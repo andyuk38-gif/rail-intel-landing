@@ -29,7 +29,9 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text);
-  background: var(--bg);
+  background: var(--bg) url("images/background.png") no-repeat center top / cover;
+  background-attachment: fixed;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
