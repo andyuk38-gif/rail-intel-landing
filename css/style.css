@@ -29,10 +29,21 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text);
-  background: var(--bg) url("../images/background.png") no-repeat center top / cover;
-  background-attachment: fixed;
+  background: var(--bg);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../images/background.png") no-repeat center top / cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .container {
