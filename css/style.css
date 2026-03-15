@@ -60,6 +60,9 @@ body {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 700;
   font-size: 1.25rem;
   color: var(--text);
@@ -69,6 +72,20 @@ body {
 
 .logo:hover {
   color: var(--accent);
+}
+
+.logo:hover .logo-img {
+  color: var(--accent);
+}
+
+.logo-img {
+  flex-shrink: 0;
+  color: var(--accent);
+  transition: color 0.2s;
+}
+
+.logo-text {
+  display: inline-block;
 }
 
 .nav {

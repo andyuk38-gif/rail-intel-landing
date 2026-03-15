@@ -35,6 +35,8 @@ The repo is set up to publish via **GitHub Pages** with the custom domain **rail
 
    After DNS propagates (a few minutes to a few hours), GitHub will show a green “DNS check successful” and serve the site over HTTPS at **https://railintel.co.uk**.
 
+   If you see **“Domain does not resolve to the GitHub Pages server”** or **NotServedByPagesError**, your DNS is still pointing elsewhere. See **[docs/GITHUB-PAGES-DNS.md](docs/GITHUB-PAGES-DNS.md)** for exact record values and step-by-step fixes.
+
 ### After setup
 
 - Push to `main` → the site at railintel.co.uk updates automatically.  
