@@ -15,5 +15,5 @@ Then open the URL shown (e.g. http://localhost:3000).
 ## Deploy to Hostinger (railintel.co.uk)
 
 1. Ensure **railintel.co.uk** points at your main website (not the Node.js app).
-2. Upload this folder’s contents to the domain’s document root (e.g. `public_html`): `index.html`, `css/`, `js/`, `images/`.
+2. Upload this folder’s contents to the domain’s document root (e.g. `public_html`): `index.html`, `css/`, `js/`, `images/` (optional: add real app screenshots and swap the placeholder mockups in the “See it in action” section for `<img>` tags).
 3. All app links go to **https://cms.railintel.co.uk**.
