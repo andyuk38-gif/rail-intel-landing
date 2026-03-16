@@ -94,9 +94,11 @@ body::before {
 
 .logo-img {
   flex-shrink: 0;
-  color: #fff;
+  height: 2rem;
+  width: auto;
+  max-height: 40px;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-  transition: color 0.2s;
+  display: block;
 }
 
 .logo-text {
