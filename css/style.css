@@ -78,22 +78,24 @@ body::before {
   gap: 0.5rem;
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--text);
+  color: #fff;
   text-decoration: none;
   letter-spacing: -0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .logo:hover {
-  color: var(--accent);
+  color: var(--accent-hover);
 }
 
 .logo:hover .logo-img {
-  color: var(--accent);
+  color: var(--accent-hover);
 }
 
 .logo-img {
   flex-shrink: 0;
-  color: var(--accent);
+  color: #fff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
   transition: color 0.2s;
 }
 
