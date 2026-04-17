@@ -185,6 +185,7 @@ body::before {
 .hero .container {
   position: relative;
   z-index: 1;
+  padding-top: 3rem;
 }
 
 .hero-tag {
@@ -566,6 +567,10 @@ body::before {
 
   .hero {
     padding: 5rem 0 3rem;
+  }
+
+  .hero .container {
+    padding-top: 2rem;
   }
 
   .hero-actions {
