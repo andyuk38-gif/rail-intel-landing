@@ -54,18 +54,21 @@ body::before {
   padding: 0 1.5rem;
 }
 
-/* Dev alert banner */
-.dev-banner {
+/* Fixed top chrome: banner + header stay stacked together */
+.site-chrome {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 110;
+  z-index: 200;
+}
+
+.dev-banner {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: var(--dev-banner-height);
-  padding: 0.5rem 1.5rem;
+  padding: 0.55rem 1.5rem;
   background: var(--accent);
   color: #0c0f14;
   text-align: center;
@@ -81,11 +84,11 @@ body::before {
 
 /* Header */
 .header {
-  position: fixed;
-  top: var(--dev-banner-height);
-  left: 0;
-  right: 0;
-  z-index: 100;
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: auto;
   padding: 1.25rem 0;
   background: rgba(12, 15, 20, 0.85);
   backdrop-filter: blur(12px);
@@ -195,7 +198,7 @@ body::before {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: calc(6rem + var(--dev-banner-height)) 0 4rem;
+  padding: calc(7.5rem + var(--dev-banner-height)) 0 4rem;
   overflow: hidden;
 }
 
@@ -592,7 +595,7 @@ body::before {
   }
 
   .hero {
-    padding: calc(5rem + var(--dev-banner-height)) 0 3rem;
+    padding: calc(6.5rem + var(--dev-banner-height)) 0 3rem;
   }
 
   .dev-banner p {

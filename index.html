@@ -10,24 +10,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+  <style>
+    /* Critical: keep under-dev banner visible even if stylesheet is cached */
+    .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+    .dev-banner { background: #f59e0b; color: #0c0f14; text-align: center; padding: 0.55rem 1.5rem; }
+    .dev-banner p { margin: 0; font-size: 0.8125rem; font-weight: 600; }
+  </style>
 </head>
 <body>
-  <div class="dev-banner" role="status">
-    <p>This site is currently under development.</p>
-  </div>
-  <header class="header">
-    <div class="container">
-      <a href="/" class="logo">
-        <img src="https://cms.railintel.co.uk/rail-intel-candidate-19.png" alt="Rail Intel" class="logo-img" width="140" height="40" />
-        <span class="logo-text">Rail Intel</span>
-      </a>
-      <nav class="nav">
-        <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
-        <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
-      </nav>
+  <div class="site-chrome">
+    <div class="dev-banner" role="status">
+      <p>This site is currently under development.</p>
     </div>
-  </header>
+    <header class="header">
+      <div class="container">
+        <a href="/" class="logo">
+          <img src="https://cms.railintel.co.uk/rail-intel-candidate-19.png" alt="Rail Intel" class="logo-img" width="140" height="40" />
+          <span class="logo-text">Rail Intel</span>
+        </a>
+        <nav class="nav">
+          <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
+        </nav>
+      </div>
+    </header>
+  </div>
 
   <main>
     <section class="hero">
