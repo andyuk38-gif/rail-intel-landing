@@ -204,7 +204,8 @@ body::before {
   display: flex;
   align-items: center;
   padding: calc(7.5rem + var(--dev-banner-height)) 0 4rem;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .hero-bg {
@@ -259,19 +260,23 @@ body::before {
 
 .hero-media {
   min-width: 0;
-  overflow: visible;
+  display: flex;
+  justify-content: center;
+  padding-right: 1.5rem;
 }
 
 .hero-media__perspective {
-  overflow: visible;
+  perspective: 1400px;
+  perspective-origin: 55% 50%;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Render at 2× internal size, scale down, then tilt — keeps the angle sharp on retina. */
 .hero-media__tilt {
-  width: 200%;
-  margin-left: -50%;
-  transform: perspective(1400px) rotateY(-6deg) rotateX(2deg) scale(0.5);
-  transform-origin: top center;
+  transform: rotateY(-6deg) rotateX(2deg);
+  transform-style: preserve-3d;
+  width: 100%;
+  max-width: 100%;
 }
 
 .hero-media__tilt .browser-mockup {
@@ -409,7 +414,7 @@ body::before {
 }
 
 .product-gallery .browser-mockup {
-  max-width: 720px;
+  max-width: 692px;
   margin-inline: auto;
 }
 
@@ -708,9 +713,11 @@ body::before {
     max-width: none;
   }
 
+  .hero-media {
+    padding-right: 0;
+  }
+
   .hero-media__tilt {
-    width: 100%;
-    margin-left: 0;
     transform: none;
   }
 
