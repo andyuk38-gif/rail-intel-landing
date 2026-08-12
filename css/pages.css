@@ -77,6 +77,33 @@
   z-index: 60;
 }
 
+.nav-panel--product {
+  min-width: min(42rem, 92vw);
+  max-height: min(78vh, 40rem);
+  overflow-y: auto;
+}
+
+.nav-panel__label {
+  margin: 0.55rem 0.7rem 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.nav-panel__label:first-child {
+  margin-top: 0.15rem;
+}
+
+.nav-panel__grid--apps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border);
+}
+
 .nav-group[data-open="true"] .nav-panel {
   opacity: 1;
   visibility: visible;
@@ -258,6 +285,12 @@
   color: var(--accent);
   background: rgba(245, 158, 11, 0.12);
   border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.page-badge--app {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.28);
 }
 
 .page-badge--core {
@@ -759,44 +792,54 @@ body.lightbox-open {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, #9ec5e8 0%, #c8dceb 42%, #d7c9a4 100%);
+    linear-gradient(180deg, #9ec5e8 0%, #c8dceb 38%, #b7c4a0 72%, #8a9080 100%);
   transition: opacity 1.1s ease, filter 1.1s ease;
+}
+
+.tunnel-scene__world {
+  position: absolute;
+  inset: -4% -2% -8%;
+  transform: perspective(900px) rotateX(14deg) rotateY(-22deg);
+  transform-style: preserve-3d;
+  transform-origin: 55% 70%;
 }
 
 .tunnel-scene__portal {
   position: absolute;
-  left: 50%;
-  top: 18%;
-  width: 38%;
-  height: 62%;
-  translate: -50% 0;
+  left: 46%;
+  top: 10%;
+  width: 34%;
+  height: 58%;
+  transform: translateZ(20px);
 }
 
 .tunnel-scene__rim {
   position: absolute;
   inset: 0;
-  border-radius: 50% 50% 12% 12% / 58% 58% 10% 10%;
-  background: linear-gradient(180deg, #5a6573, #2a313b);
-  box-shadow: inset 0 0 0 10px #1a1f27;
+  border-radius: 50% 50% 14% 14% / 58% 58% 12% 12%;
+  background: linear-gradient(180deg, #6a7584, #2a313b 55%, #1a1f27);
+  box-shadow:
+    inset 0 0 0 12px #1a1f27,
+    0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 .tunnel-scene__bore {
   position: absolute;
-  inset: 12% 14% 8%;
+  inset: 11% 13% 8%;
   border-radius: 50% 50% 10% 10% / 55% 55% 8% 8%;
-  background: radial-gradient(ellipse at 50% 40%, #1b2430 0%, #07090d 70%);
+  background: radial-gradient(ellipse at 50% 35%, #243041 0%, #07090d 72%);
   transition: background 1.1s ease;
 }
 
 .tunnel-scene__light {
   position: absolute;
   left: 50%;
-  top: 28%;
-  width: 18%;
-  height: 28%;
+  top: 26%;
+  width: 20%;
+  height: 30%;
   translate: -50% 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 240, 200, 0.85), transparent 70%);
+  background: radial-gradient(circle, rgba(255, 240, 200, 0.9), transparent 70%);
   filter: blur(6px);
   opacity: 0.55;
   transition: opacity 1.1s ease, transform 1.1s ease;
@@ -804,55 +847,55 @@ body.lightbox-open {
 
 .tunnel-scene__rails {
   position: absolute;
-  left: 18%;
+  left: 2%;
   right: 18%;
-  bottom: 10%;
-  height: 18%;
+  bottom: 6%;
+  width: 80%;
+  height: 58%;
+  overflow: visible;
 }
 
-.tunnel-scene__rails span {
+.tunnel-scene__rail {
+  fill: none;
+  stroke: #d7dee8;
+  stroke-width: 5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.35));
+  transition: stroke 1.1s ease;
+}
+
+.tunnel-scene__sleeper {
+  fill: none;
+  stroke: rgba(90, 78, 58, 0.75);
+  stroke-width: 7;
+  stroke-linecap: round;
+  transition: stroke 1.1s ease;
+}
+
+.tunnel-scene__consist {
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #c4ced8 15%, #c4ced8 85%, transparent);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-  transition: background 1.1s ease;
+  left: 8%;
+  bottom: 18%;
+  width: 48%;
+  transform-origin: left center;
+  transition: left 1.45s cubic-bezier(0.4, 0, 0.2, 1), bottom 1.45s cubic-bezier(0.4, 0, 0.2, 1), transform 1.45s cubic-bezier(0.4, 0, 0.2, 1), filter 1.1s ease;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4));
 }
-
-.tunnel-scene__rails span:first-child { top: 28%; }
-.tunnel-scene__rails span:last-child { top: 62%; }
 
 .tunnel-scene__train {
-  position: absolute;
-  left: 22%;
-  bottom: 16%;
-  width: 26%;
-  height: 14%;
-  border-radius: 6px 18px 4px 4px;
-  background: linear-gradient(90deg, #d7dde5, #8e9aab);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-  transition: left 1.4s cubic-bezier(0.4, 0, 0.2, 1), background 1.1s ease, opacity 1.1s ease;
-}
-
-.tunnel-scene__train::before {
-  content: "";
-  position: absolute;
-  right: 10%;
-  top: 22%;
-  width: 18%;
-  height: 42%;
-  border-radius: 3px;
-  background: rgba(255, 220, 120, 0.85);
-  box-shadow: 0 0 16px rgba(255, 200, 80, 0.7);
-  transition: opacity 1.1s ease, background 1.1s ease;
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scaleX(-1);
+  /* TractionHeaderImage ships on black; screen drops the plate */
+  mix-blend-mode: screen;
 }
 
 .tunnel-scene__vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
-  opacity: 0.35;
+  background: radial-gradient(ellipse at 45% 55%, transparent 35%, rgba(0, 0, 0, 0.38) 100%);
+  opacity: 0.4;
   transition: opacity 1.1s ease;
   pointer-events: none;
 }
@@ -990,39 +1033,48 @@ body.lightbox-open {
   color: var(--text-muted);
 }
 
-/* Modes */
-.tunnel__stage[data-mode="tunnel"] .tunnel-scene,
-.tunnel__stage[data-mode="dim"] .tunnel-scene {
-  background: #10151d;
+/* Modes — day is the default scene; tunnel/dim move the consist into the bore */
+.tunnel__stage[data-mode="day"] .tunnel-scene__consist {
+  left: 4%;
+  bottom: 20%;
+  transform: scale(1.05) rotate(-2deg);
 }
 
-.tunnel__stage[data-mode="tunnel"] .tunnel-scene__sky,
-.tunnel__stage[data-mode="dim"] .tunnel-scene__sky {
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene {
+  background: #1a1f27;
+}
+
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__sky {
   opacity: 0.18;
   filter: brightness(0.35) saturate(0.5);
 }
 
-.tunnel__stage[data-mode="tunnel"] .tunnel-scene__light,
-.tunnel__stage[data-mode="dim"] .tunnel-scene__light {
-  opacity: 0.15;
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__bore {
+  background: radial-gradient(ellipse at 50% 35%, #121820 0%, #030508 80%);
+}
+
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__light {
+  opacity: 0.12;
   transform: scale(0.7);
 }
 
-.tunnel__stage[data-mode="tunnel"] .tunnel-scene__train,
-.tunnel__stage[data-mode="dim"] .tunnel-scene__train {
-  left: 44%;
-  background: linear-gradient(90deg, #6b7480, #3a424d);
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__rail {
+  stroke: #8b949e;
 }
 
-.tunnel__stage[data-mode="tunnel"] .tunnel-scene__train::before,
-.tunnel__stage[data-mode="dim"] .tunnel-scene__train::before {
-  background: rgba(255, 200, 90, 0.35);
-  box-shadow: 0 0 10px rgba(255, 180, 60, 0.35);
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__sleeper {
+  stroke: rgba(55, 48, 38, 0.7);
 }
 
-.tunnel__stage[data-mode="tunnel"] .tunnel-scene__vignette,
-.tunnel__stage[data-mode="dim"] .tunnel-scene__vignette {
-  opacity: 0.75;
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__consist {
+  left: 28%;
+  bottom: 28%;
+  transform: scale(0.78) rotate(-4deg);
+  filter: brightness(0.72) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5));
+}
+
+.tunnel__stage[data-mode="tunnel"] .tunnel-scene__vignette {
+  opacity: 0.72;
 }
 
 .tunnel__stage[data-mode="tunnel"] .tunnel-device__screen {
@@ -1045,6 +1097,43 @@ body.lightbox-open {
 
 .tunnel__stage[data-mode="tunnel"] .tunnel-device__slider {
   background: #334155;
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene {
+  background: #0b0e13;
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__sky {
+  opacity: 0.08;
+  filter: brightness(0.2) saturate(0.35);
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__bore {
+  background: radial-gradient(ellipse at 50% 35%, #0a0d12 0%, #000 85%);
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__light {
+  opacity: 0.04;
+  transform: scale(0.5);
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__rail {
+  stroke: #4b5563;
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__sleeper {
+  stroke: rgba(35, 30, 24, 0.65);
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__consist {
+  left: 42%;
+  bottom: 34%;
+  transform: scale(0.55) rotate(-6deg);
+  filter: brightness(0.45) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+}
+
+.tunnel__stage[data-mode="dim"] .tunnel-scene__vignette {
+  opacity: 0.9;
 }
 
 .tunnel__stage[data-mode="dim"] .tunnel-device__screen {
@@ -1089,8 +1178,11 @@ body.lightbox-open {
 @media (prefers-reduced-motion: reduce) {
   .tunnel-scene,
   .tunnel-scene__sky,
+  .tunnel-scene__bore,
   .tunnel-scene__light,
-  .tunnel-scene__train,
+  .tunnel-scene__rail,
+  .tunnel-scene__sleeper,
+  .tunnel-scene__consist,
   .tunnel-scene__vignette,
   .tunnel-device__screen,
   .tunnel-device__slider i {

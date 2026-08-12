@@ -12,8 +12,110 @@
 export const site = {
   name: "Rail Intel",
   app: "https://cms.railintel.co.uk",
+  cms: "https://cms.railintel.co.uk",
+  investigations: "https://investigations.railintel.co.uk",
   tagline: "Secure competency management for rail",
 };
+
+/* ------------------------------------------------------------- main products */
+
+/** Standalone apps (not CMS add-ons). Shown above the add-on list in Product nav. */
+export const products = [
+  {
+    slug: "cms",
+    name: "Rail Intel CMS",
+    summary: "Competency management for rail — assessments, workforce records, medicals and licensing.",
+    tagline: "Secure competency management for rail",
+    lead:
+      "Rail Intel CMS is the system of record for competency: cycles, assessments in the cab, medicals, licences, incidents and the audit trail behind them. Optional add-on modules bolt on when your operation needs them.",
+    href: "", // homepage
+    appUrlKey: "cms",
+    cta: "Open Rail Intel CMS",
+  },
+  {
+    slug: "investigations",
+    name: "Rail Intel Investigations",
+    summary:
+      "Evidence-first rail investigations — from opening a case through recommendations, actions and a sealed final report.",
+    tagline: "Investigate with evidence, not email threads",
+    lead:
+      "Rail Intel Investigations is a standalone app for running investigations end to end: one file per case, with a command centre, structured evidence and RCA, recommendations that become owned actions, and a signed final report. Link it to Rail Intel CMS when you want competency and workforce context on the subject without leaving the investigation.",
+    href: "products/investigations.html",
+    appUrlKey: "investigations",
+    cta: "Open Investigations",
+    sections: [
+      {
+        heading: "Command centre for the live case",
+        body: [
+          "Every investigation is one workspace — Overview, Gantt, Tasks, Recommendations, Actions, Findings, D&A, Fatigue, Chat, Final report and Audit — so the file does not live in email threads and shared drives.",
+          "Open cases as manual investigations or from an incident feed when that source is configured. Capture location with coordinates, what3words and a map, set the investigation level, and assign a lead and team.",
+        ],
+        bullets: [
+          "**Statuses** Open, In review and Closed, with Level 1 / 2 / 3 (and Other) for severity.",
+          "**Configurable incident types** for your operation (SPAD, derailment, collision, welfare escalation and more).",
+          "**Gantt and tasks** so planned work sits on a timeline against the case.",
+        ],
+      },
+      {
+        heading: "Recommendations that become owned actions",
+        body: [
+          "Raise recommendations against the case and the evidence behind them. HSSE and DCP roles approve or reject; rejection needs a written justification. Approval creates a tracked action that moves from open through in progress to done — so close-out is visible, not assumed.",
+        ],
+        bullets: [
+          "**Recommendation board** with pending, approved and rejected states.",
+          "**Mandatory rejection justification** so a no is auditable.",
+          "**Actions from approvals** with clear ownership and status.",
+        ],
+      },
+      {
+        heading: "Evidence, RCA and the final report",
+        body: [
+          "Record findings against human performance factors and the ten incident factors, with an evidence reference and narrative on each item. When the investigation is ready, the final report compiles the artefacts for print or PDF, with signature pads for the Lead Investigator and Designated Competent Person — and seals when both have signed.",
+        ],
+        bullets: [
+          "**RCA coding** against human performance and ten-incident-factor frameworks.",
+          "**Print / Export PDF** of the compiled final report.",
+          "**Dual sign-off** (Lead Investigator + DCP) before the report is sealed.",
+          "**Hash-linked audit chain** of who did what, and when, on the case.",
+        ],
+      },
+      {
+        heading: "Drugs & alcohol and fatigue on the critical path",
+        body: [
+          "D&A screening sits on the investigation when the level or incident type requires it — breath, urine, blood or saliva, with consent and results, and follow-up actions where needed. Fatigue can be assessed against the shift pattern entered for that case, with a tenant-level FRMS view structured as Plan, Do, Check and Act.",
+        ],
+        bullets: [
+          "**Mandatory or recommended D&A** driven by investigation level and incident type.",
+          "**Shift pattern on the case** for fatigue context during the investigation.",
+          "**FRMS workspace** for the tenant, separate from the individual case file.",
+        ],
+      },
+      {
+        heading: "Connected to Rail Intel CMS when you need it",
+        body: [
+          "Investigations and CMS stay separate products. When linked through Admin → API Management, a dual-approval token binds one Investigations company to one CMS tenant. You can then look up the employee under investigation, pull competency cycle status and recent medication declarations, and pick lead and team members from CMS team management and employee records.",
+          "Roster and shift data for fatigue stay in Investigations — CMS does not supply them.",
+        ],
+        bullets: [
+          "**Dual-approval CMS connector** so pairing is deliberate on both sides.",
+          "**Subject lookup** with competency cycle (in date / due soon / overdue) and recent medications.",
+          "**Lead and team** selectable from CMS people where the link is active.",
+        ],
+      },
+      {
+        heading: "Roles, tenants and assurance views",
+        body: [
+          "Workspaces are multi-tenant and entered with a company code. Roles cover System Admin, Company Admin, Lead Investigator, Investigator, HSSE and DCP, with capability overrides on top of the role baseline — the same idea as CMS permissions, tuned for investigation work.",
+        ],
+        bullets: [
+          "**Reporting** for open / in review / closed mix, levels, incident types, RCA counts and sealed reports.",
+          "**Recommendations and Compliance** sections for assurance oversight across the workspace.",
+          "**Admin** for users, email templates, incident catalogue and the CMS API link.",
+        ],
+      },
+    ],
+  },
+];
 
 /* ---------------------------------------------------------------- add-ons */
 
@@ -362,17 +464,17 @@ export const featureGroups = [
     summary: "Dark, dimmable assessing that cuts windscreen glare in tunnels and at night.",
     tagline: "Assess in the cab without lighting up the windscreen",
     lead:
-      "A bright tablet in a dark cab is a distraction — for the driver and for the assessor. Tunnel Mode turns the assessing screen dark and lets you dim it further on mobile, so the focus stays on the railway, not the glass.",
+      "A bright tablet in a dark cab is a distraction — for the driver and for the assessor. Tunnel Mode is the assessor switching dark mode on and dimming the screen on mobile or tablet. It does not detect the tunnel automatically; the person in the cab decides when the glass is too bright.",
     sections: [
       {
         heading: "Built for the cab, not the office",
         body: [
           "When an assessment starts, Rail Intel reminds assessors that windscreen reflections matter — especially through tunnels — and offers dark mode in one tap. The Dark / Light control sits in the assessment header, so switching never means leaving the flow.",
-          "On mobile and tablet, a brightness slider sits under the header. Dim the screen from full daylight down to a soft cab-friendly level, and reset it when you are out of the tunnel.",
+          "On mobile and tablet, a brightness slider sits under the header. Dim the screen from full daylight down to a soft cab-friendly level, and reset it when you are out of the tunnel. Both controls are manual: the tablet does not read the ambient light and switch on its own.",
         ],
         bullets: [
           "**One-tap dark mode** from the assessment header, kept for the session.",
-          "**Dimmable brightness** on mobile and tablet (40% to 135%), so glare can be cut without losing the criteria.",
+          "**Dimmable brightness** on mobile and tablet (40% to 135%), set by the assessor.",
           "**Cab safety notice** at the start of an assessable event, with a direct Turn on dark mode action.",
           "**App-wide dark theme** available from the user menu when you are not assessing.",
         ],

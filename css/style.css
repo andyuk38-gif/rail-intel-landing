@@ -608,22 +608,6 @@ body::before {
   order: 1;
 }
 
-/* Command Centre: copy on top, gallery full-width underneath so the sign-in
-   mockup can render at its original 814 CSS px instead of being squeezed into
-   a side column. */
-.product-section--showcase .product-section__inner {
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2.25rem;
-}
-
-.product-section--showcase .product-section__copy {
-  max-width: 46rem;
-}
-
-.product-section--showcase .product-gallery--command .browser-mockup {
-  max-width: 814px;
-}
-
 .product-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -692,11 +676,9 @@ body::before {
   margin-inline: auto;
 }
 
-/* Command Centre restores the original sign-in screenshot width (814 CSS px
-   for the 1628px video / login.png source), so Sign in is no longer smaller
-   than the still it replaced. */
+/* Match the hero dashboard mockup width so Command Centre sits at the same size. */
 .product-gallery--command .browser-mockup {
-  max-width: 814px;
+  max-width: 514px;
   width: 100%;
 }
 
@@ -724,10 +706,139 @@ body::before {
    Recreates the app's login card over the same background video the live
    product uses, so it stays sharp at any size instead of being a screenshot.
    Sized in container query units so it scales with the mockup. */
+.login-card {
+  position: absolute;
+  top: 6%;
+  bottom: 6%;
+  left: 3.5%;
+  width: 58%;
+  max-width: 19rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  color: #fff;
+  text-align: center;
+  backdrop-filter: blur(2px);
+}
+
+.login-card__brand {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 0.55rem 0.7rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 60%),
+    url("../images/gbr-bg.png") center / cover;
+}
+
+.browser-mockup__content .login-card__logo {
+  display: block;
+  width: 2.1rem;
+  height: 2.1rem;
+  max-width: 2.1rem;
+  margin: 0 auto 0.3rem;
+  object-fit: contain;
+}
+
+.login-card__title {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.login-card__tagline {
+  margin: 0.25rem 0 0;
+  font-size: 0.62rem;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.login-card__form {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 0;
+  padding: 0.65rem 0.7rem 0.7rem;
+  background: rgba(255, 255, 255, 0.07);
+  text-align: left;
+}
+
+.login-card__row {
+  display: grid;
+  grid-template-columns: 5.1rem minmax(0, 1fr);
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.login-card__label {
+  margin: 0;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.login-card__input {
+  margin: 0;
+  padding: 0.35rem 0.45rem;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  color: #94a3b8;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.45rem;
+  min-width: 0;
+}
+
+.login-card__input--dots {
+  color: #475569;
+  letter-spacing: 0.12em;
+}
+
+.login-card__submit {
+  margin: 0.1rem 0 0;
+  padding: 0.42rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  background: #243c96;
+  border-radius: 0.45rem;
+}
+
+.login-card__forgot {
+  margin: 0.15rem 0 0;
+  font-size: 0.62rem;
+  text-align: center;
+  color: #fff;
+}
+
+.login-card__note {
+  margin: 0.25rem 0 0;
+  font-size: 0.52rem;
+  line-height: 1.3;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Keep the Command Centre mockup the same width as the hero dashboard above it.
+   (width rule lives with .product-gallery--command above) */
+
 .login-scene {
   position: relative;
   width: 100%;
-  aspect-ratio: 1628 / 916;
+  /* Match the hero mockup's display proportions so the two sit at the same size. */
+  aspect-ratio: 1024 / 713;
   container-type: inline-size;
   overflow: hidden;
   background: #0b1220;
@@ -750,113 +861,6 @@ body::before {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-}
-
-.login-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% calc(-50% - 4cqw);
-  width: min(56cqw, 24rem);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 0.28cqw solid rgba(255, 255, 255, 0.65);
-  border-radius: 2.4cqw;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 3.5cqw 9cqw rgba(2, 6, 23, 0.5), inset 0 0.15cqw 0 rgba(255, 255, 255, 0.62);
-  color: #fff;
-  text-align: center;
-  backdrop-filter: blur(2px);
-}
-
-.login-card__brand {
-  position: relative;
-  padding: 2.6cqw 2.4cqw 2.2cqw;
-  border-bottom: 0.14cqw solid rgba(255, 255, 255, 0.25);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 60%),
-    url("../images/gbr-bg.png") center / cover;
-}
-
-.login-card__logo {
-  display: block;
-  width: 7.6cqw;
-  height: 7.6cqw;
-  margin: 0 auto 1cqw;
-  object-fit: contain;
-}
-
-.login-card__title {
-  margin: 0;
-  font-size: 2.5cqw;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1;
-}
-
-.login-card__tagline {
-  margin: 0.7cqw 0 0;
-  font-size: 1.7cqw;
-  line-height: 1.3;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.login-card__form {
-  padding: 2.1cqw 2.4cqw 2.2cqw;
-  background: rgba(255, 255, 255, 0.07);
-  text-align: left;
-}
-
-.login-card__label {
-  margin: 0 0 0.55cqw;
-  font-size: 1.25cqw;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.login-card__input {
-  margin: 0 0 1.35cqw;
-  padding: 1cqw 1.25cqw;
-  font-size: 1.55cqw;
-  line-height: 1.2;
-  color: #94a3b8;
-  background: #f8fafc;
-  border: 0.12cqw solid #e2e8f0;
-  border-radius: 1.2cqw;
-}
-
-.login-card__input--dots {
-  color: #475569;
-  letter-spacing: 0.15em;
-}
-
-.login-card__submit {
-  margin: 0.5cqw 0 0;
-  padding: 1.25cqw;
-  font-size: 1.65cqw;
-  font-weight: 700;
-  text-align: center;
-  color: #fff;
-  background: #243c96;
-  border-radius: 1.2cqw;
-}
-
-.login-card__forgot {
-  margin: 1.25cqw 0 0;
-  font-size: 1.45cqw;
-  text-align: center;
-  color: #fff;
-}
-
-.login-card__note {
-  margin: 1.1cqw 0 0;
-  font-size: 1.1cqw;
-  line-height: 1.35;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Segmented control sitting under the screenshot. */

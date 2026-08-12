@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=17" />
-  <link rel="stylesheet" href="../css/pages.css?v=17" />
+  <link rel="stylesheet" href="../css/style.css?v=20" />
+  <link rel="stylesheet" href="../css/pages.css?v=20" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -40,7 +40,25 @@
             <a class="nav-trigger" href="../products/" data-nav-trigger aria-expanded="false" aria-controls="product-panel">
               Product<span class="nav-trigger__chevron" aria-hidden="true"></span>
             </a>
-            <div class="nav-panel" id="product-panel">
+            <div class="nav-panel nav-panel--product" id="product-panel">
+              <p class="nav-panel__label">Apps</p>
+              <div class="nav-panel__grid nav-panel__grid--apps">
+                <a class="nav-panel__item" href="../">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Rail Intel CMS</span>
+                    <span class="nav-panel__desc">Competency management for rail — assessments, workforce records, medicals and licensing.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/investigations.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Rail Intel Investigations</span>
+                    <span class="nav-panel__desc">Evidence-first rail investigations — from opening a case through recommendations, actions and a sealed final report.</span>
+                  </span>
+                </a>
+              </div>
+              <p class="nav-panel__label">Add-on modules</p>
               <div class="nav-panel__grid">
                 <a class="nav-panel__item" href="../products/qa-verifications.html">
                   <span class="nav-panel__dot" aria-hidden="true"></span>
@@ -225,7 +243,7 @@
     <div class="container">
       <p class="footer-brand">Rail Intel</p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="../products/">Add-on modules</a>
+        <a href="../products/">Products</a>
         <a href="../features/">Features</a>
         <a href="../how-it-works.html">How it works</a>
         <a href="https://cms.railintel.co.uk">Log in</a>
@@ -234,6 +252,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=17"></script>
+  <script src="../js/site.js?v=20"></script>
 </body>
 </html>

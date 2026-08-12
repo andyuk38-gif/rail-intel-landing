@@ -10,12 +10,12 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, addons, capacityAddons, featureGroups, howItWorks } from "../content/site.mjs";
+import { site, products, addons, capacityAddons, featureGroups, howItWorks } from "../content/site.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 17;
+const ASSET_VERSION = 20;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -23,29 +23,35 @@ const esc = (value) =>
 /** Supports **bold** in body copy so the content file stays readable. */
 const rich = (value) => esc(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
+const appUrl = (key) => site[key] || site.app;
+
 /* ------------------------------------------------------------------ chrome */
 
-function renderNav(base) {
-  // The trigger is a link so a desktop click goes to the section index, while
-  // hover (or a tap on touch) reveals the panel.
-  const group = (id, label, items, allHref, allLabel) => `
-          <div class="nav-group" data-nav-group data-open="false">
-            <a class="nav-trigger" href="${base}${allHref}" data-nav-trigger aria-expanded="false" aria-controls="${id}-panel">
-              ${esc(label)}<span class="nav-trigger__chevron" aria-hidden="true"></span>
-            </a>
-            <div class="nav-panel" id="${id}-panel">
-              <div class="nav-panel__grid">
-${items
-  .map(
-    (item) => `                <a class="nav-panel__item" href="${base}${item.href}">
+function renderNavItems(base, items) {
+  return items
+    .map(
+      (item) => `                <a class="nav-panel__item" href="${item.external ? item.href : `${base}${item.href}`}">
                   <span class="nav-panel__dot" aria-hidden="true"></span>
                   <span>
                     <span class="nav-panel__title">${esc(item.name)}</span>
                     <span class="nav-panel__desc">${esc(item.summary)}</span>
                   </span>
                 </a>`
-  )
-  .join("\n")}
+    )
+    .join("\n");
+}
+
+function renderNav(base) {
+  // The trigger is a link so a desktop click goes to the section index, while
+  // hover (or a tap on touch) reveals the panel.
+  const featureGroup = (id, label, items, allHref, allLabel) => `
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="${base}${allHref}" data-nav-trigger aria-expanded="false" aria-controls="${id}-panel">
+              ${esc(label)}<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="${id}-panel">
+              <div class="nav-panel__grid">
+${renderNavItems(base, items)}
               </div>
               <div class="nav-panel__footer">
                 <a class="nav-panel__all" href="${base}${allHref}">${esc(allLabel)} &rarr;</a>
@@ -53,7 +59,20 @@ ${items
             </div>
           </div>`;
 
-  const productItems = addons.map((addon) => ({
+  const productAppItems = products
+    .map((product) => {
+      const href = product.href === "" ? base || "/" : `${base}${product.href}`;
+      return `                <a class="nav-panel__item" href="${href}">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">${esc(product.name)}</span>
+                    <span class="nav-panel__desc">${esc(product.summary)}</span>
+                  </span>
+                </a>`;
+    })
+    .join("\n");
+
+  const addonItems = addons.map((addon) => ({
     name: addon.name,
     summary: addon.summary,
     href: `products/${addon.slug}.html`,
@@ -65,17 +84,37 @@ ${items
     href: `features/${featureGroup.slug}.html`,
   }));
 
+  const productPanel = `
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="${base}products/" data-nav-trigger aria-expanded="false" aria-controls="product-panel">
+              Product<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel nav-panel--product" id="product-panel">
+              <p class="nav-panel__label">Apps</p>
+              <div class="nav-panel__grid nav-panel__grid--apps">
+${productAppItems}
+              </div>
+              <p class="nav-panel__label">Add-on modules</p>
+              <div class="nav-panel__grid">
+${renderNavItems(base, addonItems)}
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="${base}products/">All add-on modules &rarr;</a>
+              </div>
+            </div>
+          </div>`;
+
   return `<nav class="nav" aria-label="Main">
         <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
-        <div class="nav-menu" data-nav-menu data-open="false">${group(
-          "product",
-          "Product",
-          productItems,
-          "products/",
-          "All add-on modules"
-        )}${group("features", "Features", featureItems, "features/", "All features")}
+        <div class="nav-menu" data-nav-menu data-open="false">${productPanel}${featureGroup(
+          "features",
+          "Features",
+          featureItems,
+          "features/",
+          "All features"
+        )}
           <a href="${base}how-it-works.html" class="nav-link">How it works</a>
           <a href="${site.app}" class="nav-link">Log in</a>
           <a href="${site.app}" class="btn btn-primary">Go to app</a>
@@ -129,7 +168,7 @@ function renderFooter(base) {
     <div class="container">
       <p class="footer-brand">Rail Intel</p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="${base}products/">Add-on modules</a>
+        <a href="${base}products/">Products</a>
         <a href="${base}features/">Features</a>
         <a href="${base}how-it-works.html">How it works</a>
         <a href="${site.app}">Log in</a>
@@ -206,6 +245,56 @@ function renderCta(base, { heading, body }) {
 
 /* ------------------------------------------------------------------- pages */
 
+function productPage(product) {
+  const base = "../";
+  const url = appUrl(product.appUrlKey);
+  const sections = (product.sections || []).map((section) => renderSection(section, base)).join("\n\n");
+
+  return (
+    renderHead(base, {
+      title: `${product.name} – Rail Intel`,
+      description: product.summary,
+    }) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Product</a> / ${esc(
+      product.name
+    )}</p>
+          <span class="page-badge page-badge--app">App</span>
+          <h1 class="page-title">${esc(product.tagline)}</h1>
+          <p class="page-lead">${esc(product.lead)}</p>
+          <div class="page-actions">
+            <a href="${url}" class="btn btn-primary btn-lg">${esc(product.cta || `Open ${product.name}`)}</a>
+            <a href="${base}products/" class="btn btn-ghost btn-lg">CMS add-on modules</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+${sections}
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>A product, not a CMS add-on</h2>
+          <p>${esc(product.name)} is a standalone Rail Intel app at ${esc(url.replace(/^https?:\/\//, ""))}. CMS add-on modules extend Rail Intel CMS; Investigations sits alongside it for investigation workflows, with an optional connector when you want shared people and competency context.</p>
+        </div>
+        <div class="page-actions">
+          <a href="${url}" class="btn btn-primary btn-lg">${esc(product.cta || `Open ${product.name}`)}</a>
+          <a href="${base}" class="btn btn-ghost btn-lg">About Rail Intel CMS</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
 function addonPage(addon) {
   const base = "../";
   const note = addon.note
@@ -260,6 +349,18 @@ ${addon.sections.map((section) => renderSection(section, base)).join("\n\n")}
 
 function productsIndex() {
   const base = "../";
+  const appCards = products
+    .map((product) => {
+      const href = product.href === "" ? base || "/" : `${base}${product.href}`;
+      return `        <a class="card" href="${href}">
+          <span class="card__kicker">App</span>
+          <h3>${esc(product.name)}</h3>
+          <p>${esc(product.summary)}</p>
+          <span class="card__more">Read more &rarr;</span>
+        </a>`;
+    })
+    .join("\n");
+
   const cards = addons
     .map(
       (addon) => `        <a class="card" href="${base}products/${addon.slug}.html">
@@ -279,22 +380,22 @@ function productsIndex() {
 
   return (
     renderHead(base, {
-      title: "Add-on modules – Rail Intel",
+      title: "Products – Rail Intel",
       description:
-        "The optional Rail Intel modules: QA Verifications, Task assignment, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks.",
+        "Rail Intel CMS and Rail Intel Investigations, plus optional CMS add-on modules: QA Verifications, Task assignment, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks.",
     }) +
     `
   <main>
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / Add-ons</p>
-          <span class="page-badge page-badge--addon">Add-on modules</span>
-          <h1 class="page-title">Extend Rail Intel to fit your operation</h1>
-          <p class="page-lead">Rail Intel ships with the full competency, medical, licensing and incident record set. These seven optional modules bolt on when your operation needs them, each activated independently from the Add-ons page.</p>
+          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / Product</p>
+          <span class="page-badge page-badge--app">Products</span>
+          <h1 class="page-title">Apps and the modules that extend them</h1>
+          <p class="page-lead">Rail Intel CMS is the competency system of record. Rail Intel Investigations is a separate app for evidence-first investigations. CMS add-on modules bolt on when your operation needs them.</p>
           <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}features/" class="btn btn-ghost btn-lg">See core features</a>
+            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel CMS</a>
+            <a href="${base}features/" class="btn btn-ghost btn-lg">See CMS core features</a>
           </div>
         </div>
       </div>
@@ -303,8 +404,20 @@ function productsIndex() {
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>The seven modules</h2>
-          <p>Every module is activated per company and can be trialled before you commit.</p>
+          <h2>Apps</h2>
+          <p>Standalone Rail Intel products — not CMS add-on modules.</p>
+        </div>
+        <div class="card-grid">
+${appCards}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>CMS add-on modules</h2>
+          <p>Optional modules that extend Rail Intel CMS. Each is activated per company and can be trialled before you commit.</p>
         </div>
         <div class="card-grid">
 ${cards}
@@ -378,32 +491,44 @@ function tunnelDemo(base, { link = true } = {}) {
             <a href="${base}features/tunnel-mode.html" class="btn btn-primary">How Tunnel Mode works</a>
           </div>`
     : "";
+  const trainSrc = `${base}images/traction-train.png`;
 
   return `    <section class="tunnel" aria-labelledby="tunnel-heading">
       <div class="container tunnel__grid">
         <div class="tunnel__copy">
           <p class="product-eyebrow">Tunnel Mode</p>
           <h2 id="tunnel-heading">Dark and dimmable for the cab</h2>
-          <p>A bright tablet against a dark windscreen is a distraction. Tunnel Mode turns assessing dark and lets you dim the screen on mobile &mdash; so glare drops when you enter a tunnel, and the focus stays on the railway.</p>
+          <p>A bright tablet against a dark windscreen is a distraction. When you enter a tunnel, the assessor switches assessing to dark mode and can dim the screen further on mobile or tablet &mdash; glare drops, and the focus stays on the railway.</p>
           <ul class="spec-list">
-            <li><strong>One-tap dark mode</strong> from the assessment header.</li>
-            <li><strong>Dimmable brightness</strong> on mobile and tablet.</li>
-            <li><strong>Cab safety notice</strong> that offers dark mode at the start of an event.</li>
+            <li><strong>One-tap dark mode</strong> from the assessment header &mdash; switched by the assessor, not by the device.</li>
+            <li><strong>Dimmable brightness</strong> on mobile and tablet, adjusted by hand to suit the cab.</li>
+            <li><strong>Cab safety notice</strong> at the start of an event that offers dark mode in one tap.</li>
           </ul>
 ${actions}
         </div>
         <div class="tunnel__stage" data-tunnel>
           <div class="tunnel-scene" aria-hidden="true">
             <div class="tunnel-scene__sky"></div>
-            <div class="tunnel-scene__portal">
-              <span class="tunnel-scene__rim"></span>
-              <span class="tunnel-scene__bore"></span>
-              <span class="tunnel-scene__light"></span>
+            <div class="tunnel-scene__world">
+              <div class="tunnel-scene__portal">
+                <span class="tunnel-scene__rim"></span>
+                <span class="tunnel-scene__bore"></span>
+                <span class="tunnel-scene__light"></span>
+              </div>
+              <svg class="tunnel-scene__rails" viewBox="0 0 800 320" preserveAspectRatio="none" aria-hidden="true">
+                <path class="tunnel-scene__sleeper" d="M70 290 L180 120" />
+                <path class="tunnel-scene__sleeper" d="M130 290 L220 120" />
+                <path class="tunnel-scene__sleeper" d="M190 290 L260 120" />
+                <path class="tunnel-scene__sleeper" d="M250 290 L300 120" />
+                <path class="tunnel-scene__sleeper" d="M310 290 L340 120" />
+                <path class="tunnel-scene__sleeper" d="M370 290 L380 120" />
+                <path class="tunnel-scene__rail" d="M40 300 C 180 300, 320 140, 400 118" />
+                <path class="tunnel-scene__rail" d="M220 300 C 300 300, 360 145, 420 118" />
+              </svg>
+              <div class="tunnel-scene__consist">
+                <img class="tunnel-scene__train" src="${trainSrc}" alt="" width="600" height="75" decoding="async" />
+              </div>
             </div>
-            <div class="tunnel-scene__rails">
-              <span></span><span></span>
-            </div>
-            <div class="tunnel-scene__train"></div>
             <div class="tunnel-scene__vignette"></div>
           </div>
           <div class="tunnel-device">
@@ -423,10 +548,10 @@ ${actions}
           </div>
           <div class="tunnel__toolbar">
             <button type="button" class="tunnel__btn is-active" data-tunnel-mode="day">Daylight</button>
-            <button type="button" class="tunnel__btn" data-tunnel-mode="tunnel">Tunnel</button>
-            <button type="button" class="tunnel__btn" data-tunnel-mode="dim">Tunnel + dim</button>
+            <button type="button" class="tunnel__btn" data-tunnel-mode="tunnel">Dark mode</button>
+            <button type="button" class="tunnel__btn" data-tunnel-mode="dim">Dark + dim</button>
           </div>
-          <p class="tunnel__caption">Watch the screen drop into dark mode as the train enters the tunnel.</p>
+          <p class="tunnel__caption">Dark mode and brightness are set by the assessor on the tablet &mdash; the device does not switch automatically when the cab goes dark.</p>
         </div>
       </div>
     </section>`;
@@ -592,7 +717,7 @@ function syncIndex() {
     "<!-- footer-nav:start -->",
     "<!-- footer-nav:end -->",
     `
-        <a href="products/">Add-on modules</a>
+        <a href="products/">Products</a>
         <a href="features/">Features</a>
         <a href="how-it-works.html">How it works</a>
         <a href="${site.app}">Log in</a>
@@ -621,6 +746,11 @@ function emit(relativePath, html) {
 }
 
 emit("products/index.html", productsIndex());
+for (const product of products) {
+  if (product.href && product.href.endsWith(".html")) {
+    emit(product.href, productPage(product));
+  }
+}
 for (const addon of addons) emit(`products/${addon.slug}.html`, addonPage(addon));
 
 emit("features/index.html", featuresIndex());
