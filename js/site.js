@@ -245,6 +245,13 @@
     });
 
     setMode("day");
-    if (!reduced) timer = setInterval(cycle, 3200);
+    if (!reduced) {
+      timer = setInterval(cycle, 3200);
+    } else {
+      Array.prototype.forEach.call(stage.querySelectorAll(".tunnel-scene__video"), function (video) {
+        video.removeAttribute("autoplay");
+        video.pause();
+      });
+    }
   });
 })();

@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=27" />
-  <link rel="stylesheet" href="../css/pages.css?v=27" />
+  <link rel="stylesheet" href="../css/style.css?v=28" />
+  <link rel="stylesheet" href="../css/pages.css?v=28" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -211,77 +211,11 @@
         </div>
         <div class="tunnel__stage" data-tunnel>
           <div class="tunnel__frame">
-          <div class="tunnel-scene" aria-hidden="true">
-            <div class="tunnel-scene__sky"></div>
-            <div class="tunnel-scene__ridge"></div>
-            <div class="tunnel-scene__space">
-              <div class="tunnel-scene__ground">
-                <div class="tunnel-scene__route">
-                  <div class="tunnel-scene__ballast"></div>
-                  <div class="tunnel-scene__sleepers"></div>
-                  <div class="tunnel-scene__rails"></div>
-                  <div class="tunnel-scene__portal">
-                    <svg viewBox="0 0 320 110" preserveAspectRatio="none" focusable="false">
-                      <defs>
-                        <linearGradient id="tunnelHill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stop-color="#77835f" />
-                          <stop offset="0.45" stop-color="#5a6549" />
-                          <stop offset="1" stop-color="#414a38" />
-                        </linearGradient>
-                        <linearGradient id="tunnelBank" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stop-color="#4f5940" />
-                          <stop offset="1" stop-color="#343d2f" />
-                        </linearGradient>
-                        <linearGradient id="tunnelFace" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0" stop-color="#78818e" />
-                          <stop offset="0.6" stop-color="#49525f" />
-                          <stop offset="1" stop-color="#323a45" />
-                        </linearGradient>
-                        <radialGradient id="tunnelBore" cx="0.5" cy="0.94" r="0.82">
-                          <stop offset="0" stop-color="#18212d" />
-                          <stop offset="0.45" stop-color="#0a0e15" />
-                          <stop offset="1" stop-color="#03050a" />
-                        </radialGradient>
-                      </defs>
-                      <path d="M0 110 L0 84 C 36 80 62 30 120 20 C 180 10 240 48 320 72 L320 110 Z" fill="url(#tunnelHill)" />
-                      <path d="M0 110 L0 98 C 80 96 130 88 190 86 L320 92 L320 110 Z" fill="url(#tunnelBank)" />
-                      <path d="M112 110 L112 76 A 44 48 0 0 1 208 76 L208 110 Z" fill="url(#tunnelFace)" />
-                      <path d="M130 110 L130 80 A 30 35 0 0 1 190 80 L190 110 Z" fill="url(#tunnelBore)" stroke="#59626f" stroke-width="1.6" />
-                    </svg>
-                  </div>
-                  <div class="tunnel-scene__shadow"></div>
-                  <div class="tunnel-scene__consist">
-                    <div class="rail-set">
-                      <span class="rail-set__side rail-set__side--far"></span>
-                      <span class="rail-set__roof"></span>
-                      <span class="rail-set__hood rail-set__hood--far"></span>
-                      <span class="rail-set__hood rail-set__hood--near"></span>
-                      <span class="rail-set__fill rail-set__fill--far">
-                        <i style="left:calc(2.85 * var(--m));top:calc(0.38 * var(--m));width:calc(1.7 * var(--m));height:calc(3.37 * var(--m))"></i>
-                        <i style="left:calc(2.10 * var(--m));top:calc(0.82 * var(--m));width:calc(1.25 * var(--m));height:calc(1.95 * var(--m))"></i>
-                        <i style="left:calc(1.43 * var(--m));top:calc(1.20 * var(--m));width:calc(0.85 * var(--m));height:calc(2.18 * var(--m))"></i>
-                        <i style="left:calc(0.75 * var(--m));top:calc(1.80 * var(--m));width:calc(0.45 * var(--m));height:calc(1.65 * var(--m))"></i>
-                      </span>
-                      <span class="rail-set__fill rail-set__fill--near">
-                        <i style="left:calc(64.80 * var(--m));top:calc(0.45 * var(--m));width:calc(1.7 * var(--m));height:calc(3.30 * var(--m))"></i>
-                        <i style="left:calc(65.55 * var(--m));top:calc(0.90 * var(--m));width:calc(1.25 * var(--m));height:calc(1.95 * var(--m))"></i>
-                        <i style="left:calc(66.23 * var(--m));top:calc(1.27 * var(--m));width:calc(0.85 * var(--m));height:calc(2.18 * var(--m))"></i>
-                        <i style="left:calc(66.90 * var(--m));top:calc(1.88 * var(--m));width:calc(0.45 * var(--m));height:calc(1.65 * var(--m))"></i>
-                      </span>
-                      <span class="rail-set__cone rail-set__cone--far"></span>
-                      <span class="rail-set__cone rail-set__cone--near">
-                        <i class="rail-set__lamp"></i>
-                        <i class="rail-set__lamp"></i>
-                      </span>
-                      <span class="rail-set__side rail-set__side--near"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tunnel-scene__haze"></div>
+          <div class="tunnel-scene">
+            <video class="tunnel-scene__video" autoplay muted loop playsinline preload="metadata" poster="../images/train-entering-tunnel.jpg" aria-hidden="true">
+              <source src="../images/train-entering-tunnel.mp4" type="video/mp4" />
+            </video>
             <div class="tunnel-scene__night"></div>
-            <div class="tunnel-scene__vignette"></div>
           </div>
           <div class="tunnel-device" aria-hidden="true">
             <div class="tunnel-device__bezel">
@@ -379,6 +313,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=27"></script>
+  <script src="../js/site.js?v=28"></script>
 </body>
 </html>

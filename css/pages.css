@@ -774,30 +774,14 @@ body.lightbox-open {
   margin: 0 0 1.25rem;
 }
 
-/* The scene is modelled in real units: --m is one metre of railway, and the
-   ground, track, portal and train all live in the same 3D space so perspective
-   resolves them consistently rather than each part faking its own angle. */
+/* Daylight / dark / dim are filters on the video, plus the tablet overlay. */
 .tunnel__stage {
   position: relative;
-
-  --m: 5cqw;
-  --yaw: -30deg;
-  --lateral: 121cqw;
-  --drop: 17cqw;
-  --portal-t: 420cqw;
-  --train-t: 200cqw;
-  --run: 10s;
   --world-light: 1;
   --world-sat: 1;
   --night: 0;
-  --rail: #e9eef5;
-  --sleeper: #6a5c4a;
-  --ballast: #8d857a;
-  --ground: #7f8a70;
 }
 
-/* The tablet overlay is sized against the frame so it keeps the same share of
-   the scene at every width instead of swamping it on a phone. */
 .tunnel__frame {
   position: relative;
   container-type: inline-size;
@@ -805,8 +789,7 @@ body.lightbox-open {
 
 .tunnel-scene {
   position: relative;
-  container-type: size;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
@@ -815,336 +798,12 @@ body.lightbox-open {
   transition: filter 0.5s ease;
 }
 
-.tunnel-scene__sky {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    #5c7d9c 0%,
-    #8aa6bb 25%,
-    #b6c4c6 40%,
-    #c2cbc4 44%,
-    #8b9578 46%,
-    #79836b 100%
-  );
-}
-
-/* Distant ground rising behind the portal, so the line has somewhere to go. */
-.tunnel-scene__ridge {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(60% 16% at 22% 46%, #6c7a72 0%, transparent 70%),
-    radial-gradient(48% 13% at 78% 45.5%, #63715f 0%, transparent 72%);
-  opacity: 0.75;
-}
-
-.tunnel-scene__space {
-  position: absolute;
-  inset: 0;
-  perspective: 150cqw;
-  perspective-origin: 50% 44%;
-}
-
-.tunnel-scene__ground {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 1400cqw;
-  height: 1400cqw;
-  margin: -700cqw 0 0 -700cqw;
-  transform: rotateX(90deg) translateZ(calc(-1 * var(--drop)));
-  transform-style: preserve-3d;
-  background:
-    /* Distance haze belongs on the ground plane, not on a screen-space band,
-       so it never washes over the train in the foreground. */
-    linear-gradient(180deg, #c3ccc5 0%, rgba(195, 204, 197, 0) 27%),
-    radial-gradient(30% 24% at 44% 52%, rgba(0, 0, 0, 0.2), transparent 72%),
-    radial-gradient(16% 10% at 32% 46%, rgba(255, 255, 255, 0.07), transparent 70%),
-    radial-gradient(20% 12% at 64% 56%, rgba(0, 0, 0, 0.1), transparent 70%),
-    repeating-linear-gradient(
-      168deg,
-      rgba(255, 255, 255, 0.045) 0 4cqw,
-      transparent 4cqw 13cqw
-    ),
-    var(--ground);
-}
-
-.tunnel-scene__route {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0;
-  height: 0;
-  transform: translateX(var(--lateral)) rotate(var(--yaw));
-  transform-style: preserve-3d;
-}
-
-.tunnel-scene__ballast,
-.tunnel-scene__sleepers,
-.tunnel-scene__rails {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  /* The line stops at the portal so it is swallowed by the bore rather than
-     running on to a vanishing point out in the open field. */
-  height: calc(var(--portal-t) + 100cqw);
-  margin-top: calc(-1 * var(--portal-t) + 1cqw);
-}
-
-.tunnel-scene__ballast {
-  width: calc(5.6 * var(--m));
-  margin-left: calc(-2.8 * var(--m));
-  transform: translateZ(0.15cqw);
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--ballast) 15%,
-    #9a9184 50%,
-    var(--ballast) 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(180deg, transparent 0%, #000 4%, #000 100%);
-}
-
-.tunnel-scene__sleepers {
-  width: calc(5.6 * var(--m));
-  margin-left: calc(-2.8 * var(--m));
-  transform: translateZ(0.3cqw);
-  background-image: repeating-linear-gradient(
-    180deg,
-    var(--sleeper) 0 calc(0.26 * var(--m)),
-    transparent calc(0.26 * var(--m)) calc(1 * var(--m))
-  );
-  background-size: calc(2.6 * var(--m)) 100%;
-  background-position: 50% 0;
-  background-repeat: repeat-y;
-  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 8%, #000 26%, #000 100%);
-}
-
-.tunnel-scene__rails {
-  width: calc(5.6 * var(--m));
-  margin-left: calc(-2.8 * var(--m));
-  transform: translateZ(0.45cqw);
-  background: linear-gradient(
-    90deg,
-    transparent calc(50% - 0.8 * var(--m)),
-    var(--rail) calc(50% - 0.8 * var(--m)),
-    var(--rail) calc(50% - 0.64 * var(--m)),
-    transparent calc(50% - 0.64 * var(--m)),
-    transparent calc(50% + 0.64 * var(--m)),
-    var(--rail) calc(50% + 0.64 * var(--m)),
-    var(--rail) calc(50% + 0.8 * var(--m)),
-    transparent calc(50% + 0.8 * var(--m))
-  );
-  mask-image: linear-gradient(180deg, transparent 0%, #000 3.5%, #000 100%);
-}
-
-/* Hillside and portal, stood upright on the line so the arch always squares
-   up with the track it swallows. */
-.tunnel-scene__portal {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: calc(32 * var(--m));
-  height: calc(11 * var(--m));
-  margin-left: calc(-16 * var(--m));
-  margin-top: calc(-11 * var(--m));
-  transform-origin: 50% 100%;
-  transform: translateY(calc(-1 * var(--portal-t))) rotateX(-90deg);
-}
-
-.tunnel-scene__portal svg {
+.tunnel-scene__video {
   display: block;
   width: 100%;
   height: 100%;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
-}
-
-.tunnel-scene__shadow {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: calc(68 * var(--m));
-  height: calc(6 * var(--m));
-  margin-left: calc(-34 * var(--m));
-  margin-top: calc(-3 * var(--m));
-  transform: translateY(calc(-1 * var(--train-t))) rotate(90deg) translateZ(0.6cqw);
-  background: radial-gradient(closest-side ellipse at 50% 50%, rgba(0, 0, 0, 0.5), transparent 100%);
-  animation: tunnel-shadow-run var(--run) linear infinite;
-}
-
-/* The set is the app's sign-in sprite standing up in the scene: the near side
-   is the artwork itself, and the roof, nose rakes and cab close it into a
-   solid body so perspective has something to bite on. 902x52 sprite maps to
-   67.65m x 3.9m. */
-.tunnel-scene__consist {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: calc(67.65 * var(--m));
-  height: calc(3.9 * var(--m));
-  margin-left: calc(-33.825 * var(--m));
-  margin-top: calc(-3.9 * var(--m));
-  transform-origin: 50% 100%;
-  transform: translateY(calc(-1 * var(--train-t))) rotate(90deg) rotateX(-90deg);
-  transform-style: preserve-3d;
-  animation: tunnel-train-run var(--run) linear infinite;
-}
-
-/* One continuous run down the line and into the bore. */
-@keyframes tunnel-train-run {
-  from { transform: translateY(-89cqw) rotate(90deg) rotateX(-90deg); }
-  to { transform: translateY(-609cqw) rotate(90deg) rotateX(-90deg); }
-}
-
-@keyframes tunnel-shadow-run {
-  from { transform: translateY(-89cqw) rotate(90deg) translateZ(0.6cqw); }
-  to { transform: translateY(-609cqw) rotate(90deg) translateZ(0.6cqw); }
-}
-
-/* Faded at the seam of the loop rather than the consist itself, because
-   opacity on the consist would flatten the 3D space it holds. */
-@keyframes tunnel-train-fade {
-  0% { opacity: 0; }
-  5% { opacity: 1; }
-  97% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-.rail-set {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-}
-
-.rail-set__side,
-.rail-set__roof,
-.rail-set__hood,
-.rail-set__fill i,
-.rail-set__cone {
-  position: absolute;
-  display: block;
-  animation: tunnel-train-fade var(--run) linear infinite;
-}
-
-/* The PNG already has the sloped cab in its alpha, so the flanks ARE the
-   nose in side elevation. Nothing else is allowed to stand outside that. */
-.rail-set__side {
-  inset: 0;
-  background: url("../images/traction-train.png") 0 0 / 100% 100% no-repeat;
-}
-
-.rail-set__side--near {
-  transform: translateZ(calc(0.95 * var(--m)));
-}
-
-.rail-set__side--far {
-  transform: translateZ(calc(-0.95 * var(--m)));
-  filter: brightness(0.72) saturate(0.88);
-}
-
-.rail-set__roof {
-  top: calc(0.08 * var(--m));
-  left: calc(3.6 * var(--m));
-  width: calc(60.4 * var(--m));
-  height: calc(1.9 * var(--m));
-  transform-origin: 50% 0;
-  transform: translateZ(calc(-0.95 * var(--m))) rotateX(90deg);
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.32)),
-    url("../images/traction-train-roof.png");
-  background-size: 100% 100%, calc(67.65 * var(--m)) 100%;
-  background-position: 0 0, calc(-3.6 * var(--m)) 0;
-  background-repeat: no-repeat;
-}
-
-/* Hood follows the sprite roof-line (3.5m run, 2.47m drop → 35.2°) and
-   tapers to a blunt tip so it sits inside the flank silhouette. */
-.rail-set__hood {
-  top: calc(0.15 * var(--m));
-  width: calc(4.28 * var(--m));
-  height: calc(1.9 * var(--m));
-  clip-path: polygon(0 0, 0 100%, 100% 68%, 100% 32%);
-  background: linear-gradient(90deg, #e5231a 0%, #f0392c 55%, #c0170f 100%);
-}
-
-.rail-set__hood--near {
-  left: calc(64 * var(--m));
-  transform-origin: 0 0;
-  transform: translateZ(calc(-0.95 * var(--m))) rotateZ(35.2deg) rotateX(90deg);
-}
-
-.rail-set__hood--far {
-  left: calc(3.6 * var(--m));
-  transform-origin: 0 0;
-  transform: translateZ(calc(-0.95 * var(--m))) scaleX(-1) rotateZ(35.2deg) rotateX(90deg);
-}
-
-.rail-set__fill {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  pointer-events: none;
-}
-
-.rail-set__fill i {
-  position: absolute;
-  display: block;
-  transform: translateX(-50%) rotateY(90deg);
-  border-radius: 50%;
-  background: linear-gradient(180deg, #e8291e 0%, #c0170f 100%);
-}
-
-.rail-set__cone {
-  width: calc(0.55 * var(--m));
-  height: calc(0.5 * var(--m));
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 30%, #f56a5c, #d21c12 62%, #8d0f09 100%);
-}
-
-.rail-set__cone--near {
-  left: calc(67.05 * var(--m));
-  top: calc(2.48 * var(--m));
-  transform: translateZ(0) rotateY(90deg);
-}
-
-.rail-set__cone--far {
-  left: calc(0.05 * var(--m));
-  top: calc(2.48 * var(--m));
-  transform: translateZ(0) rotateY(-90deg);
-  filter: brightness(0.78);
-}
-
-.rail-set__lamp {
-  position: absolute;
-  bottom: 18%;
-  width: calc(0.12 * var(--m));
-  height: calc(0.12 * var(--m));
-  border-radius: 50%;
-  background: #ff5a4d;
-  box-shadow: 0 0 calc(0.35 * var(--m)) rgba(255, 70, 50, 0.85);
-}
-
-.rail-set__lamp:first-child { left: 14%; }
-.rail-set__lamp:last-child { right: 14%; }
-
-.tunnel__stage[data-mode="tunnel"] .rail-set__lamp,
-.tunnel__stage[data-mode="dim"] .rail-set__lamp {
-  background: #ff8c7a;
-  box-shadow: 0 0 calc(1.4 * var(--m)) rgba(255, 90, 70, 0.95);
-}
-
-.tunnel-scene__haze {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 39%,
-    rgba(196, 207, 205, 0.22) 43.5%,
-    transparent 49%
-  );
-  pointer-events: none;
+  object-fit: cover;
+  object-position: center 55%;
 }
 
 .tunnel-scene__night {
@@ -1153,14 +812,6 @@ body.lightbox-open {
   background: linear-gradient(180deg, rgba(4, 8, 16, 0.92), rgba(6, 10, 18, 0.75));
   opacity: var(--night);
   transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.tunnel-scene__vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 52%, transparent 38%, rgba(0, 0, 0, 0.45) 100%);
-  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -1297,7 +948,7 @@ body.lightbox-open {
   color: var(--text-muted);
 }
 
-/* Modes change the light on the scene; the train keeps running regardless. */
+/* Modes change the light on the video; the clip keeps looping. */
 .tunnel__stage[data-mode="tunnel"] {
   --world-light: 0.46;
   --world-sat: 0.62;
@@ -1377,16 +1028,5 @@ body.lightbox-open {
   .tunnel-device__screen,
   .tunnel-device__slider i {
     transition: none;
-  }
-
-  /* Park the set short of the portal instead of running it. */
-  .tunnel-scene__consist,
-  .tunnel-scene__shadow,
-  .rail-set__side,
-  .rail-set__roof,
-  .rail-set__hood,
-  .rail-set__fill i,
-  .rail-set__cone {
-    animation: none;
   }
 }
