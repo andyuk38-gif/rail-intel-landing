@@ -184,6 +184,38 @@
 .page-hero {
   padding: calc(8rem + var(--dev-banner-height)) 0 3rem;
   position: relative;
+  isolation: isolate;
+}
+
+/* A quieter version of the homepage hero treatment, so interior pages share
+   the same look without competing with it. */
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: -2rem 0 0;
+  background:
+    linear-gradient(90deg, rgba(9, 12, 18, 0.93) 0%, rgba(9, 12, 18, 0.74) 60%, rgba(9, 12, 18, 0.6) 100%),
+    linear-gradient(180deg, rgba(9, 12, 18, 0.88) 0%, rgba(9, 12, 18, 0.82) 55%, rgba(12, 15, 20, 0.82) 100%);
+  /* Faded out rather than overhanging: the hero is a positioned stacking
+     context and would otherwise paint over the section below. */
+  mask-image: linear-gradient(180deg, #000 68%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 68%, transparent 100%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  top: -18%;
+  right: 4%;
+  width: 34rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.24), transparent 68%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .page-hero__inner {

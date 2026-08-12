@@ -32,6 +32,8 @@ async function shot(name, path, prepare) {
   await page.close();
 }
 
+await shot("hero", "/index.html", async () => {});
+
 await shot("nav-dropdown", "/index.html", async (page) => {
   await page.locator("[data-nav-trigger]").first().click();
   await page.waitForTimeout(400);
@@ -44,6 +46,11 @@ await shot("features-index", "/features/index.html");
 await shot("lightbox", "/features/competency-cycles.html", async (page) => {
   await page.locator(".shot__expand").first().click();
   await page.waitForTimeout(600);
+});
+
+await shot("mobile-hero", "/index.html", async (page) => {
+  await page.setViewportSize({ width: 420, height: 900 });
+  await page.waitForTimeout(300);
 });
 
 await shot("mobile-nav", "/index.html", async (page) => {

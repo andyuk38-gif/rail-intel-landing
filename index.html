@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=13" />
-  <link rel="stylesheet" href="css/pages.css?v=13" />
+  <link rel="stylesheet" href="css/style.css?v=14" />
+  <link rel="stylesheet" href="css/pages.css?v=14" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -157,40 +157,71 @@
 
   <main>
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="hero-aurora hero-aurora--amber"></span>
+        <span class="hero-aurora hero-aurora--blue"></span>
+        <span class="hero-mesh"></span>
+      </div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="hero-tag">Secure competency management for rail</p>
-          <h1 class="hero-title">Know who is safe to work — before they sign on.</h1>
-          <p class="hero-desc">Rail Intel gives operators live visibility of competencies, medicals, licences and assessments — so expired skills never reach the railway.</p>
+          <p class="hero-badge">
+            <span class="hero-badge__pulse" aria-hidden="true"></span>
+            Secure competency management for rail
+          </p>
+          <h1 class="hero-title">
+            Know who is <span class="hero-title__accent">safe to work</span>
+            <span class="hero-title__line">&mdash; before they sign on.</span>
+          </h1>
+          <p class="hero-desc">Rail Intel gives operators live visibility of competencies, medicals, licences and assessments &mdash; so expired skills never reach the railway.</p>
           <div class="hero-actions">
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Go to app</a>
             <a href="https://cms.railintel.co.uk" class="btn btn-ghost btn-lg">Log in</a>
           </div>
+          <ul class="hero-points">
+            <li>Live expiry alerts</li>
+            <li>Audit-ready evidence</li>
+            <li>14-day module trials</li>
+          </ul>
         </div>
         <div class="hero-media">
           <div class="hero-media__perspective">
-            <div class="hero-media__tilt">
-              <div class="browser-mockup browser-mockup--primary">
-                <div class="browser-mockup__chrome">
-                  <span class="browser-mockup__dots"></span>
-                  <span class="browser-mockup__url">cms.railintel.co.uk/dashboard</span>
-                </div>
-                <div class="browser-mockup__content">
-                  <img
-                    src="images/product/hero-dashboard.png"
-                    alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance"
-                    width="512"
-                    height="357"
-                    decoding="sync"
-                    fetchpriority="high"
-                  />
+            <div class="hero-media__float">
+              <div class="hero-media__tilt">
+                <div class="browser-mockup browser-mockup--primary">
+                  <div class="browser-mockup__chrome">
+                    <span class="browser-mockup__dots"></span>
+                    <span class="browser-mockup__url">cms.railintel.co.uk/dashboard</span>
+                  </div>
+                  <div class="browser-mockup__content">
+                    <img
+                      src="images/product/hero-dashboard.png"
+                      alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance"
+                      width="512"
+                      height="357"
+                      decoding="sync"
+                      fetchpriority="high"
+                    />
+                  </div>
                 </div>
               </div>
+              <span class="hero-chip hero-chip--safe" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong>Safe to work</strong>
+                  All checks current
+                </span>
+              </span>
+              <span class="hero-chip hero-chip--alert" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong>Medical expiring</strong>
+                  Flagged before sign-on
+                </span>
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <div class="hero-bg" aria-hidden="true"></div>
     </section>
 
     <section class="proof" aria-label="Why operators choose Rail Intel">
@@ -511,7 +542,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=13"></script>
-  <script src="js/main.js?v=13"></script>
+  <script src="js/site.js?v=14"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>
