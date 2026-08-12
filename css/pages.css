@@ -786,6 +786,7 @@ body.lightbox-open {
   --drop: 17cqw;
   --portal-t: 180cqw;
   --train-t: 60cqw;
+  --run: 30s;
   --world-light: 1;
   --world-sat: 1;
   --night: 0;
@@ -964,29 +965,42 @@ body.lightbox-open {
   position: absolute;
   left: 50%;
   top: 0;
-  width: calc(26 * var(--m));
+  width: calc(38 * var(--m));
   height: calc(7 * var(--m));
-  margin-left: calc(-13 * var(--m));
+  margin-left: calc(-19 * var(--m));
   margin-top: calc(-3.5 * var(--m));
   transform: translateY(calc(-1 * var(--train-t))) rotate(90deg) translateZ(0.6cqw);
-  background: radial-gradient(closest-side ellipse at 50% 50%, rgba(0, 0, 0, 0.62), transparent 100%);
-  transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background: radial-gradient(closest-side ellipse at 50% 50%, rgba(0, 0, 0, 0.55), transparent 100%);
+  animation: tunnel-shadow-run var(--run) linear infinite;
 }
 
 /* The unit is a real box in the same space: the consist stands the train on the
-   rails, and each car builds its own side, roof and cab faces around it. */
+   rails, and each car builds its own side, roof, rake and cab faces around it.
+   Livery follows the loading train in the app. */
 .tunnel-scene__consist {
   position: absolute;
   left: 50%;
   top: 0;
-  width: calc(24 * var(--m));
+  width: calc(36 * var(--m));
   height: calc(3.9 * var(--m));
-  margin-left: calc(-12 * var(--m));
+  margin-left: calc(-18 * var(--m));
   margin-top: calc(-3.9 * var(--m));
   transform-origin: 50% 100%;
   transform: translateY(calc(-1 * var(--train-t))) rotate(90deg) rotateX(-90deg);
   transform-style: preserve-3d;
-  transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: tunnel-train-run var(--run) linear infinite;
+}
+
+/* One continuous run: the set slides in past the camera, works its way down the
+   line and is gone inside the bore before the loop restarts. */
+@keyframes tunnel-train-run {
+  from { transform: translateY(120cqw) rotate(90deg) rotateX(-90deg); }
+  to { transform: translateY(-320cqw) rotate(90deg) rotateX(-90deg); }
+}
+
+@keyframes tunnel-shadow-run {
+  from { transform: translateY(120cqw) rotate(90deg) translateZ(0.6cqw); }
+  to { transform: translateY(-320cqw) rotate(90deg) translateZ(0.6cqw); }
 }
 
 .rail-car {
@@ -998,10 +1012,12 @@ body.lightbox-open {
 }
 
 .rail-car--lead { left: 0; }
-.rail-car--rear { left: calc(12 * var(--m)); }
+.rail-car--mid { left: calc(12 * var(--m)); }
+.rail-car--rear { left: calc(24 * var(--m)); }
 
 .rail-car__side,
 .rail-car__roof,
+.rail-car__rake,
 .rail-car__cab {
   position: absolute;
   display: block;
@@ -1011,75 +1027,141 @@ body.lightbox-open {
   inset: 0;
   transform: translateZ(calc(1.4 * var(--m)));
   background-image:
-    /* bogies */
-    radial-gradient(circle at 17% 88%, #0a0e15 0 calc(0.42 * var(--m)), transparent calc(0.45 * var(--m))),
-    radial-gradient(circle at 26% 88%, #0a0e15 0 calc(0.42 * var(--m)), transparent calc(0.45 * var(--m))),
-    radial-gradient(circle at 74% 88%, #0a0e15 0 calc(0.42 * var(--m)), transparent calc(0.45 * var(--m))),
-    radial-gradient(circle at 83% 88%, #0a0e15 0 calc(0.42 * var(--m)), transparent calc(0.45 * var(--m))),
+    /* wheels */
+    radial-gradient(circle at 16% 90%, #74757c 0 calc(0.36 * var(--m)), transparent calc(0.38 * var(--m))),
+    radial-gradient(circle at 25% 90%, #74757c 0 calc(0.36 * var(--m)), transparent calc(0.38 * var(--m))),
+    radial-gradient(circle at 75% 90%, #74757c 0 calc(0.36 * var(--m)), transparent calc(0.38 * var(--m))),
+    radial-gradient(circle at 84% 90%, #74757c 0 calc(0.36 * var(--m)), transparent calc(0.38 * var(--m))),
+    /* bogie frames */
+    linear-gradient(90deg, transparent 0 14%, #8e8f96 14% 27%, transparent 27% 73%, #8e8f96 73% 86%, transparent 86%),
     /* doors */
-    linear-gradient(90deg, transparent 0 7%, rgba(255, 255, 255, 0.07) 7% 14%, transparent 14% 82%, rgba(255, 255, 255, 0.07) 82% 89%, transparent 89%),
+    linear-gradient(90deg, transparent 0 5%, #a7a9b8 5% 9.5%, transparent 9.5% 90.5%, #a7a9b8 90.5% 95%, transparent 95%),
     /* windows */
-    repeating-linear-gradient(90deg, rgba(178, 197, 219, 0.85) 0 11%, transparent 11% 16%),
-    /* cant rail */
-    linear-gradient(180deg, transparent 0 15%, rgba(255, 255, 255, 0.16) 15% 17%, transparent 17%),
+    repeating-linear-gradient(90deg, #eceef5 0 9.5%, transparent 9.5% 13.5%),
     /* body */
     linear-gradient(
       180deg,
-      #aab5c0 0 5%,
-      #8e99a6 5% 8%,
-      #2a376b 8% 50%,
-      #212c58 50% 72%,
-      #1c2434 72% 78%,
-      #171e2a 78% 100%
+      #b6b7be 0 7%,
+      #9a9cb8 7% 13%,
+      #8688ad 13% 21%,
+      #7c7ea6 21% 63%,
+      #71739b 63% 74%,
+      #adaeb6 74% 84%,
+      #a1a2aa 84% 100%
     );
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 26%, 100% 100%, 100% 100%;
-  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 3% 22%, 0 0, 0 0;
+  background-size:
+    100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 22%, 100% 64%, 72% 25%, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 100%, 0 11%, 14% 24%, 0 0;
   background-repeat: no-repeat;
 }
 
-.rail-car__roof {
-  left: 0;
+/* Coral cab end with the double arrow, as on the app's set. */
+.rail-car__nose {
+  position: absolute;
   top: 0;
-  width: 100%;
+  bottom: 0;
+  width: 23%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20110%2046'%3E%3Cpath%20fill='%23fff'%20d='M0,6H58l12,8h40l-8,8H66L54,14H0Z'/%3E%3Cpath%20fill='%23fff'%20d='M110,40H52L40,32H0V24h44l12,8h54Z'/%3E%3C/svg%3E"),
+    linear-gradient(
+      180deg,
+      #b6b7be 0 7%,
+      #dd8a79 7% 13%,
+      #e5947f 13% 60%,
+      #d67e6c 60% 74%,
+      #adaeb6 74% 84%,
+      #a1a2aa 84% 100%
+    );
+  background-size: 62% 30%, 100% 100%;
+  background-position: 74% 40%, 0 0;
+  background-repeat: no-repeat;
+}
+
+.rail-car--rear .rail-car__nose { right: 0; }
+.rail-car--lead .rail-car__nose { left: 0; transform: scaleX(-1); }
+
+/* Raked nose: the side is cut back and this panel closes the slope. */
+.rail-car--lead .rail-car__side {
+  clip-path: polygon(0 38.5%, 14.2% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.rail-car--rear .rail-car__side {
+  clip-path: polygon(0 0, 85.8% 0, 100% 38.5%, 100% 100%, 0 100%);
+}
+
+.rail-car__rake {
+  top: 0;
+  width: calc(2.267 * var(--m));
+  height: calc(2.8 * var(--m));
+  transform-origin: 0 0;
+  background: linear-gradient(180deg, #cf7a68 0%, #e5947f 45%, #d17f6d 100%);
+}
+
+.rail-car--rear .rail-car__rake {
+  left: calc(10.3 * var(--m));
+  transform: translateZ(calc(1.4 * var(--m))) rotateZ(41.4deg) rotateX(-90deg);
+}
+
+.rail-car--lead .rail-car__rake {
+  left: calc(1.7 * var(--m));
+  transform: translateZ(calc(1.4 * var(--m))) rotateZ(138.6deg) rotateX(-90deg);
+}
+
+.rail-car__roof {
+  top: 0;
   height: calc(2.8 * var(--m));
   transform-origin: 50% 0;
   transform: translateZ(calc(-1.4 * var(--m))) rotateX(90deg);
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0 4%, transparent 4% 96%, rgba(0, 0, 0, 0.22) 96%),
-    linear-gradient(180deg, #616c77 0%, #949fa9 44%, #7e8993 74%, #5c666f 100%);
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 0 9%,
+      #9c9da5 9% 23%,
+      transparent 23% 36%,
+      #9c9da5 36% 46%,
+      transparent 46% 63%,
+      #9c9da5 63% 79%,
+      transparent 79%
+    ),
+    linear-gradient(180deg, #9d9ea6 0%, #c4c5cb 42%, #aeafb6 74%, #909199 100%);
+  background-size: 100% 44%, 100% 100%;
+  background-position: 0 26%, 0 0;
+  background-repeat: no-repeat;
 }
 
+.rail-car--mid .rail-car__roof { left: 0; width: 100%; }
+.rail-car--lead .rail-car__roof { left: calc(1.7 * var(--m)); width: calc(10.3 * var(--m)); }
+.rail-car--rear .rail-car__roof { left: 0; width: calc(10.3 * var(--m)); }
+
 .rail-car__cab {
-  top: 0;
+  top: calc(1.5 * var(--m));
   right: 0;
   width: calc(2.8 * var(--m));
-  height: 100%;
+  height: calc(2.4 * var(--m));
   transform-origin: 100% 50%;
   transform: translateZ(calc(-1.4 * var(--m))) rotateY(90deg);
   background: linear-gradient(
     180deg,
-    #8b96a1 0 6%,
-    #232e58 6% 15%,
-    #0d1424 15% 38%,
-    #2a376b 38% 44%,
-    #c2382c 44% 66%,
-    #7d231c 66% 71%,
-    #12181f 71% 100%
+    #4a4d63 0 22%,
+    #e5947f 22% 62%,
+    #d17f6d 62% 72%,
+    #adaeb6 72% 86%,
+    #8d8e95 86% 100%
   );
 }
 
 .rail-car__lamp {
   position: absolute;
-  bottom: 26%;
-  width: calc(0.24 * var(--m));
-  height: calc(0.24 * var(--m));
+  bottom: 20%;
+  width: calc(0.26 * var(--m));
+  height: calc(0.26 * var(--m));
   border-radius: 50%;
   background: #ff5a4d;
   box-shadow: 0 0 calc(0.5 * var(--m)) rgba(255, 70, 50, 0.85);
 }
 
-.rail-car__lamp:first-child { left: 16%; }
-.rail-car__lamp:last-child { right: 16%; }
+.rail-car__lamp:first-child { left: 18%; }
+.rail-car__lamp:last-child { right: 18%; }
 
 /* The scene is dimmed with a filter, so the tail lamps need to burn harder at
    night to still read as lamps. */
@@ -1251,16 +1333,14 @@ body.lightbox-open {
   color: var(--text-muted);
 }
 
-/* Modes — the train runs further down the line as the screen goes dark. */
+/* Modes change the light on the scene; the train keeps running regardless. */
 .tunnel__stage[data-mode="tunnel"] {
-  --train-t: 132cqw;
   --world-light: 0.46;
   --world-sat: 0.62;
   --night: 0.48;
 }
 
 .tunnel__stage[data-mode="dim"] {
-  --train-t: 228cqw;
   --world-light: 0.3;
   --world-sat: 0.4;
   --night: 0.7;
@@ -1329,10 +1409,15 @@ body.lightbox-open {
 
 @media (prefers-reduced-motion: reduce) {
   .tunnel-scene,
-  .tunnel-scene__consist,
   .tunnel-scene__night,
   .tunnel-device__screen,
   .tunnel-device__slider i {
     transition: none;
+  }
+
+  /* Park the set short of the portal instead of running it. */
+  .tunnel-scene__consist,
+  .tunnel-scene__shadow {
+    animation: none;
   }
 }
