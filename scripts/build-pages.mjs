@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks } fro
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 20;
+const ASSET_VERSION = 22;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -491,7 +491,6 @@ function tunnelDemo(base, { link = true } = {}) {
             <a href="${base}features/tunnel-mode.html" class="btn btn-primary">How Tunnel Mode works</a>
           </div>`
     : "";
-  const trainSrc = `${base}images/traction-train.png`;
 
   return `    <section class="tunnel" aria-labelledby="tunnel-heading">
       <div class="container tunnel__grid">
@@ -507,31 +506,68 @@ function tunnelDemo(base, { link = true } = {}) {
 ${actions}
         </div>
         <div class="tunnel__stage" data-tunnel>
+          <div class="tunnel__frame">
           <div class="tunnel-scene" aria-hidden="true">
             <div class="tunnel-scene__sky"></div>
-            <div class="tunnel-scene__world">
-              <div class="tunnel-scene__portal">
-                <span class="tunnel-scene__rim"></span>
-                <span class="tunnel-scene__bore"></span>
-                <span class="tunnel-scene__light"></span>
-              </div>
-              <svg class="tunnel-scene__rails" viewBox="0 0 800 320" preserveAspectRatio="none" aria-hidden="true">
-                <path class="tunnel-scene__sleeper" d="M70 290 L180 120" />
-                <path class="tunnel-scene__sleeper" d="M130 290 L220 120" />
-                <path class="tunnel-scene__sleeper" d="M190 290 L260 120" />
-                <path class="tunnel-scene__sleeper" d="M250 290 L300 120" />
-                <path class="tunnel-scene__sleeper" d="M310 290 L340 120" />
-                <path class="tunnel-scene__sleeper" d="M370 290 L380 120" />
-                <path class="tunnel-scene__rail" d="M40 300 C 180 300, 320 140, 400 118" />
-                <path class="tunnel-scene__rail" d="M220 300 C 300 300, 360 145, 420 118" />
-              </svg>
-              <div class="tunnel-scene__consist">
-                <img class="tunnel-scene__train" src="${trainSrc}" alt="" width="600" height="75" decoding="async" />
+            <div class="tunnel-scene__ridge"></div>
+            <div class="tunnel-scene__space">
+              <div class="tunnel-scene__ground">
+                <div class="tunnel-scene__route">
+                  <div class="tunnel-scene__ballast"></div>
+                  <div class="tunnel-scene__sleepers"></div>
+                  <div class="tunnel-scene__rails"></div>
+                  <div class="tunnel-scene__portal">
+                    <svg viewBox="0 0 320 110" preserveAspectRatio="none" focusable="false">
+                      <defs>
+                        <linearGradient id="tunnelHill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="#77835f" />
+                          <stop offset="0.45" stop-color="#5a6549" />
+                          <stop offset="1" stop-color="#414a38" />
+                        </linearGradient>
+                        <linearGradient id="tunnelBank" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="#4f5940" />
+                          <stop offset="1" stop-color="#343d2f" />
+                        </linearGradient>
+                        <linearGradient id="tunnelFace" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="#78818e" />
+                          <stop offset="0.6" stop-color="#49525f" />
+                          <stop offset="1" stop-color="#323a45" />
+                        </linearGradient>
+                        <radialGradient id="tunnelBore" cx="0.5" cy="0.94" r="0.82">
+                          <stop offset="0" stop-color="#18212d" />
+                          <stop offset="0.45" stop-color="#0a0e15" />
+                          <stop offset="1" stop-color="#03050a" />
+                        </radialGradient>
+                      </defs>
+                      <path d="M0 110 L0 84 C 36 80 62 30 120 20 C 180 10 240 48 320 72 L320 110 Z" fill="url(#tunnelHill)" />
+                      <path d="M0 110 L0 98 C 80 96 130 88 190 86 L320 92 L320 110 Z" fill="url(#tunnelBank)" />
+                      <path d="M112 110 L112 76 A 44 48 0 0 1 208 76 L208 110 Z" fill="url(#tunnelFace)" />
+                      <path d="M130 110 L130 80 A 30 35 0 0 1 190 80 L190 110 Z" fill="url(#tunnelBore)" stroke="#59626f" stroke-width="1.6" />
+                    </svg>
+                  </div>
+                  <div class="tunnel-scene__shadow"></div>
+                  <div class="tunnel-scene__consist">
+                    <div class="rail-car rail-car--lead">
+                      <span class="rail-car__side"></span>
+                      <span class="rail-car__roof"></span>
+                    </div>
+                    <div class="rail-car rail-car--rear">
+                      <span class="rail-car__side"></span>
+                      <span class="rail-car__roof"></span>
+                      <span class="rail-car__cab">
+                        <i class="rail-car__lamp"></i>
+                        <i class="rail-car__lamp"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="tunnel-scene__haze"></div>
+            <div class="tunnel-scene__night"></div>
             <div class="tunnel-scene__vignette"></div>
           </div>
-          <div class="tunnel-device">
+          <div class="tunnel-device" aria-hidden="true">
             <div class="tunnel-device__bezel">
               <div class="tunnel-device__screen">
                 <p class="tunnel-device__label">Assessing</p>
@@ -545,6 +581,7 @@ ${actions}
                 </div>
               </div>
             </div>
+          </div>
           </div>
           <div class="tunnel__toolbar">
             <button type="button" class="tunnel__btn is-active" data-tunnel-mode="day">Daylight</button>
