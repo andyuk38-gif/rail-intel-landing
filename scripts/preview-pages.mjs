@@ -34,6 +34,26 @@ async function shot(name, path, prepare) {
 
 await shot("hero", "/index.html", async () => {});
 
+await shot("verify", "/index.html", async (page) => {
+  await page.evaluate(() =>
+    document.querySelector("#verifications").scrollIntoView({ block: "start", behavior: "instant" })
+  );
+  await page.waitForTimeout(600);
+});
+
+await shot("verify-live", "/index.html", async (page) => {
+  await page.evaluate(() =>
+    document.querySelector(".verify__live").scrollIntoView({ block: "center", behavior: "instant" })
+  );
+  await page.waitForTimeout(600);
+});
+
+await shot("verify-tab", "/index.html", async (page) => {
+  await page.locator("#verifications").scrollIntoViewIfNeeded();
+  await page.locator('#verifications .gallery-tab:not(.is-active)').first().click();
+  await page.waitForTimeout(900);
+});
+
 await shot("nav-dropdown", "/index.html", async (page) => {
   await page.locator("[data-nav-trigger]").first().click();
   await page.waitForTimeout(400);
