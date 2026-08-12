@@ -786,7 +786,7 @@ body.lightbox-open {
   --drop: 17cqw;
   --portal-t: 420cqw;
   --train-t: 200cqw;
-  --run: 15s;
+  --run: 10s;
   --world-light: 1;
   --world-sat: 1;
   --night: 0;
@@ -1020,12 +1020,16 @@ body.lightbox-open {
 
 .rail-set__side,
 .rail-set__roof,
-.rail-set__art {
+.rail-set__hood,
+.rail-set__fill i,
+.rail-set__cone {
   position: absolute;
   display: block;
   animation: tunnel-train-fade var(--run) linear infinite;
 }
 
+/* The PNG already has the sloped cab in its alpha, so the flanks ARE the
+   nose in side elevation. Nothing else is allowed to stand outside that. */
 .rail-set__side {
   inset: 0;
   background: url("../images/traction-train.png") 0 0 / 100% 100% no-repeat;
@@ -1037,38 +1041,13 @@ body.lightbox-open {
 
 .rail-set__side--far {
   transform: translateZ(calc(-0.95 * var(--m)));
-  /* Ends trimmed: the cab ends are the lofted shell, not a second flat
-     profile stood behind the first. */
-  clip-path: inset(0 2.3% 0 2.3%);
-  filter: brightness(0.7) saturate(0.85);
-}
-
-/* The lofted nose sits closer to the camera than the flank, so Chrome paints
-   it over the artwork. These repaint the cab ends on the near side. */
-.rail-set__art {
-  top: 0;
-  width: calc(3.5 * var(--m));
-  height: 100%;
-  transform: translateZ(calc(0.951 * var(--m)));
-  background-image: url("../images/traction-train.png");
-  background-repeat: no-repeat;
-  background-size: calc(67.65 * var(--m)) 100%;
-}
-
-.rail-set__art--far {
-  left: 0;
-  background-position: 0 0;
-}
-
-.rail-set__art--near {
-  left: calc(64.15 * var(--m));
-  background-position: calc(-64.15 * var(--m)) 0;
+  filter: brightness(0.72) saturate(0.88);
 }
 
 .rail-set__roof {
-  top: 0;
-  left: calc(3 * var(--m));
-  width: calc(61.65 * var(--m));
+  top: calc(0.08 * var(--m));
+  left: calc(3.6 * var(--m));
+  width: calc(60.4 * var(--m));
   height: calc(1.9 * var(--m));
   transform-origin: 50% 0;
   transform: translateZ(calc(-0.95 * var(--m))) rotateX(90deg);
@@ -1076,48 +1055,84 @@ body.lightbox-open {
     linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.32)),
     url("../images/traction-train-roof.png");
   background-size: 100% 100%, calc(67.65 * var(--m)) 100%;
-  background-position: 0 0, calc(-3 * var(--m)) 0;
+  background-position: 0 0, calc(-3.6 * var(--m)) 0;
   background-repeat: no-repeat;
 }
 
-/* Each cab end is a stack of cross-sections that shrink towards the tip, so
-   the nose reads as a rounded, streamlined shell rather than a flat plate.
-   Positions come from scripts/build-pages.mjs. */
-.rail-nose {
+/* Hood follows the sprite roof-line (3.5m run, 2.47m drop → 35.2°) and
+   tapers to a blunt tip so it sits inside the flank silhouette. */
+.rail-set__hood {
+  top: calc(0.15 * var(--m));
+  width: calc(4.28 * var(--m));
+  height: calc(1.9 * var(--m));
+  clip-path: polygon(0 0, 0 100%, 100% 68%, 100% 32%);
+  background: linear-gradient(90deg, #e5231a 0%, #f0392c 55%, #c0170f 100%);
+}
+
+.rail-set__hood--near {
+  left: calc(64 * var(--m));
+  transform-origin: 0 0;
+  transform: translateZ(calc(-0.95 * var(--m))) rotateZ(35.2deg) rotateX(90deg);
+}
+
+.rail-set__hood--far {
+  left: calc(3.6 * var(--m));
+  transform-origin: 0 0;
+  transform: translateZ(calc(-0.95 * var(--m))) scaleX(-1) rotateZ(35.2deg) rotateX(90deg);
+}
+
+.rail-set__fill {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
+  pointer-events: none;
 }
 
-.rail-nose__slice {
+.rail-set__fill i {
   position: absolute;
   display: block;
-  animation: tunnel-train-fade var(--run) linear infinite;
-  transform-origin: 50% 50%;
   transform: translateX(-50%) rotateY(90deg);
-  border-radius: 44% 44% 30% 30% / 40% 40% 26% 26%;
-  background-image: linear-gradient(180deg, #e8291e 0%, #d21c12 62%, #8d0f09 100%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #e8291e 0%, #c0170f 100%);
 }
 
-.rail-nose__lamp {
+.rail-set__cone {
+  width: calc(0.55 * var(--m));
+  height: calc(0.5 * var(--m));
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #f56a5c, #d21c12 62%, #8d0f09 100%);
+}
+
+.rail-set__cone--near {
+  left: calc(67.05 * var(--m));
+  top: calc(2.48 * var(--m));
+  transform: translateZ(0) rotateY(90deg);
+}
+
+.rail-set__cone--far {
+  left: calc(0.05 * var(--m));
+  top: calc(2.48 * var(--m));
+  transform: translateZ(0) rotateY(-90deg);
+  filter: brightness(0.78);
+}
+
+.rail-set__lamp {
   position: absolute;
-  bottom: 14%;
-  width: calc(0.14 * var(--m));
-  height: calc(0.14 * var(--m));
+  bottom: 18%;
+  width: calc(0.12 * var(--m));
+  height: calc(0.12 * var(--m));
   border-radius: 50%;
   background: #ff5a4d;
-  box-shadow: 0 0 calc(0.4 * var(--m)) rgba(255, 70, 50, 0.85);
+  box-shadow: 0 0 calc(0.35 * var(--m)) rgba(255, 70, 50, 0.85);
 }
 
-.rail-nose__lamp:first-child { left: 12%; }
-.rail-nose__lamp:last-child { right: 12%; }
+.rail-set__lamp:first-child { left: 14%; }
+.rail-set__lamp:last-child { right: 14%; }
 
-/* The scene is dimmed with a filter, so the tail lamps need to burn harder at
-   night to still read as lamps. */
-.tunnel__stage[data-mode="tunnel"] .rail-nose__lamp,
-.tunnel__stage[data-mode="dim"] .rail-nose__lamp {
+.tunnel__stage[data-mode="tunnel"] .rail-set__lamp,
+.tunnel__stage[data-mode="dim"] .rail-set__lamp {
   background: #ff8c7a;
-  box-shadow: 0 0 calc(1.6 * var(--m)) rgba(255, 90, 70, 0.95);
+  box-shadow: 0 0 calc(1.4 * var(--m)) rgba(255, 90, 70, 0.95);
 }
 
 .tunnel-scene__haze {
@@ -1369,8 +1384,9 @@ body.lightbox-open {
   .tunnel-scene__shadow,
   .rail-set__side,
   .rail-set__roof,
-  .rail-set__art,
-  .rail-nose__slice {
+  .rail-set__hood,
+  .rail-set__fill i,
+  .rail-set__cone {
     animation: none;
   }
 }
