@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rail Intel – Competency Management</title>
-  <meta name="description" content="Rail Intel helps rail organisations manage competencies, training and compliance in one place." />
+  <title>Rail Intel – Know who is safe to work</title>
+  <meta name="description" content="Rail Intel is competency management for rail. Track cycles, medicals, licences and assessments so expired skills never reach the railway." />
   <link rel="icon" href="https://cms.railintel.co.uk/rail-intel-candidate-19.png" type="image/png" />
   <link rel="apple-touch-icon" href="https://cms.railintel.co.uk/rail-intel-candidate-19.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -30,6 +30,9 @@
           <span class="logo-text">Rail Intel</span>
         </a>
         <nav class="nav">
+          <a href="#product" class="nav-link">Product</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#how" class="nav-link">How it works</a>
           <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
           <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
         </nav>
@@ -39,146 +42,320 @@
 
   <main>
     <section class="hero">
-      <div class="container">
-        <p class="hero-tag">Competency management for rail</p>
-        <h1 class="hero-title">One place for digital competency tracking and compliance.</h1>
-        <p class="hero-desc">Rail Intel keeps your team’s skills, qualifications and compliance up to date so you can focus on running the railway.</p>
-        <div class="hero-actions">
-          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Go to app</a>
-          <a href="https://cms.railintel.co.uk" class="btn btn-ghost btn-lg">Log in</a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="hero-tag">Secure competency management for rail</p>
+          <h1 class="hero-title">Know who is safe to work — before they sign on.</h1>
+          <p class="hero-desc">Rail Intel gives operators live visibility of competencies, medicals, licences and assessments — so expired skills never reach the railway.</p>
+          <div class="hero-actions">
+            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Go to app</a>
+            <a href="https://cms.railintel.co.uk" class="btn btn-ghost btn-lg">Log in</a>
+          </div>
         </div>
-      </div>
-      <div class="hero-bg" aria-hidden="true"></div>
-    </section>
-
-    <section class="screenshots" aria-labelledby="screenshots-heading">
-      <div class="container">
-        <h2 id="screenshots-heading" class="section-title">See it in action</h2>
-        <p class="section-desc">Manage competencies, track expiries and run reports from one place.</p>
-        <div class="screenshot-showcase">
+        <div class="hero-media">
           <div class="browser-mockup browser-mockup--primary">
             <div class="browser-mockup__chrome">
               <span class="browser-mockup__dots"></span>
               <span class="browser-mockup__url">cms.railintel.co.uk/dashboard</span>
             </div>
-            <div class="browser-mockup__content screenshot-placeholder screenshot-placeholder--dashboard">
-              <div class="screenshot-placeholder__content">
-                <div class="ph-line ph-title"></div>
-                <div class="ph-line ph-wide"></div>
-                <div class="ph-grid">
-                  <div class="ph-card"></div>
-                  <div class="ph-card"></div>
-                  <div class="ph-card"></div>
-                </div>
-                <div class="ph-line ph-wide"></div>
-                <div class="ph-table">
-                  <div class="ph-row"></div>
-                  <div class="ph-row"></div>
-                  <div class="ph-row"></div>
-                  <div class="ph-row"></div>
-                </div>
-              </div>
+            <div class="browser-mockup__content">
+              <img src="images/product/dashboard.png" alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" width="1600" height="900" />
             </div>
           </div>
-          <div class="screenshot-stack">
-            <div class="browser-mockup browser-mockup--small">
+        </div>
+      </div>
+      <div class="hero-bg" aria-hidden="true"></div>
+    </section>
+
+    <section class="proof" aria-label="Why operators choose Rail Intel">
+      <div class="container">
+        <ul class="proof-grid">
+          <li class="proof-item">
+            <span class="proof-label">Live compliance</span>
+            <p>On-track, off-track and due-soon in one dashboard.</p>
+          </li>
+          <li class="proof-item">
+            <span class="proof-label">Safe to work</span>
+            <p>Mandatory expiry flags before anyone signs on.</p>
+          </li>
+          <li class="proof-item">
+            <span class="proof-label">QA verification</span>
+            <p>Company-wide checks across every module.</p>
+          </li>
+          <li class="proof-item">
+            <span class="proof-label">Built for rail</span>
+            <p>Roles, routes, traction, PTS and driver cycles.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="product-section product-section--elevated" id="product" aria-labelledby="command-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy">
+          <p class="product-eyebrow">Command centre</p>
+          <h2 id="command-heading">One dashboard for the whole operation.</h2>
+          <p class="product-lead">Stop chasing spreadsheets. See the state of the railway’s people the moment you log in.</p>
+          <ul class="product-bullets">
+            <li>Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.</li>
+            <li>Open any person and drill into team compliance, incidents and QA in a click.</li>
+            <li>Reporting and analytics for incidents, safety briefs and compliance rates — ready for reviews and audits.</li>
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery" data-gallery>
+            <div class="browser-mockup browser-mockup--primary">
               <div class="browser-mockup__chrome">
                 <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/dashboard</span>
               </div>
-              <div class="browser-mockup__content screenshot-placeholder screenshot-placeholder--list">
-                <div class="screenshot-placeholder__content">
-                  <div class="ph-line"></div>
-                  <div class="ph-line"></div>
-                  <div class="ph-line"></div>
-                  <div class="ph-line ph-short"></div>
-                </div>
+              <div class="browser-mockup__content">
+                <img src="images/product/dashboard.png" alt="Rail Intel dashboard with live compliance overview" width="1600" height="900" data-gallery-main loading="lazy" />
               </div>
             </div>
-            <div class="browser-mockup browser-mockup--small">
-              <div class="browser-mockup__chrome">
-                <span class="browser-mockup__dots"></span>
-              </div>
-              <div class="browser-mockup__content screenshot-placeholder screenshot-placeholder--report">
-                <div class="screenshot-placeholder__content">
-                  <div class="ph-line ph-title"></div>
-                  <div class="ph-chart"></div>
-                </div>
-              </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/dashboard.png" data-alt="Rail Intel dashboard with live compliance overview" data-url="cms.railintel.co.uk/dashboard">Dashboard</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/team-compliance.png" data-alt="Your team’s compliance with live review and advisory counts" data-url="cms.railintel.co.uk/compliance">Team compliance</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting">Reporting</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/platform-nav.png" data-alt="Rail Intel navigation showing employees, medicals, licensing, incidents and administration" data-url="cms.railintel.co.uk">Platform</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="how-it-works" aria-labelledby="how-heading">
+    <section class="product-section product-section--reverse" aria-labelledby="cycles-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy">
+          <p class="product-eyebrow">Competency engine</p>
+          <h2 id="cycles-heading">Build cycles. Assess in the field. Never miss an expiry.</h2>
+          <p class="product-lead">Competency is not a document store. It is a live cycle with a start date, an expiry, and evidence.</p>
+          <ul class="product-bullets">
+            <li>Start from a ready-made framework or build a custom cycle in four steps — method, details, criteria, events.</li>
+            <li>Assign live cycles and surface <strong>not safe to work</strong> the moment a mandatory competency lapses.</li>
+            <li>Assess against structured criteria, attach files and photos, and keep saving even if the signal drops.</li>
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery" data-gallery>
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/cycle-builder</span>
+              </div>
+              <div class="browser-mockup__content">
+                <img src="images/product/cycle-builder.png" alt="Cycle Builder step one: choose a template or build a custom competency cycle" width="1600" height="900" data-gallery-main loading="lazy" />
+              </div>
+            </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Competency cycle screens">
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/cycle-builder.png" data-alt="Cycle Builder step one: choose a template or build a custom competency cycle" data-url="cms.railintel.co.uk/cycle-builder">Cycle builder</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/current-cycles.png" data-alt="Live cycles on an employee record with a not safe to work alert" data-url="cms.railintel.co.uk/cycles">Live cycles</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/assessing-criteria.png" data-alt="In-field assessment of operate trains criteria with grade, notes and evidence" data-url="cms.railintel.co.uk/assessing">Assessing</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-section product-section--elevated" aria-labelledby="workforce-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy">
+          <p class="product-eyebrow">Workforce records</p>
+          <h2 id="workforce-heading">Every licence, medical and qualification on one record.</h2>
+          <p class="product-lead">If it has an expiry date, it belongs on the person — not in a shared drive.</p>
+          <ul class="product-bullets">
+            <li>Store train driving licences, categories and competence certificates with a clear audit trail.</li>
+            <li>Track ORR medicals and occupational health so expired medicals never slip through.</li>
+            <li>Training, qualifications and leave sit alongside the same employee — not in another spreadsheet.</li>
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery" data-gallery>
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/licensing</span>
+              </div>
+              <div class="browser-mockup__content">
+                <img src="images/product/licence.png" alt="Train driving licence record with front and back image slots and expiry fields" width="1600" height="900" data-gallery-main loading="lazy" />
+              </div>
+            </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Workforce record screens">
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png" data-alt="Train driving licence record with front and back image slots and expiry fields" data-url="cms.railintel.co.uk/licensing">Licensing</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/medical-record.png" data-alt="New medical record form for occupational health and ORR medicals" data-url="cms.railintel.co.uk/medicals">Medicals</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/training-quals.png" data-alt="Training and qualifications overview on an employee record" data-url="cms.railintel.co.uk/training">Training</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-section product-section--reverse" aria-labelledby="safety-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy">
+          <p class="product-eyebrow">Safety operations</p>
+          <h2 id="safety-heading">Incidents, plans and cab passes — linked to the person.</h2>
+          <p class="product-lead">When something happens on the railway, the record should already know who was involved.</p>
+          <ul class="product-bullets">
+            <li>Log and allocate incidents, then raise CDPs and performance support plans from the same record.</li>
+            <li>Issue and track cab passes with a clear colour status.</li>
+            <li>Safety briefs stay attached to the people who signed them — ready when you need to prove it.</li>
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery" data-gallery>
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/incidents</span>
+              </div>
+              <div class="browser-mockup__content">
+                <img src="images/product/incidents-cdp.png" alt="Monitoring and incidents view with allocated incidents and competence development plans" width="1600" height="900" data-gallery-main loading="lazy" />
+              </div>
+            </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Safety operations screens">
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/incidents-cdp.png" data-alt="Monitoring and incidents view with allocated incidents and competence development plans" data-url="cms.railintel.co.uk/incidents">Incidents &amp; CDP</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/safety-briefs.png" data-alt="Employee safety briefs overview" data-url="cms.railintel.co.uk/safety-briefs">Safety briefs</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/cab-passes.png" data-alt="Cab passes register with issue status" data-url="cms.railintel.co.uk/cab-passes">Cab passes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-section product-section--elevated" aria-labelledby="routes-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy">
+          <p class="product-eyebrow">Routes and hours</p>
+          <h2 id="routes-heading">Traction, routes and hours that prove competence.</h2>
+          <p class="product-lead">Route knowledge and hours on type are not optional extras. They are part of the same compliance picture.</p>
+          <ul class="product-bullets">
+            <li>Configure traction types, routes and depots to match how your railway actually runs.</li>
+            <li>Record trainee hours, encounters and manager hours against progress — not a separate logbook.</li>
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery" data-gallery>
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/routes</span>
+              </div>
+              <div class="browser-mockup__content">
+                <img src="images/product/traction-routes.png" alt="Traction and route overview for company configuration" width="1600" height="900" data-gallery-main loading="lazy" />
+              </div>
+            </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Routes and hours screens">
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes">Traction &amp; routes</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/trainee-hours.png" data-alt="Trainee hours and experience records" data-url="cms.railintel.co.uk/trainee-hours">Trainee hours</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-section product-section--reverse" aria-labelledby="qa-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy">
+          <p class="product-eyebrow">Assurance</p>
+          <h2 id="qa-heading">Verify the whole company. Configure it once.</h2>
+          <p class="product-lead">QA should not wait for an audit week. Run verification whenever you need the truth.</p>
+          <ul class="product-bullets">
+            <li>Run QA across licences, medicals, cycles, incidents and more — then see compliant, advisory and review at a glance.</li>
+            <li>Set organisation structure, role permissions and company standards so the platform matches your operation.</li>
+            <li>Tasks and employee messaging keep follow-ups inside the system, not in a side inbox.</li>
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery" data-gallery>
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/verifications</span>
+              </div>
+              <div class="browser-mockup__content">
+                <img src="images/product/qa-verifications.png" alt="QA verifications run history with compliance rates and section breakdown" width="1600" height="900" data-gallery-main loading="lazy" />
+              </div>
+            </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Assurance screens">
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/qa-verifications.png" data-alt="QA verifications run history with compliance rates and section breakdown" data-url="cms.railintel.co.uk/verifications">QA verifications</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/org-structure.png" data-alt="Organisation structure configuration" data-url="cms.railintel.co.uk/admin/org">Org structure</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="how" aria-labelledby="how-heading">
       <div class="container">
         <h2 id="how-heading" class="section-title">How it works</h2>
+        <p class="section-desc">Stand up the platform once. Then run the railway with live compliance.</p>
         <div class="steps">
           <div class="step">
             <span class="step-num" aria-hidden="true">1</span>
-            <h3>Add your people and roles</h3>
-            <p>Set up your organisation structure and assign competencies to roles.</p>
+            <h3>Configure your company</h3>
+            <p>Roles, standards, traction, routes and cycle templates — set up once to match how you already work.</p>
           </div>
           <div class="step">
             <span class="step-num" aria-hidden="true">2</span>
-            <h3>Track and renew</h3>
-            <p>Record qualifications and expiry dates. Get visibility before anything lapses.</p>
+            <h3>Assign and record</h3>
+            <p>Put people on cycles. Capture assessments, medicals, licences and hours as the work happens.</p>
           </div>
           <div class="step">
             <span class="step-num" aria-hidden="true">3</span>
-            <h3>Stay compliant</h3>
-            <p>Run reports, export for audits and keep your railway running with confidence.</p>
+            <h3>Monitor and verify</h3>
+            <p>Watch live compliance and run QA verifications before anyone is unsafe to work.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="features" aria-labelledby="features-heading">
+    <section class="features" id="features" aria-labelledby="features-heading">
       <div class="container">
         <h2 id="features-heading" class="section-title">Why Rail Intel</h2>
-        <p class="section-desc">Everything you need to keep your people compliant and your operations running smoothly.</p>
+        <p class="section-desc">Built for safety-critical rail — not generic HR.</p>
         <ul class="feature-grid">
           <li class="feature-card">
             <span class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             </span>
-            <h3>Competency tracking</h3>
-            <p>Record and track competencies and expiry dates in one system. Never miss a renewal.</p>
+            <h3>Expiry alerts that matter</h3>
+            <p>Competencies, medicals and licences with due-soon and overdue in one place. Never miss a renewal.</p>
           </li>
           <li class="feature-card">
             <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 1 3 4 3s4-1 4-3v-5"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
             </span>
-            <h3>Training & compliance</h3>
-            <p>Stay on top of training requirements and compliance deadlines with clear dashboards.</p>
+            <h3>Audit-ready records</h3>
+            <p>Verification history, evidence on assessments, and exports for reviews, tenders and the regulator.</p>
           </li>
           <li class="feature-card">
             <span class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             </span>
             <h3>Built for rail</h3>
-            <p>Designed around how rail organisations work—roles, schemes and standards you already use.</p>
+            <p>Driver cycles, PTS, traction, routes, cab passes and safety briefs — not a generic HR tool.</p>
           </li>
           <li class="feature-card">
             <span class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </span>
-            <h3>Team & roles</h3>
-            <p>Organise people by role and team. See who’s compliant and who needs attention at a glance.</p>
+            <h3>Team and roles</h3>
+            <p>Organise people by role and depot. Control who sees what with company permissions.</p>
           </li>
           <li class="feature-card">
             <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 1 3 4 3s4-1 4-3v-5"/></svg>
             </span>
-            <h3>Reports & exports</h3>
-            <p>Generate reports and export data for audits, tenders and internal reviews.</p>
+            <h3>Live reporting</h3>
+            <p>Incidents, monitoring, safety briefs and compliance rates on one analytics view.</p>
           </li>
           <li class="feature-card">
             <span class="feature-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </span>
-            <h3>Secure & reliable</h3>
-            <p>Your data is stored securely. Access is controlled so only the right people see what they need.</p>
+            <h3>Secure access</h3>
+            <p>Company codes, logged access and role-based permissions. Only the right people see what they need.</p>
           </li>
         </ul>
       </div>
@@ -186,8 +363,8 @@
 
     <section class="cta">
       <div class="container">
-        <h2 class="cta-title">Ready to get started?</h2>
-        <p class="cta-desc">Sign in or open the app to manage your team’s competencies.</p>
+        <h2 class="cta-title">Put your competency data to work.</h2>
+        <p class="cta-desc">Sign in to Rail Intel and see who is safe to work — live.</p>
         <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
       </div>
     </section>
@@ -196,6 +373,12 @@
   <footer class="footer">
     <div class="container">
       <p class="footer-brand">Rail Intel</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#product">Product</a>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="https://cms.railintel.co.uk">Log in</a>
+      </nav>
       <p class="footer-copy">&copy; <span id="year"></span> Rail Intel. Competency management for rail.</p>
     </div>
   </footer>
