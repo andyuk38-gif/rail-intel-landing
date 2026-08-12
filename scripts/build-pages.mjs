@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks } fro
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 23;
+const ASSET_VERSION = 24;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -547,22 +547,14 @@ ${actions}
                   </div>
                   <div class="tunnel-scene__shadow"></div>
                   <div class="tunnel-scene__consist">
-                    <div class="rail-car rail-car--lead">
-                      <span class="rail-car__side"><i class="rail-car__nose"></i></span>
-                      <span class="rail-car__rake"></span>
-                      <span class="rail-car__roof"></span>
-                    </div>
-                    <div class="rail-car rail-car--mid">
-                      <span class="rail-car__side"></span>
-                      <span class="rail-car__roof"></span>
-                    </div>
-                    <div class="rail-car rail-car--rear">
-                      <span class="rail-car__side"><i class="rail-car__nose"></i></span>
-                      <span class="rail-car__rake"></span>
-                      <span class="rail-car__roof"></span>
-                      <span class="rail-car__cab">
-                        <i class="rail-car__lamp"></i>
-                        <i class="rail-car__lamp"></i>
+                    <div class="rail-set">
+                      <span class="rail-set__side"></span>
+                      <span class="rail-set__roof"></span>
+                      <span class="rail-set__rake rail-set__rake--far"></span>
+                      <span class="rail-set__rake rail-set__rake--near"></span>
+                      <span class="rail-set__cab">
+                        <i class="rail-set__lamp"></i>
+                        <i class="rail-set__lamp"></i>
                       </span>
                     </div>
                   </div>
