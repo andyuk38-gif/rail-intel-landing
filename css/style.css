@@ -257,8 +257,29 @@ body::before {
   gap: 1rem;
 }
 
-.hero-media .browser-mockup {
-  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.5);
+.hero-media {
+  min-width: 0;
+}
+
+.hero-media__perspective {
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+}
+
+.hero-media__tilt {
+  transform: rotateY(-6deg) rotateX(2deg);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 28px 64px rgba(0, 0, 0, 0.5));
+}
+
+.hero-media__tilt .browser-mockup {
+  box-shadow: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero-media__tilt .browser-mockup__content img {
+  transform: translateZ(0.1px);
 }
 
 /* Proof strip */
@@ -550,10 +571,10 @@ body::before {
   display: block;
   width: 100%;
   height: auto;
+  max-width: 100%;
   image-rendering: auto;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transform: translateZ(0);
 }
 
 .feature-grid {
@@ -683,6 +704,19 @@ body::before {
 
   .hero-title {
     max-width: none;
+  }
+
+  .hero-media__tilt {
+    transform: none;
+    filter: none;
+  }
+
+  .hero-media__tilt .browser-mockup {
+    box-shadow: 0 28px 64px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-media__tilt .browser-mockup__content img {
+    transform: none;
   }
 
   .proof-grid {

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -54,13 +54,26 @@
           </div>
         </div>
         <div class="hero-media">
-          <div class="browser-mockup browser-mockup--primary">
-            <div class="browser-mockup__chrome">
-              <span class="browser-mockup__dots"></span>
-              <span class="browser-mockup__url">cms.railintel.co.uk/dashboard</span>
-            </div>
-            <div class="browser-mockup__content">
-              <img src="images/product/dashboard.png" alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" width="1384" height="735" decoding="async" fetchpriority="high" />
+          <div class="hero-media__perspective">
+            <div class="hero-media__tilt">
+              <div class="browser-mockup browser-mockup--primary">
+                <div class="browser-mockup__chrome">
+                  <span class="browser-mockup__dots"></span>
+                  <span class="browser-mockup__url">cms.railintel.co.uk/dashboard</span>
+                </div>
+                <div class="browser-mockup__content">
+                  <img
+                    src="images/product/dashboard.png"
+                    srcset="images/product/dashboard.png 1384w, images/product/2x/dashboard.png 2768w"
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance"
+                    width="1384"
+                    height="735"
+                    decoding="async"
+                    fetchpriority="high"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -111,14 +124,14 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/dashboard</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/dashboard.png" alt="Rail Intel dashboard with live compliance overview" width="1600" height="900" data-gallery-main loading="lazy" />
+                <img src="images/product/dashboard.png" alt="Rail Intel dashboard with live compliance overview" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
               <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/dashboard.png" data-alt="Rail Intel dashboard with live compliance overview" data-url="cms.railintel.co.uk/dashboard">Dashboard</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting">Reporting</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting">Analytics</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/login.jpg" data-alt="Rail Intel sign-in screen" data-url="cms.railintel.co.uk">Sign in</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/login.png" data-alt="Rail Intel sign-in screen" data-url="cms.railintel.co.uk">Sign in</button>
             </div>
           </div>
         </div>
@@ -145,7 +158,7 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/cycle-builder</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/cycle-builder.png" alt="Cycle Builder step one: choose a template or build a custom competency cycle" width="1600" height="900" data-gallery-main loading="lazy" />
+                <img src="images/product/cycle-builder.png" alt="Cycle Builder step one: choose a template or build a custom competency cycle" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Competency cycle screens">
@@ -178,7 +191,7 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/licensing</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/licence.png" alt="Train driving licence record with front and back image slots and expiry fields" width="1600" height="900" data-gallery-main loading="lazy" />
+                <img src="images/product/licence.png" alt="Train driving licence record with front and back image slots and expiry fields" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Workforce record screens">
@@ -211,7 +224,7 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/incidents</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/incidents-cdp.png" alt="Monitoring and incidents view with allocated incidents and competence development plans" width="1600" height="900" data-gallery-main loading="lazy" />
+                <img src="images/product/incidents-cdp.png" alt="Monitoring and incidents view with allocated incidents and competence development plans" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Safety operations screens">
@@ -243,7 +256,7 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/routes</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/traction-routes.png" alt="Traction and route overview for company configuration" width="1600" height="900" data-gallery-main loading="lazy" />
+                <img src="images/product/traction-routes.png" alt="Traction and route overview for company configuration" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Routes and hours screens">
@@ -275,7 +288,7 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/verifications</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/qa-verifications.png" alt="QA verifications run history with compliance rates and section breakdown" width="1600" height="900" data-gallery-main loading="lazy" />
+                <img src="images/product/qa-verifications.png" alt="QA verifications run history with compliance rates and section breakdown" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Assurance screens">
@@ -384,6 +397,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>
