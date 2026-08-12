@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks } fro
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 24;
+const ASSET_VERSION = 25;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -548,7 +548,8 @@ ${actions}
                   <div class="tunnel-scene__shadow"></div>
                   <div class="tunnel-scene__consist">
                     <div class="rail-set">
-                      <span class="rail-set__side"></span>
+                      <span class="rail-set__side rail-set__side--far"></span>
+                      <span class="rail-set__side rail-set__side--near"></span>
                       <span class="rail-set__roof"></span>
                       <span class="rail-set__rake rail-set__rake--far"></span>
                       <span class="rail-set__rake rail-set__rake--near"></span>
