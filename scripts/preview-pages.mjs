@@ -34,6 +34,13 @@ async function shot(name, path, prepare) {
 
 await shot("hero", "/index.html", async () => {});
 
+await shot("login-scene", "/index.html", async (page) => {
+  await page.evaluate(() =>
+    document.querySelector("#product").scrollIntoView({ block: "center", behavior: "instant" })
+  );
+  await page.waitForTimeout(1500);
+});
+
 await shot("verify", "/index.html", async (page) => {
   await page.evaluate(() =>
     document.querySelector("#verifications").scrollIntoView({ block: "start", behavior: "instant" })
