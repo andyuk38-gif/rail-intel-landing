@@ -269,7 +269,9 @@ body::before {
   perspective: 1400px;
   perspective-origin: 55% 50%;
   width: 100%;
-  max-width: 100%;
+  /* 512px of image plus the mockup's 1px borders: the hero screenshot is
+     1024px wide, so this renders it at exactly 2x for Retina. */
+  max-width: 514px;
 }
 
 .hero-media__tilt {
