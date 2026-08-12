@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks } fro
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 25;
+const ASSET_VERSION = 26;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -485,6 +485,62 @@ ${renderCta(base, {
   );
 }
 
+/* The sprite is a side elevation, so on its own it has no nose — anything flat
+   bridging the two flanks stands proud of the artwork. Instead each cab end is
+   lofted from cross-sections that shrink towards the tip, which is what gives
+   a streamlined unit its rounded, tapering nose. Distances are metres on the
+   902x52 sprite (67.65m x 3.9m); the nose runs 2.69m back from the tip. */
+function noseSlices(rootX, dir) {
+  const N = 26;
+  const LEN = 2.69;
+  const HALF = 0.95;
+  const round = (n) => Number(n.toFixed(3));
+  const out = [];
+
+  for (let i = 0; i < N; i += 1) {
+    const u = i / (N - 1);
+    const halfWidth = HALF * Math.max(0, 1 - u * u) ** 0.9;
+    const top = 0.3 + 2.03 * u ** 1.4;
+    const bottom = 3.45 - 0.25 * u ** 2;
+    const width = Math.max(0.08, halfWidth * 2);
+    const height = Math.max(0.08, bottom - top);
+    const x = rootX + dir * u * LEN;
+    const lamps = i === 21
+      ? `<i class="rail-nose__lamp"></i><i class="rail-nose__lamp"></i>`
+      : "";
+    /* Shading is baked into each section rather than applied with a filter:
+       60 filtered surfaces in one 3D context is a lot to composite. */
+    const lit = 0.78 + 0.3 * u;
+    const shade = ([r, g, b]) =>
+      `rgb(${Math.min(255, Math.round(r * lit))},${Math.min(255, Math.round(g * lit))},${Math.min(255, Math.round(b * lit))})`;
+    const skin =
+      `linear-gradient(180deg, ${shade([232, 41, 30])} 0%, ${shade([210, 28, 18])} 62%, ${shade([141, 15, 9])} 100%)`;
+
+    out.push(
+      `<span class="rail-nose__slice" style="left:calc(${round(x)} * var(--m));top:calc(${round(top)} * var(--m));` +
+        `width:calc(${round(width)} * var(--m));height:calc(${round(height)} * var(--m));` +
+        `background-image:${skin}">${lamps}</span>`
+    );
+  }
+
+  return out.join("");
+}
+
+function railSet() {
+  const nearNose = noseSlices(64.58, 1);
+  const farNose = noseSlices(3.07, -1);
+
+  return `<div class="rail-set">
+                      <span class="rail-set__side rail-set__side--far"></span>
+                      <span class="rail-set__roof"></span>
+                      <span class="rail-nose rail-nose--far">${farNose}</span>
+                      <span class="rail-nose rail-nose--near">${nearNose}</span>
+                      <span class="rail-set__side rail-set__side--near"></span>
+                      <span class="rail-set__art rail-set__art--far"></span>
+                      <span class="rail-set__art rail-set__art--near"></span>
+                    </div>`;
+}
+
 function tunnelDemo(base, { link = true } = {}) {
   const actions = link
     ? `          <div class="page-actions" style="margin-top:1.5rem">
@@ -547,17 +603,7 @@ ${actions}
                   </div>
                   <div class="tunnel-scene__shadow"></div>
                   <div class="tunnel-scene__consist">
-                    <div class="rail-set">
-                      <span class="rail-set__side rail-set__side--far"></span>
-                      <span class="rail-set__side rail-set__side--near"></span>
-                      <span class="rail-set__roof"></span>
-                      <span class="rail-set__rake rail-set__rake--far"></span>
-                      <span class="rail-set__rake rail-set__rake--near"></span>
-                      <span class="rail-set__cab">
-                        <i class="rail-set__lamp"></i>
-                        <i class="rail-set__lamp"></i>
-                      </span>
-                    </div>
+                    ${railSet()}
                   </div>
                 </div>
               </div>

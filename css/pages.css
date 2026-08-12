@@ -786,7 +786,7 @@ body.lightbox-open {
   --drop: 17cqw;
   --portal-t: 420cqw;
   --train-t: 200cqw;
-  --run: 22s;
+  --run: 15s;
   --world-light: 1;
   --world-sat: 1;
   --night: 0;
@@ -1020,16 +1020,12 @@ body.lightbox-open {
 
 .rail-set__side,
 .rail-set__roof,
-.rail-set__rake,
-.rail-set__cab {
+.rail-set__art {
   position: absolute;
   display: block;
   animation: tunnel-train-fade var(--run) linear infinite;
 }
 
-/* Two painted flanks 1.9m apart. The far one is what closes the nose: at the
-   ends it peeks out behind the near flank, so the tapered rake between them
-   reads as a rounded nose instead of a flat plate stood on edge. */
 .rail-set__side {
   inset: 0;
   background: url("../images/traction-train.png") 0 0 / 100% 100% no-repeat;
@@ -1041,7 +1037,32 @@ body.lightbox-open {
 
 .rail-set__side--far {
   transform: translateZ(calc(-0.95 * var(--m)));
-  filter: brightness(0.74) saturate(0.9);
+  /* Ends trimmed: the cab ends are the lofted shell, not a second flat
+     profile stood behind the first. */
+  clip-path: inset(0 2.3% 0 2.3%);
+  filter: brightness(0.7) saturate(0.85);
+}
+
+/* The lofted nose sits closer to the camera than the flank, so Chrome paints
+   it over the artwork. These repaint the cab ends on the near side. */
+.rail-set__art {
+  top: 0;
+  width: calc(3.5 * var(--m));
+  height: 100%;
+  transform: translateZ(calc(0.951 * var(--m)));
+  background-image: url("../images/traction-train.png");
+  background-repeat: no-repeat;
+  background-size: calc(67.65 * var(--m)) 100%;
+}
+
+.rail-set__art--far {
+  left: 0;
+  background-position: 0 0;
+}
+
+.rail-set__art--near {
+  left: calc(64.15 * var(--m));
+  background-position: calc(-64.15 * var(--m)) 0;
 }
 
 .rail-set__roof {
@@ -1059,40 +1080,28 @@ body.lightbox-open {
   background-repeat: no-repeat;
 }
 
-/* Tapered to a point, so the far edge of the slope stays inside the nose
-   drawn on the sprite instead of standing proud of it. */
-.rail-set__rake {
-  top: calc(0.3 * var(--m));
-  width: calc(3.48 * var(--m));
-  height: calc(1.9 * var(--m));
-  transform-origin: 0 0;
-  clip-path: polygon(0 0, 100% 40%, 100% 60%, 0 100%);
-  background: linear-gradient(180deg, #c0170f 0%, #f0392c 50%, #b5150e 100%);
-}
-
-.rail-set__rake--near {
-  left: calc(64.65 * var(--m));
-  transform: translateZ(calc(0.95 * var(--m))) rotateZ(37.1deg) rotateX(-90deg);
-}
-
-.rail-set__rake--far {
-  left: calc(3 * var(--m));
-  transform: translateZ(calc(0.95 * var(--m))) rotateZ(142.9deg) rotateX(-90deg);
-}
-
-.rail-set__cab {
-  top: calc(2.35 * var(--m));
-  right: calc(0.3 * var(--m));
-  width: calc(0.6 * var(--m));
-  height: calc(0.95 * var(--m));
-  transform-origin: 100% 50%;
-  transform: translateZ(calc(-0.3 * var(--m))) rotateY(90deg);
-  background: linear-gradient(180deg, #d21c13 0 62%, #8f100a 62% 100%);
-}
-
-.rail-set__lamp {
+/* Each cab end is a stack of cross-sections that shrink towards the tip, so
+   the nose reads as a rounded, streamlined shell rather than a flat plate.
+   Positions come from scripts/build-pages.mjs. */
+.rail-nose {
   position: absolute;
-  bottom: 26%;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.rail-nose__slice {
+  position: absolute;
+  display: block;
+  animation: tunnel-train-fade var(--run) linear infinite;
+  transform-origin: 50% 50%;
+  transform: translateX(-50%) rotateY(90deg);
+  border-radius: 44% 44% 30% 30% / 40% 40% 26% 26%;
+  background-image: linear-gradient(180deg, #e8291e 0%, #d21c12 62%, #8d0f09 100%);
+}
+
+.rail-nose__lamp {
+  position: absolute;
+  bottom: 14%;
   width: calc(0.14 * var(--m));
   height: calc(0.14 * var(--m));
   border-radius: 50%;
@@ -1100,13 +1109,13 @@ body.lightbox-open {
   box-shadow: 0 0 calc(0.4 * var(--m)) rgba(255, 70, 50, 0.85);
 }
 
-.rail-set__lamp:first-child { left: 20%; }
-.rail-set__lamp:last-child { right: 20%; }
+.rail-nose__lamp:first-child { left: 12%; }
+.rail-nose__lamp:last-child { right: 12%; }
 
 /* The scene is dimmed with a filter, so the tail lamps need to burn harder at
    night to still read as lamps. */
-.tunnel__stage[data-mode="tunnel"] .rail-set__lamp,
-.tunnel__stage[data-mode="dim"] .rail-set__lamp {
+.tunnel__stage[data-mode="tunnel"] .rail-nose__lamp,
+.tunnel__stage[data-mode="dim"] .rail-nose__lamp {
   background: #ff8c7a;
   box-shadow: 0 0 calc(1.6 * var(--m)) rgba(255, 90, 70, 0.95);
 }
@@ -1360,8 +1369,8 @@ body.lightbox-open {
   .tunnel-scene__shadow,
   .rail-set__side,
   .rail-set__roof,
-  .rail-set__rake,
-  .rail-set__cab {
+  .rail-set__art,
+  .rail-nose__slice {
     animation: none;
   }
 }
