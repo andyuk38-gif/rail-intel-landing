@@ -210,4 +210,41 @@
     if (getComputedStyle(frame).position === "static") frame.style.position = "relative";
     frame.appendChild(button);
   });
+
+  /* ---------- Tunnel Mode demo ---------- */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-tunnel]"), function (stage) {
+    var buttons = Array.prototype.slice.call(stage.querySelectorAll("[data-tunnel-mode]"));
+    var modes = ["day", "tunnel", "dim"];
+    var index = 0;
+    var timer = null;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function setMode(mode) {
+      stage.dataset.mode = mode;
+      buttons.forEach(function (button) {
+        var active = button.dataset.tunnelMode === mode;
+        button.classList.toggle("is-active", active);
+      });
+      index = Math.max(0, modes.indexOf(mode));
+    }
+
+    function cycle() {
+      index = (index + 1) % modes.length;
+      setMode(modes[index]);
+    }
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        setMode(button.dataset.tunnelMode);
+        if (timer) {
+          clearInterval(timer);
+          timer = setInterval(cycle, 3200);
+        }
+      });
+    });
+
+    setMode("day");
+    if (!reduced) timer = setInterval(cycle, 3200);
+  });
 })();

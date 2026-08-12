@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=16" />
-  <link rel="stylesheet" href="css/pages.css?v=16" />
+  <link rel="stylesheet" href="css/style.css?v=17" />
+  <link rel="stylesheet" href="css/pages.css?v=17" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -104,6 +104,13 @@
             </a>
             <div class="nav-panel" id="features-panel">
               <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="features/tunnel-mode.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Tunnel Mode</span>
+                    <span class="nav-panel__desc">Dark, dimmable assessing that cuts windscreen glare in tunnels and at night.</span>
+                  </span>
+                </a>
                 <a class="nav-panel__item" href="features/competency-cycles.html">
                   <span class="nav-panel__dot" aria-hidden="true"></span>
                   <span>
@@ -247,7 +254,7 @@
       </div>
     </section>
 
-    <section class="product-section product-section--elevated" id="product" aria-labelledby="command-heading">
+    <section class="product-section product-section--elevated product-section--showcase" id="product" aria-labelledby="command-heading">
       <div class="container product-section__inner">
         <div class="product-section__copy">
           <p class="product-eyebrow">Command centre</p>
@@ -260,15 +267,15 @@
           </ul>
         </div>
         <div class="product-section__media">
-          <div class="product-gallery" data-gallery>
+          <div class="product-gallery product-gallery--command" data-gallery>
             <div class="browser-mockup browser-mockup--primary">
               <div class="browser-mockup__chrome">
                 <span class="browser-mockup__dots"></span>
-                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/dashboard</span>
+                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk</span>
               </div>
               <div class="browser-mockup__content">
                 <div class="login-scene" data-gallery-scene role="img" aria-label="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app">
-                  <video class="login-scene__video" loop muted playsinline preload="none" poster="video/login-poster.jpg" aria-hidden="true" data-scene-video>
+                  <video class="login-scene__video" autoplay loop muted playsinline preload="auto" poster="video/login-poster.jpg" aria-hidden="true" data-scene-video>
                     <source src="video/login-background.mp4" type="video/mp4" />
                   </video>
                   <span class="login-scene__scrim" aria-hidden="true"></span>
@@ -291,11 +298,11 @@
                     </div>
                   </div>
                 </div>
-                <img src="images/product/dashboard.png" alt="Rail Intel dashboard with live compliance overview" width="692" height="368" data-gallery-main loading="lazy" decoding="async" hidden />
+                <img src="images/product/login.png" alt="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app" width="814" height="456" data-gallery-main loading="lazy" decoding="async" hidden />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-scene="login" data-alt="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app" data-url="cms.railintel.co.uk">Sign in</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-scene="login" data-alt="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app" data-url="cms.railintel.co.uk" data-width="814" data-height="456">Sign in</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/dashboard.png" data-alt="Rail Intel dashboard with live compliance overview" data-url="cms.railintel.co.uk/dashboard" data-width="692" data-height="368">Dashboard</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting" data-width="691" data-height="431">Reporting</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting" data-width="687" data-height="537">Analytics</button>
@@ -640,7 +647,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=16"></script>
-  <script src="js/main.js?v=16"></script>
+  <script src="js/site.js?v=17"></script>
+  <script src="js/main.js?v=17"></script>
 </body>
 </html>

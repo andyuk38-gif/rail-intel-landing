@@ -15,7 +15,7 @@ import { site, addons, capacityAddons, featureGroups, howItWorks } from "../cont
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 16;
+const ASSET_VERSION = 17;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -332,6 +332,8 @@ ${capacity}
 
 function featurePage(group) {
   const base = "../";
+  const demo =
+    group.slug === "tunnel-mode" ? `\n${tunnelDemo(base, { link: false })}\n` : "\n";
 
   return (
     renderHead(base, {
@@ -356,7 +358,7 @@ function featurePage(group) {
         </div>
       </div>
     </section>
-
+${demo}
 ${group.sections.map((section) => renderSection(section, base)).join("\n\n")}
 
 ${renderCta(base, {
@@ -370,12 +372,72 @@ ${renderCta(base, {
   );
 }
 
+function tunnelDemo(base, { link = true } = {}) {
+  const actions = link
+    ? `          <div class="page-actions" style="margin-top:1.5rem">
+            <a href="${base}features/tunnel-mode.html" class="btn btn-primary">How Tunnel Mode works</a>
+          </div>`
+    : "";
+
+  return `    <section class="tunnel" aria-labelledby="tunnel-heading">
+      <div class="container tunnel__grid">
+        <div class="tunnel__copy">
+          <p class="product-eyebrow">Tunnel Mode</p>
+          <h2 id="tunnel-heading">Dark and dimmable for the cab</h2>
+          <p>A bright tablet against a dark windscreen is a distraction. Tunnel Mode turns assessing dark and lets you dim the screen on mobile &mdash; so glare drops when you enter a tunnel, and the focus stays on the railway.</p>
+          <ul class="spec-list">
+            <li><strong>One-tap dark mode</strong> from the assessment header.</li>
+            <li><strong>Dimmable brightness</strong> on mobile and tablet.</li>
+            <li><strong>Cab safety notice</strong> that offers dark mode at the start of an event.</li>
+          </ul>
+${actions}
+        </div>
+        <div class="tunnel__stage" data-tunnel>
+          <div class="tunnel-scene" aria-hidden="true">
+            <div class="tunnel-scene__sky"></div>
+            <div class="tunnel-scene__portal">
+              <span class="tunnel-scene__rim"></span>
+              <span class="tunnel-scene__bore"></span>
+              <span class="tunnel-scene__light"></span>
+            </div>
+            <div class="tunnel-scene__rails">
+              <span></span><span></span>
+            </div>
+            <div class="tunnel-scene__train"></div>
+            <div class="tunnel-scene__vignette"></div>
+          </div>
+          <div class="tunnel-device">
+            <div class="tunnel-device__bezel">
+              <div class="tunnel-device__screen">
+                <p class="tunnel-device__label">Assessing</p>
+                <p class="tunnel-device__title">Route knowledge</p>
+                <div class="tunnel-device__bars">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="tunnel-device__controls">
+                  <span class="tunnel-device__pill">Dark</span>
+                  <span class="tunnel-device__slider"><i></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tunnel__toolbar">
+            <button type="button" class="tunnel__btn is-active" data-tunnel-mode="day">Daylight</button>
+            <button type="button" class="tunnel__btn" data-tunnel-mode="tunnel">Tunnel</button>
+            <button type="button" class="tunnel__btn" data-tunnel-mode="dim">Tunnel + dim</button>
+          </div>
+          <p class="tunnel__caption">Watch the screen drop into dark mode as the train enters the tunnel.</p>
+        </div>
+      </div>
+    </section>`;
+}
+
 function featuresIndex() {
   const base = "../";
   const cards = featureGroups
     .map(
       (group) => `        <a class="card" href="${base}features/${group.slug}.html">
-          <span class="card__kicker">Core</span>
+          <span class="card__kicker">${group.slug === "tunnel-mode" ? "Cab safety" : "Core"}</span>
           <h3>${esc(group.name)}</h3>
           <p>${esc(group.summary)}</p>
           <span class="card__more">Read more &rarr;</span>
@@ -387,7 +449,7 @@ function featuresIndex() {
     renderHead(base, {
       title: "Features – Rail Intel",
       description:
-        "The core Rail Intel feature set: competency cycles, workforce records, medicals and licensing, incidents and monitoring, reporting and administration.",
+        "The core Rail Intel feature set: Tunnel Mode for cab-safe assessing, competency cycles, workforce records, medicals and licensing, incidents and monitoring, reporting and administration.",
     }) +
     `
   <main>
@@ -405,6 +467,8 @@ function featuresIndex() {
         </div>
       </div>
     </section>
+
+${tunnelDemo(base)}
 
     <section class="page-section">
       <div class="container">

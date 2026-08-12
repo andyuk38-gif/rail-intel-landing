@@ -608,6 +608,22 @@ body::before {
   order: 1;
 }
 
+/* Command Centre: copy on top, gallery full-width underneath so the sign-in
+   mockup can render at its original 814 CSS px instead of being squeezed into
+   a side column. */
+.product-section--showcase .product-section__inner {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.25rem;
+}
+
+.product-section--showcase .product-section__copy {
+  max-width: 46rem;
+}
+
+.product-section--showcase .product-gallery--command .browser-mockup {
+  max-width: 814px;
+}
+
 .product-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -676,6 +692,14 @@ body::before {
   margin-inline: auto;
 }
 
+/* Command Centre restores the original sign-in screenshot width (814 CSS px
+   for the 1628px video / login.png source), so Sign in is no longer smaller
+   than the still it replaced. */
+.product-gallery--command .browser-mockup {
+  max-width: 814px;
+  width: 100%;
+}
+
 .product-gallery .browser-mockup__content img {
   image-rendering: auto;
 }
@@ -702,7 +726,8 @@ body::before {
    Sized in container query units so it scales with the mockup. */
 .login-scene {
   position: relative;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  aspect-ratio: 1628 / 916;
   container-type: inline-size;
   overflow: hidden;
   background: #0b1220;
@@ -731,22 +756,23 @@ body::before {
   position: absolute;
   top: 50%;
   left: 50%;
-  translate: -50% -50%;
-  width: 40cqw;
+  translate: -50% calc(-50% - 4cqw);
+  width: min(56cqw, 24rem);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 0.3cqw solid rgba(255, 255, 255, 0.65);
-  border-radius: 2.2cqw;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4cqw 10cqw rgba(2, 6, 23, 0.48), inset 0 0.15cqw 0 rgba(255, 255, 255, 0.62);
+  border: 0.28cqw solid rgba(255, 255, 255, 0.65);
+  border-radius: 2.4cqw;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 3.5cqw 9cqw rgba(2, 6, 23, 0.5), inset 0 0.15cqw 0 rgba(255, 255, 255, 0.62);
   color: #fff;
   text-align: center;
+  backdrop-filter: blur(2px);
 }
 
 .login-card__brand {
   position: relative;
-  padding: 2.2cqw 2cqw 1.8cqw;
+  padding: 2.6cqw 2.4cqw 2.2cqw;
   border-bottom: 0.14cqw solid rgba(255, 255, 255, 0.25);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 60%),
@@ -755,36 +781,36 @@ body::before {
 
 .login-card__logo {
   display: block;
-  width: 6.4cqw;
-  height: 6.4cqw;
-  margin: 0 auto 0.9cqw;
+  width: 7.6cqw;
+  height: 7.6cqw;
+  margin: 0 auto 1cqw;
   object-fit: contain;
 }
 
 .login-card__title {
   margin: 0;
-  font-size: 2.1cqw;
+  font-size: 2.5cqw;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1;
 }
 
 .login-card__tagline {
-  margin: 0.6cqw 0 0;
-  font-size: 1.5cqw;
+  margin: 0.7cqw 0 0;
+  font-size: 1.7cqw;
   line-height: 1.3;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .login-card__form {
-  padding: 1.8cqw 2cqw 1.9cqw;
-  background: rgba(255, 255, 255, 0.06);
+  padding: 2.1cqw 2.4cqw 2.2cqw;
+  background: rgba(255, 255, 255, 0.07);
   text-align: left;
 }
 
 .login-card__label {
-  margin: 0 0 0.5cqw;
-  font-size: 1.15cqw;
+  margin: 0 0 0.55cqw;
+  font-size: 1.25cqw;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -792,14 +818,14 @@ body::before {
 }
 
 .login-card__input {
-  margin: 0 0 1.2cqw;
-  padding: 0.85cqw 1.1cqw;
-  font-size: 1.35cqw;
+  margin: 0 0 1.35cqw;
+  padding: 1cqw 1.25cqw;
+  font-size: 1.55cqw;
   line-height: 1.2;
   color: #94a3b8;
   background: #f8fafc;
   border: 0.12cqw solid #e2e8f0;
-  border-radius: 1.1cqw;
+  border-radius: 1.2cqw;
 }
 
 .login-card__input--dots {
@@ -808,19 +834,19 @@ body::before {
 }
 
 .login-card__submit {
-  margin: 0.4cqw 0 0;
-  padding: 1.1cqw;
-  font-size: 1.45cqw;
+  margin: 0.5cqw 0 0;
+  padding: 1.25cqw;
+  font-size: 1.65cqw;
   font-weight: 700;
   text-align: center;
   color: #fff;
   background: #243c96;
-  border-radius: 1.1cqw;
+  border-radius: 1.2cqw;
 }
 
 .login-card__forgot {
-  margin: 1.1cqw 0 0;
-  font-size: 1.3cqw;
+  margin: 1.25cqw 0 0;
+  font-size: 1.45cqw;
   text-align: center;
   color: #fff;
 }

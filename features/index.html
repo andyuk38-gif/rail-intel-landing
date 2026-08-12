@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Features – Rail Intel</title>
-  <meta name="description" content="The core Rail Intel feature set: competency cycles, workforce records, medicals and licensing, incidents and monitoring, reporting and administration." />
+  <meta name="description" content="The core Rail Intel feature set: Tunnel Mode for cab-safe assessing, competency cycles, workforce records, medicals and licensing, incidents and monitoring, reporting and administration." />
   <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="../images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=16" />
-  <link rel="stylesheet" href="../css/pages.css?v=16" />
+  <link rel="stylesheet" href="../css/style.css?v=17" />
+  <link rel="stylesheet" href="../css/pages.css?v=17" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -103,6 +103,13 @@
             </a>
             <div class="nav-panel" id="features-panel">
               <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../features/tunnel-mode.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Tunnel Mode</span>
+                    <span class="nav-panel__desc">Dark, dimmable assessing that cuts windscreen glare in tunnels and at night.</span>
+                  </span>
+                </a>
                 <a class="nav-panel__item" href="../features/competency-cycles.html">
                   <span class="nav-panel__dot" aria-hidden="true"></span>
                   <span>
@@ -169,6 +176,60 @@
       </div>
     </section>
 
+    <section class="tunnel" aria-labelledby="tunnel-heading">
+      <div class="container tunnel__grid">
+        <div class="tunnel__copy">
+          <p class="product-eyebrow">Tunnel Mode</p>
+          <h2 id="tunnel-heading">Dark and dimmable for the cab</h2>
+          <p>A bright tablet against a dark windscreen is a distraction. Tunnel Mode turns assessing dark and lets you dim the screen on mobile &mdash; so glare drops when you enter a tunnel, and the focus stays on the railway.</p>
+          <ul class="spec-list">
+            <li><strong>One-tap dark mode</strong> from the assessment header.</li>
+            <li><strong>Dimmable brightness</strong> on mobile and tablet.</li>
+            <li><strong>Cab safety notice</strong> that offers dark mode at the start of an event.</li>
+          </ul>
+          <div class="page-actions" style="margin-top:1.5rem">
+            <a href="../features/tunnel-mode.html" class="btn btn-primary">How Tunnel Mode works</a>
+          </div>
+        </div>
+        <div class="tunnel__stage" data-tunnel>
+          <div class="tunnel-scene" aria-hidden="true">
+            <div class="tunnel-scene__sky"></div>
+            <div class="tunnel-scene__portal">
+              <span class="tunnel-scene__rim"></span>
+              <span class="tunnel-scene__bore"></span>
+              <span class="tunnel-scene__light"></span>
+            </div>
+            <div class="tunnel-scene__rails">
+              <span></span><span></span>
+            </div>
+            <div class="tunnel-scene__train"></div>
+            <div class="tunnel-scene__vignette"></div>
+          </div>
+          <div class="tunnel-device">
+            <div class="tunnel-device__bezel">
+              <div class="tunnel-device__screen">
+                <p class="tunnel-device__label">Assessing</p>
+                <p class="tunnel-device__title">Route knowledge</p>
+                <div class="tunnel-device__bars">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="tunnel-device__controls">
+                  <span class="tunnel-device__pill">Dark</span>
+                  <span class="tunnel-device__slider"><i></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tunnel__toolbar">
+            <button type="button" class="tunnel__btn is-active" data-tunnel-mode="day">Daylight</button>
+            <button type="button" class="tunnel__btn" data-tunnel-mode="tunnel">Tunnel</button>
+            <button type="button" class="tunnel__btn" data-tunnel-mode="dim">Tunnel + dim</button>
+          </div>
+          <p class="tunnel__caption">Watch the screen drop into dark mode as the train enters the tunnel.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
@@ -176,6 +237,12 @@
           <p>Grouped by the job they do rather than by where they sit in the menu.</p>
         </div>
         <div class="card-grid">
+        <a class="card" href="../features/tunnel-mode.html">
+          <span class="card__kicker">Cab safety</span>
+          <h3>Tunnel Mode</h3>
+          <p>Dark, dimmable assessing that cuts windscreen glare in tunnels and at night.</p>
+          <span class="card__more">Read more &rarr;</span>
+        </a>
         <a class="card" href="../features/competency-cycles.html">
           <span class="card__kicker">Core</span>
           <h3>Competency &amp; Cycles</h3>
@@ -233,6 +300,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=16"></script>
+  <script src="../js/site.js?v=17"></script>
 </body>
 </html>

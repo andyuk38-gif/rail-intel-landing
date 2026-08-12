@@ -38,7 +38,24 @@ await shot("login-scene", "/index.html", async (page) => {
   await page.evaluate(() =>
     document.querySelector("#product").scrollIntoView({ block: "center", behavior: "instant" })
   );
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(2000);
+});
+
+await shot("tunnel", "/features/index.html", async (page) => {
+  await page.evaluate(() =>
+    document.querySelector(".tunnel")?.scrollIntoView({ block: "center", behavior: "instant" })
+  );
+  await page.waitForTimeout(800);
+  await page.locator('[data-tunnel-mode="tunnel"]').click();
+  await page.waitForTimeout(900);
+});
+
+await shot("tunnel-dim", "/features/index.html", async (page) => {
+  await page.evaluate(() =>
+    document.querySelector(".tunnel")?.scrollIntoView({ block: "center", behavior: "instant" })
+  );
+  await page.locator('[data-tunnel-mode="dim"]').click();
+  await page.waitForTimeout(900);
 });
 
 await shot("verify", "/index.html", async (page) => {

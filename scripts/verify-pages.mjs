@@ -28,6 +28,7 @@ const pages = [
   "/products/driver-reports.html",
   "/products/leave-absence.html",
   "/products/medication-checks.html",
+  "/features/tunnel-mode.html",
   "/features/competency-cycles.html",
   "/features/workforce-records.html",
   "/features/medicals-licensing.html",

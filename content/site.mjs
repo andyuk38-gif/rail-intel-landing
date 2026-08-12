@@ -357,6 +357,37 @@ export const capacityAddons = [
 
 export const featureGroups = [
   {
+    slug: "tunnel-mode",
+    name: "Tunnel Mode",
+    summary: "Dark, dimmable assessing that cuts windscreen glare in tunnels and at night.",
+    tagline: "Assess in the cab without lighting up the windscreen",
+    lead:
+      "A bright tablet in a dark cab is a distraction — for the driver and for the assessor. Tunnel Mode turns the assessing screen dark and lets you dim it further on mobile, so the focus stays on the railway, not the glass.",
+    sections: [
+      {
+        heading: "Built for the cab, not the office",
+        body: [
+          "When an assessment starts, Rail Intel reminds assessors that windscreen reflections matter — especially through tunnels — and offers dark mode in one tap. The Dark / Light control sits in the assessment header, so switching never means leaving the flow.",
+          "On mobile and tablet, a brightness slider sits under the header. Dim the screen from full daylight down to a soft cab-friendly level, and reset it when you are out of the tunnel.",
+        ],
+        bullets: [
+          "**One-tap dark mode** from the assessment header, kept for the session.",
+          "**Dimmable brightness** on mobile and tablet (40% to 135%), so glare can be cut without losing the criteria.",
+          "**Cab safety notice** at the start of an assessable event, with a direct Turn on dark mode action.",
+          "**App-wide dark theme** available from the user menu when you are not assessing.",
+        ],
+        shots: [
+          {
+            src: "images/screens/assessing/dark-switch-safety.png",
+            caption:
+              "The cab safety notice: switch to dark mode to reduce windscreen glare in tunnels.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     slug: "competency-cycles",
     name: "Competency & Cycles",
     summary: "Build assessment cycles, run assessments in the field and carry findings forward.",
@@ -436,10 +467,6 @@ export const featureGroups = [
           {
             src: "images/screens/assessing/early-window-start-assessment.png",
             caption: "Starting an assessment within its early window.",
-          },
-          {
-            src: "images/screens/assessing/dark-switch-safety.png",
-            caption: "Recording darkness conditions during an assessment.",
           },
         ],
       },
