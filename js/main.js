@@ -1,6 +1,3 @@
-// Current year in footer
-document.getElementById("year").textContent = new Date().getFullYear();
-
 // Product screenshot galleries
 document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const img = gallery.querySelector("[data-gallery-main]");

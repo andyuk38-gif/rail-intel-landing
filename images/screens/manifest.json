@@ -1,0 +1,326 @@
+{
+  "images/screens/assessing/assessing-criteria.png": {
+    "width": 503,
+    "height": 734
+  },
+  "images/screens/assessing/dark-switch-safety.png": {
+    "width": 434,
+    "height": 710
+  },
+  "images/screens/assessing/early-window-start-assessment.png": {
+    "width": 428,
+    "height": 419
+  },
+  "images/screens/assessing/flagged-based-on-observations.png": {
+    "width": 1248,
+    "height": 1008
+  },
+  "images/screens/cab-passes/cab-passes.png": {
+    "width": 1394,
+    "height": 757
+  },
+  "images/screens/cab-passes/green-pass-issued.png": {
+    "width": 1303,
+    "height": 833
+  },
+  "images/screens/cab-passes/issue-colour-question-popup.png": {
+    "width": 1400,
+    "height": 781
+  },
+  "images/screens/comp-config/addons-library.png": {
+    "width": 1379,
+    "height": 1123
+  },
+  "images/screens/comp-config/configure-company-role-permissions.png": {
+    "width": 1385,
+    "height": 1042
+  },
+  "images/screens/comp-config/framework-apply-cycles.png": {
+    "width": 1410,
+    "height": 775
+  },
+  "images/screens/comp-config/grade-scale.png": {
+    "width": 1405,
+    "height": 580
+  },
+  "images/screens/comp-config/investigation-apimanagement.png": {
+    "width": 1398,
+    "height": 887
+  },
+  "images/screens/comp-config/org-structure.png": {
+    "width": 1400,
+    "height": 928
+  },
+  "images/screens/comp-config/set-company-standards.png": {
+    "width": 1397,
+    "height": 977
+  },
+  "images/screens/comp-config/set-traction-routes-depots.png": {
+    "width": 1392,
+    "height": 645
+  },
+  "images/screens/cycle-builder/add-competency-criteria.png": {
+    "width": 1385,
+    "height": 643
+  },
+  "images/screens/cycle-builder/created-cycle-successfully.png": {
+    "width": 1394,
+    "height": 198
+  },
+  "images/screens/cycle-builder/cycle-builder-overview.png": {
+    "width": 1410,
+    "height": 739
+  },
+  "images/screens/cycle-builder/schedule-events-assessment.png": {
+    "width": 1393,
+    "height": 482
+  },
+  "images/screens/cycle-builder/use-template-cb.png": {
+    "width": 1379,
+    "height": 229
+  },
+  "images/screens/cycles/active-assessment.png": {
+    "width": 1251,
+    "height": 974
+  },
+  "images/screens/cycles/cont-cycle-cdp-carryover.png": {
+    "width": 523,
+    "height": 485
+  },
+  "images/screens/cycles/continuous-cycles.png": {
+    "width": 1558,
+    "height": 843
+  },
+  "images/screens/cycles/current-cycles.png": {
+    "width": 1399,
+    "height": 914
+  },
+  "images/screens/cycles/individual-cycle-view.png": {
+    "width": 1394,
+    "height": 909
+  },
+  "images/screens/driver-reports/driver-report-form.png": {
+    "width": 1295,
+    "height": 1118
+  },
+  "images/screens/driver-reports/driver-report-overview.png": {
+    "width": 1562,
+    "height": 572
+  },
+  "images/screens/driver-reports/submitted-report.png": {
+    "width": 1562,
+    "height": 874
+  },
+  "images/screens/leave-absence/employee-leave-record-summary.png": {
+    "width": 1558,
+    "height": 829
+  },
+  "images/screens/leave-absence/leave-absence-entitlements.png": {
+    "width": 1142,
+    "height": 681
+  },
+  "images/screens/leave-absence/leave-absence-overview.png": {
+    "width": 1160,
+    "height": 595
+  },
+  "images/screens/leave-absence/leave-absence-reporting.png": {
+    "width": 1159,
+    "height": 695
+  },
+  "images/screens/leave-absence/leave-absence-year-policy.png": {
+    "width": 1168,
+    "height": 870
+  },
+  "images/screens/licencing/comp-cert1.png": {
+    "width": 1364,
+    "height": 1013
+  },
+  "images/screens/licencing/comp-cert2.png": {
+    "width": 1146,
+    "height": 807
+  },
+  "images/screens/licencing/licence-categories.png": {
+    "width": 1337,
+    "height": 605
+  },
+  "images/screens/licencing/licence1.png": {
+    "width": 1386,
+    "height": 797
+  },
+  "images/screens/main-sys/addons-page.png": {
+    "width": 1581,
+    "height": 1055
+  },
+  "images/screens/main-sys/dashboard.png": {
+    "width": 1384,
+    "height": 735
+  },
+  "images/screens/main-sys/document-upload-area.png": {
+    "width": 1565,
+    "height": 666
+  },
+  "images/screens/main-sys/employee-list.png": {
+    "width": 1399,
+    "height": 307
+  },
+  "images/screens/main-sys/incidebt-management-list.png": {
+    "width": 1395,
+    "height": 217
+  },
+  "images/screens/main-sys/left-navand-flyout-menu.png": {
+    "width": 559,
+    "height": 1205
+  },
+  "images/screens/main-sys/login-screen.png": {
+    "width": 1627,
+    "height": 911
+  },
+  "images/screens/main-sys/record-new-incident.png": {
+    "width": 1391,
+    "height": 786
+  },
+  "images/screens/main-sys/reporting-analytics1.png": {
+    "width": 1381,
+    "height": 861
+  },
+  "images/screens/main-sys/reporting-analytics2.png": {
+    "width": 1373,
+    "height": 1073
+  },
+  "images/screens/main-sys/role-permissions-configure.png": {
+    "width": 1408,
+    "height": 1116
+  },
+  "images/screens/main-sys/timings-standards.png": {
+    "width": 1572,
+    "height": 923
+  },
+  "images/screens/main-sys/your-team-compliance.png": {
+    "width": 676,
+    "height": 318
+  },
+  "images/screens/medical/mecical-psychologist-list-names.png": {
+    "width": 1389,
+    "height": 805
+  },
+  "images/screens/medical/medical-orrdoc-list-names.png": {
+    "width": 1389,
+    "height": 725
+  },
+  "images/screens/medical/new-medical-record.png": {
+    "width": 1396,
+    "height": 1063
+  },
+  "images/screens/messaging-employee/email-notify-new-message.png": {
+    "width": 980,
+    "height": 505
+  },
+  "images/screens/messaging-employee/employee-messaging.png": {
+    "width": 1561,
+    "height": 980
+  },
+  "images/screens/monitor-plans-incidents/add-performance-support-plans.png": {
+    "width": 1516,
+    "height": 873
+  },
+  "images/screens/monitor-plans-incidents/cdp-plan-overview.png": {
+    "width": 1522,
+    "height": 270
+  },
+  "images/screens/monitor-plans-incidents/incidents-allocated.png": {
+    "width": 1516,
+    "height": 245
+  },
+  "images/screens/monitor-plans-incidents/monitor-incident-overview.png": {
+    "width": 1576,
+    "height": 1124
+  },
+  "images/screens/monitor-plans-incidents/plan-page.png": {
+    "width": 1460,
+    "height": 528
+  },
+  "images/screens/monitor-plans-incidents/submitted-plan.png": {
+    "width": 1517,
+    "height": 534
+  },
+  "images/screens/safety-briefs/employee-sboverview.png": {
+    "width": 1569,
+    "height": 892
+  },
+  "images/screens/tasks/add-new-task.png": {
+    "width": 495,
+    "height": 598
+  },
+  "images/screens/tasks/task-overview.png": {
+    "width": 1570,
+    "height": 534
+  },
+  "images/screens/tasks/task-view-popup.png": {
+    "width": 1010,
+    "height": 752
+  },
+  "images/screens/train-routes/add-route.png": {
+    "width": 1384,
+    "height": 522
+  },
+  "images/screens/train-routes/add-traction.png": {
+    "width": 1552,
+    "height": 517
+  },
+  "images/screens/train-routes/traction-route-overview.png": {
+    "width": 1397,
+    "height": 706
+  },
+  "images/screens/trainee-hours-manager-hours/add-encounters.png": {
+    "width": 1249,
+    "height": 906
+  },
+  "images/screens/trainee-hours-manager-hours/add-entry-confirm.png": {
+    "width": 519,
+    "height": 415
+  },
+  "images/screens/trainee-hours-manager-hours/manager-hours-overview.png": {
+    "width": 1323,
+    "height": 1091
+  },
+  "images/screens/trainee-hours-manager-hours/managerhours-progress.png": {
+    "width": 1327,
+    "height": 1084
+  },
+  "images/screens/trainee-hours-manager-hours/overall-progress-trainee.png": {
+    "width": 1286,
+    "height": 676
+  },
+  "images/screens/trainee-hours-manager-hours/recorded-entries.png": {
+    "width": 1289,
+    "height": 210
+  },
+  "images/screens/trainee-hours-manager-hours/trainee-hours-experience.png": {
+    "width": 1363,
+    "height": 1122
+  },
+  "images/screens/trainee-hours-manager-hours/trainee-progress-rention-records.png": {
+    "width": 1011,
+    "height": 817
+  },
+  "images/screens/training-quals/add-new-training.png": {
+    "width": 651,
+    "height": 532
+  },
+  "images/screens/training-quals/add-qual.png": {
+    "width": 650,
+    "height": 687
+  },
+  "images/screens/training-quals/training-quals-overview.png": {
+    "width": 1567,
+    "height": 819
+  },
+  "images/screens/verification/verification-config.png": {
+    "width": 1382,
+    "height": 1050
+  },
+  "images/screens/verification/verification-run-overall.png": {
+    "width": 1382,
+    "height": 1120
+  }
+}

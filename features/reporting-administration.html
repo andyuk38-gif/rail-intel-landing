@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reporting &amp; Administration – Rail Intel features</title>
+  <meta name="description" content="Analytics across the operation, plus the configuration that makes it yours." />
+  <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="../images/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css?v=13" />
+  <link rel="stylesheet" href="../css/pages.css?v=13" />
+  <style>
+    /* Critical: keep under-dev banner visible even if stylesheet is cached */
+    .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+    .dev-banner { background: #f59e0b; color: #0c0f14; text-align: center; padding: 0.55rem 1.5rem; }
+    .dev-banner p { margin: 0; font-size: 0.8125rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="site-chrome">
+    <div class="dev-banner" role="status">
+      <p>This site is currently under development.</p>
+    </div>
+    <header class="header">
+      <div class="container">
+        <a href="../" class="logo">
+          <img src="../images/rail-intel-icon.png" alt="" class="logo-img" width="512" height="512" />
+          <span class="logo-text">Rail Intel</span>
+        </a>
+        <nav class="nav" aria-label="Main">
+        <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-menu" data-nav-menu data-open="false">
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="../products/" data-nav-trigger aria-expanded="false" aria-controls="product-panel">
+              Product<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="product-panel">
+              <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../products/qa-verifications.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">QA Verifications</span>
+                    <span class="nav-panel__desc">Automated compliance checks with an audit trail you can hand to the ORR.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/task-assignment.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Task assignment</span>
+                    <span class="nav-panel__desc">Assign follow-up actions to people and tie them to an employee record.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/safety-briefs.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Safety Briefs</span>
+                    <span class="nav-panel__desc">Record who received which brief, in person or remotely, with evidence.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/trainee-driver.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Trainee Driver</span>
+                    <span class="nav-panel__desc">Run a full trainee programme: schedules, train logs, hours and signed feedback.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/driver-reports.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Driver Reports</span>
+                    <span class="nav-panel__desc">Signed operational reports from drivers, exportable to your investigations system.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/leave-absence.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Leave &amp; Absence</span>
+                    <span class="nav-panel__desc">Entitlements, sickness and absence with manager approval and a full audit trail.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/medication-checks.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Medication Checks</span>
+                    <span class="nav-panel__desc">Medication declarations and occupational health checks on the medical record.</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="../products/">All add-on modules &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="../features/" data-nav-trigger aria-expanded="false" aria-controls="features-panel">
+              Features<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="features-panel">
+              <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../features/competency-cycles.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Competency &amp; Cycles</span>
+                    <span class="nav-panel__desc">Build assessment cycles, run assessments in the field and carry findings forward.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/workforce-records.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Workforce Records</span>
+                    <span class="nav-panel__desc">The employee record: cab passes, training, experience, documents and messaging.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/medicals-licensing.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Medicals &amp; Licensing</span>
+                    <span class="nav-panel__desc">Medical fitness, ORR medicals, driving licences and complementary certificates.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/incidents-monitoring.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Incidents &amp; Monitoring</span>
+                    <span class="nav-panel__desc">Record incidents, allocate them to people and manage development plans.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/reporting-administration.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Reporting &amp; Administration</span>
+                    <span class="nav-panel__desc">Analytics across the operation, plus the configuration that makes it yours.</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="../features/">All features &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <a href="../how-it-works.html" class="nav-link">How it works</a>
+          <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
+        </div>
+      </nav>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Reporting &amp; Administration</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <h1 class="page-title">The state of the railway's people, on demand</h1>
+          <p class="page-lead">Reporting turns the record set into the answer to a board question: how many people are off track, how many medicals expire this quarter, where are incidents concentrated. Administration is where the organisation, roles, traction and routes behind those numbers are defined.</p>
+          <div class="page-actions">
+            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="../features/" class="btn btn-ghost btn-lg">All features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Reporting and analytics</h2>
+          <p>The reporting dashboard covers incidents, monitoring, medicals and competencies with totals, trends over time and breakdowns by type and role. Where add-on modules are active, safety-brief coverage and QA compliance rates appear alongside them.</p>
+          <ul class="spec-list">
+            <li><strong>Live counts</strong> for on-track, off-track, overdue and due-soon.</li>
+            <li><strong>Incident trends</strong> over time and by type.</li>
+            <li><strong>Medical and competency expiry</strong> windows.</li>
+            <li><strong>Add-on aware</strong>: safety-brief and QA verification metrics appear when those modules are active.</li>
+          </ul>
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 691px">
+          <div class="shot__frame">
+            <img src="../images/screens/main-sys/reporting-analytics1.png" alt="Reporting and analytics with incident KPIs and compliance counts." width="691" height="431" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Reporting and analytics with incident KPIs and compliance counts.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 687px">
+          <div class="shot__frame">
+            <img src="../images/screens/main-sys/reporting-analytics2.png" alt="Trends and breakdowns across incidents and competence." width="687" height="537" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Trends and breakdowns across incidents and competence.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Organisation structure and roles</h2>
+          <p>Your organisation structure, custom job roles and role permissions determine who sees and does what. Permissions are granular, so an assessor, a manager and a system administrator each get exactly the access their role requires.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 700px">
+          <div class="shot__frame">
+            <img src="../images/screens/comp-config/org-structure.png" alt="Organisation structure configuration." width="700" height="464" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Organisation structure configuration.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 693px">
+          <div class="shot__frame">
+            <img src="../images/screens/comp-config/configure-company-role-permissions.png" alt="Configuring permissions for a company role." width="693" height="521" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Configuring permissions for a company role.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 704px">
+          <div class="shot__frame">
+            <img src="../images/screens/main-sys/role-permissions-configure.png" alt="Granular permission assignment across the platform." width="704" height="558" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Granular permission assignment across the platform.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Traction, routes and depots</h2>
+          <p>Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records, so the vocabulary is consistent everywhere it appears.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 699px">
+          <div class="shot__frame">
+            <img src="../images/screens/train-routes/traction-route-overview.png" alt="Traction and route overview for the company." width="699" height="353" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Traction and route overview for the company.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 776px">
+          <div class="shot__frame">
+            <img src="../images/screens/train-routes/add-traction.png" alt="Adding a traction type." width="776" height="259" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Adding a traction type.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 692px">
+          <div class="shot__frame">
+            <img src="../images/screens/train-routes/add-route.png" alt="Adding a route." width="692" height="261" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Adding a route.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 696px">
+          <div class="shot__frame">
+            <img src="../images/screens/comp-config/set-traction-routes-depots.png" alt="Traction, routes and depots configuration." width="696" height="323" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Traction, routes and depots configuration.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Modules and integrations</h2>
+          <p>Optional modules are activated from the Add-ons library, and the Investigations connector links Rail Intel to an external investigations system where one is in use.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 791px">
+          <div class="shot__frame">
+            <img src="../images/screens/main-sys/addons-page.png" alt="The Add-ons page where optional modules are activated." width="791" height="528" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">The Add-ons page where optional modules are activated.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 690px">
+          <div class="shot__frame">
+            <img src="../images/screens/comp-config/addons-library.png" alt="The add-ons library with available modules." width="690" height="562" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">The add-ons library with available modules.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 699px">
+          <div class="shot__frame">
+            <img src="../images/screens/comp-config/investigation-apimanagement.png" alt="Investigations API connector management." width="699" height="444" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Investigations API connector management.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Everything here is included</h2>
+          <p>These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.</p>
+        </div>
+        <div class="page-actions">
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
+          <a href="../products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Rail Intel</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../products/">Add-on modules</a>
+        <a href="../features/">Features</a>
+        <a href="../how-it-works.html">How it works</a>
+        <a href="https://cms.railintel.co.uk">Log in</a>
+      </nav>
+      <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+    </div>
+  </footer>
+
+  <script src="../js/site.js?v=13"></script>
+</body>
+</html>

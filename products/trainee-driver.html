@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainee Driver – Rail Intel add-on module</title>
+  <meta name="description" content="Run a full trainee programme: schedules, train logs, hours and signed feedback." />
+  <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="../images/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css?v=13" />
+  <link rel="stylesheet" href="../css/pages.css?v=13" />
+  <style>
+    /* Critical: keep under-dev banner visible even if stylesheet is cached */
+    .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+    .dev-banner { background: #f59e0b; color: #0c0f14; text-align: center; padding: 0.55rem 1.5rem; }
+    .dev-banner p { margin: 0; font-size: 0.8125rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="site-chrome">
+    <div class="dev-banner" role="status">
+      <p>This site is currently under development.</p>
+    </div>
+    <header class="header">
+      <div class="container">
+        <a href="../" class="logo">
+          <img src="../images/rail-intel-icon.png" alt="" class="logo-img" width="512" height="512" />
+          <span class="logo-text">Rail Intel</span>
+        </a>
+        <nav class="nav" aria-label="Main">
+        <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-menu" data-nav-menu data-open="false">
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="../products/" data-nav-trigger aria-expanded="false" aria-controls="product-panel">
+              Product<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="product-panel">
+              <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../products/qa-verifications.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">QA Verifications</span>
+                    <span class="nav-panel__desc">Automated compliance checks with an audit trail you can hand to the ORR.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/task-assignment.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Task assignment</span>
+                    <span class="nav-panel__desc">Assign follow-up actions to people and tie them to an employee record.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/safety-briefs.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Safety Briefs</span>
+                    <span class="nav-panel__desc">Record who received which brief, in person or remotely, with evidence.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/trainee-driver.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Trainee Driver</span>
+                    <span class="nav-panel__desc">Run a full trainee programme: schedules, train logs, hours and signed feedback.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/driver-reports.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Driver Reports</span>
+                    <span class="nav-panel__desc">Signed operational reports from drivers, exportable to your investigations system.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/leave-absence.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Leave &amp; Absence</span>
+                    <span class="nav-panel__desc">Entitlements, sickness and absence with manager approval and a full audit trail.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/medication-checks.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Medication Checks</span>
+                    <span class="nav-panel__desc">Medication declarations and occupational health checks on the medical record.</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="../products/">All add-on modules &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="../features/" data-nav-trigger aria-expanded="false" aria-controls="features-panel">
+              Features<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="features-panel">
+              <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../features/competency-cycles.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Competency &amp; Cycles</span>
+                    <span class="nav-panel__desc">Build assessment cycles, run assessments in the field and carry findings forward.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/workforce-records.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Workforce Records</span>
+                    <span class="nav-panel__desc">The employee record: cab passes, training, experience, documents and messaging.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/medicals-licensing.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Medicals &amp; Licensing</span>
+                    <span class="nav-panel__desc">Medical fitness, ORR medicals, driving licences and complementary certificates.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/incidents-monitoring.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Incidents &amp; Monitoring</span>
+                    <span class="nav-panel__desc">Record incidents, allocate them to people and manage development plans.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/reporting-administration.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Reporting &amp; Administration</span>
+                    <span class="nav-panel__desc">Analytics across the operation, plus the configuration that makes it yours.</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="../features/">All features &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <a href="../how-it-works.html" class="nav-link">How it works</a>
+          <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
+        </div>
+      </nav>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / Trainee Driver</p>
+          <span class="page-badge page-badge--addon">Add-on module</span>
+          <h1 class="page-title">Manage the whole training programme, not just the hours</h1>
+          <p class="page-lead">Rail Intel tracks trainee hours as standard. The Trainee Driver module is the layer above that: building schedules, enrolling trainees, recording attendance and train logs, capturing dual-signed feedback, and tracking route learning — the full programme rather than a running total.</p>
+        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> Core Rail Intel already includes trainee hours and daylight/darkness progress on the Experience Records tab. This module adds the programme management around it.</p>
+          <div class="page-actions">
+            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Progress against the standard, per trainee</h2>
+          <p>Trainee progress is measured against your configured company standards, including daylight and darkness minimums, so a trainee who has the hours but not the right conditions is visibly incomplete. Managers see the position across their trainees; the trainee sees their own.</p>
+          <ul class="spec-list">
+            <li><strong>Hours against company standards</strong>, split by daylight and darkness.</li>
+            <li><strong>Manager view across trainees</strong> and an individual view per person.</li>
+            <li><strong>Retention and progress records</strong> kept for the duration of the programme.</li>
+            <li><strong>Performance &amp; Support plans</strong> become available on the Monitoring tab when this module is active.</li>
+          </ul>
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 662px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/manager-hours-overview.png" alt="Manager view of hours and progress across every enrolled trainee." width="662" height="546" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Manager view of hours and progress across every enrolled trainee.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 664px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/managerhours-progress.png" alt="Progress tracking against the required totals for each trainee." width="664" height="542" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Progress tracking against the required totals for each trainee.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Logging encounters and entries as they happen</h2>
+          <p>Entries are recorded as the training happens, with confirmation before they are committed, so the log reflects reality rather than a reconstruction at the end of a placement.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 625px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/add-encounters.png" alt="Recording an encounter against a trainee's programme." width="625" height="453" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Recording an encounter against a trainee's programme.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 645px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/recorded-entries.png" alt="The running list of recorded entries for the trainee." width="645" height="105" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">The running list of recorded entries for the trainee.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 260px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/add-entry-confirm.png" alt="Entries are confirmed before they are committed to the log." width="260" height="208" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Entries are confirmed before they are committed to the log.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 506px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/trainee-progress-rention-records.png" alt="Retention records held alongside progress for the trainee." width="506" height="409" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Retention records held alongside progress for the trainee.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Activating Trainee Driver</h2>
+          <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator can enable it for your company directly.</p>
+          <p>Module identifier: <code>trainee-driver</code></p>
+        </div>
+        <div class="page-actions">
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Rail Intel</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../products/">Add-on modules</a>
+        <a href="../features/">Features</a>
+        <a href="../how-it-works.html">How it works</a>
+        <a href="https://cms.railintel.co.uk">Log in</a>
+      </nav>
+      <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+    </div>
+  </footer>
+
+  <script src="../js/site.js?v=13"></script>
+</body>
+</html>

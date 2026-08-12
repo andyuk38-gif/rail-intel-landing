@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workforce Records – Rail Intel features</title>
+  <meta name="description" content="The employee record: cab passes, training, experience, documents and messaging." />
+  <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="../images/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css?v=13" />
+  <link rel="stylesheet" href="../css/pages.css?v=13" />
+  <style>
+    /* Critical: keep under-dev banner visible even if stylesheet is cached */
+    .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+    .dev-banner { background: #f59e0b; color: #0c0f14; text-align: center; padding: 0.55rem 1.5rem; }
+    .dev-banner p { margin: 0; font-size: 0.8125rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="site-chrome">
+    <div class="dev-banner" role="status">
+      <p>This site is currently under development.</p>
+    </div>
+    <header class="header">
+      <div class="container">
+        <a href="../" class="logo">
+          <img src="../images/rail-intel-icon.png" alt="" class="logo-img" width="512" height="512" />
+          <span class="logo-text">Rail Intel</span>
+        </a>
+        <nav class="nav" aria-label="Main">
+        <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-menu" data-nav-menu data-open="false">
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="../products/" data-nav-trigger aria-expanded="false" aria-controls="product-panel">
+              Product<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="product-panel">
+              <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../products/qa-verifications.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">QA Verifications</span>
+                    <span class="nav-panel__desc">Automated compliance checks with an audit trail you can hand to the ORR.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/task-assignment.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Task assignment</span>
+                    <span class="nav-panel__desc">Assign follow-up actions to people and tie them to an employee record.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/safety-briefs.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Safety Briefs</span>
+                    <span class="nav-panel__desc">Record who received which brief, in person or remotely, with evidence.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/trainee-driver.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Trainee Driver</span>
+                    <span class="nav-panel__desc">Run a full trainee programme: schedules, train logs, hours and signed feedback.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/driver-reports.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Driver Reports</span>
+                    <span class="nav-panel__desc">Signed operational reports from drivers, exportable to your investigations system.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/leave-absence.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Leave &amp; Absence</span>
+                    <span class="nav-panel__desc">Entitlements, sickness and absence with manager approval and a full audit trail.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../products/medication-checks.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Medication Checks</span>
+                    <span class="nav-panel__desc">Medication declarations and occupational health checks on the medical record.</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="../products/">All add-on modules &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group data-open="false">
+            <a class="nav-trigger" href="../features/" data-nav-trigger aria-expanded="false" aria-controls="features-panel">
+              Features<span class="nav-trigger__chevron" aria-hidden="true"></span>
+            </a>
+            <div class="nav-panel" id="features-panel">
+              <div class="nav-panel__grid">
+                <a class="nav-panel__item" href="../features/competency-cycles.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Competency &amp; Cycles</span>
+                    <span class="nav-panel__desc">Build assessment cycles, run assessments in the field and carry findings forward.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/workforce-records.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Workforce Records</span>
+                    <span class="nav-panel__desc">The employee record: cab passes, training, experience, documents and messaging.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/medicals-licensing.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Medicals &amp; Licensing</span>
+                    <span class="nav-panel__desc">Medical fitness, ORR medicals, driving licences and complementary certificates.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/incidents-monitoring.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Incidents &amp; Monitoring</span>
+                    <span class="nav-panel__desc">Record incidents, allocate them to people and manage development plans.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/reporting-administration.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Reporting &amp; Administration</span>
+                    <span class="nav-panel__desc">Analytics across the operation, plus the configuration that makes it yours.</span>
+                  </span>
+                </a>
+              </div>
+              <div class="nav-panel__footer">
+                <a class="nav-panel__all" href="../features/">All features &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <a href="../how-it-works.html" class="nav-link">How it works</a>
+          <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
+        </div>
+      </nav>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Workforce Records</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <h1 class="page-title">One record per person, not six systems</h1>
+          <p class="page-lead">Every safety-critical person has one record holding their status, competence, passes, training, experience and documentation. When you need to answer whether someone is safe to work, the answer is in one place.</p>
+          <div class="page-actions">
+            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="../features/" class="btn btn-ghost btn-lg">All features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>The employee directory</h2>
+          <p>The directory lists your safety-critical personnel with role, depot, status and company, and opens straight into the record. Access is permission-controlled, and drivers with own-record-only access see their own record instead of the directory.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 700px">
+          <div class="shot__frame">
+            <img src="../images/screens/main-sys/employee-list.png" alt="The employee directory with role, depot and status." width="700" height="154" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">The employee directory with role, depot and status.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Cab passes</h2>
+          <p>Cab pass authority and validity are held on the record, with issue and colour tracked so the pass in someone's pocket matches the pass in the system.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 697px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/cab-passes.png" alt="Cab pass register on the employee record." width="697" height="379" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Cab pass register on the employee record.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 652px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/green-pass-issued.png" alt="An issued pass with its validity and status." width="652" height="417" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">An issued pass with its validity and status.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 700px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/issue-colour-question-popup.png" alt="Issuing a pass and recording its colour classification." width="700" height="391" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Issuing a pass and recording its colour classification.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Training, qualifications and experience</h2>
+          <p>Training records and qualifications are held with their provider and expiry, so a lapsing qualification is visible before it becomes a problem. Experience Records track driving experience and trainee hours, including daylight and darkness progress against your company standards.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 784px">
+          <div class="shot__frame">
+            <img src="../images/screens/training-quals/training-quals-overview.png" alt="Training records and qualifications with expiry and provider." width="784" height="410" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Training records and qualifications with expiry and provider.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 326px">
+          <div class="shot__frame">
+            <img src="../images/screens/training-quals/add-new-training.png" alt="Adding a training record." width="326" height="266" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Adding a training record.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 325px">
+          <div class="shot__frame">
+            <img src="../images/screens/training-quals/add-qual.png" alt="Adding a qualification." width="325" height="344" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Adding a qualification.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 682px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/trainee-hours-experience.png" alt="Experience records with trainee hours against the company standard." width="682" height="561" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Experience records with trainee hours against the company standard.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 643px">
+          <div class="shot__frame">
+            <img src="../images/screens/trainee-hours-manager-hours/overall-progress-trainee.png" alt="Overall progress for a trainee across their required hours." width="643" height="338" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Overall progress for a trainee across their required hours.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Documents and messaging</h2>
+          <p>Supporting evidence is uploaded against the record and counts against your company storage quota. Messaging and notes keep the conversation about a record attached to it, with email notification when a new message is raised.</p>
+
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 783px">
+          <div class="shot__frame">
+            <img src="../images/screens/main-sys/document-upload-area.png" alt="Uploading supporting documentation to an employee record." width="783" height="333" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Uploading supporting documentation to an employee record.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 781px">
+          <div class="shot__frame">
+            <img src="../images/screens/messaging-employee/employee-messaging.png" alt="Messaging threads held against the employee record." width="781" height="490" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Messaging threads held against the employee record.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 490px">
+          <div class="shot__frame">
+            <img src="../images/screens/messaging-employee/email-notify-new-message.png" alt="Email notification when a new message is raised." width="490" height="253" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Email notification when a new message is raised.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Everything here is included</h2>
+          <p>These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.</p>
+        </div>
+        <div class="page-actions">
+          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
+          <a href="../products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Rail Intel</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../products/">Add-on modules</a>
+        <a href="../features/">Features</a>
+        <a href="../how-it-works.html">How it works</a>
+        <a href="https://cms.railintel.co.uk">Log in</a>
+      </nav>
+      <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+    </div>
+  </footer>
+
+  <script src="../js/site.js?v=13"></script>
+</body>
+</html>
