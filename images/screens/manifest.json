@@ -348,11 +348,11 @@
     "height": 819
   },
   "images/screens/verification/verification-config.png": {
-    "width": 1382,
-    "height": 1050
+    "width": 1024,
+    "height": 686
   },
   "images/screens/verification/verification-run-overall.png": {
-    "width": 1382,
-    "height": 1120
+    "width": 1024,
+    "height": 750
   }
 }

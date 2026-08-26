@@ -146,6 +146,8 @@ export const addons = [
             src: "images/screens/verification/verification-run-overall.png",
             caption:
               "Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.",
+            scale: 1,
+            full: true,
           },
         ],
       },
@@ -163,6 +165,8 @@ export const addons = [
           {
             src: "images/screens/verification/verification-config.png",
             caption: "Check configuration controls which sections are tested and how each is scored.",
+            scale: 1,
+            full: true,
           },
         ],
       },
