@@ -534,13 +534,12 @@ function languagesHubPage() {
         <div class="card-grid card-grid--languages">
 ${cards}
         </div>
-        <p class="languages-note">${esc(languages.adminNote)}</p>
       </div>
     </section>
 
 ${renderCta(base, {
   heading: "Work in the language your team uses",
-  body: "Language support is part of core Rail Intel. Enable the languages you need, and each user chooses their preference at sign-in.",
+  body: "Language support is part of core Rail Intel. Users can select and switch language at sign-in or from the header — no separate enable step.",
 })}
   </main>
 

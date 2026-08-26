@@ -757,14 +757,6 @@ body.lightbox-open {
   opacity: 0.28;
 }
 
-.languages-note {
-  margin: 1.75rem 0 0;
-  max-width: 46rem;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
-
 /* ---------- Steps ---------- */
 
 .steps {

@@ -969,7 +969,7 @@ export const featureGroups = [
     summary: "Run Rail Intel in English, Spanish, French, Welsh, Italian, German or Arabic.",
     tagline: "International language support",
     lead:
-      "Assessors, managers and administrators can work in the language that suits their team. Language is chosen at sign-in and in the header, and system administrators decide which languages appear.",
+      "Assessors, managers and administrators can work in the language that suits their team. Choose a language at sign-in, or switch anytime from the header.",
     sections: [],
   },
 ];
@@ -980,8 +980,6 @@ export const languages = {
   heading: "Supported languages",
   lead:
     "The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.",
-  adminNote:
-    "System administrators choose which languages appear in the login and header selectors. If every language is turned off, selectors are hidden and English is used.",
   items: [
     {
       code: "en",
