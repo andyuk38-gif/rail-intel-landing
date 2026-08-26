@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=49" />
-  <link rel="stylesheet" href="../css/pages.css?v=49" />
+  <link rel="stylesheet" href="../css/style.css?v=50" />
+  <link rel="stylesheet" href="../css/pages.css?v=50" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -213,70 +213,51 @@
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>Authority that matches the card in someone’s pocket</h2>
-          <p>Cab passes are recorded in standard driving cab pass layout. Holder details stay on the left; the photo and verification QR sit in matching panels on the right. Colour classification makes the pass type obvious at a glance — green for authorised to assess, through to black for route learning.</p>
-          <p>Company role permissions control who can edit, renew, revoke or delete. Create digital pass saves immediately so the QR works straight away.</p>
+          <h2>Issue digital cab passes with QR verification</h2>
+          <p>Cab passes are recorded in standard driving cab pass layout. Choose the colour, complete the issue form, and save a digital pass with a QR anyone can scan — no sign-in required. Email the pass to the employee, or renew and revoke from the same tab.</p>
           <ul class="spec-list">
-            <li><strong>Standard card layout</strong> aligned to driving cab pass format for print and digital use.</li>
-            <li><strong>Colour-coded authority</strong> for assess, PTS, operational rules, endorsements and route learning.</li>
-            <li><strong>Permission-gated actions</strong> for edit, renew, revoke and delete.</li>
-            <li><strong>Immediate digital issue</strong> so the verification QR is live as soon as the pass is created.</li>
+            <li><strong>Colour-coded authority</strong> — green, yellow, blue, red or black.</li>
+            <li><strong>Digital issue with QR</strong> for public verification without a login.</li>
+            <li><strong>Email the pass</strong> to the employee with a view link.</li>
+            <li><strong>Edit, renew, revoke or delete</strong> from the pass preview.</li>
           </ul>
         </div>
       <div class="shot-grid shot-grid--two">
         <figure class="shot" style="max-width: 512px">
           <div class="shot__frame">
-            <img src="../images/screens/cab-passes/cab-passes-dark.png" alt="Cab Passes in dark mode — issued passes with QR verification beside each card." width="512" height="379" loading="lazy" decoding="async" />
+            <img src="../images/screens/cab-passes/cab-passes-dark.png" alt="Cab Passes — issued passes with SCAN TO VERIFY beside each card." width="512" height="379" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Cab Passes in dark mode — issued passes with QR verification beside each card.</figcaption>
+          <figcaption class="shot__caption">Cab Passes — issued passes with SCAN TO VERIFY beside each card.</figcaption>
         </figure>
         <figure class="shot" style="max-width: 218px">
           <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-colour-question-popup-dark.png" alt="Choose the pass colour before issuing — green, yellow, blue, red or black." width="218" height="241" loading="lazy" decoding="async" />
+            <img src="../images/screens/cab-passes/issue-colour-question-popup-dark.png" alt="Choose the pass colour before issuing." width="218" height="241" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Choose the pass colour before issuing — green, yellow, blue, red or black.</figcaption>
+          <figcaption class="shot__caption">Choose the pass colour before issuing.</figcaption>
         </figure>
         <figure class="shot" style="max-width: 512px">
           <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-form-dark.png" alt="Issue form: colour, validity dates, routes, endorsements and issuer signature." width="512" height="246" loading="lazy" decoding="async" />
+            <img src="../images/screens/cab-passes/issue-form-dark.png" alt="Issue form — colour, validity, routes, endorsements and signature." width="512" height="246" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Issue form: colour, validity dates, routes, endorsements and issuer signature.</figcaption>
+          <figcaption class="shot__caption">Issue form — colour, validity, routes, endorsements and signature.</figcaption>
         </figure>
-      </div>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>QR verification without a login</h2>
-          <p>When a digital pass is issued, Rail Intel saves it for public verification and can email the employee a copy with a link to view the pass. Scanning the QR with a phone or tablet camera opens the cab pass card in the browser — no Rail Intel account required.</p>
-          <p>The same QR appears on the printed card layout and beside the on-screen preview under Pass layout &amp; print, so what you scan matches what was issued.</p>
-          <ul class="spec-list">
-            <li><strong>Scan to verify</strong> — camera opens the live digital pass without signing in.</li>
-            <li><strong>QR on the card</strong> in a panel matched to the photo strip on the front.</li>
-            <li><strong>Email to the employee</strong> with pass details and a view link when digital issue is confirmed.</li>
-            <li><strong>Renew and revoke</strong> refresh or disable digital verification while keeping the audit trail clear.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 217px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Confirm digital issue and email the pass to the employee." width="217" height="145" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Confirm digital issue and email the pass to the employee.</figcaption>
+        </figure>
         <figure class="shot" style="max-width: 280px">
           <div class="shot__frame">
-            <img src="../images/screens/cab-passes/green-pass-issued-dark.png" alt="Issued green driving cab pass with SCAN TO VERIFY beside the card preview." width="280" height="139" loading="lazy" decoding="async" />
+            <img src="../images/screens/cab-passes/green-pass-issued-dark.png" alt="Issued green driving cab pass with SCAN TO VERIFY." width="280" height="139" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Issued green driving cab pass with SCAN TO VERIFY beside the card preview.</figcaption>
+          <figcaption class="shot__caption">Issued green driving cab pass with SCAN TO VERIFY.</figcaption>
         </figure>
         <figure class="shot" style="max-width: 512px">
           <div class="shot__frame">
             <img src="../images/screens/cab-passes/pass-preview-actions-dark.png" alt="Pass preview with Expand, Edit, View, Renew, Revoke and Delete." width="512" height="111" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Pass preview with Expand, Edit, View, Renew, Revoke and Delete.</figcaption>
-        </figure>
-        <figure class="shot" style="max-width: 217px">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Confirm digital issue — save for QR verification and email the pass to the employee." width="217" height="145" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Confirm digital issue — save for QR verification and email the pass to the employee.</figcaption>
         </figure>
         <figure class="shot" style="max-width: 277px">
           <div class="shot__frame">
@@ -316,6 +297,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=49"></script>
+  <script src="../js/site.js?v=50"></script>
 </body>
 </html>

@@ -919,56 +919,40 @@ export const featureGroups = [
       "Cab authority is held on the employee record as a standard driving cab pass. Issue a digital pass and a QR code appears beside the photo — scan it to open the live pass in a browser with no sign-in.",
     sections: [
       {
-        heading: "Authority that matches the card in someone’s pocket",
+        heading: "Issue digital cab passes with QR verification",
         body: [
-          "Cab passes are recorded in standard driving cab pass layout. Holder details stay on the left; the photo and verification QR sit in matching panels on the right. Colour classification makes the pass type obvious at a glance — green for authorised to assess, through to black for route learning.",
-          "Company role permissions control who can edit, renew, revoke or delete. Create digital pass saves immediately so the QR works straight away.",
+          "Cab passes are recorded in standard driving cab pass layout. Choose the colour, complete the issue form, and save a digital pass with a QR anyone can scan — no sign-in required. Email the pass to the employee, or renew and revoke from the same tab.",
         ],
         bullets: [
-          "**Standard card layout** aligned to driving cab pass format for print and digital use.",
-          "**Colour-coded authority** for assess, PTS, operational rules, endorsements and route learning.",
-          "**Permission-gated actions** for edit, renew, revoke and delete.",
-          "**Immediate digital issue** so the verification QR is live as soon as the pass is created.",
+          "**Colour-coded authority** — green, yellow, blue, red or black.",
+          "**Digital issue with QR** for public verification without a login.",
+          "**Email the pass** to the employee with a view link.",
+          "**Edit, renew, revoke or delete** from the pass preview.",
         ],
         shots: [
           {
             src: "images/screens/cab-passes/cab-passes-dark.png",
-            caption: "Cab Passes in dark mode — issued passes with QR verification beside each card.",
+            caption: "Cab Passes — issued passes with SCAN TO VERIFY beside each card.",
           },
           {
             src: "images/screens/cab-passes/issue-colour-question-popup-dark.png",
-            caption: "Choose the pass colour before issuing — green, yellow, blue, red or black.",
+            caption: "Choose the pass colour before issuing.",
           },
           {
             src: "images/screens/cab-passes/issue-form-dark.png",
-            caption: "Issue form: colour, validity dates, routes, endorsements and issuer signature.",
+            caption: "Issue form — colour, validity, routes, endorsements and signature.",
           },
-        ],
-      },
-      {
-        heading: "QR verification without a login",
-        body: [
-          "When a digital pass is issued, Rail Intel saves it for public verification and can email the employee a copy with a link to view the pass. Scanning the QR with a phone or tablet camera opens the cab pass card in the browser — no Rail Intel account required.",
-          "The same QR appears on the printed card layout and beside the on-screen preview under Pass layout & print, so what you scan matches what was issued.",
-        ],
-        bullets: [
-          "**Scan to verify** — camera opens the live digital pass without signing in.",
-          "**QR on the card** in a panel matched to the photo strip on the front.",
-          "**Email to the employee** with pass details and a view link when digital issue is confirmed.",
-          "**Renew and revoke** refresh or disable digital verification while keeping the audit trail clear.",
-        ],
-        shots: [
+          {
+            src: "images/screens/cab-passes/issue-digital-pass-email-dark.png",
+            caption: "Confirm digital issue and email the pass to the employee.",
+          },
           {
             src: "images/screens/cab-passes/green-pass-issued-dark.png",
-            caption: "Issued green driving cab pass with SCAN TO VERIFY beside the card preview.",
+            caption: "Issued green driving cab pass with SCAN TO VERIFY.",
           },
           {
             src: "images/screens/cab-passes/pass-preview-actions-dark.png",
             caption: "Pass preview with Expand, Edit, View, Renew, Revoke and Delete.",
-          },
-          {
-            src: "images/screens/cab-passes/issue-digital-pass-email-dark.png",
-            caption: "Confirm digital issue — save for QR verification and email the pass to the employee.",
           },
           {
             src: "images/screens/cab-passes/expired-pass-issued-dark.png",
