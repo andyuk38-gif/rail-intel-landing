@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=33" />
-  <link rel="stylesheet" href="css/pages.css?v=33" />
+  <link rel="stylesheet" href="css/style.css?v=36" />
+  <link rel="stylesheet" href="css/pages.css?v=36" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -313,25 +313,25 @@
                   />
                 </div>
               </div>
-              <span class="hero-chip hero-chip--safe" aria-hidden="true">
+              <span class="hero-chip hero-chip--safe" data-gallery-chip="safe" aria-hidden="true">
                 <span class="hero-chip__dot"></span>
                 <span>
-                  <strong>Live verification</strong>
-                  All checks current
+                  <strong data-chip-title>Live verification</strong>
+                  <span data-chip-detail>All checks current</span>
                 </span>
               </span>
-              <span class="hero-chip hero-chip--alert" aria-hidden="true">
+              <span class="hero-chip hero-chip--alert" data-gallery-chip="alert" aria-hidden="true">
                 <span class="hero-chip__dot"></span>
                 <span>
-                  <strong>Medical expiring</strong>
-                  Flagged before sign-on
+                  <strong data-chip-title>Medical expiring</strong>
+                  <span data-chip-detail>Flagged before sign-on</span>
                 </span>
               </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357">Dashboard</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting" data-width="691" data-height="431">Reporting</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting" data-width="687" data-height="537">Analytics</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357" data-chip-safe-title="Live verification" data-chip-safe-detail="All checks current" data-chip-alert-title="Medical expiring" data-chip-alert-detail="Flagged before sign-on">Dashboard</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting" data-width="691" data-height="431" data-chip-safe-title="Briefing coverage" data-chip-safe-detail="Tracked per employee" data-chip-alert-title="Open incidents" data-chip-alert-detail="Ready for review">Reporting</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting" data-width="687" data-height="537" data-chip-safe-title="Compliance trend" data-chip-safe-detail="Up this quarter" data-chip-alert-title="Off-track rising" data-chip-alert-detail="Needs attention">Analytics</button>
             </div>
           </div>
         </div>
@@ -673,7 +673,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=33"></script>
-  <script src="js/main.js?v=33"></script>
+  <script src="js/site.js?v=36"></script>
+  <script src="js/main.js?v=36"></script>
 </body>
 </html>

@@ -5,6 +5,10 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const scene = gallery.querySelector("[data-gallery-scene]");
   const video = gallery.querySelector("[data-scene-video]");
   const tabs = Array.from(gallery.querySelectorAll(".gallery-tab"));
+  const chips = {
+    safe: gallery.querySelector('[data-gallery-chip="safe"]'),
+    alert: gallery.querySelector('[data-gallery-chip="alert"]'),
+  };
   if (!img || !tabs.length) return;
 
   // The caption is built from the alt text each tab already carries, so the
@@ -14,6 +18,27 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   gallery.appendChild(caption);
 
   const settle = () => gallery.classList.remove("is-swapping");
+
+  const setChip = (chip, title, detail) => {
+    if (!chip || !title) return;
+    const titleEl = chip.querySelector("[data-chip-title]");
+    const detailEl = chip.querySelector("[data-chip-detail]");
+    if (titleEl) titleEl.textContent = title;
+    if (detailEl) detailEl.textContent = detail || "";
+  };
+
+  const updateChips = (tab) => {
+    if (!chips.safe && !chips.alert) return;
+    const hasChipCopy = tab.dataset.chipSafeTitle || tab.dataset.chipAlertTitle;
+    if (!hasChipCopy) return;
+
+    gallery.classList.add("is-chip-swapping");
+    window.setTimeout(() => {
+      setChip(chips.safe, tab.dataset.chipSafeTitle, tab.dataset.chipSafeDetail);
+      setChip(chips.alert, tab.dataset.chipAlertTitle, tab.dataset.chipAlertDetail);
+      gallery.classList.remove("is-chip-swapping");
+    }, 120);
+  };
 
   // Playback is gated on the scene being both selected and on screen.
   let sceneInView = false;
@@ -34,6 +59,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const render = (tab) => {
     caption.textContent = tab.dataset.alt || "";
     if (url && tab.dataset.url) url.textContent = tab.dataset.url;
+    updateChips(tab);
 
     if (tab.dataset.scene) {
       setSceneVisible(true);
