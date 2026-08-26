@@ -19,6 +19,7 @@ const ORIGIN = process.env.VERIFY_URL || "http://localhost:8765";
 const pages = [
   "/index.html",
   "/how-it-works.html",
+  "/security.html",
   "/products/index.html",
   "/features/index.html",
   "/products/qa-verifications.html",

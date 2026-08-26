@@ -950,3 +950,105 @@ export const howItWorks = {
     },
   ],
 };
+
+/* ----------------------------------------------------------------- security */
+
+export const security = {
+  title: "Security built for rail operations",
+  lead:
+    "Rail Intel protects competency, medical and safety records with company-scoped access, two-factor authentication and hosting on Microsoft Azure.",
+  access: {
+    heading: "Access control",
+    lead: "Every sign-in is tied to a company and a named user. Access is logged, and permissions follow the roles your operation defines.",
+    items: [
+      {
+        title: "Company codes",
+        body: "Users sign in with a company code, email and password. Tenants stay isolated — one operator cannot see another’s records.",
+      },
+      {
+        title: "Role-based permissions",
+        body: "What a person can view or change follows their role and any custom permissions your administrators set.",
+      },
+      {
+        title: "Logged access",
+        body: "Sign-in and sensitive actions are attributable. The product is built for authorised personnel only — all access is logged.",
+      },
+      {
+        title: "Session tokens",
+        body: "Successful authentication issues a signed session token. Credentials and tokens remain the responsibility of each user to safeguard.",
+      },
+    ],
+  },
+  twoFactor: {
+    heading: "Two-factor authentication (2FA)",
+    lead:
+      "When 2FA is required, a correct password is not enough. Rail Intel challenges for a second factor before a session is issued.",
+    methods: [
+      {
+        title: "Authenticator app (TOTP)",
+        body: "Users enrol an authenticator such as Microsoft Authenticator or Google Authenticator. A time-based code completes sign-in. Secrets are encrypted at rest.",
+      },
+      {
+        title: "Email verification codes",
+        body: "Where enabled, a six-digit code is sent to the user’s email. Codes can be resent from the sign-in challenge. SMTP must be configured for this method.",
+      },
+      {
+        title: "Trusted devices",
+        body: "After a successful 2FA challenge, users may trust the device for 14 days. Later password logins on that browser can skip 2FA while the trust is valid. System administrators never skip. Password changes and authenticator resets revoke trusted devices.",
+      },
+    ],
+    rules: [
+      {
+        heading: "Policy is administered centrally",
+        body: "System administrators manage 2FA from Administration → Security: authenticator on or off, email codes on or off, and company or user method overrides. Users cannot turn the requirement off themselves.",
+      },
+      {
+        heading: "Enrolment at sign-in",
+        body: "If authenticator 2FA is required and the user has not enrolled yet, they are guided through QR setup on the next sign-in before access is granted.",
+      },
+      {
+        heading: "Administrator reset",
+        body: "Administrators can reset a user’s authenticator. The user sets up a new app on the next sign-in if 2FA is still required.",
+      },
+      {
+        heading: "Backup codes for re-enrolment",
+        body: "When re-enrolling an authenticator, the current authenticator or a backup code is required so a lost phone cannot silently replace a working second factor.",
+      },
+    ],
+  },
+  azure: {
+    heading: "Hosted on Microsoft Azure",
+    lead:
+      "The Rail Intel application runs on Azure App Service with Azure Database for PostgreSQL and Azure Blob Storage for documents — so platform security inherits Azure’s enterprise controls.",
+    items: [
+      {
+        title: "Azure App Service",
+        body: "The application is deployed to Azure App Service with HTTPS. Microsoft manages the underlying host patching and regional availability.",
+      },
+      {
+        title: "Azure Database for PostgreSQL",
+        body: "Operational data is stored in Azure PostgreSQL with TLS required for database connections (`sslmode=require`). Backups and storage sit inside Azure’s managed database service.",
+      },
+      {
+        title: "Encryption in transit and at rest",
+        body: "Client traffic uses HTTPS. Database connections use TLS. Authenticator secrets (and related credentials) are encrypted at rest with AES-256-GCM. Azure encrypts managed disks and storage by default.",
+      },
+      {
+        title: "Azure Blob Storage for files",
+        body: "Employee documents, OH reports, training files, logos and profile photos are stored in Azure Blob Storage under company-scoped paths — not on the local app disk in production.",
+      },
+      {
+        title: "Network and platform protections",
+        body: "Azure provides DDoS protection at the platform edge, identity and access management for the subscription, and continuous security updates to the hosting stack.",
+      },
+      {
+        title: "Azure compliance portfolio",
+        body: "By hosting on Azure, Rail Intel sits on infrastructure that Microsoft maintains under widely recognised certifications (including ISO and SOC programmes). Ask us for the current region and any customer-specific compliance needs.",
+      },
+    ],
+  },
+  closing: {
+    heading: "Questions about security?",
+    lead: "We can walk through 2FA policy, Azure regions and how access is controlled for your company before you go live.",
+  },
+};

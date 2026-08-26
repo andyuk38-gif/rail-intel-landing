@@ -19,6 +19,37 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const settle = () => gallery.classList.remove("is-swapping");
 
+  const copyRoot = gallery.closest(".product-section__inner")?.querySelector("[data-gallery-copy]");
+  const copy = copyRoot
+    ? {
+        eyebrow: copyRoot.querySelector("[data-copy-eyebrow]"),
+        heading: copyRoot.querySelector("[data-copy-heading]"),
+        lead: copyRoot.querySelector("[data-copy-lead]"),
+        bullets: copyRoot.querySelector("[data-copy-bullets]"),
+      }
+    : null;
+
+  const updateCopy = (tab) => {
+    if (!copy || !tab.dataset.copyHeading) return;
+    copyRoot.classList.add("is-copy-swapping");
+    window.setTimeout(() => {
+      if (copy.eyebrow && tab.dataset.copyEyebrow) copy.eyebrow.textContent = tab.dataset.copyEyebrow;
+      if (copy.heading) copy.heading.textContent = tab.dataset.copyHeading;
+      if (copy.lead && tab.dataset.copyLead) copy.lead.textContent = tab.dataset.copyLead;
+      if (copy.bullets && tab.dataset.copyBullets) {
+        const items = tab.dataset.copyBullets.split("|").map((item) => item.trim()).filter(Boolean);
+        copy.bullets.replaceChildren(
+          ...items.map((item) => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            return li;
+          })
+        );
+      }
+      copyRoot.classList.remove("is-copy-swapping");
+    }, 120);
+  };
+
   const setChip = (chip, title, detail) => {
     if (!chip || !title) return;
     const titleEl = chip.querySelector("[data-chip-title]");
@@ -60,6 +91,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     caption.textContent = tab.dataset.alt || "";
     if (url && tab.dataset.url) url.textContent = tab.dataset.url;
     updateChips(tab);
+    updateCopy(tab);
 
     if (tab.dataset.scene) {
       setSceneVisible(true);

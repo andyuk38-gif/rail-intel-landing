@@ -654,6 +654,14 @@ body::before {
   order: 1;
 }
 
+.product-section__copy {
+  transition: opacity 0.18s ease;
+}
+
+.product-section__copy.is-copy-swapping {
+  opacity: 0.35;
+}
+
 .product-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;

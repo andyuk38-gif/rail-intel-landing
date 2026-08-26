@@ -1,6 +1,6 @@
 /**
- * Generates the Products, Features and How it works pages from content/site.mjs,
- * and keeps the shared navigation in index.html in step with them.
+ * Generates the Products, Features, How it works and Security pages from
+ * content/site.mjs, and keeps the shared navigation in index.html in step.
  *
  * Output is plain static HTML committed to the repo, so GitHub Pages serves it
  * directly and there is no build step at request time.
@@ -10,12 +10,12 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, addons, capacityAddons, featureGroups, howItWorks } from "../content/site.mjs";
+import { site, products, addons, capacityAddons, featureGroups, howItWorks, security } from "../content/site.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 37;
+const ASSET_VERSION = 40;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -116,6 +116,7 @@ ${renderNavItems(base, addonItems)}
           "All features"
         )}
           <a href="${base}how-it-works.html" class="nav-link">How it works</a>
+          <a href="${base}security.html" class="nav-link">Security</a>
           <a href="${site.app}" class="nav-link">Log in</a>
           <a href="${site.app}" class="btn btn-primary">Go to app</a>
         </div>
@@ -171,6 +172,7 @@ function renderFooter(base) {
         <a href="${base}products/">Products</a>
         <a href="${base}features/">Features</a>
         <a href="${base}how-it-works.html">How it works</a>
+        <a href="${base}security.html">Security</a>
         <a href="${site.app}">Log in</a>
       </nav>
       <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
@@ -680,6 +682,129 @@ ${renderShot(
   );
 }
 
+function securityPage() {
+  const base = "";
+  const accessItems = security.access.items
+    .map(
+      (item) => `          <li>
+            <strong>${esc(item.title)}</strong>
+            ${esc(item.body)}
+          </li>`
+    )
+    .join("\n");
+  const methods = security.twoFactor.methods
+    .map(
+      (item) => `          <li>
+            <strong>${esc(item.title)}</strong>
+            ${esc(item.body)}
+          </li>`
+    )
+    .join("\n");
+  const rules = security.twoFactor.rules
+    .map(
+      (step) => `          <li>
+            <h3>${esc(step.heading)}</h3>
+            <p>${esc(step.body)}</p>
+          </li>`
+    )
+    .join("\n");
+  const azureItems = security.azure.items
+    .map(
+      (item) => `          <li>
+            <strong>${esc(item.title)}</strong>
+            ${esc(item.body)}
+          </li>`
+    )
+    .join("\n");
+
+  return (
+    renderHead(base, {
+      title: "Security – Rail Intel",
+      description: security.lead,
+    }) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Security</p>
+          <h1 class="page-title">${esc(security.title)}</h1>
+          <p class="page-lead">${esc(security.lead)}</p>
+          <div class="page-actions">
+            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="how-it-works.html" class="btn btn-ghost btn-lg">How it works</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(security.access.heading)}</h2>
+          <p>${esc(security.access.lead)}</p>
+        </div>
+        <ul class="spec-list">
+${accessItems}
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(security.twoFactor.heading)}</h2>
+          <p>${esc(security.twoFactor.lead)}</p>
+        </div>
+        <ul class="spec-list">
+${methods}
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>How 2FA is governed</h2>
+          <p>These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.</p>
+        </div>
+        <ol class="steps">
+${rules}
+        </ol>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(security.azure.heading)}</h2>
+          <p>${esc(security.azure.lead)}</p>
+        </div>
+        <ul class="spec-list">
+${azureItems}
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(security.closing.heading)}</h2>
+          <p>${esc(security.closing.lead)}</p>
+        </div>
+        <div class="page-actions">
+          <a href="${site.app}" class="btn btn-primary btn-lg">Go to app</a>
+          <a href="features/" class="btn btn-ghost btn-lg">See the features</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
 /* ---------------------------------------------------------- index.html sync */
 
 function syncIndex() {
@@ -703,6 +828,7 @@ function syncIndex() {
         <a href="products/">Products</a>
         <a href="features/">Features</a>
         <a href="how-it-works.html">How it works</a>
+        <a href="security.html">Security</a>
         <a href="${site.app}">Log in</a>
       `
   );
@@ -740,6 +866,7 @@ emit("features/index.html", featuresIndex());
 for (const group of featureGroups) emit(`features/${group.slug}.html`, featurePage(group));
 
 emit("how-it-works.html", howItWorksPage());
+emit("security.html", securityPage());
 written.push(syncIndex());
 
 console.log(`generated ${written.length} pages:`);

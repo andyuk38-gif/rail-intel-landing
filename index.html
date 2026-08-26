@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=37" />
-  <link rel="stylesheet" href="css/pages.css?v=37" />
+  <link rel="stylesheet" href="css/style.css?v=40" />
+  <link rel="stylesheet" href="css/pages.css?v=40" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -171,6 +171,7 @@
             </div>
           </div>
           <a href="how-it-works.html" class="nav-link">How it works</a>
+          <a href="security.html" class="nav-link">Security</a>
           <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
           <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
         </div>
@@ -283,14 +284,14 @@
 
     <section class="product-section product-section--elevated" id="product" aria-labelledby="command-heading">
       <div class="container product-section__inner">
-        <div class="product-section__copy">
-          <p class="product-eyebrow">Command centre</p>
-          <h2 id="command-heading">One dashboard for the whole operation.</h2>
-          <p class="product-lead">Stop chasing spreadsheets. See the state of the railway’s people the moment you log in.</p>
-          <ul class="product-bullets">
-            <li>Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.</li>
+        <div class="product-section__copy" data-gallery-copy>
+          <p class="product-eyebrow" data-copy-eyebrow>Dashboard</p>
+          <h2 id="command-heading" data-copy-heading>One dashboard for the whole operation.</h2>
+          <p class="product-lead" data-copy-lead>Stop chasing spreadsheets. See the state of the railway&rsquo;s people the moment you log in.</p>
+          <ul class="product-bullets" data-copy-bullets>
+            <li>Live counts for on-track, off-track, overdue assessments and medicals &mdash; from your company data, not a weekly export.</li>
             <li>Open any person and drill into team compliance, incidents and QA in a click.</li>
-            <li>Reporting and analytics for incidents, safety briefs and compliance rates — ready for reviews and audits.</li>
+            <li>Personal progress and team status in one place, ready for the shift briefing.</li>
           </ul>
         </div>
         <div class="product-section__media">
@@ -329,10 +330,10 @@
               </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357" data-chip-safe-title="Live verification" data-chip-safe-detail="All checks current" data-chip-alert-title="Medical expiring" data-chip-alert-detail="Flagged before sign-on">Dashboard</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/team-compliance.png" data-alt="Your team's compliance panel with live issue counts and employees needing review" data-url="cms.railintel.co.uk/compliance" data-width="512" data-height="357" data-chip-safe-title="69 compliant" data-chip-safe-detail="Live company records" data-chip-alert-title="43 live issues" data-chip-alert-detail="Review and advisory">Compliance</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting" data-width="691" data-height="431" data-chip-safe-title="Briefing coverage" data-chip-safe-detail="Tracked per employee" data-chip-alert-title="Open incidents" data-chip-alert-detail="Ready for review">Reporting</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting" data-width="687" data-height="537" data-chip-safe-title="Compliance trend" data-chip-safe-detail="Up this quarter" data-chip-alert-title="Off-track rising" data-chip-alert-detail="Needs attention">Analytics</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357" data-chip-safe-title="Live verification" data-chip-safe-detail="All checks current" data-chip-alert-title="Medical expiring" data-chip-alert-detail="Flagged before sign-on" data-copy-eyebrow="Dashboard" data-copy-heading="One dashboard for the whole operation." data-copy-lead="Stop chasing spreadsheets. See the state of the railway’s people the moment you log in." data-copy-bullets="Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.|Open any person and drill into team compliance, incidents and QA in a click.|Personal progress and team status in one place, ready for the shift briefing.">Dashboard</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/team-compliance.png?v=2" data-alt="Your team's compliance panel with live issue counts and employees needing review" data-url="cms.railintel.co.uk/compliance" data-width="512" data-height="357" data-chip-safe-title="69 compliant" data-chip-safe-detail="Live company records" data-chip-alert-title="43 live issues" data-chip-alert-detail="Review and advisory" data-copy-eyebrow="Compliance" data-copy-heading="Know who needs attention — before they sign on." data-copy-lead="Team compliance reads live company records and surfaces review and advisory items, so gaps are visible while there is still time to act." data-copy-bullets="Issue counts for review, advisory and compliant statuses, updated from the live record.|Open any person with outstanding checks and move straight into QA Verifications.|Built from current data — not a weekly export or the last report someone remembered to run.">Compliance</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting" data-width="691" data-height="431" data-chip-safe-title="Briefing coverage" data-chip-safe-detail="Tracked per employee" data-chip-alert-title="Open incidents" data-chip-alert-detail="Ready for review" data-copy-eyebrow="Reporting" data-copy-heading="Audit-ready reports from live railway data." data-copy-lead="Turn incidents, safety briefs and compliance activity into clear reports you can take into a review without rebuilding the story from spreadsheets." data-copy-bullets="Incident KPIs and operational trends ready for safety and management meetings.|Safety briefing coverage tracked per employee, not against a distribution list.|Evidence that is current, filterable and ready to hand over for audit.">Reporting</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting" data-width="687" data-height="537" data-chip-safe-title="Compliance trend" data-chip-safe-detail="Up this quarter" data-chip-alert-title="Off-track rising" data-chip-alert-detail="Needs attention" data-copy-eyebrow="Analytics" data-copy-heading="Trends that show risk before it escalates." data-copy-lead="Track compliance movement, overdue assessments and incident patterns so managers act on signal — not after the event." data-copy-bullets="Compliance and off-track trends across the period that matters to your operation.|Spot rising review volumes and overdue cycles while there is still time to intervene.|Give leadership a single view of operational safety performance.">Analytics</button>
             </div>
           </div>
         </div>
@@ -667,6 +668,7 @@
         <a href="products/">Products</a>
         <a href="features/">Features</a>
         <a href="how-it-works.html">How it works</a>
+        <a href="security.html">Security</a>
         <a href="https://cms.railintel.co.uk">Log in</a>
       <!-- footer-nav:end -->
       </nav>
@@ -674,7 +676,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=37"></script>
-  <script src="js/main.js?v=37"></script>
+  <script src="js/site.js?v=40"></script>
+  <script src="js/main.js?v=40"></script>
 </body>
 </html>
