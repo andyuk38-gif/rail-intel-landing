@@ -993,8 +993,8 @@ export const security = {
         body: "Where enabled, a six-digit code is sent to the user’s email. Codes can be resent from the sign-in challenge. SMTP must be configured for this method.",
       },
       {
-        title: "Trusted devices",
-        body: "After a successful 2FA challenge, users may trust the device for 14 days. Later password logins on that browser can skip 2FA while the trust is valid. System administrators never skip. Password changes and authenticator resets revoke trusted devices.",
+        title: "Trusted devices (14 days)",
+        body: "After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator, when the device is removed, when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).",
       },
     ],
     rules: [
@@ -1007,12 +1007,12 @@ export const security = {
         body: "If authenticator 2FA is required and the user has not enrolled yet, they are guided through QR setup on the next sign-in before access is granted.",
       },
       {
-        heading: "Administrator reset",
-        body: "Administrators can reset a user’s authenticator. The user sets up a new app on the next sign-in if 2FA is still required.",
+        heading: "When trusted status ends",
+        body: "A trusted device only skips 2FA while the cookie is valid, the last MFA was within 14 days, and the location still matches. A password change, authenticator reset, revoked device, expired trust, or a change of country / network forces a fresh 2FA challenge.",
       },
       {
-        heading: "Backup codes for re-enrolment",
-        body: "When re-enrolling an authenticator, the current authenticator or a backup code is required so a lost phone cannot silently replace a working second factor.",
+        heading: "Administrator reset and backup codes",
+        body: "Administrators can reset a user’s authenticator; the user enrols again on the next sign-in if 2FA is still required. Re-enrolment needs the current authenticator or a backup code so a lost phone cannot silently replace a working second factor.",
       },
     ],
   },

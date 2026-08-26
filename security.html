@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=40" />
-  <link rel="stylesheet" href="css/pages.css?v=40" />
+  <link rel="stylesheet" href="css/style.css?v=41" />
+  <link rel="stylesheet" href="css/pages.css?v=41" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -237,8 +237,8 @@
             Where enabled, a six-digit code is sent to the user’s email. Codes can be resent from the sign-in challenge. SMTP must be configured for this method.
           </li>
           <li>
-            <strong>Trusted devices</strong>
-            After a successful 2FA challenge, users may trust the device for 14 days. Later password logins on that browser can skip 2FA while the trust is valid. System administrators never skip. Password changes and authenticator resets revoke trusted devices.
+            <strong>Trusted devices (14 days)</strong>
+            After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator, when the device is removed, when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).
           </li>
         </ul>
       </div>
@@ -250,7 +250,7 @@
           <h2>How 2FA is governed</h2>
           <p>These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.</p>
         </div>
-        <ol class="steps">
+        <ol class="steps steps--two">
           <li>
             <h3>Policy is administered centrally</h3>
             <p>System administrators manage 2FA from Administration → Security: authenticator on or off, email codes on or off, and company or user method overrides. Users cannot turn the requirement off themselves.</p>
@@ -260,12 +260,12 @@
             <p>If authenticator 2FA is required and the user has not enrolled yet, they are guided through QR setup on the next sign-in before access is granted.</p>
           </li>
           <li>
-            <h3>Administrator reset</h3>
-            <p>Administrators can reset a user’s authenticator. The user sets up a new app on the next sign-in if 2FA is still required.</p>
+            <h3>When trusted status ends</h3>
+            <p>A trusted device only skips 2FA while the cookie is valid, the last MFA was within 14 days, and the location still matches. A password change, authenticator reset, revoked device, expired trust, or a change of country / network forces a fresh 2FA challenge.</p>
           </li>
           <li>
-            <h3>Backup codes for re-enrolment</h3>
-            <p>When re-enrolling an authenticator, the current authenticator or a backup code is required so a lost phone cannot silently replace a working second factor.</p>
+            <h3>Administrator reset and backup codes</h3>
+            <p>Administrators can reset a user’s authenticator; the user enrols again on the next sign-in if 2FA is still required. Re-enrolment needs the current authenticator or a backup code so a lost phone cannot silently replace a working second factor.</p>
           </li>
         </ol>
       </div>
@@ -334,6 +334,6 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=40"></script>
+  <script src="js/site.js?v=41"></script>
 </body>
 </html>

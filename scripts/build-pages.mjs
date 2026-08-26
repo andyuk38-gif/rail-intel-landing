@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 40;
+const ASSET_VERSION = 41;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -768,7 +768,7 @@ ${methods}
           <h2>How 2FA is governed</h2>
           <p>These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.</p>
         </div>
-        <ol class="steps">
+        <ol class="steps steps--two">
 ${rules}
         </ol>
       </div>

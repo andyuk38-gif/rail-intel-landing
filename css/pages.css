@@ -5,7 +5,7 @@
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.75rem;
 }
 
 .nav-group {
@@ -617,7 +617,16 @@ body.lightbox-open {
   margin: 2rem 0 0;
   padding: 0;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1.25rem;
+}
+
+.steps--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 52rem;
+  width: 100%;
+  margin-inline: auto;
+  align-items: stretch;
 }
 
 .steps li {
@@ -627,6 +636,10 @@ body.lightbox-open {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+}
+
+.steps--two li {
+  height: 100%;
 }
 
 .steps li::before {
@@ -657,6 +670,13 @@ body.lightbox-open {
   margin: 0;
   font-size: 0.9375rem;
   color: var(--text-muted);
+}
+
+@media (max-width: 720px) {
+  .steps--two {
+    grid-template-columns: 1fr;
+    max-width: none;
+  }
 }
 
 /* ---------- Responsive ---------- */
