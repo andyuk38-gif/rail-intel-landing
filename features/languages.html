@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=43" />
-  <link rel="stylesheet" href="../css/pages.css?v=43" />
+  <link rel="stylesheet" href="../css/style.css?v=46" />
+  <link rel="stylesheet" href="../css/pages.css?v=46" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -163,6 +163,13 @@
                     <span class="nav-panel__desc">Analytics across the operation, plus the configuration that makes it yours.</span>
                   </span>
                 </a>
+                <a class="nav-panel__item" href="../features/digital-cab-passes.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Digital Cab Passes</span>
+                    <span class="nav-panel__desc">Issue driving cab passes with colour status and QR verification anyone can scan.</span>
+                  </span>
+                </a>
                 <a class="nav-panel__item" href="../features/languages.html">
                   <span class="nav-panel__dot" aria-hidden="true"></span>
                   <span>
@@ -205,59 +212,52 @@
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>Choose a language</h2>
-          <p>Each language below has its own page. The interface, including login and in-app chrome, can be switched without changing your company data.</p>
+          <h2>Supported languages</h2>
+          <p>The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.</p>
         </div>
         <div class="card-grid card-grid--languages">
-        <a class="card card--language" href="../features/language-english.html">
+        <article class="card card--language card--language--en" style="--lang-flag: url('../images/flags/gb.svg')">
           <span class="card__kicker">EN</span>
           <h3>English</h3>
           <p class="card__native" lang="en">English</p>
-          <p>Default language for Rail Intel — full UI coverage across assessing, records and administration.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
-        <a class="card card--language" href="../features/language-spanish.html">
+          <p lang="en">Default language for Rail Intel — full UI coverage across assessing, records and administration.</p>
+        </article>
+        <article class="card card--language card--language--es" style="--lang-flag: url('../images/flags/es.svg')">
           <span class="card__kicker">ES</span>
           <h3>Spanish</h3>
           <p class="card__native" lang="es">Español</p>
-          <p>Full Spanish UI for assessors and administrators working alongside English-speaking teams.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
-        <a class="card card--language" href="../features/language-french.html">
+          <p lang="es">Interfaz completa en español para evaluadores y administradores que trabajan junto a equipos de habla inglesa.</p>
+        </article>
+        <article class="card card--language card--language--fr" style="--lang-flag: url('../images/flags/fr.svg')">
           <span class="card__kicker">FR</span>
           <h3>French</h3>
           <p class="card__native" lang="fr">Français</p>
-          <p>French interface language for cab assessments, compliance reviews and administration.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
-        <a class="card card--language" href="../features/language-welsh.html">
+          <p lang="fr">Interface en français pour les évaluations en cabine, les revues de conformité et l’administration.</p>
+        </article>
+        <article class="card card--language card--language--cy" style="--lang-flag: url('../images/flags/cy.svg')">
           <span class="card__kicker">CY</span>
           <h3>Welsh</h3>
           <p class="card__native" lang="cy">Cymraeg</p>
-          <p>Welsh (Cymraeg) UI support for bilingual rail teams in Wales.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
-        <a class="card card--language" href="../features/language-italian.html">
+          <p lang="cy">Cymorth rhyngwyneb Cymraeg ar gyfer timau rheilffordd dwyieithog yng Nghymru.</p>
+        </article>
+        <article class="card card--language card--language--it" style="--lang-flag: url('../images/flags/it.svg')">
           <span class="card__kicker">IT</span>
           <h3>Italian</h3>
           <p class="card__native" lang="it">Italiano</p>
-          <p>Italian UI for assessing, records and administration across the Rail Intel platform.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
-        <a class="card card--language" href="../features/language-german.html">
+          <p lang="it">Interfaccia in italiano per valutazione, anagrafiche e amministrazione sulla piattaforma Rail Intel.</p>
+        </article>
+        <article class="card card--language card--language--de" style="--lang-flag: url('../images/flags/de.svg')">
           <span class="card__kicker">DE</span>
           <h3>German</h3>
           <p class="card__native" lang="de">Deutsch</p>
-          <p>German interface language for competence management and safety workflows.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
-        <a class="card card--language" href="../features/language-arabic.html">
+          <p lang="de">Deutsche Benutzeroberfläche für Kompetenzmanagement und Sicherheitsabläufe.</p>
+        </article>
+        <article class="card card--language card--language--ar" style="--lang-flag: url('../images/flags/ar.svg')">
           <span class="card__kicker">AR</span>
           <h3>Arabic</h3>
           <p class="card__native" lang="ar">العربية</p>
-          <p>Arabic UI translations with stable left-to-right product chrome for mixed-language teams.</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>
+          <p lang="ar">ترجمات واجهة بالعربية مع واجهة منتج ثابتة من اليسار إلى اليمين للفرق متعددة اللغات.</p>
+        </article>
         </div>
         <p class="languages-note">System administrators choose which languages appear in the login and header selectors. If every language is turned off, selectors are hidden and English is used.</p>
       </div>
@@ -291,6 +291,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=43"></script>
+  <script src="../js/site.js?v=46"></script>
 </body>
 </html>

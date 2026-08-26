@@ -911,6 +911,59 @@ export const featureGroups = [
   },
 
   {
+    slug: "digital-cab-passes",
+    name: "Digital Cab Passes",
+    summary: "Issue driving cab passes with colour status and QR verification anyone can scan.",
+    tagline: "Digital cab passes with QR verification",
+    lead:
+      "Cab authority is held on the employee record as a standard driving cab pass. Issue a digital pass and a QR code appears beside the photo — scan it to open the live pass in a browser with no sign-in.",
+    sections: [
+      {
+        heading: "Authority that matches the card in someone’s pocket",
+        body: [
+          "Cab passes are recorded in standard driving cab pass layout. Holder details stay on the left; the photo and verification QR sit in matching panels on the right. Colour classification makes the pass type obvious at a glance — green for authorised to assess, through to black for route learning.",
+          "Company role permissions control who can edit, renew, revoke or delete. Create digital pass saves immediately so the QR works straight away.",
+        ],
+        bullets: [
+          "**Standard card layout** aligned to driving cab pass format for print and digital use.",
+          "**Colour-coded authority** for assess, PTS, operational rules, endorsements and route learning.",
+          "**Permission-gated actions** for edit, renew, revoke and delete.",
+          "**Immediate digital issue** so the verification QR is live as soon as the pass is created.",
+        ],
+        shots: [
+          {
+            src: "images/screens/cab-passes/cab-passes.png",
+            caption: "Cab Passes on the employee record — digital passes include a QR panel under the photo.",
+          },
+          {
+            src: "images/screens/cab-passes/issue-colour-question-popup.png",
+            caption: "Choose the pass colour before issuing — green, yellow, blue, red or black.",
+          },
+        ],
+      },
+      {
+        heading: "QR verification without a login",
+        body: [
+          "When a digital pass is issued, Rail Intel saves it for public verification and can email the employee a copy with a link to view the pass. Scanning the QR with a phone or tablet camera opens the cab pass card in the browser — no Rail Intel account required.",
+          "The same QR appears on the printed card layout and beside the on-screen preview under Pass layout & print, so what you scan matches what was issued.",
+        ],
+        bullets: [
+          "**Scan to verify** — camera opens the live digital pass without signing in.",
+          "**QR on the card** in a panel matched to the photo strip on the front.",
+          "**Email to the employee** with pass details and a view link when digital issue is confirmed.",
+          "**Renew and revoke** refresh or disable digital verification while keeping the audit trail clear.",
+        ],
+        shots: [
+          {
+            src: "images/screens/cab-passes/green-pass-issued.png",
+            caption: "Issued green driving cab pass with SCAN TO VERIFY QR beside the card preview.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     slug: "languages",
     name: "Languages",
     summary: "Run Rail Intel in English, Spanish, French, Welsh, Italian, German or Arabic.",
@@ -924,123 +977,67 @@ export const featureGroups = [
 /* --------------------------------------------------------------- languages */
 
 export const languages = {
-  heading: "Choose a language",
+  heading: "Supported languages",
   lead:
-    "Each language below has its own page. The interface, including login and in-app chrome, can be switched without changing your company data.",
+    "The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.",
   adminNote:
     "System administrators choose which languages appear in the login and header selectors. If every language is turned off, selectors are hidden and English is used.",
   items: [
     {
       code: "en",
-      slug: "english",
+      flag: "gb",
       name: "English",
       nativeName: "English",
-      region: "United Kingdom and international operations",
-      summary: "Default language for Rail Intel — full UI coverage across assessing, records and administration.",
-      lead:
-        "English is the default interface language. Every screen, alert and workflow is authored in English first, then translated into the other supported languages.",
-      points: [
-        "Available at sign-in and throughout the application header language selector.",
-        "Used automatically when no other language is enabled or preferred.",
-        "Covers competency cycles, medicals, licensing, incidents, reporting and add-on modules.",
-        "The reference language for new features before localisation ships.",
-      ],
+      summary:
+        "Default language for Rail Intel — full UI coverage across assessing, records and administration.",
     },
     {
       code: "es",
-      slug: "spanish",
+      flag: "es",
       name: "Spanish",
       nativeName: "Español",
-      region: "Spain and Spanish-speaking operations",
-      summary: "Full Spanish UI for assessors and administrators working alongside English-speaking teams.",
-      lead:
-        "Spanish localises the Rail Intel interface so Spanish-speaking staff can assess, review records and administer the system without switching tools.",
-      points: [
-        "Selectable at login and from the in-app language control.",
-        "Translated UI for core workflows including assessing, workforce records and reporting.",
-        "Can be enabled or disabled for your company by a system administrator.",
-        "Works alongside other languages — each user keeps their own preference.",
-      ],
+      summary:
+        "Interfaz completa en español para evaluadores y administradores que trabajan junto a equipos de habla inglesa.",
     },
     {
       code: "fr",
-      slug: "french",
+      flag: "fr",
       name: "French",
       nativeName: "Français",
-      region: "France and French-speaking operations",
-      summary: "French interface language for cab assessments, compliance reviews and administration.",
-      lead:
-        "French support lets operators run Rail Intel in Français across sign-in, assessing and day-to-day management screens.",
-      points: [
-        "Available in the login and header language selectors when enabled.",
-        "Covers the main competency, medical, licensing and monitoring flows.",
-        "Administrators control whether French is offered to users.",
-        "User preference is remembered for the next sign-in.",
-      ],
+      summary:
+        "Interface en français pour les évaluations en cabine, les revues de conformité et l’administration.",
     },
     {
       code: "cy",
-      slug: "welsh",
+      flag: "cy",
       name: "Welsh",
       nativeName: "Cymraeg",
-      region: "Wales and bilingual UK operations",
-      summary: "Welsh (Cymraeg) UI support for bilingual rail teams in Wales.",
-      lead:
-        "Welsh language support helps operators meet bilingual working expectations — assessors and managers can use Cymraeg in the product interface.",
-      points: [
-        "Offered at sign-in and in the header when the language is enabled.",
-        "Translated product chrome for day-to-day competence and safety workflows.",
-        "System administrators choose whether Welsh appears in language selectors.",
-        "Designed for mixed English / Welsh teams in the same company.",
-      ],
+      summary:
+        "Cymorth rhyngwyneb Cymraeg ar gyfer timau rheilffordd dwyieithog yng Nghymru.",
     },
     {
       code: "it",
-      slug: "italian",
+      flag: "it",
       name: "Italian",
       nativeName: "Italiano",
-      region: "Italy and Italian-speaking operations",
-      summary: "Italian UI for assessing, records and administration across the Rail Intel platform.",
-      lead:
-        "Italian localises the interface so Italian-speaking staff can complete assessments and manage competence without leaving their preferred language.",
-      points: [
-        "Selectable from login and in-app language controls when enabled.",
-        "Covers core product areas used on the railway and in the office.",
-        "Enable or hide Italian company-wide from Administration language settings.",
-        "Each user can keep Italian while colleagues use another supported language.",
-      ],
+      summary:
+        "Interfaccia in italiano per valutazione, anagrafiche e amministrazione sulla piattaforma Rail Intel.",
     },
     {
       code: "de",
-      slug: "german",
+      flag: "de",
       name: "German",
       nativeName: "Deutsch",
-      region: "Germany, Austria, Switzerland and German-speaking teams",
-      summary: "German interface language for competence management and safety workflows.",
-      lead:
-        "German support brings Deutsch to Rail Intel’s interface — from sign-in through assessing, compliance and reporting.",
-      points: [
-        "Available at login and in the header language selector when turned on.",
-        "Translated UI across primary competency and workforce modules.",
-        "Administrators decide if German is visible to users.",
-        "Preferences persist so returning users stay in Deutsch.",
-      ],
+      summary:
+        "Deutsche Benutzeroberfläche für Kompetenzmanagement und Sicherheitsabläufe.",
     },
     {
       code: "ar",
-      slug: "arabic",
+      flag: "ar",
       name: "Arabic",
       nativeName: "العربية",
-      region: "Arabic-speaking operations",
-      summary: "Arabic UI translations with stable left-to-right product chrome for mixed-language teams.",
-      lead:
-        "Arabic is a fully supported interface language. Translated copy is shown throughout the product while layout stays consistent for mixed English / Arabic operations.",
-      points: [
-        "Selectable at sign-in and from the header when Arabic is enabled.",
-        "Interface strings are translated into العربية across core workflows.",
-        "Product layout remains left-to-right so chrome stays familiar alongside other languages.",
-        "System administrators control whether Arabic appears in language selectors.",
-      ],
+      summary:
+        "ترجمات واجهة بالعربية مع واجهة منتج ثابتة من اليسار إلى اليمين للفرق متعددة اللغات.",
     },
   ],
 };

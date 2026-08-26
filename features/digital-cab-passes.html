@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spanish – Rail Intel languages</title>
-  <meta name="description" content="Full Spanish UI for assessors and administrators working alongside English-speaking teams." />
+  <title>Digital Cab Passes – Rail Intel features</title>
+  <meta name="description" content="Issue driving cab passes with colour status and QR verification anyone can scan." />
   <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="../images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=43" />
-  <link rel="stylesheet" href="../css/pages.css?v=43" />
+  <link rel="stylesheet" href="../css/style.css?v=46" />
+  <link rel="stylesheet" href="../css/pages.css?v=46" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -163,6 +163,13 @@
                     <span class="nav-panel__desc">Analytics across the operation, plus the configuration that makes it yours.</span>
                   </span>
                 </a>
+                <a class="nav-panel__item" href="../features/digital-cab-passes.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Digital Cab Passes</span>
+                    <span class="nav-panel__desc">Issue driving cab passes with colour status and QR verification anyone can scan.</span>
+                  </span>
+                </a>
                 <a class="nav-panel__item" href="../features/languages.html">
                   <span class="nav-panel__dot" aria-hidden="true"></span>
                   <span>
@@ -190,79 +197,78 @@
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / <a href="../features/languages.html">Languages</a> / Spanish</p>
-          <span class="page-badge page-badge--core">ES</span>
-          <h1 class="page-title">Spanish</h1>
-          <p class="page-lead"><span lang="es">Español</span> &mdash; Spanish localises the Rail Intel interface so Spanish-speaking staff can assess, review records and administer the system without switching tools.</p>
+          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Digital Cab Passes</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <h1 class="page-title">Digital cab passes with QR verification</h1>
+          <p class="page-lead">Cab authority is held on the employee record as a standard driving cab pass. Issue a digital pass and a QR code appears beside the photo — scan it to open the live pass in a browser with no sign-in.</p>
           <div class="page-actions">
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="../features/languages.html" class="btn btn-ghost btn-lg">All languages</a>
+            <a href="../features/" class="btn btn-ghost btn-lg">All features</a>
           </div>
         </div>
       </div>
     </section>
 
+
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>Where Spanish is used</h2>
-          <p>Spain and Spanish-speaking operations.</p>
+          <h2>Authority that matches the card in someone’s pocket</h2>
+          <p>Cab passes are recorded in standard driving cab pass layout. Holder details stay on the left; the photo and verification QR sit in matching panels on the right. Colour classification makes the pass type obvious at a glance — green for authorised to assess, through to black for route learning.</p>
+          <p>Company role permissions control who can edit, renew, revoke or delete. Create digital pass saves immediately so the QR works straight away.</p>
+          <ul class="spec-list">
+            <li><strong>Standard card layout</strong> aligned to driving cab pass format for print and digital use.</li>
+            <li><strong>Colour-coded authority</strong> for assess, PTS, operational rules, endorsements and route learning.</li>
+            <li><strong>Permission-gated actions</strong> for edit, renew, revoke and delete.</li>
+            <li><strong>Immediate digital issue</strong> so the verification QR is live as soon as the pass is created.</li>
+          </ul>
         </div>
-        <ul class="spec-list">
-            <li>Selectable at login and from the in-app language control.</li>
-            <li>Translated UI for core workflows including assessing, workforce records and reporting.</li>
-            <li>Can be enabled or disabled for your company by a system administrator.</li>
-            <li>Works alongside other languages — each user keeps their own preference.</li>
-        </ul>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 697px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/cab-passes.png" alt="Cab Passes on the employee record — digital passes include a QR panel under the photo." width="697" height="379" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Cab Passes on the employee record — digital passes include a QR panel under the photo.</figcaption>
+        </figure>
+        <figure class="shot" style="max-width: 700px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/issue-colour-question-popup.png" alt="Choose the pass colour before issuing — green, yellow, blue, red or black." width="700" height="391" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Choose the pass colour before issuing — green, yellow, blue, red or black.</figcaption>
+        </figure>
+      </div>
       </div>
     </section>
 
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>Other supported languages</h2>
-          <p>System administrators choose which languages appear in the login and header selectors. If every language is turned off, selectors are hidden and English is used.</p>
+          <h2>QR verification without a login</h2>
+          <p>When a digital pass is issued, Rail Intel saves it for public verification and can email the employee a copy with a link to view the pass. Scanning the QR with a phone or tablet camera opens the cab pass card in the browser — no Rail Intel account required.</p>
+          <p>The same QR appears on the printed card layout and beside the on-screen preview under Pass layout &amp; print, so what you scan matches what was issued.</p>
+          <ul class="spec-list">
+            <li><strong>Scan to verify</strong> — camera opens the live digital pass without signing in.</li>
+            <li><strong>QR on the card</strong> in a panel matched to the photo strip on the front.</li>
+            <li><strong>Email to the employee</strong> with pass details and a view link when digital issue is confirmed.</li>
+            <li><strong>Renew and revoke</strong> refresh or disable digital verification while keeping the audit trail clear.</li>
+          </ul>
         </div>
-        <div class="card-grid card-grid--languages">
-            <a class="card card--language-mini" href="../features/language-english.html">
-              <span class="card__kicker">EN</span>
-              <h3>English</h3>
-              <p class="card__native" lang="en">English</p>
-            </a>
-            <a class="card card--language-mini" href="../features/language-french.html">
-              <span class="card__kicker">FR</span>
-              <h3>French</h3>
-              <p class="card__native" lang="fr">Français</p>
-            </a>
-            <a class="card card--language-mini" href="../features/language-welsh.html">
-              <span class="card__kicker">CY</span>
-              <h3>Welsh</h3>
-              <p class="card__native" lang="cy">Cymraeg</p>
-            </a>
-            <a class="card card--language-mini" href="../features/language-italian.html">
-              <span class="card__kicker">IT</span>
-              <h3>Italian</h3>
-              <p class="card__native" lang="it">Italiano</p>
-            </a>
-            <a class="card card--language-mini" href="../features/language-german.html">
-              <span class="card__kicker">DE</span>
-              <h3>German</h3>
-              <p class="card__native" lang="de">Deutsch</p>
-            </a>
-            <a class="card card--language-mini" href="../features/language-arabic.html">
-              <span class="card__kicker">AR</span>
-              <h3>Arabic</h3>
-              <p class="card__native" lang="ar">العربية</p>
-            </a>
-        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot" style="max-width: 652px">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/green-pass-issued.png" alt="Issued green driving cab pass with SCAN TO VERIFY QR beside the card preview." width="652" height="417" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Issued green driving cab pass with SCAN TO VERIFY QR beside the card preview.</figcaption>
+        </figure>
+      </div>
       </div>
     </section>
 
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>Try Rail Intel in Spanish</h2>
-          <p>Sign in and switch language from the login screen or the header selector once your administrator has enabled it.</p>
+          <h2>Everything here is included</h2>
+          <p>These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.</p>
         </div>
         <div class="page-actions">
           <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
@@ -286,6 +292,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=43"></script>
+  <script src="../js/site.js?v=46"></script>
 </body>
 </html>

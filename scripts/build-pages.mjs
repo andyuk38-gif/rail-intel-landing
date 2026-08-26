@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 43;
+const ASSET_VERSION = 46;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -494,13 +494,12 @@ function languagesHubPage() {
   const group = featureGroups.find((item) => item.slug === "languages");
   const cards = languages.items
     .map(
-      (lang) => `        <a class="card card--language" href="${base}features/language-${lang.slug}.html">
+      (lang) => `        <article class="card card--language card--language--${esc(lang.code)}" style="--lang-flag: url('${base}images/flags/${esc(lang.flag)}.svg')">
           <span class="card__kicker">${esc(lang.code.toUpperCase())}</span>
           <h3>${esc(lang.name)}</h3>
           <p class="card__native" lang="${esc(lang.code)}">${esc(lang.nativeName)}</p>
-          <p>${esc(lang.summary)}</p>
-          <span class="card__more">View language &rarr;</span>
-        </a>`
+          <p lang="${esc(lang.code)}">${esc(lang.summary)}</p>
+        </article>`
     )
     .join("\n");
 
@@ -542,84 +541,6 @@ ${cards}
 ${renderCta(base, {
   heading: "Work in the language your team uses",
   body: "Language support is part of core Rail Intel. Enable the languages you need, and each user chooses their preference at sign-in.",
-})}
-  </main>
-
-` +
-    renderFooter(base)
-  );
-}
-
-function languagePage(lang) {
-  const base = "../";
-  const points = lang.points
-    .map((point) => `            <li>${esc(point)}</li>`)
-    .join("\n");
-  const others = languages.items
-    .filter((item) => item.code !== lang.code)
-    .map(
-      (item) =>
-        `            <a class="card card--language-mini" href="${base}features/language-${item.slug}.html">
-              <span class="card__kicker">${esc(item.code.toUpperCase())}</span>
-              <h3>${esc(item.name)}</h3>
-              <p class="card__native" lang="${esc(item.code)}">${esc(item.nativeName)}</p>
-            </a>`
-    )
-    .join("\n");
-
-  return (
-    renderHead(base, {
-      title: `${lang.name} – Rail Intel languages`,
-      description: lang.summary,
-    }) +
-    `
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / <a href="${base}features/languages.html">Languages</a> / ${esc(
-      lang.name
-    )}</p>
-          <span class="page-badge page-badge--core">${esc(lang.code.toUpperCase())}</span>
-          <h1 class="page-title">${esc(lang.name)}</h1>
-          <p class="page-lead"><span lang="${esc(lang.code)}">${esc(lang.nativeName)}</span> &mdash; ${esc(
-      lang.lead
-    )}</p>
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}features/languages.html" class="btn btn-ghost btn-lg">All languages</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Where ${esc(lang.name)} is used</h2>
-          <p>${esc(lang.region)}.</p>
-        </div>
-        <ul class="spec-list">
-${points}
-        </ul>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Other supported languages</h2>
-          <p>${esc(languages.adminNote)}</p>
-        </div>
-        <div class="card-grid card-grid--languages">
-${others}
-        </div>
-      </div>
-    </section>
-
-${renderCta(base, {
-  heading: `Try Rail Intel in ${lang.name}`,
-  body: "Sign in and switch language from the login screen or the header selector once your administrator has enabled it.",
 })}
   </main>
 
@@ -689,7 +610,13 @@ function featuresIndex() {
     .map(
       (group) => `        <a class="card" href="${base}features/${group.slug}.html">
           <span class="card__kicker">${
-            group.slug === "tunnel-mode" ? "Cab safety" : group.slug === "languages" ? "International" : "Core"
+            group.slug === "tunnel-mode"
+              ? "Cab safety"
+              : group.slug === "languages"
+                ? "International"
+                : group.slug === "digital-cab-passes"
+                  ? "Operations"
+                  : "Core"
           }</span>
           <h3>${esc(group.name)}</h3>
           <p>${esc(group.summary)}</p>
@@ -702,7 +629,7 @@ function featuresIndex() {
     renderHead(base, {
       title: "Features – Rail Intel",
       description:
-        "The core Rail Intel feature set: Tunnel Mode, competency cycles, workforce records, medicals and licensing, incidents, reporting, administration and international languages.",
+        "The core Rail Intel feature set: Tunnel Mode, digital cab passes with QR verification, competency cycles, workforce records, medicals and licensing, incidents, reporting, administration and international languages.",
     }) +
     `
   <main>
@@ -1024,7 +951,6 @@ for (const addon of addons) emit(`products/${addon.slug}.html`, addonPage(addon)
 
 emit("features/index.html", featuresIndex());
 for (const group of featureGroups) emit(`features/${group.slug}.html`, featurePage(group));
-for (const lang of languages.items) emit(`features/language-${lang.slug}.html`, languagePage(lang));
 
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
