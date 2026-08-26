@@ -580,10 +580,13 @@ function featurePage(group) {
 ${demo}
 ${group.sections.map((section) => renderSection(section, base)).join("\n\n")}
 
-${renderCta(base, {
-  heading: "Everything here is included",
-  body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
-})}
+${renderCta(
+  base,
+  group.cta || {
+    heading: "Everything here is included",
+    body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
+  }
+)}
   </main>
 
 ` +
