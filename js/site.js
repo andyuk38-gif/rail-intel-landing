@@ -254,4 +254,29 @@
       });
     }
   });
+
+  /* ---------- Scroll reveal for showcase panels ---------- */
+
+  var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  if (reveals.length) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      reveals.forEach(function (el) {
+        el.classList.add("is-visible");
+      });
+    } else {
+      var revealObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+      );
+      reveals.forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    }
+  }
 })();

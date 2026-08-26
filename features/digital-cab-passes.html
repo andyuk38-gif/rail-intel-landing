@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=51" />
-  <link rel="stylesheet" href="../css/pages.css?v=51" />
+  <link rel="stylesheet" href="../css/style.css?v=52" />
+  <link rel="stylesheet" href="../css/pages.css?v=52" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -210,11 +210,11 @@
     </section>
 
 
-    <section class="page-section">
-      <div class="container">
+    <section class="page-section page-section--showcase">
+      <div class="container container--showcase">
         <div class="page-section__head">
           <h2>Issue digital cab passes with QR verification</h2>
-          <p>Cab passes are recorded in standard driving cab pass layout. Choose the colour, complete the issue form, and save a digital pass with a QR anyone can scan — no sign-in required. Email the pass to the employee, or renew and revoke from the same tab.</p>
+          <p>Cab passes live on the employee record in standard driving cab pass layout. Choose a colour, complete the issue form, and save a digital pass with a QR anyone can scan — no sign-in required.</p>
           <ul class="spec-list">
             <li><strong>Colour-coded authority</strong> — green, yellow, blue, red or black.</li>
             <li><strong>Digital issue with QR</strong> for public verification without a login.</li>
@@ -222,48 +222,83 @@
             <li><strong>Edit, renew, revoke or delete</strong> from the pass preview.</li>
           </ul>
         </div>
-      <div class="shot-grid shot-grid--hero-stack">
-        <figure class="shot shot--full">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/cab-passes-dark.png" alt="Cab Passes — issued passes with SCAN TO VERIFY beside each card." width="1024" height="757" loading="lazy" decoding="async" />
+      <div class="shot-grid shot-grid--showcase">
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">01</p>
+            <h3 class="shot__title">Passes on the employee record</h3>
+            <p class="shot__lede">Issued passes sit under Cab Passes with colour status, QR verification and renew / revoke controls.</p>
           </div>
-          <figcaption class="shot__caption">Cab Passes — issued passes with SCAN TO VERIFY beside each card.</figcaption>
-        </figure>
-        <figure class="shot" style="max-width: 435px">
           <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-colour-question-popup-dark.png" alt="Choose the pass colour before issuing." width="435" height="482" loading="lazy" decoding="async" />
+            <img src="../images/screens/cab-passes/cab-passes-dark.png" alt="Two digital passes on one record — including an expired blue pass and a live green assess pass." width="1024" height="757" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Choose the pass colour before issuing.</figcaption>
+          <figcaption class="shot__caption">Two digital passes on one record — including an expired blue pass and a live green assess pass.</figcaption>
         </figure>
-        <figure class="shot" style="max-width: 1024px">
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">02</p>
+            <h3 class="shot__title">Choose the pass colour</h3>
+            <p class="shot__lede">Nothing is created until you confirm. Pick green, yellow, blue, red or black to match the authority you are issuing.</p>
+          </div>
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/issue-colour-question-popup-dark.png" alt="Colour selection before the pass is created." width="435" height="482" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Colour selection before the pass is created.</figcaption>
+        </figure>
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">03</p>
+            <h3 class="shot__title">Complete the issue form</h3>
+            <p class="shot__lede">Set validity dates, routes, endorsements and the issuer signature in the same flow as a standard driving cab pass.</p>
+          </div>
           <div class="shot__frame">
             <img src="../images/screens/cab-passes/issue-form-dark.png" alt="Issue form — colour, validity, routes, endorsements and signature." width="1024" height="492" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Issue form — colour, validity, routes, endorsements and signature.</figcaption>
         </figure>
-        <figure class="shot" style="max-width: 433px">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Confirm digital issue and email the pass to the employee." width="433" height="289" loading="lazy" decoding="async" />
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">04</p>
+            <h3 class="shot__title">Issue digitally and email</h3>
+            <p class="shot__lede">Save the pass for public QR verification and send the employee the front, reverse and a link to view it.</p>
           </div>
-          <figcaption class="shot__caption">Confirm digital issue and email the pass to the employee.</figcaption>
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Confirm digital issue and email delivery." width="433" height="289" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Confirm digital issue and email delivery.</figcaption>
         </figure>
-        <figure class="shot" style="max-width: 559px">
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">05</p>
+            <h3 class="shot__title">Scan to verify — no login</h3>
+            <p class="shot__lede">The QR sits beside the card preview. Anyone can open the live pass in a browser without a Rail Intel account.</p>
+          </div>
           <div class="shot__frame">
             <img src="../images/screens/cab-passes/green-pass-issued-dark.png" alt="Issued green driving cab pass with SCAN TO VERIFY." width="559" height="277" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Issued green driving cab pass with SCAN TO VERIFY.</figcaption>
         </figure>
-        <figure class="shot" style="max-width: 1024px">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/pass-preview-actions-dark.png" alt="Pass preview with Expand, Edit, View, Renew, Revoke and Delete." width="1024" height="221" loading="lazy" decoding="async" />
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">06</p>
+            <h3 class="shot__title">Manage from the preview</h3>
+            <p class="shot__lede">Expand, edit, view, renew, revoke or delete without leaving the Cab Passes tab.</p>
           </div>
-          <figcaption class="shot__caption">Pass preview with Expand, Edit, View, Renew, Revoke and Delete.</figcaption>
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/pass-preview-actions-dark.png" alt="Pass preview actions." width="1024" height="221" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Pass preview actions.</figcaption>
         </figure>
-        <figure class="shot" style="max-width: 554px">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/expired-pass-issued-dark.png" alt="Expired passes stay on the record with status clear at a glance." width="554" height="280" loading="lazy" decoding="async" />
+        <figure class="shot shot--full shot--showcase reveal">
+          <div class="shot__copy">
+            <p class="shot__step">07</p>
+            <h3 class="shot__title">Expired status stays visible</h3>
+            <p class="shot__lede">Expired passes remain on the record with status clear at a glance, so history is never lost.</p>
           </div>
-          <figcaption class="shot__caption">Expired passes stay on the record with status clear at a glance.</figcaption>
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/expired-pass-issued-dark.png" alt="Expired pass with SCAN TO VERIFY still available for audit." width="554" height="280" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Expired pass with SCAN TO VERIFY still available for audit.</figcaption>
         </figure>
       </div>
       </div>
@@ -297,6 +332,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=51"></script>
+  <script src="../js/site.js?v=52"></script>
 </body>
 </html>

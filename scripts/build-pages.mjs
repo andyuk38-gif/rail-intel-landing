@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 51;
+const ASSET_VERSION = 52;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -187,7 +187,7 @@ function renderFooter(base) {
 
 /* --------------------------------------------------------------- fragments */
 
-function renderShot(shot, base) {
+function renderShot(shot, base, options = {}) {
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
 
@@ -196,15 +196,25 @@ function renderShot(shot, base) {
   const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
   const width = Math.max(1, Math.round(size.width * scale));
   const height = Math.max(1, Math.round(size.height * scale));
-  const classes = ["shot", shot.full ? "shot--full" : null].filter(Boolean).join(" ");
-  const style = shot.full ? "" : ` style="max-width: ${width}px"`;
+  const fill = Boolean(shot.full || options.fill);
+  const classes = ["shot", shot.full ? "shot--full" : null, options.showcase ? "shot--showcase" : null, "reveal"]
+    .filter(Boolean)
+    .join(" ");
+  const style = fill ? "" : ` style="max-width: ${width}px"`;
+
+  const copy =
+    options.showcase && (shot.title || shot.lede)
+      ? `          <div class="shot__copy">
+${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}${
+          shot.title ? `            <h3 class="shot__title">${esc(shot.title)}</h3>\n` : ""
+        }${shot.lede ? `            <p class="shot__lede">${esc(shot.lede)}</p>\n` : ""}          </div>\n`
+      : "";
 
   return `        <figure class="${classes}"${style}>
-          <div class="shot__frame">
-            <img src="${base}${shot.src}" alt="${esc(shot.caption)}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+${copy}          <div class="shot__frame">
+            <img src="${base}${shot.src}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>
-        </figure>`;
+${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
 
 function renderSection(section, base) {
@@ -216,17 +226,33 @@ function renderSection(section, base) {
         .join("\n")}\n          </ul>`
     : "";
 
-  const gridClass =
-    section.shotGrid === "hero-stack" ? "shot-grid shot-grid--hero-stack" : "shot-grid shot-grid--two";
+  const showcase = section.shotGrid === "showcase";
+  const heroStack = section.shotGrid === "hero-stack";
+  const gridClass = showcase
+    ? "shot-grid shot-grid--showcase"
+    : heroStack
+      ? "shot-grid shot-grid--hero-stack"
+      : "shot-grid shot-grid--two";
 
   const shots = section.shots
     ? `      <div class="${gridClass}">\n${section.shots
-        .map((shot) => renderShot(shot, base))
+        .map((shot, index) =>
+          renderShot(
+            {
+              ...shot,
+              step: shot.step || (showcase ? String(index + 1).padStart(2, "0") : undefined),
+              full: showcase ? true : shot.full,
+              scale: showcase ? shot.scale ?? 1 : shot.scale,
+            },
+            base,
+            { showcase, fill: showcase || heroStack || shot.full }
+          )
+        )
         .join("\n")}\n      </div>`
     : "";
 
-  return `    <section class="page-section">
-      <div class="container">
+  return `    <section class="page-section${showcase ? " page-section--showcase" : ""}">
+      <div class="container${showcase ? " container--showcase" : ""}">
         <div class="page-section__head">
           <h2>${esc(section.heading)}</h2>
 ${body}
