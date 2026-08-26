@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 56;
+const ASSET_VERSION = 58;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -212,7 +212,7 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
 
   return `        <figure class="${classes}"${style}>
 ${copy}          <div class="shot__frame">
-            <img src="${base}${shot.src}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+            <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
           </div>
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
@@ -238,7 +238,7 @@ ${shot.lede ? `            <p class="shot__lede">${esc(shot.lede)}</p>\n` : ""} 
           <div class="shot-gallery__stage">
             <figure class="shot shot--gallery" style="max-width: ${width}px">
               <div class="shot__frame">
-                <img src="${base}${shot.src}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+                <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
               </div>
 ${shot.caption ? `              <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}            </figure>
           </div>

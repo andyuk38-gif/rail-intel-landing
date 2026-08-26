@@ -296,26 +296,93 @@
     var next = gallery.querySelector("[data-gallery-next]");
     if (!track || !slides.length) return;
 
+    var count = slides.length;
     var index = 0;
+    var animating = false;
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var timer = null;
     var paused = false;
+    var transition = reduced ? "none" : "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
+
+    // Clone the first slide after the last so forward wrap keeps moving right-to-left.
+    if (count > 1) {
+      var clone = slides[0].cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      clone.removeAttribute("data-gallery-slide");
+      Array.prototype.forEach.call(clone.querySelectorAll("[id]"), function (el) {
+        el.removeAttribute("id");
+      });
+      track.appendChild(clone);
+    }
+
+    function logicalIndex() {
+      return index === count ? 0 : index;
+    }
+
+    function applyTransform(withMotion) {
+      track.style.transition = withMotion && !reduced ? transition : "none";
+      track.style.transform = "translateX(" + index * -100 + "%)";
+    }
+
+    function syncChrome() {
+      var logical = logicalIndex();
+      dots.forEach(function (dot, i) {
+        if (i === logical) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+      if (prev) prev.disabled = false;
+      if (next) next.disabled = false;
+    }
 
     function go(to, options) {
       options = options || {};
-      if (options.wrap) {
-        index = ((to % slides.length) + slides.length) % slides.length;
-      } else {
-        index = Math.max(0, Math.min(slides.length - 1, to));
+      if (count < 2) {
+        index = 0;
+        applyTransform(false);
+        syncChrome();
+        return;
       }
-      track.style.transform = "translateX(" + index * -100 + "%)";
-      dots.forEach(function (dot, i) {
-        if (i === index) dot.setAttribute("aria-current", "true");
-        else dot.removeAttribute("aria-current");
-      });
-      if (prev) prev.disabled = !options.wrap && index === 0;
-      if (next) next.disabled = !options.wrap && index === slides.length - 1;
+      if (animating && !options.force) return;
+
+      // Forward past the last real slide → animate onto the cloned first.
+      if (to >= count) {
+        animating = true;
+        index = count;
+        applyTransform(true);
+        syncChrome();
+        return;
+      }
+
+      // Backward before the first → jump to clone, then animate back to last.
+      if (to < 0) {
+        animating = true;
+        index = count;
+        applyTransform(false);
+        // Force reflow so the next transform animates.
+        void track.offsetWidth;
+        index = count - 1;
+        applyTransform(true);
+        syncChrome();
+        return;
+      }
+
+      animating = true;
+      index = to;
+      applyTransform(true);
+      syncChrome();
     }
+
+    track.addEventListener("transitionend", function (event) {
+      if (event.target !== track || event.propertyName !== "transform") return;
+      if (index === count) {
+        index = 0;
+        applyTransform(false);
+        void track.offsetWidth;
+        track.style.transition = transition;
+      }
+      animating = false;
+      syncChrome();
+    });
 
     function stopAuto() {
       if (timer) {
@@ -326,9 +393,9 @@
 
     function startAuto() {
       stopAuto();
-      if (reduced || paused || slides.length < 2) return;
+      if (reduced || paused || count < 2) return;
       timer = setInterval(function () {
-        go(index + 1, { wrap: true });
+        go(index + 1);
       }, 3000);
     }
 
@@ -343,12 +410,12 @@
     }
 
     function userGo(to) {
-      go(to, { wrap: true });
+      go(to);
       stopAuto();
       startAuto();
     }
 
-    if (prev) prev.addEventListener("click", function () { userGo(index - 1); });
+    if (prev) prev.addEventListener("click", function () { userGo(index === 0 ? -1 : index - 1); });
     if (next) next.addEventListener("click", function () { userGo(index + 1); });
     dots.forEach(function (dot) {
       dot.addEventListener("click", function () {
@@ -381,14 +448,18 @@
     track.addEventListener("pointerup", function (event) {
       if (!track.hasPointerCapture(event.pointerId)) return;
       track.releasePointerCapture(event.pointerId);
-      if (Math.abs(deltaX) >= 48) go(index + (deltaX < 0 ? 1 : -1), { wrap: true });
-      resumeAuto();
+      if (Math.abs(deltaX) >= 48) {
+        if (deltaX < 0) userGo(index + 1);
+        else userGo(index === 0 ? -1 : index - 1);
+      } else {
+        resumeAuto();
+      }
     });
 
     gallery.addEventListener("keydown", function (event) {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        userGo(index - 1);
+        userGo(index === 0 ? -1 : index - 1);
       } else if (event.key === "ArrowRight") {
         event.preventDefault();
         userGo(index + 1);
@@ -407,8 +478,10 @@
       else if (!paused) startAuto();
     });
 
-    if (reduced) track.style.transition = "none";
-    go(0, { wrap: true });
+    track.style.transition = transition;
+    index = 0;
+    applyTransform(false);
+    syncChrome();
     startAuto();
   });
 })();
