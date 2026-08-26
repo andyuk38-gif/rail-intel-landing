@@ -15,25 +15,13 @@
     "width": 1248,
     "height": 1008
   },
-  "images/screens/cab-passes/cab-passes-dark.png": {
-    "width": 1394,
-    "height": 757
-  },
   "images/screens/cab-passes/cab-passes.png": {
     "width": 1394,
     "height": 757
   },
-  "images/screens/cab-passes/green-pass-issued-dark.png": {
-    "width": 1303,
-    "height": 833
-  },
   "images/screens/cab-passes/green-pass-issued.png": {
     "width": 1303,
     "height": 833
-  },
-  "images/screens/cab-passes/issue-colour-question-popup-dark.png": {
-    "width": 1400,
-    "height": 781
   },
   "images/screens/cab-passes/issue-colour-question-popup.png": {
     "width": 1400,

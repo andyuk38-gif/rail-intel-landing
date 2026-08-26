@@ -932,11 +932,11 @@ export const featureGroups = [
         ],
         shots: [
           {
-            src: "images/screens/cab-passes/cab-passes-dark.png",
+            src: "images/screens/cab-passes/cab-passes.png",
             caption: "Cab Passes on the employee record — digital passes include a QR panel under the photo.",
           },
           {
-            src: "images/screens/cab-passes/issue-colour-question-popup-dark.png",
+            src: "images/screens/cab-passes/issue-colour-question-popup.png",
             caption: "Choose the pass colour before issuing — green, yellow, blue, red or black.",
           },
         ],
@@ -955,7 +955,7 @@ export const featureGroups = [
         ],
         shots: [
           {
-            src: "images/screens/cab-passes/green-pass-issued-dark.png",
+            src: "images/screens/cab-passes/green-pass-issued.png",
             caption: "Issued green driving cab pass with SCAN TO VERIFY QR beside the card preview.",
           },
         ],
