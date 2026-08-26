@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 50;
+const ASSET_VERSION = 51;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -191,11 +191,15 @@ function renderShot(shot, base) {
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
 
-  // Display at half the native width so the image is always 2x on Retina.
-  const width = Math.round(size.width / 2);
-  const height = Math.round(size.height / 2);
+  // Display at half the native width so the image is always 2x on Retina,
+  // unless the shot sets scale (e.g. 1 for already-compressed captures).
+  const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+  const width = Math.max(1, Math.round(size.width * scale));
+  const height = Math.max(1, Math.round(size.height * scale));
+  const classes = ["shot", shot.full ? "shot--full" : null].filter(Boolean).join(" ");
+  const style = shot.full ? "" : ` style="max-width: ${width}px"`;
 
-  return `        <figure class="shot" style="max-width: ${width}px">
+  return `        <figure class="${classes}"${style}>
           <div class="shot__frame">
             <img src="${base}${shot.src}" alt="${esc(shot.caption)}" width="${width}" height="${height}" loading="lazy" decoding="async" />
           </div>
@@ -212,8 +216,11 @@ function renderSection(section, base) {
         .join("\n")}\n          </ul>`
     : "";
 
+  const gridClass =
+    section.shotGrid === "hero-stack" ? "shot-grid shot-grid--hero-stack" : "shot-grid shot-grid--two";
+
   const shots = section.shots
-    ? `      <div class="shot-grid shot-grid--two">\n${section.shots
+    ? `      <div class="${gridClass}">\n${section.shots
         .map((shot) => renderShot(shot, base))
         .join("\n")}\n      </div>`
     : "";

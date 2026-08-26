@@ -929,34 +929,43 @@ export const featureGroups = [
           "**Email the pass** to the employee with a view link.",
           "**Edit, renew, revoke or delete** from the pass preview.",
         ],
+        shotGrid: "hero-stack",
         shots: [
           {
             src: "images/screens/cab-passes/cab-passes-dark.png",
             caption: "Cab Passes — issued passes with SCAN TO VERIFY beside each card.",
+            full: true,
+            scale: 1,
           },
           {
             src: "images/screens/cab-passes/issue-colour-question-popup-dark.png",
             caption: "Choose the pass colour before issuing.",
+            scale: 1,
           },
           {
             src: "images/screens/cab-passes/issue-form-dark.png",
             caption: "Issue form — colour, validity, routes, endorsements and signature.",
+            scale: 1,
           },
           {
             src: "images/screens/cab-passes/issue-digital-pass-email-dark.png",
             caption: "Confirm digital issue and email the pass to the employee.",
+            scale: 1,
           },
           {
             src: "images/screens/cab-passes/green-pass-issued-dark.png",
             caption: "Issued green driving cab pass with SCAN TO VERIFY.",
+            scale: 1,
           },
           {
             src: "images/screens/cab-passes/pass-preview-actions-dark.png",
             caption: "Pass preview with Expand, Edit, View, Renew, Revoke and Delete.",
+            scale: 1,
           },
           {
             src: "images/screens/cab-passes/expired-pass-issued-dark.png",
             caption: "Expired passes stay on the record with status clear at a glance.",
+            scale: 1,
           },
         ],
       },

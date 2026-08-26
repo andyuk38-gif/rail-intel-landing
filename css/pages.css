@@ -477,6 +477,26 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
 }
 
+.shot-grid--hero-stack {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1.75rem;
+}
+
+.shot-grid--hero-stack > .shot--full {
+  grid-column: 1 / -1;
+  max-width: none;
+}
+
+.shot-grid--hero-stack > .shot:not(.shot--full) {
+  max-width: none;
+}
+
+@media (max-width: 720px) {
+  .shot-grid--hero-stack {
+    grid-template-columns: 1fr;
+  }
+}
+
 .shot {
   margin: 0;
   min-width: 0;
