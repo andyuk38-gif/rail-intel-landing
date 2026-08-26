@@ -15,6 +15,10 @@
     "width": 1248,
     "height": 1008
   },
+  "images/screens/assessing/in-cab-safety.png": {
+    "width": 430,
+    "height": 665
+  },
   "images/screens/cab-passes/cab-passes-dark.png": {
     "width": 1024,
     "height": 757
@@ -100,8 +104,8 @@
     "height": 198
   },
   "images/screens/cycle-builder/cycle-builder-overview.png": {
-    "width": 1410,
-    "height": 739
+    "width": 1024,
+    "height": 386
   },
   "images/screens/cycle-builder/schedule-events-assessment.png": {
     "width": 1393,
@@ -112,8 +116,8 @@
     "height": 229
   },
   "images/screens/cycles/active-assessment.png": {
-    "width": 1251,
-    "height": 974
+    "width": 1024,
+    "height": 879
   },
   "images/screens/cycles/cont-cycle-cdp-carryover.png": {
     "width": 523,
@@ -124,8 +128,8 @@
     "height": 843
   },
   "images/screens/cycles/current-cycles.png": {
-    "width": 1399,
-    "height": 914
+    "width": 1024,
+    "height": 641
   },
   "images/screens/cycles/individual-cycle-view.png": {
     "width": 1394,

@@ -516,6 +516,8 @@ export const featureGroups = [
           {
             src: "images/screens/cycle-builder/cycle-builder-overview.png",
             caption: "Cycle Builder: choose a template or build a custom competency cycle.",
+            scale: 1,
+            full: true,
           },
           {
             src: "images/screens/cycle-builder/use-template-cb.png",
@@ -541,6 +543,8 @@ export const featureGroups = [
           {
             src: "images/screens/cycles/current-cycles.png",
             caption: "Live cycles on an employee record with start and expiry dates.",
+            scale: 1,
+            full: true,
           },
           {
             src: "images/screens/cycles/individual-cycle-view.png",
@@ -563,16 +567,19 @@ export const featureGroups = [
         ],
         shots: [
           {
-            src: "images/screens/assessing/assessing-criteria.png",
-            caption: "Assessing against structured criteria.",
+            src: "images/screens/cycles/active-assessment.png",
+            caption: "Active competency assessment — choose a unit and assess Demonstrate or Explain criteria.",
+            scale: 1,
+            full: true,
+          },
+          {
+            src: "images/screens/assessing/in-cab-safety.png",
+            caption: "In-cab safety: dark mode for windscreen glare and flagging criteria to finish later.",
+            scale: 1,
           },
           {
             src: "images/screens/assessing/flagged-based-on-observations.png",
             caption: "Criteria flagged on the basis of recorded observations.",
-          },
-          {
-            src: "images/screens/assessing/early-window-start-assessment.png",
-            caption: "Starting an assessment within its early window.",
           },
         ],
       },
