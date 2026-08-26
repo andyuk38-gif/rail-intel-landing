@@ -523,13 +523,18 @@
 }
 
 .shot__step {
-  margin: 0 0 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 0.7rem;
+  padding: 0.28rem 0.65rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #0c0f14;
+  background: var(--accent);
+  border-radius: 999px;
 }
 
 .shot__title {
@@ -646,9 +651,12 @@
   height: auto;
 }
 
-.shot--gallery .shot__caption {
-  margin-top: 0.75rem;
-  text-align: center;
+.shot--gallery .shot__expand {
+  opacity: 1;
+}
+
+.shot-gallery__stage .shot__frame {
+  position: relative;
 }
 
 .shot-gallery__controls {

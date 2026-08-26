@@ -203,8 +203,14 @@
     button.className = "shot__expand";
     button.innerHTML = EXPAND_ICON;
     button.setAttribute("aria-label", "View this screenshot at full resolution");
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
       showLightbox(img);
+    });
+    button.addEventListener("pointerdown", function (event) {
+      // Keep gallery swipe handlers from stealing the expand control.
+      event.stopPropagation();
     });
 
     if (getComputedStyle(frame).position === "static") frame.style.position = "relative";
@@ -292,23 +298,61 @@
 
     var index = 0;
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var timer = null;
+    var paused = false;
 
-    function go(to) {
-      index = Math.max(0, Math.min(slides.length - 1, to));
+    function go(to, options) {
+      options = options || {};
+      if (options.wrap) {
+        index = ((to % slides.length) + slides.length) % slides.length;
+      } else {
+        index = Math.max(0, Math.min(slides.length - 1, to));
+      }
       track.style.transform = "translateX(" + index * -100 + "%)";
       dots.forEach(function (dot, i) {
         if (i === index) dot.setAttribute("aria-current", "true");
         else dot.removeAttribute("aria-current");
       });
-      if (prev) prev.disabled = index === 0;
-      if (next) next.disabled = index === slides.length - 1;
+      if (prev) prev.disabled = !options.wrap && index === 0;
+      if (next) next.disabled = !options.wrap && index === slides.length - 1;
     }
 
-    if (prev) prev.addEventListener("click", function () { go(index - 1); });
-    if (next) next.addEventListener("click", function () { go(index + 1); });
+    function stopAuto() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (reduced || paused || slides.length < 2) return;
+      timer = setInterval(function () {
+        go(index + 1, { wrap: true });
+      }, 3000);
+    }
+
+    function pauseAuto() {
+      paused = true;
+      stopAuto();
+    }
+
+    function resumeAuto() {
+      paused = false;
+      startAuto();
+    }
+
+    function userGo(to) {
+      go(to, { wrap: true });
+      stopAuto();
+      startAuto();
+    }
+
+    if (prev) prev.addEventListener("click", function () { userGo(index - 1); });
+    if (next) next.addEventListener("click", function () { userGo(index + 1); });
     dots.forEach(function (dot) {
       dot.addEventListener("click", function () {
-        go(Number(dot.getAttribute("data-gallery-dot")) || 0);
+        userGo(Number(dot.getAttribute("data-gallery-dot")) || 0);
       });
     });
 
@@ -318,6 +362,8 @@
       "pointerdown",
       function (event) {
         if (event.pointerType === "mouse" && event.button !== 0) return;
+        if (event.target.closest("button, a, .shot__expand, .lightbox")) return;
+        pauseAuto();
         startX = event.clientX;
         deltaX = 0;
         track.setPointerCapture(event.pointerId);
@@ -335,21 +381,34 @@
     track.addEventListener("pointerup", function (event) {
       if (!track.hasPointerCapture(event.pointerId)) return;
       track.releasePointerCapture(event.pointerId);
-      if (Math.abs(deltaX) < 48) return;
-      go(index + (deltaX < 0 ? 1 : -1));
+      if (Math.abs(deltaX) >= 48) go(index + (deltaX < 0 ? 1 : -1), { wrap: true });
+      resumeAuto();
     });
 
     gallery.addEventListener("keydown", function (event) {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        go(index - 1);
+        userGo(index - 1);
       } else if (event.key === "ArrowRight") {
         event.preventDefault();
-        go(index + 1);
+        userGo(index + 1);
       }
     });
 
+    gallery.addEventListener("mouseenter", pauseAuto);
+    gallery.addEventListener("mouseleave", resumeAuto);
+    gallery.addEventListener("focusin", pauseAuto);
+    gallery.addEventListener("focusout", function (event) {
+      if (!gallery.contains(event.relatedTarget)) resumeAuto();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopAuto();
+      else if (!paused) startAuto();
+    });
+
     if (reduced) track.style.transition = "none";
-    go(0);
+    go(0, { wrap: true });
+    startAuto();
   });
 })();
