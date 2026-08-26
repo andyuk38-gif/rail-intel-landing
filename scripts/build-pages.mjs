@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 52;
+const ASSET_VERSION = 53;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -217,6 +217,64 @@ ${copy}          <div class="shot__frame">
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
 
+function renderGallery(section, base) {
+  const slides = (section.shots || [])
+    .map((shot, index) => {
+      const size = manifest[shot.src];
+      if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
+      const scale = typeof shot.scale === "number" ? shot.scale : 1;
+      const width = Math.max(1, Math.round(size.width * scale));
+      const height = Math.max(1, Math.round(size.height * scale));
+      const step = shot.step || String(index + 1).padStart(2, "0");
+      const label = shot.title || shot.caption || `Slide ${index + 1}`;
+
+      return `        <article class="shot-gallery__slide" data-gallery-slide role="group" aria-roledescription="slide" aria-label="${esc(
+        `${index + 1} of ${(section.shots || []).length}: ${label}`
+      )}">
+          <div class="shot-gallery__copy">
+            <p class="shot__step">${esc(step)}</p>
+            <h3 class="shot__title">${esc(shot.title || shot.caption || "")}</h3>
+${shot.lede ? `            <p class="shot__lede">${esc(shot.lede)}</p>\n` : ""}          </div>
+          <div class="shot-gallery__stage">
+            <figure class="shot shot--gallery" style="max-width: ${width}px">
+              <div class="shot__frame">
+                <img src="${base}${shot.src}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+              </div>
+${shot.caption ? `              <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}            </figure>
+          </div>
+        </article>`;
+    })
+    .join("\n");
+
+  const dots = (section.shots || [])
+    .map(
+      (shot, index) =>
+        `          <button type="button" class="shot-gallery__dot" data-gallery-dot="${index}" aria-label="Show ${esc(
+          shot.title || shot.caption || `slide ${index + 1}`
+        )}"></button>`
+    )
+    .join("\n");
+
+  return `      <div class="shot-gallery" data-shot-gallery>
+        <div class="shot-gallery__viewport">
+          <div class="shot-gallery__track" data-gallery-track>
+${slides}
+          </div>
+        </div>
+        <div class="shot-gallery__controls">
+          <button type="button" class="shot-gallery__btn" data-gallery-prev aria-label="Previous screenshot">
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="shot-gallery__dots" role="tablist" aria-label="Screenshots">
+${dots}
+          </div>
+          <button type="button" class="shot-gallery__btn" data-gallery-next aria-label="Next screenshot">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>`;
+}
+
 function renderSection(section, base) {
   const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
 
@@ -226,6 +284,7 @@ function renderSection(section, base) {
         .join("\n")}\n          </ul>`
     : "";
 
+  const gallery = section.shotGrid === "gallery";
   const showcase = section.shotGrid === "showcase";
   const heroStack = section.shotGrid === "hero-stack";
   const gridClass = showcase
@@ -234,8 +293,12 @@ function renderSection(section, base) {
       ? "shot-grid shot-grid--hero-stack"
       : "shot-grid shot-grid--two";
 
-  const shots = section.shots
-    ? `      <div class="${gridClass}">\n${section.shots
+  let shots = "";
+  if (section.shots) {
+    if (gallery) {
+      shots = renderGallery(section, base);
+    } else {
+      shots = `      <div class="${gridClass}">\n${section.shots
         .map((shot, index) =>
           renderShot(
             {
@@ -248,11 +311,12 @@ function renderSection(section, base) {
             { showcase, fill: showcase || heroStack || shot.full }
           )
         )
-        .join("\n")}\n      </div>`
-    : "";
+        .join("\n")}\n      </div>`;
+    }
+  }
 
-  return `    <section class="page-section${showcase ? " page-section--showcase" : ""}">
-      <div class="container${showcase ? " container--showcase" : ""}">
+  return `    <section class="page-section${gallery ? " page-section--gallery" : showcase ? " page-section--showcase" : ""}">
+      <div class="container${gallery || showcase ? " container--showcase" : ""}">
         <div class="page-section__head">
           <h2>${esc(section.heading)}</h2>
 ${body}

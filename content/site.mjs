@@ -929,7 +929,7 @@ export const featureGroups = [
           "**Email the pass** to the employee with a view link.",
           "**Edit, renew, revoke or delete** from the pass preview.",
         ],
-        shotGrid: "showcase",
+        shotGrid: "gallery",
         shots: [
           {
             src: "images/screens/cab-passes/cab-passes-dark.png",
