@@ -457,10 +457,10 @@ body::before {
   to { transform: translateY(6px); }
 }
 
-/* Large, quick travel so chips clearly float independent of the mockup bob. */
+/* Slow, deliberate travel so chips float clearly without feeling frantic. */
 @keyframes hero-chip-float {
-  from { transform: translateY(-40px); }
-  to { transform: translateY(40px); }
+  from { transform: translateY(-32px); }
+  to { transform: translateY(32px); }
 }
 
 .hero-media__tilt {
@@ -476,8 +476,7 @@ body::before {
 
 .hero-chip {
   position: absolute;
-  /* Shown only at widths where they can hang outside the mockup without
-     being clipped by the hero's horizontal overflow. */
+  /* Shown only where there is room to hang outside the mockup. */
   display: none;
   align-items: center;
   gap: 0.8rem;
@@ -495,6 +494,7 @@ body::before {
   white-space: nowrap;
   z-index: 3;
   will-change: transform;
+  pointer-events: none;
 }
 
 .hero-chip strong {
@@ -512,8 +512,8 @@ body::before {
   flex: none;
 }
 
-@media (min-width: 1200px) {
-  .hero-chip {
+@media (min-width: 1100px) {
+  .float-stage .hero-chip {
     display: flex;
   }
 }
@@ -527,7 +527,7 @@ body::before {
     0 22px 48px rgba(0, 0, 0, 0.65),
     0 0 40px rgba(52, 211, 153, 0.35),
     0 0 0 1px rgba(52, 211, 153, 0.28);
-  animation: hero-chip-float 3.2s ease-in-out 0.15s infinite alternate-reverse;
+  animation: hero-chip-float 8s ease-in-out 0.2s infinite alternate-reverse;
 }
 
 .hero-chip--safe .hero-chip__dot {
@@ -544,7 +544,7 @@ body::before {
     0 22px 48px rgba(0, 0, 0, 0.65),
     0 0 40px rgba(245, 158, 11, 0.35),
     0 0 0 1px rgba(245, 158, 11, 0.28);
-  animation: hero-chip-float 3.8s ease-in-out 0.45s infinite alternate;
+  animation: hero-chip-float 9.5s ease-in-out 0.8s infinite alternate;
 }
 
 .hero-chip--alert .hero-chip__dot {
@@ -698,10 +698,28 @@ body::before {
   margin-inline: auto;
 }
 
-/* Match the hero dashboard mockup width so Command Centre sits at the same size. */
+/* Stage for the command-centre mockup + floating status chips. */
+.float-stage {
+  position: relative;
+  width: 100%;
+  max-width: 514px;
+  margin-inline: auto;
+}
+
+.float-stage .browser-mockup {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+}
+
+/* Match the hero mockup width so Command Centre sits at the same size. */
 .product-gallery--command .browser-mockup {
   max-width: 514px;
   width: 100%;
+}
+
+.product-section__media {
+  overflow: visible;
 }
 
 .product-gallery .browser-mockup__content img {

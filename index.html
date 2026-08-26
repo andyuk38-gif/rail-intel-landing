@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=31" />
-  <link rel="stylesheet" href="css/pages.css?v=31" />
+  <link rel="stylesheet" href="css/style.css?v=32" />
+  <link rel="stylesheet" href="css/pages.css?v=32" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -216,34 +216,42 @@
                 <div class="browser-mockup browser-mockup--primary">
                   <div class="browser-mockup__chrome">
                     <span class="browser-mockup__dots"></span>
-                    <span class="browser-mockup__url">cms.railintel.co.uk/dashboard</span>
+                    <span class="browser-mockup__url">cms.railintel.co.uk</span>
                   </div>
                   <div class="browser-mockup__content">
-                    <img
-                      src="images/product/hero-dashboard.png"
-                      alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance"
-                      width="512"
-                      height="357"
-                      decoding="sync"
-                      fetchpriority="high"
-                    />
+                    <div class="login-scene" role="img" aria-label="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app">
+                      <video class="login-scene__video" autoplay loop muted playsinline preload="auto" poster="video/login-poster.jpg" aria-hidden="true">
+                        <source src="video/login-background.mp4" type="video/mp4" />
+                      </video>
+                      <span class="login-scene__scrim" aria-hidden="true"></span>
+                      <div class="login-card" aria-hidden="true">
+                        <div class="login-card__brand">
+                          <img src="images/rail-intel-icon.png" alt="" class="login-card__logo" width="512" height="512" decoding="async" fetchpriority="high" />
+                          <p class="login-card__title">Rail Intel</p>
+                          <p class="login-card__tagline">Secure Competency Management</p>
+                        </div>
+                        <div class="login-card__form">
+                          <div class="login-card__row">
+                            <p class="login-card__label">Company Code</p>
+                            <p class="login-card__input">e.g. RI-123</p>
+                          </div>
+                          <div class="login-card__row">
+                            <p class="login-card__label">Email Address</p>
+                            <p class="login-card__input">email@railintel.co.uk</p>
+                          </div>
+                          <div class="login-card__row">
+                            <p class="login-card__label">Password</p>
+                            <p class="login-card__input login-card__input--dots">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</p>
+                          </div>
+                          <p class="login-card__submit">Sign In</p>
+                          <p class="login-card__forgot">Forgot password?</p>
+                          <p class="login-card__note">Authorised Personnel Only. All access is logged.</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <span class="hero-chip hero-chip--safe" aria-hidden="true">
-                <span class="hero-chip__dot"></span>
-                <span>
-                  <strong>Live verification</strong>
-                  All checks current
-                </span>
-              </span>
-              <span class="hero-chip hero-chip--alert" aria-hidden="true">
-                <span class="hero-chip__dot"></span>
-                <span>
-                  <strong>Medical expiring</strong>
-                  Flagged before sign-on
-                </span>
-              </span>
             </div>
           </div>
         </div>
@@ -287,48 +295,41 @@
         </div>
         <div class="product-section__media">
           <div class="product-gallery product-gallery--command" data-gallery>
-            <div class="browser-mockup browser-mockup--primary">
-              <div class="browser-mockup__chrome">
-                <span class="browser-mockup__dots"></span>
-                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk</span>
-              </div>
-              <div class="browser-mockup__content">
-                <div class="login-scene" data-gallery-scene role="img" aria-label="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app">
-                  <video class="login-scene__video" autoplay loop muted playsinline preload="auto" poster="video/login-poster.jpg" aria-hidden="true" data-scene-video>
-                    <source src="video/login-background.mp4" type="video/mp4" />
-                  </video>
-                  <span class="login-scene__scrim" aria-hidden="true"></span>
-                  <div class="login-card" aria-hidden="true">
-                    <div class="login-card__brand">
-                      <img src="images/rail-intel-icon.png" alt="" class="login-card__logo" width="512" height="512" loading="lazy" decoding="async" />
-                      <p class="login-card__title">Rail Intel</p>
-                      <p class="login-card__tagline">Secure Competency Management</p>
-                    </div>
-                    <div class="login-card__form">
-                      <div class="login-card__row">
-                        <p class="login-card__label">Company Code</p>
-                        <p class="login-card__input">e.g. RI-123</p>
-                      </div>
-                      <div class="login-card__row">
-                        <p class="login-card__label">Email Address</p>
-                        <p class="login-card__input">email@railintel.co.uk</p>
-                      </div>
-                      <div class="login-card__row">
-                        <p class="login-card__label">Password</p>
-                        <p class="login-card__input login-card__input--dots">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</p>
-                      </div>
-                      <p class="login-card__submit">Sign In</p>
-                      <p class="login-card__forgot">Forgot password?</p>
-                      <p class="login-card__note">Authorised Personnel Only. All access is logged.</p>
-                    </div>
-                  </div>
+            <div class="float-stage">
+              <div class="browser-mockup browser-mockup--primary">
+                <div class="browser-mockup__chrome">
+                  <span class="browser-mockup__dots"></span>
+                  <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/dashboard</span>
                 </div>
-                <img src="images/product/login.png" alt="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app" width="512" height="357" data-gallery-main loading="lazy" decoding="async" hidden />
+                <div class="browser-mockup__content">
+                  <img
+                    src="images/product/hero-dashboard.png"
+                    alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance"
+                    width="512"
+                    height="357"
+                    data-gallery-main
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
+              <span class="hero-chip hero-chip--safe" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong>Live verification</strong>
+                  All checks current
+                </span>
+              </span>
+              <span class="hero-chip hero-chip--alert" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong>Medical expiring</strong>
+                  Flagged before sign-on
+                </span>
+              </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-scene="login" data-alt="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app" data-url="cms.railintel.co.uk" data-width="512" data-height="357">Sign in</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/dashboard.png" data-alt="Rail Intel dashboard with live compliance overview" data-url="cms.railintel.co.uk/dashboard" data-width="692" data-height="368">Dashboard</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357">Dashboard</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics.png" data-alt="Reporting and analytics with incident KPIs and charts" data-url="cms.railintel.co.uk/reporting" data-width="691" data-height="431">Reporting</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-analytics-2.png" data-alt="Reporting and analytics with additional compliance and incident trends" data-url="cms.railintel.co.uk/reporting" data-width="687" data-height="537">Analytics</button>
             </div>
@@ -672,7 +673,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=31"></script>
-  <script src="js/main.js?v=31"></script>
+  <script src="js/site.js?v=32"></script>
+  <script src="js/main.js?v=32"></script>
 </body>
 </html>
