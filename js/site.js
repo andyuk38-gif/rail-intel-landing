@@ -396,7 +396,7 @@
       if (reduced || paused || count < 2) return;
       timer = setInterval(function () {
         go(index + 1);
-      }, 3000);
+      }, 5000);
     }
 
     function pauseAuto() {

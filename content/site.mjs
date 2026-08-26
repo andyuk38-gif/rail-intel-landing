@@ -946,6 +946,7 @@ export const featureGroups = [
             lede: "Validity dates, routes, endorsements and issuer signature — the same fields as a standard driving cab pass.",
             caption: "Issue form — colour, validity, routes, endorsements and signature.",
             scale: 1,
+            layout: "stack",
           },
           {
             src: "images/screens/cab-passes/issue-digital-pass-email-dark.png",
@@ -970,6 +971,7 @@ export const featureGroups = [
             lede: "Expand, edit, view, renew, revoke or delete without leaving the Cab Passes tab.",
             caption: "Pass preview actions.",
             scale: 1,
+            layout: "stack",
           },
           {
             src: "images/screens/cab-passes/expired-pass-issued-dark.png",

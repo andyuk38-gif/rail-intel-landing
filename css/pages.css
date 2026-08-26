@@ -525,16 +525,20 @@
 .shot__step {
   display: inline-flex;
   align-items: center;
-  margin: 0 0 0.7rem;
-  padding: 0.28rem 0.65rem;
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 0.85rem;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #0c0f14;
-  background: var(--accent);
+  color: #111827;
+  background: #fbbf24;
+  border: 1px solid rgba(17, 24, 39, 0.35);
   border-radius: 999px;
+  box-shadow:
+    0 0 0 2px rgba(251, 191, 36, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.35) inset;
 }
 
 .shot__title {
@@ -608,6 +612,39 @@
   gap: 1.75rem 2rem;
   padding: clamp(1.25rem, 3vw, 2.25rem);
   align-items: center;
+}
+
+.shot-gallery__slide--stack {
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+.shot-gallery__slide--stack .shot-gallery__copy {
+  max-width: 42rem;
+}
+
+.shot-gallery__slide--stack .shot-gallery__stage {
+  min-height: 0;
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.shot-gallery__slide--stack .shot--gallery,
+.shot-gallery__slide--stack .shot--gallery-wide {
+  width: 100%;
+  max-width: 100% !important;
+}
+
+.shot-gallery__slide--stack .shot--gallery .shot__frame,
+.shot-gallery__slide--stack .shot--gallery-wide .shot__frame {
+  width: 100%;
+}
+
+.shot-gallery__slide--stack .shot--gallery .shot__frame img,
+.shot-gallery__slide--stack .shot--gallery-wide .shot__frame img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .shot-gallery__copy {

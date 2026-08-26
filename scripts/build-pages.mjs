@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 58;
+const ASSET_VERSION = 60;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -227,8 +227,13 @@ function renderGallery(section, base) {
       const height = Math.max(1, Math.round(size.height * scale));
       const step = shot.step || String(index + 1).padStart(2, "0");
       const label = shot.title || shot.caption || `Slide ${index + 1}`;
+      const stacked = shot.layout === "stack";
+      const slideClass = ["shot-gallery__slide", stacked ? "shot-gallery__slide--stack" : null]
+        .filter(Boolean)
+        .join(" ");
+      const figureMax = stacked ? Math.max(width, 960) : width;
 
-      return `        <article class="shot-gallery__slide" data-gallery-slide role="group" aria-roledescription="slide" aria-label="${esc(
+      return `        <article class="${slideClass}" data-gallery-slide role="group" aria-roledescription="slide" aria-label="${esc(
         `${index + 1} of ${(section.shots || []).length}: ${label}`
       )}">
           <div class="shot-gallery__copy">
@@ -236,7 +241,7 @@ function renderGallery(section, base) {
             <h3 class="shot__title">${esc(shot.title || shot.caption || "")}</h3>
 ${shot.lede ? `            <p class="shot__lede">${esc(shot.lede)}</p>\n` : ""}          </div>
           <div class="shot-gallery__stage">
-            <figure class="shot shot--gallery" style="max-width: ${width}px">
+            <figure class="shot shot--gallery${stacked ? " shot--gallery-wide" : ""}" style="max-width: ${figureMax}px">
               <div class="shot__frame">
                 <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
               </div>
