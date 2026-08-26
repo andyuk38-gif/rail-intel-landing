@@ -15,17 +15,45 @@
     "width": 1248,
     "height": 1008
   },
+  "images/screens/cab-passes/cab-passes-dark.png": {
+    "width": 1024,
+    "height": 757
+  },
   "images/screens/cab-passes/cab-passes.png": {
     "width": 1394,
     "height": 757
+  },
+  "images/screens/cab-passes/expired-pass-issued-dark.png": {
+    "width": 554,
+    "height": 280
+  },
+  "images/screens/cab-passes/green-pass-issued-dark.png": {
+    "width": 559,
+    "height": 277
   },
   "images/screens/cab-passes/green-pass-issued.png": {
     "width": 1303,
     "height": 833
   },
+  "images/screens/cab-passes/issue-colour-question-popup-dark.png": {
+    "width": 435,
+    "height": 482
+  },
   "images/screens/cab-passes/issue-colour-question-popup.png": {
     "width": 1400,
     "height": 781
+  },
+  "images/screens/cab-passes/issue-digital-pass-email-dark.png": {
+    "width": 433,
+    "height": 289
+  },
+  "images/screens/cab-passes/issue-form-dark.png": {
+    "width": 1024,
+    "height": 492
+  },
+  "images/screens/cab-passes/pass-preview-actions-dark.png": {
+    "width": 1024,
+    "height": 221
   },
   "images/screens/comp-config/addons-library.png": {
     "width": 1379,

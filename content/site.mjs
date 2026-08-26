@@ -932,12 +932,16 @@ export const featureGroups = [
         ],
         shots: [
           {
-            src: "images/screens/cab-passes/cab-passes.png",
-            caption: "Cab Passes on the employee record — digital passes include a QR panel under the photo.",
+            src: "images/screens/cab-passes/cab-passes-dark.png",
+            caption: "Cab Passes in dark mode — issued passes with QR verification beside each card.",
           },
           {
-            src: "images/screens/cab-passes/issue-colour-question-popup.png",
+            src: "images/screens/cab-passes/issue-colour-question-popup-dark.png",
             caption: "Choose the pass colour before issuing — green, yellow, blue, red or black.",
+          },
+          {
+            src: "images/screens/cab-passes/issue-form-dark.png",
+            caption: "Issue form: colour, validity dates, routes, endorsements and issuer signature.",
           },
         ],
       },
@@ -955,8 +959,20 @@ export const featureGroups = [
         ],
         shots: [
           {
-            src: "images/screens/cab-passes/green-pass-issued.png",
-            caption: "Issued green driving cab pass with SCAN TO VERIFY QR beside the card preview.",
+            src: "images/screens/cab-passes/green-pass-issued-dark.png",
+            caption: "Issued green driving cab pass with SCAN TO VERIFY beside the card preview.",
+          },
+          {
+            src: "images/screens/cab-passes/pass-preview-actions-dark.png",
+            caption: "Pass preview with Expand, Edit, View, Renew, Revoke and Delete.",
+          },
+          {
+            src: "images/screens/cab-passes/issue-digital-pass-email-dark.png",
+            caption: "Confirm digital issue — save for QR verification and email the pass to the employee.",
+          },
+          {
+            src: "images/screens/cab-passes/expired-pass-issued-dark.png",
+            caption: "Expired passes stay on the record with status clear at a glance.",
           },
         ],
       },
