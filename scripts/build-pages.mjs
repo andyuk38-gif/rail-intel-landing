@@ -10,12 +10,12 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, addons, capacityAddons, featureGroups, howItWorks, security } from "../content/site.mjs";
+import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, languages } from "../content/site.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 41;
+const ASSET_VERSION = 43;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -446,6 +446,8 @@ ${capacity}
 }
 
 function featurePage(group) {
+  if (group.slug === "languages") return languagesHubPage();
+
   const base = "../";
   const demo =
     group.slug === "tunnel-mode" ? `\n${tunnelDemo(base, { link: false })}\n` : "\n";
@@ -479,6 +481,145 @@ ${group.sections.map((section) => renderSection(section, base)).join("\n\n")}
 ${renderCta(base, {
   heading: "Everything here is included",
   body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
+})}
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
+function languagesHubPage() {
+  const base = "../";
+  const group = featureGroups.find((item) => item.slug === "languages");
+  const cards = languages.items
+    .map(
+      (lang) => `        <a class="card card--language" href="${base}features/language-${lang.slug}.html">
+          <span class="card__kicker">${esc(lang.code.toUpperCase())}</span>
+          <h3>${esc(lang.name)}</h3>
+          <p class="card__native" lang="${esc(lang.code)}">${esc(lang.nativeName)}</p>
+          <p>${esc(lang.summary)}</p>
+          <span class="card__more">View language &rarr;</span>
+        </a>`
+    )
+    .join("\n");
+
+  return (
+    renderHead(base, {
+      title: "Languages – Rail Intel features",
+      description: group.summary,
+    }) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / Languages</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <h1 class="page-title">${esc(group.tagline)}</h1>
+          <p class="page-lead">${esc(group.lead)}</p>
+          <div class="page-actions">
+            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(languages.heading)}</h2>
+          <p>${esc(languages.lead)}</p>
+        </div>
+        <div class="card-grid card-grid--languages">
+${cards}
+        </div>
+        <p class="languages-note">${esc(languages.adminNote)}</p>
+      </div>
+    </section>
+
+${renderCta(base, {
+  heading: "Work in the language your team uses",
+  body: "Language support is part of core Rail Intel. Enable the languages you need, and each user chooses their preference at sign-in.",
+})}
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
+function languagePage(lang) {
+  const base = "../";
+  const points = lang.points
+    .map((point) => `            <li>${esc(point)}</li>`)
+    .join("\n");
+  const others = languages.items
+    .filter((item) => item.code !== lang.code)
+    .map(
+      (item) =>
+        `            <a class="card card--language-mini" href="${base}features/language-${item.slug}.html">
+              <span class="card__kicker">${esc(item.code.toUpperCase())}</span>
+              <h3>${esc(item.name)}</h3>
+              <p class="card__native" lang="${esc(item.code)}">${esc(item.nativeName)}</p>
+            </a>`
+    )
+    .join("\n");
+
+  return (
+    renderHead(base, {
+      title: `${lang.name} – Rail Intel languages`,
+      description: lang.summary,
+    }) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / <a href="${base}features/languages.html">Languages</a> / ${esc(
+      lang.name
+    )}</p>
+          <span class="page-badge page-badge--core">${esc(lang.code.toUpperCase())}</span>
+          <h1 class="page-title">${esc(lang.name)}</h1>
+          <p class="page-lead"><span lang="${esc(lang.code)}">${esc(lang.nativeName)}</span> &mdash; ${esc(
+      lang.lead
+    )}</p>
+          <div class="page-actions">
+            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="${base}features/languages.html" class="btn btn-ghost btn-lg">All languages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Where ${esc(lang.name)} is used</h2>
+          <p>${esc(lang.region)}.</p>
+        </div>
+        <ul class="spec-list">
+${points}
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Other supported languages</h2>
+          <p>${esc(languages.adminNote)}</p>
+        </div>
+        <div class="card-grid card-grid--languages">
+${others}
+        </div>
+      </div>
+    </section>
+
+${renderCta(base, {
+  heading: `Try Rail Intel in ${lang.name}`,
+  body: "Sign in and switch language from the login screen or the header selector once your administrator has enabled it.",
 })}
   </main>
 
@@ -547,7 +688,9 @@ function featuresIndex() {
   const cards = featureGroups
     .map(
       (group) => `        <a class="card" href="${base}features/${group.slug}.html">
-          <span class="card__kicker">${group.slug === "tunnel-mode" ? "Cab safety" : "Core"}</span>
+          <span class="card__kicker">${
+            group.slug === "tunnel-mode" ? "Cab safety" : group.slug === "languages" ? "International" : "Core"
+          }</span>
           <h3>${esc(group.name)}</h3>
           <p>${esc(group.summary)}</p>
           <span class="card__more">Read more &rarr;</span>
@@ -559,7 +702,7 @@ function featuresIndex() {
     renderHead(base, {
       title: "Features – Rail Intel",
       description:
-        "The core Rail Intel feature set: Tunnel Mode for cab-safe assessing, competency cycles, workforce records, medicals and licensing, incidents and monitoring, reporting and administration.",
+        "The core Rail Intel feature set: Tunnel Mode, competency cycles, workforce records, medicals and licensing, incidents, reporting, administration and international languages.",
     }) +
     `
   <main>
@@ -726,14 +869,32 @@ function securityPage() {
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Security</p>
-          <h1 class="page-title">${esc(security.title)}</h1>
-          <p class="page-lead">${esc(security.lead)}</p>
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="how-it-works.html" class="btn btn-ghost btn-lg">How it works</a>
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Security</p>
+            <h1 class="page-title">${esc(security.title)}</h1>
+            <p class="page-lead">${esc(security.lead)}</p>
           </div>
+          <aside class="security-panel" aria-label="Microsoft Azure hosting and compliance">
+            <div class="security-panel__host">
+              <img class="security-panel__mark" src="images/security/azure-hosting.svg" alt="" width="72" height="72" decoding="async" />
+              <div>
+                <p class="security-panel__eyebrow">${esc(security.heroAside.eyebrow)}</p>
+                <p class="security-panel__title">${esc(security.heroAside.title)}</p>
+                <p class="security-panel__body">${esc(security.heroAside.body)}</p>
+              </div>
+            </div>
+            <ul class="security-panel__badges">
+${security.heroAside.badges
+  .map(
+    (badge) => `              <li>
+                <img src="${esc(badge.src)}" alt="${esc(badge.label)} — Azure platform certification" width="200" height="88" loading="lazy" decoding="async" />
+              </li>`
+  )
+  .join("\n")}
+            </ul>
+            <p class="security-panel__note">${esc(security.heroAside.note)}</p>
+          </aside>
         </div>
       </div>
     </section>
@@ -793,8 +954,7 @@ ${azureItems}
           <p>${esc(security.closing.lead)}</p>
         </div>
         <div class="page-actions">
-          <a href="${site.app}" class="btn btn-primary btn-lg">Go to app</a>
-          <a href="features/" class="btn btn-ghost btn-lg">See the features</a>
+          <a href="/" class="btn btn-primary btn-lg">Home</a>
         </div>
       </div>
     </section>
@@ -864,6 +1024,7 @@ for (const addon of addons) emit(`products/${addon.slug}.html`, addonPage(addon)
 
 emit("features/index.html", featuresIndex());
 for (const group of featureGroups) emit(`features/${group.slug}.html`, featurePage(group));
+for (const lang of languages.items) emit(`features/language-${lang.slug}.html`, languagePage(lang));
 
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());

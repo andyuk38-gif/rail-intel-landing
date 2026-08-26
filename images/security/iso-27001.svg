@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 88" role="img" aria-label="ISO 27001">
+  <rect width="200" height="88" rx="16" fill="#121820" stroke="#2a3444"/>
+  <circle cx="36" cy="44" r="18" fill="none" stroke="#0078D4" stroke-width="3"/>
+  <path d="M28 44.5l5.2 5.2 11-12" fill="none" stroke="#50E6FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="66" y="40" fill="#f3f4f6" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">ISO 27001</text>
+  <text x="66" y="60" fill="#8b93a7" font-family="Arial, Helvetica, sans-serif" font-size="11">Azure platform</text>
+</svg>

@@ -909,7 +909,141 @@ export const featureGroups = [
       },
     ],
   },
+
+  {
+    slug: "languages",
+    name: "Languages",
+    summary: "Run Rail Intel in English, Spanish, French, Welsh, Italian, German or Arabic.",
+    tagline: "International language support",
+    lead:
+      "Assessors, managers and administrators can work in the language that suits their team. Language is chosen at sign-in and in the header, and system administrators decide which languages appear.",
+    sections: [],
+  },
 ];
+
+/* --------------------------------------------------------------- languages */
+
+export const languages = {
+  heading: "Choose a language",
+  lead:
+    "Each language below has its own page. The interface, including login and in-app chrome, can be switched without changing your company data.",
+  adminNote:
+    "System administrators choose which languages appear in the login and header selectors. If every language is turned off, selectors are hidden and English is used.",
+  items: [
+    {
+      code: "en",
+      slug: "english",
+      name: "English",
+      nativeName: "English",
+      region: "United Kingdom and international operations",
+      summary: "Default language for Rail Intel — full UI coverage across assessing, records and administration.",
+      lead:
+        "English is the default interface language. Every screen, alert and workflow is authored in English first, then translated into the other supported languages.",
+      points: [
+        "Available at sign-in and throughout the application header language selector.",
+        "Used automatically when no other language is enabled or preferred.",
+        "Covers competency cycles, medicals, licensing, incidents, reporting and add-on modules.",
+        "The reference language for new features before localisation ships.",
+      ],
+    },
+    {
+      code: "es",
+      slug: "spanish",
+      name: "Spanish",
+      nativeName: "Español",
+      region: "Spain and Spanish-speaking operations",
+      summary: "Full Spanish UI for assessors and administrators working alongside English-speaking teams.",
+      lead:
+        "Spanish localises the Rail Intel interface so Spanish-speaking staff can assess, review records and administer the system without switching tools.",
+      points: [
+        "Selectable at login and from the in-app language control.",
+        "Translated UI for core workflows including assessing, workforce records and reporting.",
+        "Can be enabled or disabled for your company by a system administrator.",
+        "Works alongside other languages — each user keeps their own preference.",
+      ],
+    },
+    {
+      code: "fr",
+      slug: "french",
+      name: "French",
+      nativeName: "Français",
+      region: "France and French-speaking operations",
+      summary: "French interface language for cab assessments, compliance reviews and administration.",
+      lead:
+        "French support lets operators run Rail Intel in Français across sign-in, assessing and day-to-day management screens.",
+      points: [
+        "Available in the login and header language selectors when enabled.",
+        "Covers the main competency, medical, licensing and monitoring flows.",
+        "Administrators control whether French is offered to users.",
+        "User preference is remembered for the next sign-in.",
+      ],
+    },
+    {
+      code: "cy",
+      slug: "welsh",
+      name: "Welsh",
+      nativeName: "Cymraeg",
+      region: "Wales and bilingual UK operations",
+      summary: "Welsh (Cymraeg) UI support for bilingual rail teams in Wales.",
+      lead:
+        "Welsh language support helps operators meet bilingual working expectations — assessors and managers can use Cymraeg in the product interface.",
+      points: [
+        "Offered at sign-in and in the header when the language is enabled.",
+        "Translated product chrome for day-to-day competence and safety workflows.",
+        "System administrators choose whether Welsh appears in language selectors.",
+        "Designed for mixed English / Welsh teams in the same company.",
+      ],
+    },
+    {
+      code: "it",
+      slug: "italian",
+      name: "Italian",
+      nativeName: "Italiano",
+      region: "Italy and Italian-speaking operations",
+      summary: "Italian UI for assessing, records and administration across the Rail Intel platform.",
+      lead:
+        "Italian localises the interface so Italian-speaking staff can complete assessments and manage competence without leaving their preferred language.",
+      points: [
+        "Selectable from login and in-app language controls when enabled.",
+        "Covers core product areas used on the railway and in the office.",
+        "Enable or hide Italian company-wide from Administration language settings.",
+        "Each user can keep Italian while colleagues use another supported language.",
+      ],
+    },
+    {
+      code: "de",
+      slug: "german",
+      name: "German",
+      nativeName: "Deutsch",
+      region: "Germany, Austria, Switzerland and German-speaking teams",
+      summary: "German interface language for competence management and safety workflows.",
+      lead:
+        "German support brings Deutsch to Rail Intel’s interface — from sign-in through assessing, compliance and reporting.",
+      points: [
+        "Available at login and in the header language selector when turned on.",
+        "Translated UI across primary competency and workforce modules.",
+        "Administrators decide if German is visible to users.",
+        "Preferences persist so returning users stay in Deutsch.",
+      ],
+    },
+    {
+      code: "ar",
+      slug: "arabic",
+      name: "Arabic",
+      nativeName: "العربية",
+      region: "Arabic-speaking operations",
+      summary: "Arabic UI translations with stable left-to-right product chrome for mixed-language teams.",
+      lead:
+        "Arabic is a fully supported interface language. Translated copy is shown throughout the product while layout stays consistent for mixed English / Arabic operations.",
+      points: [
+        "Selectable at sign-in and from the header when Arabic is enabled.",
+        "Interface strings are translated into العربية across core workflows.",
+        "Product layout remains left-to-right so chrome stays familiar alongside other languages.",
+        "System administrators control whether Arabic appears in language selectors.",
+      ],
+    },
+  ],
+};
 
 /* ------------------------------------------------------------- how it works */
 
@@ -1050,5 +1184,17 @@ export const security = {
   closing: {
     heading: "Questions about security?",
     lead: "We can walk through 2FA policy, Azure regions and how access is controlled for your company before you go live.",
+  },
+  heroAside: {
+    eyebrow: "Cloud hosting",
+    title: "Hosted on Microsoft Azure",
+    body: "App Service, Azure Database for PostgreSQL and Blob Storage — on infrastructure Microsoft maintains under its Azure compliance programme.",
+    note: "These marks describe Microsoft Azure platform certifications. They do not imply a separate Microsoft partner badge for Rail Intel.",
+    badges: [
+      { src: "images/security/iso-27001.svg", label: "ISO 27001" },
+      { src: "images/security/soc-2.svg", label: "SOC 2" },
+      { src: "images/security/iso-27017.svg", label: "ISO 27017" },
+      { src: "images/security/iso-27018.svg", label: "ISO 27018" },
+    ],
   },
 };

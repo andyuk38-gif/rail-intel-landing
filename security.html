@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=41" />
-  <link rel="stylesheet" href="css/pages.css?v=41" />
+  <link rel="stylesheet" href="css/style.css?v=43" />
+  <link rel="stylesheet" href="css/pages.css?v=43" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -163,6 +163,13 @@
                     <span class="nav-panel__desc">Analytics across the operation, plus the configuration that makes it yours.</span>
                   </span>
                 </a>
+                <a class="nav-panel__item" href="features/languages.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Languages</span>
+                    <span class="nav-panel__desc">Run Rail Intel in English, Spanish, French, Welsh, Italian, German or Arabic.</span>
+                  </span>
+                </a>
               </div>
               <div class="nav-panel__footer">
                 <a class="nav-panel__all" href="features/">All features &rarr;</a>
@@ -182,14 +189,37 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="/">Rail Intel</a> / Security</p>
-          <h1 class="page-title">Security built for rail operations</h1>
-          <p class="page-lead">Rail Intel protects competency, medical and safety records with company-scoped access, two-factor authentication and hosting on Microsoft Azure.</p>
-          <div class="page-actions">
-            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="how-it-works.html" class="btn btn-ghost btn-lg">How it works</a>
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="/">Rail Intel</a> / Security</p>
+            <h1 class="page-title">Security built for rail operations</h1>
+            <p class="page-lead">Rail Intel protects competency, medical and safety records with company-scoped access, two-factor authentication and hosting on Microsoft Azure.</p>
           </div>
+          <aside class="security-panel" aria-label="Microsoft Azure hosting and compliance">
+            <div class="security-panel__host">
+              <img class="security-panel__mark" src="images/security/azure-hosting.svg" alt="" width="72" height="72" decoding="async" />
+              <div>
+                <p class="security-panel__eyebrow">Cloud hosting</p>
+                <p class="security-panel__title">Hosted on Microsoft Azure</p>
+                <p class="security-panel__body">App Service, Azure Database for PostgreSQL and Blob Storage — on infrastructure Microsoft maintains under its Azure compliance programme.</p>
+              </div>
+            </div>
+            <ul class="security-panel__badges">
+              <li>
+                <img src="images/security/iso-27001.svg" alt="ISO 27001 — Azure platform certification" width="200" height="88" loading="lazy" decoding="async" />
+              </li>
+              <li>
+                <img src="images/security/soc-2.svg" alt="SOC 2 — Azure platform certification" width="200" height="88" loading="lazy" decoding="async" />
+              </li>
+              <li>
+                <img src="images/security/iso-27017.svg" alt="ISO 27017 — Azure platform certification" width="200" height="88" loading="lazy" decoding="async" />
+              </li>
+              <li>
+                <img src="images/security/iso-27018.svg" alt="ISO 27018 — Azure platform certification" width="200" height="88" loading="lazy" decoding="async" />
+              </li>
+            </ul>
+            <p class="security-panel__note">These marks describe Microsoft Azure platform certifications. They do not imply a separate Microsoft partner badge for Rail Intel.</p>
+          </aside>
         </div>
       </div>
     </section>
@@ -313,8 +343,7 @@
           <p>We can walk through 2FA policy, Azure regions and how access is controlled for your company before you go live.</p>
         </div>
         <div class="page-actions">
-          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Go to app</a>
-          <a href="features/" class="btn btn-ghost btn-lg">See the features</a>
+          <a href="/" class="btn btn-primary btn-lg">Home</a>
         </div>
       </div>
     </section>
@@ -334,6 +363,6 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=41"></script>
+  <script src="js/site.js?v=43"></script>
 </body>
 </html>
