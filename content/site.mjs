@@ -917,6 +917,13 @@ export const featureGroups = [
     tagline: "Digital cab passes with QR verification",
     lead:
       "Cab authority is held on the employee record as a standard driving cab pass. Issue a digital pass and a QR code appears beside the photo — scan it to open the live pass in a browser with no sign-in.",
+    heroShot: {
+      src: "images/screens/cab-passes/green-pass-issued-dark.png",
+      caption: "Issued pass with QR — scan to verify without a login.",
+      scale: 1,
+      full: true,
+    },
+    showAppCta: false,
     cta: {
       heading: "Digital Cab Passes is included",
       body: "Issuing and managing digital cab passes is part of core Rail Intel. Showing pass status on verification reports requires the QA Verifications add-on.",

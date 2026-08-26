@@ -261,6 +261,23 @@
   max-width: 40rem;
 }
 
+.page-hero__inner--split:has(.page-hero__media) {
+  align-items: center;
+}
+
+.page-hero__media {
+  min-width: 0;
+}
+
+.page-hero__media .shot {
+  margin: 0;
+  width: 100%;
+}
+
+.page-hero__media .shot__caption {
+  margin-top: 0.65rem;
+}
+
 .security-panel {
   display: flex;
   flex-direction: column;

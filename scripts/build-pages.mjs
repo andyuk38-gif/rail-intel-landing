@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 62;
+const ASSET_VERSION = 63;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -332,7 +332,7 @@ ${shots}
     </section>`;
 }
 
-function renderCta(base, { heading, body }) {
+function renderCta(base, { heading, body, showAppCta = true }) {
   return `    <section class="page-section">
       <div class="container">
         <div class="page-section__head">
@@ -340,8 +340,11 @@ function renderCta(base, { heading, body }) {
           <p>${esc(body)}</p>
         </div>
         <div class="page-actions">
-          <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-          <a href="${base}products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
+${
+  showAppCta === false
+    ? ""
+    : `          <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
+}          <a href="${base}products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
         </div>
       </div>
     </section>`;
@@ -554,6 +557,33 @@ function featurePage(group) {
   const demo =
     group.slug === "tunnel-mode" ? `\n${tunnelDemo(base, { link: false })}\n` : "\n";
 
+  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
+    group.name
+  )}</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <h1 class="page-title">${esc(group.tagline)}</h1>
+          <p class="page-lead">${esc(group.lead)}</p>
+          <div class="page-actions">
+${
+  group.showAppCta === false
+    ? ""
+    : `            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
+}            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
+          </div>`;
+
+  const heroInner = group.heroShot
+    ? `        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
+${heroCopy}
+          </div>
+          <div class="page-hero__media">
+${renderShot(group.heroShot, base, { fill: true })}
+          </div>
+        </div>`
+    : `        <div class="page-hero__inner">
+${heroCopy}
+        </div>`;
+
   return (
     renderHead(base, {
       title: `${group.name} – Rail Intel features`,
@@ -563,30 +593,19 @@ function featurePage(group) {
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
-      group.name
-    )}</p>
-          <span class="page-badge page-badge--core">Included as standard</span>
-          <h1 class="page-title">${esc(group.tagline)}</h1>
-          <p class="page-lead">${esc(group.lead)}</p>
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
-          </div>
-        </div>
+${heroInner}
       </div>
     </section>
 ${demo}
 ${group.sections.map((section) => renderSection(section, base)).join("\n\n")}
 
-${renderCta(
-  base,
-  group.cta || {
+${renderCta(base, {
+  ...(group.cta || {
     heading: "Everything here is included",
     body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
-  }
-)}
+  }),
+  showAppCta: group.showAppCta,
+})}
   </main>
 
 ` +
