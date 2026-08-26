@@ -992,9 +992,9 @@ export const featureGroups = [
         ],
       },
       {
-        heading: "Included in verification report checks",
+        heading: "On QA verification reports",
         body: [
-          "When Digital Cab Passes is purchased, cab pass status forms part of the employee verification report. Expired or unsigned passes surface as review items; in-date signed passes show as compliant — with a direct path back to Cab Passes to fix anything that needs attention.",
+          "Digital Cab Passes is included as standard. When the QA Verifications add-on is purchased, cab pass status forms part of the employee verification report. Expired or unsigned passes surface as review items; in-date signed passes show as compliant — with a direct path back to Cab Passes to fix anything that needs attention.",
         ],
         bullets: [
           "**Cab Pass preview** on the verification report with colour, pass number and expiry.",
