@@ -316,13 +316,46 @@ export const addons = [
         id: "schedules",
         step: "Step 2",
         title: "Training schedules",
-        lede: "Build the programme first. Groups and enrolment need a schedule — modules, durations and working-day rules are laid out on a visual pathway.",
+        lede:
+          "Build the programme first — set a start date and Rail Intel projects the full timeline automatically, bank holidays and working-day rules included.",
         status: "1 schedule",
         accent: "#38bdf8",
+        callout: {
+          kicker: "Automatic scheduling",
+          body:
+            "Once you place a start date, Rail Intel looks up all upcoming bank holidays, applies each module's working-day rules and projects the full training timeline — no manual calendar work.",
+        },
+        floatingTiles: [
+          {
+            id: "start-date",
+            title: "Start date",
+            detail: "One date anchors every module from that day forward.",
+            tone: "accent",
+          },
+          {
+            id: "bank-holidays",
+            title: "Bank holidays",
+            detail: "Upcoming public holidays picked up and applied automatically.",
+            tone: "warn",
+          },
+          {
+            id: "working-days",
+            title: "Working days",
+            detail: "Weekends and non-working days skipped per module rules.",
+            tone: "safe",
+          },
+          {
+            id: "timeline",
+            title: "Full timeline",
+            detail: "Every training day projected on the calendar instantly.",
+            tone: "accent",
+          },
+        ],
         bullets: [
-          "**Five-module pathway** from Personal Track Safety through to Driving Instructor / Shift Pattern.",
-          "**Working-day and bank-holiday rules** per module.",
-          "**Calendar view** maps every training day colour-coded by module.",
+          "**Set a start date** — the schedule anchors every module from that day forward.",
+          "**Bank holidays applied automatically** — upcoming public holidays are picked up for you.",
+          "**Working-day rules per module** — weekends and non-working days are skipped as configured.",
+          "**Calendar view** — every projected training day colour-coded by module.",
         ],
         shots: [
           {

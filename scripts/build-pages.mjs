@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 75;
+const ASSET_VERSION = 76;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -423,6 +423,41 @@ function journeyShotFigure(shot, base, hidden = false, eager = false) {
               </figure>`;
 }
 
+function renderJourneyCallout(step) {
+  if (!step.callout) return "";
+  return `            <div class="trainee-journey__callout">
+              <p class="trainee-journey__callout-kicker">${esc(step.callout.kicker)}</p>
+              <p class="trainee-journey__callout-body">${esc(step.callout.body)}</p>
+            </div>`;
+}
+
+function renderJourneyFloatingTiles(step) {
+  if (!step.floatingTiles?.length) return { open: "", close: "" };
+
+  const tiles = step.floatingTiles
+    .map(
+      (tile, tileIndex) => {
+        const tone = tile.tone || "accent";
+        return `                <button type="button" class="trainee-journey__tile trainee-journey__tile--${esc(tone)}" data-trainee-tile="${esc(tile.id)}" data-trainee-tile-index="${tileIndex}" aria-pressed="false" style="--tile-delay: ${(tileIndex * 0.7).toFixed(1)}s">
+                  <span class="trainee-journey__tile-dot" aria-hidden="true"></span>
+                  <span class="trainee-journey__tile-copy">
+                    <strong>${esc(tile.title)}</strong>
+                    <span>${esc(tile.detail)}</span>
+                  </span>
+                </button>`;
+      }
+    )
+    .join("\n");
+
+  return {
+    open: `            <div class="trainee-journey__float-stage" data-trainee-float>
+              <div class="trainee-journey__tiles" role="list" aria-label="Automatic schedule projection">
+${tiles}
+              </div>`,
+    close: `            </div>`,
+  };
+}
+
 function renderJourneyStep(step, base, index, total) {
   const bullets = step.bullets
     ? `            <ul class="spec-list trainee-journey__bullets">\n${step.bullets
@@ -454,6 +489,8 @@ ${shots
   const figures = shots
     .map((shot, shotIndex) => journeyShotFigure(shot, base, hasSubViews && shotIndex > 0, index === 0 && shotIndex === 0))
     .join("\n");
+  const callout = renderJourneyCallout(step);
+  const float = renderJourneyFloatingTiles(step);
   const connector =
     index < total - 1
       ? `          <div class="trainee-journey__connector" aria-hidden="true">
@@ -475,10 +512,13 @@ ${status}
 ${bullets}
             </header>
             <div class="trainee-journey__visual">
+${callout}
+${float.open}
 ${subtabs}
               <div class="trainee-journey__stage">
 ${figures}
               </div>
+${float.close}
             </div>
           </div>
 ${connector}

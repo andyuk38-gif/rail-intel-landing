@@ -586,6 +586,71 @@
       });
     });
 
+    Array.prototype.forEach.call(journey.querySelectorAll("[data-trainee-float]"), function (stage) {
+      var tiles = Array.prototype.slice.call(stage.querySelectorAll("[data-trainee-tile]"));
+      if (!tiles.length) return;
+
+      var timer = null;
+      var index = 0;
+      var parentStep = stage.closest("[data-trainee-step]");
+
+      function setActive(i) {
+        index = i;
+        tiles.forEach(function (tile, tileIndex) {
+          var on = tileIndex === i;
+          tile.classList.toggle("is-active", on);
+          tile.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        stage.setAttribute("data-trainee-float-step", String(i));
+      }
+
+      function stopCycle() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function startCycle() {
+        if (reduced) {
+          setActive(0);
+          return;
+        }
+        stopCycle();
+        timer = window.setInterval(function () {
+          setActive((index + 1) % tiles.length);
+        }, 3200);
+      }
+
+      setActive(0);
+
+      if (parentStep && "IntersectionObserver" in window) {
+        var floatObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && entry.intersectionRatio > 0.3) startCycle();
+              else stopCycle();
+            });
+          },
+          { threshold: [0, 0.3, 0.5] }
+        );
+        floatObserver.observe(parentStep);
+      } else {
+        startCycle();
+      }
+
+      tiles.forEach(function (tile, tileIndex) {
+        tile.addEventListener("click", function () {
+          stopCycle();
+          setActive(tileIndex);
+        });
+        tile.addEventListener("mouseenter", stopCycle);
+        tile.addEventListener("mouseleave", function () {
+          if (parentStep && parentStep.classList.contains("is-active")) startCycle();
+        });
+      });
+    });
+
     sync(0);
   });
 })();
