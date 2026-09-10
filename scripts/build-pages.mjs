@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 71;
+const ASSET_VERSION = 72;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -540,6 +540,32 @@ ${track}
     </section>`;
 }
 
+function renderQaSection(section, base) {
+  if (!section) return "";
+  const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
+  const bullets = section.bullets
+    ? `          <ul class="spec-list">\n${section.bullets
+        .map((item) => `            <li>${rich(item)}</li>`)
+        .join("\n")}\n          </ul>`
+    : "";
+  const link = section.link
+    ? `        <div class="page-actions">
+          <a href="${base}${section.link.href}" class="btn btn-ghost btn-lg">${esc(section.link.label)}</a>
+        </div>`
+    : "";
+
+  return `    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(section.heading)}</h2>
+${body}
+${bullets}
+        </div>
+${link}
+      </div>
+    </section>`;
+}
+
 function traineeDriverPage(addon) {
   const base = "../";
   const note = addon.note
@@ -576,6 +602,8 @@ ${heroInner}
     </section>
 
 ${renderTraineeFlow(addon, base)}
+
+${renderQaSection(addon.qaSection, base)}
 
     <section class="page-section">
       <div class="container">
