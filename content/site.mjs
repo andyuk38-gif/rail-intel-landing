@@ -1032,6 +1032,7 @@ export const featureGroups = [
             src: "images/screens/monitor-plans-incidents/cdp-plan-overview.png",
             caption: "Competence development plan overview for the employee.",
           },
+          shotLayout: "split",
         },
         {
           id: "carryover",
@@ -1047,27 +1048,13 @@ export const featureGroups = [
             "**Events carry over automatically** — assessment schedule and open CDP items move with the cycle.",
             "**History retained** — previous cycles and closed plans stay on the record for audit.",
           ],
-          compare: [
-            {
-              id: "cycles",
-              label: "Continuous cycles",
-              shot: {
-                src: "images/screens/cycles/continuous-cycles.png",
-                caption: "Continuous cycles for competencies that renew rather than expire.",
-                scale: 0.46,
-              },
-            },
-            {
-              id: "carryover",
-              label: "CDP carryover",
-              shot: {
-                src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
-                caption: "A development point carried over into the next cycle.",
-                scale: 0.68,
-                compact: true,
-              },
-            },
-          ],
+          shot: {
+            src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
+            caption: "CDP monitoring events carry over when a continuous cycle renews.",
+            scale: 0.68,
+            compact: true,
+          },
+          shotLayout: "center",
         },
         {
           id: "permissions",

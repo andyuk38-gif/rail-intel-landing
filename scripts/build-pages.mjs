@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 84;
+const ASSET_VERSION = 85;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -921,7 +921,8 @@ ${shotBlock}`;
   }
 
   if (chapter.shot) {
-    return `              <div class="cdp-chapter__split">
+    if (chapter.shotLayout === "split") {
+      return `              <div class="cdp-chapter__split">
                 <div class="cdp-chapter__split-copy">
 ${renderCdpChapterBullets(chapter.bullets)}
                 </div>
@@ -929,13 +930,22 @@ ${renderCdpChapterBullets(chapter.bullets)}
 ${cdpShotFigure(chapter.shot, base, { fill: true })}
                 </div>
               </div>`;
+    }
+
+    const layoutClass =
+      chapter.shotLayout === "full" ? "cdp-chapter__shots--full" : "cdp-chapter__shots--center";
+
+    return `              <div class="cdp-chapter__shots ${layoutClass}">
+${cdpShotFigure(chapter.shot, base, { fill: chapter.shotLayout === "full" })}
+              </div>`;
   }
 
   return renderCdpChapterBullets(chapter.bullets);
 }
 
 function renderCdpChapter(chapter, base, index) {
-  const bulletsInline = chapter.shot ? "" : renderCdpChapterBullets(chapter.bullets);
+  const bulletsInline =
+    chapter.shot && chapter.shotLayout === "split" ? "" : renderCdpChapterBullets(chapter.bullets);
 
   return `        <article class="cdp-chapter reveal" data-cdp-chapter="${index}" id="cdp-chapter-${index}" data-cdp-chapter-id="${esc(chapter.id)}">
           <header class="cdp-chapter__head">

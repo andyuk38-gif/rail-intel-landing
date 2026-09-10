@@ -2664,9 +2664,10 @@ body.lightbox-open {
   margin-inline: auto;
 }
 
-.cdp-compare__panel {
+.cdp-chapter__shots--center {
   display: flex;
   justify-content: center;
+  margin-top: 0.25rem;
 }
 
 .cdp-chapter__figure .shot__frame img {
