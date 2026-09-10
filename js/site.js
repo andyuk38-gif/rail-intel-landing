@@ -484,4 +484,105 @@
     syncChrome();
     startAuto();
   });
+
+  /* ---------- Trainee Driver interactive pathway ---------- */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-flow]"), function (flow) {
+    var tabs = Array.prototype.slice.call(flow.querySelectorAll("[data-trainee-tab]"));
+    var panels = Array.prototype.slice.call(flow.querySelectorAll("[data-trainee-panel]"));
+    var prev = flow.querySelector("[data-trainee-prev]");
+    var next = flow.querySelector("[data-trainee-next]");
+    var counter = flow.querySelector("[data-trainee-counter]");
+    var progress = flow.querySelector("[data-trainee-progress]");
+    var count = Number(flow.getAttribute("data-trainee-count")) || panels.length;
+    var index = 0;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function sync() {
+      tabs.forEach(function (tab, i) {
+        var selected = i === index;
+        tab.setAttribute("aria-selected", selected ? "true" : "false");
+        if (selected) tab.scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
+      });
+      panels.forEach(function (panel, i) {
+        if (i === index) {
+          panel.hidden = false;
+          panel.removeAttribute("aria-hidden");
+        } else {
+          panel.hidden = true;
+          panel.setAttribute("aria-hidden", "true");
+        }
+      });
+      if (prev) prev.disabled = index === 0;
+      if (next) {
+        next.disabled = index >= count - 1;
+        if (index >= count - 1) next.innerHTML = "Complete";
+        else next.innerHTML = 'Next step <span aria-hidden="true">→</span>';
+      }
+      if (counter) counter.textContent = index + 1 + " / " + count;
+      if (progress) progress.style.width = ((index + 1) / count) * 100 + "%";
+    }
+
+    function go(to) {
+      index = Math.max(0, Math.min(count - 1, to));
+      sync();
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        go(Number(tab.getAttribute("data-trainee-tab")) || 0);
+      });
+    });
+
+    if (prev) prev.addEventListener("click", function () { go(index - 1); });
+    if (next) next.addEventListener("click", function () {
+      if (index < count - 1) go(index + 1);
+    });
+
+    flow.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        go(index - 1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        go(index + 1);
+      }
+    });
+
+    panels.forEach(function (panel) {
+      var subtabs = Array.prototype.slice.call(panel.querySelectorAll("[data-trainee-subtab]"));
+      if (!subtabs.length) return;
+
+      var figures = Array.prototype.slice.call(panel.querySelectorAll("[data-trainee-shot]"));
+      if (!figures.length) {
+        figures = Array.prototype.slice.call(panel.querySelectorAll(".trainee-flow__figure"));
+      }
+
+      function showSub(id) {
+        subtabs.forEach(function (subtab) {
+          var active = subtab.getAttribute("data-trainee-subtab") === id;
+          subtab.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        figures.forEach(function (figure, figureIndex) {
+          var shotId = figure.getAttribute("data-trainee-shot");
+          var active = shotId ? shotId === id : figureIndex === Number(id) || figureIndex === 0;
+          if (active) {
+            figure.hidden = false;
+            figure.removeAttribute("aria-hidden");
+          } else {
+            figure.hidden = true;
+            figure.setAttribute("aria-hidden", "true");
+          }
+        });
+      }
+
+      subtabs.forEach(function (subtab) {
+        subtab.addEventListener("click", function () {
+          showSub(subtab.getAttribute("data-trainee-subtab"));
+        });
+      });
+    });
+
+    sync();
+  });
 })();

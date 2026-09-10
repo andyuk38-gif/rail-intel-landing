@@ -104,8 +104,8 @@
     "height": 198
   },
   "images/screens/cycle-builder/cycle-builder-overview.png": {
-    "width": 1024,
-    "height": 386
+    "width": 1410,
+    "height": 739
   },
   "images/screens/cycle-builder/schedule-events-assessment.png": {
     "width": 1393,
@@ -116,8 +116,8 @@
     "height": 229
   },
   "images/screens/cycles/active-assessment.png": {
-    "width": 1024,
-    "height": 879
+    "width": 1251,
+    "height": 974
   },
   "images/screens/cycles/cont-cycle-cdp-carryover.png": {
     "width": 523,
@@ -128,8 +128,8 @@
     "height": 843
   },
   "images/screens/cycles/current-cycles.png": {
-    "width": 1024,
-    "height": 641
+    "width": 1399,
+    "height": 914
   },
   "images/screens/cycles/individual-cycle-view.png": {
     "width": 1394,
@@ -307,6 +307,42 @@
     "width": 1397,
     "height": 706
   },
+  "images/screens/trainee-addon/01-trainee-module-pathway.png": {
+    "width": 1024,
+    "height": 550
+  },
+  "images/screens/trainee-addon/02-policies-agreements.png": {
+    "width": 1024,
+    "height": 417
+  },
+  "images/screens/trainee-addon/03-training-calendar.png": {
+    "width": 1024,
+    "height": 920
+  },
+  "images/screens/trainee-addon/03-training-schedules.png": {
+    "width": 1024,
+    "height": 500
+  },
+  "images/screens/trainee-addon/04-training-groups.png": {
+    "width": 1024,
+    "height": 205
+  },
+  "images/screens/trainee-addon/05-enrol-trainee.png": {
+    "width": 473,
+    "height": 651
+  },
+  "images/screens/trainee-addon/06-assign-training-cycle.png": {
+    "width": 1024,
+    "height": 219
+  },
+  "images/screens/trainee-addon/07-trainee-portfolio.png": {
+    "width": 947,
+    "height": 577
+  },
+  "images/screens/trainee-addon/equipment-catalogue.png": {
+    "width": 1024,
+    "height": 349
+  },
   "images/screens/trainee-hours-manager-hours/add-encounters.png": {
     "width": 1249,
     "height": 906
@@ -352,11 +388,11 @@
     "height": 819
   },
   "images/screens/verification/verification-config.png": {
-    "width": 1024,
-    "height": 686
+    "width": 1382,
+    "height": 1050
   },
   "images/screens/verification/verification-run-overall.png": {
-    "width": 1024,
-    "height": 750
+    "width": 1382,
+    "height": 1120
   }
 }

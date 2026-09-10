@@ -256,59 +256,170 @@ export const addons = [
     name: "Trainee Driver",
     moduleId: "trainee-driver",
     summary: "Run a full trainee programme: schedules, train logs, hours and signed feedback.",
-    tagline: "Manage the whole training programme, not just the hours",
+    tagline: "Run the full trainee programme — from policies to portfolio",
     lead:
-      "Rail Intel tracks trainee hours as standard. The Trainee Driver module is the layer above that: building schedules, enrolling trainees, recording attendance and train logs, capturing dual-signed feedback, and tracking route learning — the full programme rather than a running total.",
+      "The Trainee Driver module guides you through a five-step pathway: policies and agreements, training schedules, groups, enrolment and training-cycle assignment. Once live, each trainee gets a portfolio for policies, equipment, modules, attendance, train logs and reporting.",
     note:
       "Core Rail Intel already includes trainee hours and daylight/darkness progress on the Experience Records tab. This module adds the programme management around it.",
-    sections: [
+    heroShot: {
+      src: "images/screens/trainee-addon/01-trainee-module-pathway.png",
+      caption: "The Trainee Module hub — five connected steps from setup to live monitoring.",
+      scale: 1,
+    },
+    flowIntro: {
+      heading: "How the module works",
+      body:
+        "Follow the pathway left to right: policies, schedules, groups, allocate trainees, then assign a training cycle. Optional equipment can be prepared before enrolment. Each step unlocks the next.",
+    },
+    flowSteps: [
       {
-        heading: "Progress against the standard, per trainee",
-        body: [
-          "Trainee progress is measured against your configured company standards, including daylight and darkness minimums, so a trainee who has the hours but not the right conditions is visibly incomplete. Managers see the position across their trainees; the trainee sees their own.",
-        ],
+        id: "policies",
+        step: "Step 1",
+        title: "Policies & agreements",
+        lede: "Must exist first. Trainees sign these when they start — Module 1 and other training activities cannot begin until required policies are signed.",
+        status: "6 ready",
+        accent: "#2dd4bf",
         bullets: [
-          "**Hours against company standards**, split by daylight and darkness.",
-          "**Manager view across trainees** and an individual view per person.",
-          "**Retention and progress records** kept for the duration of the programme.",
-          "**Performance & Support plans** become available on the Monitoring tab when this module is active.",
+          "**Required policies and agreements** configured before enrolment.",
+          "**Default templates** for SRS, job description, mobile device policy and more.",
+          "**Custom agreements** can be uploaded, edited or deactivated.",
         ],
         shots: [
           {
-            src: "images/screens/trainee-hours-manager-hours/manager-hours-overview.png",
-            caption: "Manager view of hours and progress across every enrolled trainee.",
-          },
-          {
-            src: "images/screens/trainee-hours-manager-hours/managerhours-progress.png",
-            caption: "Progress tracking against the required totals for each trainee.",
+            src: "images/screens/trainee-addon/02-policies-agreements.png",
+            caption: "Manage required policies — view, upload, edit or deactivate each item.",
+            scale: 1,
           },
         ],
       },
       {
-        heading: "Logging encounters and entries as they happen",
-        body: [
-          "Entries are recorded as the training happens, with confirmation before they are committed, so the log reflects reality rather than a reconstruction at the end of a placement.",
+        id: "equipment",
+        step: "Optional",
+        title: "Equipment catalogue",
+        lede: "Prepare items for trainees to sign when issued. Adopt a global template from the platform catalogue or create custom equipment.",
+        optional: true,
+        accent: "#a78bfa",
+        bullets: [
+          "**Global templates** such as Train Driver (10 items) added in one action.",
+          "**Custom equipment** for anything specific to your operation.",
+          "**Signed on issue** — tracked on the trainee portfolio Equipment log tab.",
         ],
         shots: [
           {
-            src: "images/screens/trainee-hours-manager-hours/add-encounters.png",
-            caption: "Recording an encounter against a trainee's programme.",
+            src: "images/screens/trainee-addon/equipment-catalogue.png",
+            caption: "Adopt the Train Driver equipment template or build your own catalogue.",
+            scale: 1,
+          },
+        ],
+      },
+      {
+        id: "schedules",
+        step: "Step 2",
+        title: "Training schedules",
+        lede: "Build the programme first. Groups and enrolment need a schedule — modules, durations and working-day rules are laid out on a visual pathway.",
+        status: "1 schedule",
+        accent: "#38bdf8",
+        bullets: [
+          "**Five-module pathway** from Personal Track Safety through to Driving Instructor / Shift Pattern.",
+          "**Working-day and bank-holiday rules** per module.",
+          "**Calendar view** maps every training day colour-coded by module.",
+        ],
+        shots: [
+          {
+            id: "pathway",
+            label: "Pathway",
+            src: "images/screens/trainee-addon/03-training-schedules.png",
+            caption: "Course pathway with module durations, modes and status.",
+            scale: 1,
           },
           {
-            src: "images/screens/trainee-hours-manager-hours/recorded-entries.png",
-            caption: "The running list of recorded entries for the trainee.",
+            id: "calendar",
+            label: "Calendar",
+            src: "images/screens/trainee-addon/03-training-calendar.png",
+            caption: "Training calendar with modules, weekends and bank holidays marked.",
+            scale: 1,
           },
+        ],
+      },
+      {
+        id: "groups",
+        step: "Step 3",
+        title: "Groups / classes",
+        lede: "Label cohorts of up to 10 trainees after a schedule exists. Each group ties enrolment to a named intake.",
+        status: "2 groups",
+        accent: "#c084fc",
+        bullets: [
+          "**Named cohorts** such as Class 1 or Euston Intake.",
+          "**Capacity tracking** — see how many places are filled.",
+          "**Edit or remove** groups as intakes change.",
+        ],
+        shots: [
           {
-            src: "images/screens/trainee-hours-manager-hours/add-entry-confirm.png",
-            caption: "Entries are confirmed before they are committed to the log.",
+            src: "images/screens/trainee-addon/04-training-groups.png",
+            caption: "Training groups with capacity badges and trainee lists.",
+            scale: 1,
           },
+        ],
+      },
+      {
+        id: "enrol",
+        step: "Step 4",
+        title: "Allocate trainees",
+        lede: "Enrol trainees onto a schedule and assign them to a group. Link a driving instructor and start date; assign a training cycle now or in step 5.",
+        status: "1 enrolled",
+        accent: "#fb923c",
+        bullets: [
+          "**Select trainee, schedule and group** in one enrolment form.",
+          "**Optional instructor** from Instructor or Senior Driver Instructor roles.",
+          "**Welcome email** sent to the trainee on enrolment.",
+        ],
+        shots: [
           {
-            src: "images/screens/trainee-hours-manager-hours/trainee-progress-rention-records.png",
-            caption: "Retention records held alongside progress for the trainee.",
+            src: "images/screens/trainee-addon/05-enrol-trainee.png",
+            caption: "Enrol a trainee — schedule, group, instructor, cycle and start date.",
+            scale: 1,
+          },
+        ],
+      },
+      {
+        id: "cycle",
+        step: "Step 5",
+        title: "Assign training cycle",
+        lede: "Link each person to a live training cycle so monitoring and assessments can be captured. Filter by group and class to manage allocations.",
+        status: "All linked",
+        accent: "#7dd3fc",
+        bullets: [
+          "**Search and filter** trainees by name, course and class.",
+          "**Manage or view** the linked competency cycle.",
+          "**Monitoring ready** once the cycle is linked.",
+        ],
+        shots: [
+          {
+            src: "images/screens/trainee-addon/06-assign-training-cycle.png",
+            caption: "Assign and manage training cycles per trainee.",
+            scale: 1,
           },
         ],
       },
     ],
+    portfolioStep: {
+      step: "Live programme",
+      title: "Trainee portfolio",
+      lede: "Once enrolled, each trainee gets a portfolio: policies, equipment log, modules, attendance, train log and report — with experience hours, instructor allocation and compliance status at a glance.",
+      accent: "#818cf8",
+      bullets: [
+        "**Policies & agreements** — signed before modules begin.",
+        "**Experience hours** against your company standard, daylight and darkness.",
+        "**Tabs for equipment, modules, attendance, train log and report**.",
+      ],
+      shots: [
+        {
+          src: "images/screens/trainee-addon/07-trainee-portfolio.png",
+          caption: "Trainee portfolio with progress, instructor, policies and module tabs.",
+          scale: 1,
+        },
+      ],
+    },
   },
 
   {
