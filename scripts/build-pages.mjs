@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 82;
+const ASSET_VERSION = 84;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -832,10 +832,11 @@ function cdpShotFigure(shot, base, { fill = false, eager = false } = {}) {
   const width = Math.max(1, Math.round(size.width * scale));
   const height = Math.max(1, Math.round(size.height * scale));
   const fillClass = fill ? " cdp-chapter__figure--fill" : "";
+  const compactClass = shot.compact ? " cdp-chapter__figure--compact" : "";
   const loading = eager ? "eager" : "lazy";
   const fetchPriority = eager ? ' fetchpriority="high"' : "";
 
-  return `              <figure class="cdp-chapter__figure shot${fillClass}" style="--shot-native-width: ${width}px">
+  return `              <figure class="cdp-chapter__figure shot${fillClass}${compactClass}" style="--shot-native-width: ${width}px">
                 <div class="shot__frame">
                   <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="${loading}" decoding="async"${fetchPriority} />
                 </div>
@@ -879,7 +880,7 @@ ${chapter.pillars
     const panels = chapter.compare
       .map(
         (item, itemIndex) => `                <div class="cdp-compare__panel" data-cdp-compare-panel="${esc(item.id)}" role="tabpanel"${itemIndex > 0 ? ' hidden aria-hidden="true"' : ""}>
-${cdpShotFigure(item.shot, base, { fill: itemIndex === 0 })}
+${cdpShotFigure(item.shot, base)}
                 </div>`
       )
       .join("\n");
@@ -903,16 +904,20 @@ ${panels}
                 </button>`
       )
       .join("\n");
-    const shots = chapter.shots?.length
-      ? `              <div class="cdp-chapter__shots cdp-chapter__shots--pair">
+    const shotBlock = chapter.shot
+      ? `              <div class="cdp-chapter__shots cdp-chapter__shots--full">
+${cdpShotFigure(chapter.shot, base, { fill: true })}
+              </div>`
+      : chapter.shots?.length
+        ? `              <div class="cdp-chapter__shots cdp-chapter__shots--pair">
 ${chapter.shots.map((shot) => cdpShotFigure(shot, base)).join("\n")}
               </div>`
-      : "";
+        : "";
 
     return `              <div class="cdp-roles" data-cdp-roles role="list" aria-label="Role access">
 ${roles}
               </div>
-${shots}`;
+${shotBlock}`;
   }
 
   if (chapter.shot) {

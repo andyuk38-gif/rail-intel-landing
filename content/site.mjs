@@ -1054,6 +1054,7 @@ export const featureGroups = [
               shot: {
                 src: "images/screens/cycles/continuous-cycles.png",
                 caption: "Continuous cycles for competencies that renew rather than expire.",
+                scale: 0.46,
               },
             },
             {
@@ -1062,6 +1063,8 @@ export const featureGroups = [
               shot: {
                 src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
                 caption: "A development point carried over into the next cycle.",
+                scale: 0.68,
+                compact: true,
               },
             },
           ],
@@ -1081,16 +1084,10 @@ export const featureGroups = [
             { name: "Driver", detail: "Own-record Monitoring tab — no company directory." },
             { name: "Company Admin", detail: "Configure roles and permissions for the operation." },
           ],
-          shots: [
-            {
-              src: "images/screens/comp-config/configure-company-role-permissions.png",
-              caption: "Configuring permissions for a company role.",
-            },
-            {
-              src: "images/screens/main-sys/role-permissions-configure.png",
-              caption: "Granular permission assignment across the platform.",
-            },
-          ],
+          shot: {
+            src: "images/screens/comp-config/configure-company-role-permissions.png",
+            caption: "Configure permissions for each company job role.",
+          },
         },
       ],
     },
