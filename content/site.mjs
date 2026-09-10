@@ -269,7 +269,7 @@ export const addons = [
     flowIntro: {
       heading: "How the module works",
       body:
-        "Follow the pathway left to right: policies, schedules, groups, allocate trainees, then assign a training cycle. Optional equipment can be prepared before enrolment. Each step unlocks the next.",
+        "Scroll through each step below — the same pathway as the module, top to bottom. Policies first, then schedules, groups, enrolment and training-cycle assignment. Optional equipment can be prepared before enrolment.",
     },
     flowSteps: [
       {

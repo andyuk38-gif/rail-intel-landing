@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=68" />
-  <link rel="stylesheet" href="../css/pages.css?v=68" />
+  <link rel="stylesheet" href="../css/style.css?v=69" />
+  <link rel="stylesheet" href="../css/pages.css?v=69" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -196,8 +196,7 @@
   <main>
     <section class="page-hero page-hero--trainee">
       <div class="container">
-        <div class="page-hero__inner page-hero__inner--split">
-          <div class="page-hero__copy">
+        <div class="page-hero__inner">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / Trainee Driver</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
           <h1 class="page-title">Run the full trainee programme — from policies to portfolio</h1>
@@ -207,269 +206,325 @@
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
           </div>
-          </div>
-          <div class="page-hero__media">
-        <figure class="shot reveal">
-          <div class="shot__frame">
-            <img src="../images/screens/trainee-addon/01-trainee-module-pathway.png?v=68" alt="The Trainee Module hub — five connected steps from setup to live monitoring." width="1024" height="550" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">The Trainee Module hub — five connected steps from setup to live monitoring.</figcaption>
-        </figure>
-          </div>
         </div>
       </div>
     </section>
 
-    <section class="page-section page-section--trainee-flow">
+    <section class="page-section page-section--trainee-journey">
       <div class="container container--showcase">
         <div class="page-section__head">
           <h2>How the module works</h2>
-          <p>Follow the pathway left to right: policies, schedules, groups, allocate trainees, then assign a training cycle. Optional equipment can be prepared before enrolment. Each step unlocks the next.</p>
+          <p>Scroll through each step below — the same pathway as the module, top to bottom. Policies first, then schedules, groups, enrolment and training-cycle assignment. Optional equipment can be prepared before enrolment.</p>
         </div>
 
-        <div class="trainee-flow reveal" data-trainee-flow data-trainee-count="7">
-          <div class="trainee-flow__chrome">
-            <div class="trainee-flow__progress" aria-hidden="true">
-              <div class="trainee-flow__progress-track">
-                <div class="trainee-flow__progress-fill" data-trainee-progress style="width: 14.285714285714286%"></div>
-              </div>
+        <div class="trainee-journey" data-trainee-journey data-trainee-count="8">
+          <aside class="trainee-journey__rail-wrap" aria-label="Module steps">
+            <div class="trainee-journey__rail-progress" aria-hidden="true">
+              <span class="trainee-journey__rail-progress-fill" data-trainee-rail-progress style="height: 12.5%"></span>
             </div>
-            <div class="trainee-flow__nav-scroll">
-              <div class="trainee-flow__nav" role="tablist" aria-label="Trainee module steps">
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-0" data-trainee-tab="0" aria-selected="true" aria-controls="trainee-panel-0" style="--trainee-accent: #2dd4bf">
-            <span class="trainee-flow__tab-index">Step 1</span>
-            <span class="trainee-flow__tab-title">Policies &amp; agreements</span>
-          </button>
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-1" data-trainee-tab="1" aria-selected="false" aria-controls="trainee-panel-1" style="--trainee-accent: #a78bfa">
-            <span class="trainee-flow__tab-index">Optional</span>
-            <span class="trainee-flow__tab-title">Equipment catalogue</span>
-          </button>
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-2" data-trainee-tab="2" aria-selected="false" aria-controls="trainee-panel-2" style="--trainee-accent: #38bdf8">
-            <span class="trainee-flow__tab-index">Step 2</span>
-            <span class="trainee-flow__tab-title">Training schedules</span>
-          </button>
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-3" data-trainee-tab="3" aria-selected="false" aria-controls="trainee-panel-3" style="--trainee-accent: #c084fc">
-            <span class="trainee-flow__tab-index">Step 3</span>
-            <span class="trainee-flow__tab-title">Groups / classes</span>
-          </button>
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-4" data-trainee-tab="4" aria-selected="false" aria-controls="trainee-panel-4" style="--trainee-accent: #fb923c">
-            <span class="trainee-flow__tab-index">Step 4</span>
-            <span class="trainee-flow__tab-title">Allocate trainees</span>
-          </button>
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-5" data-trainee-tab="5" aria-selected="false" aria-controls="trainee-panel-5" style="--trainee-accent: #7dd3fc">
-            <span class="trainee-flow__tab-index">Step 5</span>
-            <span class="trainee-flow__tab-title">Assign training cycle</span>
-          </button>
-          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-6" data-trainee-tab="6" aria-selected="false" aria-controls="trainee-panel-6" style="--trainee-accent: #818cf8">
-            <span class="trainee-flow__tab-index">Live programme</span>
-            <span class="trainee-flow__tab-title">Trainee portfolio</span>
-          </button>
+            <nav class="trainee-journey__rail">
+            <a class="trainee-journey__rail-link" href="#trainee-step-0" data-trainee-rail="0" style="--trainee-accent: #818cf8">
+              <span class="trainee-journey__rail-index">Start here</span>
+              <span class="trainee-journey__rail-title">Trainee Module hub</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-1" data-trainee-rail="1" style="--trainee-accent: #2dd4bf">
+              <span class="trainee-journey__rail-index">Step 1</span>
+              <span class="trainee-journey__rail-title">Policies &amp; agreements</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-2" data-trainee-rail="2" style="--trainee-accent: #a78bfa">
+              <span class="trainee-journey__rail-index">Optional</span>
+              <span class="trainee-journey__rail-title">Equipment catalogue</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-3" data-trainee-rail="3" style="--trainee-accent: #38bdf8">
+              <span class="trainee-journey__rail-index">Step 2</span>
+              <span class="trainee-journey__rail-title">Training schedules</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-4" data-trainee-rail="4" style="--trainee-accent: #c084fc">
+              <span class="trainee-journey__rail-index">Step 3</span>
+              <span class="trainee-journey__rail-title">Groups / classes</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-5" data-trainee-rail="5" style="--trainee-accent: #fb923c">
+              <span class="trainee-journey__rail-index">Step 4</span>
+              <span class="trainee-journey__rail-title">Allocate trainees</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-6" data-trainee-rail="6" style="--trainee-accent: #7dd3fc">
+              <span class="trainee-journey__rail-index">Step 5</span>
+              <span class="trainee-journey__rail-title">Assign training cycle</span>
+            </a>
+            <a class="trainee-journey__rail-link" href="#trainee-step-7" data-trainee-rail="7" style="--trainee-accent: #818cf8">
+              <span class="trainee-journey__rail-index">Live programme</span>
+              <span class="trainee-journey__rail-title">Trainee portfolio</span>
+            </a>
+            </nav>
+          </aside>
+
+          <div class="trainee-journey__track">
+        <article class="trainee-journey__step reveal" data-trainee-step="0" id="trainee-step-0" style="--trainee-accent: #818cf8">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
+              <p class="shot__step">Start here</p>
+              <h3 class="shot__title">Trainee Module hub</h3>
+              <p class="shot__lede">The module dashboard shows all five steps at a glance — policies, schedules, groups, enrolment and training cycles — with live status for each.</p>
+
+
+            </header>
+            <div class="trainee-journey__visual">
+
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
+                <div class="shot__frame">
+                  <img src="../images/screens/trainee-addon/01-trainee-module-pathway.png?v=69" alt="The Trainee Module hub — five connected steps from setup to live monitoring." width="1024" height="550" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">The Trainee Module hub — five connected steps from setup to live monitoring.</figcaption>
+              </figure>
               </div>
             </div>
           </div>
-
-          <div class="trainee-flow__panels">
-        <article class="trainee-flow__panel" data-trainee-panel="0" role="tabpanel" id="trainee-panel-0" aria-labelledby="trainee-tab-0" style="--trainee-accent: #2dd4bf">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
+        </article>
+        <article class="trainee-journey__step reveal" data-trainee-step="1" id="trainee-step-1" style="--trainee-accent: #2dd4bf">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Step 1</p>
               <h3 class="shot__title">Policies &amp; agreements</h3>
               <p class="shot__lede">Must exist first. Trainees sign these when they start — Module 1 and other training activities cannot begin until required policies are signed.</p>
-            <p class="trainee-flow__status"><span class="trainee-flow__status-dot" aria-hidden="true"></span>6 ready</p>
-            <ul class="spec-list trainee-flow__bullets">
+            <p class="trainee-journey__status"><span class="trainee-journey__status-dot" aria-hidden="true"></span>6 ready</p>
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Required policies and agreements</strong> configured before enrolment.</li>
               <li><strong>Default templates</strong> for SRS, job description, mobile device policy and more.</li>
               <li><strong>Custom agreements</strong> can be uploaded, edited or deactivated.</li>
             </ul>
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" style="max-width: 1024px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/02-policies-agreements.png?v=68" alt="Manage required policies — view, upload, edit or deactivate each item." width="1024" height="417" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/02-policies-agreements.png?v=69" alt="Manage required policies — view, upload, edit or deactivate each item." width="1024" height="417" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Manage required policies — view, upload, edit or deactivate each item.</figcaption>
               </figure>
               </div>
             </div>
           </div>
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
         </article>
-        <article class="trainee-flow__panel" data-trainee-panel="1" role="tabpanel" id="trainee-panel-1" aria-labelledby="trainee-tab-1" hidden style="--trainee-accent: #a78bfa">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+        <article class="trainee-journey__step reveal" data-trainee-step="2" id="trainee-step-2" style="--trainee-accent: #a78bfa" data-trainee-optional="true">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Optional</p>
               <h3 class="shot__title">Equipment catalogue</h3>
               <p class="shot__lede">Prepare items for trainees to sign when issued. Adopt a global template from the platform catalogue or create custom equipment.</p>
 
-            <ul class="spec-list trainee-flow__bullets">
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Global templates</strong> such as Train Driver (10 items) added in one action.</li>
               <li><strong>Custom equipment</strong> for anything specific to your operation.</li>
               <li><strong>Signed on issue</strong> — tracked on the trainee portfolio Equipment log tab.</li>
             </ul>
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" style="max-width: 1024px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/equipment-catalogue.png?v=68" alt="Adopt the Train Driver equipment template or build your own catalogue." width="1024" height="349" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/equipment-catalogue.png?v=69" alt="Adopt the Train Driver equipment template or build your own catalogue." width="1024" height="349" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Adopt the Train Driver equipment template or build your own catalogue.</figcaption>
               </figure>
               </div>
             </div>
           </div>
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
         </article>
-        <article class="trainee-flow__panel" data-trainee-panel="2" role="tabpanel" id="trainee-panel-2" aria-labelledby="trainee-tab-2" hidden style="--trainee-accent: #38bdf8">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+        <article class="trainee-journey__step reveal" data-trainee-step="3" id="trainee-step-3" style="--trainee-accent: #38bdf8">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Step 2</p>
               <h3 class="shot__title">Training schedules</h3>
               <p class="shot__lede">Build the programme first. Groups and enrolment need a schedule — modules, durations and working-day rules are laid out on a visual pathway.</p>
-            <p class="trainee-flow__status"><span class="trainee-flow__status-dot" aria-hidden="true"></span>1 schedule</p>
-            <ul class="spec-list trainee-flow__bullets">
+            <p class="trainee-journey__status"><span class="trainee-journey__status-dot" aria-hidden="true"></span>1 schedule</p>
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Five-module pathway</strong> from Personal Track Safety through to Driving Instructor / Shift Pattern.</li>
               <li><strong>Working-day and bank-holiday rules</strong> per module.</li>
               <li><strong>Calendar view</strong> maps every training day colour-coded by module.</li>
             </ul>
+            </header>
+            <div class="trainee-journey__visual">
+            <div class="trainee-journey__subtabs" role="tablist" aria-label="Training schedules views">
+              <button type="button" class="trainee-journey__subtab" role="tab" data-trainee-subtab="pathway" aria-selected="true">Pathway</button>
+              <button type="button" class="trainee-journey__subtab" role="tab" data-trainee-subtab="calendar" aria-selected="false">Calendar</button>
             </div>
-            <div class="trainee-flow__visual reveal">
-            <div class="trainee-flow__subtabs" role="tablist" aria-label="Training schedules views">
-              <button type="button" class="trainee-flow__subtab" role="tab" data-trainee-subtab="pathway" aria-selected="true">Pathway</button>
-              <button type="button" class="trainee-flow__subtab" role="tab" data-trainee-subtab="calendar" aria-selected="false">Calendar</button>
-            </div>
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" data-trainee-shot="pathway" style="max-width: 1024px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot" data-trainee-shot="pathway">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/03-training-schedules.png?v=68" alt="Course pathway with module durations, modes and status." width="1024" height="500" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/03-training-schedules.png?v=69" alt="Course pathway with module durations, modes and status." width="1024" height="500" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Course pathway with module durations, modes and status.</figcaption>
               </figure>
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" data-trainee-shot="calendar" hidden aria-hidden="true" style="max-width: 1024px">
+              <figure class="trainee-journey__figure shot" data-trainee-shot="calendar" hidden aria-hidden="true">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/03-training-calendar.png?v=68" alt="Training calendar with modules, weekends and bank holidays marked." width="1024" height="920" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/03-training-calendar.png?v=69" alt="Training calendar with modules, weekends and bank holidays marked." width="1024" height="920" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Training calendar with modules, weekends and bank holidays marked.</figcaption>
               </figure>
               </div>
             </div>
           </div>
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
         </article>
-        <article class="trainee-flow__panel" data-trainee-panel="3" role="tabpanel" id="trainee-panel-3" aria-labelledby="trainee-tab-3" hidden style="--trainee-accent: #c084fc">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+        <article class="trainee-journey__step reveal" data-trainee-step="4" id="trainee-step-4" style="--trainee-accent: #c084fc">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Step 3</p>
               <h3 class="shot__title">Groups / classes</h3>
               <p class="shot__lede">Label cohorts of up to 10 trainees after a schedule exists. Each group ties enrolment to a named intake.</p>
-            <p class="trainee-flow__status"><span class="trainee-flow__status-dot" aria-hidden="true"></span>2 groups</p>
-            <ul class="spec-list trainee-flow__bullets">
+            <p class="trainee-journey__status"><span class="trainee-journey__status-dot" aria-hidden="true"></span>2 groups</p>
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Named cohorts</strong> such as Class 1 or Euston Intake.</li>
               <li><strong>Capacity tracking</strong> — see how many places are filled.</li>
               <li><strong>Edit or remove</strong> groups as intakes change.</li>
             </ul>
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" style="max-width: 1024px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/04-training-groups.png?v=68" alt="Training groups with capacity badges and trainee lists." width="1024" height="205" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/04-training-groups.png?v=69" alt="Training groups with capacity badges and trainee lists." width="1024" height="205" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Training groups with capacity badges and trainee lists.</figcaption>
               </figure>
               </div>
             </div>
           </div>
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
         </article>
-        <article class="trainee-flow__panel" data-trainee-panel="4" role="tabpanel" id="trainee-panel-4" aria-labelledby="trainee-tab-4" hidden style="--trainee-accent: #fb923c">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+        <article class="trainee-journey__step reveal" data-trainee-step="5" id="trainee-step-5" style="--trainee-accent: #fb923c">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Step 4</p>
               <h3 class="shot__title">Allocate trainees</h3>
               <p class="shot__lede">Enrol trainees onto a schedule and assign them to a group. Link a driving instructor and start date; assign a training cycle now or in step 5.</p>
-            <p class="trainee-flow__status"><span class="trainee-flow__status-dot" aria-hidden="true"></span>1 enrolled</p>
-            <ul class="spec-list trainee-flow__bullets">
+            <p class="trainee-journey__status"><span class="trainee-journey__status-dot" aria-hidden="true"></span>1 enrolled</p>
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Select trainee, schedule and group</strong> in one enrolment form.</li>
               <li><strong>Optional instructor</strong> from Instructor or Senior Driver Instructor roles.</li>
               <li><strong>Welcome email</strong> sent to the trainee on enrolment.</li>
             </ul>
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" style="max-width: 473px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/05-enrol-trainee.png?v=68" alt="Enrol a trainee — schedule, group, instructor, cycle and start date." width="473" height="651" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/05-enrol-trainee.png?v=69" alt="Enrol a trainee — schedule, group, instructor, cycle and start date." width="473" height="651" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Enrol a trainee — schedule, group, instructor, cycle and start date.</figcaption>
               </figure>
               </div>
             </div>
           </div>
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
         </article>
-        <article class="trainee-flow__panel" data-trainee-panel="5" role="tabpanel" id="trainee-panel-5" aria-labelledby="trainee-tab-5" hidden style="--trainee-accent: #7dd3fc">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+        <article class="trainee-journey__step reveal" data-trainee-step="6" id="trainee-step-6" style="--trainee-accent: #7dd3fc">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Step 5</p>
               <h3 class="shot__title">Assign training cycle</h3>
               <p class="shot__lede">Link each person to a live training cycle so monitoring and assessments can be captured. Filter by group and class to manage allocations.</p>
-            <p class="trainee-flow__status"><span class="trainee-flow__status-dot" aria-hidden="true"></span>All linked</p>
-            <ul class="spec-list trainee-flow__bullets">
+            <p class="trainee-journey__status"><span class="trainee-journey__status-dot" aria-hidden="true"></span>All linked</p>
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Search and filter</strong> trainees by name, course and class.</li>
               <li><strong>Manage or view</strong> the linked competency cycle.</li>
               <li><strong>Monitoring ready</strong> once the cycle is linked.</li>
             </ul>
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" style="max-width: 1024px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/06-assign-training-cycle.png?v=68" alt="Assign and manage training cycles per trainee." width="1024" height="219" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/06-assign-training-cycle.png?v=69" alt="Assign and manage training cycles per trainee." width="1024" height="219" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Assign and manage training cycles per trainee.</figcaption>
               </figure>
               </div>
             </div>
           </div>
+          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>
         </article>
-        <article class="trainee-flow__panel" data-trainee-panel="6" role="tabpanel" id="trainee-panel-6" aria-labelledby="trainee-tab-6" hidden style="--trainee-accent: #818cf8">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+        <article class="trainee-journey__step reveal" data-trainee-step="7" id="trainee-step-7" style="--trainee-accent: #818cf8">
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">Live programme</p>
               <h3 class="shot__title">Trainee portfolio</h3>
               <p class="shot__lede">Once enrolled, each trainee gets a portfolio: policies, equipment log, modules, attendance, train log and report — with experience hours, instructor allocation and compliance status at a glance.</p>
 
-            <ul class="spec-list trainee-flow__bullets">
+            <ul class="spec-list trainee-journey__bullets">
               <li><strong>Policies &amp; agreements</strong> — signed before modules begin.</li>
               <li><strong>Experience hours</strong> against your company standard, daylight and darkness.</li>
               <li><strong>Tabs for equipment, modules, attendance, train log and report</strong>.</li>
             </ul>
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 
-              <div class="trainee-flow__stage">
-              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide" style="max-width: 947px">
+              <div class="trainee-journey__stage">
+              <figure class="trainee-journey__figure shot">
                 <div class="shot__frame">
-                  <img src="../images/screens/trainee-addon/07-trainee-portfolio.png?v=68" alt="Trainee portfolio with progress, instructor, policies and module tabs." width="947" height="577" loading="lazy" decoding="async" />
+                  <img src="../images/screens/trainee-addon/07-trainee-portfolio.png?v=69" alt="Trainee portfolio with progress, instructor, policies and module tabs." width="947" height="577" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Trainee portfolio with progress, instructor, policies and module tabs.</figcaption>
               </figure>
               </div>
             </div>
           </div>
-        </article>
-          </div>
 
-          <div class="trainee-flow__controls">
-            <button type="button" class="trainee-flow__btn trainee-flow__btn--ghost" data-trainee-prev disabled>
-              <span aria-hidden="true">←</span> Previous
-            </button>
-            <p class="trainee-flow__counter" data-trainee-counter aria-live="polite">1 / 7</p>
-            <button type="button" class="trainee-flow__btn trainee-flow__btn--primary" data-trainee-next>
-              Next step <span aria-hidden="true">→</span>
-            </button>
+        </article>
           </div>
         </div>
       </div>
@@ -503,6 +558,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=68"></script>
+  <script src="../js/site.js?v=69"></script>
 </body>
 </html>

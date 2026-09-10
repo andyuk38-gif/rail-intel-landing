@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 68;
+const ASSET_VERSION = 69;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -402,7 +402,7 @@ ${sections}
   );
 }
 
-function flowShotFigure(shot, base, hidden = false) {
+function journeyShotFigure(shot, base, hidden = false) {
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
   const scale = typeof shot.scale === "number" ? shot.scale : 1;
@@ -411,7 +411,7 @@ function flowShotFigure(shot, base, hidden = false) {
   const shotId = shot.id ? ` data-trainee-shot="${esc(shot.id)}"` : "";
   const hiddenAttr = hidden ? ' hidden aria-hidden="true"' : "";
 
-  return `              <figure class="trainee-flow__figure shot shot--gallery shot--gallery-wide"${shotId}${hiddenAttr} style="max-width: ${width}px">
+  return `              <figure class="trainee-journey__figure shot"${shotId}${hiddenAttr}>
                 <div class="shot__frame">
                   <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
                 </div>
@@ -419,15 +419,15 @@ function flowShotFigure(shot, base, hidden = false) {
               </figure>`;
 }
 
-function renderTraineeFlowStep(step, base, index, total) {
+function renderJourneyStep(step, base, index, total) {
   const bullets = step.bullets
-    ? `            <ul class="spec-list trainee-flow__bullets">\n${step.bullets
+    ? `            <ul class="spec-list trainee-journey__bullets">\n${step.bullets
         .map((item) => `              <li>${rich(item)}</li>`)
         .join("\n")}\n            </ul>`
     : "";
 
   const status = step.status
-    ? `            <p class="trainee-flow__status"><span class="trainee-flow__status-dot" aria-hidden="true"></span>${esc(step.status)}</p>`
+    ? `            <p class="trainee-journey__status"><span class="trainee-journey__status-dot" aria-hidden="true"></span>${esc(step.status)}</p>`
     : "";
 
   const optional = step.optional ? ` data-trainee-optional="true"` : "";
@@ -435,11 +435,11 @@ function renderTraineeFlowStep(step, base, index, total) {
   const hasSubViews = shots.length > 1 && shots.some((shot) => shot.label);
 
   const subtabs = hasSubViews
-    ? `            <div class="trainee-flow__subtabs" role="tablist" aria-label="${esc(step.title)} views">
+    ? `            <div class="trainee-journey__subtabs" role="tablist" aria-label="${esc(step.title)} views">
 ${shots
   .map(
     (shot, shotIndex) =>
-      `              <button type="button" class="trainee-flow__subtab" role="tab" data-trainee-subtab="${esc(
+      `              <button type="button" class="trainee-journey__subtab" role="tab" data-trainee-subtab="${esc(
         shot.id || String(shotIndex)
       )}" aria-selected="${shotIndex === 0 ? "true" : "false"}">${esc(shot.label || `View ${shotIndex + 1}`)}</button>`
   )
@@ -447,78 +447,87 @@ ${shots
             </div>`
     : "";
 
-  const figures = shots.map((shot, shotIndex) => flowShotFigure(shot, base, hasSubViews && shotIndex > 0)).join("\n");
+  const figures = shots.map((shot, shotIndex) => journeyShotFigure(shot, base, hasSubViews && shotIndex > 0)).join("\n");
+  const connector =
+    index < total - 1
+      ? `          <div class="trainee-journey__connector" aria-hidden="true">
+            <span class="trainee-journey__connector-line"></span>
+            <span class="trainee-journey__connector-arrow"></span>
+          </div>`
+      : "";
 
-  return `        <article class="trainee-flow__panel" data-trainee-panel="${index}" role="tabpanel" id="trainee-panel-${index}" aria-labelledby="trainee-tab-${index}"${index === 0 ? "" : ' hidden'} style="--trainee-accent: ${esc(step.accent || "#818cf8")}">
-          <div class="trainee-flow__panel-grid">
-            <div class="trainee-flow__copy reveal">
+  return `        <article class="trainee-journey__step reveal" data-trainee-step="${index}" id="trainee-step-${index}" style="--trainee-accent: ${esc(step.accent || "#818cf8")}"${optional}>
+          <div class="trainee-journey__marker" aria-hidden="true">
+            <span class="trainee-journey__marker-dot"></span>
+          </div>
+          <div class="trainee-journey__content">
+            <header class="trainee-journey__head">
               <p class="shot__step">${esc(step.step)}</p>
               <h3 class="shot__title">${esc(step.title)}</h3>
               <p class="shot__lede">${esc(step.lede)}</p>
 ${status}
 ${bullets}
-            </div>
-            <div class="trainee-flow__visual reveal">
+            </header>
+            <div class="trainee-journey__visual">
 ${subtabs}
-              <div class="trainee-flow__stage">
+              <div class="trainee-journey__stage">
 ${figures}
               </div>
             </div>
           </div>
+${connector}
         </article>`;
 }
 
 function renderTraineeFlow(addon, base) {
-  const steps = [...(addon.flowSteps || [])];
+  const steps = [];
+  if (addon.heroShot) {
+    steps.push({
+      id: "overview",
+      step: "Start here",
+      title: "Trainee Module hub",
+      lede:
+        "The module dashboard shows all five steps at a glance — policies, schedules, groups, enrolment and training cycles — with live status for each.",
+      accent: "#818cf8",
+      shots: [addon.heroShot],
+    });
+  }
+  steps.push(...(addon.flowSteps || []));
   if (addon.portfolioStep) steps.push(addon.portfolioStep);
   const total = steps.length;
 
-  const nav = steps
+  const rail = steps
     .map(
-      (step, index) => `          <button type="button" class="trainee-flow__tab" role="tab" id="trainee-tab-${index}" data-trainee-tab="${index}" aria-selected="${
-        index === 0 ? "true" : "false"
-      }" aria-controls="trainee-panel-${index}" style="--trainee-accent: ${esc(step.accent || "#818cf8")}">
-            <span class="trainee-flow__tab-index">${esc(step.step)}</span>
-            <span class="trainee-flow__tab-title">${esc(step.title)}</span>
-          </button>`
+      (step, index) => `            <a class="trainee-journey__rail-link" href="#trainee-step-${index}" data-trainee-rail="${index}" style="--trainee-accent: ${esc(
+        step.accent || "#818cf8"
+      )}">
+              <span class="trainee-journey__rail-index">${esc(step.step)}</span>
+              <span class="trainee-journey__rail-title">${esc(step.title)}</span>
+            </a>`
     )
     .join("\n");
 
-  const panels = steps.map((step, index) => renderTraineeFlowStep(step, base, index, total)).join("\n");
+  const track = steps.map((step, index) => renderJourneyStep(step, base, index, total)).join("\n");
 
-  return `    <section class="page-section page-section--trainee-flow">
+  return `    <section class="page-section page-section--trainee-journey">
       <div class="container container--showcase">
         <div class="page-section__head">
           <h2>${esc(addon.flowIntro.heading)}</h2>
           <p>${esc(addon.flowIntro.body)}</p>
         </div>
 
-        <div class="trainee-flow reveal" data-trainee-flow data-trainee-count="${total}">
-          <div class="trainee-flow__chrome">
-            <div class="trainee-flow__progress" aria-hidden="true">
-              <div class="trainee-flow__progress-track">
-                <div class="trainee-flow__progress-fill" data-trainee-progress style="width: ${100 / total}%"></div>
-              </div>
+        <div class="trainee-journey" data-trainee-journey data-trainee-count="${total}">
+          <aside class="trainee-journey__rail-wrap" aria-label="Module steps">
+            <div class="trainee-journey__rail-progress" aria-hidden="true">
+              <span class="trainee-journey__rail-progress-fill" data-trainee-rail-progress style="height: ${100 / total}%"></span>
             </div>
-            <div class="trainee-flow__nav-scroll">
-              <div class="trainee-flow__nav" role="tablist" aria-label="Trainee module steps">
-${nav}
-              </div>
-            </div>
-          </div>
+            <nav class="trainee-journey__rail">
+${rail}
+            </nav>
+          </aside>
 
-          <div class="trainee-flow__panels">
-${panels}
-          </div>
-
-          <div class="trainee-flow__controls">
-            <button type="button" class="trainee-flow__btn trainee-flow__btn--ghost" data-trainee-prev disabled>
-              <span aria-hidden="true">←</span> Previous
-            </button>
-            <p class="trainee-flow__counter" data-trainee-counter aria-live="polite">1 / ${total}</p>
-            <button type="button" class="trainee-flow__btn trainee-flow__btn--primary" data-trainee-next>
-              Next step <span aria-hidden="true">→</span>
-            </button>
+          <div class="trainee-journey__track">
+${track}
           </div>
         </div>
       </div>
@@ -543,16 +552,7 @@ ${note}
             <a href="${base}products/" class="btn btn-ghost btn-lg">All add-ons</a>
           </div>`;
 
-  const heroInner = addon.heroShot
-    ? `        <div class="page-hero__inner page-hero__inner--split">
-          <div class="page-hero__copy">
-${heroCopy}
-          </div>
-          <div class="page-hero__media">
-${renderShot(addon.heroShot, base, { fill: true })}
-          </div>
-        </div>`
-    : `        <div class="page-hero__inner">
+  const heroInner = `        <div class="page-hero__inner">
 ${heroCopy}
         </div>`;
 

@@ -485,88 +485,96 @@
     startAuto();
   });
 
-  /* ---------- Trainee Driver interactive pathway ---------- */
+  /* ---------- Trainee Driver vertical journey ---------- */
 
-  Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-flow]"), function (flow) {
-    var tabs = Array.prototype.slice.call(flow.querySelectorAll("[data-trainee-tab]"));
-    var panels = Array.prototype.slice.call(flow.querySelectorAll("[data-trainee-panel]"));
-    var prev = flow.querySelector("[data-trainee-prev]");
-    var next = flow.querySelector("[data-trainee-next]");
-    var counter = flow.querySelector("[data-trainee-counter]");
-    var progress = flow.querySelector("[data-trainee-progress]");
-    var count = Number(flow.getAttribute("data-trainee-count")) || panels.length;
-    var index = 0;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-journey]"), function (journey) {
+    var steps = Array.prototype.slice.call(journey.querySelectorAll("[data-trainee-step]"));
+    var railLinks = Array.prototype.slice.call(journey.querySelectorAll("[data-trainee-rail]"));
+    var progress = journey.querySelector("[data-trainee-rail-progress]");
+    var count = Number(journey.getAttribute("data-trainee-count")) || steps.length;
+    var active = 0;
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function sync() {
-      tabs.forEach(function (tab, i) {
-        var selected = i === index;
-        tab.setAttribute("aria-selected", selected ? "true" : "false");
-        if (selected) tab.scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
+    function sync(index) {
+      active = index;
+      railLinks.forEach(function (link, i) {
+        if (i === index) link.classList.add("is-active");
+        else link.classList.remove("is-active");
       });
-      panels.forEach(function (panel, i) {
-        if (i === index) {
-          panel.hidden = false;
-          panel.removeAttribute("aria-hidden");
+      steps.forEach(function (step, i) {
+        if (i === index) step.classList.add("is-active");
+        else step.classList.remove("is-active");
+      });
+      if (progress) {
+        var percent = ((index + 1) / count) * 100;
+        if (window.matchMedia("(max-width: 960px)").matches) {
+          progress.style.height = "100%";
+          progress.style.width = percent + "%";
+          journey.style.setProperty("--trainee-rail-width", percent + "%");
         } else {
-          panel.hidden = true;
-          panel.setAttribute("aria-hidden", "true");
+          progress.style.width = "";
+          progress.style.height = percent + "%";
         }
-      });
-      if (prev) prev.disabled = index === 0;
-      if (next) {
-        next.disabled = index >= count - 1;
-        if (index >= count - 1) next.innerHTML = "Complete";
-        else next.innerHTML = 'Next step <span aria-hidden="true">→</span>';
       }
-      if (counter) counter.textContent = index + 1 + " / " + count;
-      if (progress) progress.style.width = ((index + 1) / count) * 100 + "%";
+      var activeLink = railLinks[index];
+      if (activeLink && window.matchMedia("(max-width: 960px)").matches) {
+        activeLink.scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
+      }
     }
 
-    function go(to) {
-      index = Math.max(0, Math.min(count - 1, to));
-      sync();
+    if ("IntersectionObserver" in window && steps.length) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var visible = entries
+            .filter(function (entry) {
+              return entry.isIntersecting;
+            })
+            .sort(function (a, b) {
+              return b.intersectionRatio - a.intersectionRatio;
+            });
+          if (!visible.length) return;
+          var step = visible[0].target;
+          var index = Number(step.getAttribute("data-trainee-step"));
+          if (!Number.isNaN(index) && index !== active) sync(index);
+        },
+        { rootMargin: "-20% 0px -45% 0px", threshold: [0.2, 0.35, 0.5, 0.65] }
+      );
+      steps.forEach(function (step) {
+        observer.observe(step);
+      });
+    } else {
+      sync(0);
     }
 
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        go(Number(tab.getAttribute("data-trainee-tab")) || 0);
+    railLinks.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var index = Number(link.getAttribute("data-trainee-rail"));
+        var target = steps[index];
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+        sync(index);
       });
     });
 
-    if (prev) prev.addEventListener("click", function () { go(index - 1); });
-    if (next) next.addEventListener("click", function () {
-      if (index < count - 1) go(index + 1);
-    });
-
-    flow.addEventListener("keydown", function (event) {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        go(index - 1);
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        go(index + 1);
-      }
-    });
-
-    panels.forEach(function (panel) {
-      var subtabs = Array.prototype.slice.call(panel.querySelectorAll("[data-trainee-subtab]"));
+    steps.forEach(function (step) {
+      var subtabs = Array.prototype.slice.call(step.querySelectorAll("[data-trainee-subtab]"));
       if (!subtabs.length) return;
 
-      var figures = Array.prototype.slice.call(panel.querySelectorAll("[data-trainee-shot]"));
+      var figures = Array.prototype.slice.call(step.querySelectorAll("[data-trainee-shot]"));
       if (!figures.length) {
-        figures = Array.prototype.slice.call(panel.querySelectorAll(".trainee-flow__figure"));
+        figures = Array.prototype.slice.call(step.querySelectorAll(".trainee-journey__figure"));
       }
 
       function showSub(id) {
         subtabs.forEach(function (subtab) {
-          var active = subtab.getAttribute("data-trainee-subtab") === id;
-          subtab.setAttribute("aria-selected", active ? "true" : "false");
+          var activeTab = subtab.getAttribute("data-trainee-subtab") === id;
+          subtab.setAttribute("aria-selected", activeTab ? "true" : "false");
         });
         figures.forEach(function (figure, figureIndex) {
           var shotId = figure.getAttribute("data-trainee-shot");
-          var active = shotId ? shotId === id : figureIndex === Number(id) || figureIndex === 0;
-          if (active) {
+          var isActive = shotId ? shotId === id : figureIndex === Number(id) || figureIndex === 0;
+          if (isActive) {
             figure.hidden = false;
             figure.removeAttribute("aria-hidden");
           } else {
@@ -583,6 +591,6 @@
       });
     });
 
-    sync();
+    sync(0);
   });
 })();
