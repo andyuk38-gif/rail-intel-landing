@@ -507,14 +507,9 @@
       });
       if (progress) {
         var percent = ((index + 1) / count) * 100;
-        if (window.matchMedia("(max-width: 960px)").matches) {
-          progress.style.height = "100%";
-          progress.style.width = percent + "%";
-          journey.style.setProperty("--trainee-rail-width", percent + "%");
-        } else {
-          progress.style.width = "";
-          progress.style.height = percent + "%";
-        }
+        progress.style.width = percent + "%";
+        progress.style.height = "100%";
+        journey.style.setProperty("--trainee-rail-width", percent + "%");
       }
       var activeLink = railLinks[index];
       if (activeLink && window.matchMedia("(max-width: 960px)").matches) {

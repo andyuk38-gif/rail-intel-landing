@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 69;
+const ASSET_VERSION = 70;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -402,7 +402,7 @@ ${sections}
   );
 }
 
-function journeyShotFigure(shot, base, hidden = false) {
+function journeyShotFigure(shot, base, hidden = false, eager = false) {
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
   const scale = typeof shot.scale === "number" ? shot.scale : 1;
@@ -410,10 +410,13 @@ function journeyShotFigure(shot, base, hidden = false) {
   const height = Math.max(1, Math.round(size.height * scale));
   const shotId = shot.id ? ` data-trainee-shot="${esc(shot.id)}"` : "";
   const hiddenAttr = hidden ? ' hidden aria-hidden="true"' : "";
+  const fillClass = width < 960 ? " trainee-journey__figure--fill" : "";
+  const loading = eager ? "eager" : "lazy";
+  const fetchPriority = eager ? ' fetchpriority="high"' : "";
 
-  return `              <figure class="trainee-journey__figure shot"${shotId}${hiddenAttr}>
+  return `              <figure class="trainee-journey__figure shot${fillClass}"${shotId}${hiddenAttr} style="--shot-native-width: ${width}px">
                 <div class="shot__frame">
-                  <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+                  <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="${loading}" decoding="async"${fetchPriority} />
                 </div>
                 <figcaption class="shot__caption">${esc(shot.caption || "")}</figcaption>
               </figure>`;
@@ -447,7 +450,9 @@ ${shots
             </div>`
     : "";
 
-  const figures = shots.map((shot, shotIndex) => journeyShotFigure(shot, base, hasSubViews && shotIndex > 0)).join("\n");
+  const figures = shots
+    .map((shot, shotIndex) => journeyShotFigure(shot, base, hasSubViews && shotIndex > 0, index === 0 && shotIndex === 0))
+    .join("\n");
   const connector =
     index < total - 1
       ? `          <div class="trainee-journey__connector" aria-hidden="true">
@@ -510,7 +515,7 @@ function renderTraineeFlow(addon, base) {
   const track = steps.map((step, index) => renderJourneyStep(step, base, index, total)).join("\n");
 
   return `    <section class="page-section page-section--trainee-journey">
-      <div class="container container--showcase">
+      <div class="container container--trainee-journey">
         <div class="page-section__head">
           <h2>${esc(addon.flowIntro.heading)}</h2>
           <p>${esc(addon.flowIntro.body)}</p>
@@ -519,7 +524,7 @@ function renderTraineeFlow(addon, base) {
         <div class="trainee-journey" data-trainee-journey data-trainee-count="${total}">
           <aside class="trainee-journey__rail-wrap" aria-label="Module steps">
             <div class="trainee-journey__rail-progress" aria-hidden="true">
-              <span class="trainee-journey__rail-progress-fill" data-trainee-rail-progress style="height: ${100 / total}%"></span>
+              <span class="trainee-journey__rail-progress-fill" data-trainee-rail-progress style="width: ${100 / total}%"></span>
             </div>
             <nav class="trainee-journey__rail">
 ${rail}
