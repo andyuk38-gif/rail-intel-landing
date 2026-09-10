@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 72;
+const ASSET_VERSION = 73;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -542,26 +542,48 @@ ${track}
 
 function renderQaSection(section, base) {
   if (!section) return "";
-  const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
+  const body = (section.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
   const bullets = section.bullets
-    ? `          <ul class="spec-list">\n${section.bullets
-        .map((item) => `            <li>${rich(item)}</li>`)
-        .join("\n")}\n          </ul>`
+    ? `            <ul class="spec-list trainee-qa__bullets">\n${section.bullets
+        .map((item) => `              <li>${rich(item)}</li>`)
+        .join("\n")}\n            </ul>`
     : "";
   const link = section.link
-    ? `        <div class="page-actions">
-          <a href="${base}${section.link.href}" class="btn btn-ghost btn-lg">${esc(section.link.label)}</a>
-        </div>`
+    ? `            <div class="page-actions trainee-qa__actions">
+              <a href="${base}${section.link.href}" class="btn btn-ghost btn-lg">${esc(section.link.label)}</a>
+            </div>`
     : "";
 
-  return `    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>${esc(section.heading)}</h2>
+  let visual = "";
+  if (section.shot) {
+    const size = manifest[section.shot.src];
+    if (!size) throw new Error(`Missing screenshot in manifest: ${section.shot.src}`);
+    const scale = typeof section.shot.scale === "number" ? section.shot.scale : 1;
+    const width = Math.max(1, Math.round(size.width * scale));
+    const height = Math.max(1, Math.round(size.height * scale));
+    visual = `          <div class="trainee-qa__visual reveal">
+            <figure class="trainee-qa__figure shot" style="--shot-native-width: ${width}px">
+              <div class="shot__frame">
+                <img src="${base}${section.shot.src}?v=${ASSET_VERSION}" alt="${esc(section.shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="lazy" decoding="async" />
+              </div>
+              <figcaption class="shot__caption">${esc(section.shot.caption || "")}</figcaption>
+            </figure>
+          </div>`;
+  }
+
+  return `    <section class="page-section page-section--trainee-qa">
+      <div class="container container--trainee-journey">
+        <div class="trainee-qa reveal">
+          <div class="trainee-qa__grid">
+            <div class="trainee-qa__copy">
+              <h2>${esc(section.heading)}</h2>
 ${body}
 ${bullets}
-        </div>
 ${link}
+            </div>
+${visual}
+          </div>
+        </div>
       </div>
     </section>`;
 }

@@ -436,6 +436,12 @@ export const addons = [
         href: "products/qa-verifications.html",
         label: "About QA Verifications",
       },
+      shot: {
+        src: "images/screens/trainee-addon/your-team-compliance.png",
+        caption:
+          "Your team's compliance on the dashboard — live review and advisory counts per employee when QA Verifications is active.",
+        scale: 1,
+      },
     },
   },
 

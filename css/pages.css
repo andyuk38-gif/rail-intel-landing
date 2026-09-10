@@ -1943,3 +1943,84 @@ body.lightbox-open {
     transition: none;
   }
 }
+
+/* ---------- Trainee Driver QA section ---------- */
+
+.page-section--trainee-qa {
+  padding-top: 0;
+}
+
+.trainee-qa {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    radial-gradient(90% 70% at 0% 0%, rgba(129, 140, 248, 0.1), transparent 55%),
+    linear-gradient(180deg, rgba(16, 21, 29, 0.96), rgba(10, 13, 18, 0.98));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.trainee-qa__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 2rem 2.5rem;
+  align-items: center;
+  padding: clamp(1.35rem, 3vw, 2rem);
+}
+
+.trainee-qa__copy h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0 0 0.85rem;
+}
+
+.trainee-qa__copy p {
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.trainee-qa__bullets {
+  margin-top: 1rem;
+}
+
+.trainee-qa__actions {
+  margin-top: 1.35rem;
+  margin-bottom: 0;
+}
+
+.trainee-qa__visual {
+  min-width: 0;
+}
+
+.trainee-qa__figure {
+  margin: 0;
+  width: 100%;
+}
+
+.trainee-qa__figure .shot__frame {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.42);
+  cursor: zoom-in;
+}
+
+.trainee-qa__figure .shot__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.trainee-qa__figure .shot__caption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .trainee-qa__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
