@@ -326,15 +326,11 @@ export const addons = [
         ],
         shots: [
           {
-            id: "pathway",
-            label: "Pathway",
             src: "images/screens/trainee-addon/03-training-schedules.png",
             caption: "Course pathway with module durations, modes and status.",
             scale: 1,
           },
           {
-            id: "calendar",
-            label: "Calendar",
             src: "images/screens/trainee-addon/03-training-calendar.png",
             caption: "Training calendar with modules, weekends and bank holidays marked.",
             scale: 1,
@@ -952,6 +948,136 @@ export const featureGroups = [
           {
             src: "images/screens/monitor-plans-incidents/submitted-plan.png",
             caption: "A submitted plan retained against the record.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "cdp-monitoring",
+    name: "CDP Monitoring",
+    summary: "Track competence development plans, carry findings across cycles and govern access by role.",
+    tagline: "Open development points that stay visible until they are closed",
+    lead:
+      "A competence development plan (CDP) is how Rail Intel records what still needs to improve after an assessment, incident or monitoring review — what was agreed, who owns it and whether it was completed. CDPs live on the Monitoring tab of the employee record, link back to the competence activity that raised them, and carry forward automatically when a continuous cycle renews.",
+    sections: [
+      {
+        heading: "The Monitoring tab on the employee record",
+        body: [
+          "The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and — where the Trainee Driver module is active — performance and support plans.",
+          "Managers and assessors with the right permissions see the full picture for people in their scope. Employees with own-record access see their own monitoring history without opening the company directory.",
+        ],
+        bullets: [
+          "**Incidents and CDPs in one place** — nothing logged in one system and chased in another.",
+          "**Status at a glance** — open, in progress and completed plans stay on the record.",
+          "**Tied to the person** — monitoring follows the employee, not a spreadsheet row.",
+        ],
+        shots: [
+          {
+            src: "images/screens/monitor-plans-incidents/monitor-incident-overview.png",
+            caption: "Monitoring overview with allocated incidents and competence development plans.",
+            scale: 1,
+            full: true,
+          },
+        ],
+      },
+      {
+        heading: "What a competence development plan contains",
+        body: [
+          "A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity — typically when assessment criteria are flagged — and stays on the record until formally closed.",
+        ],
+        bullets: [
+          "**Linked to the finding** — the plan relates to the assessment or incident that triggered it.",
+          "**Agreed actions** — what the employee and manager or assessor committed to.",
+          "**Completion tracked** — closure is recorded on the record, not assumed.",
+        ],
+        shots: [
+          {
+            src: "images/screens/monitor-plans-incidents/cdp-plan-overview.png",
+            caption: "Competence development plan overview for the employee.",
+          },
+          {
+            src: "images/screens/monitor-plans-incidents/submitted-plan.png",
+            caption: "A submitted plan retained against the record.",
+          },
+        ],
+      },
+      {
+        heading: "Raised from assessments and incidents",
+        body: [
+          "During an assessment, criteria can be flagged on the basis of recorded observations rather than silently passed. A competence development plan can be raised from that flagged finding so the shortfall is managed, not forgotten at the end of the shift.",
+          "Incidents are recorded company-wide and allocated to the employees involved. The Monitoring tab shows what is allocated to that individual, so the competence question behind an incident is answered when the linked development work is done.",
+        ],
+        shots: [
+          {
+            src: "images/screens/assessing/flagged-based-on-observations.png",
+            caption: "Criteria flagged on the basis of recorded observations.",
+          },
+          {
+            src: "images/screens/monitor-plans-incidents/incidents-allocated.png",
+            caption: "Incidents allocated to a specific employee.",
+          },
+        ],
+      },
+      {
+        heading: "Automatic carryover between cycles",
+        body: [
+          "Competencies that renew on a continuous cycle do not wipe open development work at the boundary. When a new cycle period starts, scheduled assessment events and open CDP items carry over automatically — nothing is re-keyed and nothing still open disappears.",
+          "Closed cycles remain in history. Carryover applies to live work: development points that were not completed before the cycle turned over, and the assessment events still due in the renewed cycle.",
+        ],
+        bullets: [
+          "**Continuous cycles supported** — for competencies that renew rather than end.",
+          "**Events carry over automatically** — the assessment schedule and open CDP items move with the cycle.",
+          "**History retained** — previous cycles and closed plans stay on the record for audit.",
+        ],
+        shots: [
+          {
+            src: "images/screens/cycles/continuous-cycles.png",
+            caption: "Continuous cycles for competencies that renew rather than expire.",
+          },
+          {
+            src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
+            caption: "A development point carried over into the next cycle.",
+          },
+        ],
+      },
+      {
+        heading: "Permissions and who can do what",
+        body: [
+          "Monitoring and CDPs are core Rail Intel — not an add-on — but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.",
+          "Administrators configure roles in Organisation settings. An assessor may raise and update plans for people they assess; a line manager may see monitoring for their team; a driver with own-record-only access sees their own Monitoring tab but not the company directory.",
+        ],
+        bullets: [
+          "**Granular role permissions** — view and edit separated by role.",
+          "**Own-record access** — drivers see their monitoring without wider directory rights.",
+          "**Administrator control** — Company Admin defines which roles manage CDPs and incidents.",
+        ],
+        shots: [
+          {
+            src: "images/screens/comp-config/configure-company-role-permissions.png",
+            caption: "Configuring permissions for a company role.",
+          },
+          {
+            src: "images/screens/main-sys/role-permissions-configure.png",
+            caption: "Granular permission assignment across the platform.",
+          },
+        ],
+      },
+      {
+        heading: "Performance support, reporting and QA verification",
+        body: [
+          "Where the Trainee Driver module is active, performance and support plans are also raised and tracked on the Monitoring tab — signed by trainer and trainee and retained to completion.",
+          "Monitoring counts feed the reporting dashboard alongside incidents and competencies. When the QA Verifications add-on is active, monitoring history forms part of the employee verification run, so open or overdue development work surfaces in the same compliance report as medicals, licences and cycles.",
+        ],
+        shots: [
+          {
+            src: "images/screens/monitor-plans-incidents/add-performance-support-plans.png",
+            caption: "Raising a performance and support plan on the Monitoring tab.",
+          },
+          {
+            src: "images/screens/main-sys/reporting-analytics1.png",
+            caption: "Reporting and analytics with monitoring and incident KPIs.",
           },
         ],
       },

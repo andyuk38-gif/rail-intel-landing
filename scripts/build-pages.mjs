@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 73;
+const ASSET_VERSION = 75;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -996,7 +996,7 @@ function featuresIndex() {
     renderHead(base, {
       title: "Features – Rail Intel",
       description:
-        "The core Rail Intel feature set: Tunnel Mode, digital cab passes with QR verification, competency cycles, workforce records, medicals and licensing, incidents, reporting, administration and international languages.",
+        "The core Rail Intel feature set: Tunnel Mode, digital cab passes with QR verification, competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, reporting, administration and international languages.",
     }) +
     `
   <main>
