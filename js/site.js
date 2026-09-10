@@ -286,6 +286,25 @@
     }
   }
 
+  var howFlow = document.querySelector(".how-flow");
+  if (howFlow) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      howFlow.classList.add("is-visible");
+    } else {
+      var howFlowObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            howFlowObserver.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -10% 0px", threshold: 0.2 }
+      );
+      howFlowObserver.observe(howFlow);
+    }
+  }
+
   /* ---------- Screenshot gallery (native-size slides) ---------- */
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-shot-gallery]"), function (gallery) {

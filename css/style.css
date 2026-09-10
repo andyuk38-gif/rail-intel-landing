@@ -1262,53 +1262,185 @@ body::before {
 }
 
 .how-it-works .section-desc {
-  margin-bottom: 2rem;
+  margin-bottom: 2.75rem;
 }
 
-.steps {
+.how-flow {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 900px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 68rem;
   margin: 0 auto;
+  padding-top: 0.25rem;
 }
 
-.step {
+.how-flow::before {
+  content: "";
+  position: absolute;
+  top: 1.65rem;
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.15) 12%,
+    rgba(245, 158, 11, 0.45) 50%,
+    rgba(245, 158, 11, 0.15) 88%,
+    transparent 100%
+  );
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.how-flow.is-visible::before {
+  transform: scaleX(1);
+}
+
+.how-flow__step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 1.75rem 1.35rem 1.5rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
 }
 
-.step-num {
+.how-flow__step:hover {
+  border-color: rgba(245, 158, 11, 0.32);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(245, 158, 11, 0.12);
+  transform: translateY(-4px);
+}
+
+.how-flow__num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.1rem;
   font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: var(--accent);
-  background: rgba(245, 158, 11, 0.15);
-  border-radius: 50%;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: #0c0f14;
+  background: linear-gradient(145deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 999px;
+  box-shadow:
+    0 0 0 4px rgba(245, 158, 11, 0.12),
+    0 8px 20px rgba(245, 158, 11, 0.22);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.step h3 {
+.how-flow__step.reveal.is-visible .how-flow__num {
+  animation: how-flow-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.how-flow__step:hover .how-flow__num {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 0 6px rgba(245, 158, 11, 0.16),
+    0 10px 24px rgba(245, 158, 11, 0.28);
+}
+
+.how-flow__step h3 {
   font-size: 1.0625rem;
   font-weight: 600;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.55rem;
 }
 
-.step p {
+.how-flow__step p {
   font-size: 0.9375rem;
+  line-height: 1.55;
   color: var(--text-muted);
   margin: 0;
+  max-width: 26ch;
 }
 
-@media (max-width: 640px) {
-  .steps {
+.how-flow > .reveal:nth-child(1) {
+  transition-delay: 0.04s;
+}
+
+.how-flow > .reveal:nth-child(2) {
+  transition-delay: 0.14s;
+}
+
+.how-flow > .reveal:nth-child(3) {
+  transition-delay: 0.24s;
+}
+
+@keyframes how-flow-pop {
+  0% {
+    transform: scale(0.82);
+  }
+
+  65% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-flow::before {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .how-flow__step.reveal.is-visible .how-flow__num {
+    animation: none;
+  }
+
+  .how-flow__step:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .how-flow {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1.25rem;
+    max-width: 28rem;
+  }
+
+  .how-flow::before {
+    display: none;
+  }
+
+  .how-flow__step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+    padding: 1.25rem 1.15rem;
+  }
+
+  .how-flow__num {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0;
+    font-size: 0.9375rem;
+  }
+
+  .how-flow__step p {
+    max-width: none;
   }
 }
 
