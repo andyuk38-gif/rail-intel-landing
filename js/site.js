@@ -657,4 +657,127 @@
 
     sync(0);
   });
+
+  /* ---------- CDP Monitoring experience ---------- */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-cdp-experience]"), function (command) {
+    var chapters = Array.prototype.slice.call(command.querySelectorAll("[data-cdp-chapter]"));
+    var railLinks = Array.prototype.slice.call(command.querySelectorAll("[data-cdp-rail]"));
+    var lifecycleSteps = Array.prototype.slice.call(command.querySelectorAll("[data-cdp-lifecycle]"));
+    var lifecycleProgress = command.querySelector("[data-cdp-lifecycle-progress]");
+    var count = chapters.length;
+    var active = 0;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function sync(index) {
+      active = index;
+      var progress = count > 1 ? (index / (count - 1)) * 100 : 100;
+
+      railLinks.forEach(function (link, i) {
+        link.classList.toggle("is-active", i === index);
+      });
+      chapters.forEach(function (chapter, i) {
+        chapter.classList.toggle("is-active", i === index);
+      });
+      lifecycleSteps.forEach(function (step, i) {
+        step.classList.toggle("is-active", i === index);
+        step.setAttribute("aria-pressed", i === index ? "true" : "false");
+      });
+      if (lifecycleProgress) lifecycleProgress.style.width = progress + "%";
+
+      var activeLink = railLinks[index];
+      if (activeLink && window.matchMedia("(max-width: 960px)").matches) {
+        activeLink.scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
+      }
+    }
+
+    if ("IntersectionObserver" in window && chapters.length) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var visible = entries
+            .filter(function (entry) {
+              return entry.isIntersecting;
+            })
+            .sort(function (a, b) {
+              return b.intersectionRatio - a.intersectionRatio;
+            });
+          if (!visible.length) return;
+          var chapter = visible[0].target;
+          var index = Number(chapter.getAttribute("data-cdp-chapter"));
+          if (!Number.isNaN(index) && index !== active) sync(index);
+        },
+        { rootMargin: "-18% 0px -50% 0px", threshold: [0.2, 0.35, 0.5, 0.65] }
+      );
+      chapters.forEach(function (chapter) {
+        observer.observe(chapter);
+      });
+    } else {
+      sync(0);
+    }
+
+    railLinks.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var index = Number(link.getAttribute("data-cdp-rail"));
+        var target = chapters[index];
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+        sync(index);
+      });
+    });
+
+    lifecycleSteps.forEach(function (step) {
+      step.addEventListener("click", function () {
+        var index = Number(step.getAttribute("data-cdp-lifecycle"));
+        var target = chapters[index];
+        if (!target) return;
+        target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+        sync(index);
+      });
+    });
+
+    Array.prototype.forEach.call(command.querySelectorAll("[data-cdp-compare]"), function (compare) {
+      var tabs = Array.prototype.slice.call(compare.querySelectorAll("[data-cdp-compare-tab]"));
+      var panels = Array.prototype.slice.call(compare.querySelectorAll("[data-cdp-compare-panel]"));
+
+      function show(id) {
+        tabs.forEach(function (tab) {
+          var on = tab.getAttribute("data-cdp-compare-tab") === id;
+          tab.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        panels.forEach(function (panel) {
+          var on = panel.getAttribute("data-cdp-compare-panel") === id;
+          if (on) {
+            panel.hidden = false;
+            panel.removeAttribute("aria-hidden");
+          } else {
+            panel.hidden = true;
+            panel.setAttribute("aria-hidden", "true");
+          }
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          show(tab.getAttribute("data-cdp-compare-tab"));
+        });
+      });
+    });
+
+    Array.prototype.forEach.call(command.querySelectorAll("[data-cdp-roles]"), function (roles) {
+      var buttons = Array.prototype.slice.call(roles.querySelectorAll("[data-cdp-role]"));
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          buttons.forEach(function (item) {
+            item.classList.remove("is-active");
+            item.setAttribute("aria-pressed", "false");
+          });
+          button.classList.add("is-active");
+          button.setAttribute("aria-pressed", "true");
+        });
+      });
+    });
+
+    sync(0);
+  });
 })();

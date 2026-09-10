@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 81;
+const ASSET_VERSION = 82;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -825,6 +825,274 @@ ${capacity}
   );
 }
 
+function cdpShotFigure(shot, base, { fill = false, eager = false } = {}) {
+  const size = manifest[shot.src];
+  if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
+  const scale = typeof shot.scale === "number" ? shot.scale : 1;
+  const width = Math.max(1, Math.round(size.width * scale));
+  const height = Math.max(1, Math.round(size.height * scale));
+  const fillClass = fill ? " cdp-chapter__figure--fill" : "";
+  const loading = eager ? "eager" : "lazy";
+  const fetchPriority = eager ? ' fetchpriority="high"' : "";
+
+  return `              <figure class="cdp-chapter__figure shot${fillClass}" style="--shot-native-width: ${width}px">
+                <div class="shot__frame">
+                  <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="${loading}" decoding="async"${fetchPriority} />
+                </div>
+                <figcaption class="shot__caption">${esc(shot.caption || "")}</figcaption>
+              </figure>`;
+}
+
+function renderCdpChapterBody(chapter) {
+  return (chapter.body || []).map((text) => `              <p>${rich(text)}</p>`).join("\n");
+}
+
+function renderCdpChapterBullets(bullets) {
+  if (!bullets?.length) return "";
+  return `              <ul class="spec-list cdp-chapter__bullets">\n${bullets
+    .map((item) => `                <li>${rich(item)}</li>`)
+    .join("\n")}\n              </ul>`;
+}
+
+function renderCdpChapterContent(chapter, base) {
+  if (chapter.pillars?.length) {
+    return `              <div class="cdp-pillars">
+${chapter.pillars
+  .map(
+    (pillar, pillarIndex) => `                <article class="cdp-pillar reveal">
+                  <span class="cdp-pillar__index">${String(pillarIndex + 1).padStart(2, "0")}</span>
+                  <h4>${esc(pillar.title)}</h4>
+                  <p>${esc(pillar.detail)}</p>
+                </article>`
+  )
+  .join("\n")}
+              </div>`;
+  }
+
+  if (chapter.compare?.length) {
+    const tabs = chapter.compare
+      .map(
+        (item, itemIndex) =>
+          `                <button type="button" class="cdp-compare__tab" role="tab" data-cdp-compare-tab="${esc(item.id)}" aria-selected="${itemIndex === 0 ? "true" : "false"}">${esc(item.label)}</button>`
+      )
+      .join("\n");
+    const panels = chapter.compare
+      .map(
+        (item, itemIndex) => `                <div class="cdp-compare__panel" data-cdp-compare-panel="${esc(item.id)}" role="tabpanel"${itemIndex > 0 ? ' hidden aria-hidden="true"' : ""}>
+${cdpShotFigure(item.shot, base, { fill: itemIndex === 0 })}
+                </div>`
+      )
+      .join("\n");
+
+    return `              <div class="cdp-compare" data-cdp-compare>
+                <div class="cdp-compare__tabs" role="tablist" aria-label="Carryover views">
+${tabs}
+                </div>
+                <div class="cdp-compare__stage">
+${panels}
+                </div>
+              </div>`;
+  }
+
+  if (chapter.roles?.length) {
+    const roles = chapter.roles
+      .map(
+        (role, roleIndex) => `                <button type="button" class="cdp-role" data-cdp-role="${roleIndex}" aria-pressed="${roleIndex === 0 ? "true" : "false"}">
+                  <span class="cdp-role__name">${esc(role.name)}</span>
+                  <span class="cdp-role__detail">${esc(role.detail)}</span>
+                </button>`
+      )
+      .join("\n");
+    const shots = chapter.shots?.length
+      ? `              <div class="cdp-chapter__shots cdp-chapter__shots--pair">
+${chapter.shots.map((shot) => cdpShotFigure(shot, base)).join("\n")}
+              </div>`
+      : "";
+
+    return `              <div class="cdp-roles" data-cdp-roles role="list" aria-label="Role access">
+${roles}
+              </div>
+${shots}`;
+  }
+
+  if (chapter.shot) {
+    return `              <div class="cdp-chapter__split">
+                <div class="cdp-chapter__split-copy">
+${renderCdpChapterBullets(chapter.bullets)}
+                </div>
+                <div class="cdp-chapter__split-visual">
+${cdpShotFigure(chapter.shot, base, { fill: true })}
+                </div>
+              </div>`;
+  }
+
+  return renderCdpChapterBullets(chapter.bullets);
+}
+
+function renderCdpChapter(chapter, base, index) {
+  const bulletsInline = chapter.shot ? "" : renderCdpChapterBullets(chapter.bullets);
+
+  return `        <article class="cdp-chapter reveal" data-cdp-chapter="${index}" id="cdp-chapter-${index}" data-cdp-chapter-id="${esc(chapter.id)}">
+          <header class="cdp-chapter__head">
+            <p class="cdp-chapter__num">${esc(chapter.num)}</p>
+            <div class="cdp-chapter__titles">
+              <p class="cdp-chapter__subtitle">${esc(chapter.subtitle)}</p>
+              <h2 class="cdp-chapter__title">${esc(chapter.title)}</h2>
+            </div>
+          </header>
+          <div class="cdp-chapter__body">
+${renderCdpChapterBody(chapter)}
+${bulletsInline}
+          </div>
+          <div class="cdp-chapter__content">
+${renderCdpChapterContent(chapter, base)}
+          </div>
+        </article>`;
+}
+
+function renderCdpExperience(group, base) {
+  const exp = group.experience;
+  if (!exp) return "";
+
+  const accent = group.accent || "#38bdf8";
+  const stats = exp.stats
+    .map(
+      (stat) => `            <div class="cdp-stat reveal">
+              <p class="cdp-stat__value">${esc(stat.value)}</p>
+              <p class="cdp-stat__label">${esc(stat.label)}</p>
+              <p class="cdp-stat__detail">${esc(stat.detail)}</p>
+            </div>`
+    )
+    .join("\n");
+
+  const lifecycle = exp.lifecycle
+    .map(
+      (step, stepIndex) => `            <button type="button" class="cdp-lifecycle__step" data-cdp-lifecycle="${stepIndex}" aria-pressed="false">
+              <span class="cdp-lifecycle__dot" aria-hidden="true"></span>
+              <span class="cdp-lifecycle__copy">
+                <strong>${esc(step.title)}</strong>
+                <span>${esc(step.detail)}</span>
+              </span>
+            </button>`
+    )
+    .join("\n");
+
+  const rail = exp.chapters
+    .map(
+      (chapter, index) => `            <a class="cdp-rail__link" href="#cdp-chapter-${index}" data-cdp-rail="${index}">
+              <span class="cdp-rail__num">${esc(chapter.num)}</span>
+              <span class="cdp-rail__title">${esc(chapter.title)}</span>
+            </a>`
+    )
+    .join("\n");
+
+  const chapters = exp.chapters.map((chapter, index) => renderCdpChapter(chapter, base, index)).join("\n");
+
+  return `    <section class="page-section page-section--cdp" style="--cdp-accent: ${esc(accent)}">
+      <div class="container container--cdp">
+        <div class="cdp-stats" aria-label="CDP monitoring highlights">
+${stats}
+        </div>
+
+        <div class="cdp-command" data-cdp-experience data-cdp-count="${exp.chapters.length}">
+          <div class="cdp-command__intro reveal">
+            <p class="cdp-command__eyebrow">Competence development lifecycle</p>
+            <h2 class="cdp-command__title">From finding to closure — with nothing lost at the cycle boundary</h2>
+            <div class="cdp-lifecycle" data-cdp-lifecycle-bar role="list" aria-label="CDP lifecycle">
+              <span class="cdp-lifecycle__track" aria-hidden="true"><span class="cdp-lifecycle__fill" data-cdp-lifecycle-progress style="width: 0%"></span></span>
+${lifecycle}
+            </div>
+          </div>
+
+          <div class="cdp-command__layout">
+            <aside class="cdp-rail-wrap" aria-label="CDP chapters">
+              <nav class="cdp-rail">
+${rail}
+              </nav>
+            </aside>
+            <div class="cdp-chapters">
+${chapters}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+function cdpMonitoringPage(group) {
+  const base = "../";
+  const accent = group.accent || "#38bdf8";
+
+  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
+    group.name
+  )}</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <h1 class="page-title">${esc(group.tagline)}</h1>
+          <p class="page-lead">${esc(group.lead)}</p>
+          <div class="page-actions">
+            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
+          </div>`;
+
+  return (
+    renderHead(base, {
+      title: `${group.name} – Rail Intel features`,
+      description: group.summary,
+    }) +
+    `
+  <main>
+    <section class="page-hero page-hero--cdp" style="--cdp-accent: ${esc(accent)}">
+      <div class="container">
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
+${heroCopy}
+          </div>
+          <div class="cdp-hero-board reveal" aria-hidden="true">
+            <div class="cdp-hero-board__chrome">
+              <span class="cdp-hero-board__dot cdp-hero-board__dot--live"></span>
+              <span class="cdp-hero-board__label">Monitoring · Live record</span>
+            </div>
+            <div class="cdp-hero-board__grid">
+              <div class="cdp-hero-board__metric">
+                <span class="cdp-hero-board__metric-label">Open CDPs</span>
+                <strong>3</strong>
+                <span class="cdp-hero-board__metric-note">Active development points</span>
+              </div>
+              <div class="cdp-hero-board__metric">
+                <span class="cdp-hero-board__metric-label">Linked incidents</span>
+                <strong>1</strong>
+                <span class="cdp-hero-board__metric-note">Allocated to employee</span>
+              </div>
+              <div class="cdp-hero-board__metric cdp-hero-board__metric--accent">
+                <span class="cdp-hero-board__metric-label">Cycle carryover</span>
+                <strong>Auto</strong>
+                <span class="cdp-hero-board__metric-note">Open items preserved</span>
+              </div>
+            </div>
+            <div class="cdp-hero-board__footer">
+              <span>Employee record · Development tab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+${renderCdpExperience(group, base)}
+
+${renderCta(base, {
+  ...(group.cta || {
+    heading: "Everything here is included",
+    body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
+  }),
+  showAppCta: group.showAppCta,
+})}
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
 function featurePage(group) {
   if (group.slug === "languages") return languagesHubPage();
 
@@ -1350,7 +1618,12 @@ for (const addon of addons) {
 }
 
 emit("features/index.html", featuresIndex());
-for (const group of featureGroups) emit(`features/${group.slug}.html`, featurePage(group));
+for (const group of featureGroups) {
+  emit(
+    `features/${group.slug}.html`,
+    group.slug === "cdp-monitoring" ? cdpMonitoringPage(group) : featurePage(group)
+  );
+}
 
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());

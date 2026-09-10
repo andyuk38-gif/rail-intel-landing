@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=81" />
-  <link rel="stylesheet" href="../css/pages.css?v=81" />
+  <link rel="stylesheet" href="../css/style.css?v=82" />
+  <link rel="stylesheet" href="../css/pages.css?v=82" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -201,9 +201,10 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--cdp" style="--cdp-accent: #38bdf8">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / CDP Monitoring</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">Open development points that stay visible until they are closed</h1>
@@ -212,104 +213,281 @@
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="../features/" class="btn btn-ghost btn-lg">All features</a>
           </div>
+          </div>
+          <div class="cdp-hero-board reveal" aria-hidden="true">
+            <div class="cdp-hero-board__chrome">
+              <span class="cdp-hero-board__dot cdp-hero-board__dot--live"></span>
+              <span class="cdp-hero-board__label">Monitoring · Live record</span>
+            </div>
+            <div class="cdp-hero-board__grid">
+              <div class="cdp-hero-board__metric">
+                <span class="cdp-hero-board__metric-label">Open CDPs</span>
+                <strong>3</strong>
+                <span class="cdp-hero-board__metric-note">Active development points</span>
+              </div>
+              <div class="cdp-hero-board__metric">
+                <span class="cdp-hero-board__metric-label">Linked incidents</span>
+                <strong>1</strong>
+                <span class="cdp-hero-board__metric-note">Allocated to employee</span>
+              </div>
+              <div class="cdp-hero-board__metric cdp-hero-board__metric--accent">
+                <span class="cdp-hero-board__metric-label">Cycle carryover</span>
+                <strong>Auto</strong>
+                <span class="cdp-hero-board__metric-note">Open items preserved</span>
+              </div>
+            </div>
+            <div class="cdp-hero-board__footer">
+              <span>Employee record · Development tab</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>The Monitoring tab on the employee record</h2>
-          <p>The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and — where the Trainee Driver module is active — performance and support plans.</p>
-          <p>Managers and assessors with the right permissions see the full picture for people in their scope. Employees with own-record access see their own monitoring history without opening the company directory.</p>
-          <ul class="spec-list">
-            <li><strong>Incidents and CDPs in one place</strong> — nothing logged in one system and chased in another.</li>
-            <li><strong>Status at a glance</strong> — open, in progress and completed plans stay on the record.</li>
-            <li><strong>Tied to the person</strong> — monitoring follows the employee, not a spreadsheet row.</li>
-          </ul>
+    <section class="page-section page-section--cdp" style="--cdp-accent: #38bdf8">
+      <div class="container container--cdp">
+        <div class="cdp-stats" aria-label="CDP monitoring highlights">
+            <div class="cdp-stat reveal">
+              <p class="cdp-stat__value">Core</p>
+              <p class="cdp-stat__label">Platform capability</p>
+              <p class="cdp-stat__detail">Included — not an add-on</p>
+            </div>
+            <div class="cdp-stat reveal">
+              <p class="cdp-stat__value">Auto</p>
+              <p class="cdp-stat__label">Cycle carryover</p>
+              <p class="cdp-stat__detail">Open CDPs move forward</p>
+            </div>
+            <div class="cdp-stat reveal">
+              <p class="cdp-stat__value">Role</p>
+              <p class="cdp-stat__label">Gated access</p>
+              <p class="cdp-stat__detail">Permissions per company role</p>
+            </div>
+            <div class="cdp-stat reveal">
+              <p class="cdp-stat__value">Audit</p>
+              <p class="cdp-stat__label">Full history</p>
+              <p class="cdp-stat__detail">Closed plans retained</p>
+            </div>
         </div>
 
-      </div>
-    </section>
+        <div class="cdp-command" data-cdp-experience data-cdp-count="4">
+          <div class="cdp-command__intro reveal">
+            <p class="cdp-command__eyebrow">Competence development lifecycle</p>
+            <h2 class="cdp-command__title">From finding to closure — with nothing lost at the cycle boundary</h2>
+            <div class="cdp-lifecycle" data-cdp-lifecycle-bar role="list" aria-label="CDP lifecycle">
+              <span class="cdp-lifecycle__track" aria-hidden="true"><span class="cdp-lifecycle__fill" data-cdp-lifecycle-progress style="width: 0%"></span></span>
+            <button type="button" class="cdp-lifecycle__step" data-cdp-lifecycle="0" aria-pressed="false">
+              <span class="cdp-lifecycle__dot" aria-hidden="true"></span>
+              <span class="cdp-lifecycle__copy">
+                <strong>Finding</strong>
+                <span>Assessment or incident records the gap</span>
+              </span>
+            </button>
+            <button type="button" class="cdp-lifecycle__step" data-cdp-lifecycle="1" aria-pressed="false">
+              <span class="cdp-lifecycle__dot" aria-hidden="true"></span>
+              <span class="cdp-lifecycle__copy">
+                <strong>Plan</strong>
+                <span>Agreed actions captured on the CDP</span>
+              </span>
+            </button>
+            <button type="button" class="cdp-lifecycle__step" data-cdp-lifecycle="2" aria-pressed="false">
+              <span class="cdp-lifecycle__dot" aria-hidden="true"></span>
+              <span class="cdp-lifecycle__copy">
+                <strong>Monitor</strong>
+                <span>Live on the Monitoring tab</span>
+              </span>
+            </button>
+            <button type="button" class="cdp-lifecycle__step" data-cdp-lifecycle="3" aria-pressed="false">
+              <span class="cdp-lifecycle__dot" aria-hidden="true"></span>
+              <span class="cdp-lifecycle__copy">
+                <strong>Close / carry</strong>
+                <span>Completed or carried to next cycle</span>
+              </span>
+            </button>
+            </div>
+          </div>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>What a competence development plan contains</h2>
-          <p>A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity — typically when assessment criteria are flagged — and stays on the record until formally closed.</p>
-          <ul class="spec-list">
-            <li><strong>Linked to the finding</strong> — the plan relates to the assessment or incident that triggered it.</li>
-            <li><strong>Agreed actions</strong> — what the employee and manager or assessor committed to.</li>
-            <li><strong>Completion tracked</strong> — closure is recorded on the record, not assumed.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 761px">
-          <div class="shot__frame">
-            <img src="../images/screens/monitor-plans-incidents/cdp-plan-overview.png?v=81" alt="Competence development plan overview for the employee." width="761" height="135" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Competence development plan overview for the employee.</figcaption>
-        </figure>
-      </div>
-      </div>
-    </section>
+          <div class="cdp-command__layout">
+            <aside class="cdp-rail-wrap" aria-label="CDP chapters">
+              <nav class="cdp-rail">
+            <a class="cdp-rail__link" href="#cdp-chapter-0" data-cdp-rail="0">
+              <span class="cdp-rail__num">01</span>
+              <span class="cdp-rail__title">The Monitoring tab</span>
+            </a>
+            <a class="cdp-rail__link" href="#cdp-chapter-1" data-cdp-rail="1">
+              <span class="cdp-rail__num">02</span>
+              <span class="cdp-rail__title">What a CDP contains</span>
+            </a>
+            <a class="cdp-rail__link" href="#cdp-chapter-2" data-cdp-rail="2">
+              <span class="cdp-rail__num">03</span>
+              <span class="cdp-rail__title">Automatic carryover</span>
+            </a>
+            <a class="cdp-rail__link" href="#cdp-chapter-3" data-cdp-rail="3">
+              <span class="cdp-rail__num">04</span>
+              <span class="cdp-rail__title">Permissions by role</span>
+            </a>
+              </nav>
+            </aside>
+            <div class="cdp-chapters">
+        <article class="cdp-chapter reveal" data-cdp-chapter="0" id="cdp-chapter-0" data-cdp-chapter-id="monitoring">
+          <header class="cdp-chapter__head">
+            <p class="cdp-chapter__num">01</p>
+            <div class="cdp-chapter__titles">
+              <p class="cdp-chapter__subtitle">Employee record · Development view</p>
+              <h2 class="cdp-chapter__title">The Monitoring tab</h2>
+            </div>
+          </header>
+          <div class="cdp-chapter__body">
+              <p>The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and — where the Trainee Driver module is active — performance and support plans.</p>
+              <p>Managers and assessors with the right permissions see the full picture for people in their scope. Employees with own-record access see their own monitoring history without opening the company directory.</p>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Automatic carryover between cycles</h2>
-          <p>Competencies that renew on a continuous cycle do not wipe open development work at the boundary. When a new cycle period starts, scheduled assessment events and open CDP items carry over automatically — nothing is re-keyed and nothing still open disappears.</p>
-          <p>Closed cycles remain in history. Carryover applies to live work: development points that were not completed before the cycle turned over, and the assessment events still due in the renewed cycle.</p>
-          <ul class="spec-list">
-            <li><strong>Continuous cycles supported</strong> — for competencies that renew rather than end.</li>
-            <li><strong>Events carry over automatically</strong> — the assessment schedule and open CDP items move with the cycle.</li>
-            <li><strong>History retained</strong> — previous cycles and closed plans stay on the record for audit.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 779px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycles/continuous-cycles.png?v=81" alt="Continuous cycles for competencies that renew rather than expire." width="779" height="422" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Continuous cycles for competencies that renew rather than expire.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 262px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=81" alt="A development point carried over into the next cycle." width="262" height="243" loading="lazy" decoding="async" />
+          <div class="cdp-chapter__content">
+              <div class="cdp-pillars">
+                <article class="cdp-pillar reveal">
+                  <span class="cdp-pillar__index">01</span>
+                  <h4>Incidents &amp; CDPs together</h4>
+                  <p>Nothing logged in one system and chased in another.</p>
+                </article>
+                <article class="cdp-pillar reveal">
+                  <span class="cdp-pillar__index">02</span>
+                  <h4>Status at a glance</h4>
+                  <p>Open, in progress and completed plans on the record.</p>
+                </article>
+                <article class="cdp-pillar reveal">
+                  <span class="cdp-pillar__index">03</span>
+                  <h4>Tied to the person</h4>
+                  <p>Monitoring follows the employee, not a spreadsheet row.</p>
+                </article>
+              </div>
           </div>
-          <figcaption class="shot__caption">A development point carried over into the next cycle.</figcaption>
-        </figure>
-      </div>
-      </div>
-    </section>
+        </article>
+        <article class="cdp-chapter reveal" data-cdp-chapter="1" id="cdp-chapter-1" data-cdp-chapter-id="anatomy">
+          <header class="cdp-chapter__head">
+            <p class="cdp-chapter__num">02</p>
+            <div class="cdp-chapter__titles">
+              <p class="cdp-chapter__subtitle">Structure · Evidence · Closure</p>
+              <h2 class="cdp-chapter__title">What a CDP contains</h2>
+            </div>
+          </header>
+          <div class="cdp-chapter__body">
+              <p>A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity — typically when assessment criteria are flagged — and stays on the record until formally closed.</p>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Permissions and who can do what</h2>
-          <p>Monitoring and CDPs are core Rail Intel — not an add-on — but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.</p>
-          <p>Administrators configure roles in Organisation settings. An assessor may raise and update plans for people they assess; a line manager may see monitoring for their team; a driver with own-record-only access sees their own Monitoring tab but not the company directory.</p>
-          <ul class="spec-list">
-            <li><strong>Granular role permissions</strong> — view and edit separated by role.</li>
-            <li><strong>Own-record access</strong> — drivers see their monitoring without wider directory rights.</li>
-            <li><strong>Administrator control</strong> — Company Admin defines which roles manage CDPs and incidents.</li>
-          </ul>
+          </div>
+          <div class="cdp-chapter__content">
+              <div class="cdp-chapter__split">
+                <div class="cdp-chapter__split-copy">
+              <ul class="spec-list cdp-chapter__bullets">
+                <li><strong>Linked to the finding</strong> — the plan relates to the assessment or incident that triggered it.</li>
+                <li><strong>Agreed actions</strong> — what the employee and manager or assessor committed to.</li>
+                <li><strong>Completion tracked</strong> — closure is recorded on the record, not assumed.</li>
+              </ul>
+                </div>
+                <div class="cdp-chapter__split-visual">
+              <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1522px">
+                <div class="shot__frame">
+                  <img src="../images/screens/monitor-plans-incidents/cdp-plan-overview.png?v=82" alt="Competence development plan overview for the employee." width="1522" height="270" sizes="(min-width: 1100px) 1522px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">Competence development plan overview for the employee.</figcaption>
+              </figure>
+                </div>
+              </div>
+          </div>
+        </article>
+        <article class="cdp-chapter reveal" data-cdp-chapter="2" id="cdp-chapter-2" data-cdp-chapter-id="carryover">
+          <header class="cdp-chapter__head">
+            <p class="cdp-chapter__num">03</p>
+            <div class="cdp-chapter__titles">
+              <p class="cdp-chapter__subtitle">Continuous cycles · No re-keying</p>
+              <h2 class="cdp-chapter__title">Automatic carryover</h2>
+            </div>
+          </header>
+          <div class="cdp-chapter__body">
+              <p>Competencies that renew on a continuous cycle do not wipe open development work at the boundary. When a new cycle period starts, scheduled assessment events and open CDP items carry over automatically.</p>
+              <p>Closed cycles remain in history. Carryover applies to live work that was not completed before the cycle turned over.</p>
+              <ul class="spec-list cdp-chapter__bullets">
+                <li><strong>Continuous cycles supported</strong> — for competencies that renew rather than end.</li>
+                <li><strong>Events carry over automatically</strong> — assessment schedule and open CDP items move with the cycle.</li>
+                <li><strong>History retained</strong> — previous cycles and closed plans stay on the record for audit.</li>
+              </ul>
+          </div>
+          <div class="cdp-chapter__content">
+              <div class="cdp-compare" data-cdp-compare>
+                <div class="cdp-compare__tabs" role="tablist" aria-label="Carryover views">
+                <button type="button" class="cdp-compare__tab" role="tab" data-cdp-compare-tab="cycles" aria-selected="true">Continuous cycles</button>
+                <button type="button" class="cdp-compare__tab" role="tab" data-cdp-compare-tab="carryover" aria-selected="false">CDP carryover</button>
+                </div>
+                <div class="cdp-compare__stage">
+                <div class="cdp-compare__panel" data-cdp-compare-panel="cycles" role="tabpanel">
+              <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1558px">
+                <div class="shot__frame">
+                  <img src="../images/screens/cycles/continuous-cycles.png?v=82" alt="Continuous cycles for competencies that renew rather than expire." width="1558" height="843" sizes="(min-width: 1100px) 1558px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">Continuous cycles for competencies that renew rather than expire.</figcaption>
+              </figure>
+                </div>
+                <div class="cdp-compare__panel" data-cdp-compare-panel="carryover" role="tabpanel" hidden aria-hidden="true">
+              <figure class="cdp-chapter__figure shot" style="--shot-native-width: 523px">
+                <div class="shot__frame">
+                  <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=82" alt="A development point carried over into the next cycle." width="523" height="485" sizes="(min-width: 1100px) 523px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">A development point carried over into the next cycle.</figcaption>
+              </figure>
+                </div>
+                </div>
+              </div>
+          </div>
+        </article>
+        <article class="cdp-chapter reveal" data-cdp-chapter="3" id="cdp-chapter-3" data-cdp-chapter-id="permissions">
+          <header class="cdp-chapter__head">
+            <p class="cdp-chapter__num">04</p>
+            <div class="cdp-chapter__titles">
+              <p class="cdp-chapter__subtitle">Organisation settings · Granular control</p>
+              <h2 class="cdp-chapter__title">Permissions by role</h2>
+            </div>
+          </header>
+          <div class="cdp-chapter__body">
+              <p>Monitoring and CDPs are core Rail Intel — not an add-on — but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.</p>
+              <p>Administrators configure roles in Organisation settings. Each role gets exactly the access your operation requires — no more, no less.</p>
+
+          </div>
+          <div class="cdp-chapter__content">
+              <div class="cdp-roles" data-cdp-roles role="list" aria-label="Role access">
+                <button type="button" class="cdp-role" data-cdp-role="0" aria-pressed="true">
+                  <span class="cdp-role__name">Assessor</span>
+                  <span class="cdp-role__detail">Raise and update plans for people they assess.</span>
+                </button>
+                <button type="button" class="cdp-role" data-cdp-role="1" aria-pressed="false">
+                  <span class="cdp-role__name">Line manager</span>
+                  <span class="cdp-role__detail">View monitoring for their team.</span>
+                </button>
+                <button type="button" class="cdp-role" data-cdp-role="2" aria-pressed="false">
+                  <span class="cdp-role__name">Driver</span>
+                  <span class="cdp-role__detail">Own-record Monitoring tab — no company directory.</span>
+                </button>
+                <button type="button" class="cdp-role" data-cdp-role="3" aria-pressed="false">
+                  <span class="cdp-role__name">Company Admin</span>
+                  <span class="cdp-role__detail">Configure roles and permissions for the operation.</span>
+                </button>
+              </div>
+              <div class="cdp-chapter__shots cdp-chapter__shots--pair">
+              <figure class="cdp-chapter__figure shot" style="--shot-native-width: 1385px">
+                <div class="shot__frame">
+                  <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=82" alt="Configuring permissions for a company role." width="1385" height="1042" sizes="(min-width: 1100px) 1385px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">Configuring permissions for a company role.</figcaption>
+              </figure>
+              <figure class="cdp-chapter__figure shot" style="--shot-native-width: 1408px">
+                <div class="shot__frame">
+                  <img src="../images/screens/main-sys/role-permissions-configure.png?v=82" alt="Granular permission assignment across the platform." width="1408" height="1116" sizes="(min-width: 1100px) 1408px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">Granular permission assignment across the platform.</figcaption>
+              </figure>
+              </div>
+          </div>
+        </article>
+            </div>
+          </div>
         </div>
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 693px">
-          <div class="shot__frame">
-            <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=81" alt="Configuring permissions for a company role." width="693" height="521" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Configuring permissions for a company role.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 704px">
-          <div class="shot__frame">
-            <img src="../images/screens/main-sys/role-permissions-configure.png?v=81" alt="Granular permission assignment across the platform." width="704" height="558" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Granular permission assignment across the platform.</figcaption>
-        </figure>
-      </div>
       </div>
     </section>
 
@@ -341,6 +519,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=81"></script>
+  <script src="../js/site.js?v=82"></script>
 </body>
 </html>

@@ -985,81 +985,115 @@ export const featureGroups = [
     tagline: "Open development points that stay visible until they are closed",
     lead:
       "A competence development plan (CDP) is how Rail Intel records what still needs to improve after an assessment, incident or monitoring review — what was agreed, who owns it and whether it was completed. CDPs live on the Monitoring tab of the employee record, link back to the competence activity that raised them, and carry forward automatically when a continuous cycle renews.",
-    sections: [
-      {
-        heading: "The Monitoring tab on the employee record",
-        body: [
-          "The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and — where the Trainee Driver module is active — performance and support plans.",
-          "Managers and assessors with the right permissions see the full picture for people in their scope. Employees with own-record access see their own monitoring history without opening the company directory.",
-        ],
-        bullets: [
-          "**Incidents and CDPs in one place** — nothing logged in one system and chased in another.",
-          "**Status at a glance** — open, in progress and completed plans stay on the record.",
-          "**Tied to the person** — monitoring follows the employee, not a spreadsheet row.",
-        ],
-      },
-      {
-        heading: "What a competence development plan contains",
-        body: [
-          "A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity — typically when assessment criteria are flagged — and stays on the record until formally closed.",
-        ],
-        bullets: [
-          "**Linked to the finding** — the plan relates to the assessment or incident that triggered it.",
-          "**Agreed actions** — what the employee and manager or assessor committed to.",
-          "**Completion tracked** — closure is recorded on the record, not assumed.",
-        ],
-        shots: [
-          {
+    accent: "#38bdf8",
+    experience: {
+      stats: [
+        { value: "Core", label: "Platform capability", detail: "Included — not an add-on" },
+        { value: "Auto", label: "Cycle carryover", detail: "Open CDPs move forward" },
+        { value: "Role", label: "Gated access", detail: "Permissions per company role" },
+        { value: "Audit", label: "Full history", detail: "Closed plans retained" },
+      ],
+      lifecycle: [
+        { title: "Finding", detail: "Assessment or incident records the gap" },
+        { title: "Plan", detail: "Agreed actions captured on the CDP" },
+        { title: "Monitor", detail: "Live on the Monitoring tab" },
+        { title: "Close / carry", detail: "Completed or carried to next cycle" },
+      ],
+      chapters: [
+        {
+          id: "monitoring",
+          num: "01",
+          title: "The Monitoring tab",
+          subtitle: "Employee record · Development view",
+          body: [
+            "The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and — where the Trainee Driver module is active — performance and support plans.",
+            "Managers and assessors with the right permissions see the full picture for people in their scope. Employees with own-record access see their own monitoring history without opening the company directory.",
+          ],
+          pillars: [
+            { title: "Incidents & CDPs together", detail: "Nothing logged in one system and chased in another." },
+            { title: "Status at a glance", detail: "Open, in progress and completed plans on the record." },
+            { title: "Tied to the person", detail: "Monitoring follows the employee, not a spreadsheet row." },
+          ],
+        },
+        {
+          id: "anatomy",
+          num: "02",
+          title: "What a CDP contains",
+          subtitle: "Structure · Evidence · Closure",
+          body: [
+            "A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity — typically when assessment criteria are flagged — and stays on the record until formally closed.",
+          ],
+          bullets: [
+            "**Linked to the finding** — the plan relates to the assessment or incident that triggered it.",
+            "**Agreed actions** — what the employee and manager or assessor committed to.",
+            "**Completion tracked** — closure is recorded on the record, not assumed.",
+          ],
+          shot: {
             src: "images/screens/monitor-plans-incidents/cdp-plan-overview.png",
             caption: "Competence development plan overview for the employee.",
           },
-        ],
-      },
-      {
-        heading: "Automatic carryover between cycles",
-        body: [
-          "Competencies that renew on a continuous cycle do not wipe open development work at the boundary. When a new cycle period starts, scheduled assessment events and open CDP items carry over automatically — nothing is re-keyed and nothing still open disappears.",
-          "Closed cycles remain in history. Carryover applies to live work: development points that were not completed before the cycle turned over, and the assessment events still due in the renewed cycle.",
-        ],
-        bullets: [
-          "**Continuous cycles supported** — for competencies that renew rather than end.",
-          "**Events carry over automatically** — the assessment schedule and open CDP items move with the cycle.",
-          "**History retained** — previous cycles and closed plans stay on the record for audit.",
-        ],
-        shots: [
-          {
-            src: "images/screens/cycles/continuous-cycles.png",
-            caption: "Continuous cycles for competencies that renew rather than expire.",
-          },
-          {
-            src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
-            caption: "A development point carried over into the next cycle.",
-          },
-        ],
-      },
-      {
-        heading: "Permissions and who can do what",
-        body: [
-          "Monitoring and CDPs are core Rail Intel — not an add-on — but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.",
-          "Administrators configure roles in Organisation settings. An assessor may raise and update plans for people they assess; a line manager may see monitoring for their team; a driver with own-record-only access sees their own Monitoring tab but not the company directory.",
-        ],
-        bullets: [
-          "**Granular role permissions** — view and edit separated by role.",
-          "**Own-record access** — drivers see their monitoring without wider directory rights.",
-          "**Administrator control** — Company Admin defines which roles manage CDPs and incidents.",
-        ],
-        shots: [
-          {
-            src: "images/screens/comp-config/configure-company-role-permissions.png",
-            caption: "Configuring permissions for a company role.",
-          },
-          {
-            src: "images/screens/main-sys/role-permissions-configure.png",
-            caption: "Granular permission assignment across the platform.",
-          },
-        ],
-      },
-    ],
+        },
+        {
+          id: "carryover",
+          num: "03",
+          title: "Automatic carryover",
+          subtitle: "Continuous cycles · No re-keying",
+          body: [
+            "Competencies that renew on a continuous cycle do not wipe open development work at the boundary. When a new cycle period starts, scheduled assessment events and open CDP items carry over automatically.",
+            "Closed cycles remain in history. Carryover applies to live work that was not completed before the cycle turned over.",
+          ],
+          bullets: [
+            "**Continuous cycles supported** — for competencies that renew rather than end.",
+            "**Events carry over automatically** — assessment schedule and open CDP items move with the cycle.",
+            "**History retained** — previous cycles and closed plans stay on the record for audit.",
+          ],
+          compare: [
+            {
+              id: "cycles",
+              label: "Continuous cycles",
+              shot: {
+                src: "images/screens/cycles/continuous-cycles.png",
+                caption: "Continuous cycles for competencies that renew rather than expire.",
+              },
+            },
+            {
+              id: "carryover",
+              label: "CDP carryover",
+              shot: {
+                src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
+                caption: "A development point carried over into the next cycle.",
+              },
+            },
+          ],
+        },
+        {
+          id: "permissions",
+          num: "04",
+          title: "Permissions by role",
+          subtitle: "Organisation settings · Granular control",
+          body: [
+            "Monitoring and CDPs are core Rail Intel — not an add-on — but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.",
+            "Administrators configure roles in Organisation settings. Each role gets exactly the access your operation requires — no more, no less.",
+          ],
+          roles: [
+            { name: "Assessor", detail: "Raise and update plans for people they assess." },
+            { name: "Line manager", detail: "View monitoring for their team." },
+            { name: "Driver", detail: "Own-record Monitoring tab — no company directory." },
+            { name: "Company Admin", detail: "Configure roles and permissions for the operation." },
+          ],
+          shots: [
+            {
+              src: "images/screens/comp-config/configure-company-role-permissions.png",
+              caption: "Configuring permissions for a company role.",
+            },
+            {
+              src: "images/screens/main-sys/role-permissions-configure.png",
+              caption: "Granular permission assignment across the platform.",
+            },
+          ],
+        },
+      ],
+    },
   },
 
   {
