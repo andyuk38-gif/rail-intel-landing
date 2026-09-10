@@ -1059,23 +1059,6 @@ export const featureGroups = [
           },
         ],
       },
-      {
-        heading: "Performance support, reporting and QA verification",
-        body: [
-          "Where the Trainee Driver module is active, performance and support plans are also raised and tracked on the Monitoring tab — signed by trainer and trainee and retained to completion.",
-          "Monitoring counts feed the reporting dashboard alongside incidents and competencies. When the QA Verifications add-on is active, monitoring history forms part of the employee verification run, so open or overdue development work surfaces in the same compliance report as medicals, licences and cycles.",
-        ],
-        shots: [
-          {
-            src: "images/screens/monitor-plans-incidents/add-performance-support-plans.png",
-            caption: "Raising a performance and support plan on the Monitoring tab.",
-          },
-          {
-            src: "images/screens/main-sys/reporting-analytics1.png",
-            caption: "Reporting and analytics with monitoring and incident KPIs.",
-          },
-        ],
-      },
     ],
   },
 
