@@ -586,22 +586,26 @@
       });
     });
 
-    Array.prototype.forEach.call(journey.querySelectorAll("[data-trainee-float]"), function (stage) {
-      var tiles = Array.prototype.slice.call(stage.querySelectorAll("[data-trainee-tile]"));
-      if (!tiles.length) return;
+    Array.prototype.forEach.call(journey.querySelectorAll("[data-schedule-flow]"), function (flow) {
+      var steps = Array.prototype.slice.call(flow.querySelectorAll("[data-schedule-flow-step]"));
+      if (!steps.length) return;
 
       var timer = null;
       var index = 0;
-      var parentStep = stage.closest("[data-trainee-step]");
+      var parentStep = flow.closest("[data-trainee-step]");
+      var visual = flow.closest(".trainee-journey__visual");
 
       function setActive(i) {
         index = i;
-        tiles.forEach(function (tile, tileIndex) {
-          var on = tileIndex === i;
-          tile.classList.toggle("is-active", on);
-          tile.setAttribute("aria-pressed", on ? "true" : "false");
+        var progress = steps.length > 1 ? (i / (steps.length - 1)) * 100 : 100;
+        flow.setAttribute("data-schedule-flow-index", String(i));
+        flow.style.setProperty("--flow-progress", progress + "%");
+        if (visual) visual.setAttribute("data-schedule-flow-index", String(i));
+        steps.forEach(function (step, stepIndex) {
+          var on = stepIndex === i;
+          step.classList.toggle("is-active", on);
+          step.setAttribute("aria-pressed", on ? "true" : "false");
         });
-        stage.setAttribute("data-trainee-float-step", String(i));
       }
 
       function stopCycle() {
@@ -613,19 +617,19 @@
 
       function startCycle() {
         if (reduced) {
-          setActive(0);
+          setActive(steps.length - 1);
           return;
         }
         stopCycle();
         timer = window.setInterval(function () {
-          setActive((index + 1) % tiles.length);
-        }, 3200);
+          setActive((index + 1) % steps.length);
+        }, 3500);
       }
 
       setActive(0);
 
       if (parentStep && "IntersectionObserver" in window) {
-        var floatObserver = new IntersectionObserver(
+        var flowObserver = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting && entry.intersectionRatio > 0.3) startCycle();
@@ -634,18 +638,18 @@
           },
           { threshold: [0, 0.3, 0.5] }
         );
-        floatObserver.observe(parentStep);
+        flowObserver.observe(parentStep);
       } else {
         startCycle();
       }
 
-      tiles.forEach(function (tile, tileIndex) {
-        tile.addEventListener("click", function () {
+      steps.forEach(function (step, stepIndex) {
+        step.addEventListener("click", function () {
           stopCycle();
-          setActive(tileIndex);
+          setActive(stepIndex);
         });
-        tile.addEventListener("mouseenter", stopCycle);
-        tile.addEventListener("mouseleave", function () {
+        step.addEventListener("mouseenter", stopCycle);
+        step.addEventListener("mouseleave", function () {
           if (parentStep && parentStep.classList.contains("is-active")) startCycle();
         });
       });

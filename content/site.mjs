@@ -320,41 +320,32 @@ export const addons = [
           "Build the programme first — set a start date and Rail Intel projects the full timeline automatically, bank holidays and working-day rules included.",
         status: "1 schedule",
         accent: "#38bdf8",
-        callout: {
+        scheduleFlow: {
           kicker: "Automatic scheduling",
+          headline: "One start date. Full timeline.",
           body:
-            "Once you place a start date, Rail Intel looks up all upcoming bank holidays, applies each module's working-day rules and projects the full training timeline — no manual calendar work.",
+            "Place a start date and Rail Intel looks up upcoming bank holidays, applies each module's working-day rules and projects every training day — no manual calendar work.",
+          steps: [
+            {
+              title: "Set start date",
+              detail: "One date anchors every module from that day forward.",
+            },
+            {
+              title: "Bank holidays",
+              detail: "Upcoming public holidays picked up and applied automatically.",
+            },
+            {
+              title: "Working days",
+              detail: "Weekends and non-working days skipped per module rules.",
+            },
+            {
+              title: "Timeline projected",
+              detail: "Every training day mapped on the calendar instantly.",
+            },
+          ],
         },
-        floatingTiles: [
-          {
-            id: "start-date",
-            title: "Start date",
-            detail: "One date anchors every module from that day forward.",
-            tone: "accent",
-          },
-          {
-            id: "bank-holidays",
-            title: "Bank holidays",
-            detail: "Upcoming public holidays picked up and applied automatically.",
-            tone: "warn",
-          },
-          {
-            id: "working-days",
-            title: "Working days",
-            detail: "Weekends and non-working days skipped per module rules.",
-            tone: "safe",
-          },
-          {
-            id: "timeline",
-            title: "Full timeline",
-            detail: "Every training day projected on the calendar instantly.",
-            tone: "accent",
-          },
-        ],
         bullets: [
-          "**Set a start date** — the schedule anchors every module from that day forward.",
-          "**Bank holidays applied automatically** — upcoming public holidays are picked up for you.",
-          "**Working-day rules per module** — weekends and non-working days are skipped as configured.",
+          "**Five-module pathway** from Personal Track Safety through to Driving Instructor / Shift Pattern.",
           "**Calendar view** — every projected training day colour-coded by module.",
         ],
         shots: [
@@ -1006,14 +997,6 @@ export const featureGroups = [
           "**Status at a glance** — open, in progress and completed plans stay on the record.",
           "**Tied to the person** — monitoring follows the employee, not a spreadsheet row.",
         ],
-        shots: [
-          {
-            src: "images/screens/monitor-plans-incidents/monitor-incident-overview.png",
-            caption: "Monitoring overview with allocated incidents and competence development plans.",
-            scale: 1,
-            full: true,
-          },
-        ],
       },
       {
         heading: "What a competence development plan contains",
@@ -1029,27 +1012,6 @@ export const featureGroups = [
           {
             src: "images/screens/monitor-plans-incidents/cdp-plan-overview.png",
             caption: "Competence development plan overview for the employee.",
-          },
-          {
-            src: "images/screens/monitor-plans-incidents/submitted-plan.png",
-            caption: "A submitted plan retained against the record.",
-          },
-        ],
-      },
-      {
-        heading: "Raised from assessments and incidents",
-        body: [
-          "During an assessment, criteria can be flagged on the basis of recorded observations rather than silently passed. A competence development plan can be raised from that flagged finding so the shortfall is managed, not forgotten at the end of the shift.",
-          "Incidents are recorded company-wide and allocated to the employees involved. The Monitoring tab shows what is allocated to that individual, so the competence question behind an incident is answered when the linked development work is done.",
-        ],
-        shots: [
-          {
-            src: "images/screens/assessing/flagged-based-on-observations.png",
-            caption: "Criteria flagged on the basis of recorded observations.",
-          },
-          {
-            src: "images/screens/monitor-plans-incidents/incidents-allocated.png",
-            caption: "Incidents allocated to a specific employee.",
           },
         ],
       },

@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 76;
+const ASSET_VERSION = 80;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -423,39 +423,33 @@ function journeyShotFigure(shot, base, hidden = false, eager = false) {
               </figure>`;
 }
 
-function renderJourneyCallout(step) {
-  if (!step.callout) return "";
-  return `            <div class="trainee-journey__callout">
-              <p class="trainee-journey__callout-kicker">${esc(step.callout.kicker)}</p>
-              <p class="trainee-journey__callout-body">${esc(step.callout.body)}</p>
-            </div>`;
-}
+function renderScheduleFlow(step) {
+  const flow = step.scheduleFlow;
+  if (!flow?.steps?.length) return "";
 
-function renderJourneyFloatingTiles(step) {
-  if (!step.floatingTiles?.length) return { open: "", close: "" };
-
-  const tiles = step.floatingTiles
+  const steps = flow.steps
     .map(
-      (tile, tileIndex) => {
-        const tone = tile.tone || "accent";
-        return `                <button type="button" class="trainee-journey__tile trainee-journey__tile--${esc(tone)}" data-trainee-tile="${esc(tile.id)}" data-trainee-tile-index="${tileIndex}" aria-pressed="false" style="--tile-delay: ${(tileIndex * 0.7).toFixed(1)}s">
-                  <span class="trainee-journey__tile-dot" aria-hidden="true"></span>
-                  <span class="trainee-journey__tile-copy">
-                    <strong>${esc(tile.title)}</strong>
-                    <span>${esc(tile.detail)}</span>
+      (item, stepIndex) => `                <button type="button" class="trainee-schedule-flow__step" data-schedule-flow-step="${stepIndex}" aria-pressed="false">
+                  <span class="trainee-schedule-flow__node"><span class="trainee-schedule-flow__num">${stepIndex + 1}</span></span>
+                  <span class="trainee-schedule-flow__copy">
+                    <strong>${esc(item.title)}</strong>
+                    <span>${esc(item.detail)}</span>
                   </span>
-                </button>`;
-      }
+                </button>`
     )
     .join("\n");
 
-  return {
-    open: `            <div class="trainee-journey__float-stage" data-trainee-float>
-              <div class="trainee-journey__tiles" role="list" aria-label="Automatic schedule projection">
-${tiles}
-              </div>`,
-    close: `            </div>`,
-  };
+  return `            <div class="trainee-schedule-flow" data-schedule-flow data-schedule-flow-index="0" style="--flow-progress: 0%">
+              <div class="trainee-schedule-flow__head">
+                <p class="trainee-schedule-flow__kicker">${esc(flow.kicker)}</p>
+                <h4 class="trainee-schedule-flow__headline">${esc(flow.headline)}</h4>
+                <p class="trainee-schedule-flow__lede">${esc(flow.body)}</p>
+              </div>
+              <div class="trainee-schedule-flow__track" role="list" aria-label="${esc(flow.kicker)}">
+                <span class="trainee-schedule-flow__rail" aria-hidden="true"><span class="trainee-schedule-flow__rail-fill"></span></span>
+${steps}
+              </div>
+            </div>`;
 }
 
 function renderJourneyStep(step, base, index, total) {
@@ -489,8 +483,7 @@ ${shots
   const figures = shots
     .map((shot, shotIndex) => journeyShotFigure(shot, base, hasSubViews && shotIndex > 0, index === 0 && shotIndex === 0))
     .join("\n");
-  const callout = renderJourneyCallout(step);
-  const float = renderJourneyFloatingTiles(step);
+  const scheduleFlow = renderScheduleFlow(step);
   const connector =
     index < total - 1
       ? `          <div class="trainee-journey__connector" aria-hidden="true">
@@ -512,13 +505,11 @@ ${status}
 ${bullets}
             </header>
             <div class="trainee-journey__visual">
-${callout}
-${float.open}
+${scheduleFlow}
 ${subtabs}
               <div class="trainee-journey__stage">
 ${figures}
               </div>
-${float.close}
             </div>
           </div>
 ${connector}
