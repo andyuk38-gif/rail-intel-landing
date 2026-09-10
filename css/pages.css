@@ -1830,6 +1830,16 @@ body.lightbox-open {
   max-width: none;
 }
 
+.trainee-journey__figure--compact {
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+.trainee-journey__figure--compact .shot__frame {
+  max-width: none;
+  width: 100%;
+}
+
 .trainee-journey__figure .shot__frame img {
   display: block;
   width: 100%;

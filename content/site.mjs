@@ -378,6 +378,7 @@ export const addons = [
             src: "images/screens/trainee-addon/05-enrol-trainee.png",
             caption: "Enrol a trainee — schedule, group, instructor, cycle and start date.",
             scale: 1,
+            compact: true,
           },
         ],
       },

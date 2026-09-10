@@ -15,7 +15,7 @@ import { site, products, addons, capacityAddons, featureGroups, howItWorks, secu
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 70;
+const ASSET_VERSION = 71;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -410,11 +410,12 @@ function journeyShotFigure(shot, base, hidden = false, eager = false) {
   const height = Math.max(1, Math.round(size.height * scale));
   const shotId = shot.id ? ` data-trainee-shot="${esc(shot.id)}"` : "";
   const hiddenAttr = hidden ? ' hidden aria-hidden="true"' : "";
-  const fillClass = width < 960 ? " trainee-journey__figure--fill" : "";
+  const fillClass = !shot.compact && width < 960 ? " trainee-journey__figure--fill" : "";
+  const compactClass = shot.compact ? " trainee-journey__figure--compact" : "";
   const loading = eager ? "eager" : "lazy";
   const fetchPriority = eager ? ' fetchpriority="high"' : "";
 
-  return `              <figure class="trainee-journey__figure shot${fillClass}"${shotId}${hiddenAttr} style="--shot-native-width: ${width}px">
+  return `              <figure class="trainee-journey__figure shot${fillClass}${compactClass}"${shotId}${hiddenAttr} style="--shot-native-width: ${width}px">
                 <div class="shot__frame">
                   <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="${loading}" decoding="async"${fetchPriority} />
                 </div>
