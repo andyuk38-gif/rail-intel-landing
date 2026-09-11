@@ -121,16 +121,29 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const parseCarouselSlides = (tab) => {
     const srcs = tab.dataset.carouselSlides?.split("|").filter(Boolean) || [];
-    if (srcs.length < 2) return [];
     const alts = tab.dataset.carouselAlts?.split("|") || [];
     const widths = tab.dataset.carouselWidths?.split("|") || [];
     const heights = tab.dataset.carouselHeights?.split("|") || [];
-    return srcs.map((src, index) => ({
-      src: src.trim(),
-      alt: (alts[index] || "").trim(),
-      width: widths[index]?.trim(),
-      height: heights[index]?.trim(),
-    }));
+
+    if (srcs.length > 1) {
+      return srcs.map((src, index) => ({
+        src: src.trim(),
+        alt: (alts[index] || "").trim(),
+        width: widths[index]?.trim(),
+        height: heights[index]?.trim(),
+      }));
+    }
+
+    if (!tab.hasAttribute("data-carousel") || !carouselTrack) return [];
+
+    return Array.from(carouselTrack.querySelectorAll(".gallery-carousel__slide img"))
+      .map((slideImg) => ({
+        src: slideImg.getAttribute("src") || "",
+        alt: slideImg.alt || "",
+        width: slideImg.width ? String(slideImg.width) : "",
+        height: slideImg.height ? String(slideImg.height) : "",
+      }))
+      .filter((slide) => slide.src);
   };
 
   const stopCarousel = () => {
@@ -208,7 +221,8 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const render = (tab) => {
     const slides = parseCarouselSlides(tab);
-    if (slides.length > 1 && carouselEl && carouselTrack) {
+    const useCarousel = tab.hasAttribute("data-carousel") && slides.length > 1 && carouselEl && carouselTrack;
+    if (useCarousel) {
       if (url && tab.dataset.url) url.textContent = tab.dataset.url;
       updateChips(tab);
       updateCopy(tab);

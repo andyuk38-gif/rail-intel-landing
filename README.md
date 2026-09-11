@@ -2,6 +2,18 @@
 
 Static landing site for **railintel.co.uk**. Links to the app at **cms.railintel.co.uk**.
 
+## Homepage gallery (Dashboard / Compliance / Reporting / Analytics)
+
+Copy, screenshots and chip text for the homepage command-centre tabs live in **`content/home-gallery.mjs`**.
+
+After editing that file, regenerate the site and commit the output:
+
+```bash
+node scripts/build-pages.mjs
+```
+
+The build rewrites the `<!-- home-gallery:start -->` … `<!-- home-gallery:end -->` block in `index.html` and bumps the shared asset version (`ASSET_VERSION` in `scripts/build-pages.mjs`). You can confirm a deploy reached production by viewing page source and checking for `<!-- site-asset-version:91 -->` (version number increases when assets change).
+
 ## Local preview
 
 Open `index.html` in a browser, or:

@@ -11,11 +11,12 @@ import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, languages } from "../content/site.mjs";
+import { homeGallery } from "../content/home-gallery.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 87;
+const ASSET_VERSION = 91;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1573,6 +1574,163 @@ ${azureItems}
   );
 }
 
+/* ----------------------------------------------------- homepage gallery */
+
+const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : "");
+
+const versionedAsset = (src) => `${String(src).split("?")[0]}?v=${ASSET_VERSION}`;
+
+function renderHomeGallery() {
+  const defaultTab = homeGallery.tabs.find((tab) => tab.active) || homeGallery.tabs[0];
+  const reportingTab = homeGallery.tabs.find((tab) => tab.carousel);
+  const reportingSlides = reportingTab?.slides || [];
+
+  const renderBullets = (items) =>
+    items.map((item) => `            <li>${esc(item)}</li>`).join("\n");
+
+  const renderTabButton = (tab) => {
+    const attrs = [
+      attr("data-src", tab.image?.src ? versionedAsset(tab.image.src) : ""),
+      attr("data-alt", tab.image?.alt || tab.slides?.[0]?.alt || ""),
+      attr("data-url", tab.url),
+      attr("data-width", tab.image?.width || tab.slides?.[0]?.width),
+      attr("data-height", tab.image?.height || tab.slides?.[0]?.height),
+      attr("data-chip-safe-title", tab.chips?.safe?.title),
+      attr("data-chip-safe-detail", tab.chips?.safe?.detail),
+      attr("data-chip-alert-title", tab.chips?.alert?.title),
+      attr("data-chip-alert-detail", tab.chips?.alert?.detail),
+      attr("data-copy-eyebrow", tab.copy.eyebrow),
+      attr("data-copy-heading", tab.copy.heading),
+      attr("data-copy-lead", tab.copy.lead),
+      attr(
+        "data-copy-bullets",
+        tab.copy.bullets.join("|")
+      ),
+    ];
+
+    if (tab.carousel && tab.slides?.length) {
+      attrs.push(' data-carousel="true"');
+      attrs.push(
+        attr(
+          "data-carousel-slides",
+          tab.slides.map((slide) => versionedAsset(slide.src)).join("|")
+        )
+      );
+      attrs.push(attr("data-carousel-alts", tab.slides.map((slide) => slide.alt).join("|")));
+      attrs.push(attr("data-carousel-widths", tab.slides.map((slide) => slide.width).join("|")));
+      attrs.push(attr("data-carousel-heights", tab.slides.map((slide) => slide.height).join("|")));
+      attrs.push(
+        attr(
+          "data-carousel-chip-safe-titles",
+          tab.slides.map((slide) => slide.chips.safe.title).join("|")
+        )
+      );
+      attrs.push(
+        attr(
+          "data-carousel-chip-safe-details",
+          tab.slides.map((slide) => slide.chips.safe.detail).join("|")
+        )
+      );
+      attrs.push(
+        attr(
+          "data-carousel-chip-alert-titles",
+          tab.slides.map((slide) => slide.chips.alert.title).join("|")
+        )
+      );
+      attrs.push(
+        attr(
+          "data-carousel-chip-alert-details",
+          tab.slides.map((slide) => slide.chips.alert.detail).join("|")
+        )
+      );
+    }
+
+    return `              <button type="button" class="gallery-tab${tab.active ? " is-active" : ""}" role="tab" aria-selected="${tab.active ? "true" : "false"}"${attrs.join("")}>${esc(tab.label)}</button>`;
+  };
+
+  const renderCarousel = () => {
+    if (!reportingSlides.length) return "";
+    const slides = reportingSlides
+      .map(
+        (slide) => `                        <div class="gallery-carousel__slide">
+                          <img
+                            src="${esc(versionedAsset(slide.src))}"
+                            alt="${esc(slide.alt)}"
+                            width="${slide.width}"
+                            height="${slide.height}"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>`
+      )
+      .join("\n");
+
+    return `                  <div class="gallery-carousel" data-gallery-carousel hidden>
+                    <div class="gallery-carousel__viewport">
+                      <div class="gallery-carousel__track" data-gallery-carousel-track>
+${slides}
+                      </div>
+                    </div>
+                  </div>`;
+  };
+
+  return `
+    <section class="product-section product-section--elevated" id="product" aria-labelledby="command-heading">
+      <div class="container product-section__inner">
+        <div class="product-section__copy" data-gallery-copy>
+          <p class="product-eyebrow" data-copy-eyebrow>${esc(defaultTab.copy.eyebrow)}</p>
+          <h2 id="command-heading" data-copy-heading>${esc(defaultTab.copy.heading)}</h2>
+          <p class="product-lead" data-copy-lead>${esc(defaultTab.copy.lead)}</p>
+          <ul class="product-bullets" data-copy-bullets>
+${renderBullets(defaultTab.copy.bullets)}
+          </ul>
+        </div>
+        <div class="product-section__media">
+          <div class="product-gallery product-gallery--command" data-gallery>
+            <div class="float-stage">
+              <div class="browser-mockup browser-mockup--primary">
+                <div class="browser-mockup__chrome">
+                  <span class="browser-mockup__dots"></span>
+                  <span class="browser-mockup__url" data-gallery-url>${esc(defaultTab.url)}</span>
+                </div>
+                <div class="browser-mockup__content">
+                  <img
+                    src="${esc(versionedAsset(defaultTab.image.src))}"
+                    alt="${esc(defaultTab.image.alt)}"
+                    width="${defaultTab.image.width}"
+                    height="${defaultTab.image.height}"
+                    data-gallery-main
+                    loading="lazy"
+                    decoding="async"
+                  />
+${renderCarousel()}
+                </div>
+              </div>
+              <span class="hero-chip hero-chip--safe" data-gallery-chip="safe" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong data-chip-title>${esc(defaultTab.chips.safe.title)}</strong>
+                  <span data-chip-detail>${esc(defaultTab.chips.safe.detail)}</span>
+                </span>
+              </span>
+              <span class="hero-chip hero-chip--alert" data-gallery-chip="alert" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong data-chip-title>${esc(defaultTab.chips.alert.title)}</strong>
+                  <span data-chip-detail>${esc(defaultTab.chips.alert.detail)}</span>
+                </span>
+              </span>
+            </div>
+            <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
+${homeGallery.tabs.map(renderTabButton).join("\n")}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+`;
+}
+
 /* ---------------------------------------------------------- index.html sync */
 
 function syncIndex() {
@@ -1587,6 +1745,13 @@ function syncIndex() {
   };
 
   html = replaceBetween(html, "<!-- nav:start -->", "<!-- nav:end -->", `\n        ${renderNav("")}\n        `);
+
+  html = replaceBetween(
+    html,
+    "<!-- home-gallery:start -->",
+    "<!-- home-gallery:end -->",
+    renderHomeGallery()
+  );
 
   html = replaceBetween(
     html,
@@ -1605,7 +1770,8 @@ function syncIndex() {
     .replace(/css\/style\.css\?v=\d+/, `css/style.css?v=${ASSET_VERSION}`)
     .replace(/css\/pages\.css\?v=\d+/, `css/pages.css?v=${ASSET_VERSION}`)
     .replace(/js\/main\.js\?v=\d+/, `js/main.js?v=${ASSET_VERSION}`)
-    .replace(/js\/site\.js\?v=\d+/, `js/site.js?v=${ASSET_VERSION}`);
+    .replace(/js\/site\.js\?v=\d+/, `js/site.js?v=${ASSET_VERSION}`)
+    .replace(/<!-- site-asset-version:\d+ -->/, `<!-- site-asset-version:${ASSET_VERSION} -->`);
 
   writeFileSync(path, html);
   return "index.html";
