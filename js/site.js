@@ -1232,3 +1232,62 @@
     }
   });
 })();
+
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll("[data-verify-report]"), function (root) {
+    var picks = Array.prototype.slice.call(root.querySelectorAll("[data-report-pick]"));
+    var main = root.querySelector("[data-report-main]");
+    var caption = root.querySelector("[data-report-caption]");
+    var counter = root.querySelector("[data-report-counter]");
+    var progress = root.querySelector("[data-report-progress]");
+    if (!picks.length || !main) return;
+
+    var index = 0;
+
+    function show(nextIndex) {
+      index = nextIndex;
+      var pick = picks[index];
+
+      picks.forEach(function (item, itemIndex) {
+        var active = itemIndex === index;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-selected", String(active));
+        item.tabIndex = active ? 0 : -1;
+      });
+
+      if (progress) {
+        progress.style.width = ((index + 1) / picks.length) * 100 + "%";
+      }
+      if (counter) {
+        counter.textContent = String(index + 1);
+      }
+
+      root.classList.add("is-swapping");
+      window.setTimeout(function () {
+        main.src = pick.dataset.src;
+        main.alt = pick.dataset.alt || "";
+        if (pick.dataset.width) main.width = Number(pick.dataset.width);
+        if (pick.dataset.height) main.height = Number(pick.dataset.height);
+        if (caption) caption.textContent = pick.dataset.caption || "";
+        root.classList.remove("is-swapping");
+      }, 120);
+    }
+
+    picks.forEach(function (pick, pickIndex) {
+      pick.tabIndex = pick.classList.contains("is-active") ? 0 : -1;
+      pick.addEventListener("click", function () {
+        show(pickIndex);
+      });
+      pick.addEventListener("keydown", function (event) {
+        var step = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : event.key === "ArrowUp" || event.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        event.preventDefault();
+        var next = (pickIndex + step + picks.length) % picks.length;
+        picks[next].focus();
+        show(next);
+      });
+    });
+
+    show(0);
+  });
+})();

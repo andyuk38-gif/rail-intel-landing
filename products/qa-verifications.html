@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=134" />
-  <link rel="stylesheet" href="../css/pages.css?v=134" />
+  <link rel="stylesheet" href="../css/style.css?v=135" />
+  <link rel="stylesheet" href="../css/pages.css?v=135" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -273,12 +273,12 @@
                   <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/qa-verifications</span>
                 </div>
                 <div class="browser-mockup__content">
-                  <img src="../images/product/qa-verifications.png?v=134" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="1024" height="750" data-gallery-main loading="eager" decoding="async" fetchpriority="high" />
+                  <img src="../images/product/qa-verifications.png?v=135" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="1024" height="750" data-gallery-main loading="eager" decoding="async" fetchpriority="high" />
                 </div>
               </div>
               <div class="gallery-tabs" role="tablist" aria-label="QA Verification screens">
-                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/product/qa-verifications.png?v=134" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="1024" data-height="750">Run history</button>
-                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/CheckConfigVerification.png?v=134" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="1024" data-height="748">Check configuration</button>
+                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/product/qa-verifications.png?v=135" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="1024" data-height="750">Run history</button>
+                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/CheckConfigVerification.png?v=135" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="1024" data-height="748">Check configuration</button>
               </div>
             </div>
           </div>
@@ -298,6 +298,79 @@
             <figcaption>Live review and advisory counts, straight from current records.</figcaption>
           </figure>
         </div>
+
+        <div class="verify-report" data-verify-report>
+          <div class="verify-report__head">
+            <p class="product-eyebrow">Verification report</p>
+            <h2 class="verify-report__title">See exactly what an auditor receives</h2>
+            <p class="product-lead">Open the report at any level &mdash; full overview, summary charts, then section evidence for cab passes, medicals and more.</p>
+          </div>
+
+          <div class="verify-report__shell">
+            <div class="verify-report__rail-wrap">
+              <p class="verify-report__rail-label">Report sections</p>
+              <div class="verify-report__progress" aria-hidden="true">
+                <span class="verify-report__progress-fill" data-report-progress style="width: 25%"></span>
+              </div>
+              <div class="verify-report__rail" role="tablist" aria-label="Verification report examples">
+                <button type="button" class="verify-report__pick is-active" role="tab" aria-selected="true" data-report-pick data-src="../images/screens/verification/report/verification-report-overview.jpg" data-alt="Verification report overview with outcome filters, employee header and GDPR notice" data-width="1024" data-height="671" data-caption="Full report header, outcome filters and the compliance summary an auditor opens first." data-accent="review" style="--report-accent: #f87171">
+                  <span class="verify-report__pick-num">01</span>
+                  <span class="verify-report__pick-body">
+                    <strong>Report overview</strong>
+                    <span>Outcome filters, employee header and data protection notice</span>
+                  </span>
+                  <span class="verify-report__pick-tag verify-report__pick-tag--review">Review</span>
+                </button>
+                <button type="button" class="verify-report__pick" role="tab" aria-selected="false" data-report-pick data-src="../images/screens/verification/report/verification-report-summary-visuals.jpg" data-alt="Summary visuals with overall outcome and checks by section donut charts" data-width="1024" data-height="485" data-caption="Summary visuals break the run into overall outcome and per-section check distribution." data-accent="mixed" style="--report-accent: #a78bfa">
+                  <span class="verify-report__pick-num">02</span>
+                  <span class="verify-report__pick-body">
+                    <strong>Summary visuals</strong>
+                    <span>Overall outcome and checks by section at a glance</span>
+                  </span>
+                  <span class="verify-report__pick-tag verify-report__pick-tag--mixed">42 checks</span>
+                </button>
+                <button type="button" class="verify-report__pick" role="tab" aria-selected="false" data-report-pick data-src="../images/screens/verification/report/verification-report-cab-pass.jpg" data-alt="Cab pass section showing pass preview, validity and compliant status" data-width="1024" data-height="492" data-caption="Section evidence includes the cab pass preview, validity dates and the signed pass image." data-accent="compliant" style="--report-accent: #2dd4bf">
+                  <span class="verify-report__pick-num">03</span>
+                  <span class="verify-report__pick-body">
+                    <strong>Cab passes</strong>
+                    <span>Pass preview, validity and compliant status</span>
+                  </span>
+                  <span class="verify-report__pick-tag verify-report__pick-tag--c">Compliant</span>
+                </button>
+                <button type="button" class="verify-report__pick" role="tab" aria-selected="false" data-report-pick data-src="../images/screens/verification/report/verification-report-medical.jpg" data-alt="Medical section listing compliant, advisory and review checks with fix actions" data-width="1024" data-height="542" data-caption="Each medical check shows the rule outcome, detail and a direct fix action when something needs attention." data-accent="advisory" style="--report-accent: #fbbf24">
+                  <span class="verify-report__pick-num">04</span>
+                  <span class="verify-report__pick-body">
+                    <strong>Medical</strong>
+                    <span>Compliant, advisory and review checks with fix links</span>
+                  </span>
+                  <span class="verify-report__pick-tag verify-report__pick-tag--a">Advisory</span>
+                </button>
+              </div>
+              <p class="verify-report__counter"><span data-report-counter>1</span> / 4</p>
+            </div>
+
+            <div class="verify-report__stage">
+              <div class="verify-report__chrome" aria-hidden="true">
+                <span class="verify-report__chrome-dots"></span>
+                <span class="verify-report__chrome-url">Verification report</span>
+                <span class="verify-report__chrome-action">Print / Save PDF</span>
+              </div>
+              <div class="verify-report__viewport shot__frame">
+                <img
+                  class="verify-report__img"
+                  data-report-main
+                  src="../images/screens/verification/report/verification-report-overview.jpg"
+                  alt="Verification report overview with outcome filters, employee header and GDPR notice"
+                  width="1024"
+                  height="671"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="verify-report__caption" data-report-caption>Full report header, outcome filters and the compliance summary an auditor opens first.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -306,7 +379,6 @@
         <div class="page-section__head">
           <h2>Activating QA Verifications</h2>
           <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator can enable it for your company directly.</p>
-          <p>Module identifier: <code>qa-verifications</code></p>
         </div>
         <div class="page-actions">
           <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
@@ -330,7 +402,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=134"></script>
-  <script src="../js/main.js?v=134"></script>
+  <script src="../js/site.js?v=135"></script>
+  <script src="../js/main.js?v=135"></script>
 </body>
 </html>

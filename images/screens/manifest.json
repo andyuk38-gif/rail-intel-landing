@@ -395,6 +395,22 @@
     "width": 1024,
     "height": 748
   },
+  "images/screens/verification/report/verification-report-overview.jpg": {
+    "width": 1024,
+    "height": 671
+  },
+  "images/screens/verification/report/verification-report-summary-visuals.jpg": {
+    "width": 1024,
+    "height": 485
+  },
+  "images/screens/verification/report/verification-report-cab-pass.jpg": {
+    "width": 1024,
+    "height": 492
+  },
+  "images/screens/verification/report/verification-report-medical.jpg": {
+    "width": 1024,
+    "height": 542
+  },
   "images/screens/verification/verification-run-overall.png": {
     "width": 1382,
     "height": 1120
