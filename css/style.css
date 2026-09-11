@@ -2106,7 +2106,15 @@ body::before {
   border-color: rgba(245, 158, 11, 0.28);
 }
 
-.verify-report__pick-tag--review {
+.verify-report__pick-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.verify-report__pick-tag--review,
+.verify-report__pick-tag--failed {
   color: #fca5a5;
   background: rgba(248, 113, 113, 0.12);
   border-color: rgba(248, 113, 113, 0.28);
