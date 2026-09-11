@@ -1670,6 +1670,32 @@ body::before {
   align-items: center;
 }
 
+.verify__grid--stacked {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.verify__media--full {
+  width: 100%;
+  min-width: 0;
+}
+
+.verify--module-page .product-gallery--full {
+  width: 100%;
+}
+
+.verify--module-page .product-gallery--full .browser-mockup {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+}
+
+.verify--module-page .product-gallery--full .browser-mockup__content img {
+  width: 100%;
+  height: auto;
+}
+
 .verify__copy h3 {
   font-size: 1.25rem;
   font-weight: 600;

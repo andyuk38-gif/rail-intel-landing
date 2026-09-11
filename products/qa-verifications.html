@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=126" />
-  <link rel="stylesheet" href="../css/pages.css?v=126" />
+  <link rel="stylesheet" href="../css/style.css?v=127" />
+  <link rel="stylesheet" href="../css/pages.css?v=127" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -230,7 +230,7 @@
           </li>
         </ul>
 
-        <div class="verify__grid">
+        <div class="verify__grid verify__grid--stacked">
           <div class="verify__copy">
             <h3>Every check scored, every run kept</h3>
             <p>Each check returns one of four outcomes, and the run reports the share that came back compliant alongside the pass rate across the people you verified.</p>
@@ -242,20 +242,20 @@
             </ul>
             <p>Runs are retained with the date and who ran them, so a verification you did months ago is still there to open, print and hand over. You choose which sections are examined and how strictly, from the check configuration.</p>
           </div>
-          <div class="verify__media">
-            <div class="product-gallery" data-gallery>
-              <div class="browser-mockup">
+          <div class="verify__media verify__media--full">
+            <div class="product-gallery product-gallery--full" data-gallery>
+              <div class="browser-mockup browser-mockup--primary">
                 <div class="browser-mockup__chrome">
                   <span class="browser-mockup__dots"></span>
                   <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/qa-verifications</span>
                 </div>
                 <div class="browser-mockup__content">
-                  <img src="../images/product/qa-verifications.png?v=65" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="691" height="506" data-gallery-main loading="lazy" decoding="async" />
+                  <img src="../images/screens/verification/verification-run-overall.png?v=127" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="1382" height="1120" data-gallery-main loading="eager" decoding="async" fetchpriority="high" />
                 </div>
               </div>
               <div class="gallery-tabs" role="tablist" aria-label="QA Verification screens">
-                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/product/qa-verifications.png?v=65" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="691" data-height="506">Run history</button>
-                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/verification-config.png?v=65" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="691" data-height="463">Check configuration</button>
+                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/screens/verification/verification-run-overall.png?v=127" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="1382" data-height="1120">Run history</button>
+                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/verification-config.png?v=127" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="1382" data-height="1050">Check configuration</button>
               </div>
             </div>
           </div>
@@ -307,7 +307,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=126"></script>
-  <script src="../js/main.js?v=126"></script>
+  <script src="../js/site.js?v=127"></script>
+  <script src="../js/main.js?v=127"></script>
 </body>
 </html>
