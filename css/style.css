@@ -379,6 +379,10 @@ body::before {
   margin: 0 0 2.25rem;
 }
 
+.hero-copy > .hero-desc + .hero-desc {
+  margin-top: -0.85rem;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
