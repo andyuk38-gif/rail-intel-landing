@@ -1686,17 +1686,17 @@ body::before {
 }
 
 .verify--module-page .product-gallery--full .browser-mockup {
-  max-width: none;
-  width: 100%;
-  margin-inline: 0;
+  /* Match native screenshot width so the browser never upscales and softens UI text. */
+  width: min(100%, 1024px);
+  max-width: 1024px;
+  margin-inline: auto;
 }
 
 .verify--module-page .product-gallery--full .browser-mockup__content img {
+  display: block;
   width: 100%;
   height: auto;
-  image-rendering: auto;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  max-width: 1024px;
 }
 
 .verify__copy h3 {
