@@ -163,7 +163,7 @@ export const addons = [
         ],
         shots: [
           {
-            src: "images/screens/verification/verification-config.png",
+            src: "images/screens/verification/CheckConfigVerification.png",
             caption: "Check configuration controls which sections are tested and how each is scored.",
             scale: 1,
             full: true,
