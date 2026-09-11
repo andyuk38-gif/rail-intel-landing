@@ -149,21 +149,32 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const buildCarousel = (slides) => {
     if (!carouselTrack) return;
-    carouselTrack.replaceChildren(
-      ...slides.map((slide, index) => {
-        const frame = document.createElement("div");
-        frame.className = "gallery-carousel__slide";
-        const slideImg = document.createElement("img");
-        slideImg.src = slide.src;
-        slideImg.alt = slide.alt;
-        if (slide.width) slideImg.width = Number(slide.width);
-        if (slide.height) slideImg.height = Number(slide.height);
-        slideImg.loading = index === 0 ? "lazy" : "lazy";
-        slideImg.decoding = "async";
-        frame.appendChild(slideImg);
-        return frame;
-      })
-    );
+    const existingSlides = Array.from(carouselTrack.querySelectorAll(".gallery-carousel__slide"));
+    const hasMatchingSlides =
+      existingSlides.length === slides.length &&
+      existingSlides.every((frame, index) => {
+        const slideImg = frame.querySelector("img");
+        return slideImg && slideImg.getAttribute("src") === slides[index].src;
+      });
+
+    if (!hasMatchingSlides) {
+      carouselTrack.replaceChildren(
+        ...slides.map((slide, index) => {
+          const frame = document.createElement("div");
+          frame.className = "gallery-carousel__slide";
+          const slideImg = document.createElement("img");
+          slideImg.src = slide.src;
+          slideImg.alt = slide.alt;
+          if (slide.width) slideImg.width = Number(slide.width);
+          if (slide.height) slideImg.height = Number(slide.height);
+          slideImg.loading = "lazy";
+          slideImg.decoding = "async";
+          frame.appendChild(slideImg);
+          return frame;
+        })
+      );
+    }
+
     carouselSlides = slides;
     carouselIndex = 0;
     applyCarouselTransform(false);
