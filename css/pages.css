@@ -431,6 +431,10 @@
   background: linear-gradient(180deg, #0e1218 0%, #0c0f14 100%);
 }
 
+.page-section--activation .page-section__head {
+  max-width: none;
+}
+
 .page-section__head {
   max-width: 46rem;
   margin-bottom: 2rem;
