@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rail Intel – Know who is safe to work</title>
   <meta name="description" content="Rail Intel is competency management for rail. Track cycles, medicals, licences and assessments so expired skills never reach the railway." />
-  <!-- site-asset-version:93 -->
+  <!-- site-asset-version:94 -->
   <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=93" />
-  <link rel="stylesheet" href="css/pages.css?v=93" />
+  <link rel="stylesheet" href="css/style.css?v=94" />
+  <link rel="stylesheet" href="css/pages.css?v=94" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -283,9 +283,11 @@
 
     <section class="proof" aria-label="Why operators choose Rail Intel">
       <div class="container">
-        <ul class="proof-grid">
-          <li>
-            <a href="#product" class="proof-card reveal" data-proof-tilt style="--proof-accent: #34d399; --proof-glow: rgba(52, 211, 153, 0.22);">
+        <div class="proof-carousel reveal" data-proof-carousel aria-roledescription="carousel">
+          <div class="proof-carousel__stage" data-proof-stage tabindex="0" aria-label="Feature highlights carousel. Use arrow keys or drag to browse.">
+            <ul class="proof-carousel__ring" data-proof-ring>
+              <li class="proof-carousel__item" data-proof-item style="--proof-i: 0">
+            <a href="#product" class="proof-card" data-proof-tilt style="--proof-accent: #34d399; --proof-glow: rgba(52, 211, 153, 0.22);">
               <span class="proof-card__glow" aria-hidden="true"></span>
               <span class="proof-card__shine" aria-hidden="true"></span>
               <span class="proof-card__icon" aria-hidden="true">
@@ -298,9 +300,9 @@
               <p>Automated live feed to your dashboard to check compliance of your assigned team members.</p>
               <span class="proof-card__cta" aria-hidden="true">View dashboard</span>
             </a>
-          </li>
-          <li>
-            <a href="features/digital-cab-passes.html" class="proof-card reveal" data-proof-tilt style="--proof-accent: #f59e0b; --proof-glow: rgba(245, 158, 11, 0.24);">
+              </li>
+              <li class="proof-carousel__item" data-proof-item style="--proof-i: 1">
+            <a href="features/digital-cab-passes.html" class="proof-card" data-proof-tilt style="--proof-accent: #f59e0b; --proof-glow: rgba(245, 158, 11, 0.24);">
               <span class="proof-card__glow" aria-hidden="true"></span>
               <span class="proof-card__shine" aria-hidden="true"></span>
               <span class="proof-card__icon" aria-hidden="true">
@@ -315,9 +317,9 @@
               <p>Issue digital cab passes with QR code verification anyone can scan to validate.</p>
               <span class="proof-card__cta" aria-hidden="true">See cab passes</span>
             </a>
-          </li>
-          <li>
-            <a href="products/qa-verifications.html" class="proof-card reveal" data-proof-tilt style="--proof-accent: #38bdf8; --proof-glow: rgba(56, 189, 248, 0.22);">
+              </li>
+              <li class="proof-carousel__item" data-proof-item style="--proof-i: 2">
+            <a href="products/qa-verifications.html" class="proof-card" data-proof-tilt style="--proof-accent: #38bdf8; --proof-glow: rgba(56, 189, 248, 0.22);">
               <span class="proof-card__glow" aria-hidden="true"></span>
               <span class="proof-card__shine" aria-hidden="true"></span>
               <span class="proof-card__icon" aria-hidden="true">
@@ -330,9 +332,9 @@
               <p>Company wide checks across every module either by percentage, individual or team at the touch of a button.</p>
               <span class="proof-card__cta" aria-hidden="true">Explore QA</span>
             </a>
-          </li>
-          <li>
-            <a href="features/competency-cycles.html" class="proof-card reveal" data-proof-tilt style="--proof-accent: #a78bfa; --proof-glow: rgba(167, 139, 250, 0.22);">
+              </li>
+              <li class="proof-carousel__item" data-proof-item style="--proof-i: 3">
+            <a href="features/competency-cycles.html" class="proof-card" data-proof-tilt style="--proof-accent: #a78bfa; --proof-glow: rgba(167, 139, 250, 0.22);">
               <span class="proof-card__glow" aria-hidden="true"></span>
               <span class="proof-card__shine" aria-hidden="true"></span>
               <span class="proof-card__icon" aria-hidden="true">
@@ -346,8 +348,16 @@
               <p>Flexible, custom competency cycles — start from a template or build your own with criteria and scheduled events.</p>
               <span class="proof-card__cta" aria-hidden="true">See cycle builder</span>
             </a>
-          </li>
-        </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="proof-carousel__dots" role="tablist" aria-label="Feature highlights">
+            <button type="button" class="proof-carousel__dot" role="tab" data-proof-dot="0" aria-label="Live compliance" aria-selected="false"></button>
+            <button type="button" class="proof-carousel__dot is-active" role="tab" data-proof-dot="1" aria-label="Digital cab passes" aria-selected="true"></button>
+            <button type="button" class="proof-carousel__dot" role="tab" data-proof-dot="2" aria-label="QA verification" aria-selected="false"></button>
+            <button type="button" class="proof-carousel__dot" role="tab" data-proof-dot="3" aria-label="Cycle builder" aria-selected="false"></button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -774,7 +784,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=93"></script>
+  <script src="js/site.js?v=94"></script>
   <script src="js/main.js?v=92"></script>
 </body>
 </html>

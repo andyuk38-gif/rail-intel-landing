@@ -286,12 +286,176 @@
     }
   }
 
-  /* ---------- Proof glass cards — subtle pointer tilt ---------- */
+  /* ---------- Proof 3D carousel ---------- */
+
+  var proofCarousel = document.querySelector("[data-proof-carousel]");
+  if (proofCarousel) {
+    var proofRing = proofCarousel.querySelector("[data-proof-ring]");
+    var proofStage = proofCarousel.querySelector("[data-proof-stage]");
+    var proofItems = Array.prototype.slice.call(proofCarousel.querySelectorAll("[data-proof-item]"));
+    var proofDots = Array.prototype.slice.call(proofCarousel.querySelectorAll("[data-proof-dot]"));
+    var proofCount = proofItems.length;
+    var proofIndex = 1;
+    var proofReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var proofCompact = function () {
+      return window.matchMedia("(max-width: 1024px)").matches;
+    };
+    var proofDragging = false;
+    var proofDragStart = 0;
+    var proofDragDelta = 0;
+
+    function proofAccentFor(index) {
+      var card = proofItems[index] && proofItems[index].querySelector(".proof-card");
+      if (!card) return "";
+      return card.style.getPropertyValue("--proof-accent") || getComputedStyle(card).getPropertyValue("--proof-accent");
+    }
+
+    function proofSetIndex(nextIndex) {
+      proofIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
+      var angle = -proofIndex * (360 / proofCount);
+      proofCarousel.style.setProperty("--carousel-rotate", angle + "deg");
+      proofCarousel.style.setProperty("--dot-accent", proofAccentFor(proofIndex).trim());
+
+      proofItems.forEach(function (item, itemIndex) {
+        var isFront = itemIndex === proofIndex;
+        item.classList.toggle("is-front", isFront);
+        item.setAttribute("aria-hidden", isFront ? "false" : "true");
+        var link = item.querySelector(".proof-card");
+        if (link) link.tabIndex = isFront ? 0 : -1;
+      });
+
+      proofDots.forEach(function (dot, dotIndex) {
+        var active = dotIndex === proofIndex;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      if (proofCompact() && proofStage) {
+        var target = proofItems[proofIndex];
+        if (target) {
+          var offset = target.offsetLeft - (proofStage.clientWidth - target.offsetWidth) / 2;
+          proofStage.scrollTo({ left: offset, behavior: proofReduced ? "auto" : "smooth" });
+        }
+      }
+    }
+
+    function proofNearestFromScroll() {
+      if (!proofStage || !proofCompact()) return proofIndex;
+      var center = proofStage.scrollLeft + proofStage.clientWidth / 2;
+      var nearest = 0;
+      var nearestDistance = Infinity;
+      proofItems.forEach(function (item, itemIndex) {
+        var itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        var distance = Math.abs(itemCenter - center);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = itemIndex;
+        }
+      });
+      return nearest;
+    }
+
+    proofSetIndex(proofIndex);
+
+    proofDots.forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        proofSetIndex(Number(dot.getAttribute("data-proof-dot")) || 0);
+      });
+    });
+
+    proofItems.forEach(function (item, itemIndex) {
+      var link = item.querySelector(".proof-card");
+      if (!link) return;
+      link.addEventListener("click", function (event) {
+        if (itemIndex !== proofIndex) {
+          event.preventDefault();
+          proofSetIndex(itemIndex);
+        }
+      });
+    });
+
+    if (proofStage && !proofReduced) {
+      proofStage.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          proofSetIndex(proofIndex - 1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          proofSetIndex(proofIndex + 1);
+        }
+      });
+
+      proofStage.addEventListener(
+        "pointerdown",
+        function (event) {
+          if (proofCompact()) return;
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          proofDragging = true;
+          proofDragStart = event.clientX;
+          proofDragDelta = 0;
+          proofStage.classList.add("is-dragging");
+          if (proofStage.setPointerCapture) proofStage.setPointerCapture(event.pointerId);
+        },
+        { passive: true }
+      );
+
+      proofStage.addEventListener(
+        "pointermove",
+        function (event) {
+          if (!proofDragging || proofCompact()) return;
+          proofDragDelta = event.clientX - proofDragStart;
+        },
+        { passive: true }
+      );
+
+      function proofEndDrag(event) {
+        if (!proofDragging) return;
+        proofDragging = false;
+        proofStage.classList.remove("is-dragging");
+        if (event && proofStage.releasePointerCapture) {
+          try {
+            proofStage.releasePointerCapture(event.pointerId);
+          } catch (error) {
+            /* pointer may already be released */
+          }
+        }
+        if (Math.abs(proofDragDelta) > 48) {
+          proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1));
+        }
+        proofDragDelta = 0;
+      }
+
+      proofStage.addEventListener("pointerup", proofEndDrag);
+      proofStage.addEventListener("pointercancel", proofEndDrag);
+
+      var proofScrollTimer;
+      proofStage.addEventListener(
+        "scroll",
+        function () {
+          if (!proofCompact()) return;
+          window.clearTimeout(proofScrollTimer);
+          proofScrollTimer = window.setTimeout(function () {
+            var nearest = proofNearestFromScroll();
+            if (nearest !== proofIndex) proofSetIndex(nearest);
+          }, 80);
+        },
+        { passive: true }
+      );
+    }
+
+    window.addEventListener("resize", function () {
+      if (proofCompact()) proofSetIndex(proofIndex);
+    });
+  }
+
+  /* ---------- Proof glass cards — subtle pointer tilt (front card only) ---------- */
 
   var proofCards = Array.prototype.slice.call(document.querySelectorAll("[data-proof-tilt]"));
   if (proofCards.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     proofCards.forEach(function (card) {
       card.addEventListener("mousemove", function (event) {
+        var item = card.closest("[data-proof-item]");
+        if (item && !item.classList.contains("is-front")) return;
         var rect = card.getBoundingClientRect();
         var x = (event.clientX - rect.left) / rect.width - 0.5;
         var y = (event.clientY - rect.top) / rect.height - 0.5;

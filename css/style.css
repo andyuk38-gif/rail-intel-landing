@@ -590,6 +590,42 @@ body::before {
     animation: none;
   }
 
+  .proof-carousel__stage {
+    perspective: none;
+    height: auto;
+    cursor: default;
+  }
+
+  .proof-carousel__ring {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .proof-carousel__item {
+    position: relative;
+    width: auto;
+    transform: none !important;
+    pointer-events: auto;
+  }
+
+  .proof-carousel__item:not(.is-front) .proof-card,
+  .proof-carousel__item.is-front .proof-card {
+    opacity: 1;
+    filter: none;
+  }
+
+  .proof-carousel__dots {
+    display: none;
+  }
+
+  .proof-carousel__ring {
+    transition: none;
+  }
+
   .proof-card {
     transform: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -607,23 +643,130 @@ body::before {
   }
 }
 
-/* Proof strip — glass cards */
+/* Proof strip — 3D carousel of glass cards */
 .proof {
   padding: 0 0 4.5rem;
   position: relative;
 }
 
-.proof-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+.proof-carousel {
+  --carousel-radius: 420px;
+  --carousel-card-width: 268px;
+  --carousel-rotate: -90deg;
+  position: relative;
 }
 
-.proof-grid > li {
-  min-width: 0;
+.proof-carousel__stage {
+  position: relative;
+  height: clamp(22rem, 42vw, 26rem);
+  margin: 0 auto;
+  perspective: 1400px;
+  perspective-origin: 50% 42%;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  user-select: none;
+}
+
+.proof-carousel__stage.is-dragging {
+  cursor: grabbing;
+}
+
+.proof-carousel__stage::before {
+  content: "";
+  position: absolute;
+  inset: auto 8% 4%;
+  height: 38%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.05), transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.proof-carousel__ring {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  width: var(--carousel-card-width);
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--carousel-rotate, 0deg));
+  transition: transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.proof-carousel__item {
+  position: absolute;
+  inset: 0;
+  width: var(--carousel-card-width);
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--proof-i, 0) * 90deg)) translateZ(var(--carousel-radius));
+  backface-visibility: hidden;
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease;
+}
+
+.proof-carousel__item:not(.is-front) .proof-card {
+  cursor: pointer;
+  opacity: 0.68;
+  filter: brightness(0.82) saturate(0.9);
+}
+
+.proof-carousel__item.is-front .proof-card {
+  opacity: 1;
+  filter: none;
+  border-color: color-mix(in srgb, var(--proof-accent, var(--accent)) 38%, rgba(255, 255, 255, 0.14));
+  box-shadow:
+    0 28px 58px rgba(0, 0, 0, 0.48),
+    0 0 0 1px color-mix(in srgb, var(--proof-accent, var(--accent)) 22%, transparent),
+    0 0 42px color-mix(in srgb, var(--proof-glow, rgba(245, 158, 11, 0.2)) 90%, transparent);
+}
+
+.proof-carousel__item.is-front .proof-card__glow {
+  opacity: 0.88;
+}
+
+.proof-carousel__item.is-front .proof-card__cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.proof-carousel__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.35rem;
+}
+
+.proof-carousel__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.proof-carousel__dot:hover {
+  background: rgba(255, 255, 255, 0.42);
+  transform: scale(1.15);
+}
+
+.proof-carousel__dot.is-active {
+  background: var(--dot-accent, var(--accent));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--dot-accent, var(--accent)) 65%, transparent);
+  transform: scale(1.2);
+}
+
+.proof-carousel__dot:focus-visible {
+  outline: 2px solid var(--dot-accent, var(--accent));
+  outline-offset: 3px;
 }
 
 .proof-card {
@@ -631,7 +774,8 @@ body::before {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 11.5rem;
+  min-height: 12.5rem;
+  width: 100%;
   padding: 1.35rem 1.4rem 1.2rem;
   border-radius: calc(var(--radius) + 2px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -808,10 +952,14 @@ body::before {
   transform: perspective(900px) rotateX(var(--proof-tilt-x, 0deg)) rotateY(var(--proof-tilt-y, 0deg)) translateY(-1px) scale(0.995);
 }
 
-.proof-grid > li:nth-child(1) .reveal { transition-delay: 0.04s; }
-.proof-grid > li:nth-child(2) .reveal { transition-delay: 0.1s; }
-.proof-grid > li:nth-child(3) .reveal { transition-delay: 0.16s; }
-.proof-grid > li:nth-child(4) .reveal { transition-delay: 0.22s; }
+.proof-carousel .proof-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.45s ease,
+    filter 0.45s ease;
+}
 
 @keyframes proof-shine {
   from {
@@ -1870,8 +2018,54 @@ body::before {
     transform: none;
   }
 
-  .proof-grid {
-    grid-template-columns: 1fr 1fr;
+  .proof-carousel {
+    --carousel-radius: 0;
+  }
+
+  .proof-carousel__stage {
+    perspective: none;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: default;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+  }
+
+  .proof-carousel__stage::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proof-carousel__stage::before {
+    display: none;
+  }
+
+  .proof-carousel__ring {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    height: auto;
+    min-height: 0;
+    transform: none !important;
+    padding-bottom: 0.25rem;
+  }
+
+  .proof-carousel__item {
+    position: relative;
+    flex: 0 0 min(82vw, 300px);
+    width: min(82vw, 300px);
+    transform: none !important;
+    scroll-snap-align: center;
+    pointer-events: auto;
+  }
+
+  .proof-carousel__item:not(.is-front) .proof-card,
+  .proof-carousel__item.is-front .proof-card {
+    opacity: 1;
+    filter: none;
   }
 }
 
@@ -1911,10 +2105,6 @@ body::before {
 
   .hero-actions .btn {
     width: 100%;
-  }
-
-  .proof-grid {
-    grid-template-columns: 1fr;
   }
 
   .product-section,
