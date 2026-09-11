@@ -712,6 +712,9 @@ body::before {
 }
 
 .proof-carousel__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   position: absolute;
   left: calc(50% + var(--carousel-radius) + (var(--carousel-card-width) / 2) + 0.65rem);
   right: auto;
@@ -720,8 +723,51 @@ body::before {
   pointer-events: none;
 }
 
-.proof-carousel__footer .proof-carousel__dots {
+.proof-carousel__footer .proof-carousel__dots,
+.proof-carousel__footer .proof-carousel__pill {
   pointer-events: auto;
+}
+
+.proof-carousel__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.42rem 0.82rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8ecf4;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    rgba(10, 14, 22, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  white-space: nowrap;
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.proof-carousel__pill::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--dot-accent, var(--accent));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--dot-accent, var(--accent)) 70%, transparent);
+  flex: none;
 }
 
 .proof-carousel__item {
@@ -2190,16 +2236,20 @@ body::before {
 
   .proof-carousel__footer {
     position: static;
+    justify-content: center;
     margin-top: 1.1rem;
-    text-align: center;
   }
 
   .proof-carousel__dots {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    margin-inline: auto;
+    margin: 0;
     padding: 0;
+  }
+
+  .proof-carousel__pill {
+    max-width: none;
   }
 
 }

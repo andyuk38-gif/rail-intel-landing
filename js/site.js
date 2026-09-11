@@ -293,6 +293,7 @@
     var proofRing = proofCarousel.querySelector("[data-proof-ring]");
     var proofStage = proofCarousel.querySelector("[data-proof-stage]");
     var proofDotsRoot = proofCarousel.querySelector("[data-proof-dots]");
+    var proofPill = proofCarousel.querySelector("[data-proof-pill]");
     var proofItems = Array.prototype.slice.call(proofCarousel.querySelectorAll("[data-proof-item]"));
     var proofDots = [];
     var proofCount = proofItems.length;
@@ -395,6 +396,10 @@
         dot.classList.toggle("is-active", active);
         dot.setAttribute("aria-selected", active ? "true" : "false");
       });
+
+      if (proofPill && proofItems[proofIndex]) {
+        proofPill.textContent = proofLabelFor(proofItems[proofIndex]);
+      }
 
       if (proofCompact() && proofStage) {
         var target = proofItems[proofIndex];
