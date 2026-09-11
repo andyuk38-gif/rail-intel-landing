@@ -56,10 +56,12 @@ The repo is set up to publish via **GitHub Pages** with the custom domain **rail
 
 ---
 
-## Alternative: Deploy to Hostinger
+## Deploy to Hostinger (production)
 
-If you prefer to host the landing page on Hostinger instead of GitHub Pages:
+**railintel.co.uk** is deployed from this repo via Hostinger **Advanced → Git** (auto-deploy on push to `main`).
 
-1. Ensure **railintel.co.uk** points at your Hostinger hosting (not the Node.js app).
-2. Upload this folder’s contents to the domain’s document root (e.g. `public_html`): `index.html`, `css/`, `js/`, `images/`.
-3. You can remove the `CNAME` file from the repo if you are not using GitHub Pages for this domain.
+After changing content, always run `node scripts/build-pages.mjs` before committing.
+
+If deploy fails with **“divergent branches”**, the server checkout has drifted from GitHub. See **[docs/HOSTINGER-DEPLOY.md](docs/HOSTINGER-DEPLOY.md)** — you will need to SSH in once and run `scripts/hostinger-sync.sh` in the Git project directory, then redeploy.
+
+Confirm a successful deploy: view page source and look for `<!-- site-asset-version:… -->` (version should match `ASSET_VERSION` in `scripts/build-pages.mjs`).
