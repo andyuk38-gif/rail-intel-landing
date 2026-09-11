@@ -739,7 +739,8 @@ body::before {
   transform:
     rotateY(calc(var(--proof-i, 0) * var(--carousel-angle)))
     translateZ(var(--carousel-radius))
-    rotateX(calc(-1 * var(--carousel-tilt)));
+    rotateX(calc(-1 * var(--carousel-tilt)))
+    translateY(-1.35rem);
 }
 
 .proof-carousel__item:not(.is-front) .proof-card {
@@ -750,16 +751,19 @@ body::before {
 
 .proof-carousel__item.is-front .proof-card {
   opacity: 1;
-  filter: none;
-  border-color: color-mix(in srgb, var(--proof-accent, var(--accent)) 38%, rgba(255, 255, 255, 0.14));
+  filter: brightness(1.14) saturate(1.1);
+  border-color: color-mix(in srgb, var(--proof-accent, var(--accent)) 44%, rgba(255, 255, 255, 0.18));
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 42%, transparent 70%),
+    rgba(16, 20, 30, 0.58);
   box-shadow:
     0 28px 58px rgba(0, 0, 0, 0.48),
-    0 0 0 1px color-mix(in srgb, var(--proof-accent, var(--accent)) 22%, transparent),
-    0 0 42px color-mix(in srgb, var(--proof-glow, rgba(245, 158, 11, 0.2)) 90%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--proof-accent, var(--accent)) 28%, transparent),
+    0 0 48px color-mix(in srgb, var(--proof-glow, rgba(245, 158, 11, 0.2)) 100%, transparent);
 }
 
 .proof-carousel__item.is-front .proof-card__glow {
-  opacity: 0.88;
+  opacity: 1;
 }
 
 .proof-carousel__item.is-front .proof-card__cta {
