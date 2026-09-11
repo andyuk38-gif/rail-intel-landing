@@ -586,8 +586,7 @@ body::before {
   .hero-aurora,
   .hero-chip,
   .hero-badge__pulse::after,
-  .proof-card__shine,
-  .proof-carousel__hint-arrow {
+  .proof-card__shine {
     animation: none;
   }
 
@@ -619,8 +618,7 @@ body::before {
     filter: none;
   }
 
-  .proof-carousel__dots,
-  .proof-carousel__hint {
+  .proof-carousel__dots {
     display: none;
   }
 
@@ -647,25 +645,25 @@ body::before {
 
 /* Proof strip — 3D carousel of glass cards */
 .proof {
-  padding: 0 0 3.25rem;
+  padding: 0 0 2.5rem;
   position: relative;
 }
 
 .proof-carousel {
-  --carousel-radius: 360px;
-  --carousel-card-width: 252px;
-  --carousel-rotate: -90deg;
+  --carousel-radius: 290px;
+  --carousel-card-width: 220px;
+  --carousel-angle: 90deg;
+  --carousel-rotate: 0deg;
   position: relative;
 }
 
 .proof-carousel__stage {
   position: relative;
-  height: clamp(15.5rem, 24vw, 17.25rem);
+  height: clamp(12.5rem, 18vw, 13.75rem);
   margin: 0 auto;
-  perspective: 1200px;
-  perspective-origin: 50% 38%;
+  perspective: 1000px;
+  perspective-origin: 50% 36%;
   touch-action: pan-y pinch-zoom;
-  cursor: grab;
   user-select: none;
 }
 
@@ -701,7 +699,7 @@ body::before {
   inset: 0;
   width: var(--carousel-card-width);
   transform-style: preserve-3d;
-  transform: rotateY(calc(var(--proof-i, 0) * 90deg)) translateZ(var(--carousel-radius));
+  transform: rotateY(calc(var(--proof-i, 0) * var(--carousel-angle))) translateZ(var(--carousel-radius));
   backface-visibility: hidden;
   transition:
     opacity 0.45s ease,
@@ -733,61 +731,15 @@ body::before {
   transform: translateY(0);
 }
 
-.proof-carousel__hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  margin: 0.65rem 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.proof-carousel__hint-arrow {
-  display: inline-flex;
-  color: var(--dot-accent, var(--accent));
-  opacity: 0.85;
-}
-
-.proof-carousel__hint-arrow:first-child {
-  animation: proof-hint-left 1.8s ease-in-out infinite;
-}
-
-.proof-carousel__hint-arrow:last-child {
-  animation: proof-hint-right 1.8s ease-in-out infinite;
-}
-
-.proof-carousel__hint-mobile {
-  display: none;
-}
-
-.proof-carousel.is-hint-dismissed .proof-carousel__hint {
-  opacity: 0;
-  transform: translateY(-4px);
-}
-
-@keyframes proof-hint-left {
-  0%, 100% { transform: translateX(0); opacity: 0.55; }
-  50% { transform: translateX(-5px); opacity: 1; }
-}
-
-@keyframes proof-hint-right {
-  0%, 100% { transform: translateX(0); opacity: 0.55; }
-  50% { transform: translateX(5px); opacity: 1; }
-}
-
 .proof-carousel__dots {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 0.55rem;
-  margin-top: 0.85rem;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+  max-width: 18rem;
+  margin-inline: auto;
 }
 
 .proof-carousel__dot {
@@ -1004,8 +956,8 @@ body::before {
 }
 
 .proof-carousel .proof-card {
-  min-height: 10rem;
-  padding: 1.1rem 1.2rem 1rem;
+  min-height: 8.25rem;
+  padding: 0.95rem 1rem 0.85rem;
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.35s ease,
@@ -1015,14 +967,25 @@ body::before {
 }
 
 .proof-carousel .proof-card__icon {
-  width: 2.2rem;
-  height: 2.2rem;
-  margin-bottom: 0.7rem;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.55rem;
+  border-radius: 9px;
+}
+
+.proof-carousel .proof-label {
+  font-size: 0.625rem;
+  margin-bottom: 0.35rem;
 }
 
 .proof-carousel .proof-card p {
-  font-size: 0.875rem;
-  line-height: 1.42;
+  font-size: 0.8125rem;
+  line-height: 1.38;
+}
+
+.proof-carousel .proof-card__cta {
+  margin-top: 0.65rem;
+  font-size: 0.625rem;
 }
 
 @keyframes proof-shine {
@@ -2132,13 +2095,6 @@ body::before {
     filter: none;
   }
 
-  .proof-carousel__hint-desktop {
-    display: none;
-  }
-
-  .proof-carousel__hint-mobile {
-    display: inline;
-  }
 }
 
 @media (max-width: 900px) {

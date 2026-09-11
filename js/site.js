@@ -292,10 +292,11 @@
   if (proofCarousel) {
     var proofRing = proofCarousel.querySelector("[data-proof-ring]");
     var proofStage = proofCarousel.querySelector("[data-proof-stage]");
+    var proofDotsRoot = proofCarousel.querySelector("[data-proof-dots]");
     var proofItems = Array.prototype.slice.call(proofCarousel.querySelectorAll("[data-proof-item]"));
-    var proofDots = Array.prototype.slice.call(proofCarousel.querySelectorAll("[data-proof-dot]"));
+    var proofDots = [];
     var proofCount = proofItems.length;
-    var proofIndex = 1;
+    var proofIndex = Math.min(1, proofCount - 1);
     var proofReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var proofCompact = function () {
       return window.matchMedia("(max-width: 1024px)").matches;
@@ -303,23 +304,10 @@
     var proofDragging = false;
     var proofDragStart = 0;
     var proofDragDelta = 0;
-    var proofHintDismissed = false;
-
-    if (sessionStorage.getItem("proof-carousel-hint-dismissed") === "1") {
-      proofCarousel.classList.add("is-hint-dismissed");
-      proofHintDismissed = true;
-    }
-
-    function proofDismissHint() {
-      if (proofHintDismissed) return;
-      proofHintDismissed = true;
-      proofCarousel.classList.add("is-hint-dismissed");
-      try {
-        sessionStorage.setItem("proof-carousel-hint-dismissed", "1");
-      } catch (error) {
-        /* storage may be unavailable */
-      }
-    }
+    var proofAutoTimer = null;
+    var proofPaused = false;
+    var proofInView = true;
+    var PROOF_AUTO_MS = 3000;
 
     function proofAccentFor(index) {
       var card = proofItems[index] && proofItems[index].querySelector(".proof-card");
@@ -327,8 +315,65 @@
       return card.style.getPropertyValue("--proof-accent") || getComputedStyle(card).getPropertyValue("--proof-accent");
     }
 
-    function proofSetIndex(nextIndex, dismissHint) {
-      if (dismissHint && nextIndex !== proofIndex) proofDismissHint();
+    function proofLabelFor(item) {
+      var label = item.querySelector(".proof-label");
+      return label ? label.textContent.replace(/\s+/g, " ").trim() : "";
+    }
+
+    function proofLayout() {
+      if (!proofCount) return;
+      var step = 360 / proofCount;
+      var cardWidth = 220;
+      var radius = Math.round(cardWidth / (2 * Math.tan(Math.PI / proofCount)) + 48);
+      radius = Math.max(260, Math.min(radius, 420));
+      proofCarousel.style.setProperty("--carousel-angle", step + "deg");
+      proofCarousel.style.setProperty("--carousel-radius", radius + "px");
+      proofItems.forEach(function (item, itemIndex) {
+        item.style.setProperty("--proof-i", String(itemIndex));
+      });
+    }
+
+    function proofBuildDots() {
+      if (!proofDotsRoot) return;
+      proofDotsRoot.replaceChildren();
+      proofItems.forEach(function (item, itemIndex) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "proof-carousel__dot";
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("data-proof-dot", String(itemIndex));
+        dot.setAttribute("aria-label", proofLabelFor(item) || "Feature " + (itemIndex + 1));
+        dot.setAttribute("aria-selected", "false");
+        dot.addEventListener("click", function () {
+          proofSetIndex(itemIndex, true);
+        });
+        proofDotsRoot.appendChild(dot);
+      });
+      proofDots = Array.prototype.slice.call(proofDotsRoot.querySelectorAll("[data-proof-dot]"));
+    }
+
+    function proofStopAuto() {
+      if (!proofAutoTimer) return;
+      window.clearInterval(proofAutoTimer);
+      proofAutoTimer = null;
+    }
+
+    function proofStartAuto() {
+      proofStopAuto();
+      if (proofReduced || proofPaused || !proofInView || proofDragging) return;
+      proofAutoTimer = window.setInterval(function () {
+        if (proofPaused || proofDragging || !proofInView) return;
+        proofSetIndex(proofIndex + 1);
+      }, PROOF_AUTO_MS);
+    }
+
+    function proofRestartAuto() {
+      proofStopAuto();
+      proofStartAuto();
+    }
+
+    function proofSetIndex(nextIndex, userInitiated) {
+      if (userInitiated) proofRestartAuto();
       proofIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
       var angle = -proofIndex * (360 / proofCount);
       proofCarousel.style.setProperty("--carousel-rotate", angle + "deg");
@@ -373,14 +418,42 @@
       return nearest;
     }
 
+    proofLayout();
+    proofBuildDots();
     proofSetIndex(proofIndex);
+    proofStartAuto();
 
-    proofDots.forEach(function (dot) {
-      dot.addEventListener("click", function () {
-        proofDismissHint();
-        proofSetIndex(Number(dot.getAttribute("data-proof-dot")) || 0);
-      });
+    proofCarousel.addEventListener("mouseenter", function () {
+      proofPaused = true;
+      proofStopAuto();
     });
+
+    proofCarousel.addEventListener("mouseleave", function () {
+      proofPaused = false;
+      proofStartAuto();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        proofStopAuto();
+      } else if (!proofPaused) {
+        proofStartAuto();
+      }
+    });
+
+    if ("IntersectionObserver" in window) {
+      var proofViewObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            proofInView = entry.isIntersecting;
+            if (proofInView && !proofPaused) proofStartAuto();
+            else proofStopAuto();
+          });
+        },
+        { threshold: 0.35 }
+      );
+      proofViewObserver.observe(proofCarousel);
+    }
 
     proofItems.forEach(function (item, itemIndex) {
       var link = item.querySelector(".proof-card");
@@ -410,6 +483,7 @@
           if (proofCompact()) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
           proofDragging = true;
+          proofStopAuto();
           proofDragStart = event.clientX;
           proofDragDelta = 0;
           proofStage.classList.add("is-dragging");
@@ -440,6 +514,8 @@
         }
         if (Math.abs(proofDragDelta) > 48) {
           proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1), true);
+        } else if (!proofPaused) {
+          proofStartAuto();
         }
         proofDragDelta = 0;
       }
@@ -463,7 +539,8 @@
     }
 
     window.addEventListener("resize", function () {
-      if (proofCompact()) proofSetIndex(proofIndex);
+      proofLayout();
+      proofSetIndex(proofIndex);
     });
   }
 
