@@ -293,6 +293,9 @@
     var proofRing = proofCarousel.querySelector("[data-proof-ring]");
     var proofStage = proofCarousel.querySelector("[data-proof-stage]");
     var proofDotsRoot = proofCarousel.querySelector("[data-proof-dots]");
+    var proofPill = proofCarousel.querySelector("[data-proof-pill]");
+    var proofPreview = proofCarousel.querySelector("[data-proof-preview]");
+    var proofPreviewUrl = proofCarousel.querySelector("[data-proof-preview-url]");
     var proofItems = Array.prototype.slice.call(proofCarousel.querySelectorAll("[data-proof-item]"));
     var proofDots = [];
     var proofCount = proofItems.length;
@@ -320,6 +323,31 @@
     function proofLabelFor(item) {
       var label = item.querySelector(".proof-label");
       return label ? label.textContent.replace(/\s+/g, " ").trim() : "";
+    }
+
+    function proofShotFor(index) {
+      var item = proofItems[index];
+      if (!item) return { src: "", alt: "", url: "cms.railintel.co.uk" };
+      return {
+        src: item.getAttribute("data-proof-shot") || "",
+        alt: item.getAttribute("data-proof-shot-alt") || proofLabelFor(item),
+        url: item.getAttribute("data-proof-url") || "cms.railintel.co.uk",
+      };
+    }
+
+    function proofUpdatePreview() {
+      var item = proofItems[proofIndex];
+      if (!item) return;
+      var shot = proofShotFor(proofIndex);
+      if (proofPill) proofPill.textContent = proofLabelFor(item);
+      if (!proofPreview || !shot.src) return;
+      proofCarousel.classList.add("is-preview-swapping");
+      window.setTimeout(function () {
+        proofPreview.src = shot.src;
+        proofPreview.alt = shot.alt;
+        if (proofPreviewUrl) proofPreviewUrl.textContent = shot.url;
+        proofCarousel.classList.remove("is-preview-swapping");
+      }, 130);
     }
 
     function proofLayout() {
@@ -403,6 +431,8 @@
           proofStage.scrollTo({ left: offset, behavior: proofReduced ? "auto" : "smooth" });
         }
       }
+
+      proofUpdatePreview();
     }
 
     function proofSetIndex(nextIndex, userInitiated) {

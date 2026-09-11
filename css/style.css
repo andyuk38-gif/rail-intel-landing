@@ -646,28 +646,45 @@ body::before {
 
 /* Proof strip — 3D carousel of glass cards */
 .proof {
-  padding: 0 0 6.5rem;
+  padding: 0 0 5rem;
   position: relative;
   z-index: 3;
 }
 
+.proof-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 1.5rem 2.5rem;
+  align-items: center;
+}
+
+.proof-showcase__left {
+  min-width: 0;
+}
+
 .proof-carousel {
-  --carousel-radius: 290px;
-  --carousel-card-width: 220px;
+  --carousel-radius: 250px;
+  --carousel-card-width: 210px;
   --carousel-angle: 90deg;
   --carousel-tilt: -16deg;
   --carousel-rotate: 0deg;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   position: relative;
-  min-height: clamp(15.5rem, 22vw, 17.5rem);
+  min-height: clamp(15rem, 21vw, 17rem);
 }
 
 .proof-carousel__stage {
   position: relative;
-  height: clamp(14.5rem, 21vw, 16rem);
-  margin: 0 auto;
-  padding-bottom: 1.5rem;
+  flex: none;
+  height: clamp(14rem, 20vw, 15.5rem);
+  width: calc((var(--carousel-radius) + var(--carousel-card-width) / 2) * 2);
+  max-width: 100%;
+  margin: 0;
+  padding-bottom: 0;
   perspective: 1100px;
-  perspective-origin: 50% 18%;
+  perspective-origin: 42% 18%;
   touch-action: pan-y pinch-zoom;
   user-select: none;
   overflow: visible;
@@ -690,7 +707,8 @@ body::before {
 
 .proof-carousel__ring {
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
+  margin-left: calc(var(--carousel-radius) - (var(--carousel-card-width) / 2));
   padding: 0;
   position: relative;
   width: var(--carousel-card-width);
@@ -711,17 +729,77 @@ body::before {
   filter: brightness(0.9) saturate(0.95);
 }
 
-.proof-carousel__footer {
-  position: absolute;
-  left: calc(50% + var(--carousel-radius) + (var(--carousel-card-width) / 2) + 0.65rem);
-  right: auto;
-  bottom: 0.35rem;
+.proof-carousel__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding-top: 1.5rem;
+  flex: none;
   z-index: 5;
-  pointer-events: none;
 }
 
-.proof-carousel__footer .proof-carousel__dots {
-  pointer-events: auto;
+.proof-carousel__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.42rem 0.82rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8ecf4;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    rgba(10, 14, 22, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  white-space: nowrap;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.proof-carousel__pill::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--dot-accent, var(--accent));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--dot-accent, var(--accent)) 70%, transparent);
+  flex: none;
+}
+
+.proof-showcase__preview {
+  min-width: 0;
+}
+
+.proof-preview .browser-mockup {
+  max-width: none;
+  width: 100%;
+}
+
+.proof-preview .browser-mockup__content img {
+  transition: opacity 0.22s ease;
+}
+
+.proof-showcase.is-preview-swapping .proof-preview .browser-mockup__content img {
+  opacity: 0.35;
+}
+
+.proof-showcase.is-preview-swapping .proof-carousel__pill {
+  opacity: 0.65;
 }
 
 .proof-carousel__item {
@@ -787,16 +865,14 @@ body::before {
 
 .proof-carousel__dots {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-end;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
-  gap: 0.32rem;
+  gap: 0.36rem;
   margin: 0;
   padding: 0;
-  width: max-content;
-  max-width: 5.25rem;
+  flex: none;
 }
 
 .proof-carousel__dot {
@@ -2186,23 +2262,48 @@ body::before {
     filter: none;
   }
 
+  .proof-showcase {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .proof-showcase__preview {
+    order: 2;
+  }
+
+  .proof-showcase__left {
+    order: 1;
+  }
+
   .proof-carousel {
+    flex-direction: column;
     min-height: 0;
   }
 
-  .proof-carousel__footer {
-    position: static;
-    margin-top: 1.1rem;
-    text-align: center;
+  .proof-carousel__stage {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .proof-carousel__ring {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .proof-carousel__nav {
+    justify-content: center;
+    padding-top: 0;
+    margin-top: 0.75rem;
   }
 
   .proof-carousel__dots {
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 14rem;
-    margin-inline: auto;
-    padding: 0;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+  }
+
+  .proof-carousel__pill {
+    max-width: none;
   }
 
 }
