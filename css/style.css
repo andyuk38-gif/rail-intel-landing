@@ -356,7 +356,7 @@ body::before {
   line-height: 1.1;
   letter-spacing: -0.035em;
   margin: 0 0 1.35rem;
-  max-width: 26ch;
+  max-width: 22ch;
   text-wrap: balance;
 }
 
@@ -372,10 +372,10 @@ body::before {
 }
 
 .hero-desc {
-  font-size: 1.1875rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.62;
   color: #a7aebc;
-  max-width: 44ch;
+  max-width: 52ch;
   margin: 0 0 2.25rem;
 }
 
