@@ -383,6 +383,19 @@ body::before {
   margin-top: -0.85rem;
 }
 
+.hero-desc__link {
+  text-decoration: none;
+  transition: filter 0.2s ease;
+}
+
+.hero-desc__link:hover,
+.hero-desc__link:focus-visible {
+  filter: brightness(1.12);
+  text-decoration: underline;
+  text-decoration-color: #f59e0b;
+  text-underline-offset: 0.15em;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
