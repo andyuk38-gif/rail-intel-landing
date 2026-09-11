@@ -297,6 +297,7 @@
     var proofDots = [];
     var proofCount = proofItems.length;
     var proofIndex = Math.min(1, proofCount - 1);
+    var proofDisplayAngle = 0;
     var proofReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var proofCompact = function () {
       return window.matchMedia("(max-width: 1024px)").matches;
@@ -307,6 +308,7 @@
     var proofAutoTimer = null;
     var proofPaused = false;
     var proofInView = true;
+    var proofIntroDone = false;
     var PROOF_AUTO_MS = 3000;
 
     function proofAccentFor(index) {
@@ -360,10 +362,10 @@
 
     function proofStartAuto() {
       proofStopAuto();
-      if (proofReduced || proofPaused || !proofInView || proofDragging) return;
+      if (proofReduced || proofPaused || !proofInView || proofDragging || !proofIntroDone) return;
       proofAutoTimer = window.setInterval(function () {
         if (proofPaused || proofDragging || !proofInView) return;
-        proofSetIndex(proofIndex + 1);
+        proofAdvanceForward();
       }, PROOF_AUTO_MS);
     }
 
@@ -372,11 +374,12 @@
       proofStartAuto();
     }
 
-    function proofSetIndex(nextIndex, userInitiated) {
-      if (userInitiated) proofRestartAuto();
-      proofIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
-      var angle = -proofIndex * (360 / proofCount);
-      proofCarousel.style.setProperty("--carousel-rotate", angle + "deg");
+    function proofStepSize() {
+      return 360 / proofCount;
+    }
+
+    function proofApplyState() {
+      proofCarousel.style.setProperty("--carousel-rotate", proofDisplayAngle + "deg");
       proofCarousel.style.setProperty("--dot-accent", proofAccentFor(proofIndex).trim());
 
       proofItems.forEach(function (item, itemIndex) {
@@ -402,6 +405,27 @@
       }
     }
 
+    function proofSetIndex(nextIndex, userInitiated) {
+      if (userInitiated) proofRestartAuto();
+      var newIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
+      if (newIndex === proofIndex) return;
+
+      var step = proofStepSize();
+      var delta = newIndex - proofIndex;
+      if (delta > proofCount / 2) delta -= proofCount;
+      else if (delta < -proofCount / 2) delta += proofCount;
+
+      proofDisplayAngle -= delta * step;
+      proofIndex = newIndex;
+      proofApplyState();
+    }
+
+    function proofAdvanceForward() {
+      proofDisplayAngle -= proofStepSize();
+      proofIndex = (proofIndex + 1) % proofCount;
+      proofApplyState();
+    }
+
     function proofNearestFromScroll() {
       if (!proofStage || !proofCompact()) return proofIndex;
       var center = proofStage.scrollLeft + proofStage.clientWidth / 2;
@@ -418,10 +442,62 @@
       return nearest;
     }
 
-    proofLayout();
-    proofBuildDots();
-    proofSetIndex(proofIndex);
-    proofStartAuto();
+    var proofIntroFinished = false;
+
+    function proofFinishIntro() {
+      if (proofIntroFinished) return;
+      proofIntroFinished = true;
+      proofIntroDone = true;
+      proofCarousel.classList.remove("is-intro");
+      if (proofRing) proofRing.classList.remove("is-intro-spin");
+      proofDisplayAngle = -proofIndex * proofStepSize();
+      proofApplyState();
+      proofStartAuto();
+    }
+
+    function proofRunIntro() {
+      proofLayout();
+      proofBuildDots();
+
+      if (proofReduced || proofCompact() || !proofRing) {
+        proofFinishIntro();
+        return;
+      }
+
+      var step = proofStepSize();
+      var targetAngle = -proofIndex * step;
+      proofDisplayAngle = targetAngle;
+      var fromAngle = targetAngle - 360;
+      var introFallback;
+
+      proofCarousel.classList.add("is-intro");
+      proofItems.forEach(function (item) {
+        item.classList.remove("is-front");
+      });
+      proofCarousel.style.setProperty("--carousel-rotate", fromAngle + "deg");
+      proofRing.classList.add("is-intro-spin");
+
+      function onIntroEnd(event) {
+        if (event.propertyName !== "transform") return;
+        proofRing.removeEventListener("transitionend", onIntroEnd);
+        window.clearTimeout(introFallback);
+        proofFinishIntro();
+      }
+
+      proofRing.addEventListener("transitionend", onIntroEnd);
+      introFallback = window.setTimeout(function () {
+        proofRing.removeEventListener("transitionend", onIntroEnd);
+        proofFinishIntro();
+      }, 1900);
+
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          proofCarousel.style.setProperty("--carousel-rotate", targetAngle + "deg");
+        });
+      });
+    }
+
+    proofRunIntro();
 
     proofCarousel.addEventListener("mouseenter", function () {
       proofPaused = true;
@@ -436,7 +512,7 @@
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) {
         proofStopAuto();
-      } else if (!proofPaused) {
+      } else if (!proofPaused && proofIntroDone) {
         proofStartAuto();
       }
     });
@@ -446,7 +522,7 @@
         function (entries) {
           entries.forEach(function (entry) {
             proofInView = entry.isIntersecting;
-            if (proofInView && !proofPaused) proofStartAuto();
+            if (proofInView && !proofPaused && proofIntroDone) proofStartAuto();
             else proofStopAuto();
           });
         },
@@ -540,7 +616,7 @@
 
     window.addEventListener("resize", function () {
       proofLayout();
-      proofSetIndex(proofIndex);
+      proofApplyState();
     });
   }
 
