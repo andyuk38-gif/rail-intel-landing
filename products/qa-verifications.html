@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=125" />
-  <link rel="stylesheet" href="../css/pages.css?v=125" />
+  <link rel="stylesheet" href="../css/style.css?v=126" />
+  <link rel="stylesheet" href="../css/pages.css?v=126" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -201,27 +201,14 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="verify verify--module-page" id="verifications" aria-labelledby="verify-heading">
       <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / QA Verifications</p>
-          <span class="page-badge page-badge--addon">Add-on module</span>
-          <h1 class="page-title">Verify one driver, every reportee, or a percentage of the company.</h1>
-          <p class="page-lead">Automate your rail compliance. Survive every audit with <span class="hero-title__accent">QA verification Addon Module</span>. Produce team, individual or a percentage of all for quarterly spot checks at the click of a button.</p>
-
-          <div class="page-actions">
-            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="verify" id="verifications" aria-labelledby="verify-heading">
-      <div class="container">
+        <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / QA Verifications</p>
+        <span class="page-badge page-badge--addon">Add-on module</span>
         <div class="verify__head">
           <p class="product-eyebrow">QA Verifications</p>
-          <h2 id="verify-heading">Run structured checks across live records</h2>
+          <h1 id="verify-heading" class="verify__title">Verify one driver, every reportee, or a percentage of the company.</h1>
+          <p class="product-lead">Automate your rail compliance. Survive every audit with <span class="hero-title__accent">QA verification Addon Module</span>. Produce team, individual or a percentage of all for quarterly spot checks at the click of a button.</p>
           <p class="product-lead">A verification reads the live record &mdash; cycles, medicals, licence, cab passes, experience, training, assessment events and incidents &mdash; and scores every check it runs. Use it on one person before they sign on, across your whole team, or as a spot-check sample.</p>
         </div>
 
@@ -291,29 +278,7 @@
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Configure what a check actually tests</h2>
-          <p>The check configuration decides which sections are examined and how strict each one is, so verification reflects your standards rather than a generic template. Companies running different standards for drivers, instructors and managers can hold each to the right bar.</p>
-          <ul class="spec-list">
-            <li><strong>Per-section configuration</strong> of what is examined and what counts as a pass.</li>
-            <li><strong>Permission-gated running</strong> via `qa-verifications.run`, so only authorised staff can execute checks.</li>
-            <li><strong>Launch from any employee record</strong> once the module is active.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame">
-            <img src="../images/screens/verification/verification-config.png?v=92" alt="Check configuration controls which sections are tested and how each is scored." width="1382" height="1050" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Check configuration controls which sections are tested and how each is scored.</figcaption>
-        </figure>
-      </div>
-      </div>
-    </section>
-
-    <section class="page-section">
+    <section class="page-section page-section--activation">
       <div class="container">
         <div class="page-section__head">
           <h2>Activating QA Verifications</h2>
@@ -322,6 +287,7 @@
         </div>
         <div class="page-actions">
           <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
+          <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
         </div>
       </div>
     </section>
@@ -341,7 +307,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=125"></script>
-  <script src="../js/main.js?v=125"></script>
+  <script src="../js/site.js?v=126"></script>
+  <script src="../js/main.js?v=126"></script>
 </body>
 </html>

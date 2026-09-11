@@ -427,6 +427,10 @@
   border-top: 1px solid var(--border);
 }
 
+.page-section--activation {
+  background: linear-gradient(180deg, #0e1218 0%, #0c0f14 100%);
+}
+
 .page-section__head {
   max-width: 46rem;
   margin-bottom: 2rem;
