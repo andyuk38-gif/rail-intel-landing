@@ -2277,6 +2277,60 @@ body::before {
     filter: none;
   }
 
+  .proof {
+    background: linear-gradient(180deg, rgba(12, 14, 20, 0.72) 0%, var(--bg) 42%);
+  }
+
+  .proof-carousel .proof-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(180deg, rgba(20, 22, 28, 0.72) 0%, rgba(14, 16, 22, 0.94) 100%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, transparent 52%);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+
+  .proof-carousel .proof-card::before {
+    opacity: 0.05;
+    filter: saturate(0.45) brightness(0.55);
+  }
+
+  .proof-carousel__item.is-front .proof-card {
+    border-color: rgba(255, 255, 255, 0.18);
+    background:
+      linear-gradient(180deg, rgba(22, 24, 30, 0.78) 0%, rgba(14, 16, 22, 0.96) 100%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+
+  .proof-carousel__item.is-front .proof-card::before {
+    opacity: 0.07;
+    filter: saturate(0.5) brightness(0.58);
+  }
+
+  .proof-carousel__item.is-front .proof-card__glow {
+    opacity: 0.35;
+  }
+
+  .proof-carousel .proof-card::after {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--proof-accent, var(--accent)) 5%, transparent);
+    opacity: 0.55;
+  }
+
+  .proof-carousel .proof-card__icon {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+
   .proof-carousel {
     min-height: 0;
   }
