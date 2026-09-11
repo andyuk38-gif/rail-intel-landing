@@ -286,6 +286,26 @@
     }
   }
 
+  /* ---------- Proof glass cards — subtle pointer tilt ---------- */
+
+  var proofCards = Array.prototype.slice.call(document.querySelectorAll("[data-proof-tilt]"));
+  if (proofCards.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    proofCards.forEach(function (card) {
+      card.addEventListener("mousemove", function (event) {
+        var rect = card.getBoundingClientRect();
+        var x = (event.clientX - rect.left) / rect.width - 0.5;
+        var y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty("--proof-tilt-x", (-y * 7).toFixed(2) + "deg");
+        card.style.setProperty("--proof-tilt-y", (x * 7).toFixed(2) + "deg");
+      });
+
+      card.addEventListener("mouseleave", function () {
+        card.style.setProperty("--proof-tilt-x", "0deg");
+        card.style.setProperty("--proof-tilt-y", "0deg");
+      });
+    });
+  }
+
   var howFlow = document.querySelector(".how-flow");
   if (howFlow) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {

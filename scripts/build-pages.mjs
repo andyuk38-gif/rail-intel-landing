@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 91;
+const ASSET_VERSION = 92;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1607,6 +1607,8 @@ function renderHomeGallery() {
         tab.copy.bullets.join("|")
       ),
     ];
+
+    if (tab.wide) attrs.push(' data-wide="true"');
 
     if (tab.carousel && tab.slides?.length) {
       attrs.push(' data-carousel="true"');

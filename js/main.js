@@ -262,6 +262,14 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     }
   };
 
+  const sectionInner = gallery.closest(".product-section__inner");
+
+  const setWideLayout = (tab) => {
+    const wide = tab.hasAttribute("data-wide");
+    gallery.classList.toggle("is-wide", wide);
+    if (sectionInner) sectionInner.classList.toggle("is-gallery-wide", wide);
+  };
+
   const show = (tab) => {
     activeTab = tab;
     tabs.forEach((other) => {
@@ -271,6 +279,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
       other.tabIndex = active ? 0 : -1;
     });
 
+    setWideLayout(tab);
     gallery.classList.add("is-swapping");
     setTimeout(() => render(tab), 120);
   };
@@ -289,7 +298,9 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     });
   });
 
-  render(tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0]);
+  const initialTab = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
+  setWideLayout(initialTab);
+  render(initialTab);
 
   // Only run the video while it is on screen, so it costs nothing to visitors
   // who never scroll this far.
