@@ -586,7 +586,8 @@ body::before {
   .hero-aurora,
   .hero-chip,
   .hero-badge__pulse::after,
-  .proof-card__shine {
+  .proof-card__shine,
+  .proof-carousel__hint-arrow {
     animation: none;
   }
 
@@ -618,7 +619,8 @@ body::before {
     filter: none;
   }
 
-  .proof-carousel__dots {
+  .proof-carousel__dots,
+  .proof-carousel__hint {
     display: none;
   }
 
@@ -645,23 +647,23 @@ body::before {
 
 /* Proof strip — 3D carousel of glass cards */
 .proof {
-  padding: 0 0 4.5rem;
+  padding: 0 0 3.25rem;
   position: relative;
 }
 
 .proof-carousel {
-  --carousel-radius: 420px;
-  --carousel-card-width: 268px;
+  --carousel-radius: 360px;
+  --carousel-card-width: 252px;
   --carousel-rotate: -90deg;
   position: relative;
 }
 
 .proof-carousel__stage {
   position: relative;
-  height: clamp(22rem, 42vw, 26rem);
+  height: clamp(15.5rem, 24vw, 17.25rem);
   margin: 0 auto;
-  perspective: 1400px;
-  perspective-origin: 50% 42%;
+  perspective: 1200px;
+  perspective-origin: 50% 38%;
   touch-action: pan-y pinch-zoom;
   cursor: grab;
   user-select: none;
@@ -731,12 +733,61 @@ body::before {
   transform: translateY(0);
 }
 
+.proof-carousel__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 0.65rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.proof-carousel__hint-arrow {
+  display: inline-flex;
+  color: var(--dot-accent, var(--accent));
+  opacity: 0.85;
+}
+
+.proof-carousel__hint-arrow:first-child {
+  animation: proof-hint-left 1.8s ease-in-out infinite;
+}
+
+.proof-carousel__hint-arrow:last-child {
+  animation: proof-hint-right 1.8s ease-in-out infinite;
+}
+
+.proof-carousel__hint-mobile {
+  display: none;
+}
+
+.proof-carousel.is-hint-dismissed .proof-carousel__hint {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+@keyframes proof-hint-left {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50% { transform: translateX(-5px); opacity: 1; }
+}
+
+@keyframes proof-hint-right {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50% { transform: translateX(5px); opacity: 1; }
+}
+
 .proof-carousel__dots {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.55rem;
-  margin-top: 1.35rem;
+  margin-top: 0.85rem;
 }
 
 .proof-carousel__dot {
@@ -953,12 +1004,25 @@ body::before {
 }
 
 .proof-carousel .proof-card {
+  min-height: 10rem;
+  padding: 1.1rem 1.2rem 1rem;
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.35s ease,
     box-shadow 0.35s ease,
     opacity 0.45s ease,
     filter 0.45s ease;
+}
+
+.proof-carousel .proof-card__icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.proof-carousel .proof-card p {
+  font-size: 0.875rem;
+  line-height: 1.42;
 }
 
 @keyframes proof-shine {
@@ -2066,6 +2130,14 @@ body::before {
   .proof-carousel__item.is-front .proof-card {
     opacity: 1;
     filter: none;
+  }
+
+  .proof-carousel__hint-desktop {
+    display: none;
+  }
+
+  .proof-carousel__hint-mobile {
+    display: inline;
   }
 }
 

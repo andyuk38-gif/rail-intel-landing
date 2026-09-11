@@ -303,6 +303,23 @@
     var proofDragging = false;
     var proofDragStart = 0;
     var proofDragDelta = 0;
+    var proofHintDismissed = false;
+
+    if (sessionStorage.getItem("proof-carousel-hint-dismissed") === "1") {
+      proofCarousel.classList.add("is-hint-dismissed");
+      proofHintDismissed = true;
+    }
+
+    function proofDismissHint() {
+      if (proofHintDismissed) return;
+      proofHintDismissed = true;
+      proofCarousel.classList.add("is-hint-dismissed");
+      try {
+        sessionStorage.setItem("proof-carousel-hint-dismissed", "1");
+      } catch (error) {
+        /* storage may be unavailable */
+      }
+    }
 
     function proofAccentFor(index) {
       var card = proofItems[index] && proofItems[index].querySelector(".proof-card");
@@ -310,7 +327,8 @@
       return card.style.getPropertyValue("--proof-accent") || getComputedStyle(card).getPropertyValue("--proof-accent");
     }
 
-    function proofSetIndex(nextIndex) {
+    function proofSetIndex(nextIndex, dismissHint) {
+      if (dismissHint && nextIndex !== proofIndex) proofDismissHint();
       proofIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
       var angle = -proofIndex * (360 / proofCount);
       proofCarousel.style.setProperty("--carousel-rotate", angle + "deg");
@@ -359,6 +377,7 @@
 
     proofDots.forEach(function (dot) {
       dot.addEventListener("click", function () {
+        proofDismissHint();
         proofSetIndex(Number(dot.getAttribute("data-proof-dot")) || 0);
       });
     });
@@ -369,7 +388,7 @@
       link.addEventListener("click", function (event) {
         if (itemIndex !== proofIndex) {
           event.preventDefault();
-          proofSetIndex(itemIndex);
+          proofSetIndex(itemIndex, true);
         }
       });
     });
@@ -378,10 +397,10 @@
       proofStage.addEventListener("keydown", function (event) {
         if (event.key === "ArrowLeft") {
           event.preventDefault();
-          proofSetIndex(proofIndex - 1);
+          proofSetIndex(proofIndex - 1, true);
         } else if (event.key === "ArrowRight") {
           event.preventDefault();
-          proofSetIndex(proofIndex + 1);
+          proofSetIndex(proofIndex + 1, true);
         }
       });
 
@@ -420,7 +439,7 @@
           }
         }
         if (Math.abs(proofDragDelta) > 48) {
-          proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1));
+          proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1), true);
         }
         proofDragDelta = 0;
       }
@@ -436,7 +455,7 @@
           window.clearTimeout(proofScrollTimer);
           proofScrollTimer = window.setTimeout(function () {
             var nearest = proofNearestFromScroll();
-            if (nearest !== proofIndex) proofSetIndex(nearest);
+            if (nearest !== proofIndex) proofSetIndex(nearest, true);
           }, 80);
         },
         { passive: true }
