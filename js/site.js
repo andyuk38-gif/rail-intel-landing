@@ -306,6 +306,7 @@
     var proofDragging = false;
     var proofDragStart = 0;
     var proofDragDelta = 0;
+    var proofScrollStart = 0;
     var proofAutoTimer = null;
     var proofPaused = false;
     var proofInView = true;
@@ -582,12 +583,12 @@
       proofStage.addEventListener(
         "pointerdown",
         function (event) {
-          if (proofCompact()) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
           proofDragging = true;
           proofStopAuto();
           proofDragStart = event.clientX;
           proofDragDelta = 0;
+          proofScrollStart = proofStage.scrollLeft;
           proofStage.classList.add("is-dragging");
           if (proofStage.setPointerCapture) proofStage.setPointerCapture(event.pointerId);
         },
@@ -597,7 +598,7 @@
       proofStage.addEventListener(
         "pointermove",
         function (event) {
-          if (!proofDragging || proofCompact()) return;
+          if (!proofDragging) return;
           proofDragDelta = event.clientX - proofDragStart;
         },
         { passive: true }
@@ -614,11 +615,24 @@
             /* pointer may already be released */
           }
         }
-        if (Math.abs(proofDragDelta) > 48) {
+
+        if (proofCompact()) {
+          var scrolled = Math.abs(proofStage.scrollLeft - proofScrollStart);
+          if (Math.abs(proofDragDelta) > 48 && scrolled < 28) {
+            proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1), true);
+          } else if (scrolled >= 28) {
+            var nearest = proofNearestFromScroll();
+            if (nearest !== proofIndex) proofSetIndex(nearest, true);
+            else if (!proofPaused) proofStartAuto();
+          } else if (!proofPaused) {
+            proofStartAuto();
+          }
+        } else if (Math.abs(proofDragDelta) > 48) {
           proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1), true);
         } else if (!proofPaused) {
           proofStartAuto();
         }
+
         proofDragDelta = 0;
       }
 
