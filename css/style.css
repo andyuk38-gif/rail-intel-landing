@@ -1952,8 +1952,11 @@ body::before {
 }
 
 .verify-report__head {
-  max-width: 42rem;
   margin-bottom: 2rem;
+}
+
+.verify-report__head .product-lead {
+  max-width: none;
 }
 
 .verify-report__title {
