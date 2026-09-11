@@ -323,6 +323,24 @@
       return label ? label.textContent.replace(/\s+/g, " ").trim() : "";
     }
 
+    function proofPositionPill() {
+      if (!proofPill || !proofDots.length) return;
+      var activeDot = proofDots[proofIndex];
+      if (!activeDot) return;
+      var footer = proofPill.parentElement;
+      if (!footer) return;
+
+      if (proofCompact()) {
+        proofPill.style.transform = "";
+        return;
+      }
+
+      var footerRect = footer.getBoundingClientRect();
+      var dotRect = activeDot.getBoundingClientRect();
+      var offsetY = dotRect.top + dotRect.height / 2 - footerRect.top - proofPill.offsetHeight / 2;
+      proofPill.style.transform = "translateY(" + offsetY + "px)";
+    }
+
     function proofLayout() {
       if (!proofCount) return;
       var step = 360 / proofCount;
@@ -353,6 +371,7 @@
         proofDotsRoot.appendChild(dot);
       });
       proofDots = Array.prototype.slice.call(proofDotsRoot.querySelectorAll("[data-proof-dot]"));
+      proofPositionPill();
     }
 
     function proofStopAuto() {
@@ -400,6 +419,8 @@
       if (proofPill && proofItems[proofIndex]) {
         proofPill.textContent = proofLabelFor(proofItems[proofIndex]);
       }
+
+      proofPositionPill();
 
       if (proofCompact() && proofStage) {
         var target = proofItems[proofIndex];

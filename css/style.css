@@ -713,7 +713,7 @@ body::before {
 
 .proof-carousel__footer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
   position: absolute;
   left: calc(50% + var(--carousel-radius) + (var(--carousel-card-width) / 2) + 0.65rem);
@@ -755,6 +755,7 @@ body::before {
   overflow: hidden;
   text-overflow: ellipsis;
   transition:
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.3s ease,
     box-shadow 0.3s ease,
     opacity 0.2s ease;
