@@ -1694,6 +1694,9 @@ body::before {
 .verify--module-page .product-gallery--full .browser-mockup__content img {
   width: 100%;
   height: auto;
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .verify__copy h3 {
