@@ -2278,6 +2278,7 @@ body::before {
   }
 
   .proof {
+    padding-top: 2.5rem;
     background: linear-gradient(180deg, rgba(12, 14, 20, 0.72) 0%, var(--bg) 42%);
   }
 
