@@ -4,7 +4,13 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const url = gallery.querySelector("[data-gallery-url]");
   const scene = gallery.querySelector("[data-gallery-scene]");
   const video = gallery.querySelector("[data-scene-video]");
+  const carouselEl = gallery.querySelector("[data-gallery-carousel]");
+  const carouselTrack = gallery.querySelector("[data-gallery-carousel-track]");
   const tabs = Array.from(gallery.querySelectorAll(".gallery-tab"));
+  let carouselTimer = null;
+  let carouselIndex = 0;
+  let carouselSlides = [];
+  let activeTab = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
   const chips = {
     safe: gallery.querySelector('[data-gallery-chip="safe"]'),
     alert: gallery.querySelector('[data-gallery-chip="alert"]'),
@@ -58,15 +64,41 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     if (detailEl) detailEl.textContent = detail || "";
   };
 
-  const updateChips = (tab) => {
+  const getChipCopy = (tab, slideIndex = 0) => {
+    const carouselSafeTitles = tab.dataset.carouselChipSafeTitles?.split("|") || [];
+    const carouselSafeDetails = tab.dataset.carouselChipSafeDetails?.split("|") || [];
+    const carouselAlertTitles = tab.dataset.carouselChipAlertTitles?.split("|") || [];
+    const carouselAlertDetails = tab.dataset.carouselChipAlertDetails?.split("|") || [];
+    const hasCarouselChips = carouselSafeTitles.length > 0 || carouselAlertTitles.length > 0;
+
+    if (hasCarouselChips && tab.dataset.carouselSlides) {
+      const pick = (values, fallback) => (values[slideIndex] ?? values[0] ?? fallback ?? "").trim();
+      return {
+        safeTitle: pick(carouselSafeTitles, tab.dataset.chipSafeTitle),
+        safeDetail: pick(carouselSafeDetails, tab.dataset.chipSafeDetail),
+        alertTitle: pick(carouselAlertTitles, tab.dataset.chipAlertTitle),
+        alertDetail: pick(carouselAlertDetails, tab.dataset.chipAlertDetail),
+      };
+    }
+
+    return {
+      safeTitle: tab.dataset.chipSafeTitle || "",
+      safeDetail: tab.dataset.chipSafeDetail || "",
+      alertTitle: tab.dataset.chipAlertTitle || "",
+      alertDetail: tab.dataset.chipAlertDetail || "",
+    };
+  };
+
+  const updateChips = (tab, slideIndex = 0) => {
     if (!chips.safe && !chips.alert) return;
-    const hasChipCopy = tab.dataset.chipSafeTitle || tab.dataset.chipAlertTitle;
+    const chipCopy = getChipCopy(tab, slideIndex);
+    const hasChipCopy = chipCopy.safeTitle || chipCopy.alertTitle;
     if (!hasChipCopy) return;
 
     gallery.classList.add("is-chip-swapping");
     window.setTimeout(() => {
-      setChip(chips.safe, tab.dataset.chipSafeTitle, tab.dataset.chipSafeDetail);
-      setChip(chips.alert, tab.dataset.chipAlertTitle, tab.dataset.chipAlertDetail);
+      setChip(chips.safe, chipCopy.safeTitle, chipCopy.safeDetail);
+      setChip(chips.alert, chipCopy.alertTitle, chipCopy.alertDetail);
       gallery.classList.remove("is-chip-swapping");
     }, 120);
   };
@@ -87,7 +119,95 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     else video.pause();
   };
 
+  const parseCarouselSlides = (tab) => {
+    const srcs = tab.dataset.carouselSlides?.split("|").filter(Boolean) || [];
+    if (srcs.length < 2) return [];
+    const alts = tab.dataset.carouselAlts?.split("|") || [];
+    const widths = tab.dataset.carouselWidths?.split("|") || [];
+    const heights = tab.dataset.carouselHeights?.split("|") || [];
+    return srcs.map((src, index) => ({
+      src: src.trim(),
+      alt: (alts[index] || "").trim(),
+      width: widths[index]?.trim(),
+      height: heights[index]?.trim(),
+    }));
+  };
+
+  const stopCarousel = () => {
+    if (!carouselTimer) return;
+    clearInterval(carouselTimer);
+    carouselTimer = null;
+  };
+
+  const applyCarouselTransform = (animate) => {
+    if (!carouselTrack) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    carouselTrack.style.transition =
+      animate && !reduced ? "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)" : "none";
+    carouselTrack.style.transform = `translateX(${carouselIndex * -100}%)`;
+  };
+
+  const buildCarousel = (slides) => {
+    if (!carouselTrack) return;
+    carouselTrack.replaceChildren(
+      ...slides.map((slide, index) => {
+        const frame = document.createElement("div");
+        frame.className = "gallery-carousel__slide";
+        const slideImg = document.createElement("img");
+        slideImg.src = slide.src;
+        slideImg.alt = slide.alt;
+        if (slide.width) slideImg.width = Number(slide.width);
+        if (slide.height) slideImg.height = Number(slide.height);
+        slideImg.loading = index === 0 ? "lazy" : "lazy";
+        slideImg.decoding = "async";
+        frame.appendChild(slideImg);
+        return frame;
+      })
+    );
+    carouselSlides = slides;
+    carouselIndex = 0;
+    applyCarouselTransform(false);
+  };
+
+  const advanceCarousel = () => {
+    if (carouselSlides.length < 2) return;
+    carouselIndex = (carouselIndex + 1) % carouselSlides.length;
+    applyCarouselTransform(true);
+    caption.textContent = carouselSlides[carouselIndex].alt || "";
+    updateChips(activeTab, carouselIndex);
+  };
+
+  const hideCarousel = () => {
+    stopCarousel();
+    if (carouselEl) carouselEl.hidden = true;
+    if (img) img.hidden = false;
+  };
+
+  const startCarousel = (slides) => {
+    stopCarousel();
+    buildCarousel(slides);
+    if (carouselEl) carouselEl.hidden = false;
+    if (img) img.hidden = true;
+    caption.textContent = slides[0]?.alt || "";
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced && slides.length > 1) {
+      carouselTimer = window.setInterval(advanceCarousel, 3000);
+    }
+  };
+
   const render = (tab) => {
+    const slides = parseCarouselSlides(tab);
+    if (slides.length > 1 && carouselEl && carouselTrack) {
+      if (url && tab.dataset.url) url.textContent = tab.dataset.url;
+      updateChips(tab);
+      updateCopy(tab);
+      setSceneVisible(false);
+      startCarousel(slides);
+      settle();
+      return;
+    }
+
+    hideCarousel();
     caption.textContent = tab.dataset.alt || "";
     if (url && tab.dataset.url) url.textContent = tab.dataset.url;
     updateChips(tab);
@@ -118,6 +238,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   };
 
   const show = (tab) => {
+    activeTab = tab;
     tabs.forEach((other) => {
       const active = other === tab;
       other.classList.toggle("is-active", active);

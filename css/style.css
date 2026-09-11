@@ -1500,6 +1500,32 @@ body::before {
   display: none;
 }
 
+.gallery-carousel[hidden] {
+  display: none;
+}
+
+.gallery-carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.gallery-carousel__track {
+  display: flex;
+  will-change: transform;
+}
+
+.gallery-carousel__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.gallery-carousel__slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
 .feature-grid {
   list-style: none;
   margin: 0;
