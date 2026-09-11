@@ -1196,3 +1196,39 @@
     sync(0);
   });
 })();
+
+(function () {
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-verify-scan-video]"), function (video) {
+    var maxLoops = Number(video.getAttribute("data-max-loops")) || 3;
+    var loops = 0;
+
+    function tryPlay() {
+      if (reducedMotion || loops >= maxLoops) return;
+      video.play().catch(function () {});
+    }
+
+    video.addEventListener("ended", function () {
+      loops += 1;
+      if (loops < maxLoops) {
+        video.currentTime = 0;
+        tryPlay();
+      }
+    });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) tryPlay();
+            else video.pause();
+          });
+        },
+        { threshold: 0.35 }
+      ).observe(video);
+    } else {
+      tryPlay();
+    }
+  });
+})();

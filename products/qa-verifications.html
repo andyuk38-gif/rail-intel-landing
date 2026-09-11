@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=132" />
-  <link rel="stylesheet" href="../css/pages.css?v=132" />
+  <link rel="stylesheet" href="../css/style.css?v=133" />
+  <link rel="stylesheet" href="../css/pages.css?v=133" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -205,11 +205,34 @@
       <div class="container">
         <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / QA Verifications</p>
         <span class="page-badge page-badge--addon">Add-on module</span>
-        <div class="verify__head">
-          <p class="product-eyebrow">QA Verifications</p>
-          <h1 id="verify-heading" class="verify__title">Verify one driver, every reportee, or a percentage of the company.</h1>
-          <p class="product-lead">Automate your rail compliance. Survive every audit with <span class="hero-title__accent">QA verification Addon Module</span>. Produce team, individual or a percentage of all for quarterly spot checks at the click of a button.</p>
-          <p class="product-lead">A verification reads the live record &mdash; cycles, medicals, licence, cab passes, experience, training, assessment events and incidents &mdash; and scores every check it runs. Use it on one person before they sign on, across your whole team, or as a spot-check sample.</p>
+        <div class="verify__intro">
+          <div class="verify__head">
+            <p class="product-eyebrow">QA Verifications</p>
+            <h1 id="verify-heading" class="verify__title">Verify one driver, every reportee, or a percentage of the company.</h1>
+            <p class="product-lead">Automate your rail compliance. Survive every audit with <span class="hero-title__accent">QA verification Addon Module</span>. Produce team, individual or a percentage of all for quarterly spot checks at the click of a button.</p>
+            <p class="product-lead">A verification reads the live record &mdash; cycles, medicals, licence, cab passes, experience, training, assessment events and incidents &mdash; and scores every check it runs. Use it on one person before they sign on, across your whole team, or as a spot-check sample.</p>
+          </div>
+          <div class="verify__head-media">
+            <div class="verify-scan" data-verify-scan>
+              <div class="verify-scan__chrome" aria-hidden="true">
+                <span class="verify-scan__dot"></span>
+                <span class="verify-scan__label">Live record scan</span>
+              </div>
+              <div class="verify-scan__screen">
+                <video
+                  class="verify-scan__video"
+                  data-verify-scan-video
+                  data-max-loops="3"
+                  muted
+                  playsinline
+                  preload="auto"
+                  aria-label="Scanning an employee record during QA verification"
+                >
+                  <source src="../video/ScanningEmployeeRecord.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
         </div>
 
         <ul class="scope-cards">
@@ -250,12 +273,12 @@
                   <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/qa-verifications</span>
                 </div>
                 <div class="browser-mockup__content">
-                  <img src="../images/product/qa-verifications.png?v=132" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="1024" height="750" data-gallery-main loading="eager" decoding="async" fetchpriority="high" />
+                  <img src="../images/product/qa-verifications.png?v=133" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="1024" height="750" data-gallery-main loading="eager" decoding="async" fetchpriority="high" />
                 </div>
               </div>
               <div class="gallery-tabs" role="tablist" aria-label="QA Verification screens">
-                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/product/qa-verifications.png?v=132" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="1024" data-height="750">Run history</button>
-                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/CheckConfigVerification.png?v=132" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="1024" data-height="748">Check configuration</button>
+                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/product/qa-verifications.png?v=133" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="1024" data-height="750">Run history</button>
+                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/CheckConfigVerification.png?v=133" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="1024" data-height="748">Check configuration</button>
               </div>
             </div>
           </div>
@@ -307,7 +330,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=132"></script>
-  <script src="../js/main.js?v=132"></script>
+  <script src="../js/site.js?v=133"></script>
+  <script src="../js/main.js?v=133"></script>
 </body>
 </html>
