@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How it works – Rail Intel</title>
-  <meta name="description" content="Rail Intel replaces the spreadsheet that tracks who is competent with a live system of record. Here is what implementation actually looks like." />
+  <title>Your quotation – Rail Intel</title>
+  <meta name="description" content="Review and respond to your Rail Intel CMS quotation." />
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32" />
@@ -211,79 +211,24 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--compact">
       <div class="container">
         <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="/">Rail Intel</a> / How it works</p>
-          <h1 class="page-title">How Rail Intel works</h1>
-          <p class="page-lead">Rail Intel replaces the spreadsheet that tracks who is competent with a live system of record. Here is what implementation actually looks like.</p>
-          <div class="page-actions">
-            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="features/" class="btn btn-ghost btn-lg">See the features</a>
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="/">Rail Intel</a> / Quotation</p>
+            <h1 class="page-title">Your quotation</h1>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Six steps from spreadsheet to system of record</h2>
-          <p>Most operators are live on their first cycles within weeks, because the configuration follows standards you already work to.</p>
-        </div>
-        <ol class="steps">
-          <li>
-            <h3>Configure your standard</h3>
-            <p>Set up your organisation structure, job roles, grading scale, traction, routes and depots, and the timing standards your operation works to. This is the vocabulary everything else uses.</p>
-          </li>
-          <li>
-            <h3>Build your competency cycles</h3>
-            <p>Use Cycle Builder to create the cycles each role must complete — from a template or from scratch — with their criteria and scheduled assessment events.</p>
-          </li>
-          <li>
-            <h3>Load your people</h3>
-            <p>Create employee records with their licences, medicals, cab passes, training and experience. Each person ends up with one record covering everything that determines whether they can sign on.</p>
-          </li>
-          <li>
-            <h3>Assess in the field</h3>
-            <p>Assessors work against structured criteria, recording observations as they are made. Findings that fall short are flagged, and a competence development plan can be raised on the spot.</p>
-          </li>
-          <li>
-            <h3>Monitor and act</h3>
-            <p>The dashboard shows who is on track, off track, overdue or due soon. Expired medicals and lapsed mandatory competencies mark a person as not safe to work before they reach the railway.</p>
-          </li>
-          <li>
-            <h3>Evidence it</h3>
-            <p>Reporting gives the position across the workforce, and the QA Verifications module produces per-employee compliance evidence with a retained run history for audit.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Where the screenshots come from</h2>
-          <p>Every screenshot across this site is taken from the live Rail Intel application. Use the expand control on any image to view it at full resolution.</p>
-        </div>
-        <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 692px">
-          <div class="shot__frame">
-            <img src="images/screens/main-sys/dashboard.png?v=181" alt="The Rail Intel dashboard: compliance position across the workforce at a glance." width="692" height="368" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">The Rail Intel dashboard: compliance position across the workforce at a glance.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 338px">
-          <div class="shot__frame">
-            <img src="images/screens/main-sys/your-team-compliance.png?v=181" alt="Team compliance summary showing who is on track and who is not." width="338" height="159" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Team compliance summary showing who is on track and who is not.</figcaption>
-        </figure>
+    <section class="page-section page-section--tight">
+      <div class="container" style="max-width:800px">
+        <div class="signup-form panel" data-quotation-view>
+          <p class="signup-form__lead">Loading quotation…</p>
         </div>
       </div>
     </section>
   </main>
-
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-col">
@@ -312,6 +257,7 @@
   </footer>
 
   <script src="js/site.js?v=181"></script>
+  <script src="js/quotation.js?v=181"></script>
   <script src="js/newsletter.js?v=181"></script>
 </body>
 </html>

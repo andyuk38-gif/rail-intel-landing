@@ -4346,6 +4346,59 @@ body.lightbox-open {
   min-height: 12rem;
 }
 
+.signup-wizard__steps--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.signup-path-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.signup-path-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(12, 15, 20, 0.45);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.signup-path-tile:hover,
+.signup-path-tile:focus-visible {
+  border-color: var(--accent);
+  background: rgba(12, 15, 20, 0.65);
+  outline: none;
+}
+
+.signup-path-tile strong {
+  font-size: 1rem;
+}
+
+.signup-path-tile span {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.quotation-preview {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a1a;
+  overflow-x: auto;
+}
+
 .signup-wizard__steps {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -4468,7 +4521,12 @@ body.lightbox-open {
     grid-template-columns: 1fr;
   }
 
-  .signup-wizard__steps {
+  .signup-path-tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-wizard__steps,
+  .signup-wizard__steps--5 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 

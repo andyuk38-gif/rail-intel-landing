@@ -1,4 +1,4 @@
-/* Self-serve CMS signup wizard — stepped navigation, payment, PO upload */
+/* Self-serve CMS signup — quote vs purchase paths */
 (function () {
   "use strict";
 
@@ -8,52 +8,88 @@
   var form = document.querySelector("[data-cms-signup-form]");
   if (!wizard || !form) return;
 
-  var moduleList = document.querySelector("[data-signup-modules]");
-  var priceLabel = document.querySelector("[data-signup-price-label]");
+  var moduleListQuote = document.querySelector("[data-signup-modules]");
+  var moduleListPurchase = document.querySelector("[data-signup-modules-purchase]");
   var paymentOptions = document.querySelector("[data-signup-payment-options]");
   var bankDetailsEl = document.querySelector("[data-signup-bank-details]");
   var stripePanel = document.querySelector("[data-signup-stripe-panel]");
   var bankPanel = document.querySelector("[data-signup-bank-panel]");
-  var successMessage = document.querySelector("[data-signup-success-message]");
+  var successMessageQuote = document.querySelector("[data-signup-success-message]");
+  var successMessagePurchase = document.querySelector("[data-signup-success-message-purchase]");
   var asideTip = document.querySelector("[data-signup-aside-tip]");
   var asideTitle = document.querySelector("[data-signup-aside-title]");
 
+  var PANEL_STEP = {
+    company: 1,
+    contact: 2,
+    "path-choice": 3,
+    "quote-requirements": 4,
+    "quote-modules": 4,
+    "purchase-modules": 4,
+    "purchase-payment": 4,
+    "purchase-pay": 4,
+    "quote-complete": 5,
+    "purchase-complete": 5,
+  };
+
   var ASIDE_COPY = {
-    1: {
+    company: {
       title: "Step 1 — Company",
       tip: "Enter your registered company name and address. This becomes your CMS tenant identity.",
     },
-    2: {
+    contact: {
       title: "Step 2 — Contact",
       tip: "Your primary contact receives application updates and the welcome email once approved.",
     },
-    3: {
-      title: "Step 3 — Modules",
-      tip: "Optional bolt-ons can be enabled during approval. Skip any you do not need yet.",
+    "path-choice": {
+      title: "Step 3 — Your path",
+      tip: "Request a tailored quotation or proceed directly to purchase and onboarding.",
     },
-    4: {
-      title: "Step 4 — Payment",
-      tip: "Choose card payment (instant) or bank transfer with a purchase order for procurement teams.",
+    "quote-requirements": {
+      title: "Quotation requirements",
+      tip: "Minimum contract term is 12 months. Tell us how many users and admin licences you need.",
     },
-    5: {
-      title: "Step 5 — Pay / PO",
-      tip: "Complete Stripe checkout or upload your PO and arrange a BACS transfer.",
+    "quote-modules": {
+      title: "Modules for your quote",
+      tip: "Select bolt-on modules to include in your quotation.",
     },
-    6: {
-      title: "All done",
+    "purchase-modules": {
+      title: "Modules",
+      tip: "Optional bolt-ons can be enabled during approval.",
+    },
+    "purchase-payment": {
+      title: "Payment method",
+      tip: "Choose card payment or bank transfer with a purchase order. No prices are shown on this step.",
+    },
+    "purchase-pay": {
+      title: "Complete payment",
+      tip: "Pay by card via Stripe or upload your PO and arrange a BACS transfer.",
+    },
+    "quote-complete": {
+      title: "Quotation requested",
+      tip: "We will prepare your quote and email it to you for acceptance.",
+    },
+    "purchase-complete": {
+      title: "Application received",
       tip: "We will review your application and email you when your CMS space is ready.",
     },
   };
 
   var state = {
-    step: 1,
+    panel: "company",
+    path: null,
     signupId: null,
     config: null,
     paymentMethod: null,
+    modules: [],
   };
 
   function apiUrl(path) {
     return apiBase.replace(/\/$/, "") + path;
+  }
+
+  function getMsgEl(key) {
+    return document.querySelector('[data-signup-msg="' + key + '"]');
   }
 
   function showMessage(el, text, kind) {
@@ -67,8 +103,8 @@
     if (el) el.hidden = true;
   }
 
-  function updateAside(step) {
-    var copy = ASIDE_COPY[step] || ASIDE_COPY[1];
+  function updateAside(panel) {
+    var copy = ASIDE_COPY[panel] || ASIDE_COPY.company;
     if (asideTitle) asideTitle.textContent = copy.title;
     if (asideTip) asideTip.textContent = copy.tip;
   }
@@ -78,18 +114,18 @@
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   }
 
-  function setStep(step) {
-    state.step = step;
-    wizard.querySelectorAll("[data-signup-panel]").forEach(function (panel) {
-      var n = Number(panel.getAttribute("data-signup-panel"));
-      panel.hidden = n !== step;
+  function setPanel(panel) {
+    state.panel = panel;
+    wizard.querySelectorAll("[data-signup-panel]").forEach(function (el) {
+      el.hidden = el.getAttribute("data-signup-panel") !== panel;
     });
+    var step = PANEL_STEP[panel] || 1;
     wizard.querySelectorAll("[data-signup-step-indicator]").forEach(function (item) {
       var n = Number(item.getAttribute("data-signup-step-indicator"));
       item.classList.toggle("is-active", n === step);
       item.classList.toggle("is-complete", n < step);
     });
-    updateAside(step);
+    updateAside(panel);
     scrollWizardIntoView();
   }
 
@@ -98,27 +134,39 @@
     return el ? String(el.value || "").trim() : "";
   }
 
-  function validateStep(step) {
-    if (step === 1) {
-      if (!fieldValue("companyName")) return "Please enter your company name.";
-      if (!fieldValue("companyAddress")) return "Please enter your registered address.";
-    }
-    if (step === 2) {
-      if (!fieldValue("contactName")) return "Please enter a contact name.";
-      if (!fieldValue("contactPhone")) return "Please enter a contact phone number.";
-      var email = fieldValue("contactEmail");
-      if (!email) return "Please enter a contact email.";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
-    }
+  function fieldNumber(id) {
+    return Math.max(0, Math.floor(Number(fieldValue(id)) || 0));
+  }
+
+  function validateCompany() {
+    if (!fieldValue("companyName")) return "Please enter your company name.";
+    if (!fieldValue("companyAddress")) return "Please enter your registered address.";
     return "";
   }
 
-  function renderModules(modules) {
-    if (!moduleList || !modules || !modules.length) {
-      if (moduleList) moduleList.innerHTML = '<p class="signup-form__lead">No optional modules listed.</p>';
-      return;
+  function validateContact() {
+    if (!fieldValue("contactName")) return "Please enter a contact name.";
+    if (!fieldValue("contactPhone")) return "Please enter a contact phone number.";
+    var email = fieldValue("contactEmail");
+    if (!email) return "Please enter a contact email.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
+    return "";
+  }
+
+  function validateQuoteRequirements() {
+    var minMonths = (state.config && state.config.minContractMonths) || 12;
+    var months = fieldNumber("contractMonths");
+    if (months < minMonths) return "Minimum contract duration is " + minMonths + " months.";
+    if (fieldNumber("platformUsers") < 1) return "Please enter how many users will use the platform.";
+    if (fieldNumber("adminLicences") < 1) return "Please enter how many admin licences you require.";
+    return "";
+  }
+
+  function moduleHtml(modules) {
+    if (!modules || !modules.length) {
+      return '<p class="signup-form__lead">No optional modules listed.</p>';
     }
-    moduleList.innerHTML = modules
+    return modules
       .map(function (mod) {
         return (
           '<label class="signup-module">' +
@@ -134,6 +182,13 @@
         );
       })
       .join("");
+  }
+
+  function renderModules(modules) {
+    state.modules = modules || [];
+    var html = moduleHtml(modules);
+    if (moduleListQuote) moduleListQuote.innerHTML = html;
+    if (moduleListPurchase) moduleListPurchase.innerHTML = html;
   }
 
   function renderPaymentOptions() {
@@ -177,19 +232,23 @@
       "</dl>";
   }
 
-  function collectPayload() {
+  function collectAddonsFrom(container) {
     var addons = [];
-    form.querySelectorAll('input[name="addon"]:checked').forEach(function (el) {
+    if (!container) return addons;
+    container.querySelectorAll('input[name="addon"]:checked').forEach(function (el) {
       addons.push(el.value);
     });
+    return addons;
+  }
+
+  function collectBasePayload() {
     return {
       companyName: fieldValue("companyName"),
       companyAddress: fieldValue("companyAddress"),
       contactName: fieldValue("contactName"),
       contactEmail: fieldValue("contactEmail"),
       contactPhone: fieldValue("contactPhone"),
-      notes: fieldValue("notes"),
-      requestedAddons: addons,
+      notes: fieldValue("notes") || fieldValue("purchaseNotes"),
       source: "railintel.co.uk",
       website: fieldValue("website"),
     };
@@ -209,16 +268,67 @@
     });
   }
 
-  function saveDraftAndContinue() {
-    var msgEl = document.querySelector("[data-signup-message-step3]");
-    var btn = document.querySelector("[data-signup-save-modules]");
+  function submitQuote() {
+    var msgEl = getMsgEl("quote-modules");
+    var btn = document.querySelector("[data-signup-submit-quote]");
+    hideMessage(msgEl);
+    var reqErr = validateQuoteRequirements();
+    if (reqErr) {
+      showMessage(getMsgEl("quote-requirements"), reqErr, "error");
+      setPanel("quote-requirements");
+      return;
+    }
+    if (btn) btn.disabled = true;
+
+    var payload = Object.assign({}, collectBasePayload(), {
+      requestType: "quote",
+      contractDurationMonths: fieldNumber("contractMonths"),
+      platformUserCount: fieldNumber("platformUsers"),
+      adminLicenceCount: fieldNumber("adminLicences"),
+      requestedAddons: collectAddonsFrom(moduleListQuote),
+    });
+
+    fetch(apiUrl("/public/signup-request"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || "Could not submit quotation request");
+          return data;
+        });
+      })
+      .then(function (data) {
+        if (successMessageQuote) {
+          successMessageQuote.textContent =
+            data.message || "Thank you — we will prepare your quotation and email it to you shortly.";
+        }
+        setPanel("quote-complete");
+      })
+      .catch(function (err) {
+        showMessage(msgEl, err.message || "Something went wrong.", "error");
+      })
+      .finally(function () {
+        if (btn) btn.disabled = false;
+      });
+  }
+
+  function savePurchaseDraft() {
+    var msgEl = getMsgEl("purchase-modules");
+    var btn = document.querySelector("[data-signup-save-purchase]");
     hideMessage(msgEl);
     if (btn) btn.disabled = true;
+
+    var payload = Object.assign({}, collectBasePayload(), {
+      requestType: "purchase",
+      requestedAddons: collectAddonsFrom(moduleListPurchase),
+    });
 
     return fetch(apiUrl("/public/signup-request"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(collectPayload()),
+      body: JSON.stringify(payload),
     })
       .then(function (res) {
         return res.json().then(function (data) {
@@ -228,7 +338,7 @@
       })
       .then(function (data) {
         state.signupId = data.id;
-        setStep(4);
+        setPanel("purchase-payment");
       })
       .catch(function (err) {
         showMessage(msgEl, err.message || "Something went wrong.", "error");
@@ -246,8 +356,9 @@
     if (!signupId || !sessionId || payment !== "success") return;
 
     state.signupId = signupId;
-    setStep(5);
-    showMessage(document.querySelector("[data-signup-message-step5]"), "Confirming payment…", "info");
+    state.path = "purchase";
+    setPanel("purchase-pay");
+    showMessage(getMsgEl("purchase-pay"), "Confirming payment…", "info");
 
     fetch(
       apiUrl(
@@ -264,13 +375,42 @@
         });
       })
       .then(function (data) {
-        if (successMessage) successMessage.textContent = data.message || "Payment received. Your application is with our team.";
-        setStep(6);
+        if (successMessagePurchase) {
+          successMessagePurchase.textContent =
+            data.message || "Payment received. Your application is with our team.";
+        }
+        setPanel("purchase-complete");
         window.history.replaceState({}, "", window.location.pathname);
       })
       .catch(function (err) {
-        showMessage(document.querySelector("[data-signup-message-step5]"), err.message || "Payment verification failed", "error");
+        showMessage(getMsgEl("purchase-pay"), err.message || "Payment verification failed", "error");
       });
+  }
+
+  function gotoPanel(target) {
+    hideMessage(getMsgEl(state.panel));
+    if (target === "contact") {
+      var err = validateCompany();
+      if (err) {
+        showMessage(getMsgEl("company"), err, "error");
+        return;
+      }
+    }
+    if (target === "path-choice") {
+      var contactErr = validateContact();
+      if (contactErr) {
+        showMessage(getMsgEl("contact"), contactErr, "error");
+        return;
+      }
+    }
+    if (target === "quote-modules") {
+      var quoteErr = validateQuoteRequirements();
+      if (quoteErr) {
+        showMessage(getMsgEl("quote-requirements"), quoteErr, "error");
+        return;
+      }
+    }
+    setPanel(target);
   }
 
   fetch(apiUrl("/public/onboarding-addons"))
@@ -288,51 +428,50 @@
     })
     .then(function (data) {
       state.config = data;
-      if (priceLabel && data && data.pricing) {
-        priceLabel.textContent = data.pricing.label + " — " + (data.pricing.description || "");
-      }
       renderPaymentOptions();
       renderBankDetails();
     })
     .catch(function () {});
 
   handleStripeReturn();
-  updateAside(1);
+  setPanel("company");
 
-  wizard.querySelectorAll("[data-signup-next]").forEach(function (btn) {
+  wizard.querySelectorAll("[data-signup-goto]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var target = Number(btn.getAttribute("data-signup-next"));
-      var err = validateStep(state.step);
-      var msgEl = document.querySelector("[data-signup-message-step" + state.step + "]");
-      hideMessage(msgEl);
-      if (err) {
-        showMessage(msgEl, err, "error");
-        return;
-      }
-      setStep(target);
+      gotoPanel(btn.getAttribute("data-signup-goto"));
     });
   });
 
-  wizard.querySelectorAll("[data-signup-back]").forEach(function (btn) {
+  wizard.querySelectorAll("[data-signup-path]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var target = Number(btn.getAttribute("data-signup-back"));
-      hideMessage(document.querySelector("[data-signup-message-step" + state.step + "]"));
-      setStep(target);
+      state.path = btn.getAttribute("data-signup-path");
+      hideMessage(getMsgEl("path-choice"));
+      if (state.path === "quote") setPanel("quote-requirements");
+      else if (state.path === "purchase") setPanel("purchase-modules");
     });
   });
 
-  var saveModulesBtn = document.querySelector("[data-signup-save-modules]");
-  if (saveModulesBtn) {
-    saveModulesBtn.addEventListener("click", function () {
-      var err = validateStep(2);
-      var msgEl = document.querySelector("[data-signup-message-step3]");
-      hideMessage(msgEl);
-      if (err) {
-        showMessage(msgEl, err, "error");
-        setStep(2);
+  var submitQuoteBtn = document.querySelector("[data-signup-submit-quote]");
+  if (submitQuoteBtn) {
+    submitQuoteBtn.addEventListener("click", function () {
+      var contactErr = validateContact() || validateCompany();
+      if (contactErr) {
+        showMessage(getMsgEl("quote-modules"), contactErr, "error");
         return;
       }
-      saveDraftAndContinue();
+      submitQuote();
+    });
+  }
+
+  var savePurchaseBtn = document.querySelector("[data-signup-save-purchase]");
+  if (savePurchaseBtn) {
+    savePurchaseBtn.addEventListener("click", function () {
+      var contactErr = validateContact() || validateCompany();
+      if (contactErr) {
+        showMessage(getMsgEl("purchase-modules"), contactErr, "error");
+        return;
+      }
+      savePurchaseDraft();
     });
   }
 
@@ -350,10 +489,10 @@
   if (paymentContinueBtn) {
     paymentContinueBtn.addEventListener("click", function () {
       if (!state.paymentMethod) return;
-      hideMessage(document.querySelector("[data-signup-message-step4]"));
+      hideMessage(getMsgEl("purchase-payment"));
       if (stripePanel) stripePanel.hidden = state.paymentMethod !== "stripe";
       if (bankPanel) bankPanel.hidden = state.paymentMethod !== "bank_transfer";
-      setStep(5);
+      setPanel("purchase-pay");
     });
   }
 
@@ -361,8 +500,8 @@
   if (stripePayBtn) {
     stripePayBtn.addEventListener("click", function () {
       if (!state.signupId) return;
-      var msgEl = document.querySelector("[data-signup-message-step5]");
-      hideMessage(msgEl);
+      var el = getMsgEl("purchase-pay");
+      hideMessage(el);
       stripePayBtn.disabled = true;
 
       fetch(apiUrl("/public/signup-request/" + encodeURIComponent(state.signupId) + "/stripe-checkout"), {
@@ -381,7 +520,7 @@
           else throw new Error("No checkout URL returned");
         })
         .catch(function (err) {
-          showMessage(msgEl, err.message || "Checkout failed", "error");
+          showMessage(el, err.message || "Checkout failed", "error");
           stripePayBtn.disabled = false;
         });
     });
@@ -391,18 +530,18 @@
   if (bankSubmitBtn) {
     bankSubmitBtn.addEventListener("click", function () {
       if (!state.signupId) return;
-      var msgEl = document.querySelector("[data-signup-message-step5]");
+      var el = getMsgEl("purchase-pay");
       var fileInput = document.querySelector("[data-signup-po-file]");
       var bankRef = document.getElementById("bankReference");
-      hideMessage(msgEl);
+      hideMessage(el);
 
       if (!fileInput || !fileInput.files || !fileInput.files[0]) {
-        showMessage(msgEl, "Please upload your purchase order document.", "error");
+        showMessage(el, "Please upload your purchase order document.", "error");
         return;
       }
       var file = fileInput.files[0];
       if (file.size > 10 * 1024 * 1024) {
-        showMessage(msgEl, "Purchase order must be 10 MB or smaller.", "error");
+        showMessage(el, "Purchase order must be 10 MB or smaller.", "error");
         return;
       }
 
@@ -425,11 +564,13 @@
           });
         })
         .then(function (data) {
-          if (successMessage) successMessage.textContent = data.message || "Application submitted.";
-          setStep(6);
+          if (successMessagePurchase) {
+            successMessagePurchase.textContent = data.message || "Application submitted.";
+          }
+          setPanel("purchase-complete");
         })
         .catch(function (err) {
-          showMessage(msgEl, err.message || "Submission failed", "error");
+          showMessage(el, err.message || "Submission failed", "error");
         })
         .finally(function () {
           bankSubmitBtn.disabled = false;
