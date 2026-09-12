@@ -668,10 +668,11 @@ body::before {
   padding-bottom: 1.5rem;
   perspective: 1100px;
   perspective-origin: 50% 18%;
-  touch-action: pan-y pinch-zoom;
+  touch-action: none;
   user-select: none;
   overflow: visible;
   z-index: 2;
+  cursor: grab;
 }
 
 .proof-carousel__stage.is-dragging {
@@ -704,6 +705,11 @@ body::before {
 
 .proof-carousel__ring.is-intro-spin {
   transition: transform 1.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.proof-carousel__ring.is-dragging,
+.proof-carousel__ring.is-dragging .proof-carousel__item {
+  transition: none;
 }
 
 .proof-carousel.is-intro .proof-carousel__item .proof-card {
@@ -794,10 +800,28 @@ body::before {
     translateY(-2.35rem);
 }
 
+.proof-carousel__item.is-adjacent {
+  z-index: 2;
+}
+
+.proof-carousel__item:not(.is-front):not(.is-adjacent) {
+  pointer-events: none;
+}
+
 .proof-carousel__item:not(.is-front) .proof-card {
   cursor: pointer;
   opacity: 0.74;
   filter: brightness(0.9) saturate(0.94);
+}
+
+.proof-carousel__item.is-adjacent .proof-card {
+  opacity: 0.88;
+  filter: brightness(0.96) saturate(0.98);
+}
+
+.proof-carousel__item.is-adjacent .proof-card:hover {
+  opacity: 0.96;
+  filter: brightness(1.02) saturate(1.04);
 }
 
 .proof-carousel__item.is-front .proof-card {

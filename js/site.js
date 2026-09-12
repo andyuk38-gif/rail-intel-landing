@@ -306,12 +306,18 @@
     var proofDragging = false;
     var proofDragStart = 0;
     var proofDragDelta = 0;
+    var proofDragAngleStart = 0;
+    var proofDragTarget = null;
+    var proofLastDragDistance = 0;
     var proofScrollStart = 0;
     var proofAutoTimer = null;
     var proofPaused = false;
     var proofInView = true;
     var proofIntroDone = false;
     var PROOF_AUTO_MS = 3000;
+    var PROOF_DRAG_CLICK_MAX = 12;
+    var PROOF_DRAG_STEP = 48;
+    var PROOF_DRAG_SENSITIVITY = 0.24;
 
     function proofAccentFor(index) {
       var card = proofItems[index] && proofItems[index].querySelector(".proof-card");
@@ -399,13 +405,35 @@
       return 360 / proofCount;
     }
 
+    function proofIsAdjacent(itemIndex) {
+      if (!proofCount) return false;
+      var left = (proofIndex - 1 + proofCount) % proofCount;
+      var right = (proofIndex + 1) % proofCount;
+      return itemIndex === left || itemIndex === right;
+    }
+
+    function proofIndexFromAngle(angle) {
+      var step = proofStepSize();
+      var stepIndex = Math.round(-angle / step);
+      return ((stepIndex % proofCount) + proofCount) % proofCount;
+    }
+
+    function proofSnapToIndex(nextIndex, userInitiated) {
+      if (userInitiated) proofRestartAuto();
+      proofIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
+      proofDisplayAngle = -proofIndex * proofStepSize();
+      proofApplyState();
+    }
+
     function proofApplyState() {
       proofCarousel.style.setProperty("--carousel-rotate", proofDisplayAngle + "deg");
       proofCarousel.style.setProperty("--dot-accent", proofAccentFor(proofIndex).trim());
 
       proofItems.forEach(function (item, itemIndex) {
         var isFront = itemIndex === proofIndex;
+        var isAdjacent = proofIsAdjacent(itemIndex);
         item.classList.toggle("is-front", isFront);
+        item.classList.toggle("is-adjacent", isAdjacent);
         item.setAttribute("aria-hidden", isFront ? "false" : "true");
         var link = item.querySelector(".proof-card");
         if (link) link.tabIndex = isFront ? 0 : -1;
@@ -435,7 +463,11 @@
     function proofSetIndex(nextIndex, userInitiated) {
       if (userInitiated) proofRestartAuto();
       var newIndex = ((nextIndex % proofCount) + proofCount) % proofCount;
-      if (newIndex === proofIndex) return;
+      if (newIndex === proofIndex) {
+        proofDisplayAngle = -proofIndex * proofStepSize();
+        proofApplyState();
+        return;
+      }
 
       var step = proofStepSize();
       var delta = newIndex - proofIndex;
@@ -558,17 +590,6 @@
       proofViewObserver.observe(proofCarousel);
     }
 
-    proofItems.forEach(function (item, itemIndex) {
-      var link = item.querySelector(".proof-card");
-      if (!link) return;
-      link.addEventListener("click", function (event) {
-        if (itemIndex !== proofIndex) {
-          event.preventDefault();
-          proofSetIndex(itemIndex, true);
-        }
-      });
-    });
-
     if (proofStage && !proofReduced) {
       proofStage.addEventListener("keydown", function (event) {
         if (event.key === "ArrowLeft") {
@@ -584,12 +605,17 @@
         "pointerdown",
         function (event) {
           if (event.pointerType === "mouse" && event.button !== 0) return;
+          if (!proofIntroDone) return;
           proofDragging = true;
           proofStopAuto();
           proofDragStart = event.clientX;
           proofDragDelta = 0;
+          proofLastDragDistance = 0;
+          proofDragAngleStart = proofDisplayAngle;
+          proofDragTarget = event.target.closest("[data-proof-item]");
           proofScrollStart = proofStage.scrollLeft;
           proofStage.classList.add("is-dragging");
+          if (proofRing) proofRing.classList.add("is-dragging");
           if (proofStage.setPointerCapture) proofStage.setPointerCapture(event.pointerId);
         },
         { passive: true }
@@ -600,6 +626,12 @@
         function (event) {
           if (!proofDragging) return;
           proofDragDelta = event.clientX - proofDragStart;
+          if (proofCompact()) {
+            proofStage.scrollLeft = proofScrollStart - proofDragDelta;
+            return;
+          }
+          var dragAngle = proofDragAngleStart - proofDragDelta * PROOF_DRAG_SENSITIVITY;
+          proofCarousel.style.setProperty("--carousel-rotate", dragAngle + "deg");
         },
         { passive: true }
       );
@@ -608,6 +640,7 @@
         if (!proofDragging) return;
         proofDragging = false;
         proofStage.classList.remove("is-dragging");
+        if (proofRing) proofRing.classList.remove("is-dragging");
         if (event && proofStage.releasePointerCapture) {
           try {
             proofStage.releasePointerCapture(event.pointerId);
@@ -616,28 +649,65 @@
           }
         }
 
+        var dragDistance = Math.abs(proofDragDelta);
+        var clickedItem = proofDragTarget;
+        proofDragTarget = null;
+
         if (proofCompact()) {
           var scrolled = Math.abs(proofStage.scrollLeft - proofScrollStart);
-          if (Math.abs(proofDragDelta) > 48 && scrolled < 28) {
+          if (dragDistance <= PROOF_DRAG_CLICK_MAX && clickedItem) {
+            var clickIndex = proofItems.indexOf(clickedItem);
+            if (clickIndex !== -1 && clickIndex !== proofIndex) {
+              proofSetIndex(clickIndex, true);
+            } else if (!proofPaused) {
+              proofStartAuto();
+            }
+          } else if (dragDistance > PROOF_DRAG_STEP && scrolled < 28) {
             proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1), true);
           } else if (scrolled >= 28) {
             var nearest = proofNearestFromScroll();
             if (nearest !== proofIndex) proofSetIndex(nearest, true);
-            else if (!proofPaused) proofStartAuto();
-          } else if (!proofPaused) {
-            proofStartAuto();
+            else proofSetIndex(proofIndex, false);
+          } else {
+            proofSetIndex(proofIndex, false);
           }
-        } else if (Math.abs(proofDragDelta) > 48) {
-          proofSetIndex(proofIndex + (proofDragDelta < 0 ? 1 : -1), true);
+        } else if (dragDistance <= PROOF_DRAG_CLICK_MAX && clickedItem) {
+          var clickIndex = proofItems.indexOf(clickedItem);
+          if (clickIndex !== -1 && proofIsAdjacent(clickIndex)) {
+            proofSetIndex(clickIndex, true);
+          } else {
+            proofSetIndex(proofIndex, false);
+          }
+        } else if (dragDistance > PROOF_DRAG_CLICK_MAX) {
+          var dragAngle = proofDragAngleStart - proofDragDelta * PROOF_DRAG_SENSITIVITY;
+          proofSnapToIndex(proofIndexFromAngle(dragAngle), true);
         } else if (!proofPaused) {
           proofStartAuto();
         }
 
+        proofLastDragDistance = dragDistance;
         proofDragDelta = 0;
       }
 
       proofStage.addEventListener("pointerup", proofEndDrag);
       proofStage.addEventListener("pointercancel", proofEndDrag);
+
+      proofItems.forEach(function (item, itemIndex) {
+        var link = item.querySelector(".proof-card");
+        if (!link) return;
+        link.addEventListener("click", function (event) {
+          if (proofLastDragDistance > PROOF_DRAG_CLICK_MAX) {
+            event.preventDefault();
+            return;
+          }
+          if (itemIndex !== proofIndex && proofIsAdjacent(itemIndex)) {
+            event.preventDefault();
+            proofSetIndex(itemIndex, true);
+          } else if (itemIndex !== proofIndex) {
+            event.preventDefault();
+          }
+        });
+      });
 
       var proofScrollTimer;
       proofStage.addEventListener(
