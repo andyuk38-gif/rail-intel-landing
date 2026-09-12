@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const outDir = path.join(root, ".preview");
-const url = "http://localhost:8765/features/administration.html";
+const url = "http://localhost:8765/security.html";
 
 await mkdir(outDir, { recursive: true });
 
@@ -13,7 +13,7 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 await page.goto(url, { waitUntil: "networkidle" });
 
-const section = page.locator(".page-section--viewer").filter({ hasText: "Security and sign-in policy" });
+const section = page.locator(".page-section--viewer").filter({ hasText: "Two-factor authentication" });
 await section.scrollIntoViewIfNeeded();
 await page.waitForTimeout(500);
 await section.screenshot({ path: path.join(outDir, "security-viewer-01.png") });

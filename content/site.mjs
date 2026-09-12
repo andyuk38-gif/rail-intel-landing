@@ -1239,19 +1239,6 @@ export const featureGroups = [
           },
         ],
       },
-      {
-        heading: "Security and sign-in policy",
-        body: [
-          "Users sign in with a company code, email and password. Tenants stay isolated — one operator cannot see another's records. What each person can view or change follows the role and custom permissions your administrators set.",
-          "System administrators manage two-factor authentication from Administration → Security: authenticator on or off, email codes on or off, and company or user method overrides. Users cannot turn the requirement off themselves; administrators can reset authenticators and revoke trusted devices when someone changes role or leaves.",
-        ],
-        bullets: [
-          "**Company-scoped tenants** with named user accounts.",
-          "**Central 2FA policy** — authenticator, email codes and overrides.",
-          "**Trusted-device rules** administered by the platform, not the end user.",
-          "**Administrator recovery** — reset authenticators and enforce re-enrolment.",
-        ],
-      },
     ],
     cta: {
       heading: "Flexibility without custom development",
@@ -1634,7 +1621,7 @@ export const security = {
       },
       {
         title: "Trusted devices (14 days)",
-        body: "After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator, when the device is removed, when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).",
+        body: "After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. The 14-day window and revocation rules are enforced by the platform — not configurable by end users. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator or removes the device (for example when someone changes role or leaves), when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).",
       },
     ],
     viewer: {
@@ -1691,19 +1678,15 @@ export const security = {
     rules: [
       {
         heading: "Policy is administered centrally",
-        body: "System administrators manage 2FA from Administration → Security: authenticator on or off, email codes on or off, and company or user method overrides. Users cannot turn the requirement off themselves.",
+        body: "System administrators configure 2FA from Administration → Security: authenticator on or off, email codes on or off, and company or user method overrides. Users cannot turn the requirement off themselves.",
       },
       {
         heading: "Enrolment at sign-in",
         body: "If authenticator 2FA is required and the user has not enrolled yet, they are guided through QR setup on the next sign-in before access is granted.",
       },
       {
-        heading: "When trusted status ends",
-        body: "A trusted device only skips 2FA while the cookie is valid, the last MFA was within 14 days, and the location still matches. A password change, authenticator reset, revoked device, expired trust, or a change of country / network forces a fresh 2FA challenge.",
-      },
-      {
-        heading: "Administrator reset and backup codes",
-        body: "Administrators can reset a user’s authenticator; the user enrols again on the next sign-in if 2FA is still required. Re-enrolment needs the current authenticator or a backup code so a lost phone cannot silently replace a working second factor.",
+        heading: "Administrator recovery",
+        body: "Administrators can reset a user’s authenticator and enforce re-enrolment on the next sign-in. Re-enrolment needs the current authenticator or a backup code so a lost phone cannot silently replace a working second factor.",
       },
     ],
   },

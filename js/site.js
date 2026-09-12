@@ -1219,9 +1219,10 @@
     var preview = null;
     var previewImg = null;
     var hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    var sidebarViewer = viewerRoot.classList.contains("shot-viewer--sidebar");
     var syncPreview;
 
-    if (shell && !shell.querySelector(".shot-viewer__hint")) {
+    if (shell && sidebarViewer && !shell.querySelector(".shot-viewer__hint")) {
       var hint = document.createElement("p");
       hint.className = "shot-viewer__hint";
       hint.textContent = hoverCapable ? "Hover to enlarge" : "Tap expand for full size";
@@ -1233,7 +1234,7 @@
       return frame ? frame.querySelector(".shot-viewer__image") : null;
     }
 
-    if (shell && hoverCapable) {
+    if (shell && sidebarViewer && hoverCapable) {
       preview = document.createElement("div");
       preview.className = "shot-viewer__preview";
       preview.setAttribute("aria-hidden", "true");

@@ -1426,7 +1426,7 @@
   object-position: center center;
 }
 
-.shot-viewer__hint {
+.shot-viewer--sidebar .shot-viewer__hint {
   position: absolute;
   bottom: 0.7rem;
   left: 50%;
@@ -1452,12 +1452,12 @@
   transition: opacity 0.18s ease;
 }
 
-.shot-viewer__shell:hover .shot-viewer__hint,
-.shot-viewer__shell:focus-within .shot-viewer__hint {
+.shot-viewer--sidebar .shot-viewer__shell:hover .shot-viewer__hint,
+.shot-viewer--sidebar .shot-viewer__shell:focus-within .shot-viewer__hint {
   opacity: 0;
 }
 
-.shot-viewer__preview {
+.shot-viewer--sidebar .shot-viewer__preview {
   position: absolute;
   top: 0;
   left: calc(100% + 0.75rem);
@@ -1482,13 +1482,13 @@
     visibility 0.22s ease;
 }
 
-.shot-viewer__preview.is-visible {
+.shot-viewer--sidebar .shot-viewer__preview.is-visible {
   opacity: 1;
   visibility: visible;
   transform: translateX(0) scale(1);
 }
 
-.shot-viewer__preview img {
+.shot-viewer--sidebar .shot-viewer__preview img {
   display: block;
   width: 100%;
   height: auto;
@@ -1497,42 +1497,25 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
 }
 
-.shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview {
-  top: auto;
-  bottom: calc(100% + 0.75rem);
-  left: 50%;
-  width: min(32rem, 92vw);
-  transform: translateX(-50%) translateY(10px) scale(0.98);
-}
-
-.shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview.is-visible {
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
 @media (hover: none) {
   .shot-viewer__frame-inner .shot__expand {
     opacity: 1;
   }
 
-  .shot-viewer__shell:hover .shot-viewer__hint,
-  .shot-viewer__shell:focus-within .shot-viewer__hint {
+  .shot-viewer--sidebar .shot-viewer__shell:hover .shot-viewer__hint,
+  .shot-viewer--sidebar .shot-viewer__shell:focus-within .shot-viewer__hint {
     opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shot-viewer__preview {
+  .shot-viewer--sidebar .shot-viewer__preview {
     transition: opacity 0.15s ease, visibility 0.15s ease;
     transform: none;
   }
 
-  .shot-viewer__preview.is-visible {
+  .shot-viewer--sidebar .shot-viewer__preview.is-visible {
     transform: none;
-  }
-
-  .shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview,
-  .shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview.is-visible {
-    transform: translateX(-50%);
   }
 }
 
