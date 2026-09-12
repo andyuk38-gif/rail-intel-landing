@@ -1581,9 +1581,23 @@ export const howItWorks = {
 /* ----------------------------------------------------------------- security */
 
 export const security = {
-  title: "Security built for rail operations",
+  title: "Security built to protect your data",
+  titleHtml:
+    'Security built to <span class="hero-title__accent">protect</span> your data',
   lead:
     "Rail Intel protects competency, medical and safety records with company-scoped access, two-factor authentication and hosting on Microsoft Azure.",
+  heroIntro: {
+    heading: "Security in practice",
+    body: [
+      "Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control — not the end user.",
+      "Below we cover access control, two-factor authentication and the Azure platform Rail Intel runs on. These protections are part of core Rail Intel — not a separate module or add-on.",
+    ],
+    bullets: [
+      "**Company-scoped access** — isolated tenants, role-based permissions and an attributable audit trail.",
+      "**Administrator-controlled 2FA** — authenticator or email codes, with trusted-device rules enforced by the platform.",
+      "**Enterprise cloud hosting** — HTTPS everywhere, encrypted secrets and documents stored in Azure Blob Storage.",
+    ],
+  },
   access: {
     heading: "Access control",
     lead: "Every sign-in is tied to a company and a named user. Access is logged, and permissions follow the roles your operation defines.",

@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 170;
+const ASSET_VERSION = 172;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1792,13 +1792,14 @@ function securityPage() {
     }) +
     `
   <main>
-    <section class="page-hero">
+    <section class="page-hero${security.heroIntro ? " page-hero--intro-split" : ""}">
       <div class="container">
-        <div class="page-hero__inner page-hero__inner--split">
+        <div class="page-hero__inner page-hero__inner--split${security.heroIntro ? " page-hero__inner--with-intro" : ""}">
           <div class="page-hero__copy">
             <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Security</p>
-            <h1 class="page-title">${esc(security.title)}</h1>
+            <h1 class="page-title">${security.titleHtml || esc(security.title)}</h1>
             <p class="page-lead">${esc(security.lead)}</p>
+${renderHeroIntro(security.heroIntro)}
           </div>
           <aside class="security-panel" aria-label="Microsoft Azure hosting and compliance">
             <div class="security-panel__host">
