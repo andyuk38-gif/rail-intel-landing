@@ -1738,7 +1738,8 @@ export const security = {
     eyebrow: "Cloud hosting",
     title: "Hosted on Microsoft Azure",
     body: "App Service, Azure Database for PostgreSQL and Blob Storage — on infrastructure Microsoft maintains under its Azure compliance programme.",
-    note: "These marks describe Microsoft Azure platform certifications. They do not imply a separate Microsoft partner badge for Rail Intel.",
+    note:
+      "Rail Intel is built on Microsoft Azure's enterprise-grade infrastructure. These certifications reflect the rigorous security, privacy, and compliance standards maintained by Microsoft for the underlying platform.",
     badges: [
       { src: "images/security/iso-27001.svg", label: "ISO 27001" },
       { src: "images/security/soc-2.svg", label: "SOC 2" },
