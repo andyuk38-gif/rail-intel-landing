@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 178;
+const ASSET_VERSION = 179;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1779,7 +1779,7 @@ function getStartedPage() {
           <div class="page-hero__copy">
             <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Get started</p>
             <h1 class="page-title">Start with Rail Intel CMS</h1>
-            <p class="page-lead">Submit your company details below. Our team reviews every application. Once approved, you will receive a welcome email with login details and be guided through onboarding in the CMS.</p>
+            <p class="page-lead">Complete your company application, choose how to pay, and upload a purchase order if paying by bank transfer. Our team reviews every application before your CMS space is created.</p>
           </div>
         </div>
       </div>
@@ -1787,57 +1787,113 @@ function getStartedPage() {
 
     <section class="page-section">
       <div class="container signup-layout">
-        <form class="signup-form panel" data-cms-signup-form novalidate>
-          <h2 class="signup-form__title">Company application</h2>
-          <p class="signup-form__lead">Fields marked with * are required.</p>
-          <div class="signup-form__grid">
-            <div class="field">
-              <label for="companyName">Company name *</label>
-              <input id="companyName" name="companyName" required autocomplete="organization" />
+        <div class="signup-form panel" data-cms-signup-wizard>
+          <ol class="signup-wizard__steps" data-signup-stepper aria-label="Application progress">
+            <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span>1</span> Company</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="2"><span>2</span> Payment</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="3"><span>3</span> Pay / PO</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="4"><span>4</span> Done</li>
+          </ol>
+
+          <form data-cms-signup-form data-signup-panel="1" novalidate>
+            <h2 class="signup-form__title">Company details</h2>
+            <p class="signup-form__lead">Fields marked with * are required.</p>
+            <div class="signup-form__grid">
+              <div class="field">
+                <label for="companyName">Company name *</label>
+                <input id="companyName" name="companyName" required autocomplete="organization" />
+              </div>
+              <div class="field field--full">
+                <label for="companyAddress">Registered address *</label>
+                <textarea id="companyAddress" name="companyAddress" rows="3" required></textarea>
+              </div>
+              <div class="field">
+                <label for="contactName">Primary contact *</label>
+                <input id="contactName" name="contactName" required autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="contactEmail">Contact email *</label>
+                <input id="contactEmail" name="contactEmail" type="email" required autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="contactPhone">Contact phone *</label>
+                <input id="contactPhone" name="contactPhone" type="tel" required autocomplete="tel" />
+              </div>
+              <div class="field field--full">
+                <label for="notes">Notes for our team</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Fleet size, depots, modules you need, or procurement requirements"></textarea>
+              </div>
+              <div class="field field--full signup-form__honeypot" aria-hidden="true">
+                <label for="website">Website</label>
+                <input id="website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
             </div>
-            <div class="field field--full">
-              <label for="companyAddress">Registered address *</label>
-              <textarea id="companyAddress" name="companyAddress" rows="3" required></textarea>
+            <div class="signup-modules">
+              <h3>Optional modules</h3>
+              <p class="signup-form__lead">Select bolt-on modules you are interested in. Final selection can be confirmed during approval.</p>
+              <div data-signup-modules class="signup-modules__list"></div>
             </div>
-            <div class="field">
-              <label for="contactName">Primary contact *</label>
-              <input id="contactName" name="contactName" required autocomplete="name" />
+            <p class="signup-form__message" data-signup-message hidden></p>
+            <div class="signup-wizard__actions">
+              <button type="submit" class="btn btn-primary btn-lg" data-signup-continue>Continue to payment</button>
             </div>
-            <div class="field">
-              <label for="contactEmail">Contact email *</label>
-              <input id="contactEmail" name="contactEmail" type="email" required autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="contactPhone">Contact phone *</label>
-              <input id="contactPhone" name="contactPhone" type="tel" required autocomplete="tel" />
-            </div>
-            <div class="field">
-              <label for="procurementReference">Procurement / PO reference</label>
-              <input id="procurementReference" name="procurementReference" />
-            </div>
-            <div class="field field--full">
-              <label for="notes">Notes for our team</label>
-              <textarea id="notes" name="notes" rows="3" placeholder="Fleet size, depots, modules you need, or procurement requirements"></textarea>
-            </div>
-            <div class="field field--full signup-form__honeypot" aria-hidden="true">
-              <label for="website">Website</label>
-              <input id="website" name="website" tabindex="-1" autocomplete="off" />
+          </form>
+
+          <div data-signup-panel="2" hidden>
+            <h2 class="signup-form__title">Choose payment method</h2>
+            <p class="signup-form__lead" data-signup-price-label>Loading pricing…</p>
+            <div class="signup-payment-options" data-signup-payment-options></div>
+            <p class="signup-form__message" data-signup-message-step2 hidden></p>
+            <div class="signup-wizard__actions">
+              <button type="button" class="btn btn-ghost" data-signup-back>Back</button>
+              <button type="button" class="btn btn-primary btn-lg" data-signup-payment-continue disabled>Continue</button>
             </div>
           </div>
-          <div class="signup-modules">
-            <h3>Optional modules</h3>
-            <p class="signup-form__lead">Select the bolt-on modules you are interested in. Final selection can be confirmed during approval.</p>
-            <div data-signup-modules class="signup-modules__list"></div>
+
+          <div data-signup-panel="3" hidden>
+            <div data-signup-stripe-panel hidden>
+              <h2 class="signup-form__title">Pay by card</h2>
+              <p class="signup-form__lead">You will be redirected to Stripe to complete payment securely. Your application is submitted once payment succeeds.</p>
+              <button type="button" class="btn btn-primary btn-lg" data-signup-stripe-pay>Pay with Stripe</button>
+            </div>
+            <div data-signup-bank-panel hidden>
+              <h2 class="signup-form__title">Bank transfer &amp; purchase order</h2>
+              <p class="signup-form__lead">Upload your purchase order, then arrange payment using the bank details below. We will confirm once funds are received.</p>
+              <div class="signup-bank-details" data-signup-bank-details></div>
+              <div class="field field--full">
+                <label for="bankReference">Payment reference (optional)</label>
+                <input id="bankReference" name="bankReference" placeholder="Your PO or finance reference" />
+              </div>
+              <div class="field field--full">
+                <label for="poFile">Purchase order document *</label>
+                <input id="poFile" name="poFile" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" data-signup-po-file />
+                <p class="signup-form__hint">PDF, Word, or image — max 10 MB.</p>
+              </div>
+              <button type="button" class="btn btn-primary btn-lg" data-signup-bank-submit>Submit application</button>
+            </div>
+            <p class="signup-form__message" data-signup-message-step3 hidden></p>
+            <div class="signup-wizard__actions">
+              <button type="button" class="btn btn-ghost" data-signup-back-payment>Back</button>
+            </div>
           </div>
-          <p class="signup-form__message" data-signup-message hidden></p>
-          <button type="submit" class="btn btn-primary btn-lg">Submit application</button>
-        </form>
+
+          <div data-signup-panel="4" hidden>
+            <h2 class="signup-form__title">Application received</h2>
+            <p class="signup-form__lead" data-signup-success-message>Thank you — your application has been received.</p>
+            <ol class="signup-steps">
+              <li><strong>Review</strong> — Rail Intel checks your application (usually within one working day).</li>
+              <li><strong>Approval</strong> — We create your company space and enable the modules you need.</li>
+              <li><strong>Welcome email</strong> — Your contact receives CMS login details.</li>
+              <li><strong>Onboarding</strong> — Guided setup in the CMS.</li>
+            </ol>
+          </div>
+        </div>
         <aside class="signup-aside panel">
           <h2>What happens next</h2>
           <ol class="signup-steps">
+            <li><strong>Payment</strong> — Pay by card (Stripe) or bank transfer with a purchase order.</li>
             <li><strong>Review</strong> — Rail Intel checks your application (usually within one working day).</li>
             <li><strong>Approval</strong> — We create your company space and enable the modules you need.</li>
-            <li><strong>Welcome email</strong> — Your contact receives CMS login details.</li>
             <li><strong>Onboarding</strong> — Guided setup: terms, company profile, job roles, and more.</li>
           </ol>
           <p class="signup-aside__note">Already have an account? <a href="${site.app}">Log in to Rail Intel CMS</a>.</p>
