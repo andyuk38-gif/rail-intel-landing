@@ -4653,6 +4653,38 @@ body.lightbox-open {
   color: color-mix(in srgb, var(--text-muted) 88%, var(--accent));
 }
 
+.quotation-a4-wrap {
+  margin: 1.5rem auto 0;
+  max-width: 794px;
+  background: #e2e8f0;
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.quotation-a4-wrap .ri-quotation-doc,
+.quotation-a4-wrap > div {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
+.quotation-actions {
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+[data-quotation-view] .signup-form__title,
+[data-invoice-view] .signup-form__title {
+  text-align: center;
+}
+
+[data-quotation-view] .signup-form__lead--success,
+[data-invoice-view] .signup-form__lead--success {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .signup-success-badge {
   display: inline-flex;
   align-items: center;

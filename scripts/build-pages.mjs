@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 194;
+const ASSET_VERSION = 195;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -2040,7 +2040,7 @@ function quotationPage() {
       </div>
     </section>
     <section class="page-section page-section--tight">
-      <div class="container" style="max-width:800px">
+      <div class="container" style="max-width:900px">
         <div class="signup-form panel" data-quotation-view>
           <p class="signup-form__lead">Loading quotation…</p>
         </div>
@@ -2051,6 +2051,41 @@ function quotationPage() {
     renderFooter(base).replace(
       '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>',
       '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/quotation.js?v=' + ASSET_VERSION + '"></script>'
+    )
+  );
+}
+
+function invoicePage() {
+  const base = "";
+  return (
+    renderHead(base, {
+      title: "Your invoice – Rail Intel",
+      description: "View your Rail Intel CMS invoice and payment details.",
+    }) +
+    `
+  <main>
+    <section class="page-hero page-hero--compact">
+      <div class="container">
+        <div class="page-hero__inner">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Invoice</p>
+            <h1 class="page-title">Your invoice</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="page-section page-section--tight">
+      <div class="container" style="max-width:900px">
+        <div class="signup-form panel" data-invoice-view>
+          <p class="signup-form__lead">Loading invoice…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+` +
+    renderFooter(base).replace(
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>',
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/invoice.js?v=' + ASSET_VERSION + '"></script>'
     )
   );
 }
@@ -2439,6 +2474,7 @@ emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
 emit("get-started.html", getStartedPage());
 emit("quotation.html", quotationPage());
+emit("invoice.html", invoicePage());
 written.push(syncIndex());
 
 console.log(`generated ${written.length} pages:`);

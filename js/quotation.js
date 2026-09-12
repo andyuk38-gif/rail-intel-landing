@@ -23,7 +23,7 @@
   function renderError(message) {
     view.innerHTML =
       '<h2 class="signup-form__title">Quotation unavailable</h2>' +
-      '<p class="signup-form__lead">' +
+      '<p class="signup-form__lead signup-form__lead--success">' +
       message +
       "</p>" +
       '<p><a href="/get-started.html">Return to get started</a></p>';
@@ -34,12 +34,12 @@
       '<h2 class="signup-form__title">Quotation for ' +
       (data.companyName || "your company") +
       "</h2>" +
-      '<p class="signup-form__lead">Hello ' +
+      '<p class="signup-form__lead signup-form__lead--success">Hello ' +
       (data.contactName || "there") +
-      ", please review your quotation below.</p>" +
-      '<div class="quotation-preview" data-quotation-preview></div>' +
+      ", please review your quotation below and accept or decline.</p>" +
+      '<div class="quotation-a4-wrap" data-quotation-preview></div>' +
       '<p class="signup-form__message" data-quotation-message hidden></p>' +
-      '<div class="signup-wizard__actions">' +
+      '<div class="signup-wizard__actions quotation-actions">' +
       '<button type="button" class="btn btn-primary" data-quotation-accept>Accept quotation</button>' +
       '<button type="button" class="btn btn-ghost" data-quotation-decline>Decline</button>' +
       "</div>";
@@ -76,7 +76,7 @@
         .then(function (body) {
           view.innerHTML =
             '<h2 class="signup-form__title">Thank you</h2>' +
-            '<p class="signup-form__lead">' +
+            '<p class="signup-form__lead signup-form__lead--success">' +
             (body.message || "Your response has been recorded.") +
             "</p>";
         })

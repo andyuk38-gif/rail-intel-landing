@@ -32,6 +32,9 @@ foreach ($allowed as $prefix) {
 if (str_starts_with($path, 'public/quotation/')) {
     $ok = true;
 }
+if (str_starts_with($path, 'public/invoice/')) {
+    $ok = true;
+}
 if (!$ok) {
     http_response_code(403);
     echo json_encode(['error' => 'path not allowed']);
