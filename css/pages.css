@@ -4209,18 +4209,6 @@ body.lightbox-open {
   overflow: hidden;
 }
 
-.signup-wizard-glass::before {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 auto;
-  width: min(38%, 300px);
-  height: 45%;
-  background: url("../images/gbr-bg.png") right bottom / contain no-repeat;
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .signup-wizard-glass > * {
   position: relative;
   z-index: 1;
@@ -4236,12 +4224,18 @@ body.lightbox-open {
 }
 
 .signup-wizard__eyebrow {
+  display: inline-block;
   margin: 0;
-  font-size: 0.82rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--accent);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, rgba(255, 255, 255, 0.12));
+  border-radius: 8px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .signup-wizard__login {
@@ -4695,7 +4689,8 @@ body.lightbox-open {
   opacity: 0.88;
 }
 
-.signup-wizard__step span {
+.signup-wizard__step-num {
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4718,17 +4713,13 @@ body.lightbox-open {
   font-weight: 700;
 }
 
-.signup-wizard__step-label {
-  line-height: 1.25;
-}
-
-.signup-wizard__step.is-active span:first-child {
+.signup-wizard__step.is-active .signup-wizard__step-num {
   transform: scale(1.08);
   box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
-.signup-wizard__step.is-active span,
-.signup-wizard__step.is-complete span {
+.signup-wizard__step.is-active .signup-wizard__step-num,
+.signup-wizard__step.is-complete .signup-wizard__step-num {
   background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   border-color: transparent;
   color: #0c0f14;
@@ -4799,10 +4790,6 @@ body.lightbox-open {
     font-size: 0.68rem;
   }
 
-  .signup-wizard-glass::before {
-    opacity: 0.08;
-    background-size: min(70%, 320px);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

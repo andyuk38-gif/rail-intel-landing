@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 185;
+const ASSET_VERSION = 186;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1803,11 +1803,11 @@ function getStartedPage() {
             <div class="signup-progress__track"><div class="signup-progress__fill" data-signup-progress style="width:20%"></div></div>
           </div>
           <ol class="signup-wizard__steps signup-wizard__steps--5" data-signup-stepper aria-label="Application progress">
-            <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span>1</span> Company</li>
-            <li class="signup-wizard__step" data-signup-step-indicator="2"><span>2</span> Contact</li>
-            <li class="signup-wizard__step" data-signup-step-indicator="3"><span>3</span> Path</li>
-            <li class="signup-wizard__step" data-signup-step-indicator="4"><span>4</span><span class="signup-wizard__step-label">Optional Addon Modules for your quote</span></li>
-            <li class="signup-wizard__step" data-signup-step-indicator="5"><span>5</span> Done</li>
+            <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span class="signup-wizard__step-num">1</span> Company</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="2"><span class="signup-wizard__step-num">2</span> Contact</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="3"><span class="signup-wizard__step-num">3</span> Path</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="4"><span class="signup-wizard__step-num">4</span> Addon modules</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="5"><span class="signup-wizard__step-num">5</span> Done</li>
           </ol>
 
           <form data-cms-signup-form novalidate>
