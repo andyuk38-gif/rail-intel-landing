@@ -193,7 +193,7 @@
 
   // Every screenshot frame gets an expand control, so pages only need the markup
   // for the image itself.
-  var frames = document.querySelectorAll(".shot__frame, .browser-mockup__content");
+  var frames = document.querySelectorAll(".shot__frame, .browser-mockup__content, .shot-viewer__frame-inner");
   Array.prototype.forEach.call(frames, function (frame) {
     var img = frame.querySelector("img");
     if (!img || frame.querySelector(".shot__expand")) return;
@@ -1063,6 +1063,7 @@
         frame.setAttribute("aria-hidden", isActive ? "false" : "true");
       });
       syncTiles();
+      if (typeof syncPreview === "function") syncPreview();
 
       if (!reduced && previousIndex !== undefined && previousIndex !== index) {
         window.setTimeout(function () {
@@ -1213,6 +1214,42 @@
       if (document.hidden) stopAuto();
       else if (!paused) startAuto();
     });
+
+    var shell = viewerRoot.querySelector(".shot-viewer__shell");
+    var preview = null;
+    var previewImg = null;
+    var hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    var syncPreview;
+
+    function activeImage() {
+      var frame = frames[index];
+      return frame ? frame.querySelector(".shot-viewer__image") : null;
+    }
+
+    if (shell && hoverCapable) {
+      preview = document.createElement("div");
+      preview.className = "shot-viewer__preview";
+      preview.setAttribute("aria-hidden", "true");
+      preview.innerHTML = '<img alt="" data-shot-viewer-preview-img />';
+      shell.appendChild(preview);
+      previewImg = preview.querySelector("[data-shot-viewer-preview-img]");
+
+      syncPreview = function () {
+        if (!previewImg) return;
+        var img = activeImage();
+        if (!img) return;
+        previewImg.src = img.currentSrc || img.src;
+        previewImg.alt = img.alt || "";
+      };
+
+      shell.addEventListener("mouseenter", function () {
+        syncPreview();
+        preview.classList.add("is-visible");
+      });
+      shell.addEventListener("mouseleave", function () {
+        preview.classList.remove("is-visible");
+      });
+    }
 
     applyState(index);
     startAuto();

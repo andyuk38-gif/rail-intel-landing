@@ -1015,8 +1015,23 @@
   margin-top: 2.5rem;
 }
 
+.shot-viewer__frame-inner {
+  position: relative;
+}
+
+.shot-viewer__frame-inner .shot__expand {
+  opacity: 0;
+}
+
+.shot-viewer__frame-inner:hover .shot__expand,
+.shot-viewer__frame-inner:focus-within .shot__expand,
+.shot-viewer__frame-inner .shot__expand:focus-visible {
+  opacity: 1;
+}
+
 .shot-viewer__shell {
   position: relative;
+  overflow: visible;
   padding: 1px;
   border-radius: 12px 12px 18px 18px;
   background: linear-gradient(
@@ -1409,6 +1424,80 @@
   max-height: 100%;
   object-fit: contain;
   object-position: center center;
+}
+
+.shot-viewer__preview {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 0.75rem);
+  z-index: 24;
+  width: min(20rem, 42vw);
+  padding: 0.55rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(8, 12, 20, 0.96);
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-10px) scale(0.98);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    visibility 0.22s ease;
+}
+
+.shot-viewer__preview.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0) scale(1);
+}
+
+.shot-viewer__preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+}
+
+.shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview {
+  top: auto;
+  bottom: calc(100% + 0.75rem);
+  left: 50%;
+  width: min(32rem, 92vw);
+  transform: translateX(-50%) translateY(10px) scale(0.98);
+}
+
+.shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview.is-visible {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+@media (hover: none) {
+  .shot-viewer__frame-inner .shot__expand {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shot-viewer__preview {
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    transform: none;
+  }
+
+  .shot-viewer__preview.is-visible {
+    transform: none;
+  }
+
+  .shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview,
+  .shot-viewer:not(.shot-viewer--sidebar) .shot-viewer__preview.is-visible {
+    transform: translateX(-50%);
+  }
 }
 
 .shot-viewer--sidebar .shot-viewer__partner {
