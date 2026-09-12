@@ -51,9 +51,16 @@
     return apiBase.replace(/\/$/, "") + "/" + normalized;
   }
 
+  function isStartingResponse(res, data) {
+    return (res.status === 503 || res.status === 502) && data && data.error === "starting";
+  }
+
   function friendlyFetchError(err, data) {
-    if (data && (data.error === "starting" || data.retry === true)) {
-      return "The application server is starting up. Please wait a few seconds and try again.";
+    if (data && data.error === "starting") {
+      return "The application server is still starting. This can take up to two minutes after a deploy — please wait and try again.";
+    }
+    if (data && data.retry === true && !data.error) {
+      return "Could not reach the application server. Please try again in a moment or email sales@railintel.co.uk.";
     }
     if (err && (err.message === "Failed to fetch" || err.name === "TypeError")) {
       return "Could not reach the application server. Please try again in a moment or email sales@railintel.co.uk.";
@@ -63,6 +70,7 @@
 
   function apiFetch(path, options, attempt) {
     var tries = attempt || 0;
+    var maxStartingRetries = 20;
     return fetch(apiUrl(path), options)
       .then(function (res) {
         return res
@@ -71,13 +79,9 @@
             return {};
           })
           .then(function (data) {
-            if (
-              tries < 3 &&
-              (res.status === 503 || res.status === 502) &&
-              (data.error === "starting" || data.retry === true)
-            ) {
+            if (tries < maxStartingRetries && isStartingResponse(res, data)) {
               return new Promise(function (resolve) {
-                setTimeout(resolve, 1500 * (tries + 1));
+                setTimeout(resolve, Math.min(8000, 2000 + tries * 500));
               }).then(function () {
                 return apiFetch(path, options, tries + 1);
               });
@@ -89,9 +93,9 @@
           });
       })
       .catch(function (err) {
-        if (tries < 2 && err && err.message === "Failed to fetch") {
+        if (tries < 4 && err && err.message === "Failed to fetch") {
           return new Promise(function (resolve) {
-            setTimeout(resolve, 1200);
+            setTimeout(resolve, 1200 * (tries + 1));
           }).then(function () {
             return apiFetch(path, options, tries + 1);
           });
