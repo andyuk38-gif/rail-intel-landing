@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 166;
+const ASSET_VERSION = 167;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1765,6 +1765,9 @@ function securityPage() {
           </li>`
     )
     .join("\n");
+  const twoFactorViewer = security.twoFactor.viewer
+    ? renderViewerGallery(security.twoFactor.viewer, base)
+    : "";
   const rules = security.twoFactor.rules
     .map(
       (step) => `          <li>
@@ -1833,8 +1836,8 @@ ${accessItems}
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="container">
+    <section class="page-section page-section--viewer">
+      <div class="container container--showcase">
         <div class="page-section__head">
           <h2>${esc(security.twoFactor.heading)}</h2>
           <p>${esc(security.twoFactor.lead)}</p>
@@ -1842,6 +1845,7 @@ ${accessItems}
         <ul class="spec-list">
 ${methods}
         </ul>
+${twoFactorViewer}
       </div>
     </section>
 

@@ -1251,55 +1251,6 @@ export const featureGroups = [
           "**Trusted-device rules** administered by the platform, not the end user.",
           "**Administrator recovery** — reset authenticators and enforce re-enrolment.",
         ],
-        shotGrid: "viewer",
-        viewerLayout: "sidebar",
-        viewerPartner: {
-          kicker: "Works with standard authenticator apps",
-          title: "Google Authenticator and other TOTP apps",
-          body:
-            "Rail Intel uses industry-standard time-based one-time passwords. Users scan a QR code once during enrolment, then enter a six-digit code at sign-in.",
-          logo: "images/security/auth-apps/google-authenticator.png",
-          apps: [
-            {
-              name: "Google Authenticator",
-              icon: "images/security/auth-apps/google-authenticator.png",
-            },
-            {
-              name: "Microsoft Authenticator",
-              icon: "images/security/auth-apps/microsoft-authenticator.png",
-            },
-            { name: "Authy", icon: "images/security/auth-apps/authy.png" },
-            { name: "1Password", icon: "images/security/auth-apps/1password.png" },
-            { name: "Bitwarden", icon: "images/security/auth-apps/bitwarden.png" },
-            { name: "Duo Mobile", icon: "images/security/auth-apps/duo-mobile.png" },
-            {
-              name: "Apple Passwords",
-              icon: "images/security/auth-apps/apple-passwords.png",
-            },
-          ],
-          note:
-            "Any TOTP-compatible app works — including built-in authenticators on iOS and Android.",
-        },
-        shots: [
-          {
-            src: "images/screens/main-sys/login-screen-portrait.png",
-            caption: "Sign-in with company code, email and password.",
-            step: "01",
-            portrait: true,
-          },
-          {
-            src: "images/screens/main-sys/login-authenticator-code.png",
-            caption: "Authenticator code challenge at sign-in.",
-            step: "02",
-            portrait: true,
-          },
-          {
-            src: "images/screens/main-sys/account-two-factor.png",
-            caption: "Re-enrol authenticator and manage trusted devices.",
-            step: "03",
-            portrait: true,
-          },
-        ],
       },
     ],
     cta: {
@@ -1686,6 +1637,57 @@ export const security = {
         body: "After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator, when the device is removed, when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).",
       },
     ],
+    viewer: {
+      shotGrid: "viewer",
+      viewerLayout: "sidebar",
+      viewerPartner: {
+        kicker: "Works with standard authenticator apps",
+        title: "Google Authenticator and other TOTP apps",
+        body:
+          "Rail Intel uses industry-standard time-based one-time passwords. Users scan a QR code once during enrolment, then enter a six-digit code at sign-in.",
+        logo: "images/security/auth-apps/google-authenticator.png",
+        apps: [
+          {
+            name: "Google Authenticator",
+            icon: "images/security/auth-apps/google-authenticator.png",
+          },
+          {
+            name: "Microsoft Authenticator",
+            icon: "images/security/auth-apps/microsoft-authenticator.png",
+          },
+          { name: "Authy", icon: "images/security/auth-apps/authy.png" },
+          { name: "1Password", icon: "images/security/auth-apps/1password.png" },
+          { name: "Bitwarden", icon: "images/security/auth-apps/bitwarden.png" },
+          { name: "Duo Mobile", icon: "images/security/auth-apps/duo-mobile.png" },
+          {
+            name: "Apple Passwords",
+            icon: "images/security/auth-apps/apple-passwords.png",
+          },
+        ],
+        note:
+          "Any TOTP-compatible app works — including built-in authenticators on iOS and Android.",
+      },
+      shots: [
+        {
+          src: "images/screens/main-sys/login-screen-portrait.png",
+          caption: "Sign-in with company code, email and password.",
+          step: "01",
+          portrait: true,
+        },
+        {
+          src: "images/screens/main-sys/login-authenticator-code.png",
+          caption: "Authenticator code challenge at sign-in.",
+          step: "02",
+          portrait: true,
+        },
+        {
+          src: "images/screens/main-sys/account-two-factor.png",
+          caption: "Re-enrol authenticator and manage trusted devices.",
+          step: "03",
+          portrait: true,
+        },
+      ],
+    },
     rules: [
       {
         heading: "Policy is administered centrally",

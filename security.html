@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=166" />
-  <link rel="stylesheet" href="css/pages.css?v=166" />
+  <link rel="stylesheet" href="css/style.css?v=167" />
+  <link rel="stylesheet" href="css/pages.css?v=167" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -272,8 +272,8 @@
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="container">
+    <section class="page-section page-section--viewer">
+      <div class="container container--showcase">
         <div class="page-section__head">
           <h2>Two-factor authentication (2FA)</h2>
           <p>When 2FA is required, a correct password is not enough. Rail Intel challenges for a second factor before a session is issued.</p>
@@ -292,6 +292,211 @@
             After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator, when the device is removed, when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).
           </li>
         </ul>
+      <div class="shot-viewer reveal shot-viewer--sidebar" data-shot-viewer data-shot-count="3" tabindex="0">
+        <div class="shot-viewer__cluster">
+        <div class="shot-viewer__rail">
+          <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
+            <span aria-hidden="true">↑</span>
+          </button>
+          <div class="shot-viewer__tiles" data-shot-viewer-tiles role="tablist" aria-label="Screenshots">
+            <button
+              type="button"
+              class="shot-viewer__tile is-active"
+              data-shot-viewer-tile="0"
+              role="tab"
+              aria-label="Sign-in with company code, email and password."
+              aria-selected="true"
+            >
+              <span class="shot-viewer__tile-step">01</span>
+              <span class="shot-viewer__tile-label">Sign-in with company code, email and password.</span>
+              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
+            </button>
+            <button
+              type="button"
+              class="shot-viewer__tile"
+              data-shot-viewer-tile="1"
+              role="tab"
+              aria-label="Authenticator code challenge at sign-in."
+              aria-selected="false"
+            >
+              <span class="shot-viewer__tile-step">02</span>
+              <span class="shot-viewer__tile-label">Authenticator code challenge at sign-in.</span>
+              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
+            </button>
+            <button
+              type="button"
+              class="shot-viewer__tile"
+              data-shot-viewer-tile="2"
+              role="tab"
+              aria-label="Re-enrol authenticator and manage trusted devices."
+              aria-selected="false"
+            >
+              <span class="shot-viewer__tile-step">03</span>
+              <span class="shot-viewer__tile-label">Re-enrol authenticator and manage trusted devices.</span>
+              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
+            </button>
+          </div>
+          <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
+            <span aria-hidden="true">↓</span>
+          </button>
+        </div>
+        <div class="shot-viewer__shell">
+          <div class="shot-viewer__glow" aria-hidden="true"></div>
+          <div class="shot-viewer__stage" data-shot-viewer-stage>
+        <figure
+          class="shot-viewer__frame is-active shot-viewer__frame--portrait"
+          data-shot-viewer-frame
+          data-shot-viewer-label="Sign-in with company code, email and password."
+          aria-hidden="false"
+        >
+          <div class="shot-viewer__frame-inner">
+            <img
+              class="shot-viewer__image"
+              src="images/screens/main-sys/login-screen-portrait.png?v=167"
+              alt="Sign-in with company code, email and password."
+              width="280"
+              height="456"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </figure>
+        <figure
+          class="shot-viewer__frame shot-viewer__frame--portrait"
+          data-shot-viewer-frame
+          data-shot-viewer-label="Authenticator code challenge at sign-in."
+          aria-hidden="true"
+        >
+          <div class="shot-viewer__frame-inner">
+            <img
+              class="shot-viewer__image"
+              src="images/screens/main-sys/login-authenticator-code.png?v=167"
+              alt="Authenticator code challenge at sign-in."
+              width="198"
+              height="384"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </figure>
+        <figure
+          class="shot-viewer__frame shot-viewer__frame--portrait"
+          data-shot-viewer-frame
+          data-shot-viewer-label="Re-enrol authenticator and manage trusted devices."
+          aria-hidden="true"
+        >
+          <div class="shot-viewer__frame-inner">
+            <img
+              class="shot-viewer__image"
+              src="images/screens/main-sys/account-two-factor.png?v=167"
+              alt="Re-enrol authenticator and manage trusted devices."
+              width="268"
+              height="415"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </figure>
+          </div>
+        </div>
+        </div>
+        <aside class="shot-viewer__partner" aria-label="Google Authenticator and other TOTP apps">
+          <div class="shot-viewer__partner-content">
+            <div class="shot-viewer__partner-head">
+              <div class="shot-viewer__partner-mark">
+                <img
+                  src="images/security/auth-apps/google-authenticator.png?v=167"
+                  alt=""
+                  width="72"
+                  height="72"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="shot-viewer__partner-intro">
+                <p class="shot-viewer__partner-kicker">Works with standard authenticator apps</p>
+                <h3 class="shot-viewer__partner-title">Google Authenticator and other TOTP apps</h3>
+              </div>
+            </div>
+            <p class="shot-viewer__partner-body">Rail Intel uses industry-standard time-based one-time passwords. Users scan a QR code once during enrolment, then enter a six-digit code at sign-in.</p>
+          <ul class="shot-viewer__partner-apps">
+            <li>Google Authenticator</li>
+            <li>Microsoft Authenticator</li>
+            <li>Authy</li>
+            <li>1Password</li>
+            <li>Bitwarden</li>
+            <li>Duo Mobile</li>
+            <li>Apple Passwords</li>
+          </ul>
+            <p class="shot-viewer__partner-note">Any TOTP-compatible app works — including built-in authenticators on iOS and Android.</p>
+          </div>
+          <div class="shot-viewer__partner-icons" aria-label="Supported authenticator apps">
+            <img
+              src="images/security/auth-apps/google-authenticator.png?v=167"
+              alt="Google Authenticator"
+              title="Google Authenticator"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="images/security/auth-apps/microsoft-authenticator.png?v=167"
+              alt="Microsoft Authenticator"
+              title="Microsoft Authenticator"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="images/security/auth-apps/authy.png?v=167"
+              alt="Authy"
+              title="Authy"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="images/security/auth-apps/1password.png?v=167"
+              alt="1Password"
+              title="1Password"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="images/security/auth-apps/bitwarden.png?v=167"
+              alt="Bitwarden"
+              title="Bitwarden"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="images/security/auth-apps/duo-mobile.png?v=167"
+              alt="Duo Mobile"
+              title="Duo Mobile"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="images/security/auth-apps/apple-passwords.png?v=167"
+              alt="Apple Passwords"
+              title="Apple Passwords"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </aside>
+      </div>
       </div>
     </section>
 
@@ -384,6 +589,6 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=166"></script>
+  <script src="js/site.js?v=167"></script>
 </body>
 </html>
