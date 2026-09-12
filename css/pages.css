@@ -4632,7 +4632,7 @@ body.lightbox-open {
 }
 
 .signup-path-tile .signup-glass-tile__bg {
-  opacity: 0.28;
+  opacity: 0.16;
   background-image: url("../images/gbr-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -4643,9 +4643,9 @@ body.lightbox-open {
   background:
     linear-gradient(
       180deg,
-      rgba(8, 10, 14, 0.25) 0%,
-      rgba(8, 10, 14, 0.5) 50%,
-      rgba(8, 10, 14, 0.92) 100%
+      rgba(8, 10, 14, 0.4) 0%,
+      rgba(8, 10, 14, 0.62) 50%,
+      rgba(8, 10, 14, 0.94) 100%
     ),
     linear-gradient(155deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
 }
@@ -4673,7 +4673,7 @@ body.lightbox-open {
 
 .signup-path-tile:hover .signup-glass-tile__bg,
 .signup-path-tile:focus-visible .signup-glass-tile__bg {
-  opacity: 0.36;
+  opacity: 0.22;
 }
 
 .quotation-preview {
