@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 143;
+const ASSET_VERSION = 145;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1118,9 +1118,9 @@ function renderHeroIntro(intro) {
 
   const body = (intro.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
   const tiles = intro.tiles
-    ? `            <div class="admin-intro-tiles">\n${intro.tiles
+    ? `            <div class="admin-intro-tiles" data-admin-intro-tiles>\n${intro.tiles
         .map(
-          (tile) => `              <article class="admin-intro-tile">
+          (tile, index) => `              <article class="admin-intro-tile${index === 0 ? " is-active" : ""}" data-admin-intro-tile>
                 <h3 class="admin-intro-tile__title">${esc(tile.title)}</h3>
                 <p>${esc(tile.detail)}</p>
               </article>`
@@ -1151,7 +1151,7 @@ function featurePage(group) {
     group.name
   )}</p>
           <span class="page-badge page-badge--core">Included as standard</span>
-          <h1 class="page-title">${esc(group.tagline)}</h1>
+          <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
           <p class="page-lead">${esc(group.lead)}</p>
 ${
   group.hideHeroActions

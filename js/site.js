@@ -730,6 +730,32 @@
     });
   }
 
+  /* ---------- Administration intro tiles — animated border focus ---------- */
+
+  var adminIntroTiles = document.querySelector("[data-admin-intro-tiles]");
+  if (adminIntroTiles) {
+    var adminTiles = Array.prototype.slice.call(adminIntroTiles.querySelectorAll("[data-admin-intro-tile]"));
+    var adminDefaultTile = 0;
+
+    function setAdminTileActive(index) {
+      adminTiles.forEach(function (tile, tileIndex) {
+        tile.classList.toggle("is-active", tileIndex === index);
+      });
+    }
+
+    setAdminTileActive(adminDefaultTile);
+
+    adminTiles.forEach(function (tile, tileIndex) {
+      tile.addEventListener("mouseenter", function () {
+        setAdminTileActive(tileIndex);
+      });
+    });
+
+    adminIntroTiles.addEventListener("mouseleave", function () {
+      setAdminTileActive(adminDefaultTile);
+    });
+  }
+
   /* ---------- Proof glass cards — subtle pointer tilt (front card only) ---------- */
 
   var proofCards = Array.prototype.slice.call(document.querySelectorAll("[data-proof-tilt]"));

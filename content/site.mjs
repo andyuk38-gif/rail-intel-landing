@@ -1086,6 +1086,8 @@ export const featureGroups = [
     summary:
       "Configure organisation, roles, standards, modules and security — your operation's control centre.",
     tagline: "Configure Rail Intel to match how your operation runs",
+    taglineHtml:
+      '<span class="hero-title__accent">Configure</span> Rail Intel to match how your <span class="hero-title__accent">operation</span> runs',
     lead:
       "Administration is where Rail Intel becomes yours. System and company administrators define who can see and do what, set the competency standards assessors work to, configure traction and routes once for the whole company, activate optional modules and govern sign-in policy — without a vendor change request.",
     heroShot: {
