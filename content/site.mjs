@@ -1081,6 +1081,174 @@ export const featureGroups = [
   },
 
   {
+    slug: "administration",
+    name: "Administration",
+    summary:
+      "Configure organisation, roles, standards, modules and security — your operation's control centre.",
+    tagline: "Configure Rail Intel to match how your operation runs",
+    lead:
+      "Administration is where Rail Intel becomes yours. System and company administrators define who can see and do what, set the competency standards assessors work to, configure traction and routes once for the whole company, activate optional modules and govern sign-in policy — without a vendor change request.",
+    heroShot: {
+      src: "images/screens/main-sys/adminmenu.png",
+      caption:
+        "The Administration fly-out menu — team management, module settings, storage and company configuration.",
+      scale: 1,
+      full: true,
+    },
+    sections: [
+      {
+        heading: "The Administration menu",
+        body: [
+          "Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.",
+          "The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.",
+        ],
+        bullets: [
+          "**Team Management** — administrator seats, users and access.",
+          "**Module shortcuts** — QA Verifications, Trainee and Leave & Absence when those add-ons are active.",
+          "**Storage** — document storage administration.",
+          "**Company configuration** — roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.",
+        ],
+      },
+      {
+        heading: "Organisation structure, roles and permissions",
+        body: [
+          "Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular — an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.",
+          "The same permission model gates every core capability: the employee directory, monitoring, assessing, medicals, incidents, reporting and optional modules. Nothing is all-or-nothing unless you configure it that way.",
+        ],
+        bullets: [
+          "**Custom job roles** for assessors, managers, instructors and administrators.",
+          "**Granular permissions** across records, assessing, monitoring, reporting and configuration.",
+          "**Own-record access** for employees who should see only their own record.",
+          "**Line-manager scope** so managers see their reportees without the whole company.",
+        ],
+        shots: [
+          {
+            src: "images/screens/comp-config/org-structure.png",
+            caption: "Organisation structure configuration.",
+          },
+          {
+            src: "images/screens/comp-config/configure-company-role-permissions.png",
+            caption: "Configuring permissions for a company job role.",
+          },
+          {
+            src: "images/screens/main-sys/role-permissions-configure.png",
+            caption: "Granular permission assignment across the platform.",
+          },
+        ],
+      },
+      {
+        heading: "Competency standards and frameworks",
+        body: [
+          "Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run — so assessors in every depot work to the same bar.",
+          "When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification — not after someone re-keys a spreadsheet.",
+        ],
+        bullets: [
+          "**Competency frameworks** applied across cycles and roles.",
+          "**Grading scales** that assessors use in the field.",
+          "**Company standards** for assessment and competence outcomes.",
+          "**Timing standards** including trainee daylight and darkness minimums.",
+        ],
+        shots: [
+          {
+            src: "images/screens/comp-config/framework-apply-cycles.png",
+            caption: "Applying a competency framework across cycles.",
+          },
+          {
+            src: "images/screens/comp-config/grade-scale.png",
+            caption: "The grading scale used by assessors.",
+          },
+          {
+            src: "images/screens/comp-config/set-company-standards.png",
+            caption: "Company standards for assessment and competence.",
+          },
+          {
+            src: "images/screens/main-sys/timings-standards.png",
+            caption: "Timing standards including trainee daylight and darkness minimums.",
+          },
+        ],
+      },
+      {
+        heading: "Traction, routes and depots",
+        body: [
+          "Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears — on the record, in the cab and in a verification report.",
+          "Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.",
+        ],
+        shots: [
+          {
+            src: "images/screens/train-routes/traction-route-overview.png",
+            caption: "Traction and route overview for the company.",
+          },
+          {
+            src: "images/screens/train-routes/add-traction.png",
+            caption: "Adding a traction type.",
+          },
+          {
+            src: "images/screens/train-routes/add-route.png",
+            caption: "Adding a route.",
+          },
+          {
+            src: "images/screens/comp-config/set-traction-routes-depots.png",
+            caption: "Traction, routes and depots configuration.",
+          },
+        ],
+      },
+      {
+        heading: "Modules, licences and integrations",
+        body: [
+          "Optional modules are activated from the Add-ons library inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator enables it for the company directly.",
+          "Every company includes two administrator seats; additional Company Admin licences are purchased by quantity and managed in Team Management. Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval.",
+        ],
+        bullets: [
+          "**Add-on activation** from the in-app library — no separate procurement workflow.",
+          "**14-day trials** before you commit to an annual subscription.",
+          "**Company Admin licences** managed in Team Management.",
+          "**Investigations connector** for workforce context on a live case.",
+        ],
+        shots: [
+          {
+            src: "images/screens/main-sys/addons-page.png",
+            caption: "The Add-ons page where optional modules are activated.",
+          },
+          {
+            src: "images/screens/comp-config/addons-library.png",
+            caption: "The add-ons library with available modules.",
+          },
+          {
+            src: "images/screens/comp-config/investigation-apimanagement.png",
+            caption: "Investigations API connector management.",
+          },
+        ],
+      },
+      {
+        heading: "Security and sign-in policy",
+        body: [
+          "Users sign in with a company code, email and password. Tenants stay isolated — one operator cannot see another's records. What each person can view or change follows the role and custom permissions your administrators set.",
+          "System administrators manage two-factor authentication from Administration → Security: authenticator on or off, email codes on or off, and company or user method overrides. Users cannot turn the requirement off themselves; administrators can reset authenticators and revoke trusted devices when someone changes role or leaves.",
+        ],
+        bullets: [
+          "**Company-scoped tenants** with named user accounts.",
+          "**Central 2FA policy** — authenticator, email codes and overrides.",
+          "**Trusted-device rules** administered by the platform, not the end user.",
+          "**Administrator recovery** — reset authenticators and enforce re-enrolment.",
+        ],
+        shots: [
+          {
+            src: "images/screens/main-sys/login-screen.png",
+            caption: "Sign-in with company code, email and password.",
+          },
+        ],
+      },
+    ],
+    cta: {
+      heading: "Flexibility without custom development",
+      body:
+        "Administration is included in core Rail Intel. You configure organisation, standards, modules and security yourself — and adjust them as your operation changes. For the full security story, see the Security page.",
+      secondaryHref: "../security.html",
+      secondaryLabel: "Security overview",
+    },
+  },
+
+  {
     slug: "reporting-administration",
     name: "Reporting & Administration",
     summary: "Analytics across the operation, plus the configuration that makes it yours.",

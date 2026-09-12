@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 92;
+const ASSET_VERSION = 141;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -333,7 +333,11 @@ ${shots}
     </section>`;
 }
 
-function renderCta(base, { heading, body, showAppCta = true }) {
+function renderCta(base, { heading, body, showAppCta = true, secondaryHref, secondaryLabel }) {
+  const secondaryLink = secondaryHref
+    ? `          <a href="${secondaryHref.startsWith("../") || secondaryHref.startsWith("http") ? secondaryHref : `${base}${secondaryHref}`}" class="btn btn-ghost btn-lg">${esc(secondaryLabel || "Learn more")}</a>`
+    : `          <a href="${base}products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>`;
+
   return `    <section class="page-section">
       <div class="container">
         <div class="page-section__head">
@@ -345,7 +349,7 @@ ${
   showAppCta === false
     ? ""
     : `          <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
-}          <a href="${base}products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
+}${secondaryLink}
         </div>
       </div>
     </section>`;
@@ -1298,7 +1302,9 @@ function featuresIndex() {
                 ? "International"
                 : group.slug === "digital-cab-passes"
                   ? "Operations"
-                  : "Core"
+                  : group.slug === "administration"
+                    ? "Configuration"
+                    : "Core"
           }</span>
           <h3>${esc(group.name)}</h3>
           <p>${esc(group.summary)}</p>
@@ -1311,7 +1317,7 @@ function featuresIndex() {
     renderHead(base, {
       title: "Features – Rail Intel",
       description:
-        "The core Rail Intel feature set: Tunnel Mode, digital cab passes with QR verification, competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, reporting, administration and international languages.",
+        "The core Rail Intel feature set: Tunnel Mode, digital cab passes with QR verification, competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, administration, reporting and international languages.",
     }) +
     `
   <main>

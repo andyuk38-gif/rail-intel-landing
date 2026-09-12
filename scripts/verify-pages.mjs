@@ -37,6 +37,7 @@ const pages = [
   "/features/medicals-licensing.html",
   "/features/incidents-monitoring.html",
   "/features/cdp-monitoring.html",
+  "/features/administration.html",
   "/features/reporting-administration.html",
 ];
 
