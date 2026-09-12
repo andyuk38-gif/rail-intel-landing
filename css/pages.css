@@ -4212,9 +4212,11 @@ body.lightbox-open {
 .signup-wizard-glass::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: url("../images/gbr-bg.png") right -2rem bottom -1rem / min(52%, 420px) no-repeat;
-  opacity: 0.14;
+  inset: auto 0 0 auto;
+  width: min(38%, 300px);
+  height: 45%;
+  background: url("../images/gbr-bg.png") right bottom / contain no-repeat;
+  opacity: 0.06;
   pointer-events: none;
   z-index: 0;
 }
@@ -4235,17 +4237,31 @@ body.lightbox-open {
 
 .signup-wizard__eyebrow {
   margin: 0;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--accent) 75%, #fff);
+  color: #fff;
 }
 
 .signup-wizard__login {
   margin: 0;
-  font-size: 0.88rem;
-  color: var(--text-muted);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.signup-wizard__login a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signup-wizard__login a:hover,
+.signup-wizard__login a:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  outline: none;
 }
 
 .signup-progress {
@@ -4584,12 +4600,6 @@ body.lightbox-open {
   min-height: 9.5rem;
 }
 
-.signup-path-tile .signup-glass-tile__icon {
-  font-size: 1.5rem;
-  line-height: 1;
-  margin-bottom: 0.35rem;
-}
-
 .signup-path-tile:hover .signup-glass-tile__surface,
 .signup-path-tile:focus-visible .signup-glass-tile__surface {
   outline: none;
@@ -4618,14 +4628,15 @@ body.lightbox-open {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.74rem;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
   min-width: 0;
   transition: color 0.25s, opacity 0.25s;
 }
 
 .signup-wizard__step:not(.is-active):not(.is-complete) {
-  opacity: 0.55;
+  opacity: 0.88;
 }
 
 .signup-wizard__step span {
@@ -4642,12 +4653,20 @@ body.lightbox-open {
   transition: transform 0.25s, background 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 
-.signup-wizard__step.is-active {
-  color: var(--text);
-  font-weight: 600;
+.signup-wizard__step.is-complete {
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.signup-wizard__step.is-active span {
+.signup-wizard__step.is-active {
+  color: #fff;
+  font-weight: 700;
+}
+
+.signup-wizard__step-label {
+  line-height: 1.25;
+}
+
+.signup-wizard__step.is-active span:first-child {
   transform: scale(1.08);
   box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 40%, transparent);
 }

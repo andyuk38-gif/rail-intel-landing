@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 183;
+const ASSET_VERSION = 184;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1806,7 +1806,7 @@ function getStartedPage() {
             <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span>1</span> Company</li>
             <li class="signup-wizard__step" data-signup-step-indicator="2"><span>2</span> Contact</li>
             <li class="signup-wizard__step" data-signup-step-indicator="3"><span>3</span> Path</li>
-            <li class="signup-wizard__step" data-signup-step-indicator="4"><span>4</span> Details</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="4"><span>4</span><span class="signup-wizard__step-label">Optional Addon Modules for your quote</span></li>
             <li class="signup-wizard__step" data-signup-step-indicator="5"><span>5</span> Done</li>
           </ol>
 
@@ -1871,7 +1871,6 @@ function getStartedPage() {
             <div class="signup-path-tiles">
               <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="quote">
                 <span class="signup-glass-tile__bg" aria-hidden="true"></span>
-                <span class="signup-glass-tile__icon" aria-hidden="true">&#128196;</span>
                 <span class="signup-glass-tile__content">
                   <strong>Request a quotation</strong>
                   <span>Tell us your contract term, users, and admin licences. We will send a formal quote.</span>
@@ -1879,7 +1878,6 @@ function getStartedPage() {
               </button>
               <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="purchase">
                 <span class="signup-glass-tile__bg" aria-hidden="true"></span>
-                <span class="signup-glass-tile__icon" aria-hidden="true">&#128640;</span>
                 <span class="signup-glass-tile__content">
                   <strong>Proceed with purchase</strong>
                   <span>Select modules and complete payment to start onboarding straight away.</span>
@@ -1920,7 +1918,7 @@ function getStartedPage() {
 
           <div class="signup-wizard__body" data-signup-panel="quote-modules" hidden>
             <div class="signup-panel__head">
-              <h2 class="signup-form__title">Modules for your quote</h2>
+              <h2 class="signup-form__title">Optional Addon Modules for your quote</h2>
               <p class="signup-form__lead">Select bolt-on modules to include in your quotation.</p>
             </div>
             <div data-signup-modules class="signup-module-grid"></div>

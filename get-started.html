@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=183" />
-  <link rel="stylesheet" href="css/pages.css?v=183" />
+  <link rel="stylesheet" href="css/style.css?v=184" />
+  <link rel="stylesheet" href="css/pages.css?v=184" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -237,7 +237,7 @@
             <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span>1</span> Company</li>
             <li class="signup-wizard__step" data-signup-step-indicator="2"><span>2</span> Contact</li>
             <li class="signup-wizard__step" data-signup-step-indicator="3"><span>3</span> Path</li>
-            <li class="signup-wizard__step" data-signup-step-indicator="4"><span>4</span> Details</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="4"><span>4</span><span class="signup-wizard__step-label">Optional Addon Modules for your quote</span></li>
             <li class="signup-wizard__step" data-signup-step-indicator="5"><span>5</span> Done</li>
           </ol>
 
@@ -302,7 +302,6 @@
             <div class="signup-path-tiles">
               <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="quote">
                 <span class="signup-glass-tile__bg" aria-hidden="true"></span>
-                <span class="signup-glass-tile__icon" aria-hidden="true">&#128196;</span>
                 <span class="signup-glass-tile__content">
                   <strong>Request a quotation</strong>
                   <span>Tell us your contract term, users, and admin licences. We will send a formal quote.</span>
@@ -310,7 +309,6 @@
               </button>
               <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="purchase">
                 <span class="signup-glass-tile__bg" aria-hidden="true"></span>
-                <span class="signup-glass-tile__icon" aria-hidden="true">&#128640;</span>
                 <span class="signup-glass-tile__content">
                   <strong>Proceed with purchase</strong>
                   <span>Select modules and complete payment to start onboarding straight away.</span>
@@ -351,7 +349,7 @@
 
           <div class="signup-wizard__body" data-signup-panel="quote-modules" hidden>
             <div class="signup-panel__head">
-              <h2 class="signup-form__title">Modules for your quote</h2>
+              <h2 class="signup-form__title">Optional Addon Modules for your quote</h2>
               <p class="signup-form__lead">Select bolt-on modules to include in your quotation.</p>
             </div>
             <div data-signup-modules class="signup-module-grid"></div>
@@ -472,8 +470,8 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=183"></script>
-  <script src="js/signup.js?v=183"></script>
-  <script src="js/newsletter.js?v=183"></script>
+  <script src="js/site.js?v=184"></script>
+  <script src="js/signup.js?v=184"></script>
+  <script src="js/newsletter.js?v=184"></script>
 </body>
 </html>
