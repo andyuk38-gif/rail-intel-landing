@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 158;
+const ASSET_VERSION = 159;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -281,6 +281,31 @@ ${dots}
       </div>`;
 }
 
+function renderViewerPartner(partner, base) {
+  if (!partner) return "";
+  const logo = partner.logo || "images/security/google-authenticator.svg";
+  const title = partner.title || "Google Authenticator";
+  const kicker = partner.kicker || "Compatible with";
+  const body = partner.body || "";
+
+  return `
+        <aside class="shot-viewer__partner" aria-label="${esc(title)}">
+          <div class="shot-viewer__partner-mark">
+            <img
+              src="${base}${logo}?v=${ASSET_VERSION}"
+              alt=""
+              width="72"
+              height="72"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p class="shot-viewer__partner-kicker">${esc(kicker)}</p>
+          <h3 class="shot-viewer__partner-title">${esc(title)}</h3>
+          ${body ? `<p class="shot-viewer__partner-body">${esc(body)}</p>` : ""}
+        </aside>`;
+}
+
 function renderViewerGallery(section, base) {
   const shots = section.shots || [];
   const count = shots.length;
@@ -372,9 +397,9 @@ function renderViewerGallery(section, base) {
     .join("\n");
 
   const railHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
+  const partnerHtml = sidebar && section.viewerPartner ? renderViewerPartner(section.viewerPartner, base) : "";
 
-  return `      <div class="${viewerClass}" data-shot-viewer data-shot-count="${count}" tabindex="0">
-        <div class="shot-viewer__rail"${railHidden}>
+  const coreHtml = `        <div class="shot-viewer__rail"${railHidden}>
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">${prevArrow}</span>
           </button>
@@ -390,7 +415,18 @@ ${tiles}
           <div class="shot-viewer__stage" data-shot-viewer-stage>
 ${frames}
           </div>
-        </div>
+        </div>`;
+
+  if (sidebar) {
+    return `      <div class="${viewerClass}" data-shot-viewer data-shot-count="${count}" tabindex="0">
+        <div class="shot-viewer__cluster">
+${coreHtml}
+        </div>${partnerHtml}
+      </div>`;
+  }
+
+  return `      <div class="${viewerClass}" data-shot-viewer data-shot-count="${count}" tabindex="0">
+${coreHtml}
       </div>`;
 }
 

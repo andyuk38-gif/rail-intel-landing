@@ -1253,6 +1253,13 @@ export const featureGroups = [
         ],
         shotGrid: "viewer",
         viewerLayout: "sidebar",
+        viewerPartner: {
+          kicker: "Compatible with",
+          title: "Google Authenticator",
+          body:
+            "Rail Intel supports standard time-based one-time codes from Google Authenticator and other TOTP apps.",
+          logo: "images/security/google-authenticator.svg",
+        },
         shots: [
           {
             src: "images/screens/main-sys/login-screen-portrait.png",
