@@ -187,6 +187,10 @@
     "width": 1581,
     "height": 1055
   },
+  "images/screens/main-sys/adminmenu.png": {
+    "width": 489,
+    "height": 1024
+  },
   "images/screens/main-sys/dashboard.png": {
     "width": 1384,
     "height": 735
@@ -202,10 +206,6 @@
   "images/screens/main-sys/incidebt-management-list.png": {
     "width": 1395,
     "height": 217
-  },
-  "images/screens/main-sys/adminmenu.png": {
-    "width": 489,
-    "height": 1024
   },
   "images/screens/main-sys/left-navand-flyout-menu.png": {
     "width": 559,
@@ -399,14 +399,6 @@
     "width": 1024,
     "height": 748
   },
-  "images/screens/verification/report/verification-report-overview.jpg": {
-    "width": 1024,
-    "height": 671
-  },
-  "images/screens/verification/report/verification-report-summary-visuals.jpg": {
-    "width": 1024,
-    "height": 485
-  },
   "images/screens/verification/report/verification-report-cab-pass.jpg": {
     "width": 1024,
     "height": 492
@@ -414,6 +406,14 @@
   "images/screens/verification/report/verification-report-medical.jpg": {
     "width": 1024,
     "height": 542
+  },
+  "images/screens/verification/report/verification-report-overview.jpg": {
+    "width": 1024,
+    "height": 671
+  },
+  "images/screens/verification/report/verification-report-summary-visuals.jpg": {
+    "width": 1024,
+    "height": 485
   },
   "images/screens/verification/verification-run-overall.png": {
     "width": 1382,
