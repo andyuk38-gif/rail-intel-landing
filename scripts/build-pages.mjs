@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 153;
+const ASSET_VERSION = 155;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -293,7 +293,35 @@ function renderViewerGallery(section, base) {
       const width = Math.max(1, Math.round(size.width * scale));
       const height = Math.max(1, Math.round(size.height * scale));
       const label = shot.caption || shot.title || `Screen ${index + 1}`;
-      const frameClass = ["shot-viewer__frame", index === 0 ? "is-active" : null].filter(Boolean).join(" ");
+      const frameClass = [
+        "shot-viewer__frame",
+        index === 0 ? "is-active" : null,
+        shot.portrait ? "shot-viewer__frame--portrait" : null,
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      let floatHtml = "";
+      if (shot.float) {
+        const floatSize = manifest[shot.float];
+        if (!floatSize) throw new Error(`Missing screenshot in manifest: ${shot.float}`);
+        const floatScale = typeof shot.floatScale === "number" ? shot.floatScale : 0.5;
+        const floatWidth = Math.max(1, Math.round(floatSize.width * floatScale));
+        const floatHeight = Math.max(1, Math.round(floatSize.height * floatScale));
+        const floatLabel = shot.floatLabel || "Authenticator app";
+        floatHtml = `
+            <aside class="shot-viewer__float" aria-hidden="true">
+              <img
+                src="${base}${shot.float}?v=${ASSET_VERSION}"
+                alt=""
+                width="${floatWidth}"
+                height="${floatHeight}"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="shot-viewer__float-label">${esc(floatLabel)}</span>
+            </aside>`;
+      }
 
       return `        <figure
           class="${frameClass}"
@@ -301,14 +329,17 @@ function renderViewerGallery(section, base) {
           data-shot-viewer-label="${esc(label)}"
           aria-hidden="${index === 0 ? "false" : "true"}"
         >
-          <img
-            src="${base}${shot.src}?v=${ASSET_VERSION}"
-            alt="${esc(label)}"
-            width="${width}"
-            height="${height}"
-            loading="${index === 0 ? "eager" : "lazy"}"
-            decoding="async"
-          />
+          <div class="shot-viewer__frame-inner">
+            <img
+              class="shot-viewer__image"
+              src="${base}${shot.src}?v=${ASSET_VERSION}"
+              alt="${esc(label)}"
+              width="${width}"
+              height="${height}"
+              loading="${index === 0 ? "eager" : "lazy"}"
+              decoding="async"
+            />${floatHtml}
+          </div>
         </figure>`;
     })
     .join("\n");
@@ -337,12 +368,6 @@ function renderViewerGallery(section, base) {
   const railHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
 
   return `      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="${count}" tabindex="0">
-        <div class="shot-viewer__shell">
-          <div class="shot-viewer__glow" aria-hidden="true"></div>
-          <div class="shot-viewer__stage" data-shot-viewer-stage>
-${frames}
-          </div>
-        </div>
         <div class="shot-viewer__rail"${railHidden}>
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">←</span>
@@ -353,6 +378,12 @@ ${tiles}
           <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
             <span aria-hidden="true">→</span>
           </button>
+        </div>
+        <div class="shot-viewer__shell">
+          <div class="shot-viewer__glow" aria-hidden="true"></div>
+          <div class="shot-viewer__stage" data-shot-viewer-stage>
+${frames}
+          </div>
         </div>
       </div>`;
 }

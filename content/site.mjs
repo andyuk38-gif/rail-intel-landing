@@ -1256,6 +1256,20 @@ export const featureGroups = [
           {
             src: "images/screens/main-sys/login-screen.png",
             caption: "Sign-in with company code, email and password.",
+            step: "01",
+          },
+          {
+            src: "images/screens/main-sys/login-mfa-verify.png",
+            caption: "Authenticator code challenge at sign-in.",
+            step: "02",
+            float: "images/screens/main-sys/google-authenticator.png",
+            floatLabel: "Google Authenticator",
+          },
+          {
+            src: "images/screens/main-sys/account-two-factor.png",
+            caption: "Re-enrol authenticator and manage trusted devices.",
+            step: "03",
+            portrait: true,
           },
         ],
       },
