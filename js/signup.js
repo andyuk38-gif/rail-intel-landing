@@ -253,7 +253,13 @@
   }
 
   function showModulesLoading() {
-    var loading = '<p class="signup-form__lead">Loading modules from Rail Intel…</p>';
+    var loading =
+      '<div class="signup-modules-loading" role="status" aria-live="polite" aria-busy="true">' +
+      '<div class="signup-modules-loading__spinner" aria-hidden="true"></div>' +
+      '<p class="signup-modules-loading__text">Loading modules from Rail Intel…</p>' +
+      '<p class="signup-modules-loading__hint">Fetching the latest add-ons from your CMS catalog</p>' +
+      '<div class="signup-modules-loading__bar" aria-hidden="true"><span></span></div>' +
+      "</div>";
     if (moduleListQuote) moduleListQuote.innerHTML = loading;
     if (moduleListPurchase) moduleListPurchase.innerHTML = loading;
   }
