@@ -3,7 +3,9 @@
   "use strict";
 
   var meta = document.querySelector('meta[name="cms-api"]');
+  var proxyMeta = document.querySelector('meta[name="signup-api-proxy"]');
   var apiBase = (meta && meta.getAttribute("content")) || "https://cms.railintel.co.uk/api";
+  var proxyBase = proxyMeta && proxyMeta.getAttribute("content");
   var wizard = document.querySelector("[data-cms-signup-wizard]");
   var form = document.querySelector("[data-cms-signup-form]");
   if (!wizard || !form) return;
@@ -41,7 +43,60 @@
   };
 
   function apiUrl(path) {
-    return apiBase.replace(/\/$/, "") + path;
+    var normalized = String(path || "").replace(/^\//, "");
+    if (proxyBase) {
+      return proxyBase.replace(/\/$/, "") + "?path=" + encodeURIComponent(normalized);
+    }
+    return apiBase.replace(/\/$/, "") + "/" + normalized;
+  }
+
+  function friendlyFetchError(err, data) {
+    if (data && (data.error === "starting" || data.retry === true)) {
+      return "The application server is starting up. Please wait a few seconds and try again.";
+    }
+    if (err && (err.message === "Failed to fetch" || err.name === "TypeError")) {
+      return "Could not reach the application server. Please try again in a moment or email sales@railintel.co.uk.";
+    }
+    return (data && data.error) || (err && err.message) || "Something went wrong.";
+  }
+
+  function apiFetch(path, options, attempt) {
+    var tries = attempt || 0;
+    return fetch(apiUrl(path), options)
+      .then(function (res) {
+        return res
+          .json()
+          .catch(function () {
+            return {};
+          })
+          .then(function (data) {
+            if (
+              tries < 3 &&
+              (res.status === 503 || res.status === 502) &&
+              (data.error === "starting" || data.retry === true)
+            ) {
+              return new Promise(function (resolve) {
+                setTimeout(resolve, 1500 * (tries + 1));
+              }).then(function () {
+                return apiFetch(path, options, tries + 1);
+              });
+            }
+            if (!res.ok) {
+              throw new Error(friendlyFetchError(null, data));
+            }
+            return data;
+          });
+      })
+      .catch(function (err) {
+        if (tries < 2 && err && err.message === "Failed to fetch") {
+          return new Promise(function (resolve) {
+            setTimeout(resolve, 1200);
+          }).then(function () {
+            return apiFetch(path, options, tries + 1);
+          });
+        }
+        throw new Error(friendlyFetchError(err, null));
+      });
   }
 
   function getMsgEl(key) {
@@ -213,10 +268,7 @@
       if (moduleListPurchase) moduleListPurchase.innerHTML = loading;
     }
 
-    fetch(apiUrl("/public/onboarding-addons"))
-      .then(function (res) {
-        return res.ok ? res.json() : null;
-      })
+    apiFetch("/public/onboarding-addons")
       .then(function (data) {
         if (data && data.modules && data.modules.length) renderModules(data.modules);
         else if (!embedded.length) renderModules([]);
@@ -343,17 +395,11 @@
       requestedAddons: collectAddonsFrom(moduleListQuote),
     });
 
-    fetch(apiUrl("/public/signup-request"), {
+    apiFetch("/public/signup-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
-      .then(function (res) {
-        return res.json().then(function (data) {
-          if (!res.ok) throw new Error(data.error || "Could not submit quotation request");
-          return data;
-        });
-      })
       .then(function (data) {
         if (successMessageQuote) {
           successMessageQuote.textContent =
@@ -380,17 +426,11 @@
       requestedAddons: collectAddonsFrom(moduleListPurchase),
     });
 
-    return fetch(apiUrl("/public/signup-request"), {
+    return apiFetch("/public/signup-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
-      .then(function (res) {
-        return res.json().then(function (data) {
-          if (!res.ok) throw new Error(data.error || "Could not save application");
-          return data;
-        });
-      })
       .then(function (data) {
         state.signupId = data.id;
         setPanel("purchase-payment");
@@ -415,20 +455,12 @@
     setPanel("purchase-pay");
     showMessage(getMsgEl("purchase-pay"), "Confirming payment…", "info");
 
-    fetch(
-      apiUrl(
-        "/public/signup-request/verify-payment?signupId=" +
-          encodeURIComponent(signupId) +
-          "&sessionId=" +
-          encodeURIComponent(sessionId)
-      )
+    apiFetch(
+      "/public/signup-request/verify-payment?signupId=" +
+        encodeURIComponent(signupId) +
+        "&sessionId=" +
+        encodeURIComponent(sessionId)
     )
-      .then(function (res) {
-        return res.json().then(function (data) {
-          if (!res.ok) throw new Error(data.error || "Payment verification failed");
-          return data;
-        });
-      })
       .then(function (data) {
         if (successMessagePurchase) {
           successMessagePurchase.textContent =
@@ -470,10 +502,7 @@
 
   loadModules();
 
-  fetch(apiUrl("/public/signup-config"))
-    .then(function (res) {
-      return res.ok ? res.json() : null;
-    })
+  apiFetch("/public/signup-config")
     .then(function (data) {
       state.config = data;
       renderPaymentOptions();
@@ -552,17 +581,11 @@
       hideMessage(el);
       stripePayBtn.disabled = true;
 
-      fetch(apiUrl("/public/signup-request/" + encodeURIComponent(state.signupId) + "/stripe-checkout"), {
+      apiFetch("/public/signup-request/" + encodeURIComponent(state.signupId) + "/stripe-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: "{}",
       })
-        .then(function (res) {
-          return res.json().then(function (data) {
-            if (!res.ok) throw new Error(data.error || "Could not start checkout");
-            return data;
-          });
-        })
         .then(function (data) {
           if (data.url) window.location.href = data.url;
           else throw new Error("No checkout URL returned");
@@ -596,7 +619,7 @@
       bankSubmitBtn.disabled = true;
       readFileAsBase64(file)
         .then(function (base64) {
-          return fetch(apiUrl("/public/signup-request/" + encodeURIComponent(state.signupId) + "/bank-payment"), {
+          return apiFetch("/public/signup-request/" + encodeURIComponent(state.signupId) + "/bank-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -604,11 +627,6 @@
               poFileContentBase64: base64,
               bankReference: bankRef ? bankRef.value : "",
             }),
-          }).then(function (res) {
-            return res.json().then(function (data) {
-              if (!res.ok) throw new Error(data.error || "Submission failed");
-              return data;
-            });
           });
         })
         .then(function (data) {

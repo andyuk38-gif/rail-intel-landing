@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 187;
+const ASSET_VERSION = 188;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -135,6 +135,7 @@ function renderHead(base, { title, description }) {
   <meta name="description" content="${esc(description)}" />
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
+  <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
   <link rel="icon" href="${base}images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="${base}images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="${base}images/apple-touch-icon.png" />

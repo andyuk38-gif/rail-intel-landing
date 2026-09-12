@@ -3,7 +3,9 @@
   "use strict";
 
   var meta = document.querySelector('meta[name="cms-api"]');
+  var proxyMeta = document.querySelector('meta[name="signup-api-proxy"]');
   var apiBase = (meta && meta.getAttribute("content")) || "https://cms.railintel.co.uk/api";
+  var proxyBase = proxyMeta && proxyMeta.getAttribute("content");
   var view = document.querySelector("[data-quotation-view]");
   if (!view) return;
 
@@ -11,7 +13,11 @@
   var token = params.get("token");
 
   function apiUrl(path) {
-    return apiBase.replace(/\/$/, "") + path;
+    var normalized = String(path || "").replace(/^\//, "");
+    if (proxyBase) {
+      return proxyBase.replace(/\/$/, "") + "?path=" + encodeURIComponent(normalized);
+    }
+    return apiBase.replace(/\/$/, "") + "/" + normalized;
   }
 
   function renderError(message) {
