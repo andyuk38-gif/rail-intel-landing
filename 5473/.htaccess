@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /5473/
+
+# Block direct access to data and lib
+RewriteRule ^data/ - [F,L]
+RewriteRule ^lib/ - [F,L]
+
+# Serve existing static assets
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# API, uploads, and admin SPA
+RewriteRule ^ index.php [L]

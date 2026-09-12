@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QA Verifications – Rail Intel add-on module</title>
   <meta name="description" content="Automated compliance checks with an audit trail you can hand to the ORR." />
+  <meta name="site-admin-api" content="/5473/api" />
+  <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="../images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=138" />
-  <link rel="stylesheet" href="../css/pages.css?v=138" />
+  <link rel="stylesheet" href="../css/style.css?v=178" />
+  <link rel="stylesheet" href="../css/pages.css?v=178" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -199,6 +201,7 @@
           </div>
           <a href="../how-it-works.html" class="nav-link">How it works</a>
           <a href="../security.html" class="nav-link">Security</a>
+          <a href="../get-started.html" class="nav-link">Get started</a>
           <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
           <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
         </div>
@@ -208,211 +211,110 @@
   </div>
 
   <main>
-    <section class="verify verify--module-page" id="verifications" aria-labelledby="verify-heading">
+    <section class="page-hero">
       <div class="container">
-        <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / QA Verifications</p>
-        <span class="page-badge page-badge--addon">Add-on module</span>
-        <div class="verify__intro">
-          <div class="verify__head">
-            <p class="product-eyebrow">QA Verifications</p>
-            <h1 id="verify-heading" class="verify__title">Verify <span class="hero-title__accent">one employee</span>, <span class="hero-title__accent">every reportee</span>, or a <span class="hero-title__accent">percentage</span> of the company.</h1>
-            <p class="product-lead">Automate your rail compliance. Survive every audit with <span class="hero-title__accent">QA verification Addon Module</span>. Produce team, individual or a percentage of all for quarterly spot checks at the click of a button.</p>
-            <p class="product-lead">A verification reads the live record &mdash; cycles, medicals, licence, cab passes, experience, training, assessment events and incidents &mdash; and scores every check it runs. Use it on one person before they sign on, across your whole team, or as a spot-check sample.</p>
-          </div>
-          <div class="verify__head-media">
-            <div class="verify-scan" data-verify-scan>
-              <div class="verify-scan__chrome" aria-hidden="true">
-                <span class="verify-scan__dot"></span>
-                <span class="verify-scan__label">Live record scan</span>
-              </div>
-              <div class="verify-scan__screen">
-                <video
-                  class="verify-scan__video"
-                  data-verify-scan-video
-                  data-max-loops="3"
-                  muted
-                  playsinline
-                  preload="auto"
-                  aria-label="Scanning an employee record during QA verification"
-                >
-                  <source src="../video/ScanningEmployeeRecord.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / QA Verifications</p>
+          <span class="page-badge page-badge--addon">Add-on module</span>
+          <h1 class="page-title">Prove compliance instead of asserting it</h1>
+          <p class="page-lead">QA Verifications runs structured checks across an employee's competency, medical and licence data, scores every section, and keeps the run history as evidence. Instead of assembling a compliance picture by hand before an audit, you produce it on demand.</p>
 
-        <ul class="scope-cards">
-          <li class="scope-card">
-            <span class="scope-card__num">01</span>
-            <h3>One employee</h3>
-            <p>Run a verification from any record and get a sectioned report back in seconds, saved straight to that person&rsquo;s history.</p>
-          </li>
-          <li class="scope-card">
-            <span class="scope-card__num">02</span>
-            <h3>Every reportee</h3>
-            <p>One action on your dashboard verifies everyone who lists you as their assessing manager, and stores a full report for each.</p>
-          </li>
-          <li class="scope-card">
-            <span class="scope-card__num">03</span>
-            <h3>A percentage sample</h3>
-            <p>Audit-style spot checks across the company: run a random sample from 5% upwards, or 100% to cover everybody.</p>
-          </li>
-        </ul>
-
-        <div class="verify__grid verify__grid--stacked">
-          <div class="verify__copy">
-            <h3>Every check scored, every run kept</h3>
-            <p>Each check returns one of four outcomes, and the run reports the share that came back compliant alongside the pass rate across the people you verified.</p>
-            <ul class="outcome-chips">
-              <li class="outcome-chip outcome-chip--c">Compliant</li>
-              <li class="outcome-chip outcome-chip--a">Advisory</li>
-              <li class="outcome-chip outcome-chip--r">Review</li>
-              <li class="outcome-chip outcome-chip--na">N/A</li>
-            </ul>
-            <p>Runs are retained with the date and who ran them, so a verification you did months ago is still there to open, print and hand over. You choose which sections are examined and how strictly, from the check configuration.</p>
-          </div>
-          <div class="verify__media verify__media--full">
-            <div class="product-gallery product-gallery--full" data-gallery>
-              <div class="browser-mockup browser-mockup--primary">
-                <div class="browser-mockup__chrome">
-                  <span class="browser-mockup__dots"></span>
-                  <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/qa-verifications</span>
-                </div>
-                <div class="browser-mockup__content">
-                  <img src="../images/product/qa-verifications.png?v=138" alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" width="1024" height="750" data-gallery-main loading="eager" decoding="async" fetchpriority="high" />
-                </div>
-              </div>
-              <div class="gallery-tabs" role="tablist" aria-label="QA Verification screens">
-                <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="../images/product/qa-verifications.png?v=138" data-alt="QA Verifications run history with overall compliance rate and a section breakdown by outcome" data-url="cms.railintel.co.uk/qa-verifications" data-width="1024" data-height="750">Run history</button>
-                <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="../images/screens/verification/CheckConfigVerification.png?v=138" data-alt="Check configuration controlling which sections are examined and how each is scored" data-url="cms.railintel.co.uk/qa-verifications/settings" data-width="1024" data-height="748">Check configuration</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="verify__live">
-          <div class="verify__live-copy">
-            <p class="verify__live-tag"><span class="verify__live-dot" aria-hidden="true"></span>Live on the dashboard</p>
-            <h3>Gaps show up before anyone asks for a report.</h3>
-            <p>Your team&rsquo;s compliance sits on the dashboard and is worked out from the records as they stand right now &mdash; not from the last time somebody remembered to run a report. Anyone carrying a review or advisory item is listed with their counts, and when there is nothing outstanding it says so.</p>
-            <p>From there it is one click into the full QA Verifications page, or one action to re-run every reportee.</p>
-          </div>
-          <figure class="verify__live-media">
-            <div class="shot__frame">
-              <img src="../images/screens/main-sys/your-team-compliance.png" alt="Your team's compliance panel on the dashboard, listing live review and advisory counts per employee" width="338" height="159" loading="lazy" decoding="async" />
-            </div>
-            <figcaption>Live review and advisory counts, straight from current records.</figcaption>
-          </figure>
-        </div>
-
-        <div class="verify-report" data-verify-report>
-          <div class="verify-report__head">
-            <p class="product-eyebrow">Verification report</p>
-            <h2 class="verify-report__title">See exactly what you see after scanning an individual</h2>
-            <p class="product-lead">Open the report at any level &mdash; full overview, summary charts, then section evidence for cab passes, medicals and more.</p>
-          </div>
-
-          <div class="verify-report__shell">
-            <div class="verify-report__rail-wrap">
-              <p class="verify-report__rail-label">Report sections</p>
-              <div class="verify-report__progress" aria-hidden="true">
-                <span class="verify-report__progress-fill" data-report-progress style="width: 25%"></span>
-              </div>
-              <div class="verify-report__rail" role="tablist" aria-label="Verification report examples">
-                <button type="button" class="verify-report__pick is-active" role="tab" aria-selected="true" data-report-pick data-src="../images/screens/verification/report/verification-report-overview.jpg" data-alt="Verification report overview with outcome filters, employee header and GDPR notice" data-width="1024" data-height="671" data-caption="Full report header, outcome filters and the compliance summary an auditor opens first." data-accent="review" style="--report-accent: #f87171">
-                  <span class="verify-report__pick-num">01</span>
-                  <span class="verify-report__pick-body">
-                    <strong>Report overview</strong>
-                    <span>Outcome filters, employee header and data protection notice</span>
-                  </span>
-                  <span class="verify-report__pick-tag verify-report__pick-tag--failed">Failed</span>
-                </button>
-                <button type="button" class="verify-report__pick" role="tab" aria-selected="false" data-report-pick data-src="../images/screens/verification/report/verification-report-summary-visuals.jpg" data-alt="Summary visuals with overall outcome and checks by section donut charts" data-width="1024" data-height="485" data-caption="Summary visuals break the run into overall outcome and per-section check distribution." data-accent="mixed" style="--report-accent: #a78bfa">
-                  <span class="verify-report__pick-num">02</span>
-                  <span class="verify-report__pick-body">
-                    <strong>Summary visuals</strong>
-                    <span>Overall outcome and checks by section at a glance</span>
-                  </span>
-                  <span class="verify-report__pick-tag verify-report__pick-tag--mixed">42 checks</span>
-                </button>
-                <button type="button" class="verify-report__pick" role="tab" aria-selected="false" data-report-pick data-src="../images/screens/verification/report/verification-report-cab-pass.jpg" data-alt="Cab pass section showing pass preview, validity and compliant status" data-width="1024" data-height="492" data-caption="Section evidence includes the cab pass preview, validity dates and the signed pass image." data-accent="compliant" style="--report-accent: #2dd4bf">
-                  <span class="verify-report__pick-num">03</span>
-                  <span class="verify-report__pick-body">
-                    <strong>Cab passes</strong>
-                    <span>Pass preview, validity and compliant status</span>
-                  </span>
-                  <span class="verify-report__pick-tag verify-report__pick-tag--c">Compliant</span>
-                </button>
-                <button type="button" class="verify-report__pick" role="tab" aria-selected="false" data-report-pick data-src="../images/screens/verification/report/verification-report-medical.jpg" data-alt="Medical section listing compliant, advisory and review checks with fix actions" data-width="1024" data-height="542" data-caption="Each medical check shows the rule outcome, detail and a direct fix action when something needs attention." data-accent="advisory" style="--report-accent: #fbbf24">
-                  <span class="verify-report__pick-num">04</span>
-                  <span class="verify-report__pick-body">
-                    <strong>Medical</strong>
-                    <span>Compliant, advisory and review checks with fix links</span>
-                  </span>
-                  <span class="verify-report__pick-tags">
-                    <span class="verify-report__pick-tag verify-report__pick-tag--a">Advisory</span>
-                    <span class="verify-report__pick-tag verify-report__pick-tag--review">Review</span>
-                  </span>
-                </button>
-              </div>
-              <p class="verify-report__counter"><span data-report-counter>1</span> / 4</p>
-            </div>
-
-            <div class="verify-report__stage">
-              <div class="verify-report__chrome" aria-hidden="true">
-                <span class="verify-report__chrome-dots"></span>
-                <span class="verify-report__chrome-url">Verification report</span>
-                <span class="verify-report__chrome-action">Print / Save PDF</span>
-              </div>
-              <div class="verify-report__viewport shot__frame">
-                <img
-                  class="verify-report__img"
-                  data-report-main
-                  src="../images/screens/verification/report/verification-report-overview.jpg"
-                  alt="Verification report overview with outcome filters, employee header and GDPR notice"
-                  width="1024"
-                  height="671"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="verify-report__caption" data-report-caption>Full report header, outcome filters and the compliance summary an auditor opens first.</p>
-            </div>
+          <div class="page-actions">
+            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="page-section page-section--activation">
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Run a verification against live record data</h2>
+          <p>A verification reads the employee's actual record — cycles, assessments, medicals, licence expiry and monitoring history — and evaluates each section against your configured criteria. Every check resolves to compliant, advisory, review or not applicable, so a partial pass is visible rather than hidden behind a single score.</p>
+          <p>Runs are stored, not just displayed. The company-wide QA Verifications page keeps the full history with overall compliance rate, per-section breakdown and pass rates across employees, which is what an auditor actually asks to see.</p>
+          <ul class="spec-list">
+            <li><strong>Section-level outcomes</strong> so you can see precisely which part of a record failed.</li>
+            <li><strong>Run history retained</strong> per employee and company-wide, with the date and the assessor.</li>
+            <li><strong>Compliance rate and pass rate</strong> calculated across the latest run for every employee.</li>
+            <li><strong>Derogations tracked separately</strong> from advisories and reviews.</li>
+          </ul>
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot shot--full reveal">
+          <div class="shot__frame">
+            <img src="../images/screens/verification/verification-run-overall.png?v=178" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1382" height="1120" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Configure what a check actually tests</h2>
+          <p>The check configuration decides which sections are examined and how strict each one is, so verification reflects your standards rather than a generic template. Companies running different standards for drivers, instructors and managers can hold each to the right bar.</p>
+          <ul class="spec-list">
+            <li><strong>Per-section configuration</strong> of what is examined and what counts as a pass.</li>
+            <li><strong>Permission-gated running</strong> via `qa-verifications.run`, so only authorised staff can execute checks.</li>
+            <li><strong>Launch from any employee record</strong> once the module is active.</li>
+          </ul>
+        </div>
+      <div class="shot-grid shot-grid--two">
+        <figure class="shot shot--full reveal">
+          <div class="shot__frame">
+            <img src="../images/screens/verification/CheckConfigVerification.png?v=178" alt="Check configuration controls which sections are tested and how each is scored." width="1024" height="748" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Check configuration controls which sections are tested and how each is scored.</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <section class="page-section">
       <div class="container">
         <div class="page-section__head">
           <h2>Activating QA Verifications</h2>
           <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator can enable it for your company directly.</p>
+          <p>Module identifier: <code>qa-verifications</code></p>
         </div>
         <div class="page-actions">
           <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
-          <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <p class="footer-brand">Rail Intel</p>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="../products/">Products</a>
-        <a href="../features/">Features</a>
-        <a href="../how-it-works.html">How it works</a>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">Rail Intel</p>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="../products/">Products</a>
+          <a href="../features/">Features</a>
+          <a href="../how-it-works.html">How it works</a>
         <a href="../security.html">Security</a>
+        <a href="../get-started.html">Get started</a>
         <a href="https://cms.railintel.co.uk">Log in</a>
-      </nav>
-      <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+        </nav>
+        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
+        <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
+        <form class="footer-newsletter__form" data-newsletter-form>
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="footer-newsletter__message" data-newsletter-message hidden></p>
+      </div>
     </div>
   </footer>
 
-  <script src="../js/site.js?v=138"></script>
-  <script src="../js/main.js?v=138"></script>
+  <script src="../js/site.js?v=178"></script>
+  <script src="../js/newsletter.js?v=178"></script>
 </body>
 </html>

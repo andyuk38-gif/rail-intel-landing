@@ -8,3 +8,6 @@ preview-hero.png
 .venv-img/
 .preview/
 node_modules/
+5473/data/*.sqlite
+5473/data/uploads/
+5473/config.local.php

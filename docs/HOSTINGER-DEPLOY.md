@@ -60,6 +60,19 @@ Use this if the server directory is badly out of sync. You may need to ensure th
 
 Do **not** edit tracked site files directly in Hostinger File Manager. Changes made only on the server cause the next `git pull` to fail or be overwritten.
 
+## Site admin (`/5473`)
+
+The PHP admin in `5473/` deploys with the site. After the first deploy, SSH in once:
+
+```bash
+cd /path/to/your/git/project
+cp 5473/config.example.php 5473/config.local.php
+# edit jwt_secret in config.local.php
+php 5473/bin/create-admin.php you@railintel.co.uk 'your-password'
+```
+
+Then open **https://railintel.co.uk/5473**. See [5473/README.md](../5473/README.md).
+
 ## Homepage gallery only
 
 See the “Homepage gallery” section in [README.md](../README.md).

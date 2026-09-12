@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 176;
+const ASSET_VERSION = 178;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -118,6 +118,7 @@ ${renderNavItems(base, addonItems)}
         )}
           <a href="${base}how-it-works.html" class="nav-link">How it works</a>
           <a href="${base}security.html" class="nav-link">Security</a>
+          <a href="${base}get-started.html" class="nav-link">Get started</a>
           <a href="${site.app}" class="nav-link">Log in</a>
           <a href="${site.app}" class="btn btn-primary">Go to app</a>
         </div>
@@ -132,6 +133,8 @@ function renderHead(base, { title, description }) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}" />
+  <meta name="site-admin-api" content="/5473/api" />
+  <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <link rel="icon" href="${base}images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="${base}images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="${base}images/apple-touch-icon.png" />
@@ -167,20 +170,34 @@ function renderHead(base, { title, description }) {
 
 function renderFooter(base) {
   return `  <footer class="footer">
-    <div class="container">
-      <p class="footer-brand">Rail Intel</p>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="${base}products/">Products</a>
-        <a href="${base}features/">Features</a>
-        <a href="${base}how-it-works.html">How it works</a>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">Rail Intel</p>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="${base}products/">Products</a>
+          <a href="${base}features/">Features</a>
+          <a href="${base}how-it-works.html">How it works</a>
         <a href="${base}security.html">Security</a>
+        <a href="${base}get-started.html">Get started</a>
         <a href="${site.app}">Log in</a>
-      </nav>
-      <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+        </nav>
+        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
+        <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
+        <form class="footer-newsletter__form" data-newsletter-form>
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="footer-newsletter__message" data-newsletter-message hidden></p>
+      </div>
     </div>
   </footer>
 
   <script src="${base}js/site.js?v=${ASSET_VERSION}"></script>
+  <script src="${base}js/newsletter.js?v=${ASSET_VERSION}"></script>
 </body>
 </html>
 `;
@@ -1747,6 +1764,95 @@ ${renderShot(
   );
 }
 
+function getStartedPage() {
+  const base = "";
+  return (
+    renderHead(base, {
+      title: "Get started – Rail Intel CMS",
+      description: "Apply for Rail Intel CMS — competency management for rail. We review your application and send login details once approved.",
+    }) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Get started</p>
+            <h1 class="page-title">Start with Rail Intel CMS</h1>
+            <p class="page-lead">Submit your company details below. Our team reviews every application. Once approved, you will receive a welcome email with login details and be guided through onboarding in the CMS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container signup-layout">
+        <form class="signup-form panel" data-cms-signup-form novalidate>
+          <h2 class="signup-form__title">Company application</h2>
+          <p class="signup-form__lead">Fields marked with * are required.</p>
+          <div class="signup-form__grid">
+            <div class="field">
+              <label for="companyName">Company name *</label>
+              <input id="companyName" name="companyName" required autocomplete="organization" />
+            </div>
+            <div class="field field--full">
+              <label for="companyAddress">Registered address *</label>
+              <textarea id="companyAddress" name="companyAddress" rows="3" required></textarea>
+            </div>
+            <div class="field">
+              <label for="contactName">Primary contact *</label>
+              <input id="contactName" name="contactName" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="contactEmail">Contact email *</label>
+              <input id="contactEmail" name="contactEmail" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="contactPhone">Contact phone *</label>
+              <input id="contactPhone" name="contactPhone" type="tel" required autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="procurementReference">Procurement / PO reference</label>
+              <input id="procurementReference" name="procurementReference" />
+            </div>
+            <div class="field field--full">
+              <label for="notes">Notes for our team</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Fleet size, depots, modules you need, or procurement requirements"></textarea>
+            </div>
+            <div class="field field--full signup-form__honeypot" aria-hidden="true">
+              <label for="website">Website</label>
+              <input id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+          </div>
+          <div class="signup-modules">
+            <h3>Optional modules</h3>
+            <p class="signup-form__lead">Select the bolt-on modules you are interested in. Final selection can be confirmed during approval.</p>
+            <div data-signup-modules class="signup-modules__list"></div>
+          </div>
+          <p class="signup-form__message" data-signup-message hidden></p>
+          <button type="submit" class="btn btn-primary btn-lg">Submit application</button>
+        </form>
+        <aside class="signup-aside panel">
+          <h2>What happens next</h2>
+          <ol class="signup-steps">
+            <li><strong>Review</strong> — Rail Intel checks your application (usually within one working day).</li>
+            <li><strong>Approval</strong> — We create your company space and enable the modules you need.</li>
+            <li><strong>Welcome email</strong> — Your contact receives CMS login details.</li>
+            <li><strong>Onboarding</strong> — Guided setup: terms, company profile, job roles, and more.</li>
+          </ol>
+          <p class="signup-aside__note">Already have an account? <a href="${site.app}">Log in to Rail Intel CMS</a>.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+` +
+    renderFooter(base).replace(
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>',
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/signup.js?v=' + ASSET_VERSION + '"></script>'
+    )
+  );
+}
+
 function securityPage() {
   const base = "";
   const accessItems = security.access.items
@@ -2082,6 +2188,7 @@ function syncIndex() {
         <a href="features/">Features</a>
         <a href="how-it-works.html">How it works</a>
         <a href="security.html">Security</a>
+        <a href="get-started.html">Get started</a>
         <a href="${site.app}">Log in</a>
       `
   );
@@ -2128,6 +2235,7 @@ for (const group of featureGroups) {
 
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
+emit("get-started.html", getStartedPage());
 written.push(syncIndex());
 
 console.log(`generated ${written.length} pages:`);

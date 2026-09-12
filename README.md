@@ -2,6 +2,18 @@
 
 Static landing site for **railintel.co.uk**. Links to the app at **cms.railintel.co.uk**.
 
+## Self-serve CMS signup
+
+Visitors apply at **[/get-started.html](get-started.html)** (or **Get started** in the nav). Applications are sent to **cms.railintel.co.uk** for system-admin approval. Once approved, the customer receives the CMS welcome email and completes onboarding in the app.
+
+Configure the CMS API URL via `<meta name="cms-api" content="https://cms.railintel.co.uk/api" />` (set in `scripts/build-pages.mjs`).
+
+## Site admin (`/5473`)
+
+A PHP admin for editing content, managing media, and sending newsletters. It deploys **with this repo** on Hostinger — no separate app to run.
+
+Login: **https://railintel.co.uk/5473** (company code **5473**). See **[5473/README.md](5473/README.md)** for setup.
+
 ## Homepage gallery (Dashboard / Compliance / Reporting / Analytics)
 
 Copy, screenshots and chip text for the homepage command-centre tabs live in **`content/home-gallery.mjs`**.
@@ -65,3 +77,5 @@ After changing content, always run `node scripts/build-pages.mjs` before committ
 If deploy fails with **“divergent branches”**, the server checkout has drifted from GitHub. See **[docs/HOSTINGER-DEPLOY.md](docs/HOSTINGER-DEPLOY.md)** — you will need to SSH in once and run `scripts/hostinger-sync.sh` in the Git project directory, then redeploy.
 
 Confirm a successful deploy: view page source and look for `<!-- site-asset-version:… -->` (version should match `ASSET_VERSION` in `scripts/build-pages.mjs`).
+
+**Site admin:** after deploy, SSH once to create `5473/config.local.php` and run `php 5473/bin/create-admin.php` (see [5473/README.md](5473/README.md)).

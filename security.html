@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Security – Rail Intel</title>
   <meta name="description" content="Rail Intel protects competency, medical and safety records with company-scoped access, two-factor authentication and hosting on Microsoft Azure." />
+  <meta name="site-admin-api" content="/5473/api" />
+  <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=176" />
-  <link rel="stylesheet" href="css/pages.css?v=176" />
+  <link rel="stylesheet" href="css/style.css?v=178" />
+  <link rel="stylesheet" href="css/pages.css?v=178" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -199,6 +201,7 @@
           </div>
           <a href="how-it-works.html" class="nav-link">How it works</a>
           <a href="security.html" class="nav-link">Security</a>
+          <a href="get-started.html" class="nav-link">Get started</a>
           <a href="https://cms.railintel.co.uk" class="nav-link">Log in</a>
           <a href="https://cms.railintel.co.uk" class="btn btn-primary">Go to app</a>
         </div>
@@ -358,7 +361,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="images/screens/main-sys/login-screen-portrait.png?v=176"
+              src="images/screens/main-sys/login-screen-portrait.png?v=178"
               alt="Sign-in with company code, email and password."
               width="280"
               height="456"
@@ -376,7 +379,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="images/screens/main-sys/login-authenticator-code.png?v=176"
+              src="images/screens/main-sys/login-authenticator-code.png?v=178"
               alt="Authenticator code challenge at sign-in."
               width="198"
               height="384"
@@ -394,7 +397,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="images/screens/main-sys/account-two-factor.png?v=176"
+              src="images/screens/main-sys/account-two-factor.png?v=178"
               alt="Re-enrol authenticator and manage trusted devices."
               width="268"
               height="415"
@@ -411,7 +414,7 @@
             <div class="shot-viewer__partner-head">
               <div class="shot-viewer__partner-mark">
                 <img
-                  src="images/security/auth-apps/google-authenticator.png?v=176"
+                  src="images/security/auth-apps/google-authenticator.png?v=178"
                   alt=""
                   width="72"
                   height="72"
@@ -438,7 +441,7 @@
           </div>
           <div class="shot-viewer__partner-icons" aria-label="Supported authenticator apps">
             <img
-              src="images/security/auth-apps/google-authenticator.png?v=176"
+              src="images/security/auth-apps/google-authenticator.png?v=178"
               alt="Google Authenticator"
               title="Google Authenticator"
               width="32"
@@ -447,7 +450,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/microsoft-authenticator.png?v=176"
+              src="images/security/auth-apps/microsoft-authenticator.png?v=178"
               alt="Microsoft Authenticator"
               title="Microsoft Authenticator"
               width="32"
@@ -456,7 +459,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/authy.png?v=176"
+              src="images/security/auth-apps/authy.png?v=178"
               alt="Authy"
               title="Authy"
               width="32"
@@ -465,7 +468,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/1password.png?v=176"
+              src="images/security/auth-apps/1password.png?v=178"
               alt="1Password"
               title="1Password"
               width="32"
@@ -474,7 +477,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/bitwarden.png?v=176"
+              src="images/security/auth-apps/bitwarden.png?v=178"
               alt="Bitwarden"
               title="Bitwarden"
               width="32"
@@ -483,7 +486,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/duo-mobile.png?v=176"
+              src="images/security/auth-apps/duo-mobile.png?v=178"
               alt="Duo Mobile"
               title="Duo Mobile"
               width="32"
@@ -492,7 +495,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/apple-passwords.png?v=176"
+              src="images/security/auth-apps/apple-passwords.png?v=178"
               alt="Apple Passwords"
               title="Apple Passwords"
               width="32"
@@ -578,19 +581,33 @@
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <p class="footer-brand">Rail Intel</p>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="products/">Products</a>
-        <a href="features/">Features</a>
-        <a href="how-it-works.html">How it works</a>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">Rail Intel</p>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="products/">Products</a>
+          <a href="features/">Features</a>
+          <a href="how-it-works.html">How it works</a>
         <a href="security.html">Security</a>
+        <a href="get-started.html">Get started</a>
         <a href="https://cms.railintel.co.uk">Log in</a>
-      </nav>
-      <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+        </nav>
+        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
+        <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
+        <form class="footer-newsletter__form" data-newsletter-form>
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="footer-newsletter__message" data-newsletter-message hidden></p>
+      </div>
     </div>
   </footer>
 
-  <script src="js/site.js?v=176"></script>
+  <script src="js/site.js?v=178"></script>
+  <script src="js/newsletter.js?v=178"></script>
 </body>
 </html>
