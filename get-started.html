@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=193" />
-  <link rel="stylesheet" href="css/pages.css?v=193" />
+  <link rel="stylesheet" href="css/style.css?v=194" />
+  <link rel="stylesheet" href="css/pages.css?v=194" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -370,9 +370,12 @@
 
           <div class="signup-wizard__body signup-wizard__body--success" data-signup-panel="quote-complete" hidden>
             <div class="signup-success-badge" aria-hidden="true">&#10003;</div>
-            <div class="signup-panel__head">
+            <div class="signup-panel__head signup-panel__head--success">
               <h2 class="signup-form__title">Quotation request received</h2>
-              <p class="signup-form__lead" data-signup-success-message>Thank you — we will prepare your quotation and email it to you shortly.</p>
+              <p class="signup-form__lead signup-form__lead--success" data-signup-success-message>
+                A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.
+              </p>
+              <p class="signup-form__note" data-signup-success-note hidden></p>
             </div>
           </div>
 
@@ -474,8 +477,8 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=193"></script>
-  <script src="js/signup.js?v=193"></script>
-  <script src="js/newsletter.js?v=193"></script>
+  <script src="js/site.js?v=194"></script>
+  <script src="js/signup.js?v=194"></script>
+  <script src="js/newsletter.js?v=194"></script>
 </body>
 </html>

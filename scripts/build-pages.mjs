@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 193;
+const ASSET_VERSION = 194;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1932,9 +1932,12 @@ function getStartedPage() {
 
           <div class="signup-wizard__body signup-wizard__body--success" data-signup-panel="quote-complete" hidden>
             <div class="signup-success-badge" aria-hidden="true">&#10003;</div>
-            <div class="signup-panel__head">
+            <div class="signup-panel__head signup-panel__head--success">
               <h2 class="signup-form__title">Quotation request received</h2>
-              <p class="signup-form__lead" data-signup-success-message>Thank you — we will prepare your quotation and email it to you shortly.</p>
+              <p class="signup-form__lead signup-form__lead--success" data-signup-success-message>
+                A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.
+              </p>
+              <p class="signup-form__note" data-signup-success-note hidden></p>
             </div>
           </div>
 

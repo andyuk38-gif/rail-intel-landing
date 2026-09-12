@@ -17,7 +17,10 @@
   var stripePanel = document.querySelector("[data-signup-stripe-panel]");
   var bankPanel = document.querySelector("[data-signup-bank-panel]");
   var successMessageQuote = document.querySelector("[data-signup-success-message]");
+  var successNoteQuote = document.querySelector("[data-signup-success-note]");
   var successMessagePurchase = document.querySelector("[data-signup-success-message-purchase]");
+  var QUOTE_SUCCESS_HELPER =
+    "A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.";
   var progressFill = document.querySelector("[data-signup-progress]");
 
   var PANEL_STEP = {
@@ -428,8 +431,16 @@
     })
       .then(function (data) {
         if (successMessageQuote) {
-          successMessageQuote.textContent =
-            data.message || "Thank you — we will prepare your quotation and email it to you shortly.";
+          successMessageQuote.textContent = QUOTE_SUCCESS_HELPER;
+        }
+        if (successNoteQuote) {
+          if (data && data.duplicate && data.message) {
+            successNoteQuote.textContent = data.message;
+            successNoteQuote.hidden = false;
+          } else {
+            successNoteQuote.textContent = "";
+            successNoteQuote.hidden = true;
+          }
         }
         setPanel("quote-complete");
       })

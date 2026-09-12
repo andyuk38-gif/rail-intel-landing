@@ -4633,6 +4633,26 @@ body.lightbox-open {
   padding: 1rem 0 0.5rem;
 }
 
+.signup-panel__head--success {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 36rem;
+}
+
+.signup-form__lead--success {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 32rem;
+}
+
+.signup-form__note {
+  margin: 0.85rem auto 0;
+  max-width: 32rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text-muted) 88%, var(--accent));
+}
+
 .signup-success-badge {
   display: inline-flex;
   align-items: center;
