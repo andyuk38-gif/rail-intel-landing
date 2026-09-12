@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 188;
+const ASSET_VERSION = 189;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1767,13 +1767,6 @@ ${renderShot(
 
 function getStartedPage() {
   const base = "";
-  const signupModulesJson = JSON.stringify(
-    addons.map((a) => ({
-      id: a.moduleId,
-      name: a.name,
-      shortDescription: a.summary,
-    }))
-  ).replace(/</g, "\\u003c");
   return (
     renderHead(base, {
       title: "Get started – Rail Intel CMS",
@@ -1795,7 +1788,6 @@ function getStartedPage() {
     <section class="page-section page-section--tight signup-page">
       <div class="container signup-shell">
         <div class="signup-wizard-glass" data-cms-signup-wizard>
-          <script type="application/json" id="signup-onboarding-modules">${signupModulesJson}</script>
           <div class="signup-wizard__header">
             <p class="signup-wizard__eyebrow">Rail Intel CMS application</p>
             <p class="signup-wizard__login">Already have an account? <a href="${site.app}">Log in to CMS</a></p>
