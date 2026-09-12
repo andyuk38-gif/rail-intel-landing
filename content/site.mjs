@@ -1137,7 +1137,7 @@ export const featureGroups = [
           "**Own-record access** for employees who should see only their own record.",
           "**Line-manager scope** so managers see their reportees without the whole company.",
         ],
-        shotGrid: "stage",
+        shotGrid: "viewer",
         shots: [
           {
             src: "images/screens/comp-config/org-structure.png",
@@ -1165,7 +1165,7 @@ export const featureGroups = [
           "**Company standards** for assessment and competence outcomes.",
           "**Timing standards** including trainee daylight and darkness minimums.",
         ],
-        shotGrid: "stage",
+        shotGrid: "viewer",
         shots: [
           {
             src: "images/screens/comp-config/framework-apply-cycles.png",
@@ -1191,7 +1191,7 @@ export const featureGroups = [
           "Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears — on the record, in the cab and in a verification report.",
           "Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.",
         ],
-        shotGrid: "stage",
+        shotGrid: "viewer",
         shots: [
           {
             src: "images/screens/train-routes/traction-route-overview.png",
@@ -1223,7 +1223,7 @@ export const featureGroups = [
           "**Company Admin licences** managed in Team Management.",
           "**Investigations connector** for workforce context on a live case.",
         ],
-        shotGrid: "stage",
+        shotGrid: "viewer",
         shots: [
           {
             src: "images/screens/main-sys/addons-page.png",
@@ -1251,7 +1251,7 @@ export const featureGroups = [
           "**Trusted-device rules** administered by the platform, not the end user.",
           "**Administrator recovery** — reset authenticators and enforce re-enrolment.",
         ],
-        shotGrid: "stage",
+        shotGrid: "viewer",
         shots: [
           {
             src: "images/screens/main-sys/login-screen.png",

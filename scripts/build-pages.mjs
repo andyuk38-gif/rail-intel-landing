@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 151;
+const ASSET_VERSION = 152;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -281,11 +281,11 @@ ${dots}
       </div>`;
 }
 
-function renderStageGallery(section, base) {
+function renderViewerGallery(section, base) {
   const shots = section.shots || [];
   const count = shots.length;
 
-  const slides = shots
+  const frames = shots
     .map((shot, index) => {
       const size = manifest[shot.src];
       if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
@@ -293,55 +293,79 @@ function renderStageGallery(section, base) {
       const width = Math.max(1, Math.round(size.width * scale));
       const height = Math.max(1, Math.round(size.height * scale));
       const label = shot.caption || shot.title || `Screen ${index + 1}`;
-      const slideClass = ["shot-deck__slide", index === 0 ? "is-current" : null].filter(Boolean).join(" ");
+      const frameClass = ["shot-viewer__frame", index === 0 ? "is-active" : null].filter(Boolean).join(" ");
 
-      return `        <li
-          class="${slideClass}"
-          data-shot-deck-slide
-          data-shot-deck-label="${esc(label)}"
+      return `        <figure
+          class="${frameClass}"
+          data-shot-viewer-frame
+          data-shot-viewer-label="${esc(label)}"
           aria-hidden="${index === 0 ? "false" : "true"}"
         >
-          <figure class="shot-deck__figure">
-            <img
-              src="${base}${shot.src}?v=${ASSET_VERSION}"
-              alt="${esc(label)}"
-              width="${width}"
-              height="${height}"
-              loading="${index === 0 ? "eager" : "lazy"}"
-              decoding="async"
-            />
-          </figure>
-        </li>`;
+          <img
+            src="${base}${shot.src}?v=${ASSET_VERSION}"
+            alt="${esc(label)}"
+            width="${width}"
+            height="${height}"
+            loading="${index === 0 ? "eager" : "lazy"}"
+            decoding="async"
+          />
+        </figure>`;
+    })
+    .join("\n");
+
+  const thumbs = shots
+    .map((shot, index) => {
+      const size = manifest[shot.src];
+      if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
+      const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+      const width = Math.max(1, Math.round(size.width * scale));
+      const height = Math.max(1, Math.round(size.height * scale));
+      const label = shot.caption || shot.title || `Screen ${index + 1}`;
+      const thumbClass = ["shot-viewer__thumb", index === 0 ? "is-active" : null].filter(Boolean).join(" ");
+
+      return `            <button
+              type="button"
+              class="${thumbClass}"
+              data-shot-viewer-thumb="${index}"
+              role="tab"
+              aria-label="${esc(label)}"
+              aria-selected="${index === 0 ? "true" : "false"}"
+            >
+              <img
+                src="${base}${shot.src}?v=${ASSET_VERSION}"
+                alt=""
+                width="${width}"
+                height="${height}"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="shot-viewer__thumb-progress" data-shot-viewer-thumb-progress aria-hidden="true"></span>
+            </button>`;
     })
     .join("\n");
 
   const first = shots[0];
   const firstLabel = first?.caption || first?.title || "";
-  const navHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
+  const railHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
 
-  return `      <div class="shot-deck reveal" data-shot-deck data-shot-count="${count}" tabindex="0">
-        <div class="shot-deck__viewport" data-shot-deck-viewport>
-          <ul class="shot-deck__track" data-shot-deck-track role="list">
-${slides}
-          </ul>
+  return `      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="${count}" tabindex="0">
+        <div class="shot-viewer__shell">
+          <div class="shot-viewer__glow" aria-hidden="true"></div>
+          <div class="shot-viewer__stage" data-shot-viewer-stage>
+${frames}
+          </div>
+          <p class="shot-viewer__caption" data-shot-viewer-caption aria-live="polite">${esc(firstLabel)}</p>
         </div>
-        <div class="shot-deck__bar">
-          <div class="shot-deck__meta" aria-live="polite">
-            <span class="shot-deck__counter" data-shot-deck-counter>${count > 1 ? `01 / ${String(count).padStart(2, "0")}` : "01"}</span>
-            <p class="shot-deck__caption" data-shot-deck-caption>${esc(firstLabel)}</p>
+        <div class="shot-viewer__rail"${railHidden}>
+          <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="shot-viewer__thumbs" data-shot-viewer-thumbs role="tablist" aria-label="Screenshots">
+${thumbs}
           </div>
-          <div class="shot-deck__controls"${navHidden}>
-            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
-              <span aria-hidden="true">←</span>
-            </button>
-            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-deck__progress" aria-hidden="true">
-              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
-            </div>
-            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
+          <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
       </div>`;
 }
@@ -431,7 +455,7 @@ function renderSection(section, base) {
     : "";
 
   const gallery = section.shotGrid === "gallery";
-  const stage = section.shotGrid === "stage";
+  const viewer = section.shotGrid === "viewer";
   const spotlight = section.shotGrid === "spotlight";
   const showcase = section.shotGrid === "showcase";
   const heroStack = section.shotGrid === "hero-stack";
@@ -443,8 +467,8 @@ function renderSection(section, base) {
 
   let shots = "";
   if (section.shots) {
-    if (stage) {
-      shots = renderStageGallery(section, base);
+    if (viewer) {
+      shots = renderViewerGallery(section, base);
     } else if (spotlight) {
       shots = renderSpotlightGallery(section, base);
     } else if (gallery) {
@@ -467,8 +491,8 @@ function renderSection(section, base) {
     }
   }
 
-  return `    <section class="page-section${gallery ? " page-section--gallery" : stage ? " page-section--stage" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
-      <div class="container${gallery || stage || spotlight || showcase ? " container--showcase" : ""}">
+  return `    <section class="page-section${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+      <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
         <div class="page-section__head">
           <h2>${esc(section.heading)}</h2>
 ${body}
