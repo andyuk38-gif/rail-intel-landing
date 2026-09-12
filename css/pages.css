@@ -2450,6 +2450,12 @@ body.lightbox-open {
   align-items: stretch;
 }
 
+.steps--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  align-items: stretch;
+}
+
 .steps li {
   counter-increment: step;
   position: relative;
@@ -2459,7 +2465,8 @@ body.lightbox-open {
   border-radius: var(--radius);
 }
 
-.steps--two li {
+.steps--two li,
+.steps--three li {
   height: 100%;
 }
 
@@ -2505,6 +2512,12 @@ body.lightbox-open {
   }
 
   .admin-intro-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .steps--three {
     grid-template-columns: 1fr;
   }
 }
