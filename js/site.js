@@ -1001,11 +1001,10 @@
   Array.prototype.forEach.call(document.querySelectorAll("[data-shot-viewer]"), function (viewerRoot) {
     var stage = viewerRoot.querySelector("[data-shot-viewer-stage]");
     var frames = Array.prototype.slice.call(viewerRoot.querySelectorAll("[data-shot-viewer-frame]"));
-    var thumbs = Array.prototype.slice.call(viewerRoot.querySelectorAll("[data-shot-viewer-thumb]"));
-    var thumbsRoot = viewerRoot.querySelector("[data-shot-viewer-thumbs]");
+    var tiles = Array.prototype.slice.call(viewerRoot.querySelectorAll("[data-shot-viewer-tile]"));
+    var tilesRoot = viewerRoot.querySelector("[data-shot-viewer-tiles]");
     var prevBtn = viewerRoot.querySelector("[data-shot-viewer-prev]");
     var nextBtn = viewerRoot.querySelector("[data-shot-viewer-next]");
-    var captionEl = viewerRoot.querySelector("[data-shot-viewer-caption]");
     var count = frames.length;
     if (!stage || !count) return;
 
@@ -1020,41 +1019,31 @@
     var dragDelta = 0;
     var VIEWER_AUTO_MS = 5500;
 
-    function labelFor(frame) {
-      return frame.getAttribute("data-shot-viewer-label") || "";
-    }
-
-    function activeThumb() {
-      return thumbs[index] || null;
+    function activeTile() {
+      return tiles[index] || null;
     }
 
     function activeProgress() {
-      var thumb = activeThumb();
-      return thumb ? thumb.querySelector("[data-shot-viewer-thumb-progress]") : null;
+      var tile = activeTile();
+      return tile ? tile.querySelector("[data-shot-viewer-tile-progress]") : null;
     }
 
-    function scrollThumbIntoView() {
-      var thumb = activeThumb();
-      if (!thumb || !thumbsRoot) return;
-      var offset = thumb.offsetLeft - (thumbsRoot.clientWidth - thumb.offsetWidth) / 2;
-      thumbsRoot.scrollTo({ left: offset, behavior: reduced ? "auto" : "smooth" });
+    function scrollTileIntoView() {
+      var tile = activeTile();
+      if (!tile || !tilesRoot) return;
+      var offset = tile.offsetLeft - (tilesRoot.clientWidth - tile.offsetWidth) / 2;
+      tilesRoot.scrollTo({ left: offset, behavior: reduced ? "auto" : "smooth" });
     }
 
-    function syncCaption() {
-      var frame = frames[index];
-      if (!frame || !captionEl) return;
-      captionEl.textContent = labelFor(frame);
-    }
-
-    function syncThumbs() {
-      thumbs.forEach(function (thumb, thumbIndex) {
-        var active = thumbIndex === index;
-        thumb.classList.toggle("is-active", active);
-        thumb.setAttribute("aria-selected", active ? "true" : "false");
-        var progress = thumb.querySelector("[data-shot-viewer-thumb-progress]");
+    function syncTiles() {
+      tiles.forEach(function (tile, tileIndex) {
+        var active = tileIndex === index;
+        tile.classList.toggle("is-active", active);
+        tile.setAttribute("aria-selected", active ? "true" : "false");
+        var progress = tile.querySelector("[data-shot-viewer-tile-progress]");
         if (progress && !active) progress.style.width = "0%";
       });
-      scrollThumbIntoView();
+      scrollTileIntoView();
     }
 
     function applyState(previousIndex) {
@@ -1067,8 +1056,7 @@
         frame.classList.toggle("is-active", isActive);
         frame.setAttribute("aria-hidden", isActive ? "false" : "true");
       });
-      syncCaption();
-      syncThumbs();
+      syncTiles();
 
       if (!reduced && previousIndex !== undefined && previousIndex !== index) {
         window.setTimeout(function () {
@@ -1079,14 +1067,6 @@
       }
     }
 
-    function flashCaption() {
-      if (!captionEl || reduced) return;
-      captionEl.classList.add("is-changing");
-      window.setTimeout(function () {
-        captionEl.classList.remove("is-changing");
-      }, 180);
-    }
-
     function setIndex(next, userInitiated) {
       if (count < 2) return;
       var newIndex = ((next % count) + count) % count;
@@ -1094,7 +1074,6 @@
       if (userInitiated) restartAuto();
       var previousIndex = index;
       index = newIndex;
-      flashCaption();
       applyState(previousIndex);
     }
 
@@ -1111,8 +1090,8 @@
         cancelAnimationFrame(progressTimer);
         progressTimer = null;
       }
-      thumbs.forEach(function (thumb) {
-        var progress = thumb.querySelector("[data-shot-viewer-thumb-progress]");
+      tiles.forEach(function (tile) {
+        var progress = tile.querySelector("[data-shot-viewer-tile-progress]");
         if (progress) progress.style.width = "0%";
       });
     }
@@ -1152,9 +1131,9 @@
       startAuto();
     }
 
-    thumbs.forEach(function (thumb) {
-      thumb.addEventListener("click", function () {
-        setIndex(Number(thumb.getAttribute("data-shot-viewer-thumb")) || 0, true);
+    tiles.forEach(function (tile) {
+      tile.addEventListener("click", function () {
+        setIndex(Number(tile.getAttribute("data-shot-viewer-tile")) || 0, true);
       });
     });
 

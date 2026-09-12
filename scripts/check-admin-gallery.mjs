@@ -22,6 +22,10 @@ for (let i = 0; i < Math.min(count, 2); i++) {
   await section.scrollIntoViewIfNeeded();
   await page.waitForTimeout(400);
   await section.screenshot({ path: path.join(outDir, `viewer-section-${i + 1}-1280.png`) });
+  if (i === 0) {
+    const rail = section.locator(".shot-viewer__rail");
+    await rail.screenshot({ path: path.join(outDir, "viewer-rail-1280.png") });
+  }
 }
 
 await page.setViewportSize({ width: 390, height: 844 });

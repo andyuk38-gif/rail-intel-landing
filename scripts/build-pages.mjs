@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 152;
+const ASSET_VERSION = 153;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -313,39 +313,27 @@ function renderViewerGallery(section, base) {
     })
     .join("\n");
 
-  const thumbs = shots
+  const tiles = shots
     .map((shot, index) => {
-      const size = manifest[shot.src];
-      if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
-      const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
-      const width = Math.max(1, Math.round(size.width * scale));
-      const height = Math.max(1, Math.round(size.height * scale));
       const label = shot.caption || shot.title || `Screen ${index + 1}`;
-      const thumbClass = ["shot-viewer__thumb", index === 0 ? "is-active" : null].filter(Boolean).join(" ");
+      const step = shot.step || String(index + 1).padStart(2, "0");
+      const tileClass = ["shot-viewer__tile", index === 0 ? "is-active" : null].filter(Boolean).join(" ");
 
       return `            <button
               type="button"
-              class="${thumbClass}"
-              data-shot-viewer-thumb="${index}"
+              class="${tileClass}"
+              data-shot-viewer-tile="${index}"
               role="tab"
               aria-label="${esc(label)}"
               aria-selected="${index === 0 ? "true" : "false"}"
             >
-              <img
-                src="${base}${shot.src}?v=${ASSET_VERSION}"
-                alt=""
-                width="${width}"
-                height="${height}"
-                loading="lazy"
-                decoding="async"
-              />
-              <span class="shot-viewer__thumb-progress" data-shot-viewer-thumb-progress aria-hidden="true"></span>
+              <span class="shot-viewer__tile-step">${esc(step)}</span>
+              <span class="shot-viewer__tile-label">${esc(label)}</span>
+              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
             </button>`;
     })
     .join("\n");
 
-  const first = shots[0];
-  const firstLabel = first?.caption || first?.title || "";
   const railHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
 
   return `      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="${count}" tabindex="0">
@@ -354,14 +342,13 @@ function renderViewerGallery(section, base) {
           <div class="shot-viewer__stage" data-shot-viewer-stage>
 ${frames}
           </div>
-          <p class="shot-viewer__caption" data-shot-viewer-caption aria-live="polite">${esc(firstLabel)}</p>
         </div>
         <div class="shot-viewer__rail"${railHidden}>
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">←</span>
           </button>
-          <div class="shot-viewer__thumbs" data-shot-viewer-thumbs role="tablist" aria-label="Screenshots">
-${thumbs}
+          <div class="shot-viewer__tiles" data-shot-viewer-tiles role="tablist" aria-label="Screenshots">
+${tiles}
           </div>
           <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
             <span aria-hidden="true">→</span>
