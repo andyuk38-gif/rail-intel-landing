@@ -1258,7 +1258,7 @@ export const featureGroups = [
           title: "Google Authenticator",
           body:
             "Rail Intel supports standard time-based one-time codes from Google Authenticator and other TOTP apps.",
-          logo: "images/security/google-authenticator.svg",
+          logo: "images/security/google-logo.webp",
         },
         shots: [
           {

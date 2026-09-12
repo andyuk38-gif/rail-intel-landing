@@ -1403,21 +1403,22 @@
 }
 
 .shot-viewer--sidebar .shot-viewer__frame--portrait .shot-viewer__image {
-  width: 100%;
+  width: auto;
   max-width: 100%;
+  height: auto;
   max-height: 100%;
   object-fit: contain;
   object-position: center center;
 }
 
 .shot-viewer__partner {
-  flex: 1 1 16rem;
+  flex: 1 1 18rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.65rem;
-  min-width: 14rem;
-  max-width: 22rem;
+  min-width: 16rem;
+  max-width: 24rem;
   padding: 1.35rem 1.5rem;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1437,8 +1438,7 @@
   display: block;
   width: 4.5rem;
   height: 4.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  object-fit: contain;
 }
 
 .shot-viewer__partner-kicker {
