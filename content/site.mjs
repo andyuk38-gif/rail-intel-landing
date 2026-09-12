@@ -1592,11 +1592,6 @@ export const security = {
       "Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control — not the end user.",
       "Below we cover access control, two-factor authentication and the Azure platform Rail Intel runs on. These protections are part of core Rail Intel — not a separate module or add-on.",
     ],
-    bullets: [
-      "**Company-scoped access** — isolated tenants, role-based permissions and an attributable audit trail.",
-      "**Administrator-controlled 2FA** — authenticator or email codes, with trusted-device rules enforced by the platform.",
-      "**Enterprise cloud hosting** — HTTPS everywhere, encrypted secrets and documents stored in Azure Blob Storage.",
-    ],
   },
   access: {
     heading: "Access control",
