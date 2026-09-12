@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 161;
+const ASSET_VERSION = 162;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -281,9 +281,17 @@ ${dots}
       </div>`;
 }
 
+function partnerAppName(app) {
+  return typeof app === "string" ? app : app.name || "";
+}
+
+function partnerAppIcon(app) {
+  return typeof app === "object" && app.icon ? app.icon : "";
+}
+
 function renderViewerPartner(partner, base) {
   if (!partner) return "";
-  const logo = partner.logo || "images/security/google-logo.webp";
+  const logo = partner.logo || "images/security/auth-apps/google-authenticator.png";
   const title = partner.title || "Google Authenticator";
   const kicker = partner.kicker || "Compatible with";
   const body = partner.body || "";
@@ -292,31 +300,55 @@ function renderViewerPartner(partner, base) {
 
   const appsHtml = apps.length
     ? `          <ul class="shot-viewer__partner-apps">
-${apps.map((app) => `            <li>${esc(app)}</li>`).join("\n")}
+${apps.map((app) => `            <li>${esc(partnerAppName(app))}</li>`).join("\n")}
           </ul>`
+    : "";
+
+  const iconApps = apps.filter((app) => partnerAppIcon(app));
+  const iconsHtml = iconApps.length
+    ? `          <div class="shot-viewer__partner-icons" aria-label="Supported authenticator apps">
+${iconApps
+  .map((app) => {
+    const name = partnerAppName(app);
+    const icon = partnerAppIcon(app);
+    return `            <img
+              src="${base}${icon}?v=${ASSET_VERSION}"
+              alt="${esc(name)}"
+              title="${esc(name)}"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />`;
+  })
+  .join("\n")}
+          </div>`
     : "";
 
   return `
         <aside class="shot-viewer__partner" aria-label="${esc(title)}">
-          <div class="shot-viewer__partner-head">
-            <div class="shot-viewer__partner-mark">
-              <img
-                src="${base}${logo}?v=${ASSET_VERSION}"
-                alt=""
-                width="72"
-                height="72"
-                loading="lazy"
-                decoding="async"
-              />
+          <div class="shot-viewer__partner-content">
+            <div class="shot-viewer__partner-head">
+              <div class="shot-viewer__partner-mark">
+                <img
+                  src="${base}${logo}?v=${ASSET_VERSION}"
+                  alt=""
+                  width="72"
+                  height="72"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="shot-viewer__partner-intro">
+                <p class="shot-viewer__partner-kicker">${esc(kicker)}</p>
+                <h3 class="shot-viewer__partner-title">${esc(title)}</h3>
+              </div>
             </div>
-            <div class="shot-viewer__partner-intro">
-              <p class="shot-viewer__partner-kicker">${esc(kicker)}</p>
-              <h3 class="shot-viewer__partner-title">${esc(title)}</h3>
-            </div>
-          </div>
-          ${body ? `<p class="shot-viewer__partner-body">${esc(body)}</p>` : ""}
+            ${body ? `<p class="shot-viewer__partner-body">${esc(body)}</p>` : ""}
 ${appsHtml}
-          ${note ? `<p class="shot-viewer__partner-note">${esc(note)}</p>` : ""}
+            ${note ? `<p class="shot-viewer__partner-note">${esc(note)}</p>` : ""}
+          </div>
+${iconsHtml}
         </aside>`;
 }
 

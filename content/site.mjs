@@ -1258,14 +1258,20 @@ export const featureGroups = [
           title: "Google Authenticator and other TOTP apps",
           body:
             "Rail Intel uses industry-standard time-based one-time passwords. Users scan a QR code once during enrolment, then enter a six-digit code at sign-in.",
-          logo: "images/security/google-logo.webp",
+          logo: "images/security/auth-apps/google-authenticator.png",
           apps: [
-            "Google Authenticator",
-            "Microsoft Authenticator",
-            "Authy",
-            "1Password",
-            "Bitwarden",
-            "Duo Mobile",
+            {
+              name: "Google Authenticator",
+              icon: "images/security/auth-apps/google-authenticator.png",
+            },
+            {
+              name: "Microsoft Authenticator",
+              icon: "images/security/auth-apps/microsoft-authenticator.png",
+            },
+            { name: "Authy", icon: "images/security/auth-apps/authy.png" },
+            { name: "1Password", icon: "images/security/auth-apps/1password.png" },
+            { name: "Bitwarden", icon: "images/security/auth-apps/bitwarden.png" },
+            { name: "Duo Mobile", icon: "images/security/auth-apps/duo-mobile.png" },
           ],
           note:
             "Any TOTP-compatible app works — including built-in authenticators on iOS and Android.",
