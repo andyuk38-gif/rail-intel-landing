@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 146;
+const ASSET_VERSION = 147;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -281,6 +281,81 @@ ${dots}
       </div>`;
 }
 
+function renderSpotlightGallery(section, base) {
+  const shots = section.shots || [];
+  const count = shots.length;
+  const items = shots
+    .map((shot, index) => {
+      const size = manifest[shot.src];
+      if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
+      const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+      const width = Math.max(1, Math.round(size.width * scale));
+      const height = Math.max(1, Math.round(size.height * scale));
+      const label = shot.title || shot.caption || `Screenshot ${index + 1}`;
+      const step = shot.step || String(index + 1).padStart(2, "0");
+
+      const itemClass = [
+        "shot-spotlight__item",
+        index === 0 ? "is-front" : null,
+        index === 1 || (index === count - 1 && count > 1) ? "is-adjacent" : null,
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      return `        <article
+          class="${itemClass}"
+          data-spotlight-item
+          data-spotlight-title="${esc(label)}"
+          data-spotlight-caption="${esc(shot.caption || label)}"
+          data-spotlight-step="${esc(step)}"
+          style="--spot-i: ${index}"
+          aria-hidden="${index === 0 ? "false" : "true"}"
+        >
+          <button type="button" class="shot-spotlight__card" aria-label="${esc(label)}">
+            <div class="shot-spotlight__chrome" aria-hidden="true">
+              <span class="shot-spotlight__chrome-dots"></span>
+              <span class="shot-spotlight__chrome-url">cms.railintel.co.uk/administration</span>
+            </div>
+            <div class="shot-spotlight__frame">
+              <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" />
+            </div>
+          </button>
+        </article>`;
+    })
+    .join("\n");
+
+  const navHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
+
+  return `      <div class="shot-spotlight reveal" data-shot-spotlight data-shot-count="${count}">
+        <div class="shot-spotlight__layout">
+          <div class="shot-spotlight__meta" aria-live="polite">
+            <p class="shot-spotlight__index" data-spotlight-index>${count > 1 ? `01 / ${String(count).padStart(2, "0")}` : "01"}</p>
+            <h3 class="shot-spotlight__title" data-spotlight-title>${esc(shots[0]?.title || shots[0]?.caption || "")}</h3>
+            <p class="shot-spotlight__lede" data-spotlight-caption>${esc(shots[0]?.caption || shots[0]?.title || "")}</p>
+          </div>
+          <div class="shot-spotlight__stage" data-spotlight-stage>
+            <div class="shot-spotlight__ring" data-spotlight-ring role="list">
+${items}
+            </div>
+            <div class="shot-spotlight__floor" aria-hidden="true"></div>
+            <div class="shot-spotlight__glow" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="shot-spotlight__footer"${navHidden}>
+          <button type="button" class="shot-spotlight__nav" data-spotlight-prev aria-label="Previous screenshot">
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="shot-spotlight__dots" data-spotlight-dots role="tablist" aria-label="Screenshots"></div>
+          <div class="shot-spotlight__progress" aria-hidden="true">
+            <span class="shot-spotlight__progress-bar" data-spotlight-progress></span>
+          </div>
+          <button type="button" class="shot-spotlight__nav" data-spotlight-next aria-label="Next screenshot">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>`;
+}
+
 function renderSection(section, base) {
   const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
 
@@ -291,6 +366,7 @@ function renderSection(section, base) {
     : "";
 
   const gallery = section.shotGrid === "gallery";
+  const spotlight = section.shotGrid === "spotlight";
   const showcase = section.shotGrid === "showcase";
   const heroStack = section.shotGrid === "hero-stack";
   const gridClass = showcase
@@ -301,7 +377,9 @@ function renderSection(section, base) {
 
   let shots = "";
   if (section.shots) {
-    if (gallery) {
+    if (spotlight) {
+      shots = renderSpotlightGallery(section, base);
+    } else if (gallery) {
       shots = renderGallery(section, base);
     } else {
       shots = `      <div class="${gridClass}">\n${section.shots
@@ -321,8 +399,8 @@ function renderSection(section, base) {
     }
   }
 
-  return `    <section class="page-section${gallery ? " page-section--gallery" : showcase ? " page-section--showcase" : ""}">
-      <div class="container${gallery || showcase ? " container--showcase" : ""}">
+  return `    <section class="page-section${gallery ? " page-section--gallery" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+      <div class="container${gallery || spotlight || showcase ? " container--showcase" : ""}">
         <div class="page-section__head">
           <h2>${esc(section.heading)}</h2>
 ${body}

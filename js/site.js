@@ -996,6 +996,332 @@
     startAuto();
   });
 
+  /* ---------- 3D spotlight screenshot gallery ---------- */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-shot-spotlight]"), function (spotlight) {
+    var stage = spotlight.querySelector("[data-spotlight-stage]");
+    var ring = spotlight.querySelector("[data-spotlight-ring]");
+    var items = Array.prototype.slice.call(spotlight.querySelectorAll("[data-spotlight-item]"));
+    var dotsRoot = spotlight.querySelector("[data-spotlight-dots]");
+    var prevBtn = spotlight.querySelector("[data-spotlight-prev]");
+    var nextBtn = spotlight.querySelector("[data-spotlight-next]");
+    var meta = spotlight.querySelector(".shot-spotlight__meta");
+    var indexEl = spotlight.querySelector("[data-spotlight-index]");
+    var titleEl = spotlight.querySelector("[data-spotlight-title]");
+    var captionEl = spotlight.querySelector("[data-spotlight-caption]");
+    var progressBar = spotlight.querySelector("[data-spotlight-progress]");
+    var count = items.length;
+    if (!stage || !ring || !count) return;
+
+    var index = 0;
+    var displayAngle = 0;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var compact = function () {
+      return window.matchMedia("(max-width: 900px)").matches;
+    };
+    var autoTimer = null;
+    var progressTimer = null;
+    var progressStart = 0;
+    var paused = false;
+    var dragging = false;
+    var dragStart = 0;
+    var dragDelta = 0;
+    var SPOT_AUTO_MS = 5500;
+
+    function stepSize() {
+      return 360 / count;
+    }
+
+    function layout() {
+      var angle = stepSize();
+      spotlight.style.setProperty("--spot-angle", angle + "deg");
+      var cardWidth = Math.min(352, Math.max(220, stage.clientWidth * 0.42));
+      var radius = Math.round(cardWidth / (2 * Math.tan(Math.PI / count)) + 56);
+      radius = Math.max(220, Math.min(radius, 420));
+      spotlight.style.setProperty("--spot-card-width", cardWidth + "px");
+      spotlight.style.setProperty("--spot-radius", radius + "px");
+      items.forEach(function (item, itemIndex) {
+        item.style.setProperty("--spot-i", String(itemIndex));
+      });
+    }
+
+    function isAdjacent(itemIndex) {
+      var left = (index - 1 + count) % count;
+      var right = (index + 1) % count;
+      return itemIndex === left || itemIndex === right;
+    }
+
+    function labelFor(item) {
+      return item.getAttribute("data-spotlight-title") || "";
+    }
+
+    function buildDots() {
+      if (!dotsRoot || count < 2) return;
+      dotsRoot.replaceChildren();
+      items.forEach(function (item, itemIndex) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "shot-spotlight__dot";
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-label", labelFor(item) || "Screenshot " + (itemIndex + 1));
+        dot.addEventListener("click", function () {
+          setIndex(itemIndex, true);
+        });
+        dotsRoot.appendChild(dot);
+      });
+    }
+
+    function syncDots() {
+      if (!dotsRoot) return;
+      Array.prototype.forEach.call(dotsRoot.querySelectorAll(".shot-spotlight__dot"), function (dot, dotIndex) {
+        var active = dotIndex === index;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function syncMeta() {
+      var item = items[index];
+      if (!item) return;
+      if (indexEl) {
+        indexEl.textContent =
+          count > 1
+            ? String(index + 1).padStart(2, "0") + " / " + String(count).padStart(2, "0")
+            : "01";
+      }
+      if (titleEl) titleEl.textContent = item.getAttribute("data-spotlight-title") || "";
+      if (captionEl) captionEl.textContent = item.getAttribute("data-spotlight-caption") || "";
+    }
+
+    function applyState() {
+      spotlight.style.setProperty("--spot-rotate", displayAngle + "deg");
+      items.forEach(function (item, itemIndex) {
+        var isFront = itemIndex === index;
+        item.classList.toggle("is-front", isFront);
+        item.classList.toggle("is-adjacent", isAdjacent(itemIndex));
+        item.setAttribute("aria-hidden", isFront ? "false" : "true");
+        var card = item.querySelector(".shot-spotlight__card");
+        if (card) card.tabIndex = isFront ? 0 : -1;
+      });
+      syncDots();
+      syncMeta();
+
+      if (compact() && stage) {
+        var target = items[index];
+        if (target) {
+          var offset = target.offsetLeft - (stage.clientWidth - target.offsetWidth) / 2;
+          stage.scrollTo({ left: offset, behavior: reduced ? "auto" : "smooth" });
+        }
+      }
+    }
+
+    function flashMeta() {
+      if (!meta || reduced) return;
+      meta.classList.add("is-changing");
+      window.setTimeout(function () {
+        meta.classList.remove("is-changing");
+      }, 180);
+    }
+
+    function setIndex(nextIndex, userInitiated) {
+      if (count < 2) return;
+      var newIndex = ((nextIndex % count) + count) % count;
+      if (userInitiated) restartAuto();
+      if (newIndex === index) {
+        displayAngle = -index * stepSize();
+        applyState();
+        return;
+      }
+      var delta = newIndex - index;
+      if (delta > count / 2) delta -= count;
+      else if (delta < -count / 2) delta += count;
+      displayAngle -= delta * stepSize();
+      index = newIndex;
+      flashMeta();
+      applyState();
+    }
+
+    function advance() {
+      displayAngle -= stepSize();
+      index = (index + 1) % count;
+      flashMeta();
+      applyState();
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      if (progressTimer) {
+        cancelAnimationFrame(progressTimer);
+        progressTimer = null;
+      }
+      if (progressBar) progressBar.style.width = "0%";
+    }
+
+    function tickProgress() {
+      if (!progressBar || paused || reduced || count < 2) return;
+      var elapsed = Date.now() - progressStart;
+      var pct = Math.min(100, (elapsed / SPOT_AUTO_MS) * 100);
+      progressBar.style.width = pct + "%";
+      if (elapsed < SPOT_AUTO_MS) {
+        progressTimer = requestAnimationFrame(tickProgress);
+      }
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (reduced || paused || count < 2) return;
+      progressStart = Date.now();
+      tickProgress();
+      autoTimer = setInterval(function () {
+        if (!paused && !dragging) advance();
+        progressStart = Date.now();
+        if (progressBar) progressBar.style.width = "0%";
+      }, SPOT_AUTO_MS);
+    }
+
+    function restartAuto() {
+      stopAuto();
+      startAuto();
+    }
+
+    function pauseAuto() {
+      paused = true;
+      stopAuto();
+    }
+
+    function resumeAuto() {
+      paused = false;
+      startAuto();
+    }
+
+    items.forEach(function (item, itemIndex) {
+      var card = item.querySelector(".shot-spotlight__card");
+      if (!card) return;
+      card.addEventListener("click", function () {
+        if (itemIndex === index) return;
+        if (isAdjacent(itemIndex) || compact()) setIndex(itemIndex, true);
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        setIndex(index - 1, true);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        setIndex(index + 1, true);
+      });
+    }
+
+    stage.addEventListener(
+      "pointerdown",
+      function (event) {
+        if (count < 2) return;
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        if (event.target.closest("button, a, .shot__expand, .lightbox")) return;
+        dragging = true;
+        dragStart = event.clientX;
+        dragDelta = 0;
+        ring.classList.add("is-dragging");
+        stage.classList.add("is-dragging");
+        stage.setPointerCapture(event.pointerId);
+        pauseAuto();
+      },
+      { passive: true }
+    );
+    stage.addEventListener(
+      "pointermove",
+      function (event) {
+        if (!stage.hasPointerCapture(event.pointerId)) return;
+        dragDelta = event.clientX - dragStart;
+      },
+      { passive: true }
+    );
+    stage.addEventListener("pointerup", function (event) {
+      if (!stage.hasPointerCapture(event.pointerId)) return;
+      stage.releasePointerCapture(event.pointerId);
+      ring.classList.remove("is-dragging");
+      stage.classList.remove("is-dragging");
+      dragging = false;
+      if (Math.abs(dragDelta) >= 42) {
+        if (dragDelta < 0) setIndex(index + 1, true);
+        else setIndex(index - 1, true);
+      } else {
+        resumeAuto();
+      }
+    });
+
+    spotlight.addEventListener("keydown", function (event) {
+      if (count < 2) return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setIndex(index - 1, true);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setIndex(index + 1, true);
+      }
+    });
+
+    spotlight.addEventListener("mouseenter", pauseAuto);
+    spotlight.addEventListener("mouseleave", resumeAuto);
+    spotlight.addEventListener("focusin", pauseAuto);
+    spotlight.addEventListener("focusout", function (event) {
+      if (!spotlight.contains(event.relatedTarget)) resumeAuto();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopAuto();
+      else if (!paused) startAuto();
+    });
+
+    function nearestFromScroll() {
+      if (!compact() || !stage) return index;
+      var center = stage.scrollLeft + stage.clientWidth / 2;
+      var nearest = 0;
+      var nearestDistance = Infinity;
+      items.forEach(function (item, itemIndex) {
+        var itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        var distance = Math.abs(itemCenter - center);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = itemIndex;
+        }
+      });
+      return nearest;
+    }
+
+    if (stage) {
+      stage.addEventListener(
+        "scroll",
+        function () {
+          if (!compact()) return;
+          var nearest = nearestFromScroll();
+          if (nearest !== index) {
+            index = nearest;
+            displayAngle = -index * stepSize();
+            syncDots();
+            syncMeta();
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    layout();
+    buildDots();
+    displayAngle = -index * stepSize();
+    applyState();
+    startAuto();
+    window.addEventListener("resize", function () {
+      layout();
+      applyState();
+    });
+  });
+
   /* ---------- Trainee Driver vertical journey ---------- */
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-journey]"), function (journey) {
