@@ -1272,6 +1272,10 @@ export const featureGroups = [
             { name: "1Password", icon: "images/security/auth-apps/1password.png" },
             { name: "Bitwarden", icon: "images/security/auth-apps/bitwarden.png" },
             { name: "Duo Mobile", icon: "images/security/auth-apps/duo-mobile.png" },
+            {
+              name: "Apple Passwords",
+              icon: "images/security/auth-apps/apple-passwords.png",
+            },
           ],
           note:
             "Any TOTP-compatible app works — including built-in authenticators on iOS and Android.",
