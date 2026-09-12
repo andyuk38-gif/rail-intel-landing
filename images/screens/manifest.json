@@ -426,5 +426,9 @@
   "images/screens/main-sys/login-authenticator-code.png": {
     "width": 396,
     "height": 768
+  },
+  "images/screens/main-sys/login-screen-portrait.png": {
+    "width": 469,
+    "height": 911
   }
 }

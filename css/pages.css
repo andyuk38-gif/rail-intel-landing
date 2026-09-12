@@ -1320,6 +1320,63 @@
   pointer-events: none;
 }
 
+.shot-viewer--sidebar {
+  display: grid;
+  grid-template-columns: minmax(10.5rem, 14.5rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.shot-viewer--sidebar .shot-viewer__rail {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 0;
+  max-height: min(68vh, 28rem);
+  margin-bottom: 0;
+  border-radius: 16px 12px 12px 16px;
+}
+
+.shot-viewer--sidebar .shot-viewer__tiles {
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-columns: unset;
+  grid-auto-rows: minmax(4.35rem, auto);
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.shot-viewer--sidebar .shot-viewer__tile {
+  scroll-snap-align: start;
+}
+
+.shot-viewer--sidebar .shot-viewer__nav {
+  align-self: center;
+}
+
+.shot-viewer--sidebar .shot-viewer__shell {
+  justify-self: end;
+  width: min(100%, 13.75rem);
+  align-self: start;
+}
+
+.shot-viewer--sidebar .shot-viewer__stage {
+  min-height: min(68vh, 28rem);
+}
+
+.shot-viewer--sidebar .shot-viewer__frame--portrait .shot-viewer__frame-inner {
+  justify-content: flex-end;
+}
+
+.shot-viewer--sidebar .shot-viewer__frame--portrait .shot-viewer__image {
+  width: 100%;
+  max-width: none;
+  max-height: min(68vh, 28rem);
+}
+
 @media (max-width: 640px) {
   .shot-viewer__tiles {
     grid-auto-columns: minmax(8.5rem, 72vw);
@@ -1344,6 +1401,25 @@
   .shot-viewer__frame--portrait .shot-viewer__image {
     max-width: min(100%, 16rem);
     max-height: min(52vh, 20rem);
+  }
+
+  .shot-viewer--sidebar {
+    grid-template-columns: minmax(8.75rem, 10.5rem) minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .shot-viewer--sidebar .shot-viewer__rail,
+  .shot-viewer--sidebar .shot-viewer__stage {
+    max-height: min(58vh, 22rem);
+    min-height: min(58vh, 22rem);
+  }
+
+  .shot-viewer--sidebar .shot-viewer__shell {
+    width: min(100%, 11.5rem);
+  }
+
+  .shot-viewer--sidebar .shot-viewer__frame--portrait .shot-viewer__image {
+    max-height: min(58vh, 22rem);
   }
 }
 

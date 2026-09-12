@@ -1031,8 +1031,14 @@
     function scrollTileIntoView() {
       var tile = activeTile();
       if (!tile || !tilesRoot) return;
-      var offset = tile.offsetLeft - (tilesRoot.clientWidth - tile.offsetWidth) / 2;
-      tilesRoot.scrollTo({ left: offset, behavior: reduced ? "auto" : "smooth" });
+      var sidebar = viewerRoot.classList.contains("shot-viewer--sidebar");
+      if (sidebar) {
+        var topOffset = tile.offsetTop - (tilesRoot.clientHeight - tile.offsetHeight) / 2;
+        tilesRoot.scrollTo({ top: topOffset, behavior: reduced ? "auto" : "smooth" });
+      } else {
+        var leftOffset = tile.offsetLeft - (tilesRoot.clientWidth - tile.offsetWidth) / 2;
+        tilesRoot.scrollTo({ left: leftOffset, behavior: reduced ? "auto" : "smooth" });
+      }
     }
 
     function syncTiles() {
@@ -1186,10 +1192,11 @@
 
     viewerRoot.addEventListener("keydown", function (event) {
       if (count < 2) return;
-      if (event.key === "ArrowLeft") {
+      var sidebar = viewerRoot.classList.contains("shot-viewer--sidebar");
+      if (event.key === "ArrowLeft" || (sidebar && event.key === "ArrowUp")) {
         event.preventDefault();
         setIndex(index - 1, true);
-      } else if (event.key === "ArrowRight") {
+      } else if (event.key === "ArrowRight" || (sidebar && event.key === "ArrowDown")) {
         event.preventDefault();
         setIndex(index + 1, true);
       }

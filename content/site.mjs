@@ -1252,11 +1252,13 @@ export const featureGroups = [
           "**Administrator recovery** — reset authenticators and enforce re-enrolment.",
         ],
         shotGrid: "viewer",
+        viewerLayout: "sidebar",
         shots: [
           {
-            src: "images/screens/main-sys/login-screen.png",
+            src: "images/screens/main-sys/login-screen-portrait.png",
             caption: "Sign-in with company code, email and password.",
             step: "01",
+            portrait: true,
           },
           {
             src: "images/screens/main-sys/login-authenticator-code.png",

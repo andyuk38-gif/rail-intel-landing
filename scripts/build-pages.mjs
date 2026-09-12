@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 156;
+const ASSET_VERSION = 157;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -284,6 +284,12 @@ ${dots}
 function renderViewerGallery(section, base) {
   const shots = section.shots || [];
   const count = shots.length;
+  const sidebar = section.viewerLayout === "sidebar";
+  const viewerClass = ["shot-viewer", "reveal", sidebar ? "shot-viewer--sidebar" : null]
+    .filter(Boolean)
+    .join(" ");
+  const prevArrow = sidebar ? "↑" : "←";
+  const nextArrow = sidebar ? "↓" : "→";
 
   const frames = shots
     .map((shot, index) => {
@@ -367,16 +373,16 @@ function renderViewerGallery(section, base) {
 
   const railHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
 
-  return `      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="${count}" tabindex="0">
+  return `      <div class="${viewerClass}" data-shot-viewer data-shot-count="${count}" tabindex="0">
         <div class="shot-viewer__rail"${railHidden}>
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
-            <span aria-hidden="true">←</span>
+            <span aria-hidden="true">${prevArrow}</span>
           </button>
           <div class="shot-viewer__tiles" data-shot-viewer-tiles role="tablist" aria-label="Screenshots">
 ${tiles}
           </div>
           <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
-            <span aria-hidden="true">→</span>
+            <span aria-hidden="true">${nextArrow}</span>
           </button>
         </div>
         <div class="shot-viewer__shell">
