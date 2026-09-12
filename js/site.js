@@ -996,6 +996,211 @@
     startAuto();
   });
 
+  /* ---------- Immersive admin viewport ---------- */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-admin-viewport]"), function (viewport) {
+    var slides = Array.prototype.slice.call(viewport.querySelectorAll("[data-admin-slide]"));
+    var thumbs = Array.prototype.slice.call(viewport.querySelectorAll("[data-admin-thumb]"));
+    var screen = viewport.querySelector("[data-admin-screen]");
+    var hudCopy = viewport.querySelector(".admin-viewport__hud-copy");
+    var stepEl = viewport.querySelector("[data-admin-step]");
+    var titleEl = viewport.querySelector("[data-admin-title]");
+    var captionEl = viewport.querySelector("[data-admin-caption]");
+    var progressBar = viewport.querySelector("[data-admin-progress]");
+    var prevBtn = viewport.querySelector("[data-admin-prev]");
+    var nextBtn = viewport.querySelector("[data-admin-next]");
+    var count = slides.length;
+    if (!count) return;
+
+    var index = 0;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var autoTimer = null;
+    var progressTimer = null;
+    var progressStart = 0;
+    var paused = false;
+    var dragStart = 0;
+    var dragDelta = 0;
+    var AUTO_MS = 6500;
+
+    function syncHud() {
+      var slide = slides[index];
+      if (!slide) return;
+      if (stepEl) {
+        stepEl.textContent =
+          count > 1
+            ? String(index + 1).padStart(2, "0") + " / " + String(count).padStart(2, "0")
+            : "01";
+      }
+      if (titleEl) titleEl.textContent = slide.getAttribute("data-admin-title") || "";
+      if (captionEl) captionEl.textContent = slide.getAttribute("data-admin-caption") || "";
+    }
+
+    function flashHud() {
+      if (!hudCopy || reduced) return;
+      hudCopy.classList.add("is-changing");
+      window.setTimeout(function () {
+        hudCopy.classList.remove("is-changing");
+      }, 180);
+    }
+
+    function setIndex(nextIndex, userInitiated) {
+      if (count < 2) return;
+      var newIndex = ((nextIndex % count) + count) % count;
+      if (newIndex === index) return;
+      if (userInitiated) restartAuto();
+
+      slides.forEach(function (slide, slideIndex) {
+        slide.classList.remove("is-exiting");
+        if (slideIndex === index) slide.classList.add("is-exiting");
+        slide.classList.toggle("is-active", slideIndex === newIndex);
+        slide.setAttribute("aria-hidden", slideIndex === newIndex ? "false" : "true");
+      });
+
+      thumbs.forEach(function (thumb, thumbIndex) {
+        var active = thumbIndex === newIndex;
+        thumb.classList.toggle("is-active", active);
+        thumb.setAttribute("aria-current", active ? "true" : "false");
+      });
+
+      index = newIndex;
+      flashHud();
+      syncHud();
+
+      window.setTimeout(function () {
+        slides.forEach(function (slide) {
+          slide.classList.remove("is-exiting");
+        });
+      }, reduced ? 0 : 520);
+    }
+
+    function advance() {
+      setIndex(index + 1, false);
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      if (progressTimer) {
+        cancelAnimationFrame(progressTimer);
+        progressTimer = null;
+      }
+      if (progressBar) progressBar.style.width = "0%";
+    }
+
+    function tickProgress() {
+      if (!progressBar || paused || reduced || count < 2) return;
+      var elapsed = Date.now() - progressStart;
+      var pct = Math.min(100, (elapsed / AUTO_MS) * 100);
+      progressBar.style.width = pct + "%";
+      if (elapsed < AUTO_MS) progressTimer = requestAnimationFrame(tickProgress);
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (reduced || paused || count < 2) return;
+      progressStart = Date.now();
+      tickProgress();
+      autoTimer = setInterval(function () {
+        if (!paused) advance();
+        progressStart = Date.now();
+        if (progressBar) progressBar.style.width = "0%";
+      }, AUTO_MS);
+    }
+
+    function restartAuto() {
+      stopAuto();
+      startAuto();
+    }
+
+    function pauseAuto() {
+      paused = true;
+      stopAuto();
+    }
+
+    function resumeAuto() {
+      paused = false;
+      startAuto();
+    }
+
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("click", function () {
+        setIndex(Number(thumb.getAttribute("data-admin-thumb")) || 0, true);
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        setIndex(index - 1, true);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        setIndex(index + 1, true);
+      });
+    }
+
+    var dragTarget = screen || viewport;
+    dragTarget.addEventListener(
+      "pointerdown",
+      function (event) {
+        if (count < 2) return;
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        if (event.target.closest("button, a, .shot__expand, .lightbox")) return;
+        dragStart = event.clientX;
+        dragDelta = 0;
+        dragTarget.setPointerCapture(event.pointerId);
+        pauseAuto();
+      },
+      { passive: true }
+    );
+    dragTarget.addEventListener(
+      "pointermove",
+      function (event) {
+        if (!dragTarget.hasPointerCapture(event.pointerId)) return;
+        dragDelta = event.clientX - dragStart;
+      },
+      { passive: true }
+    );
+    dragTarget.addEventListener("pointerup", function (event) {
+      if (!dragTarget.hasPointerCapture(event.pointerId)) return;
+      dragTarget.releasePointerCapture(event.pointerId);
+      if (Math.abs(dragDelta) >= 50) {
+        if (dragDelta < 0) setIndex(index + 1, true);
+        else setIndex(index - 1, true);
+      } else {
+        resumeAuto();
+      }
+    });
+
+    viewport.addEventListener("keydown", function (event) {
+      if (count < 2) return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setIndex(index - 1, true);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setIndex(index + 1, true);
+      }
+    });
+
+    viewport.addEventListener("mouseenter", pauseAuto);
+    viewport.addEventListener("mouseleave", resumeAuto);
+    viewport.addEventListener("focusin", pauseAuto);
+    viewport.addEventListener("focusout", function (event) {
+      if (!viewport.contains(event.relatedTarget)) resumeAuto();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopAuto();
+      else if (!paused) startAuto();
+    });
+
+    syncHud();
+    startAuto();
+  });
+
   /* ---------- 3D spotlight screenshot gallery ---------- */
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-shot-spotlight]"), function (spotlight) {
