@@ -1590,7 +1590,6 @@ export const security = {
     heading: "Security in practice",
     body: [
       "Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control — not the end user.",
-      "Below we cover access control, two-factor authentication and the Azure platform Rail Intel runs on. These protections are part of core Rail Intel — not a separate module or add-on.",
     ],
   },
   access: {
