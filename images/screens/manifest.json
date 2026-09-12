@@ -419,16 +419,12 @@
     "width": 1382,
     "height": 1120
   },
-  "images/screens/main-sys/login-mfa-verify.png": {
-    "width": 1627,
-    "height": 911
-  },
   "images/screens/main-sys/account-two-factor.png": {
     "width": 535,
     "height": 830
   },
-  "images/screens/main-sys/google-authenticator.png": {
-    "width": 1024,
-    "height": 660
+  "images/screens/main-sys/login-authenticator-code.png": {
+    "width": 396,
+    "height": 768
   }
 }

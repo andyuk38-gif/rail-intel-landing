@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ENV_FILE = join(ROOT, ".env.screenshots");
-const OUT = join(ROOT, "images/screens/main-sys/login-mfa-verify.png");
+const OUT = join(ROOT, "images/screens/main-sys/login-authenticator-code.png");
 const MANIFEST_PATH = join(ROOT, "images/screens/manifest.json");
 
 function loadEnvFile() {
@@ -66,7 +66,7 @@ await page.screenshot({ path: OUT, fullPage: false });
 const size = pngSize(OUT);
 if (size) {
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, "utf8"));
-  manifest["images/screens/main-sys/login-mfa-verify.png"] = size;
+  manifest["images/screens/main-sys/login-authenticator-code.png"] = size;
   writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 

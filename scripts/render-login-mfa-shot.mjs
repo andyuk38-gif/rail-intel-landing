@@ -1,5 +1,5 @@
 /**
- * Renders login-mfa-verify.png to match login-screen.png dimensions and backdrop.
+ * Legacy: rendered login-mfa-verify.png (replaced by login-authenticator-code.png).
  */
 import { chromium } from "../../Rail-Vault/node_modules/playwright/index.mjs";
 import { openSync, readSync, closeSync, readFileSync, writeFileSync } from "fs";
@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const LOGIN_BG = join(ROOT, "images/screens/main-sys/login-screen.png");
-const OUT = join(ROOT, "images/screens/main-sys/login-mfa-verify.png");
+const OUT = join(ROOT, "images/screens/main-sys/login-authenticator-code.png");
 const MANIFEST_PATH = join(ROOT, "images/screens/manifest.json");
 
 function pngSize(file) {
@@ -149,6 +149,6 @@ await browser.close();
 
 const size = pngSize(OUT);
 const manifest = JSON.parse(readFileSync(MANIFEST_PATH, "utf8"));
-manifest["images/screens/main-sys/login-mfa-verify.png"] = size;
+manifest["images/screens/main-sys/login-authenticator-code.png"] = size;
 writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log("rendered", OUT, size);

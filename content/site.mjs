@@ -1259,11 +1259,10 @@ export const featureGroups = [
             step: "01",
           },
           {
-            src: "images/screens/main-sys/login-mfa-verify.png",
+            src: "images/screens/main-sys/login-authenticator-code.png",
             caption: "Authenticator code challenge at sign-in.",
             step: "02",
-            float: "images/screens/main-sys/google-authenticator.png",
-            floatLabel: "Google Authenticator",
+            portrait: true,
           },
           {
             src: "images/screens/main-sys/account-two-factor.png",
