@@ -10,13 +10,13 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, languages } from "../content/site.mjs";
+import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, procurement, languages } from "../content/site.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 195;
+const ASSET_VERSION = 196;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -118,6 +118,7 @@ ${renderNavItems(base, addonItems)}
         )}
           <a href="${base}how-it-works.html" class="nav-link">How it works</a>
           <a href="${base}security.html" class="nav-link">Security</a>
+          <a href="${base}procurement.html" class="nav-link">Procurement</a>
           <a href="${base}get-started.html" class="nav-link">Get started</a>
           <a href="${site.app}" class="nav-link">Log in</a>
           <a href="${site.app}" class="btn btn-primary">Go to app</a>
@@ -179,6 +180,7 @@ function renderFooter(base) {
           <a href="${base}features/">Features</a>
           <a href="${base}how-it-works.html">How it works</a>
         <a href="${base}security.html">Security</a>
+        <a href="${base}procurement.html">Procurement</a>
         <a href="${base}get-started.html">Get started</a>
         <a href="${site.app}">Log in</a>
         </nav>
@@ -1790,7 +1792,7 @@ function getStartedPage() {
         <div class="signup-wizard-glass" data-cms-signup-wizard>
           <div class="signup-wizard__header">
             <p class="signup-wizard__eyebrow">Rail Intel CMS application</p>
-            <p class="signup-wizard__login">Already have an account? <a href="${site.app}">Log in to CMS</a></p>
+            <p class="signup-wizard__login">Already have an account? <a href="${site.app}">Log in to CMS</a> · <a href="${base}procurement.html">Procurement pack</a></p>
           </div>
           <div class="signup-progress" aria-hidden="true">
             <div class="signup-progress__track"><div class="signup-progress__fill" data-signup-progress style="width:20%"></div></div>
@@ -2090,6 +2092,192 @@ function invoicePage() {
   );
 }
 
+function procurementPage() {
+  const base = "";
+  const sectionNav = procurement.sections
+    .map(
+      (s) => `          <li><a href="#${esc(s.id)}">${esc(s.heading)}</a></li>`
+    )
+    .join("\n");
+
+  return (
+    renderHead(base, {
+      title: "Procurement pack – Rail Intel",
+      description: procurement.lead,
+    }) +
+    `
+  <main class="procurement-page" data-procurement-page>
+    <section class="page-hero page-hero--intro-split">
+      <div class="container">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--with-intro">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Procurement</p>
+            <h1 class="page-title">${procurement.titleHtml || esc(procurement.title)}</h1>
+            <p class="page-lead">${esc(procurement.lead)}</p>
+            <div class="page-hero__intro">
+              <h2>${esc(procurement.intro.heading)}</h2>
+              ${procurement.intro.body.map((p) => `<p>${esc(p)}</p>`).join("\n              ")}
+            </div>
+          </div>
+          <aside class="procurement-pack-aside" aria-label="Pack contents">
+            <p class="procurement-pack-aside__eyebrow">Contents</p>
+            <ul class="procurement-pack-aside__list">
+${sectionNav}
+            </ul>
+            <p class="procurement-pack-aside__note" data-procurement-updated hidden>Last updated: <span data-procurement-updated-value></span></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="company">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Company registration &amp; VAT</h2>
+          <p>Legal entity details for your vendor master record.</p>
+        </div>
+        <dl class="procurement-facts" data-procurement-company>
+          <div><dt>Legal name</dt><dd data-field="legalName">—</dd></div>
+          <div><dt>Company number</dt><dd data-field="companyNumber">—</dd></div>
+          <div><dt>UK VAT number</dt><dd data-field="vatNumber">—</dd></div>
+          <div><dt>Registered office</dt><dd data-field="registeredOffice">—</dd></div>
+          <div><dt>Procurement contact</dt><dd data-field="procurementEmail">—</dd></div>
+          <div><dt>DPO / privacy contact</dt><dd data-field="dpoEmail">—</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="page-section page-section--elevated" id="bank">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Bank details</h2>
+          <p>BACS payment details with letterheaded confirmation for supplier onboarding.</p>
+        </div>
+        <div data-procurement-bank-wrap hidden>
+          <dl class="procurement-facts" data-procurement-bank>
+            <div><dt>Account name</dt><dd data-field="accountName">—</dd></div>
+            <div><dt>Sort code</dt><dd data-field="sortCode">—</dd></div>
+            <div><dt>Account number</dt><dd data-field="accountNumber">—</dd></div>
+          </dl>
+          <div class="page-actions">
+            <a class="btn btn-primary" data-procurement-bank-letter href="#" target="_blank" rel="noopener">Download bank details letter</a>
+          </div>
+        </div>
+        <p class="procurement-empty" data-procurement-bank-empty>Bank details are not yet published. Contact <a href="mailto:sales@railintel.co.uk">sales@railintel.co.uk</a>.</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="insurance">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Insurance certificates</h2>
+          <p>Employers' liability, public liability and professional indemnity cover.</p>
+        </div>
+        <div class="procurement-cards" data-procurement-insurance></div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--elevated" id="cyber">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Cyber Essentials</h2>
+          <p>Baseline security controls certification.</p>
+        </div>
+        <div data-procurement-cyber-wrap hidden>
+          <dl class="procurement-facts" data-procurement-cyber>
+            <div><dt>Certificate number</dt><dd data-field="certificateNumber">—</dd></div>
+            <div><dt>Certifying body</dt><dd data-field="certifyingBody">—</dd></div>
+            <div><dt>Issue date</dt><dd data-field="issueDate">—</dd></div>
+            <div><dt>Expiry date</dt><dd data-field="expiryDate">—</dd></div>
+          </dl>
+          <div class="page-actions" data-procurement-cyber-download hidden>
+            <a class="btn btn-secondary" data-procurement-doc="cyber_essentials" href="#">Download certificate</a>
+          </div>
+        </div>
+        <p class="procurement-empty" data-procurement-cyber-empty>Certificate details are not yet published.</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="dpa">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Data Processing Agreement</h2>
+          <p>Processor terms where Rail Intel processes personal data on your behalf.</p>
+        </div>
+        <div data-procurement-dpa-wrap hidden>
+          <p data-procurement-dpa-summary></p>
+          <p><strong>Contact:</strong> <a data-procurement-dpa-email href="#"></a></p>
+          <p class="procurement-muted" data-procurement-dpa-terms></p>
+          <div class="page-actions" data-procurement-dpa-download hidden>
+            <a class="btn btn-secondary" data-procurement-doc="dpa" href="#">Download DPA (PDF)</a>
+          </div>
+        </div>
+        <p class="procurement-empty" data-procurement-dpa-empty>Contact sales@railintel.co.uk for DPA terms.</p>
+      </div>
+    </section>
+
+    <section class="page-section page-section--elevated" id="dpia">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>DPIA support information</h2>
+          <p>Inputs for your Data Protection Impact Assessment — hosting, subprocessors, retention and transfers.</p>
+        </div>
+        <div data-procurement-dpia-wrap hidden>
+          <h3 class="procurement-subhead">Personal data categories</h3>
+          <ul class="spec-list" data-procurement-data-categories></ul>
+          <h3 class="procurement-subhead">Hosting &amp; residency</h3>
+          <p data-procurement-hosting></p>
+          <p data-procurement-residency></p>
+          <h3 class="procurement-subhead">Retention</h3>
+          <p data-procurement-retention></p>
+          <h3 class="procurement-subhead">Cross-border transfers</h3>
+          <p data-procurement-transfers></p>
+          <h3 class="procurement-subhead">Security controls</h3>
+          <p data-procurement-security></p>
+          <h3 class="procurement-subhead">Subprocessors</h3>
+          <div class="procurement-table-wrap">
+            <table class="procurement-table" data-procurement-subprocessors>
+              <thead><tr><th>Name</th><th>Purpose</th><th>Location</th><th>Safeguards</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="saq">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>SAQ readiness</h2>
+          <p data-procurement-saq-intro></p>
+        </div>
+        <dl class="procurement-faq" data-procurement-saq></dl>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(procurement.closing.heading)}</h2>
+          <p>${esc(procurement.closing.lead)}</p>
+        </div>
+        <div class="page-actions">
+          <a href="mailto:${esc(procurement.closing.email)}" class="btn btn-primary btn-lg">${esc(procurement.closing.email)}</a>
+          <a href="${base}security.html" class="btn btn-secondary btn-lg">Security overview</a>
+          <a href="${base}get-started.html" class="btn btn-secondary btn-lg">Get started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+` +
+    renderFooter(base).replace(
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>',
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/procurement.js?v=' + ASSET_VERSION + '"></script>'
+    )
+  );
+}
+
 function securityPage() {
   const base = "";
   const accessItems = security.access.items
@@ -2224,7 +2412,8 @@ ${azureItems}
           <p>${esc(security.closing.lead)}</p>
         </div>
         <div class="page-actions">
-          <a href="/" class="btn btn-primary btn-lg">Home</a>
+          <a href="${base}procurement.html" class="btn btn-primary btn-lg">Procurement pack</a>
+          <a href="/" class="btn btn-secondary btn-lg">Home</a>
         </div>
       </div>
     </section>
@@ -2472,6 +2661,7 @@ for (const group of featureGroups) {
 
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
+emit("procurement.html", procurementPage());
 emit("get-started.html", getStartedPage());
 emit("quotation.html", quotationPage());
 emit("invoice.html", invoicePage());

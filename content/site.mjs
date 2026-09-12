@@ -1747,3 +1747,69 @@ export const security = {
     ],
   },
 };
+
+/* ------------------------------------------------------------- procurement */
+
+export const procurement = {
+  title: "Supplier procurement pack",
+  titleHtml:
+    'Supplier <span class="hero-title__accent">procurement</span> pack',
+  lead:
+    "Everything your procurement and AP teams typically need to onboard Rail Intel as a supplier — company registration, bank confirmation, insurance, security assurance, DPA and DPIA support information.",
+  intro: {
+    heading: "What this pack covers",
+    body: [
+      "Rail operators and infrastructure managers usually ask for a consistent core set of documents when onboarding a new software supplier. We keep ours current and published here so your team does not have to chase individual items by email.",
+      "You will still need to complete your own Security Assessment Questionnaire in your format — but the supporting evidence, insurance certificates, bank letter, DPA terms and DPIA inputs below are ready to attach or copy across.",
+    ],
+  },
+  sections: [
+    {
+      id: "company",
+      heading: "Company registration & VAT",
+      lead: "Legal entity details for your vendor master record.",
+      static: true,
+    },
+    {
+      id: "bank",
+      heading: "Bank details",
+      lead: "BACS payment details on letterheaded confirmation — as most buyers require.",
+      static: false,
+    },
+    {
+      id: "insurance",
+      heading: "Insurance certificates",
+      lead: "Employers' liability, public liability and professional indemnity (where advice or personal data is involved).",
+      static: false,
+    },
+    {
+      id: "cyber",
+      heading: "Cyber Essentials",
+      lead: "Evidence of baseline security controls — many buyers accept this alongside a lighter SAQ.",
+      static: false,
+    },
+    {
+      id: "dpa",
+      heading: "Data Processing Agreement",
+      lead: "Processor terms for personal data processed on your behalf in Rail Intel CMS.",
+      static: false,
+    },
+    {
+      id: "dpia",
+      heading: "DPIA support information",
+      lead: "Hosting location, subprocessors, retention and cross-border transfer position for your own Data Protection Impact Assessment.",
+      static: false,
+    },
+    {
+      id: "saq",
+      heading: "SAQ readiness",
+      lead: "Standard answers to common security questionnaire themes — map these into your buyer's own SAQ format.",
+      static: false,
+    },
+  ],
+  closing: {
+    heading: "Need something else?",
+    lead: "Contact our team if you need a signed DPA, additional assurance evidence, or help mapping answers into your procurement portal.",
+    email: "sales@railintel.co.uk",
+  },
+};

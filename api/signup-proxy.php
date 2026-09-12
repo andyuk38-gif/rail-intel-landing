@@ -35,6 +35,9 @@ if (str_starts_with($path, 'public/quotation/')) {
 if (str_starts_with($path, 'public/invoice/')) {
     $ok = true;
 }
+if ($path === 'public/procurement-pack' || str_starts_with($path, 'public/procurement-pack/')) {
+    $ok = true;
+}
 if (!$ok) {
     http_response_code(403);
     echo json_encode(['error' => 'path not allowed']);
