@@ -996,29 +996,25 @@
     startAuto();
   });
 
-  /* ---------- 3D stage screenshot gallery ---------- */
+  /* ---------- 3D deck screenshot gallery (coverflow) ---------- */
 
-  Array.prototype.forEach.call(document.querySelectorAll("[data-shot-stage]"), function (stageRoot) {
-    var arena = stageRoot.querySelector("[data-shot-stage-arena]");
-    var scene = stageRoot.querySelector("[data-shot-stage-arena] .shot-stage__scene");
-    var ring = stageRoot.querySelector("[data-shot-stage-ring]");
-    var panels = Array.prototype.slice.call(stageRoot.querySelectorAll("[data-shot-stage-panel]"));
-    var dotsRoot = stageRoot.querySelector("[data-shot-stage-dots]");
-    var prevBtn = stageRoot.querySelector("[data-shot-stage-prev]");
-    var nextBtn = stageRoot.querySelector("[data-shot-stage-next]");
-    var meta = stageRoot.querySelector(".shot-stage__meta");
-    var stepEl = stageRoot.querySelector("[data-shot-stage-step]");
-    var titleEl = stageRoot.querySelector("[data-shot-stage-title]");
-    var captionEl = stageRoot.querySelector("[data-shot-stage-caption]");
-    var progressBar = stageRoot.querySelector("[data-shot-stage-progress]");
-    var count = panels.length;
-    if (!arena || !scene || !ring || !count) return;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-shot-deck]"), function (deckRoot) {
+    var viewport = deckRoot.querySelector("[data-shot-deck-viewport]");
+    var slides = Array.prototype.slice.call(deckRoot.querySelectorAll("[data-shot-deck-slide]"));
+    var dotsRoot = deckRoot.querySelector("[data-shot-deck-dots]");
+    var prevBtn = deckRoot.querySelector("[data-shot-deck-prev]");
+    var nextBtn = deckRoot.querySelector("[data-shot-deck-next]");
+    var meta = deckRoot.querySelector(".shot-deck__meta");
+    var counterEl = deckRoot.querySelector("[data-shot-deck-counter]");
+    var captionEl = deckRoot.querySelector(".shot-deck__caption");
+    var progressBar = deckRoot.querySelector("[data-shot-deck-progress]");
+    var count = slides.length;
+    if (!viewport || !count) return;
 
     var index = 0;
-    var displayAngle = 0;
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var compact = function () {
-      return window.matchMedia("(max-width: 900px)").matches;
+      return window.matchMedia("(max-width: 768px)").matches;
     };
     var autoTimer = null;
     var progressTimer = null;
@@ -1027,50 +1023,31 @@
     var dragging = false;
     var dragStart = 0;
     var dragDelta = 0;
-    var STAGE_AUTO_MS = 6000;
+    var DECK_AUTO_MS = 6000;
 
-    function stepSize() {
-      return 360 / count;
+    function prevIndex() {
+      return (index - 1 + count) % count;
     }
 
-    function layout() {
-      var angle = stepSize();
-      stageRoot.style.setProperty("--stage-angle", angle + "deg");
-      var panelWidth = Math.min(832, Math.max(280, arena.clientWidth * 0.9));
-      stageRoot.style.setProperty("--stage-panel-width", panelWidth + "px");
-      if (count < 2) {
-        stageRoot.style.setProperty("--stage-radius", "0px");
-        return;
-      }
-      var radius = Math.round(panelWidth / (2 * Math.tan(Math.PI / count)) + 72);
-      radius = Math.max(260, Math.min(radius, 480));
-      stageRoot.style.setProperty("--stage-radius", radius + "px");
-      panels.forEach(function (panel, panelIndex) {
-        panel.style.setProperty("--panel-i", String(panelIndex));
-      });
+    function nextIndex() {
+      return (index + 1) % count;
     }
 
-    function isAdjacent(panelIndex) {
-      var left = (index - 1 + count) % count;
-      var right = (index + 1) % count;
-      return panelIndex === left || panelIndex === right;
-    }
-
-    function labelFor(panel) {
-      return panel.getAttribute("data-shot-stage-title") || "";
+    function labelFor(slide) {
+      return slide.getAttribute("data-shot-deck-label") || "";
     }
 
     function buildDots() {
       if (!dotsRoot || count < 2) return;
       dotsRoot.replaceChildren();
-      panels.forEach(function (panel, panelIndex) {
+      slides.forEach(function (slide, slideIndex) {
         var dot = document.createElement("button");
         dot.type = "button";
-        dot.className = "shot-stage__dot";
+        dot.className = "shot-deck__dot";
         dot.setAttribute("role", "tab");
-        dot.setAttribute("aria-label", labelFor(panel) || "Screenshot " + (panelIndex + 1));
+        dot.setAttribute("aria-label", labelFor(slide) || "Screenshot " + (slideIndex + 1));
         dot.addEventListener("click", function () {
-          setIndex(panelIndex, true);
+          setIndex(slideIndex, true);
         });
         dotsRoot.appendChild(dot);
       });
@@ -1078,7 +1055,7 @@
 
     function syncDots() {
       if (!dotsRoot) return;
-      Array.prototype.forEach.call(dotsRoot.querySelectorAll(".shot-stage__dot"), function (dot, dotIndex) {
+      Array.prototype.forEach.call(dotsRoot.querySelectorAll(".shot-deck__dot"), function (dot, dotIndex) {
         var active = dotIndex === index;
         dot.classList.toggle("is-active", active);
         dot.setAttribute("aria-selected", active ? "true" : "false");
@@ -1086,38 +1063,29 @@
     }
 
     function syncMeta() {
-      var panel = panels[index];
-      if (!panel) return;
-      if (stepEl) {
-        stepEl.textContent =
+      var slide = slides[index];
+      if (!slide) return;
+      if (counterEl) {
+        counterEl.textContent =
           count > 1
             ? String(index + 1).padStart(2, "0") + " / " + String(count).padStart(2, "0")
-            : panel.getAttribute("data-shot-stage-step") || "01";
+            : "01";
       }
-      if (titleEl) titleEl.textContent = panel.getAttribute("data-shot-stage-title") || "";
-      if (captionEl) captionEl.textContent = panel.getAttribute("data-shot-stage-caption") || "";
+      if (captionEl) captionEl.textContent = labelFor(slide);
     }
 
     function applyState() {
-      stageRoot.style.setProperty("--stage-rotate", displayAngle + "deg");
-      panels.forEach(function (panel, panelIndex) {
-        var isFront = panelIndex === index;
-        panel.classList.toggle("is-front", isFront);
-        panel.classList.toggle("is-adjacent", isAdjacent(panelIndex));
-        panel.setAttribute("aria-hidden", isFront ? "false" : "true");
-        var card = panel.querySelector(".shot-stage__card");
-        if (card) card.tabIndex = isFront ? 0 : -1;
+      var prev = prevIndex();
+      var next = nextIndex();
+      slides.forEach(function (slide, slideIndex) {
+        var isCurrent = slideIndex === index;
+        slide.classList.toggle("is-current", isCurrent);
+        slide.classList.toggle("is-prev", !compact() && count > 1 && slideIndex === prev);
+        slide.classList.toggle("is-next", !compact() && count > 1 && slideIndex === next);
+        slide.setAttribute("aria-hidden", isCurrent ? "false" : "true");
       });
       syncDots();
       syncMeta();
-
-      if (compact() && scene) {
-        var target = panels[index];
-        if (target) {
-          var offset = target.offsetLeft - (scene.clientWidth - target.offsetWidth) / 2;
-          scene.scrollTo({ left: offset, behavior: reduced ? "auto" : "smooth" });
-        }
-      }
     }
 
     function flashMeta() {
@@ -1128,29 +1096,18 @@
       }, 180);
     }
 
-    function setIndex(nextIndex, userInitiated) {
+    function setIndex(next, userInitiated) {
       if (count < 2) return;
-      var newIndex = ((nextIndex % count) + count) % count;
+      var newIndex = ((next % count) + count) % count;
+      if (newIndex === index) return;
       if (userInitiated) restartAuto();
-      if (newIndex === index) {
-        displayAngle = -index * stepSize();
-        applyState();
-        return;
-      }
-      var delta = newIndex - index;
-      if (delta > count / 2) delta -= count;
-      else if (delta < -count / 2) delta += count;
-      displayAngle -= delta * stepSize();
       index = newIndex;
       flashMeta();
       applyState();
     }
 
     function advance() {
-      displayAngle -= stepSize();
-      index = (index + 1) % count;
-      flashMeta();
-      applyState();
+      setIndex(index + 1, false);
     }
 
     function stopAuto() {
@@ -1168,9 +1125,9 @@
     function tickProgress() {
       if (!progressBar || paused || reduced || count < 2) return;
       var elapsed = Date.now() - progressStart;
-      var pct = Math.min(100, (elapsed / STAGE_AUTO_MS) * 100);
+      var pct = Math.min(100, (elapsed / DECK_AUTO_MS) * 100);
       progressBar.style.width = pct + "%";
-      if (elapsed < STAGE_AUTO_MS) progressTimer = requestAnimationFrame(tickProgress);
+      if (elapsed < DECK_AUTO_MS) progressTimer = requestAnimationFrame(tickProgress);
     }
 
     function startAuto() {
@@ -1182,7 +1139,7 @@
         if (!paused && !dragging) advance();
         progressStart = Date.now();
         if (progressBar) progressBar.style.width = "0%";
-      }, STAGE_AUTO_MS);
+      }, DECK_AUTO_MS);
     }
 
     function restartAuto() {
@@ -1200,12 +1157,12 @@
       startAuto();
     }
 
-    panels.forEach(function (panel, panelIndex) {
-      var card = panel.querySelector(".shot-stage__card");
-      if (!card) return;
-      card.addEventListener("click", function () {
-        if (panelIndex === index) return;
-        if (isAdjacent(panelIndex) || compact()) setIndex(panelIndex, true);
+    slides.forEach(function (slide, slideIndex) {
+      slide.addEventListener("click", function () {
+        if (slideIndex === index) return;
+        if (slideIndex === prevIndex() || slideIndex === nextIndex() || compact()) {
+          setIndex(slideIndex, true);
+        }
       });
     });
 
@@ -1220,7 +1177,7 @@
       });
     }
 
-    scene.addEventListener(
+    viewport.addEventListener(
       "pointerdown",
       function (event) {
         if (count < 2) return;
@@ -1229,26 +1186,24 @@
         dragging = true;
         dragStart = event.clientX;
         dragDelta = 0;
-        ring.classList.add("is-dragging");
-        scene.classList.add("is-dragging");
-        scene.setPointerCapture(event.pointerId);
+        viewport.classList.add("is-dragging");
+        viewport.setPointerCapture(event.pointerId);
         pauseAuto();
       },
       { passive: true }
     );
-    scene.addEventListener(
+    viewport.addEventListener(
       "pointermove",
       function (event) {
-        if (!scene.hasPointerCapture(event.pointerId)) return;
+        if (!viewport.hasPointerCapture(event.pointerId)) return;
         dragDelta = event.clientX - dragStart;
       },
       { passive: true }
     );
-    scene.addEventListener("pointerup", function (event) {
-      if (!scene.hasPointerCapture(event.pointerId)) return;
-      scene.releasePointerCapture(event.pointerId);
-      ring.classList.remove("is-dragging");
-      scene.classList.remove("is-dragging");
+    viewport.addEventListener("pointerup", function (event) {
+      if (!viewport.hasPointerCapture(event.pointerId)) return;
+      viewport.releasePointerCapture(event.pointerId);
+      viewport.classList.remove("is-dragging");
       dragging = false;
       if (Math.abs(dragDelta) >= 42) {
         if (dragDelta < 0) setIndex(index + 1, true);
@@ -1258,7 +1213,7 @@
       }
     });
 
-    stageRoot.addEventListener("keydown", function (event) {
+    deckRoot.addEventListener("keydown", function (event) {
       if (count < 2) return;
       if (event.key === "ArrowLeft") {
         event.preventDefault();
@@ -1269,11 +1224,11 @@
       }
     });
 
-    stageRoot.addEventListener("mouseenter", pauseAuto);
-    stageRoot.addEventListener("mouseleave", resumeAuto);
-    stageRoot.addEventListener("focusin", pauseAuto);
-    stageRoot.addEventListener("focusout", function (event) {
-      if (!stageRoot.contains(event.relatedTarget)) resumeAuto();
+    deckRoot.addEventListener("mouseenter", pauseAuto);
+    deckRoot.addEventListener("mouseleave", resumeAuto);
+    deckRoot.addEventListener("focusin", pauseAuto);
+    deckRoot.addEventListener("focusout", function (event) {
+      if (!deckRoot.contains(event.relatedTarget)) resumeAuto();
     });
 
     document.addEventListener("visibilitychange", function () {
@@ -1281,47 +1236,11 @@
       else if (!paused) startAuto();
     });
 
-    function nearestFromScroll() {
-      if (!compact() || !scene) return index;
-      var center = scene.scrollLeft + scene.clientWidth / 2;
-      var nearest = 0;
-      var nearestDistance = Infinity;
-      panels.forEach(function (panel, panelIndex) {
-        var panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
-        var distance = Math.abs(panelCenter - center);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearest = panelIndex;
-        }
-      });
-      return nearest;
-    }
-
-    if (scene) {
-      scene.addEventListener(
-        "scroll",
-        function () {
-          if (!compact() || dragging) return;
-          var nearest = nearestFromScroll();
-          if (nearest !== index) {
-            index = nearest;
-            syncDots();
-            syncMeta();
-          }
-        },
-        { passive: true }
-      );
-    }
-
-    layout();
     buildDots();
     applyState();
     startAuto();
 
-    window.addEventListener("resize", function () {
-      layout();
-      applyState();
-    });
+    window.addEventListener("resize", applyState);
   });
 
   /* ---------- 3D spotlight screenshot gallery ---------- */

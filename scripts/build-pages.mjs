@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 150;
+const ASSET_VERSION = 151;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -285,78 +285,60 @@ function renderStageGallery(section, base) {
   const shots = section.shots || [];
   const count = shots.length;
 
-  const panels = shots
+  const slides = shots
     .map((shot, index) => {
       const size = manifest[shot.src];
       if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
       const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
       const width = Math.max(1, Math.round(size.width * scale));
       const height = Math.max(1, Math.round(size.height * scale));
-      const label = shot.title || shot.caption || `Screen ${index + 1}`;
-      const step = shot.step || String(index + 1).padStart(2, "0");
-
-      const panelClass = [
-        "shot-stage__panel",
-        index === 0 ? "is-front" : null,
-        index === 1 || (index === count - 1 && count > 1) ? "is-adjacent" : null,
-      ]
-        .filter(Boolean)
-        .join(" ");
+      const label = shot.caption || shot.title || `Screen ${index + 1}`;
+      const slideClass = ["shot-deck__slide", index === 0 ? "is-current" : null].filter(Boolean).join(" ");
 
       return `        <li
-          class="${panelClass}"
-          data-shot-stage-panel
-          data-shot-stage-title="${esc(label)}"
-          data-shot-stage-caption="${esc(shot.caption || label)}"
-          data-shot-stage-step="${esc(step)}"
-          style="--panel-i: ${index}"
+          class="${slideClass}"
+          data-shot-deck-slide
+          data-shot-deck-label="${esc(label)}"
           aria-hidden="${index === 0 ? "false" : "true"}"
         >
-          <button type="button" class="shot-stage__card" aria-label="${esc(label)}">
-            <div class="shot-stage__frame">
-              <img
-                src="${base}${shot.src}?v=${ASSET_VERSION}"
-                alt="${esc(shot.caption || shot.title || "")}"
-                width="${width}"
-                height="${height}"
-                loading="${index === 0 ? "eager" : "lazy"}"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="${base}${shot.src}?v=${ASSET_VERSION}"
+              alt="${esc(label)}"
+              width="${width}"
+              height="${height}"
+              loading="${index === 0 ? "eager" : "lazy"}"
+              decoding="async"
+            />
+          </figure>
         </li>`;
     })
     .join("\n");
 
   const first = shots[0];
-  const firstLabel = first?.title || first?.caption || "";
+  const firstLabel = first?.caption || first?.title || "";
   const navHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
 
-  return `      <div class="shot-stage reveal" data-shot-stage data-shot-count="${count}" tabindex="0">
-        <div class="shot-stage__arena" data-shot-stage-arena>
-          <div class="shot-stage__glow" aria-hidden="true"></div>
-          <div class="shot-stage__scene">
-            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
-${panels}
-            </ul>
-          </div>
-          <div class="shot-stage__floor" aria-hidden="true"></div>
+  return `      <div class="shot-deck reveal" data-shot-deck data-shot-count="${count}" tabindex="0">
+        <div class="shot-deck__viewport" data-shot-deck-viewport>
+          <ul class="shot-deck__track" data-shot-deck-track role="list">
+${slides}
+          </ul>
         </div>
-        <div class="shot-stage__footer">
-          <div class="shot-stage__meta" aria-live="polite">
-            <p class="shot-stage__step" data-shot-stage-step>${count > 1 ? `01 / ${String(count).padStart(2, "0")}` : "01"}</p>
-            <h3 class="shot-stage__title" data-shot-stage-title>${esc(firstLabel)}</h3>
-            <p class="shot-stage__caption" data-shot-stage-caption>${esc(first?.caption || firstLabel)}</p>
+        <div class="shot-deck__bar">
+          <div class="shot-deck__meta" aria-live="polite">
+            <span class="shot-deck__counter" data-shot-deck-counter>${count > 1 ? `01 / ${String(count).padStart(2, "0")}` : "01"}</span>
+            <p class="shot-deck__caption" data-shot-deck-caption>${esc(firstLabel)}</p>
           </div>
-          <div class="shot-stage__controls"${navHidden}>
-            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
+          <div class="shot-deck__controls"${navHidden}>
+            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-stage__progress" aria-hidden="true">
-              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
+            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-deck__progress" aria-hidden="true">
+              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
             </div>
-            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
+            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>

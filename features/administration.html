@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=150" />
-  <link rel="stylesheet" href="../css/pages.css?v=150" />
+  <link rel="stylesheet" href="../css/style.css?v=151" />
+  <link rel="stylesheet" href="../css/pages.css?v=151" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -244,7 +244,7 @@
           <div class="page-hero__media">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/adminmenu.png?v=150" alt="The Administration fly-out menu — team management, module settings, storage and company configuration." width="489" height="1024" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/adminmenu.png?v=151" alt="The Administration fly-out menu — team management, module settings, storage and company configuration." width="489" height="1024" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The Administration fly-out menu — team management, module settings, storage and company configuration.</figcaption>
         </figure>
@@ -267,96 +267,76 @@
             <li><strong>Line-manager scope</strong> so managers see their reportees without the whole company.</li>
           </ul>
         </div>
-      <div class="shot-stage reveal" data-shot-stage data-shot-count="3" tabindex="0">
-        <div class="shot-stage__arena" data-shot-stage-arena>
-          <div class="shot-stage__glow" aria-hidden="true"></div>
-          <div class="shot-stage__scene">
-            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
+      <div class="shot-deck reveal" data-shot-deck data-shot-count="3" tabindex="0">
+        <div class="shot-deck__viewport" data-shot-deck-viewport>
+          <ul class="shot-deck__track" data-shot-deck-track role="list">
         <li
-          class="shot-stage__panel is-front"
-          data-shot-stage-panel
-          data-shot-stage-title="Organisation structure configuration."
-          data-shot-stage-caption="Organisation structure configuration."
-          data-shot-stage-step="01"
-          style="--panel-i: 0"
+          class="shot-deck__slide is-current"
+          data-shot-deck-slide
+          data-shot-deck-label="Organisation structure configuration."
           aria-hidden="false"
         >
-          <button type="button" class="shot-stage__card" aria-label="Organisation structure configuration.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/org-structure.png?v=150"
-                alt="Organisation structure configuration."
-                width="700"
-                height="464"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/org-structure.png?v=151"
+              alt="Organisation structure configuration."
+              width="700"
+              height="464"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="Configuring permissions for a company job role."
-          data-shot-stage-caption="Configuring permissions for a company job role."
-          data-shot-stage-step="02"
-          style="--panel-i: 1"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Configuring permissions for a company job role."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Configuring permissions for a company job role.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/configure-company-role-permissions.png?v=150"
-                alt="Configuring permissions for a company job role."
-                width="693"
-                height="521"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/configure-company-role-permissions.png?v=151"
+              alt="Configuring permissions for a company job role."
+              width="693"
+              height="521"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="Granular permission assignment across the platform."
-          data-shot-stage-caption="Granular permission assignment across the platform."
-          data-shot-stage-step="03"
-          style="--panel-i: 2"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Granular permission assignment across the platform."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Granular permission assignment across the platform.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/main-sys/role-permissions-configure.png?v=150"
-                alt="Granular permission assignment across the platform."
-                width="704"
-                height="558"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/main-sys/role-permissions-configure.png?v=151"
+              alt="Granular permission assignment across the platform."
+              width="704"
+              height="558"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
-            </ul>
-          </div>
-          <div class="shot-stage__floor" aria-hidden="true"></div>
+          </ul>
         </div>
-        <div class="shot-stage__footer">
-          <div class="shot-stage__meta" aria-live="polite">
-            <p class="shot-stage__step" data-shot-stage-step>01 / 03</p>
-            <h3 class="shot-stage__title" data-shot-stage-title>Organisation structure configuration.</h3>
-            <p class="shot-stage__caption" data-shot-stage-caption>Organisation structure configuration.</p>
+        <div class="shot-deck__bar">
+          <div class="shot-deck__meta" aria-live="polite">
+            <span class="shot-deck__counter" data-shot-deck-counter>01 / 03</span>
+            <p class="shot-deck__caption" data-shot-deck-caption>Organisation structure configuration.</p>
           </div>
-          <div class="shot-stage__controls">
-            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
+          <div class="shot-deck__controls">
+            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-stage__progress" aria-hidden="true">
-              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
+            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-deck__progress" aria-hidden="true">
+              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
             </div>
-            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
+            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -378,118 +358,93 @@
             <li><strong>Timing standards</strong> including trainee daylight and darkness minimums.</li>
           </ul>
         </div>
-      <div class="shot-stage reveal" data-shot-stage data-shot-count="4" tabindex="0">
-        <div class="shot-stage__arena" data-shot-stage-arena>
-          <div class="shot-stage__glow" aria-hidden="true"></div>
-          <div class="shot-stage__scene">
-            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
+      <div class="shot-deck reveal" data-shot-deck data-shot-count="4" tabindex="0">
+        <div class="shot-deck__viewport" data-shot-deck-viewport>
+          <ul class="shot-deck__track" data-shot-deck-track role="list">
         <li
-          class="shot-stage__panel is-front"
-          data-shot-stage-panel
-          data-shot-stage-title="Applying a competency framework across cycles."
-          data-shot-stage-caption="Applying a competency framework across cycles."
-          data-shot-stage-step="01"
-          style="--panel-i: 0"
+          class="shot-deck__slide is-current"
+          data-shot-deck-slide
+          data-shot-deck-label="Applying a competency framework across cycles."
           aria-hidden="false"
         >
-          <button type="button" class="shot-stage__card" aria-label="Applying a competency framework across cycles.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/framework-apply-cycles.png?v=150"
-                alt="Applying a competency framework across cycles."
-                width="705"
-                height="388"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/framework-apply-cycles.png?v=151"
+              alt="Applying a competency framework across cycles."
+              width="705"
+              height="388"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="The grading scale used by assessors."
-          data-shot-stage-caption="The grading scale used by assessors."
-          data-shot-stage-step="02"
-          style="--panel-i: 1"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="The grading scale used by assessors."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="The grading scale used by assessors.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/grade-scale.png?v=150"
-                alt="The grading scale used by assessors."
-                width="703"
-                height="290"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/grade-scale.png?v=151"
+              alt="The grading scale used by assessors."
+              width="703"
+              height="290"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel"
-          data-shot-stage-panel
-          data-shot-stage-title="Company standards for assessment and competence."
-          data-shot-stage-caption="Company standards for assessment and competence."
-          data-shot-stage-step="03"
-          style="--panel-i: 2"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Company standards for assessment and competence."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Company standards for assessment and competence.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/set-company-standards.png?v=150"
-                alt="Company standards for assessment and competence."
-                width="699"
-                height="489"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/set-company-standards.png?v=151"
+              alt="Company standards for assessment and competence."
+              width="699"
+              height="489"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="Timing standards including trainee daylight and darkness minimums."
-          data-shot-stage-caption="Timing standards including trainee daylight and darkness minimums."
-          data-shot-stage-step="04"
-          style="--panel-i: 3"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Timing standards including trainee daylight and darkness minimums."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Timing standards including trainee daylight and darkness minimums.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/main-sys/timings-standards.png?v=150"
-                alt="Timing standards including trainee daylight and darkness minimums."
-                width="786"
-                height="462"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/main-sys/timings-standards.png?v=151"
+              alt="Timing standards including trainee daylight and darkness minimums."
+              width="786"
+              height="462"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
-            </ul>
-          </div>
-          <div class="shot-stage__floor" aria-hidden="true"></div>
+          </ul>
         </div>
-        <div class="shot-stage__footer">
-          <div class="shot-stage__meta" aria-live="polite">
-            <p class="shot-stage__step" data-shot-stage-step>01 / 04</p>
-            <h3 class="shot-stage__title" data-shot-stage-title>Applying a competency framework across cycles.</h3>
-            <p class="shot-stage__caption" data-shot-stage-caption>Applying a competency framework across cycles.</p>
+        <div class="shot-deck__bar">
+          <div class="shot-deck__meta" aria-live="polite">
+            <span class="shot-deck__counter" data-shot-deck-counter>01 / 04</span>
+            <p class="shot-deck__caption" data-shot-deck-caption>Applying a competency framework across cycles.</p>
           </div>
-          <div class="shot-stage__controls">
-            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
+          <div class="shot-deck__controls">
+            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-stage__progress" aria-hidden="true">
-              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
+            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-deck__progress" aria-hidden="true">
+              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
             </div>
-            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
+            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -506,118 +461,93 @@
           <p>Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.</p>
 
         </div>
-      <div class="shot-stage reveal" data-shot-stage data-shot-count="4" tabindex="0">
-        <div class="shot-stage__arena" data-shot-stage-arena>
-          <div class="shot-stage__glow" aria-hidden="true"></div>
-          <div class="shot-stage__scene">
-            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
+      <div class="shot-deck reveal" data-shot-deck data-shot-count="4" tabindex="0">
+        <div class="shot-deck__viewport" data-shot-deck-viewport>
+          <ul class="shot-deck__track" data-shot-deck-track role="list">
         <li
-          class="shot-stage__panel is-front"
-          data-shot-stage-panel
-          data-shot-stage-title="Traction and route overview for the company."
-          data-shot-stage-caption="Traction and route overview for the company."
-          data-shot-stage-step="01"
-          style="--panel-i: 0"
+          class="shot-deck__slide is-current"
+          data-shot-deck-slide
+          data-shot-deck-label="Traction and route overview for the company."
           aria-hidden="false"
         >
-          <button type="button" class="shot-stage__card" aria-label="Traction and route overview for the company.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/train-routes/traction-route-overview.png?v=150"
-                alt="Traction and route overview for the company."
-                width="699"
-                height="353"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/train-routes/traction-route-overview.png?v=151"
+              alt="Traction and route overview for the company."
+              width="699"
+              height="353"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="Adding a traction type."
-          data-shot-stage-caption="Adding a traction type."
-          data-shot-stage-step="02"
-          style="--panel-i: 1"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Adding a traction type."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Adding a traction type.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/train-routes/add-traction.png?v=150"
-                alt="Adding a traction type."
-                width="776"
-                height="259"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/train-routes/add-traction.png?v=151"
+              alt="Adding a traction type."
+              width="776"
+              height="259"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel"
-          data-shot-stage-panel
-          data-shot-stage-title="Adding a route."
-          data-shot-stage-caption="Adding a route."
-          data-shot-stage-step="03"
-          style="--panel-i: 2"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Adding a route."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Adding a route.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/train-routes/add-route.png?v=150"
-                alt="Adding a route."
-                width="692"
-                height="261"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/train-routes/add-route.png?v=151"
+              alt="Adding a route."
+              width="692"
+              height="261"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="Traction, routes and depots configuration."
-          data-shot-stage-caption="Traction, routes and depots configuration."
-          data-shot-stage-step="04"
-          style="--panel-i: 3"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Traction, routes and depots configuration."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Traction, routes and depots configuration.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/set-traction-routes-depots.png?v=150"
-                alt="Traction, routes and depots configuration."
-                width="696"
-                height="323"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/set-traction-routes-depots.png?v=151"
+              alt="Traction, routes and depots configuration."
+              width="696"
+              height="323"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
-            </ul>
-          </div>
-          <div class="shot-stage__floor" aria-hidden="true"></div>
+          </ul>
         </div>
-        <div class="shot-stage__footer">
-          <div class="shot-stage__meta" aria-live="polite">
-            <p class="shot-stage__step" data-shot-stage-step>01 / 04</p>
-            <h3 class="shot-stage__title" data-shot-stage-title>Traction and route overview for the company.</h3>
-            <p class="shot-stage__caption" data-shot-stage-caption>Traction and route overview for the company.</p>
+        <div class="shot-deck__bar">
+          <div class="shot-deck__meta" aria-live="polite">
+            <span class="shot-deck__counter" data-shot-deck-counter>01 / 04</span>
+            <p class="shot-deck__caption" data-shot-deck-caption>Traction and route overview for the company.</p>
           </div>
-          <div class="shot-stage__controls">
-            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
+          <div class="shot-deck__controls">
+            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-stage__progress" aria-hidden="true">
-              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
+            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-deck__progress" aria-hidden="true">
+              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
             </div>
-            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
+            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -639,96 +569,76 @@
             <li><strong>Investigations connector</strong> for workforce context on a live case.</li>
           </ul>
         </div>
-      <div class="shot-stage reveal" data-shot-stage data-shot-count="3" tabindex="0">
-        <div class="shot-stage__arena" data-shot-stage-arena>
-          <div class="shot-stage__glow" aria-hidden="true"></div>
-          <div class="shot-stage__scene">
-            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
+      <div class="shot-deck reveal" data-shot-deck data-shot-count="3" tabindex="0">
+        <div class="shot-deck__viewport" data-shot-deck-viewport>
+          <ul class="shot-deck__track" data-shot-deck-track role="list">
         <li
-          class="shot-stage__panel is-front"
-          data-shot-stage-panel
-          data-shot-stage-title="The Add-ons page where optional modules are activated."
-          data-shot-stage-caption="The Add-ons page where optional modules are activated."
-          data-shot-stage-step="01"
-          style="--panel-i: 0"
+          class="shot-deck__slide is-current"
+          data-shot-deck-slide
+          data-shot-deck-label="The Add-ons page where optional modules are activated."
           aria-hidden="false"
         >
-          <button type="button" class="shot-stage__card" aria-label="The Add-ons page where optional modules are activated.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/main-sys/addons-page.png?v=150"
-                alt="The Add-ons page where optional modules are activated."
-                width="791"
-                height="528"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/main-sys/addons-page.png?v=151"
+              alt="The Add-ons page where optional modules are activated."
+              width="791"
+              height="528"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="The add-ons library with available modules."
-          data-shot-stage-caption="The add-ons library with available modules."
-          data-shot-stage-step="02"
-          style="--panel-i: 1"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="The add-ons library with available modules."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="The add-ons library with available modules.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/addons-library.png?v=150"
-                alt="The add-ons library with available modules."
-                width="690"
-                height="562"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/addons-library.png?v=151"
+              alt="The add-ons library with available modules."
+              width="690"
+              height="562"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
         <li
-          class="shot-stage__panel is-adjacent"
-          data-shot-stage-panel
-          data-shot-stage-title="Investigations API connector management."
-          data-shot-stage-caption="Investigations API connector management."
-          data-shot-stage-step="03"
-          style="--panel-i: 2"
+          class="shot-deck__slide"
+          data-shot-deck-slide
+          data-shot-deck-label="Investigations API connector management."
           aria-hidden="true"
         >
-          <button type="button" class="shot-stage__card" aria-label="Investigations API connector management.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/comp-config/investigation-apimanagement.png?v=150"
-                alt="Investigations API connector management."
-                width="699"
-                height="444"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/comp-config/investigation-apimanagement.png?v=151"
+              alt="Investigations API connector management."
+              width="699"
+              height="444"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </li>
-            </ul>
-          </div>
-          <div class="shot-stage__floor" aria-hidden="true"></div>
+          </ul>
         </div>
-        <div class="shot-stage__footer">
-          <div class="shot-stage__meta" aria-live="polite">
-            <p class="shot-stage__step" data-shot-stage-step>01 / 03</p>
-            <h3 class="shot-stage__title" data-shot-stage-title>The Add-ons page where optional modules are activated.</h3>
-            <p class="shot-stage__caption" data-shot-stage-caption>The Add-ons page where optional modules are activated.</p>
+        <div class="shot-deck__bar">
+          <div class="shot-deck__meta" aria-live="polite">
+            <span class="shot-deck__counter" data-shot-deck-counter>01 / 03</span>
+            <p class="shot-deck__caption" data-shot-deck-caption>The Add-ons page where optional modules are activated.</p>
           </div>
-          <div class="shot-stage__controls">
-            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
+          <div class="shot-deck__controls">
+            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-stage__progress" aria-hidden="true">
-              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
+            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-deck__progress" aria-hidden="true">
+              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
             </div>
-            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
+            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -750,52 +660,42 @@
             <li><strong>Administrator recovery</strong> — reset authenticators and enforce re-enrolment.</li>
           </ul>
         </div>
-      <div class="shot-stage reveal" data-shot-stage data-shot-count="1" tabindex="0">
-        <div class="shot-stage__arena" data-shot-stage-arena>
-          <div class="shot-stage__glow" aria-hidden="true"></div>
-          <div class="shot-stage__scene">
-            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
+      <div class="shot-deck reveal" data-shot-deck data-shot-count="1" tabindex="0">
+        <div class="shot-deck__viewport" data-shot-deck-viewport>
+          <ul class="shot-deck__track" data-shot-deck-track role="list">
         <li
-          class="shot-stage__panel is-front"
-          data-shot-stage-panel
-          data-shot-stage-title="Sign-in with company code, email and password."
-          data-shot-stage-caption="Sign-in with company code, email and password."
-          data-shot-stage-step="01"
-          style="--panel-i: 0"
+          class="shot-deck__slide is-current"
+          data-shot-deck-slide
+          data-shot-deck-label="Sign-in with company code, email and password."
           aria-hidden="false"
         >
-          <button type="button" class="shot-stage__card" aria-label="Sign-in with company code, email and password.">
-            <div class="shot-stage__frame">
-              <img
-                src="../images/screens/main-sys/login-screen.png?v=150"
-                alt="Sign-in with company code, email and password."
-                width="814"
-                height="456"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </button>
+          <figure class="shot-deck__figure">
+            <img
+              src="../images/screens/main-sys/login-screen.png?v=151"
+              alt="Sign-in with company code, email and password."
+              width="814"
+              height="456"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </li>
-            </ul>
-          </div>
-          <div class="shot-stage__floor" aria-hidden="true"></div>
+          </ul>
         </div>
-        <div class="shot-stage__footer">
-          <div class="shot-stage__meta" aria-live="polite">
-            <p class="shot-stage__step" data-shot-stage-step>01</p>
-            <h3 class="shot-stage__title" data-shot-stage-title>Sign-in with company code, email and password.</h3>
-            <p class="shot-stage__caption" data-shot-stage-caption>Sign-in with company code, email and password.</p>
+        <div class="shot-deck__bar">
+          <div class="shot-deck__meta" aria-live="polite">
+            <span class="shot-deck__counter" data-shot-deck-counter>01</span>
+            <p class="shot-deck__caption" data-shot-deck-caption>Sign-in with company code, email and password.</p>
           </div>
-          <div class="shot-stage__controls" hidden aria-hidden="true">
-            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
+          <div class="shot-deck__controls" hidden aria-hidden="true">
+            <button type="button" class="shot-deck__btn" data-shot-deck-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
-            <div class="shot-stage__progress" aria-hidden="true">
-              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
+            <div class="shot-deck__dots" data-shot-deck-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-deck__progress" aria-hidden="true">
+              <span class="shot-deck__progress-bar" data-shot-deck-progress></span>
             </div>
-            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
+            <button type="button" class="shot-deck__btn" data-shot-deck-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -832,6 +732,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=150"></script>
+  <script src="../js/site.js?v=151"></script>
 </body>
 </html>

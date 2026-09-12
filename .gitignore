@@ -6,3 +6,5 @@ previews/
 preview-full.png
 preview-hero.png
 .venv-img/
+.preview/
+node_modules/
