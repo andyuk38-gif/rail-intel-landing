@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 142;
+const ASSET_VERSION = 143;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1117,17 +1117,26 @@ function renderHeroIntro(intro) {
   if (!intro) return "";
 
   const body = (intro.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
-  const bullets = intro.bullets
-    ? `            <ul class="spec-list">\n${intro.bullets
-        .map((item) => `              <li>${rich(item)}</li>`)
-        .join("\n")}\n            </ul>`
-    : "";
+  const tiles = intro.tiles
+    ? `            <div class="admin-intro-tiles">\n${intro.tiles
+        .map(
+          (tile) => `              <article class="admin-intro-tile">
+                <h3 class="admin-intro-tile__title">${esc(tile.title)}</h3>
+                <p>${esc(tile.detail)}</p>
+              </article>`
+        )
+        .join("\n")}\n            </div>`
+    : intro.bullets
+      ? `            <ul class="spec-list">\n${intro.bullets
+          .map((item) => `              <li>${rich(item)}</li>`)
+          .join("\n")}\n            </ul>`
+      : "";
 
   return `
           <div class="page-hero__intro">
             <h2 class="page-hero__intro-title">${esc(intro.heading)}</h2>
 ${body}
-${bullets}
+${tiles}
           </div>`;
 }
 
@@ -1144,13 +1153,17 @@ function featurePage(group) {
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${esc(group.tagline)}</h1>
           <p class="page-lead">${esc(group.lead)}</p>
-          <div class="page-actions">
+${
+  group.hideHeroActions
+    ? ""
+    : `          <div class="page-actions">
 ${
   group.showAppCta === false
     ? ""
     : `            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
 }            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
-          </div>${renderHeroIntro(group.heroIntro)}`;
+          </div>`
+}${renderHeroIntro(group.heroIntro)}`;
 
   const heroInner = group.heroShot
     ? `        <div class="page-hero__inner page-hero__inner--split${group.heroIntro ? " page-hero__inner--with-intro" : ""}">

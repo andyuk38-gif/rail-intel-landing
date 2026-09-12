@@ -1095,17 +1095,31 @@ export const featureGroups = [
       scale: 1,
       full: true,
     },
+    hideHeroActions: true,
     heroIntro: {
       heading: "The Administration menu",
       body: [
         "Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.",
         "The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.",
       ],
-      bullets: [
-        "**Team Management** — administrator seats, users and access.",
-        "**Module shortcuts** — QA Verifications, Trainee and Leave & Absence when those add-ons are active.",
-        "**Storage** — document storage administration.",
-        "**Company configuration** — roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.",
+      tiles: [
+        {
+          title: "Team Management",
+          detail: "Administrator seats, users and access.",
+        },
+        {
+          title: "Module shortcuts",
+          detail: "QA Verifications, Trainee and Leave & Absence when those add-ons are active.",
+        },
+        {
+          title: "Storage",
+          detail: "Document storage administration.",
+        },
+        {
+          title: "Company configuration",
+          detail:
+            "Roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.",
+        },
       ],
     },
     sections: [
