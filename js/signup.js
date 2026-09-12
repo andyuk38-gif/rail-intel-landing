@@ -162,17 +162,39 @@
     return "";
   }
 
-  function moduleHtml(modules) {
+  function getSelectedAddons() {
+    var selected = new Set();
+    document.querySelectorAll('input[name="addon"]:checked').forEach(function (el) {
+      selected.add(el.value);
+    });
+    return selected;
+  }
+
+  function readEmbeddedModules() {
+    var el = document.getElementById("signup-onboarding-modules");
+    if (!el) return [];
+    try {
+      var data = JSON.parse(el.textContent || "[]");
+      return Array.isArray(data) ? data : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function moduleHtml(modules, selected) {
     if (!modules || !modules.length) {
       return '<p class="signup-form__lead">No optional modules listed.</p>';
     }
     return modules
       .map(function (mod) {
+        var checked = selected && selected.has(mod.id) ? " checked" : "";
         return (
           '<label class="signup-module">' +
           '<input type="checkbox" name="addon" value="' +
           mod.id +
-          '" />' +
+          '"' +
+          checked +
+          " />" +
           "<span><strong>" +
           mod.name +
           "</strong><span>" +
@@ -186,9 +208,32 @@
 
   function renderModules(modules) {
     state.modules = modules || [];
-    var html = moduleHtml(modules);
+    var selected = getSelectedAddons();
+    var html = moduleHtml(modules, selected);
     if (moduleListQuote) moduleListQuote.innerHTML = html;
     if (moduleListPurchase) moduleListPurchase.innerHTML = html;
+  }
+
+  function loadModules() {
+    var embedded = readEmbeddedModules();
+    if (embedded.length) renderModules(embedded);
+    else {
+      var loading = '<p class="signup-form__lead">Loading modules…</p>';
+      if (moduleListQuote) moduleListQuote.innerHTML = loading;
+      if (moduleListPurchase) moduleListPurchase.innerHTML = loading;
+    }
+
+    fetch(apiUrl("/public/onboarding-addons"))
+      .then(function (res) {
+        return res.ok ? res.json() : null;
+      })
+      .then(function (data) {
+        if (data && data.modules && data.modules.length) renderModules(data.modules);
+        else if (!embedded.length) renderModules([]);
+      })
+      .catch(function () {
+        if (!embedded.length) renderModules([]);
+      });
   }
 
   function renderPaymentOptions() {
@@ -413,14 +458,7 @@
     setPanel(target);
   }
 
-  fetch(apiUrl("/public/onboarding-addons"))
-    .then(function (res) {
-      return res.ok ? res.json() : null;
-    })
-    .then(function (data) {
-      if (data && data.modules) renderModules(data.modules);
-    })
-    .catch(function () {});
+  loadModules();
 
   fetch(apiUrl("/public/signup-config"))
     .then(function (res) {

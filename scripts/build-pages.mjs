@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 181;
+const ASSET_VERSION = 182;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1766,6 +1766,13 @@ ${renderShot(
 
 function getStartedPage() {
   const base = "";
+  const signupModulesJson = JSON.stringify(
+    addons.map((a) => ({
+      id: a.moduleId,
+      name: a.name,
+      shortDescription: a.summary,
+    }))
+  ).replace(/</g, "\\u003c");
   return (
     renderHead(base, {
       title: "Get started – Rail Intel CMS",
@@ -1787,6 +1794,7 @@ function getStartedPage() {
     <section class="page-section page-section--tight">
       <div class="container signup-layout">
         <div class="signup-form panel" data-cms-signup-wizard>
+          <script type="application/json" id="signup-onboarding-modules">${signupModulesJson}</script>
           <ol class="signup-wizard__steps signup-wizard__steps--5" data-signup-stepper aria-label="Application progress">
             <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span>1</span> Company</li>
             <li class="signup-wizard__step" data-signup-step-indicator="2"><span>2</span> Contact</li>
