@@ -16,8 +16,7 @@
   var bankPanel = document.querySelector("[data-signup-bank-panel]");
   var successMessageQuote = document.querySelector("[data-signup-success-message]");
   var successMessagePurchase = document.querySelector("[data-signup-success-message-purchase]");
-  var asideTip = document.querySelector("[data-signup-aside-tip]");
-  var asideTitle = document.querySelector("[data-signup-aside-title]");
+  var progressFill = document.querySelector("[data-signup-progress]");
 
   var PANEL_STEP = {
     company: 1,
@@ -30,49 +29,6 @@
     "purchase-pay": 4,
     "quote-complete": 5,
     "purchase-complete": 5,
-  };
-
-  var ASIDE_COPY = {
-    company: {
-      title: "Step 1 — Company",
-      tip: "Enter your registered company name and address. This becomes your CMS tenant identity.",
-    },
-    contact: {
-      title: "Step 2 — Contact",
-      tip: "Your primary contact receives application updates and the welcome email once approved.",
-    },
-    "path-choice": {
-      title: "Step 3 — Your path",
-      tip: "Request a tailored quotation or proceed directly to purchase and onboarding.",
-    },
-    "quote-requirements": {
-      title: "Quotation requirements",
-      tip: "Minimum contract term is 12 months. Tell us how many users and admin licences you need.",
-    },
-    "quote-modules": {
-      title: "Modules for your quote",
-      tip: "Select bolt-on modules to include in your quotation.",
-    },
-    "purchase-modules": {
-      title: "Modules",
-      tip: "Optional bolt-ons can be enabled during approval.",
-    },
-    "purchase-payment": {
-      title: "Payment method",
-      tip: "Choose card payment or bank transfer with a purchase order. No prices are shown on this step.",
-    },
-    "purchase-pay": {
-      title: "Complete payment",
-      tip: "Pay by card via Stripe or upload your PO and arrange a BACS transfer.",
-    },
-    "quote-complete": {
-      title: "Quotation requested",
-      tip: "We will prepare your quote and email it to you for acceptance.",
-    },
-    "purchase-complete": {
-      title: "Application received",
-      tip: "We will review your application and email you when your CMS space is ready.",
-    },
   };
 
   var state = {
@@ -103,10 +59,8 @@
     if (el) el.hidden = true;
   }
 
-  function updateAside(panel) {
-    var copy = ASIDE_COPY[panel] || ASIDE_COPY.company;
-    if (asideTitle) asideTitle.textContent = copy.title;
-    if (asideTip) asideTip.textContent = copy.tip;
+  function updateProgress(step) {
+    if (progressFill) progressFill.style.width = Math.min(100, step * 20) + "%";
   }
 
   function scrollWizardIntoView() {
@@ -117,7 +71,14 @@
   function setPanel(panel) {
     state.panel = panel;
     wizard.querySelectorAll("[data-signup-panel]").forEach(function (el) {
-      el.hidden = el.getAttribute("data-signup-panel") !== panel;
+      var isCurrent = el.getAttribute("data-signup-panel") === panel;
+      el.hidden = !isCurrent;
+      el.classList.toggle("is-active", isCurrent);
+      if (isCurrent) {
+        el.classList.remove("is-entering");
+        void el.offsetWidth;
+        el.classList.add("is-entering");
+      }
     });
     var step = PANEL_STEP[panel] || 1;
     wizard.querySelectorAll("[data-signup-step-indicator]").forEach(function (item) {
@@ -125,7 +86,7 @@
       item.classList.toggle("is-active", n === step);
       item.classList.toggle("is-complete", n < step);
     });
-    updateAside(panel);
+    updateProgress(step);
     scrollWizardIntoView();
   }
 
@@ -186,32 +147,61 @@
       return '<p class="signup-form__lead">No optional modules listed.</p>';
     }
     return modules
-      .map(function (mod) {
-        var checked = selected && selected.has(mod.id) ? " checked" : "";
+      .map(function (mod, index) {
+        var isOn = selected && selected.has(mod.id);
         return (
-          '<label class="signup-module">' +
-          '<input type="checkbox" name="addon" value="' +
+          '<label class="signup-glass-tile signup-module-tile' +
+          (isOn ? " is-selected" : "") +
+          '" style="--tile-delay:' +
+          index * 40 +
+          'ms">' +
+          '<input type="checkbox" class="signup-glass-tile__input" name="addon" value="' +
           mod.id +
           '"' +
-          checked +
+          (isOn ? " checked" : "") +
           " />" +
-          "<span><strong>" +
+          '<span class="signup-glass-tile__surface">' +
+          '<span class="signup-glass-tile__bg" aria-hidden="true"></span>' +
+          '<span class="signup-glass-tile__check" aria-hidden="true"></span>' +
+          '<span class="signup-glass-tile__content">' +
+          "<strong>" +
           mod.name +
-          "</strong><span>" +
+          "</strong>" +
+          "<span>" +
           mod.shortDescription +
-          "</span></span>" +
+          "</span>" +
+          "</span>" +
+          "</span>" +
           "</label>"
         );
       })
       .join("");
   }
 
+  function syncTileSelection(container) {
+    if (!container) return;
+    container.querySelectorAll(".signup-module-tile").forEach(function (tile) {
+      var input = tile.querySelector('input[name="addon"]');
+      if (!input) return;
+      tile.classList.toggle("is-selected", input.checked);
+      input.addEventListener("change", function () {
+        tile.classList.toggle("is-selected", input.checked);
+      });
+    });
+  }
+
   function renderModules(modules) {
     state.modules = modules || [];
     var selected = getSelectedAddons();
     var html = moduleHtml(modules, selected);
-    if (moduleListQuote) moduleListQuote.innerHTML = html;
-    if (moduleListPurchase) moduleListPurchase.innerHTML = html;
+    if (moduleListQuote) {
+      moduleListQuote.innerHTML = html;
+      syncTileSelection(moduleListQuote);
+    }
+    if (moduleListPurchase) {
+      moduleListPurchase.innerHTML = html;
+      syncTileSelection(moduleListPurchase);
+    }
   }
 
   function loadModules() {
@@ -241,23 +231,43 @@
     var html = "";
     if (state.config.stripeEnabled) {
       html +=
-        '<label class="signup-payment-option">' +
-        '<input type="radio" name="paymentMethod" value="stripe" />' +
-        "<span><strong>Pay by card (Stripe)</strong><span>Secure card payment — submitted immediately after payment.</span></span>" +
-        "</label>";
+        '<label class="signup-glass-tile signup-payment-tile">' +
+        '<input type="radio" class="signup-glass-tile__input" name="paymentMethod" value="stripe" />' +
+        '<span class="signup-glass-tile__surface">' +
+        '<span class="signup-glass-tile__bg" aria-hidden="true"></span>' +
+        '<span class="signup-glass-tile__check signup-glass-tile__check--radio" aria-hidden="true"></span>' +
+        '<span class="signup-glass-tile__content">' +
+        "<strong>Pay by card (Stripe)</strong>" +
+        "<span>Secure card payment — submitted immediately after payment.</span>" +
+        "</span></span></label>";
     }
     if (state.config.bankTransferEnabled) {
       html +=
-        '<label class="signup-payment-option">' +
-        '<input type="radio" name="paymentMethod" value="bank_transfer" />' +
-        "<span><strong>Bank transfer</strong><span>Upload your purchase order and pay by BACS.</span></span>" +
-        "</label>";
+        '<label class="signup-glass-tile signup-payment-tile">' +
+        '<input type="radio" class="signup-glass-tile__input" name="paymentMethod" value="bank_transfer" />' +
+        '<span class="signup-glass-tile__surface">' +
+        '<span class="signup-glass-tile__bg" aria-hidden="true"></span>' +
+        '<span class="signup-glass-tile__check signup-glass-tile__check--radio" aria-hidden="true"></span>' +
+        '<span class="signup-glass-tile__content">' +
+        "<strong>Bank transfer</strong>" +
+        "<span>Upload your purchase order and pay by BACS.</span>" +
+        "</span></span></label>";
     }
     if (!html) {
       html =
         '<p class="signup-form__lead">Online payment is not configured yet. Please contact <a href="mailto:sales@railintel.co.uk">sales@railintel.co.uk</a>.</p>';
     }
     paymentOptions.innerHTML = html;
+    paymentOptions.querySelectorAll(".signup-payment-tile").forEach(function (tile) {
+      var input = tile.querySelector('input[name="paymentMethod"]');
+      if (!input) return;
+      input.addEventListener("change", function () {
+        paymentOptions.querySelectorAll(".signup-payment-tile").forEach(function (t) {
+          var i = t.querySelector('input[name="paymentMethod"]');
+          t.classList.toggle("is-selected", !!(i && i.checked));
+        });
+      });
+    });
   }
 
   function renderBankDetails() {

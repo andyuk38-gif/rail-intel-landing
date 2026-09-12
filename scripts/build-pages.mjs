@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 182;
+const ASSET_VERSION = 183;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1791,10 +1791,17 @@ function getStartedPage() {
       </div>
     </section>
 
-    <section class="page-section page-section--tight">
-      <div class="container signup-layout">
-        <div class="signup-form panel" data-cms-signup-wizard>
+    <section class="page-section page-section--tight signup-page">
+      <div class="container signup-shell">
+        <div class="signup-wizard-glass" data-cms-signup-wizard>
           <script type="application/json" id="signup-onboarding-modules">${signupModulesJson}</script>
+          <div class="signup-wizard__header">
+            <p class="signup-wizard__eyebrow">Rail Intel CMS application</p>
+            <p class="signup-wizard__login">Already have an account? <a href="${site.app}">Log in to CMS</a></p>
+          </div>
+          <div class="signup-progress" aria-hidden="true">
+            <div class="signup-progress__track"><div class="signup-progress__fill" data-signup-progress style="width:20%"></div></div>
+          </div>
           <ol class="signup-wizard__steps signup-wizard__steps--5" data-signup-stepper aria-label="Application progress">
             <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span>1</span> Company</li>
             <li class="signup-wizard__step" data-signup-step-indicator="2"><span>2</span> Contact</li>
@@ -1804,9 +1811,11 @@ function getStartedPage() {
           </ol>
 
           <form data-cms-signup-form novalidate>
-            <div class="signup-wizard__body" data-signup-panel="company">
-              <h2 class="signup-form__title">Your company</h2>
-              <p class="signup-form__lead">Registered company details for your CMS tenant.</p>
+            <div class="signup-wizard__body is-active" data-signup-panel="company">
+              <div class="signup-panel__head">
+                <h2 class="signup-form__title">Your company</h2>
+                <p class="signup-form__lead">Registered company details for your CMS tenant.</p>
+              </div>
               <div class="signup-form__grid">
                 <div class="field field--full">
                   <label for="companyName">Company name *</label>
@@ -1824,8 +1833,10 @@ function getStartedPage() {
             </div>
 
             <div class="signup-wizard__body" data-signup-panel="contact" hidden>
-              <h2 class="signup-form__title">Primary contact</h2>
-              <p class="signup-form__lead">We will use this for updates and your welcome email.</p>
+              <div class="signup-panel__head">
+                <h2 class="signup-form__title">Primary contact</h2>
+                <p class="signup-form__lead">We will use this for updates and your welcome email.</p>
+              </div>
               <div class="signup-form__grid">
                 <div class="field">
                   <label for="contactName">Contact name *</label>
@@ -1853,16 +1864,26 @@ function getStartedPage() {
           </form>
 
           <div class="signup-wizard__body" data-signup-panel="path-choice" hidden>
-            <h2 class="signup-form__title">How would you like to proceed?</h2>
-            <p class="signup-form__lead">Request a tailored quotation or proceed directly to purchase and onboarding.</p>
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">How would you like to proceed?</h2>
+              <p class="signup-form__lead">Request a tailored quotation or proceed directly to purchase and onboarding.</p>
+            </div>
             <div class="signup-path-tiles">
-              <button type="button" class="signup-path-tile" data-signup-path="quote">
-                <strong>Request a quotation</strong>
-                <span>Tell us your contract term, users, and admin licences. We will send a formal quote.</span>
+              <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="quote">
+                <span class="signup-glass-tile__bg" aria-hidden="true"></span>
+                <span class="signup-glass-tile__icon" aria-hidden="true">&#128196;</span>
+                <span class="signup-glass-tile__content">
+                  <strong>Request a quotation</strong>
+                  <span>Tell us your contract term, users, and admin licences. We will send a formal quote.</span>
+                </span>
               </button>
-              <button type="button" class="signup-path-tile" data-signup-path="purchase">
-                <strong>Proceed with purchase</strong>
-                <span>Select modules and complete payment to start onboarding straight away.</span>
+              <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="purchase">
+                <span class="signup-glass-tile__bg" aria-hidden="true"></span>
+                <span class="signup-glass-tile__icon" aria-hidden="true">&#128640;</span>
+                <span class="signup-glass-tile__content">
+                  <strong>Proceed with purchase</strong>
+                  <span>Select modules and complete payment to start onboarding straight away.</span>
+                </span>
               </button>
             </div>
             <p class="signup-form__message" data-signup-msg="path-choice" hidden></p>
@@ -1872,9 +1893,11 @@ function getStartedPage() {
           </div>
 
           <div class="signup-wizard__body" data-signup-panel="quote-requirements" hidden>
-            <h2 class="signup-form__title">Quotation requirements</h2>
-            <p class="signup-form__lead">Minimum contract term is 12 months.</p>
-            <div class="signup-form__grid">
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">Quotation requirements</h2>
+              <p class="signup-form__lead">Minimum contract term is 12 months.</p>
+            </div>
+            <div class="signup-form__grid signup-form__grid--glass">
               <div class="field">
                 <label for="contractMonths">Contract duration (months) *</label>
                 <input id="contractMonths" name="contractMonths" type="number" min="12" step="1" value="12" required />
@@ -1896,9 +1919,11 @@ function getStartedPage() {
           </div>
 
           <div class="signup-wizard__body" data-signup-panel="quote-modules" hidden>
-            <h2 class="signup-form__title">Modules for your quote</h2>
-            <p class="signup-form__lead">Select bolt-on modules to include in your quotation.</p>
-            <div data-signup-modules class="signup-modules__list signup-modules__list--scroll"></div>
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">Modules for your quote</h2>
+              <p class="signup-form__lead">Select bolt-on modules to include in your quotation.</p>
+            </div>
+            <div data-signup-modules class="signup-module-grid"></div>
             <div class="field field--full" style="margin-top:1rem">
               <label for="notes">Notes for our team</label>
               <textarea id="notes" name="notes" rows="2" placeholder="Fleet size, depots, or procurement requirements"></textarea>
@@ -1910,15 +1935,20 @@ function getStartedPage() {
             </div>
           </div>
 
-          <div class="signup-wizard__body" data-signup-panel="quote-complete" hidden>
-            <h2 class="signup-form__title">Quotation request received</h2>
-            <p class="signup-form__lead" data-signup-success-message>Thank you — we will prepare your quotation and email it to you shortly.</p>
+          <div class="signup-wizard__body signup-wizard__body--success" data-signup-panel="quote-complete" hidden>
+            <div class="signup-success-badge" aria-hidden="true">&#10003;</div>
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">Quotation request received</h2>
+              <p class="signup-form__lead" data-signup-success-message>Thank you — we will prepare your quotation and email it to you shortly.</p>
+            </div>
           </div>
 
           <div class="signup-wizard__body" data-signup-panel="purchase-modules" hidden>
-            <h2 class="signup-form__title">Optional modules</h2>
-            <p class="signup-form__lead">Select bolt-on modules for your purchase.</p>
-            <div data-signup-modules-purchase class="signup-modules__list signup-modules__list--scroll"></div>
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">Optional modules</h2>
+              <p class="signup-form__lead">Select bolt-on modules for your purchase.</p>
+            </div>
+            <div data-signup-modules-purchase class="signup-module-grid"></div>
             <div class="field field--full" style="margin-top:1rem">
               <label for="purchaseNotes">Notes for our team</label>
               <textarea id="purchaseNotes" name="purchaseNotes" rows="2" placeholder="Fleet size, depots, or procurement requirements"></textarea>
@@ -1931,8 +1961,10 @@ function getStartedPage() {
           </div>
 
           <div class="signup-wizard__body" data-signup-panel="purchase-payment" hidden>
-            <h2 class="signup-form__title">Payment method</h2>
-            <p class="signup-form__lead">Choose how you would like to pay. No prices are shown here — your order is confirmed after payment or PO submission.</p>
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">Payment method</h2>
+              <p class="signup-form__lead">Choose how you would like to pay. No prices are shown here — your order is confirmed after payment or PO submission.</p>
+            </div>
             <div class="signup-payment-options" data-signup-payment-options></div>
             <p class="signup-form__message" data-signup-msg="purchase-payment" hidden></p>
             <div class="signup-wizard__actions">
@@ -1971,16 +2003,14 @@ function getStartedPage() {
             <p class="signup-form__message" data-signup-msg="purchase-pay" hidden></p>
           </div>
 
-          <div class="signup-wizard__body" data-signup-panel="purchase-complete" hidden>
-            <h2 class="signup-form__title">Application received</h2>
-            <p class="signup-form__lead" data-signup-success-message-purchase>Thank you — your application has been received.</p>
+          <div class="signup-wizard__body signup-wizard__body--success" data-signup-panel="purchase-complete" hidden>
+            <div class="signup-success-badge" aria-hidden="true">&#10003;</div>
+            <div class="signup-panel__head">
+              <h2 class="signup-form__title">Application received</h2>
+              <p class="signup-form__lead" data-signup-success-message-purchase>Thank you — your application has been received.</p>
+            </div>
           </div>
         </div>
-        <aside class="signup-aside panel" data-signup-aside>
-          <h2 data-signup-aside-title>Application guide</h2>
-          <p class="signup-aside__tip" data-signup-aside-tip>Work through each step with Next. Request a quote or proceed to purchase and onboarding.</p>
-          <p class="signup-aside__note">Already have an account? <a href="${site.app}">Log in to Rail Intel CMS</a>.</p>
-        </aside>
       </div>
     </section>
   </main>
