@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 148;
+const ASSET_VERSION = 150;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -281,61 +281,50 @@ ${dots}
       </div>`;
 }
 
-function renderImmersiveViewport(section, base) {
+function renderStageGallery(section, base) {
   const shots = section.shots || [];
   const count = shots.length;
 
-  const slides = shots
+  const panels = shots
     .map((shot, index) => {
       const size = manifest[shot.src];
       if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
-      const width = size.width;
-      const height = size.height;
+      const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+      const width = Math.max(1, Math.round(size.width * scale));
+      const height = Math.max(1, Math.round(size.height * scale));
       const label = shot.title || shot.caption || `Screen ${index + 1}`;
       const step = shot.step || String(index + 1).padStart(2, "0");
 
-      return `            <figure
-              class="admin-viewport__slide${index === 0 ? " is-active" : ""}"
-              data-admin-slide
-              data-admin-title="${esc(label)}"
-              data-admin-caption="${esc(shot.caption || label)}"
-              data-admin-step="${esc(step)}"
-              aria-hidden="${index === 0 ? "false" : "true"}"
-            >
+      const panelClass = [
+        "shot-stage__panel",
+        index === 0 ? "is-front" : null,
+        index === 1 || (index === count - 1 && count > 1) ? "is-adjacent" : null,
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      return `        <li
+          class="${panelClass}"
+          data-shot-stage-panel
+          data-shot-stage-title="${esc(label)}"
+          data-shot-stage-caption="${esc(shot.caption || label)}"
+          data-shot-stage-step="${esc(step)}"
+          style="--panel-i: ${index}"
+          aria-hidden="${index === 0 ? "false" : "true"}"
+        >
+          <button type="button" class="shot-stage__card" aria-label="${esc(label)}">
+            <div class="shot-stage__frame">
               <img
                 src="${base}${shot.src}?v=${ASSET_VERSION}"
                 alt="${esc(shot.caption || shot.title || "")}"
                 width="${width}"
                 height="${height}"
-                sizes="(min-width: 1200px) 1100px, 94vw"
                 loading="${index === 0 ? "eager" : "lazy"}"
                 decoding="async"
-                ${index === 0 ? 'fetchpriority="high"' : ""}
               />
-            </figure>`;
-    })
-    .join("\n");
-
-  const railItems = shots
-    .map((shot, index) => {
-      const size = manifest[shot.src];
-      if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
-      const label = shot.title || shot.caption || `Screen ${index + 1}`;
-      const step = shot.step || String(index + 1).padStart(2, "0");
-
-      return `          <button
-            type="button"
-            class="admin-viewport__thumb${index === 0 ? " is-active" : ""}"
-            data-admin-thumb="${index}"
-            aria-label="${esc(label)}"
-            aria-current="${index === 0 ? "true" : "false"}"
-          >
-            <span class="admin-viewport__thumb-index">${esc(step)}</span>
-            <span class="admin-viewport__thumb-preview">
-              <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="" width="${Math.round(size.width * 0.2)}" height="${Math.round(size.height * 0.2)}" loading="lazy" decoding="async" />
-            </span>
-            <span class="admin-viewport__thumb-label">${esc(label)}</span>
-          </button>`;
+            </div>
+          </button>
+        </li>`;
     })
     .join("\n");
 
@@ -343,64 +332,31 @@ function renderImmersiveViewport(section, base) {
   const firstLabel = first?.title || first?.caption || "";
   const navHidden = count < 2 ? ' hidden aria-hidden="true"' : "";
 
-  return `      <div class="admin-viewport reveal" data-admin-viewport data-slide-count="${count}">
-        <div class="admin-viewport__ambient" aria-hidden="true">
-          <div class="admin-viewport__gridlines"></div>
-          <div class="admin-viewport__orb admin-viewport__orb--a"></div>
-          <div class="admin-viewport__orb admin-viewport__orb--b"></div>
-        </div>
-        <div class="admin-viewport__shell">
-          <div class="admin-viewport__window-wrap">
-            <div class="admin-viewport__window">
-              <div class="admin-viewport__titlebar" aria-hidden="true">
-                <span class="admin-viewport__traffic"></span>
-                <span class="admin-viewport__url">cms.railintel.co.uk · Administration</span>
-                <span class="admin-viewport__badge">Live product</span>
-              </div>
-              <div class="admin-viewport__chrome">
-                <aside class="admin-viewport__sidebar" aria-hidden="true">
-                  <div class="admin-viewport__brand">Ri</div>
-                  <span class="admin-viewport__nav-item">Dashboard</span>
-                  <span class="admin-viewport__nav-item">Employees</span>
-                  <span class="admin-viewport__nav-item">Reporting</span>
-                  <span class="admin-viewport__nav-item is-active">Administration</span>
-                  <span class="admin-viewport__nav-item">Add-ons</span>
-                </aside>
-                <div class="admin-viewport__main">
-                  <header class="admin-viewport__header" aria-hidden="true">
-                    <span class="admin-viewport__scope">Viewing as your company</span>
-                    <span class="admin-viewport__search">Search employees, records…</span>
-                    <span class="admin-viewport__user">Administrator</span>
-                  </header>
-                  <div class="admin-viewport__screen" data-admin-screen tabindex="0" role="region" aria-label="Administration screenshots">
-                    <div class="admin-viewport__slides" data-admin-slides>
-${slides}
-                    </div>
-                    <div class="admin-viewport__scan" aria-hidden="true"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="admin-viewport__reflection" aria-hidden="true"></div>
+  return `      <div class="shot-stage reveal" data-shot-stage data-shot-count="${count}" tabindex="0">
+        <div class="shot-stage__arena" data-shot-stage-arena>
+          <div class="shot-stage__glow" aria-hidden="true"></div>
+          <div class="shot-stage__scene">
+            <ul class="shot-stage__ring" data-shot-stage-ring role="list">
+${panels}
+            </ul>
           </div>
-          <nav class="admin-viewport__rail" data-admin-rail aria-label="Screens in this section"${count < 2 ? ' hidden' : ""}>
-${railItems}
-          </nav>
+          <div class="shot-stage__floor" aria-hidden="true"></div>
         </div>
-        <div class="admin-viewport__hud">
-          <div class="admin-viewport__hud-copy" aria-live="polite">
-            <p class="admin-viewport__hud-step" data-admin-step>${count > 1 ? `01 / ${String(count).padStart(2, "0")}` : "01"}</p>
-            <h3 class="admin-viewport__hud-title" data-admin-title>${esc(firstLabel)}</h3>
-            <p class="admin-viewport__hud-caption" data-admin-caption>${esc(first?.caption || firstLabel)}</p>
+        <div class="shot-stage__footer">
+          <div class="shot-stage__meta" aria-live="polite">
+            <p class="shot-stage__step" data-shot-stage-step>${count > 1 ? `01 / ${String(count).padStart(2, "0")}` : "01"}</p>
+            <h3 class="shot-stage__title" data-shot-stage-title>${esc(firstLabel)}</h3>
+            <p class="shot-stage__caption" data-shot-stage-caption>${esc(first?.caption || firstLabel)}</p>
           </div>
-          <div class="admin-viewport__hud-controls"${navHidden}>
-            <button type="button" class="admin-viewport__hud-btn" data-admin-prev aria-label="Previous screen">
+          <div class="shot-stage__controls"${navHidden}>
+            <button type="button" class="shot-stage__btn" data-shot-stage-prev aria-label="Previous screenshot">
               <span aria-hidden="true">←</span>
             </button>
-            <div class="admin-viewport__hud-progress" aria-hidden="true">
-              <span class="admin-viewport__hud-progress-bar" data-admin-progress></span>
+            <div class="shot-stage__dots" data-shot-stage-dots role="tablist" aria-label="Screenshots"></div>
+            <div class="shot-stage__progress" aria-hidden="true">
+              <span class="shot-stage__progress-bar" data-shot-stage-progress></span>
             </div>
-            <button type="button" class="admin-viewport__hud-btn" data-admin-next aria-label="Next screen">
+            <button type="button" class="shot-stage__btn" data-shot-stage-next aria-label="Next screenshot">
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -493,7 +449,7 @@ function renderSection(section, base) {
     : "";
 
   const gallery = section.shotGrid === "gallery";
-  const immersive = section.shotGrid === "immersive";
+  const stage = section.shotGrid === "stage";
   const spotlight = section.shotGrid === "spotlight";
   const showcase = section.shotGrid === "showcase";
   const heroStack = section.shotGrid === "hero-stack";
@@ -505,8 +461,8 @@ function renderSection(section, base) {
 
   let shots = "";
   if (section.shots) {
-    if (immersive) {
-      shots = renderImmersiveViewport(section, base);
+    if (stage) {
+      shots = renderStageGallery(section, base);
     } else if (spotlight) {
       shots = renderSpotlightGallery(section, base);
     } else if (gallery) {
@@ -529,21 +485,8 @@ function renderSection(section, base) {
     }
   }
 
-  if (immersive) {
-    return `    <section class="page-section page-section--immersive">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>${esc(section.heading)}</h2>
-${body}
-${bullets}
-        </div>
-      </div>
-${shots}
-    </section>`;
-  }
-
-  return `    <section class="page-section${gallery ? " page-section--gallery" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
-      <div class="container${gallery || spotlight || showcase ? " container--showcase" : ""}">
+  return `    <section class="page-section${gallery ? " page-section--gallery" : stage ? " page-section--stage" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+      <div class="container${gallery || stage || spotlight || showcase ? " container--showcase" : ""}">
         <div class="page-section__head">
           <h2>${esc(section.heading)}</h2>
 ${body}

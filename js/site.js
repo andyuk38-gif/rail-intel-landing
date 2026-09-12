@@ -996,85 +996,161 @@
     startAuto();
   });
 
-  /* ---------- Immersive admin viewport ---------- */
+  /* ---------- 3D stage screenshot gallery ---------- */
 
-  Array.prototype.forEach.call(document.querySelectorAll("[data-admin-viewport]"), function (viewport) {
-    var slides = Array.prototype.slice.call(viewport.querySelectorAll("[data-admin-slide]"));
-    var thumbs = Array.prototype.slice.call(viewport.querySelectorAll("[data-admin-thumb]"));
-    var screen = viewport.querySelector("[data-admin-screen]");
-    var hudCopy = viewport.querySelector(".admin-viewport__hud-copy");
-    var stepEl = viewport.querySelector("[data-admin-step]");
-    var titleEl = viewport.querySelector("[data-admin-title]");
-    var captionEl = viewport.querySelector("[data-admin-caption]");
-    var progressBar = viewport.querySelector("[data-admin-progress]");
-    var prevBtn = viewport.querySelector("[data-admin-prev]");
-    var nextBtn = viewport.querySelector("[data-admin-next]");
-    var count = slides.length;
-    if (!count) return;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-shot-stage]"), function (stageRoot) {
+    var arena = stageRoot.querySelector("[data-shot-stage-arena]");
+    var scene = stageRoot.querySelector("[data-shot-stage-arena] .shot-stage__scene");
+    var ring = stageRoot.querySelector("[data-shot-stage-ring]");
+    var panels = Array.prototype.slice.call(stageRoot.querySelectorAll("[data-shot-stage-panel]"));
+    var dotsRoot = stageRoot.querySelector("[data-shot-stage-dots]");
+    var prevBtn = stageRoot.querySelector("[data-shot-stage-prev]");
+    var nextBtn = stageRoot.querySelector("[data-shot-stage-next]");
+    var meta = stageRoot.querySelector(".shot-stage__meta");
+    var stepEl = stageRoot.querySelector("[data-shot-stage-step]");
+    var titleEl = stageRoot.querySelector("[data-shot-stage-title]");
+    var captionEl = stageRoot.querySelector("[data-shot-stage-caption]");
+    var progressBar = stageRoot.querySelector("[data-shot-stage-progress]");
+    var count = panels.length;
+    if (!arena || !scene || !ring || !count) return;
 
     var index = 0;
+    var displayAngle = 0;
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var compact = function () {
+      return window.matchMedia("(max-width: 900px)").matches;
+    };
     var autoTimer = null;
     var progressTimer = null;
     var progressStart = 0;
     var paused = false;
+    var dragging = false;
     var dragStart = 0;
     var dragDelta = 0;
-    var AUTO_MS = 6500;
+    var STAGE_AUTO_MS = 6000;
 
-    function syncHud() {
-      var slide = slides[index];
-      if (!slide) return;
+    function stepSize() {
+      return 360 / count;
+    }
+
+    function layout() {
+      var angle = stepSize();
+      stageRoot.style.setProperty("--stage-angle", angle + "deg");
+      var panelWidth = Math.min(832, Math.max(280, arena.clientWidth * 0.9));
+      stageRoot.style.setProperty("--stage-panel-width", panelWidth + "px");
+      if (count < 2) {
+        stageRoot.style.setProperty("--stage-radius", "0px");
+        return;
+      }
+      var radius = Math.round(panelWidth / (2 * Math.tan(Math.PI / count)) + 72);
+      radius = Math.max(260, Math.min(radius, 480));
+      stageRoot.style.setProperty("--stage-radius", radius + "px");
+      panels.forEach(function (panel, panelIndex) {
+        panel.style.setProperty("--panel-i", String(panelIndex));
+      });
+    }
+
+    function isAdjacent(panelIndex) {
+      var left = (index - 1 + count) % count;
+      var right = (index + 1) % count;
+      return panelIndex === left || panelIndex === right;
+    }
+
+    function labelFor(panel) {
+      return panel.getAttribute("data-shot-stage-title") || "";
+    }
+
+    function buildDots() {
+      if (!dotsRoot || count < 2) return;
+      dotsRoot.replaceChildren();
+      panels.forEach(function (panel, panelIndex) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "shot-stage__dot";
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-label", labelFor(panel) || "Screenshot " + (panelIndex + 1));
+        dot.addEventListener("click", function () {
+          setIndex(panelIndex, true);
+        });
+        dotsRoot.appendChild(dot);
+      });
+    }
+
+    function syncDots() {
+      if (!dotsRoot) return;
+      Array.prototype.forEach.call(dotsRoot.querySelectorAll(".shot-stage__dot"), function (dot, dotIndex) {
+        var active = dotIndex === index;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function syncMeta() {
+      var panel = panels[index];
+      if (!panel) return;
       if (stepEl) {
         stepEl.textContent =
           count > 1
             ? String(index + 1).padStart(2, "0") + " / " + String(count).padStart(2, "0")
-            : "01";
+            : panel.getAttribute("data-shot-stage-step") || "01";
       }
-      if (titleEl) titleEl.textContent = slide.getAttribute("data-admin-title") || "";
-      if (captionEl) captionEl.textContent = slide.getAttribute("data-admin-caption") || "";
+      if (titleEl) titleEl.textContent = panel.getAttribute("data-shot-stage-title") || "";
+      if (captionEl) captionEl.textContent = panel.getAttribute("data-shot-stage-caption") || "";
     }
 
-    function flashHud() {
-      if (!hudCopy || reduced) return;
-      hudCopy.classList.add("is-changing");
+    function applyState() {
+      stageRoot.style.setProperty("--stage-rotate", displayAngle + "deg");
+      panels.forEach(function (panel, panelIndex) {
+        var isFront = panelIndex === index;
+        panel.classList.toggle("is-front", isFront);
+        panel.classList.toggle("is-adjacent", isAdjacent(panelIndex));
+        panel.setAttribute("aria-hidden", isFront ? "false" : "true");
+        var card = panel.querySelector(".shot-stage__card");
+        if (card) card.tabIndex = isFront ? 0 : -1;
+      });
+      syncDots();
+      syncMeta();
+
+      if (compact() && scene) {
+        var target = panels[index];
+        if (target) {
+          var offset = target.offsetLeft - (scene.clientWidth - target.offsetWidth) / 2;
+          scene.scrollTo({ left: offset, behavior: reduced ? "auto" : "smooth" });
+        }
+      }
+    }
+
+    function flashMeta() {
+      if (!meta || reduced) return;
+      meta.classList.add("is-changing");
       window.setTimeout(function () {
-        hudCopy.classList.remove("is-changing");
+        meta.classList.remove("is-changing");
       }, 180);
     }
 
     function setIndex(nextIndex, userInitiated) {
       if (count < 2) return;
       var newIndex = ((nextIndex % count) + count) % count;
-      if (newIndex === index) return;
       if (userInitiated) restartAuto();
-
-      slides.forEach(function (slide, slideIndex) {
-        slide.classList.remove("is-exiting");
-        if (slideIndex === index) slide.classList.add("is-exiting");
-        slide.classList.toggle("is-active", slideIndex === newIndex);
-        slide.setAttribute("aria-hidden", slideIndex === newIndex ? "false" : "true");
-      });
-
-      thumbs.forEach(function (thumb, thumbIndex) {
-        var active = thumbIndex === newIndex;
-        thumb.classList.toggle("is-active", active);
-        thumb.setAttribute("aria-current", active ? "true" : "false");
-      });
-
+      if (newIndex === index) {
+        displayAngle = -index * stepSize();
+        applyState();
+        return;
+      }
+      var delta = newIndex - index;
+      if (delta > count / 2) delta -= count;
+      else if (delta < -count / 2) delta += count;
+      displayAngle -= delta * stepSize();
       index = newIndex;
-      flashHud();
-      syncHud();
-
-      window.setTimeout(function () {
-        slides.forEach(function (slide) {
-          slide.classList.remove("is-exiting");
-        });
-      }, reduced ? 0 : 520);
+      flashMeta();
+      applyState();
     }
 
     function advance() {
-      setIndex(index + 1, false);
+      displayAngle -= stepSize();
+      index = (index + 1) % count;
+      flashMeta();
+      applyState();
     }
 
     function stopAuto() {
@@ -1092,9 +1168,9 @@
     function tickProgress() {
       if (!progressBar || paused || reduced || count < 2) return;
       var elapsed = Date.now() - progressStart;
-      var pct = Math.min(100, (elapsed / AUTO_MS) * 100);
+      var pct = Math.min(100, (elapsed / STAGE_AUTO_MS) * 100);
       progressBar.style.width = pct + "%";
-      if (elapsed < AUTO_MS) progressTimer = requestAnimationFrame(tickProgress);
+      if (elapsed < STAGE_AUTO_MS) progressTimer = requestAnimationFrame(tickProgress);
     }
 
     function startAuto() {
@@ -1103,10 +1179,10 @@
       progressStart = Date.now();
       tickProgress();
       autoTimer = setInterval(function () {
-        if (!paused) advance();
+        if (!paused && !dragging) advance();
         progressStart = Date.now();
         if (progressBar) progressBar.style.width = "0%";
-      }, AUTO_MS);
+      }, STAGE_AUTO_MS);
     }
 
     function restartAuto() {
@@ -1124,9 +1200,12 @@
       startAuto();
     }
 
-    thumbs.forEach(function (thumb) {
-      thumb.addEventListener("click", function () {
-        setIndex(Number(thumb.getAttribute("data-admin-thumb")) || 0, true);
+    panels.forEach(function (panel, panelIndex) {
+      var card = panel.querySelector(".shot-stage__card");
+      if (!card) return;
+      card.addEventListener("click", function () {
+        if (panelIndex === index) return;
+        if (isAdjacent(panelIndex) || compact()) setIndex(panelIndex, true);
       });
     });
 
@@ -1141,32 +1220,37 @@
       });
     }
 
-    var dragTarget = screen || viewport;
-    dragTarget.addEventListener(
+    scene.addEventListener(
       "pointerdown",
       function (event) {
         if (count < 2) return;
         if (event.pointerType === "mouse" && event.button !== 0) return;
         if (event.target.closest("button, a, .shot__expand, .lightbox")) return;
+        dragging = true;
         dragStart = event.clientX;
         dragDelta = 0;
-        dragTarget.setPointerCapture(event.pointerId);
+        ring.classList.add("is-dragging");
+        scene.classList.add("is-dragging");
+        scene.setPointerCapture(event.pointerId);
         pauseAuto();
       },
       { passive: true }
     );
-    dragTarget.addEventListener(
+    scene.addEventListener(
       "pointermove",
       function (event) {
-        if (!dragTarget.hasPointerCapture(event.pointerId)) return;
+        if (!scene.hasPointerCapture(event.pointerId)) return;
         dragDelta = event.clientX - dragStart;
       },
       { passive: true }
     );
-    dragTarget.addEventListener("pointerup", function (event) {
-      if (!dragTarget.hasPointerCapture(event.pointerId)) return;
-      dragTarget.releasePointerCapture(event.pointerId);
-      if (Math.abs(dragDelta) >= 50) {
+    scene.addEventListener("pointerup", function (event) {
+      if (!scene.hasPointerCapture(event.pointerId)) return;
+      scene.releasePointerCapture(event.pointerId);
+      ring.classList.remove("is-dragging");
+      scene.classList.remove("is-dragging");
+      dragging = false;
+      if (Math.abs(dragDelta) >= 42) {
         if (dragDelta < 0) setIndex(index + 1, true);
         else setIndex(index - 1, true);
       } else {
@@ -1174,7 +1258,7 @@
       }
     });
 
-    viewport.addEventListener("keydown", function (event) {
+    stageRoot.addEventListener("keydown", function (event) {
       if (count < 2) return;
       if (event.key === "ArrowLeft") {
         event.preventDefault();
@@ -1185,11 +1269,11 @@
       }
     });
 
-    viewport.addEventListener("mouseenter", pauseAuto);
-    viewport.addEventListener("mouseleave", resumeAuto);
-    viewport.addEventListener("focusin", pauseAuto);
-    viewport.addEventListener("focusout", function (event) {
-      if (!viewport.contains(event.relatedTarget)) resumeAuto();
+    stageRoot.addEventListener("mouseenter", pauseAuto);
+    stageRoot.addEventListener("mouseleave", resumeAuto);
+    stageRoot.addEventListener("focusin", pauseAuto);
+    stageRoot.addEventListener("focusout", function (event) {
+      if (!stageRoot.contains(event.relatedTarget)) resumeAuto();
     });
 
     document.addEventListener("visibilitychange", function () {
@@ -1197,8 +1281,47 @@
       else if (!paused) startAuto();
     });
 
-    syncHud();
+    function nearestFromScroll() {
+      if (!compact() || !scene) return index;
+      var center = scene.scrollLeft + scene.clientWidth / 2;
+      var nearest = 0;
+      var nearestDistance = Infinity;
+      panels.forEach(function (panel, panelIndex) {
+        var panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
+        var distance = Math.abs(panelCenter - center);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = panelIndex;
+        }
+      });
+      return nearest;
+    }
+
+    if (scene) {
+      scene.addEventListener(
+        "scroll",
+        function () {
+          if (!compact() || dragging) return;
+          var nearest = nearestFromScroll();
+          if (nearest !== index) {
+            index = nearest;
+            syncDots();
+            syncMeta();
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    layout();
+    buildDots();
+    applyState();
     startAuto();
+
+    window.addEventListener("resize", function () {
+      layout();
+      applyState();
+    });
   });
 
   /* ---------- 3D spotlight screenshot gallery ---------- */
