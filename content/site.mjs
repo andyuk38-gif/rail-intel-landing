@@ -1254,11 +1254,21 @@ export const featureGroups = [
         shotGrid: "viewer",
         viewerLayout: "sidebar",
         viewerPartner: {
-          kicker: "Compatible with",
-          title: "Google Authenticator",
+          kicker: "Works with standard authenticator apps",
+          title: "Google Authenticator and other TOTP apps",
           body:
-            "Rail Intel supports standard time-based one-time codes from Google Authenticator and other TOTP apps.",
+            "Rail Intel uses industry-standard time-based one-time passwords. Users scan a QR code once during enrolment, then enter a six-digit code at sign-in.",
           logo: "images/security/google-logo.webp",
+          apps: [
+            "Google Authenticator",
+            "Microsoft Authenticator",
+            "Authy",
+            "1Password",
+            "Bitwarden",
+            "Duo Mobile",
+          ],
+          note:
+            "Any TOTP-compatible app works — including built-in authenticators on iOS and Android.",
         },
         shots: [
           {

@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 160;
+const ASSET_VERSION = 161;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -287,22 +287,36 @@ function renderViewerPartner(partner, base) {
   const title = partner.title || "Google Authenticator";
   const kicker = partner.kicker || "Compatible with";
   const body = partner.body || "";
+  const apps = Array.isArray(partner.apps) ? partner.apps : [];
+  const note = partner.note || "";
+
+  const appsHtml = apps.length
+    ? `          <ul class="shot-viewer__partner-apps">
+${apps.map((app) => `            <li>${esc(app)}</li>`).join("\n")}
+          </ul>`
+    : "";
 
   return `
         <aside class="shot-viewer__partner" aria-label="${esc(title)}">
-          <div class="shot-viewer__partner-mark">
-            <img
-              src="${base}${logo}?v=${ASSET_VERSION}"
-              alt=""
-              width="72"
-              height="72"
-              loading="lazy"
-              decoding="async"
-            />
+          <div class="shot-viewer__partner-head">
+            <div class="shot-viewer__partner-mark">
+              <img
+                src="${base}${logo}?v=${ASSET_VERSION}"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="shot-viewer__partner-intro">
+              <p class="shot-viewer__partner-kicker">${esc(kicker)}</p>
+              <h3 class="shot-viewer__partner-title">${esc(title)}</h3>
+            </div>
           </div>
-          <p class="shot-viewer__partner-kicker">${esc(kicker)}</p>
-          <h3 class="shot-viewer__partner-title">${esc(title)}</h3>
           ${body ? `<p class="shot-viewer__partner-body">${esc(body)}</p>` : ""}
+${appsHtml}
+          ${note ? `<p class="shot-viewer__partner-note">${esc(note)}</p>` : ""}
         </aside>`;
 }
 
