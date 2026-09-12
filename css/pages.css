@@ -1426,6 +1426,33 @@
   object-position: center center;
 }
 
+.shot-viewer__hint {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 50%;
+  z-index: 6;
+  margin: 0;
+  padding: 0.3rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 12, 20, 0.78);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 0.18s ease;
+}
+
+.shot-viewer__shell:hover .shot-viewer__hint,
+.shot-viewer__shell:focus-within .shot-viewer__hint {
+  opacity: 0;
+}
+
 .shot-viewer__preview {
   position: absolute;
   top: 0;
@@ -1480,6 +1507,11 @@
 
 @media (hover: none) {
   .shot-viewer__frame-inner .shot__expand {
+    opacity: 1;
+  }
+
+  .shot-viewer__shell:hover .shot-viewer__hint,
+  .shot-viewer__shell:focus-within .shot-viewer__hint {
     opacity: 1;
   }
 }

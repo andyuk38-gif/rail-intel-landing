@@ -1221,6 +1221,13 @@
     var hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     var syncPreview;
 
+    if (shell && !shell.querySelector(".shot-viewer__hint")) {
+      var hint = document.createElement("p");
+      hint.className = "shot-viewer__hint";
+      hint.textContent = hoverCapable ? "Hover to enlarge" : "Tap expand for full size";
+      shell.appendChild(hint);
+    }
+
     function activeImage() {
       var frame = frames[index];
       return frame ? frame.querySelector(".shot-viewer__image") : null;
