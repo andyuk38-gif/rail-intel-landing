@@ -4590,19 +4590,75 @@ body.lightbox-open {
 .signup-path-tiles {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.15rem;
+  margin-top: 0.25rem;
+}
+
+.signup-path-tile {
+  animation: signup-tile-in 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.signup-path-tile:nth-child(2) {
+  animation-delay: 80ms;
 }
 
 .signup-path-tile .signup-glass-tile__surface {
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.35rem;
-  min-height: 9.5rem;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 1.5rem 1.4rem;
+  min-height: 11rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.07) 42%, rgba(8, 10, 14, 0.62) 100%);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.signup-path-tile .signup-glass-tile__surface::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  opacity: 0.9;
+  z-index: 2;
+}
+
+.signup-path-tile .signup-glass-tile__bg {
+  opacity: 0.42;
+  background-size: 88%;
+  background-position: right -0.5rem bottom -0.25rem;
+}
+
+.signup-path-tile .signup-glass-tile__content strong {
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.signup-path-tile .signup-glass-tile__content > span {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.93rem;
 }
 
 .signup-path-tile:hover .signup-glass-tile__surface,
 .signup-path-tile:focus-visible .signup-glass-tile__surface {
   outline: none;
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 70%, #fff);
+  box-shadow:
+    0 20px 52px rgba(0, 0, 0, 0.45),
+    0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.signup-path-tile:hover .signup-glass-tile__bg,
+.signup-path-tile:focus-visible .signup-glass-tile__bg {
+  opacity: 0.55;
 }
 
 .quotation-preview {

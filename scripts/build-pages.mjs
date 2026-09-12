@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 184;
+const ASSET_VERSION = 185;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1870,17 +1870,21 @@ function getStartedPage() {
             </div>
             <div class="signup-path-tiles">
               <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="quote">
-                <span class="signup-glass-tile__bg" aria-hidden="true"></span>
-                <span class="signup-glass-tile__content">
-                  <strong>Request a quotation</strong>
-                  <span>Tell us your contract term, users, and admin licences. We will send a formal quote.</span>
+                <span class="signup-glass-tile__surface">
+                  <span class="signup-glass-tile__bg" aria-hidden="true"></span>
+                  <span class="signup-glass-tile__content">
+                    <strong>Request a quotation</strong>
+                    <span>Tell us your contract term, users, and admin licences. We will send a formal quote.</span>
+                  </span>
                 </span>
               </button>
               <button type="button" class="signup-glass-tile signup-path-tile" data-signup-path="purchase">
-                <span class="signup-glass-tile__bg" aria-hidden="true"></span>
-                <span class="signup-glass-tile__content">
-                  <strong>Proceed with purchase</strong>
-                  <span>Select modules and complete payment to start onboarding straight away.</span>
+                <span class="signup-glass-tile__surface">
+                  <span class="signup-glass-tile__bg" aria-hidden="true"></span>
+                  <span class="signup-glass-tile__content">
+                    <strong>Proceed with purchase</strong>
+                    <span>Select modules and complete payment to start onboarding straight away.</span>
+                  </span>
                 </span>
               </button>
             </div>
