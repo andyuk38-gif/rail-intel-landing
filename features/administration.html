@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=141" />
-  <link rel="stylesheet" href="../css/pages.css?v=141" />
+  <link rel="stylesheet" href="../css/style.css?v=142" />
+  <link rel="stylesheet" href="../css/pages.css?v=142" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -208,9 +208,9 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--intro-split">
       <div class="container">
-        <div class="page-hero__inner page-hero__inner--split">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--with-intro">
           <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Administration</p>
           <span class="page-badge page-badge--core">Included as standard</span>
@@ -220,11 +220,22 @@
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="../features/" class="btn btn-ghost btn-lg">All features</a>
           </div>
+          <div class="page-hero__intro">
+            <h2 class="page-hero__intro-title">The Administration menu</h2>
+            <p>Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.</p>
+            <p>The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.</p>
+            <ul class="spec-list">
+              <li><strong>Team Management</strong> — administrator seats, users and access.</li>
+              <li><strong>Module shortcuts</strong> — QA Verifications, Trainee and Leave &amp; Absence when those add-ons are active.</li>
+              <li><strong>Storage</strong> — document storage administration.</li>
+              <li><strong>Company configuration</strong> — roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.</li>
+            </ul>
+          </div>
           </div>
           <div class="page-hero__media">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/adminmenu.png?v=141" alt="The Administration fly-out menu — team management, module settings, storage and company configuration." width="489" height="1024" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/adminmenu.png?v=142" alt="The Administration fly-out menu — team management, module settings, storage and company configuration." width="489" height="1024" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The Administration fly-out menu — team management, module settings, storage and company configuration.</figcaption>
         </figure>
@@ -233,23 +244,6 @@
       </div>
     </section>
 
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>The Administration menu</h2>
-          <p>Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.</p>
-          <p>The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.</p>
-          <ul class="spec-list">
-            <li><strong>Team Management</strong> — administrator seats, users and access.</li>
-            <li><strong>Module shortcuts</strong> — QA Verifications, Trainee and Leave &amp; Absence when those add-ons are active.</li>
-            <li><strong>Storage</strong> — document storage administration.</li>
-            <li><strong>Company configuration</strong> — roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
 
     <section class="page-section">
       <div class="container">
@@ -267,19 +261,19 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 700px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/org-structure.png?v=141" alt="Organisation structure configuration." width="700" height="464" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/org-structure.png?v=142" alt="Organisation structure configuration." width="700" height="464" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Organisation structure configuration.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 693px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=141" alt="Configuring permissions for a company job role." width="693" height="521" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=142" alt="Configuring permissions for a company job role." width="693" height="521" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Configuring permissions for a company job role.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 704px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/role-permissions-configure.png?v=141" alt="Granular permission assignment across the platform." width="704" height="558" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/role-permissions-configure.png?v=142" alt="Granular permission assignment across the platform." width="704" height="558" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Granular permission assignment across the platform.</figcaption>
         </figure>
@@ -303,25 +297,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 705px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=141" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=142" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Applying a competency framework across cycles.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 703px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/grade-scale.png?v=141" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/grade-scale.png?v=142" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The grading scale used by assessors.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 699px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/set-company-standards.png?v=141" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/set-company-standards.png?v=142" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company standards for assessment and competence.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 786px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/timings-standards.png?v=141" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/timings-standards.png?v=142" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Timing standards including trainee daylight and darkness minimums.</figcaption>
         </figure>
@@ -340,25 +334,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 699px">
           <div class="shot__frame">
-            <img src="../images/screens/train-routes/traction-route-overview.png?v=141" alt="Traction and route overview for the company." width="699" height="353" loading="lazy" decoding="async" />
+            <img src="../images/screens/train-routes/traction-route-overview.png?v=142" alt="Traction and route overview for the company." width="699" height="353" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Traction and route overview for the company.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 776px">
           <div class="shot__frame">
-            <img src="../images/screens/train-routes/add-traction.png?v=141" alt="Adding a traction type." width="776" height="259" loading="lazy" decoding="async" />
+            <img src="../images/screens/train-routes/add-traction.png?v=142" alt="Adding a traction type." width="776" height="259" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Adding a traction type.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 692px">
           <div class="shot__frame">
-            <img src="../images/screens/train-routes/add-route.png?v=141" alt="Adding a route." width="692" height="261" loading="lazy" decoding="async" />
+            <img src="../images/screens/train-routes/add-route.png?v=142" alt="Adding a route." width="692" height="261" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Adding a route.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 696px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/set-traction-routes-depots.png?v=141" alt="Traction, routes and depots configuration." width="696" height="323" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/set-traction-routes-depots.png?v=142" alt="Traction, routes and depots configuration." width="696" height="323" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Traction, routes and depots configuration.</figcaption>
         </figure>
@@ -382,19 +376,19 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 791px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/addons-page.png?v=141" alt="The Add-ons page where optional modules are activated." width="791" height="528" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/addons-page.png?v=142" alt="The Add-ons page where optional modules are activated." width="791" height="528" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The Add-ons page where optional modules are activated.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 690px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/addons-library.png?v=141" alt="The add-ons library with available modules." width="690" height="562" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/addons-library.png?v=142" alt="The add-ons library with available modules." width="690" height="562" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The add-ons library with available modules.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 699px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/investigation-apimanagement.png?v=141" alt="Investigations API connector management." width="699" height="444" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/investigation-apimanagement.png?v=142" alt="Investigations API connector management." width="699" height="444" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Investigations API connector management.</figcaption>
         </figure>
@@ -418,7 +412,7 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 814px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/login-screen.png?v=141" alt="Sign-in with company code, email and password." width="814" height="456" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/login-screen.png?v=142" alt="Sign-in with company code, email and password." width="814" height="456" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Sign-in with company code, email and password.</figcaption>
         </figure>
@@ -454,6 +448,6 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=141"></script>
+  <script src="../js/site.js?v=142"></script>
 </body>
 </html>

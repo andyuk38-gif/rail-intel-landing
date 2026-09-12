@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 141;
+const ASSET_VERSION = 142;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1113,6 +1113,24 @@ ${renderCta(base, {
   );
 }
 
+function renderHeroIntro(intro) {
+  if (!intro) return "";
+
+  const body = (intro.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
+  const bullets = intro.bullets
+    ? `            <ul class="spec-list">\n${intro.bullets
+        .map((item) => `              <li>${rich(item)}</li>`)
+        .join("\n")}\n            </ul>`
+    : "";
+
+  return `
+          <div class="page-hero__intro">
+            <h2 class="page-hero__intro-title">${esc(intro.heading)}</h2>
+${body}
+${bullets}
+          </div>`;
+}
+
 function featurePage(group) {
   if (group.slug === "languages") return languagesHubPage();
 
@@ -1132,10 +1150,10 @@ ${
     ? ""
     : `            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
 }            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
-          </div>`;
+          </div>${renderHeroIntro(group.heroIntro)}`;
 
   const heroInner = group.heroShot
-    ? `        <div class="page-hero__inner page-hero__inner--split">
+    ? `        <div class="page-hero__inner page-hero__inner--split${group.heroIntro ? " page-hero__inner--with-intro" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
@@ -1154,7 +1172,7 @@ ${heroCopy}
     }) +
     `
   <main>
-    <section class="page-hero">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}">
       <div class="container">
 ${heroInner}
       </div>
