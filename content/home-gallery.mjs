@@ -53,7 +53,7 @@ export const homeGallery = {
         bullets: [
           "Issue counts for review, advisory and compliant statuses, updated from the live record.",
           "Open any person with outstanding checks and move straight into QA Verifications.",
-          "Built from current data — not a weekly export or the last report someone remembered to run.",
+          "Live realtime data — not a weekly export or the last report someone remembered to run.",
         ],
       },
     },
