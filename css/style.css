@@ -3098,7 +3098,7 @@ body::before {
   bottom: 1.25rem;
   z-index: 180;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: flex-end;
   gap: 0.75rem;
   max-width: min(26rem, calc(100vw - 2rem));
@@ -3273,10 +3273,18 @@ body::before {
     max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.eoi-widget[data-expanded="true"] {
+  max-height: calc(100vh - var(--dev-banner-height) - 2rem);
+  max-height: calc(100dvh - var(--dev-banner-height) - 2rem);
+}
+
 .eoi-widget[data-expanded="true"] .eoi-panel {
   opacity: 1;
   transform: scale(1) translateY(0);
-  max-height: 38rem;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--dev-banner-height) - 2rem);
+  max-height: calc(100dvh - var(--dev-banner-height) - 2rem);
   pointer-events: auto;
 }
 
@@ -3286,6 +3294,7 @@ body::before {
 
 .eoi-panel__header {
   position: relative;
+  flex-shrink: 0;
   padding: 1.15rem 1.15rem 0.85rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   background:
@@ -3370,6 +3379,11 @@ body::before {
 
 .eoi-panel__body {
   padding: 1rem 1.15rem 1.15rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1 1 auto;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .eoi-perks {
@@ -3532,6 +3546,12 @@ body::before {
     right: 0.85rem;
     bottom: 0.85rem;
     max-width: calc(100vw - 1.7rem);
+  }
+
+  .eoi-widget[data-expanded="true"],
+  .eoi-widget[data-expanded="true"] .eoi-panel {
+    max-height: calc(100vh - var(--dev-banner-height) - 1.5rem);
+    max-height: calc(100dvh - var(--dev-banner-height) - 1.5rem);
   }
 
   .eoi-teaser__label {
