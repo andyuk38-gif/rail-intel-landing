@@ -1787,10 +1787,11 @@ function getStartedPage() {
 
     <section class="page-section page-section--tight signup-page">
       <div class="container signup-shell">
-        <aside class="signup-procurement-notice" aria-label="Procurement information">
-          <p class="signup-procurement-notice__eyebrow">How it works</p>
-          <h2 class="signup-procurement-notice__title">${esc(getStarted.procurementNotice.heading)}</h2>
-          <p class="signup-procurement-notice__lead">${esc(getStarted.procurementNotice.lead)}</p>
+        <aside class="signup-wizard-glass signup-procurement-notice" aria-label="Procurement information">
+          <div class="signup-panel__head">
+            <h2 class="signup-form__title">${esc(getStarted.procurementNotice.heading)}</h2>
+            <p class="signup-form__lead">${esc(getStarted.procurementNotice.lead)}</p>
+          </div>
           ${getStarted.procurementNotice.body.map((p) => `<p class="signup-procurement-notice__text">${esc(p)}</p>`).join("\n          ")}
           <ul class="signup-procurement-notice__list">
 ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}</li>`).join("\n")}
