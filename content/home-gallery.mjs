@@ -66,8 +66,8 @@ export const homeGallery = {
         {
           src: "images/product/reporting-headline-metrics.png",
           alt: "Reporting and analytics with headline metrics and licensing readiness",
-          width: 1381,
-          height: 861,
+          width: 1024,
+          height: 545,
           chips: {
             safe: { title: "QA compliance rate", detail: "54% from live data" },
             alert: { title: "Licence renewals", detail: "2 due within 6 weeks" },
@@ -75,9 +75,9 @@ export const homeGallery = {
         },
         {
           src: "images/product/reporting-incident-statistics.png",
-          alt: "Incident data statistics with charts by time and type",
-          width: 1373,
-          height: 1073,
+          alt: "Incident data statistics with period and week filters, trends and breakdowns by type",
+          width: 1024,
+          height: 547,
           chips: {
             safe: { title: "Incident trends", detail: "Filter by period and week" },
             alert: { title: "Incidents by type", detail: "Collision and SPAD split" },
@@ -106,9 +106,9 @@ export const homeGallery = {
       wide: true,
       image: {
         src: "images/product/reporting-incident-statistics.png",
-        alt: "Incident data statistics with charts by time and type",
-        width: 1373,
-        height: 1073,
+        alt: "Incident data statistics with period and week filters, trends and breakdowns by type",
+        width: 1024,
+        height: 547,
       },
       chips: {
         safe: { title: "Compliance trend", detail: "Up this quarter" },
