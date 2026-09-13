@@ -24,7 +24,7 @@ export const homeGallery = {
       copy: {
         eyebrow: "Dashboard",
         heading: "One dashboard for the whole operation.",
-        lead: "Stop chasing spreadsheets. See the state of the railway’s people the moment you log in.",
+        lead: "Stop chasing spreadsheets. See the state of your team the moment you log in.",
         bullets: [
           "Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.",
           "Open any person and drill into team compliance, incidents and QA in a click.",
