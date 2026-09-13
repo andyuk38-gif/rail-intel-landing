@@ -1751,6 +1751,34 @@ export const security = {
 /* ----------------------------------------------------------- get started */
 
 export const getStarted = {
+  heroTitle: "Start onboarding with Rail Intel",
+  welcome: {
+    title: "Welcome — and thank you for getting started",
+    lead:
+      "Our automated onboarding takes you smoothly from first application to a live CMS tenant. Complete the form below and we will keep you updated at every step — with instant email confirmation when you submit.",
+    steps: [
+      {
+        title: "Apply online",
+        body: "Share your company details, contacts and module preferences in one guided application.",
+      },
+      {
+        title: "Quote or pay",
+        body: "Request a formal quotation or purchase directly — pricing and procurement are handled in the flow.",
+      },
+      {
+        title: "Instant confirmation",
+        body: "You and our team receive automated email notifications as soon as your application is submitted.",
+      },
+      {
+        title: "Review & provision",
+        body: "We review your application, configure your tenant and prepare administrator access.",
+      },
+      {
+        title: "Go live",
+        body: "Log in to CMS, invite your team and start onboarding your workforce.",
+      },
+    ],
+  },
   procurementNotice: {
     heading: "Procurement & supplier onboarding",
     lead:

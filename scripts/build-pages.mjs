@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 198;
+const ASSET_VERSION = 199;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1765,6 +1765,27 @@ ${renderShot(
   );
 }
 
+function renderGetStartedWelcome() {
+  const steps = getStarted.welcome.steps
+    .map(
+      (step, index) => `            <article class="signup-onboard-flow__tile${index === 0 ? " is-active" : ""}" data-onboard-tile role="listitem" tabindex="0" aria-label="Step ${index + 1}: ${esc(step.title)}">
+              <div class="signup-onboard-flow__surface" data-onboard-tilt>
+                <span class="signup-onboard-flow__num" aria-hidden="true">${index + 1}</span>
+                <h3 class="signup-onboard-flow__title">${esc(step.title)}</h3>
+                <p class="signup-onboard-flow__text">${esc(step.body)}</p>
+              </div>
+            </article>`,
+    )
+    .join("\n");
+  return `        <section class="signup-onboard-welcome" aria-label="Onboarding overview">
+          <h2 class="signup-onboard-welcome__title">${esc(getStarted.welcome.title)}</h2>
+          <p class="signup-onboard-welcome__lead">${esc(getStarted.welcome.lead)}</p>
+          <div class="signup-onboard-flow" data-onboard-flow role="list">
+${steps}
+          </div>
+        </section>`;
+}
+
 function getStartedPage() {
   const base = "";
   return (
@@ -1779,7 +1800,7 @@ function getStartedPage() {
         <div class="page-hero__inner">
           <div class="page-hero__copy">
             <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Get started</p>
-            <h1 class="page-title">Start with Rail Intel CMS</h1>
+            <h1 class="page-title">${esc(getStarted.heroTitle)}</h1>
           </div>
         </div>
       </div>
@@ -1787,6 +1808,7 @@ function getStartedPage() {
 
     <section class="page-section page-section--tight signup-page">
       <div class="container signup-shell">
+${renderGetStartedWelcome()}
         <aside class="signup-wizard-glass signup-procurement-notice" aria-label="Procurement information">
           <div class="signup-panel__head">
             <h2 class="signup-form__title">${esc(getStarted.procurementNotice.heading)}</h2>

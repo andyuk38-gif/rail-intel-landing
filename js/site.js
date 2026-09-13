@@ -730,6 +730,81 @@
     });
   }
 
+  /* ---------- Get started — onboarding step flow (3D tiles) ---------- */
+
+  var onboardFlow = document.querySelector("[data-onboard-flow]");
+  if (onboardFlow) {
+    var onboardTiles = Array.prototype.slice.call(onboardFlow.querySelectorAll("[data-onboard-tile]"));
+    var onboardDefaultIndex = 0;
+    var onboardAutoTimer = null;
+    var onboardReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function setOnboardTileActive(index) {
+      onboardDefaultIndex = index;
+      onboardTiles.forEach(function (tile, tileIndex) {
+        tile.classList.toggle("is-active", tileIndex === index);
+      });
+    }
+
+    function startOnboardAutoCycle() {
+      if (onboardReducedMotion || onboardTiles.length < 2) return;
+      clearInterval(onboardAutoTimer);
+      onboardAutoTimer = setInterval(function () {
+        var next = (onboardDefaultIndex + 1) % onboardTiles.length;
+        setOnboardTileActive(next);
+      }, 4200);
+    }
+
+    setOnboardTileActive(onboardDefaultIndex);
+    startOnboardAutoCycle();
+
+    onboardTiles.forEach(function (tile, tileIndex) {
+      var surface = tile.querySelector("[data-onboard-tilt]");
+
+      tile.addEventListener("mouseenter", function () {
+        clearInterval(onboardAutoTimer);
+        setOnboardTileActive(tileIndex);
+      });
+
+      tile.addEventListener("focus", function () {
+        clearInterval(onboardAutoTimer);
+        setOnboardTileActive(tileIndex);
+      });
+
+      tile.addEventListener("click", function () {
+        setOnboardTileActive(tileIndex);
+      });
+
+      tile.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setOnboardTileActive(tileIndex);
+        }
+      });
+
+      if (!surface || onboardReducedMotion) return;
+
+      surface.addEventListener("mousemove", function (event) {
+        if (!tile.classList.contains("is-active")) return;
+        var rect = surface.getBoundingClientRect();
+        var x = (event.clientX - rect.left) / rect.width - 0.5;
+        var y = (event.clientY - rect.top) / rect.height - 0.5;
+        surface.style.setProperty("--onboard-tilt-x", (-y * 9).toFixed(2) + "deg");
+        surface.style.setProperty("--onboard-tilt-y", (x * 9).toFixed(2) + "deg");
+      });
+
+      surface.addEventListener("mouseleave", function () {
+        surface.style.setProperty("--onboard-tilt-x", "0deg");
+        surface.style.setProperty("--onboard-tilt-y", "0deg");
+      });
+    });
+
+    onboardFlow.addEventListener("mouseleave", function () {
+      setOnboardTileActive(onboardDefaultIndex);
+      startOnboardAutoCycle();
+    });
+  }
+
   /* ---------- Administration intro tiles — animated border focus ---------- */
 
   var adminIntroTiles = document.querySelector("[data-admin-intro-tiles]");
