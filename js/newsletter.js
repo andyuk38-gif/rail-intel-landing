@@ -16,6 +16,21 @@
     return cmsApiBase.replace(/\/$/, "") + "/public/newsletter/subscribe";
   }
 
+  function newsletterSubscribe(payload) {
+    return fetch(subscribeUrl(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).then(function (res) {
+      return res.json().then(function (data) {
+        if (!res.ok) throw new Error((data && data.error) || "Subscription failed");
+        return data;
+      });
+    });
+  }
+
+  window.railintelNewsletterSubscribe = newsletterSubscribe;
+
   function applyContentOverrides() {
     if (!siteAdminApiBase) return;
     fetch(siteAdminApiBase.replace(/\/$/, "") + "/public/content")
@@ -71,21 +86,11 @@
       }
       clearMessage();
 
-      fetch(subscribeUrl(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          source: "railintel_website",
-          website: honeypot && honeypot.value ? String(honeypot.value) : "",
-        }),
+      newsletterSubscribe({
+        email: email,
+        source: "railintel_website",
+        website: honeypot && honeypot.value ? String(honeypot.value) : "",
       })
-        .then(function (res) {
-          return res.json().then(function (data) {
-            if (!res.ok) throw new Error((data && data.error) || "Subscription failed");
-            return data;
-          });
-        })
         .then(function (data) {
           var text =
             (data && data.message) ||

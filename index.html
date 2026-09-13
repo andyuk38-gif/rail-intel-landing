@@ -6,15 +6,17 @@
   <title>Rail Intel - Rail Compliance</title>
   <meta name="description" content="Rail Intel is competency management for rail. Track cycles, medicals, licences and assessments so expired skills never reach the railway." />
   <meta name="site-admin-api" content="/5473/api" />
-  <!-- site-asset-version:212 -->
+  <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
+  <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
+  <!-- site-asset-version:213 -->
   <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=212" />
-  <link rel="stylesheet" href="css/pages.css?v=212" />
+  <link rel="stylesheet" href="css/style.css?v=213" />
+  <link rel="stylesheet" href="css/pages.css?v=213" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -818,8 +820,86 @@
     </div>
   </footer><!-- footer:end -->
 
-  <script src="js/site.js?v=212"></script>
-  <script src="js/newsletter.js?v=212"></script>
-  <script src="js/main.js?v=212"></script>
+  <!-- eoi:start -->
+  <div class="eoi-widget" data-eoi-widget hidden>
+    <button type="button" class="eoi-teaser" data-eoi-teaser aria-expanded="false" aria-controls="eoi-panel">
+      <span class="eoi-teaser__pulse" aria-hidden="true"></span>
+      <span class="eoi-teaser__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </span>
+      <span class="eoi-teaser__text">
+        <span class="eoi-teaser__label">New Rail Products</span>
+        <span class="eoi-teaser__date">Launching April 2027</span>
+      </span>
+    </button>
+
+    <div class="eoi-panel" id="eoi-panel" data-eoi-panel hidden role="dialog" aria-labelledby="eoi-title">
+      <div class="eoi-panel__header">
+        <div class="eoi-panel__actions">
+          <button type="button" class="eoi-panel__btn-icon" data-eoi-close aria-label="Minimise">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+          </button>
+          <button type="button" class="eoi-panel__btn-icon" data-eoi-dismiss aria-label="Dismiss">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <span class="eoi-panel__badge"><span class="eoi-panel__badge-dot" aria-hidden="true"></span> April 2027 launch</span>
+        <h2 class="eoi-panel__title" id="eoi-title">Register your interest</h2>
+        <p class="eoi-panel__lead">Be among the first to hear about our new Rail Products — built for the modern railway.</p>
+      </div>
+
+      <div class="eoi-panel__body">
+        <ul class="eoi-perks" aria-label="Benefits">
+          <li>
+            <span class="eoi-perks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </span>
+            Early access when we go live
+          </li>
+          <li>
+            <span class="eoi-perks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </span>
+            Launch updates straight to your inbox
+          </li>
+          <li>
+            <span class="eoi-perks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            No spam — unsubscribe any time
+          </li>
+        </ul>
+
+        <form class="eoi-form" data-eoi-form>
+          <div class="field">
+            <label for="eoi-name">Your name</label>
+            <input id="eoi-name" type="text" name="name" placeholder="Jane Smith" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="eoi-email">Work email</label>
+            <input id="eoi-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+          </div>
+          <input type="text" name="website" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary">Register my interest</button>
+          <p class="eoi-form__note">We will only contact you about the April 2027 launch.</p>
+          <p class="eoi-message" data-eoi-message hidden></p>
+        </form>
+
+        <div class="eoi-success" data-eoi-success hidden>
+          <div class="eoi-success__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <p class="eoi-success__title">You are on the list</p>
+          <p class="eoi-success__text">Thanks — we will be in touch as we approach the April 2027 launch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- eoi:end -->
+
+  <script src="js/site.js?v=213"></script>
+  <script src="js/newsletter.js?v=213"></script>
+  <script src="js/eoi.js?v=213"></script>
+  <script src="js/main.js?v=213"></script>
 </body>
 </html>

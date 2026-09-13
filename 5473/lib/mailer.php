@@ -85,11 +85,18 @@ function admin_forward_newsletter_subscribe_to_cms(array $body): array
     $cfg = admin_config();
     $apiBase = rtrim((string) ($cfg['cms_api_url'] ?? 'https://cms.railintel.co.uk/api'), '/');
     $url = $apiBase . '/public/newsletter/subscribe';
+    $source = trim((string) ($body['source'] ?? ''));
+    $allowedSources = ['railintel_website', 'EOI'];
+    if (!in_array($source, $allowedSources, true)) {
+        $source = 'railintel_website';
+    }
+
+    $name = trim((string) ($body['name'] ?? ''));
     $payload = json_encode([
         'email' => $body['email'] ?? '',
-        'name' => $body['name'] ?? null,
+        'name' => $name !== '' ? $name : null,
         'website' => $body['website'] ?? '',
-        'source' => 'railintel_website',
+        'source' => $source,
     ], JSON_UNESCAPED_UNICODE);
 
     if ($payload === false) {

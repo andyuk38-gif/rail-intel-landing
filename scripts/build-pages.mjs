@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 212;
+const ASSET_VERSION = 213;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -2491,6 +2491,7 @@ function syncIndex() {
     .replace(/js\/main\.js\?v=\d+/, `js/main.js?v=${ASSET_VERSION}`)
     .replace(/js\/site\.js\?v=\d+/, `js/site.js?v=${ASSET_VERSION}`)
     .replace(/js\/newsletter\.js\?v=\d+/, `js/newsletter.js?v=${ASSET_VERSION}`)
+    .replace(/js\/eoi\.js\?v=\d+/, `js/eoi.js?v=${ASSET_VERSION}`)
     .replace(/<!-- site-asset-version:\d+ -->/, `<!-- site-asset-version:${ASSET_VERSION} -->`);
 
   writeFileSync(path, html);
