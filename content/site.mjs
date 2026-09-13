@@ -15,6 +15,8 @@ export const site = {
   cms: "https://cms.railintel.co.uk",
   investigations: "https://investigations.railintel.co.uk",
   tagline: "Secure competency management for rail",
+  footerTagline:
+    "Rail Intel is a suite of digital products for rail, built by a rail professional for the industry.",
 };
 
 /* ------------------------------------------------------------- main products */

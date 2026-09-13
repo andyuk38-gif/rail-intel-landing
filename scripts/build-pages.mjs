@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 206;
+const ASSET_VERSION = 207;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -176,7 +176,7 @@ function renderFooterMarkup(base) {
       <div class="container footer-grid">
         <div class="footer-col footer-col--brand">
           <p class="footer-brand">Rail Intel</p>
-          <p class="footer-tagline">Competency management for rail — assessments, workforce records, medicals and licensing.</p>
+          <p class="footer-tagline">${esc(site.footerTagline)}</p>
           <div class="footer-newsletter footer-newsletter--inline">
             <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
             <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>

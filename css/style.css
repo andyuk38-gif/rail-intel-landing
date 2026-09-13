@@ -2656,7 +2656,7 @@ body::before {
 
 .footer-tagline {
   margin: 0;
-  max-width: 36ch;
+  max-width: 44ch;
   font-size: 0.92rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.68);
