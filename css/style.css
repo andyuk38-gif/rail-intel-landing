@@ -41,10 +41,23 @@ body::before {
   position: fixed;
   inset: 0;
   background: url("../images/background.png") no-repeat center 45% / cover;
-  background-attachment: fixed;
   opacity: 0.5;
   z-index: -1;
   pointer-events: none;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* iOS and touch browsers repaint background-attachment: fixed on every scroll
+   frame, which makes the photo look jumpy and pixelated. The pseudo-element is
+   already viewport-fixed on desktop; on mobile it scrolls with the page instead. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  body::before {
+    position: absolute;
+    height: auto;
+    min-height: 100%;
+  }
 }
 
 .container {
