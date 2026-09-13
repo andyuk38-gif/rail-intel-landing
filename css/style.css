@@ -3276,7 +3276,7 @@ body::before {
 .eoi-widget[data-expanded="true"] .eoi-panel {
   opacity: 1;
   transform: scale(1) translateY(0);
-  max-height: 32rem;
+  max-height: 38rem;
   pointer-events: auto;
 }
 
@@ -3404,6 +3404,33 @@ body::before {
 .eoi-perks__icon svg {
   width: 0.8rem;
   height: 0.8rem;
+}
+
+.eoi-perks-footnote {
+  margin: -0.35rem 0 1rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.eoi-perks-footnote__lead {
+  margin: 0 0 0.45rem;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.eoi-modules-list {
+  margin: 0;
+  padding: 0 0 0 1rem;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.eoi-modules-list li {
+  margin: 0.12rem 0;
 }
 
 .eoi-form {
