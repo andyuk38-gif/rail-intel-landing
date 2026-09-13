@@ -128,6 +128,7 @@
     teaser.addEventListener("click", function () {
       if (widget.dataset.collapsed === "true") {
         setCollapsed(false);
+        setExpanded(true);
         return;
       }
       setExpanded(widget.dataset.expanded !== "true");
