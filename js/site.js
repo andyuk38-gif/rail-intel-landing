@@ -1699,7 +1699,7 @@
       var chrome = document.querySelector(".site-chrome");
       var chromeBottom = chrome ? chrome.getBoundingClientRect().bottom : 0;
       var railHeight = railWrap ? railWrap.getBoundingClientRect().height : 0;
-      return chromeBottom + railHeight + 16;
+      return chromeBottom + railHeight + 36;
     }
 
     function updateScrollInset() {
@@ -1712,13 +1712,13 @@
       var step = steps[index];
       if (!step) return;
       var anchor =
-        step.querySelector(".trainee-journey__head") ||
         step.querySelector(".trainee-journey__content") ||
+        step.querySelector(".trainee-journey__head") ||
         step;
       var rect = anchor.getBoundingClientRect();
       var inset = updateScrollInset();
       var targetY = window.scrollY + rect.top - inset;
-      if (rect.top >= inset - 4 && rect.top <= inset + 40) return;
+      if (rect.top >= inset - 4 && rect.top <= inset + 24) return;
       window.scrollTo({ top: Math.max(0, targetY), behavior: reduced ? "auto" : "smooth" });
     }
 
