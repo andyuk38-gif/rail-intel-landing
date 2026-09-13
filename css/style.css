@@ -3116,43 +3116,29 @@ body::before {
   pointer-events: auto;
 }
 
-.eoi-teaser {
+.eoi-teaser-shell {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.7rem 0.95rem 0.7rem 0.8rem;
-  border: 1px solid rgba(245, 158, 11, 0.38);
+  display: inline-flex;
   border-radius: 999px;
-  cursor: pointer;
-  font-family: inherit;
-  text-align: left;
-  color: #0c0f14;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 48%, #ea580c 100%);
+  padding: 2px;
   isolation: isolate;
-  overflow: hidden;
-  z-index: 0;
-  box-shadow:
-    0 10px 32px rgba(245, 158, 11, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.eoi-teaser::after {
+.eoi-teaser-shell::after {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: inherit;
-  padding: 2px;
+  padding: 2.5px;
   background: conic-gradient(
     from var(--eoi-teaser-angle),
     transparent 0deg,
-    transparent 248deg,
-    rgba(251, 191, 36, 0.2) 272deg,
-    #fbbf24 300deg,
-    #f59e0b 318deg,
-    #fcd34d 336deg,
-    rgba(251, 191, 36, 0.2) 352deg,
+    transparent 236deg,
+    rgba(255, 255, 255, 0.15) 258deg,
+    #ffffff 286deg,
+    #fffbeb 304deg,
+    #fcd34d 322deg,
+    rgba(255, 255, 255, 0.2) 340deg,
     transparent 360deg
   );
   -webkit-mask:
@@ -3168,26 +3154,41 @@ body::before {
   animation: eoi-teaser-trace 2.6s linear infinite;
 }
 
-.eoi-teaser:hover {
+.eoi-teaser-shell:hover::after {
+  animation-duration: 1.8s;
+}
+
+.eoi-teaser {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.95rem 0.7rem 0.8rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  color: #0c0f14;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 48%, #ea580c 100%);
+  z-index: 1;
+  box-shadow:
+    0 10px 32px rgba(245, 158, 11, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eoi-teaser-shell:hover .eoi-teaser {
   transform: translateY(-2px);
-  border-color: rgba(245, 158, 11, 0.55);
   box-shadow:
     0 14px 36px rgba(245, 158, 11, 0.42),
     0 0 24px rgba(245, 158, 11, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.26);
 }
 
-.eoi-teaser:hover::after {
-  animation-duration: 1.8s;
-}
-
 .eoi-teaser:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
-}
-
-.eoi-teaser__pulse {
-  display: none;
 }
 
 @keyframes eoi-teaser-trace {
@@ -3197,12 +3198,12 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .eoi-teaser::after {
+  .eoi-teaser-shell::after {
     animation: none;
     background: linear-gradient(
       145deg,
-      rgba(245, 158, 11, 0.65),
-      rgba(245, 158, 11, 0.18) 42%,
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.2) 42%,
       transparent 72%
     );
   }
@@ -3279,7 +3280,7 @@ body::before {
   pointer-events: auto;
 }
 
-.eoi-widget[data-expanded="true"] .eoi-teaser {
+.eoi-widget[data-expanded="true"] .eoi-teaser-shell {
   display: none;
 }
 
