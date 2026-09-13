@@ -3065,7 +3065,11 @@ body.lightbox-open {
   grid-template-columns: 1.75rem minmax(0, 1fr);
   gap: 1rem 1.5rem;
   padding-bottom: 3rem;
-  scroll-margin-top: calc(var(--dev-banner-height, 0px) + 11rem);
+  scroll-margin-top: var(--trainee-scroll-inset, calc(var(--dev-banner-height, 0px) + 11rem));
+}
+
+.trainee-journey__head {
+  scroll-margin-top: var(--trainee-scroll-inset, calc(var(--dev-banner-height, 0px) + 11rem));
 }
 
 .trainee-journey__step.is-active .trainee-journey__marker-dot {
@@ -3471,7 +3475,7 @@ body.lightbox-open {
 
   .trainee-journey__step {
     grid-template-columns: minmax(0, 1fr);
-    scroll-margin-top: calc(var(--dev-banner-height, 0px) + 9rem);
+    scroll-margin-top: var(--trainee-scroll-inset, calc(var(--dev-banner-height, 0px) + 9rem));
   }
 
   .trainee-journey__marker {

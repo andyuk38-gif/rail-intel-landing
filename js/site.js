@@ -1696,23 +1696,34 @@
     }
 
     function scrollInset() {
-      var banner = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dev-banner-height")) || 40;
+      var chrome = document.querySelector(".site-chrome");
+      var chromeBottom = chrome ? chrome.getBoundingClientRect().bottom : 0;
       var railHeight = railWrap ? railWrap.getBoundingClientRect().height : 0;
-      return banner + 72 + railHeight + 20;
+      return chromeBottom + railHeight + 16;
+    }
+
+    function updateScrollInset() {
+      var inset = scrollInset();
+      journey.style.setProperty("--trainee-scroll-inset", inset + "px");
+      return inset;
     }
 
     function scrollToStep(index) {
       var step = steps[index];
       if (!step) return;
-      var anchor = step.querySelector(".trainee-journey__visual") || step.querySelector(".trainee-journey__content") || step;
+      var anchor =
+        step.querySelector(".trainee-journey__head") ||
+        step.querySelector(".trainee-journey__content") ||
+        step;
       var rect = anchor.getBoundingClientRect();
-      var viewportRoom = window.innerHeight - scrollInset();
-      var targetY = window.scrollY + rect.top - scrollInset();
-      if (rect.height < viewportRoom) {
-        targetY = window.scrollY + rect.top - scrollInset() - Math.max(0, (viewportRoom - rect.height) * 0.15);
-      }
+      var inset = updateScrollInset();
+      var targetY = window.scrollY + rect.top - inset;
+      if (rect.top >= inset - 4 && rect.top <= inset + 40) return;
       window.scrollTo({ top: Math.max(0, targetY), behavior: reduced ? "auto" : "smooth" });
     }
+
+    updateScrollInset();
+    window.addEventListener("resize", updateScrollInset);
 
     function stopAutoRotate() {
       if (autoTimer) {
