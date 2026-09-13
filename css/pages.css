@@ -4185,6 +4185,10 @@ body.lightbox-open {
   padding-top: 1.25rem;
 }
 
+.signup-page.page-section--tight {
+  padding-top: clamp(3rem, 8vh, 5rem);
+}
+
 .signup-page {
   position: relative;
 }
@@ -4200,12 +4204,17 @@ body.lightbox-open {
   margin-bottom: 1rem;
 }
 
+.signup-procurement-notice .signup-form__lead,
 .signup-procurement-notice__text {
   margin: 0 0 0.85rem;
   color: var(--text-muted);
   font-size: 0.95rem;
   line-height: 1.55;
-  max-width: 72ch;
+  max-width: none;
+}
+
+.signup-procurement-notice .signup-panel__head .signup-form__lead {
+  margin-bottom: 0;
 }
 
 .signup-procurement-notice__list {
