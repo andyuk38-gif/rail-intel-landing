@@ -3382,6 +3382,15 @@ body::before {
   pointer-events: auto;
 }
 
+.eoi-widget[data-immediate="true"] .eoi-panel,
+.eoi-widget[data-immediate="true"][data-expanded="true"] .eoi-panel {
+  transition: none;
+  opacity: 1;
+  transform: none;
+  max-height: calc(100vh - var(--dev-banner-height) - 2rem);
+  max-height: calc(100dvh - var(--dev-banner-height) - 2rem);
+}
+
 .eoi-widget[data-expanded="true"] .eoi-teaser-shell {
   display: none;
 }

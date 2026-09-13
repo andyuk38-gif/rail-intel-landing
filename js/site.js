@@ -10,6 +10,28 @@
 
   /* ---------- Dev banner → EOI register-interest panel ---------- */
 
+  var EOI_REGISTERED_KEY = "railintel_eoi_registered";
+
+  function isEoiRegistered() {
+    try {
+      return localStorage.getItem(EOI_REGISTERED_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function hideDevBannerEoiCta() {
+    Array.prototype.forEach.call(document.querySelectorAll(".dev-banner__cta"), function (link) {
+      var paragraph = link.closest("p");
+      if (!paragraph) return;
+      paragraph.textContent = "This site is currently under development.";
+    });
+  }
+
+  if (isEoiRegistered()) {
+    hideDevBannerEoiCta();
+  }
+
   function homeRegisterInterestHref() {
     var link = document.querySelector(".dev-banner__cta");
     if (link && link.href) return link.href;
@@ -21,13 +43,17 @@
     return path === "/" || /\/index\.html$/i.test(path);
   }
 
+  function tryOpenEoiPanel() {
+    if (typeof window.railintelEoiOpen !== "function") return false;
+    return window.railintelEoiOpen() !== false;
+  }
+
   function openRegisterInterest(event) {
     if (event) event.preventDefault();
 
-    if (typeof window.railintelEoiOpen === "function") {
-      window.railintelEoiOpen();
-      return;
-    }
+    if (isEoiRegistered()) return;
+
+    if (tryOpenEoiPanel()) return;
 
     if (isHomePage()) {
       if (location.hash !== "#register-interest") {
@@ -35,10 +61,9 @@
       }
       var attempts = 0;
       var timer = window.setInterval(function () {
-        if (typeof window.railintelEoiOpen === "function") {
+        if (tryOpenEoiPanel()) {
           window.clearInterval(timer);
-          window.railintelEoiOpen();
-        } else if (++attempts > 40) {
+        } else if (++attempts > 60) {
           window.clearInterval(timer);
         }
       }, 50);

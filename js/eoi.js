@@ -58,37 +58,51 @@
 
   var showTimeoutId = null;
 
-  function showWidget() {
+  function revealWidget(callback) {
     widget.hidden = false;
+    widget.setAttribute("aria-hidden", "false");
+    delete widget.dataset.immediate;
     requestAnimationFrame(function () {
       widget.dataset.visible = "true";
+      if (typeof callback === "function") {
+        requestAnimationFrame(callback);
+      }
     });
   }
 
-  function openEoiPanel() {
-    if (!widget || !widget.isConnected) return;
-    if (showTimeoutId !== null) {
-      window.clearTimeout(showTimeoutId);
-      showTimeoutId = null;
-    }
-    widget.hidden = false;
-    widget.dataset.visible = "true";
-    setCollapsed(false);
-    setExpanded(true);
-    if (location.hash !== "#register-interest") {
-      history.replaceState(null, "", "#register-interest");
-    }
-    if (panel) {
-      window.setTimeout(function () {
-        panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
-      }, 80);
-    }
+  function showWidget() {
+    revealWidget();
+  }
+
+  function focusEoiPanel() {
     var nameInput = form && form.querySelector('input[name="name"]');
     if (nameInput) {
       window.setTimeout(function () {
         nameInput.focus({ preventScroll: true });
-      }, 150);
+      }, 120);
     }
+  }
+
+  function openEoiPanel() {
+    if (!widget || !widget.isConnected) return false;
+    if (showTimeoutId !== null) {
+      window.clearTimeout(showTimeoutId);
+      showTimeoutId = null;
+    }
+    setCollapsed(false);
+    widget.dataset.immediate = "true";
+    revealWidget(function () {
+      setExpanded(true);
+      widget.dataset.open = "true";
+      focusEoiPanel();
+      window.setTimeout(function () {
+        delete widget.dataset.immediate;
+      }, 50);
+    });
+    if (location.hash !== "#register-interest") {
+      history.replaceState(null, "", "#register-interest");
+    }
+    return true;
   }
 
   window.railintelEoiOpen = openEoiPanel;
@@ -115,10 +129,18 @@
     delete message.dataset.state;
   }
 
+  function hideDevBannerCta() {
+    var cta = document.querySelector(".dev-banner__cta");
+    if (!cta) return;
+    var paragraph = cta.closest("p");
+    if (paragraph) paragraph.textContent = "This site is currently under development.";
+  }
+
   function showSuccess() {
     if (form) form.hidden = true;
     if (successView) successView.hidden = false;
     setRegistered();
+    hideDevBannerCta();
   }
 
   function subscribe(payload) {
@@ -145,6 +167,7 @@
   }
 
   if (isRegistered()) {
+    window.railintelEoiOpen = null;
     widget.remove();
     return;
   }
