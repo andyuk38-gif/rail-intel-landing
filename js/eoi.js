@@ -2,9 +2,8 @@
 (function () {
   "use strict";
 
-  var STORAGE_DISMISS = "railintel_eoi_dismissed_until";
+  var STORAGE_COLLAPSED = "railintel_eoi_collapsed";
   var STORAGE_REGISTERED = "railintel_eoi_registered";
-  var DISMISS_DAYS = 7;
   var SHOW_DELAY_MS = 4000;
 
   var widget = document.querySelector("[data-eoi-widget]");
@@ -20,19 +19,6 @@
   var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
   var submitLabel = submitBtn ? submitBtn.textContent : "";
 
-  function now() {
-    return Date.now();
-  }
-
-  function isDismissed() {
-    try {
-      var until = parseInt(localStorage.getItem(STORAGE_DISMISS) || "0", 10);
-      return until > now();
-    } catch (e) {
-      return false;
-    }
-  }
-
   function isRegistered() {
     try {
       return localStorage.getItem(STORAGE_REGISTERED) === "1";
@@ -41,10 +27,27 @@
     }
   }
 
-  function setDismissed() {
+  function isCollapsed() {
     try {
-      localStorage.setItem(STORAGE_DISMISS, String(now() + DISMISS_DAYS * 86400000));
+      return sessionStorage.getItem(STORAGE_COLLAPSED) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function setCollapsed(collapsed) {
+    widget.dataset.collapsed = collapsed ? "true" : "false";
+    if (teaser) {
+      teaser.setAttribute(
+        "aria-label",
+        collapsed ? "Open register your interest" : "Register your interest for April 2027 launch"
+      );
+    }
+    try {
+      if (collapsed) sessionStorage.setItem(STORAGE_COLLAPSED, "1");
+      else sessionStorage.removeItem(STORAGE_COLLAPSED);
     } catch (e) {}
+    if (collapsed) setExpanded(false);
   }
 
   function setRegistered() {
@@ -116,15 +119,17 @@
     return;
   }
 
-  if (isDismissed()) {
-    widget.remove();
-    return;
-  }
-
-  window.setTimeout(showWidget, SHOW_DELAY_MS);
+  window.setTimeout(function () {
+    showWidget();
+    if (isCollapsed()) setCollapsed(true);
+  }, SHOW_DELAY_MS);
 
   if (teaser) {
     teaser.addEventListener("click", function () {
+      if (widget.dataset.collapsed === "true") {
+        setCollapsed(false);
+        return;
+      }
       setExpanded(widget.dataset.expanded !== "true");
     });
   }
@@ -137,11 +142,7 @@
 
   if (dismissBtn) {
     dismissBtn.addEventListener("click", function () {
-      setDismissed();
-      widget.dataset.visible = "false";
-      window.setTimeout(function () {
-        widget.remove();
-      }, 320);
+      setCollapsed(true);
     });
   }
 
