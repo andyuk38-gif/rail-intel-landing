@@ -7,9 +7,27 @@
 
   var forms = document.querySelectorAll("[data-newsletter-form]");
   forms.forEach(function (form) {
+    var wrap = form.closest(".footer-newsletter");
     var input = form.querySelector('input[type="email"]');
-    var message = form.querySelector("[data-newsletter-message]");
+    var message = wrap ? wrap.querySelector("[data-newsletter-message]") : null;
     var button = form.querySelector('button[type="submit"]');
+    var buttonLabel = button ? button.textContent : "";
+
+    function showMessage(text, state) {
+      if (!message) return;
+      message.textContent = text;
+      message.hidden = false;
+      message.dataset.state = state;
+      message.setAttribute("role", "status");
+      message.setAttribute("aria-live", "polite");
+    }
+
+    function clearMessage() {
+      if (!message) return;
+      message.textContent = "";
+      message.hidden = true;
+      delete message.dataset.state;
+    }
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -17,11 +35,11 @@
       var email = input.value.trim();
       if (!email) return;
 
-      if (button) button.disabled = true;
-      if (message) {
-        message.textContent = "";
-        message.hidden = true;
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Subscribing…";
       }
+      clearMessage();
 
       fetch(apiBase.replace(/\/$/, "") + "/public/newsletter/subscribe", {
         method: "POST",
@@ -35,22 +53,17 @@
           });
         })
         .then(function (data) {
-          if (message) {
-            message.textContent = data.message || "Thanks — you are subscribed.";
-            message.hidden = false;
-            message.dataset.state = "success";
-          }
+          showMessage(data.message || "Thanks — you are subscribed.", "success");
           input.value = "";
         })
         .catch(function (err) {
-          if (message) {
-            message.textContent = err.message || "Something went wrong. Try again later.";
-            message.hidden = false;
-            message.dataset.state = "error";
-          }
+          showMessage(err.message || "Something went wrong. Try again later.", "error");
         })
         .finally(function () {
-          if (button) button.disabled = false;
+          if (button) {
+            button.disabled = false;
+            button.textContent = buttonLabel;
+          }
         });
     });
   });
