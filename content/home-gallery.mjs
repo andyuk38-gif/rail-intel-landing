@@ -94,18 +94,18 @@ export const homeGallery = {
         height: 547,
       },
       chips: {
-        safe: { title: "Compliance trend", detail: "Up this quarter" },
-        alert: { title: "Off-track rising", detail: "Needs attention" },
+        safe: { title: "Incident trends", detail: "Filter by period and week" },
+        alert: { title: "Incidents by type", detail: "Collision and SPAD split" },
       },
       copy: {
         eyebrow: "Analytics",
-        heading: "Trends that show risk before it escalates.",
+        heading: "Incident statistics sliced by period and type.",
         lead:
-          "Track compliance movement, overdue assessments and incident patterns so managers act on signal — not after the event.",
+          "Filter incidents by financial year, period and week, then read trends over time and a breakdown by type — ready for safety reviews without rebuilding charts in a spreadsheet.",
         bullets: [
-          "Compliance and off-track trends across the period that matters to your operation.",
-          "Spot rising review volumes and overdue cycles while there is still time to intervene.",
-          "Give leadership a single view of operational safety performance.",
+          "Year, period and week filters aligned to your financial calendar.",
+          "Incidents over time across reporting periods so clusters stand out quickly.",
+          "Type breakdown with counts and share — Collision, SPAD and other categories in one view.",
         ],
       },
     },
