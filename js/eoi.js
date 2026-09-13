@@ -70,7 +70,8 @@
       window.clearTimeout(showTimeoutId);
       showTimeoutId = null;
     }
-    showWidget();
+    widget.hidden = false;
+    widget.dataset.visible = "true";
     setCollapsed(false);
     setExpanded(true);
     if (location.hash !== "#register-interest") {
@@ -147,13 +148,6 @@
   }, SHOW_DELAY_MS);
 
   window.railintelEoiOpen = openEoiPanel;
-
-  document.addEventListener("click", function (event) {
-    var trigger = event.target.closest("[data-eoi-open]");
-    if (!trigger) return;
-    event.preventDefault();
-    openEoiPanel();
-  });
 
   if (location.hash === "#register-interest") {
     openEoiPanel();

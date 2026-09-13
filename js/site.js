@@ -2170,4 +2170,24 @@
 
     show(0);
   });
+
+  /* ---------- Dev banner → EOI register-interest panel ---------- */
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest("[data-eoi-open], .dev-banner__cta");
+    if (!link) return;
+
+    var widget = document.querySelector("[data-eoi-widget]");
+    if (widget && typeof window.railintelEoiOpen === "function") {
+      event.preventDefault();
+      window.railintelEoiOpen();
+      return;
+    }
+
+    var href = link.getAttribute("href") || "";
+    if (href === "#register-interest") {
+      event.preventDefault();
+      window.location.href = "/#register-interest";
+    }
+  });
 })();

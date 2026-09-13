@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 225;
+const ASSET_VERSION = 226;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -29,9 +29,8 @@ const appUrl = (key) => site[key] || site.app;
 /* ------------------------------------------------------------------ chrome */
 
 function renderDevBanner(base) {
-  const href = `${base}#register-interest`;
-  const openAttr = base ? "" : ' data-eoi-open';
-  return `<p>This site is currently under development. — <a href="${href}"${openAttr}>Register your interest to qualify for early onboarding discounts and FREE modules.</a></p>`;
+  const href = base ? `${base}#register-interest` : "/#register-interest";
+  return `<p>This site is currently under development. — <a href="${href}" class="dev-banner__cta" data-eoi-open>Register your interest to qualify for early onboarding discounts and FREE modules.</a></p>`;
 }
 
 function renderNavItems(base, items) {
@@ -155,6 +154,7 @@ function renderHead(base, { title, description }) {
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
     .dev-banner { background: #f59e0b; color: #0c0f14; text-align: center; padding: 0.55rem 1.5rem; }
     .dev-banner p { margin: 0; font-size: 0.8125rem; font-weight: 600; }
+    .dev-banner__cta { color: #b91c1c; font-weight: 700; text-decoration: underline; }
   </style>
 </head>
 <body>
