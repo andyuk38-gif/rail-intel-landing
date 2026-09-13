@@ -20,14 +20,17 @@ import {
   staticPages,
   pageUrl,
   seoForItem,
+  guideSeo,
   collectJsonLd,
   allSitemapPaths,
 } from "../content/seo.mjs";
+import { mergeItemSeo } from "../content/seo-extensions.mjs";
+import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 231;
+const ASSET_VERSION = 232;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -219,12 +222,16 @@ function staticPageSeo(relativePath) {
 }
 
 function featureSeo(group) {
-  return seoForItem(group, {
+  return seoForItem(mergeItemSeo(group, group.slug), {
     path: `features/${group.slug}.html`,
     titleFallback: `${group.name} – Rail Intel features`,
     descriptionFallback: group.summary,
     breadcrumbParent: { name: "Features", path: "features/index.html" },
   });
+}
+
+function mergedItem(item, slug) {
+  return mergeItemSeo(item, slug);
 }
 
 function renderHead(base, pageSeo) {
@@ -791,7 +798,8 @@ function productPage(product) {
   const base = "../";
   const url = appUrl(product.appUrlKey);
   const sections = (product.sections || []).map((section) => renderSection(section, base)).join("\n\n");
-  const pageSeo = seoForItem(product, {
+  const item = mergedItem(product, product.slug);
+  const pageSeo = seoForItem(item, {
     path: product.href,
     titleFallback: `${product.name} – Rail Intel`,
     descriptionFallback: product.summary,
@@ -833,7 +841,7 @@ ${sections}
         </div>
       </div>
     </section>
-${renderRelatedLinks(base, product.relatedLinks)}
+${renderRelatedLinks(base, item.relatedLinks)}
 ${renderFaqSection(pageSeo.faq)}
   </main>
 
@@ -1082,7 +1090,8 @@ ${note}
 ${heroCopy}
         </div>`;
 
-  const pageSeo = seoForItem(addon, {
+  const item = mergedItem(addon, addon.slug);
+  const pageSeo = seoForItem(item, {
     path: `products/${addon.slug}.html`,
     titleFallback: `${addon.name} – Rail Intel add-on module`,
     descriptionFallback: addon.summary,
@@ -1114,7 +1123,7 @@ ${renderQaSection(addon.qaSection, base)}
         </div>
       </div>
     </section>
-${renderRelatedLinks(base, addon.relatedLinks)}
+${renderRelatedLinks(base, item.relatedLinks)}
 ${renderFaqSection(pageSeo.faq)}
   </main>
 
@@ -1129,7 +1138,8 @@ function addonPage(addon) {
     ? `        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>`
     : "";
 
-  const pageSeo = seoForItem(addon, {
+  const item = mergedItem(addon, addon.slug);
+  const pageSeo = seoForItem(item, {
     path: `products/${addon.slug}.html`,
     titleFallback: `${addon.name} – Rail Intel add-on module`,
     descriptionFallback: addon.summary,
@@ -1172,7 +1182,7 @@ ${(addon.sections || []).map((section) => renderSection(section, base)).join("\n
         </div>
       </div>
     </section>
-${renderRelatedLinks(base, addon.relatedLinks)}
+${renderRelatedLinks(base, item.relatedLinks)}
 ${renderFaqSection(pageSeo.faq)}
   </main>
 
@@ -1265,6 +1275,19 @@ ${cards}
           <ul class="spec-list">
 ${capacity}
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--tight">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Evaluating competency software?</h2>
+          <p>Read our buyer's guide and platform comparison for UK rail — including RailSmart EDS, AssessTech ACMS and RPD Assure.</p>
+        </div>
+        <div class="page-actions">
+          <a href="${base}guides/rail-competency-management-software.html" class="btn btn-ghost btn-lg">Buyer's guide</a>
+          <a href="${base}guides/compare-rail-competency-software.html" class="btn btn-ghost btn-lg">Compare platforms</a>
         </div>
       </div>
     </section>
@@ -1551,7 +1574,7 @@ ${renderCta(base, {
   }),
   showAppCta: group.showAppCta,
 })}
-${renderRelatedLinks(base, group.relatedLinks)}
+${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
 ${renderFaqSection(pageSeo.faq)}
   </main>
 
@@ -1646,7 +1669,7 @@ ${renderCta(base, {
   }),
   showAppCta: group.showAppCta,
 })}
-${renderRelatedLinks(base, group.relatedLinks)}
+${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
 ${renderFaqSection(pageSeo.faq)}
   </main>
 
@@ -1706,6 +1729,8 @@ ${renderCta(base, {
   heading: "Work in the language your team uses",
   body: "Language support is part of core Rail Intel. Users can select and switch language at sign-in or from the header — no separate enable step.",
 })}
+${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -2570,6 +2595,152 @@ ${homeGallery.tabs.map(renderTabButton).join("\n")}
 `;
 }
 
+/* --------------------------------------------------------------- guides */
+
+function renderGuideBullets(bullets) {
+  if (!bullets?.length) return "";
+  return `        <ul class="spec-list">
+${bullets.map((item) => `          <li>${rich(item)}</li>`).join("\n")}
+        </ul>`;
+}
+
+function renderGuideBody(paragraphs) {
+  return (paragraphs || []).map((text) => `        <p>${rich(text)}</p>`).join("\n");
+}
+
+function renderCompetitorCards() {
+  const cards = competitors
+    .map(
+      (vendor) => `        <article class="card">
+          <span class="card__kicker">${esc(vendor.vendor)}</span>
+          <h3><a href="${esc(vendor.url)}" rel="noopener noreferrer">${esc(vendor.name)}</a></h3>
+          <p>${esc(vendor.positioning)}</p>
+          <ul class="spec-list">
+${vendor.strengths.map((item) => `            <li>${esc(item)}</li>`).join("\n")}
+          </ul>
+          <p class="page-lead" style="font-size:0.95rem;margin-top:0.75rem"><strong>Typical buyer:</strong> ${esc(vendor.typicalBuyer)}</p>
+        </article>`
+    )
+    .join("\n");
+
+  return `        <div class="card-grid">
+${cards}
+        </div>`;
+}
+
+function renderComparisonTable() {
+  const head = `          <tr>
+            <th scope="col">Capability</th>
+            <th scope="col">Rail Intel</th>
+            <th scope="col">RailSmart EDS</th>
+            <th scope="col">AssessTech ACMS</th>
+            <th scope="col">RPD Assure</th>
+            <th scope="col">3Squared</th>
+          </tr>`;
+
+  const rows = comparisonCriteria
+    .map(
+      (row) => `          <tr>
+            <th scope="row">${esc(row.label)}</th>
+            <td>${esc(row.railintel)}</td>
+            <td>${esc(row.velociti)}</td>
+            <td>${esc(row.assesstech)}</td>
+            <td>${esc(row.rpd)}</td>
+            <td>${esc(row.squared)}</td>
+          </tr>`
+    )
+    .join("\n");
+
+  return `        <div class="procurement-table-wrap">
+          <table class="procurement-table">
+            <thead>
+${head}
+            </thead>
+            <tbody>
+${rows}
+            </tbody>
+          </table>
+        </div>`;
+}
+
+function renderGuideSections(guide) {
+  return guide.sections
+    .map((section) => {
+      if (section.isComparison) {
+        return `    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(section.heading)}</h2>
+${renderGuideBody(section.body)}
+        </div>
+${renderComparisonTable()}
+      </div>
+    </section>`;
+      }
+
+      if (section.heading === "Platform summaries") {
+        return `    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(section.heading)}</h2>
+${renderGuideBody(section.body)}
+        </div>
+${renderCompetitorCards()}
+      </div>
+    </section>`;
+      }
+
+      return `    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(section.heading)}</h2>
+${renderGuideBody(section.body)}
+        </div>
+${renderGuideBullets(section.bullets)}
+      </div>
+    </section>`;
+    })
+    .join("\n\n");
+}
+
+function guidePage(guide) {
+  const base = "../";
+  const pageSeo = guideSeo(guide);
+  const disclaimer = guide.disclaimer
+    ? `          <p class="page-lead" style="font-size:0.95rem">${esc(guide.disclaimer)}</p>`
+    : "";
+  const cta = guide.cta
+    ? `          <a href="${base}${guide.cta.href}" class="btn btn-ghost btn-lg">${esc(guide.cta.label)}</a>`
+    : "";
+
+  return (
+    renderHead(base, pageSeo) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / ${esc(guide.shortTitle)}</p>
+          <h1 class="page-title">${esc(guide.heroTitle)}</h1>
+          <p class="page-lead">${esc(guide.heroLead)}</p>
+${disclaimer}
+          <div class="page-actions">
+            <a href="${base}get-started.html" class="btn btn-primary btn-lg">Register your interest</a>
+${cta}
+          </div>
+        </div>
+      </div>
+    </section>
+
+${renderGuideSections(guide)}
+${renderFaqSection(pageSeo.faq)}
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
 /* ---------------------------------------------------------- index.html sync */
 
 function renderIndexFaq() {
@@ -2678,6 +2849,9 @@ for (const group of featureGroups) {
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
 emit("get-started.html", getStartedPage());
+for (const guide of guides) {
+  emit(`guides/${guide.slug}.html`, guidePage(guide));
+}
 emit("quotation.html", quotationPage());
 emit("invoice.html", invoicePage());
 written.push(syncIndex());

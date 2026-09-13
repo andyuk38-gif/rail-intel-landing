@@ -3,8 +3,10 @@
  * Consumed by scripts/build-pages.mjs — no visual design changes.
  */
 
+import { guides } from "./guides.mjs";
+
 export const SITE_URL = "https://railintel.co.uk";
-export const DEFAULT_OG_IMAGE = "/images/apple-touch-icon.png";
+export const DEFAULT_OG_IMAGE = "/images/product/team-compliance.png";
 export const SITE_NAME = "Rail Intel";
 
 export function pageUrl(path) {
@@ -79,6 +81,11 @@ export const home = {
       answer:
         "The platform is launching in April 2027. You can register your interest now for early onboarding discounts and introductory module offers.",
     },
+    {
+      question: "How does Rail Intel compare to other UK rail competency systems?",
+      answer:
+        "We publish a buyer's guide and platform comparison covering Rail Intel alongside established options such as Velociti RailSmart EDS, AssessTech ACMS and RPD Assure.",
+    },
   ],
 };
 
@@ -98,6 +105,11 @@ export const staticPages = {
         question: "Which modules are add-ons?",
         answer:
           "QA Verifications, Task assignment, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks extend Rail Intel CMS when your operation needs them.",
+      },
+      {
+        question: "How does Rail Intel compare to RailSmart EDS or AssessTech ACMS?",
+        answer:
+          "See our rail competency software buyer's guide and platform comparison for a factual overview of UK market options including Velociti RailSmart EDS, AssessTech ACMS and RPD Assure.",
       },
     ],
     breadcrumbs: [
@@ -256,10 +268,36 @@ export function collectJsonLd(pageSeo) {
   const software = softwareJsonLd(pageSeo.software);
   if (software) blocks.push(software);
 
+  if (String(pageSeo.path || "").startsWith("guides/")) {
+    blocks.push({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: pageSeo.title,
+      description: pageSeo.description,
+      url,
+      inLanguage: "en-GB",
+      publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    });
+  }
+
   return blocks;
 }
 
-export function allSitemapPaths({ products, addons, featureGroups }) {
+export function guideSeo(guide) {
+  return {
+    path: `guides/${guide.slug}.html`,
+    title: guide.seoTitle,
+    description: guide.seoDescription,
+    keywords: guide.seoKeywords || "",
+    faq: guide.faq || [],
+    breadcrumbs: [
+      { name: "Rail Intel", path: "/" },
+      { name: guide.shortTitle, path: `guides/${guide.slug}.html` },
+    ],
+  };
+}
+
+export function allSitemapPaths({ products, addons, featureGroups, guideList = guides }) {
   const paths = [
     "/",
     "products/index.html",
@@ -277,6 +315,9 @@ export function allSitemapPaths({ products, addons, featureGroups }) {
   }
   for (const group of featureGroups) {
     paths.push(`features/${group.slug}.html`);
+  }
+  for (const guide of guideList) {
+    paths.push(`guides/${guide.slug}.html`);
   }
 
   return paths;
