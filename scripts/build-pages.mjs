@@ -12,11 +12,22 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, getStarted, languages } from "../content/site.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
+import {
+  SITE_URL,
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+  home as homeSeo,
+  staticPages,
+  pageUrl,
+  seoForItem,
+  collectJsonLd,
+  allSitemapPaths,
+} from "../content/seo.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 230;
+const ASSET_VERSION = 231;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -130,14 +141,99 @@ ${renderNavItems(base, addonItems)}
       </nav>`;
 }
 
-function renderHead(base, { title, description }) {
+function renderJsonLd(blocks) {
+  if (!blocks?.length) return "";
+  return blocks
+    .map((block) => `  <script type="application/ld+json">${JSON.stringify(block)}</script>`)
+    .join("\n");
+}
+
+function renderSeoMeta(pageSeo) {
+  const canonical = pageUrl(pageSeo.path);
+  const ogImage = pageUrl(pageSeo.ogImage || DEFAULT_OG_IMAGE);
+  const robots = pageSeo.robots || "index, follow";
+  const keywords = pageSeo.keywords ? `  <meta name="keywords" content="${esc(pageSeo.keywords)}" />\n` : "";
+
+  return `  <title>${esc(pageSeo.title)}</title>
+  <meta name="description" content="${esc(pageSeo.description)}" />
+  <meta name="robots" content="${esc(robots)}" />
+${keywords}  <link rel="canonical" href="${esc(canonical)}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="${esc(SITE_NAME)}" />
+  <meta property="og:title" content="${esc(pageSeo.title)}" />
+  <meta property="og:description" content="${esc(pageSeo.description)}" />
+  <meta property="og:url" content="${esc(canonical)}" />
+  <meta property="og:image" content="${esc(ogImage)}" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${esc(pageSeo.title)}" />
+  <meta name="twitter:description" content="${esc(pageSeo.description)}" />
+  <meta name="twitter:image" content="${esc(ogImage)}" />
+${renderJsonLd(collectJsonLd(pageSeo))}`;
+}
+
+function renderRelatedLinks(base, links) {
+  if (!links?.length) return "";
+  const items = links
+    .map((link) => `<a href="${base}${link.href}">${esc(link.name)}</a>`)
+    .join(", ");
+  return `
+    <section class="page-section page-section--tight">
+      <div class="container">
+        <p class="page-lead">Related: ${items}</p>
+      </div>
+    </section>`;
+}
+
+function renderFaqSection(faq) {
+  if (!faq?.length) return "";
+  return `
+    <section class="page-section page-section--tight" aria-label="Frequently asked questions">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Frequently asked questions</h2>
+        </div>
+        <dl class="procurement-faq">
+${faq
+  .map(
+    (entry) => `          <dt>${esc(entry.question)}</dt>
+          <dd>${esc(entry.answer)}</dd>`
+  )
+  .join("\n")}
+        </dl>
+      </div>
+    </section>`;
+}
+
+function staticPageSeo(relativePath) {
+  const config = staticPages[relativePath];
+  return {
+    path: relativePath === "index.html" ? "/" : relativePath,
+    title: config.title,
+    description: config.description,
+    keywords: config.keywords || "",
+    faq: config.faq || [],
+    breadcrumbs: config.breadcrumbs || [],
+    robots: config.robots,
+  };
+}
+
+function featureSeo(group) {
+  return seoForItem(group, {
+    path: `features/${group.slug}.html`,
+    titleFallback: `${group.name} – Rail Intel features`,
+    descriptionFallback: group.summary,
+    breadcrumbParent: { name: "Features", path: "features/index.html" },
+  });
+}
+
+function renderHead(base, pageSeo) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${esc(title)}</title>
-  <meta name="description" content="${esc(description)}" />
+${renderSeoMeta(pageSeo)}
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
@@ -695,12 +791,15 @@ function productPage(product) {
   const base = "../";
   const url = appUrl(product.appUrlKey);
   const sections = (product.sections || []).map((section) => renderSection(section, base)).join("\n\n");
+  const pageSeo = seoForItem(product, {
+    path: product.href,
+    titleFallback: `${product.name} – Rail Intel`,
+    descriptionFallback: product.summary,
+    breadcrumbParent: { name: "Products", path: "products/index.html" },
+  });
 
   return (
-    renderHead(base, {
-      title: `${product.name} – Rail Intel`,
-      description: product.summary,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero">
@@ -734,6 +833,8 @@ ${sections}
         </div>
       </div>
     </section>
+${renderRelatedLinks(base, product.relatedLinks)}
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -981,11 +1082,15 @@ ${note}
 ${heroCopy}
         </div>`;
 
+  const pageSeo = seoForItem(addon, {
+    path: `products/${addon.slug}.html`,
+    titleFallback: `${addon.name} – Rail Intel add-on module`,
+    descriptionFallback: addon.summary,
+    breadcrumbParent: { name: "Products", path: "products/index.html" },
+  });
+
   return (
-    renderHead(base, {
-      title: `${addon.name} – Rail Intel add-on module`,
-      description: addon.summary,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero page-hero--trainee">
@@ -1009,6 +1114,8 @@ ${renderQaSection(addon.qaSection, base)}
         </div>
       </div>
     </section>
+${renderRelatedLinks(base, addon.relatedLinks)}
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -1022,11 +1129,15 @@ function addonPage(addon) {
     ? `        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>`
     : "";
 
+  const pageSeo = seoForItem(addon, {
+    path: `products/${addon.slug}.html`,
+    titleFallback: `${addon.name} – Rail Intel add-on module`,
+    descriptionFallback: addon.summary,
+    breadcrumbParent: { name: "Products", path: "products/index.html" },
+  });
+
   return (
-    renderHead(base, {
-      title: `${addon.name} – Rail Intel add-on module`,
-      description: addon.summary,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero">
@@ -1061,6 +1172,8 @@ ${(addon.sections || []).map((section) => renderSection(section, base)).join("\n
         </div>
       </div>
     </section>
+${renderRelatedLinks(base, addon.relatedLinks)}
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -1099,12 +1212,10 @@ function productsIndex() {
     )
     .join("\n");
 
+  const pageSeo = staticPageSeo("products/index.html");
+
   return (
-    renderHead(base, {
-      title: "Products – Rail Intel",
-      description:
-        "Rail Intel CMS and Rail Intel Investigations, plus optional CMS add-on modules: QA Verifications, Task assignment, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks.",
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero">
@@ -1157,6 +1268,7 @@ ${capacity}
         </div>
       </div>
     </section>
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -1388,11 +1500,10 @@ function cdpMonitoringPage(group) {
             <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
           </div>`;
 
+  const pageSeo = featureSeo(group);
+
   return (
-    renderHead(base, {
-      title: `${group.name} – Rail Intel features`,
-      description: group.summary,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero page-hero--cdp" style="--cdp-accent: ${esc(accent)}">
@@ -1440,6 +1551,8 @@ ${renderCta(base, {
   }),
   showAppCta: group.showAppCta,
 })}
+${renderRelatedLinks(base, group.relatedLinks)}
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -1512,11 +1625,10 @@ ${renderShot(group.heroShot, base, { fill: true })}
 ${heroCopy}
         </div>`;
 
+  const pageSeo = featureSeo(group);
+
   return (
-    renderHead(base, {
-      title: `${group.name} – Rail Intel features`,
-      description: group.summary,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}">
@@ -1534,6 +1646,8 @@ ${renderCta(base, {
   }),
   showAppCta: group.showAppCta,
 })}
+${renderRelatedLinks(base, group.relatedLinks)}
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -1555,11 +1669,10 @@ function languagesHubPage() {
     )
     .join("\n");
 
+  const pageSeo = featureSeo(group);
+
   return (
-    renderHead(base, {
-      title: "Languages – Rail Intel features",
-      description: group.summary,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero">
@@ -1678,12 +1791,10 @@ function featuresIndex() {
     )
     .join("\n");
 
+  const pageSeo = staticPageSeo("features/index.html");
+
   return (
-    renderHead(base, {
-      title: "Features – Rail Intel",
-      description:
-        "The core Rail Intel feature set: Tunnel Mode, digital cab passes with QR verification, competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, administration, reporting and international languages.",
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero">
@@ -1723,6 +1834,7 @@ ${cards}
         </div>
       </div>
     </section>
+${renderFaqSection(pageSeo.faq)}
   </main>
 
 ` +
@@ -1741,11 +1853,10 @@ function howItWorksPage() {
     )
     .join("\n");
 
+  const pageSeo = staticPageSeo("how-it-works.html");
+
   return (
-    renderHead(base, {
-      title: "How it works – Rail Intel",
-      description: howItWorks.lead,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero">
@@ -1828,11 +1939,10 @@ ${steps}
 
 function getStartedPage() {
   const base = "";
+  const pageSeo = staticPageSeo("get-started.html");
+
   return (
-    renderHead(base, {
-      title: "Get started – Rail Intel CMS",
-      description: "Apply for Rail Intel CMS — competency management for rail. We review your application and send login details once approved.",
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero page-hero--compact page-hero--get-started">
@@ -2095,10 +2205,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
 function quotationPage() {
   const base = "";
   return (
-    renderHead(base, {
-      title: "Your quotation – Rail Intel",
-      description: "Review and respond to your Rail Intel CMS quotation.",
-    }) +
+    renderHead(base, staticPageSeo("quotation.html")) +
     `
   <main>
     <section class="page-hero page-hero--compact">
@@ -2130,10 +2237,7 @@ function quotationPage() {
 function invoicePage() {
   const base = "";
   return (
-    renderHead(base, {
-      title: "Your invoice – Rail Intel",
-      description: "View your Rail Intel CMS invoice and payment details.",
-    }) +
+    renderHead(base, staticPageSeo("invoice.html")) +
     `
   <main>
     <section class="page-hero page-hero--compact">
@@ -2200,11 +2304,10 @@ function securityPage() {
     )
     .join("\n");
 
+  const pageSeo = staticPageSeo("security.html");
+
   return (
-    renderHead(base, {
-      title: "Security – Rail Intel",
-      description: security.lead,
-    }) +
+    renderHead(base, pageSeo) +
     `
   <main>
     <section class="page-hero${security.heroIntro ? " page-hero--intro-split" : ""}">
@@ -2469,6 +2572,36 @@ ${homeGallery.tabs.map(renderTabButton).join("\n")}
 
 /* ---------------------------------------------------------- index.html sync */
 
+function renderIndexFaq() {
+  return renderFaqSection(homeSeo.faq);
+}
+
+function writeRobots() {
+  const body = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  writeFileSync(join(root, "robots.txt"), body);
+  return "robots.txt";
+}
+
+function writeSitemap() {
+  const lastmod = new Date().toISOString().split("T")[0];
+  const paths = allSitemapPaths({ products, addons, featureGroups });
+  const urls = paths
+    .map(
+      (path) => `  <url>
+    <loc>${pageUrl(path)}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`
+    )
+    .join("\n");
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`;
+  writeFileSync(join(root, "sitemap.xml"), xml);
+  return "sitemap.xml";
+}
+
 function syncIndex() {
   const path = join(root, "index.html");
   let html = readFileSync(path, "utf8");
@@ -2479,6 +2612,15 @@ function syncIndex() {
     if (start === -1 || end === -1) throw new Error(`index.html is missing ${startMarker}`);
     return source.slice(0, start + startMarker.length) + replacement + source.slice(end);
   };
+
+  html = replaceBetween(
+    html,
+    "<!-- seo:start -->",
+    "<!-- seo:end -->",
+    `\n${renderSeoMeta(homeSeo)}\n  `
+  );
+
+  html = replaceBetween(html, "<!-- seo-faq:start -->", "<!-- seo-faq:end -->", renderIndexFaq());
 
   html = replaceBetween(html, "<!-- nav:start -->", "<!-- nav:end -->", `\n        ${renderNav("")}\n        `);
 
@@ -2539,6 +2681,8 @@ emit("get-started.html", getStartedPage());
 emit("quotation.html", quotationPage());
 emit("invoice.html", invoicePage());
 written.push(syncIndex());
+written.push(writeRobots());
+written.push(writeSitemap());
 
 console.log(`generated ${written.length} pages:`);
 for (const path of written) console.log(`  ${path}`);

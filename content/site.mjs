@@ -37,11 +37,32 @@ export const products = [
   {
     slug: "investigations",
     name: "Rail Intel Investigations",
+    seoTitle: "Rail Investigations Software | Rail Intel Investigations",
+    seoDescription:
+      "Evidence-first rail investigation software for cases, RCA, recommendations, actions and sealed final reports — with optional CMS competency context.",
+    seoKeywords: "rail investigations software, incident investigation rail, RCA rail, ORR investigation evidence",
     summary:
       "Evidence-first rail investigations — from opening a case through recommendations, actions and a sealed final report.",
     tagline: "Investigate with evidence, not email threads",
     lead:
       "Rail Intel Investigations is a standalone app for running investigations end to end: one file per case, with a command centre, structured evidence and RCA, recommendations that become owned actions, and a signed final report. Link it to Rail Intel CMS when you want competency and workforce context on the subject without leaving the investigation.",
+    faq: [
+      {
+        question: "Is Rail Intel Investigations separate from CMS?",
+        answer:
+          "Yes. Investigations is a standalone app. An optional connector links one Investigations company to one CMS tenant when you want shared people and competency context.",
+      },
+      {
+        question: "Can final reports be signed and sealed?",
+        answer:
+          "Yes. The final report compiles case artefacts for PDF export with dual sign-off from the Lead Investigator and Designated Competent Person.",
+      },
+    ],
+    relatedLinks: [
+      { name: "Rail Intel CMS", href: "" },
+      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
+      { name: "Security", href: "security.html" },
+    ],
     href: "products/investigations.html",
     appUrlKey: "investigations",
     cta: "Open Investigations",
@@ -126,10 +147,30 @@ export const addons = [
     slug: "qa-verifications",
     name: "QA Verifications",
     moduleId: "qa-verifications",
+    seoTitle: "QA Verifications for Rail | Automated Compliance Checks",
+    seoDescription:
+      "Run automated QA verifications across competency, medical and licence data with section-level outcomes and audit-ready run history for rail operators.",
+    seoKeywords: "rail QA verification, compliance checks rail, ORR audit evidence, competence verification",
     summary: "Automated compliance checks with an audit trail you can hand to the ORR.",
     tagline: "Prove compliance instead of asserting it",
     lead:
       "QA Verifications runs structured checks across an employee's competency, medical and licence data, scores every section, and keeps the run history as evidence. Instead of assembling a compliance picture by hand before an audit, you produce it on demand.",
+    faq: [
+      {
+        question: "What does QA Verifications check?",
+        answer:
+          "It evaluates live employee record data — competency cycles, assessments, medicals, licence expiry and monitoring history — against configured criteria with section-level outcomes.",
+      },
+      {
+        question: "Can I use QA Verifications for ORR audits?",
+        answer:
+          "Yes. Run history is retained per employee and company-wide with compliance rates and section breakdowns, so you can produce evidence on demand rather than assembling it manually.",
+      },
+    ],
+    relatedLinks: [
+      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
+      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
+    ],
     sections: [
       {
         heading: "Run a verification against live record data",
@@ -652,10 +693,31 @@ export const featureGroups = [
   {
     slug: "competency-cycles",
     name: "Competency & Cycles",
+    seoTitle: "Rail Competency Cycles & Assessments | Rail Intel",
+    seoDescription:
+      "Build rail competency cycles, schedule assessments, record in-cab evidence and flag lapsed mandatory competencies before anyone reaches the railway.",
+    seoKeywords: "rail competency cycles, driver assessments, competence management, in-cab assessment software",
     summary: "Build assessment cycles, run assessments in the field and carry findings forward.",
     tagline: "The competency engine",
     lead:
       "Competence is a live cycle with a start date, an expiry and evidence — not a document store. Rail Intel's cycle engine builds the standard, schedules the assessments, records them in the field and flags the moment a mandatory competency lapses.",
+    faq: [
+      {
+        question: "What is a competency cycle in Rail Intel?",
+        answer:
+          "A competency cycle defines the standard, criteria and scheduled assessment events a role must complete, with start and expiry dates on the employee record.",
+      },
+      {
+        question: "Can assessments be completed in the cab?",
+        answer:
+          "Yes. Assessors record structured observations in the field, including Tunnel Mode for low-glare assessing in dark cabs.",
+      },
+    ],
+    relatedLinks: [
+      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
+      { name: "Workforce Records", href: "features/workforce-records.html" },
+      { name: "QA Verifications add-on", href: "products/qa-verifications.html" },
+    ],
     sections: [
       {
         heading: "Build a cycle from a template or from scratch",
