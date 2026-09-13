@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=200" />
-  <link rel="stylesheet" href="../css/pages.css?v=200" />
+  <link rel="stylesheet" href="../css/style.css?v=201" />
+  <link rel="stylesheet" href="../css/pages.css?v=201" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -335,20 +335,25 @@
   </main>
 
   <footer class="footer">
+    <div class="footer__backdrop" aria-hidden="true"></div>
     <div class="container footer-grid">
-      <div class="footer-col">
+      <div class="footer-col footer-col--brand">
         <p class="footer-brand">Rail Intel</p>
+        <p class="footer-tagline">Competency management for rail.</p>
+        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. All rights reserved.</p>
+      </div>
+      <div class="footer-col footer-col--nav">
+        <h2 class="footer-heading">Explore</h2>
         <nav class="footer-nav" aria-label="Footer">
           <a href="../products/">Products</a>
           <a href="../features/">Features</a>
           <a href="../how-it-works.html">How it works</a>
-        <a href="../security.html">Security</a>
-        <a href="../get-started.html">Get started</a>
-        <a href="https://cms.railintel.co.uk">Log in</a>
+          <a href="../security.html">Security</a>
+          <a href="../get-started.html">Get started</a>
+          <a href="https://cms.railintel.co.uk">Log in</a>
         </nav>
-        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
       </div>
-      <div class="footer-col footer-newsletter">
+      <div class="footer-col footer-col--newsletter footer-newsletter">
         <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
         <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
         <form class="footer-newsletter__form" data-newsletter-form>
@@ -361,7 +366,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=200"></script>
-  <script src="../js/newsletter.js?v=200"></script>
+  <script src="../js/site.js?v=201"></script>
+  <script src="../js/newsletter.js?v=201"></script>
 </body>
 </html>

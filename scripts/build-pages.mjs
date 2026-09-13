@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 200;
+const ASSET_VERSION = 201;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -169,22 +169,31 @@ function renderHead(base, { title, description }) {
 `;
 }
 
-function renderFooter(base) {
-  return `  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-col">
-        <p class="footer-brand">Rail Intel</p>
-        <nav class="footer-nav" aria-label="Footer">
-          <a href="${base}products/">Products</a>
+function renderFooterNavLinks(base) {
+  return `<a href="${base}products/">Products</a>
           <a href="${base}features/">Features</a>
           <a href="${base}how-it-works.html">How it works</a>
-        <a href="${base}security.html">Security</a>
-        <a href="${base}get-started.html">Get started</a>
-        <a href="${site.app}">Log in</a>
-        </nav>
-        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. Competency management for rail.</p>
+          <a href="${base}security.html">Security</a>
+          <a href="${base}get-started.html">Get started</a>
+          <a href="${site.app}">Log in</a>`;
+}
+
+function renderFooterMarkup(base) {
+  return `  <footer class="footer">
+    <div class="footer__backdrop" aria-hidden="true"></div>
+    <div class="container footer-grid">
+      <div class="footer-col footer-col--brand">
+        <p class="footer-brand">Rail Intel</p>
+        <p class="footer-tagline">Competency management for rail.</p>
+        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. All rights reserved.</p>
       </div>
-      <div class="footer-col footer-newsletter">
+      <div class="footer-col footer-col--nav">
+        <h2 class="footer-heading">Explore</h2>
+        <nav class="footer-nav" aria-label="Footer">
+          ${renderFooterNavLinks(base)}
+        </nav>
+      </div>
+      <div class="footer-col footer-col--newsletter footer-newsletter">
         <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
         <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
         <form class="footer-newsletter__form" data-newsletter-form>
@@ -195,7 +204,11 @@ function renderFooter(base) {
         <p class="footer-newsletter__message" data-newsletter-message hidden></p>
       </div>
     </div>
-  </footer>
+  </footer>`;
+}
+
+function renderFooter(base) {
+  return `${renderFooterMarkup(base)}
 
   <script src="${base}js/site.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/newsletter.js?v=${ASSET_VERSION}"></script>
@@ -2449,19 +2462,7 @@ function syncIndex() {
     renderHomeGallery()
   );
 
-  html = replaceBetween(
-    html,
-    "<!-- footer-nav:start -->",
-    "<!-- footer-nav:end -->",
-    `
-        <a href="products/">Products</a>
-        <a href="features/">Features</a>
-        <a href="how-it-works.html">How it works</a>
-        <a href="security.html">Security</a>
-        <a href="get-started.html">Get started</a>
-        <a href="${site.app}">Log in</a>
-      `
-  );
+  html = replaceBetween(html, "<!-- footer:start -->", "<!-- footer:end -->", renderFooterMarkup(""));
 
   html = html
     .replace(/css\/style\.css\?v=\d+/, `css/style.css?v=${ASSET_VERSION}`)
