@@ -20,6 +20,7 @@ $allowed = [
     'public/signup-config',
     'public/onboarding-addons',
     'public/signup-request',
+    'public/newsletter/subscribe',
 ];
 
 $ok = false;

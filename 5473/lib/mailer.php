@@ -79,6 +79,75 @@ function admin_send_mail_via_cms(string $to, string $subject, string $html, stri
     }
 }
 
+/** Forward footer newsletter sign-ups to Rail Intel CMS (Administration → Newsletter). */
+function admin_forward_newsletter_subscribe_to_cms(array $body): array
+{
+    $cfg = admin_config();
+    $apiBase = rtrim((string) ($cfg['cms_api_url'] ?? 'https://cms.railintel.co.uk/api'), '/');
+    $url = $apiBase . '/public/newsletter/subscribe';
+    $payload = json_encode([
+        'email' => $body['email'] ?? '',
+        'name' => $body['name'] ?? null,
+        'website' => $body['website'] ?? '',
+        'source' => 'railintel_website',
+    ], JSON_UNESCAPED_UNICODE);
+
+    if ($payload === false) {
+        throw new RuntimeException('Failed to encode subscribe payload.');
+    }
+
+    $headers = ['Content-Type: application/json', 'Accept: application/json'];
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 30,
+        ]);
+        $response = curl_exec($ch);
+        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+
+        if ($response === false) {
+            throw new RuntimeException('CMS subscribe request failed: ' . $curlError);
+        }
+    } else {
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => implode("\r\n", $headers),
+                'content' => $payload,
+                'timeout' => 30,
+                'ignore_errors' => true,
+            ],
+        ]);
+        $response = file_get_contents($url, false, $context);
+        $status = 0;
+        if (isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $m)) {
+            $status = (int) $m[1];
+        }
+        if ($response === false) {
+            throw new RuntimeException('CMS subscribe request failed.');
+        }
+    }
+
+    $data = json_decode($response, true);
+    if (!is_array($data)) {
+        $data = [];
+    }
+
+    if ($status < 200 || $status >= 300) {
+        $message = isset($data['error']) ? (string) $data['error'] : 'CMS subscribe failed (HTTP ' . $status . ')';
+        throw new RuntimeException($message);
+    }
+
+    return $data;
+}
+
 function admin_send_mail(string $to, string $subject, string $html, string $text = ''): void
 {
     $cfg = admin_config();

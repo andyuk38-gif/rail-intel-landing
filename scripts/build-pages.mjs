@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 211;
+const ASSET_VERSION = 212;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -183,6 +183,7 @@ function renderFooterMarkup(base) {
             <form class="footer-newsletter__form" data-newsletter-form>
               <label class="sr-only" for="newsletter-email">Email address</label>
               <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+              <input type="text" name="website" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <button type="submit" class="btn btn-primary">Subscribe</button>
             </form>
             <p class="footer-newsletter__message" data-newsletter-message hidden></p>

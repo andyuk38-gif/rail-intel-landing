@@ -286,20 +286,18 @@ function admin_handle_api(string $method, string $path): void
         if ($subEmail === '' || !filter_var($subEmail, FILTER_VALIDATE_EMAIL)) {
             admin_error('Please enter a valid email address.');
         }
-        $stmt = $db->prepare('SELECT id, status FROM newsletter_subscribers WHERE email = ?');
-        $stmt->execute([$subEmail]);
-        $existing = $stmt->fetch();
-        if ($existing && $existing['status'] === 'active') {
-            admin_json(['ok' => true, 'message' => 'You are already subscribed.']);
+        if (trim((string) ($body['website'] ?? '')) !== '') {
+            admin_json(['ok' => true, 'message' => 'Thanks — you are subscribed to Rail Intel news.']);
         }
-        if ($existing) {
-            $db->prepare("UPDATE newsletter_subscribers SET status = 'active', unsubscribed_at = NULL, subscribed_at = datetime('now') WHERE id = ?")->execute([$existing['id']]);
-            admin_json(['ok' => true, 'message' => 'Welcome back — you are subscribed again.']);
+        try {
+            $result = admin_forward_newsletter_subscribe_to_cms($body);
+            $message = isset($result['message'])
+                ? (string) $result['message']
+                : 'Thanks — you are subscribed to Rail Intel news.';
+            admin_json(['ok' => true, 'message' => $message], ($result['created'] ?? true) ? 201 : 200);
+        } catch (Throwable $e) {
+            admin_error($e->getMessage(), 502);
         }
-        $id = admin_uuid();
-        $db->prepare('INSERT INTO newsletter_subscribers (id, email, status, source) VALUES (?, ?, ?, ?)')
-            ->execute([$id, $subEmail, 'active', $body['source'] ?? 'website']);
-        admin_json(['ok' => true, 'message' => 'Thanks — you are subscribed to Rail Intel news.'], 201);
     }
 
     if ($method === 'GET' && $path === '/public/content') {

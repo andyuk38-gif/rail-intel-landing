@@ -459,8 +459,14 @@ async function renderNewsletter() {
     api("/newsletter/subscribers"),
   ]);
   const content = el(`
+    <div class="alert" style="margin-bottom:1rem;background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.25);color:#e6e9ef;padding:1rem;border-radius:8px;">
+      <strong>Newsletter has moved to Rail Intel CMS.</strong>
+      Create campaigns, manage subscribers and send mail from
+      <a href="https://cms.railintel.co.uk/?tab=newsletter" style="color:#a5b4fc">CMS → Administration → Newsletter</a>.
+      Footer sign-ups on railintel.co.uk sync there automatically.
+    </div>
     <div class="page-header">
-      <div><h1 class="page-title">Newsletter</h1><p class="page-lead">${subscribers.length} active subscribers.</p></div>
+      <div><h1 class="page-title">Newsletter (legacy)</h1><p class="page-lead">Local list only — new sign-ups go to CMS (${subscribers.length} stored here).</p></div>
       <button class="btn" id="new-campaign">New campaign</button>
     </div>
     <div class="grid-2">

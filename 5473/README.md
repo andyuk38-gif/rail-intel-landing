@@ -40,7 +40,9 @@ SQLite and uploads live in `5473/data/` (gitignored). They persist across normal
 
 ## Email (newsletters)
 
-**Recommended:** use the same SMTP as Rail Intel CMS — no separate mailbox credentials on the landing site.
+**Subscribers and campaigns** are managed in **Rail Intel CMS** → Administration → **Newsletter**. Footer sign-ups on railintel.co.uk sync to CMS automatically.
+
+**Sending mail** from `/5473` (legacy campaigns UI) uses the same SMTP as CMS:
 
 1. In CMS (Azure), set `SITE_ADMIN_MAIL_SECRET` to a long random string.
 2. In `config.local.php`, set the same value as `cms_mail_secret` (and `cms_api_url` if needed).

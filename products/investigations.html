@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=211" />
-  <link rel="stylesheet" href="../css/pages.css?v=211" />
+  <link rel="stylesheet" href="../css/style.css?v=212" />
+  <link rel="stylesheet" href="../css/pages.css?v=212" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -347,6 +347,7 @@
             <form class="footer-newsletter__form" data-newsletter-form>
               <label class="sr-only" for="newsletter-email">Email address</label>
               <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+              <input type="text" name="website" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <button type="submit" class="btn btn-primary">Subscribe</button>
             </form>
             <p class="footer-newsletter__message" data-newsletter-message hidden></p>
@@ -390,7 +391,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=211"></script>
-  <script src="../js/newsletter.js?v=211"></script>
+  <script src="../js/site.js?v=212"></script>
+  <script src="../js/newsletter.js?v=212"></script>
 </body>
 </html>
