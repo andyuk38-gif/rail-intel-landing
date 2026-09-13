@@ -28,7 +28,7 @@ export const homeGallery = {
         bullets: [
           "Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.",
           "Open any person and drill into team compliance, incidents and QA in a click.",
-          "Personal progress and team status in one place, ready for the shift briefing.",
+          "Personal progress and team status in one place, ready for any internal or external audit.",
         ],
       },
     },
