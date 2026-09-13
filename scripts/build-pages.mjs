@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 224;
+const ASSET_VERSION = 225;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -27,6 +27,12 @@ const rich = (value) => esc(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong
 const appUrl = (key) => site[key] || site.app;
 
 /* ------------------------------------------------------------------ chrome */
+
+function renderDevBanner(base) {
+  const href = `${base}#register-interest`;
+  const openAttr = base ? "" : ' data-eoi-open';
+  return `<p>This site is currently under development. — <a href="${href}"${openAttr}>Register your interest to qualify for early onboarding discounts and FREE modules.</a></p>`;
+}
 
 function renderNavItems(base, items) {
   return items
@@ -154,7 +160,7 @@ function renderHead(base, { title, description }) {
 <body>
   <div class="site-chrome">
     <div class="dev-banner" role="status">
-      <p>This site is currently under development.</p>
+      ${renderDevBanner(base)}
     </div>
     <header class="header">
       <div class="container">

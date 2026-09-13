@@ -56,11 +56,32 @@
     } catch (e) {}
   }
 
+  var showTimeoutId = null;
+
   function showWidget() {
     widget.hidden = false;
     requestAnimationFrame(function () {
       widget.dataset.visible = "true";
     });
+  }
+
+  function openEoiPanel() {
+    if (showTimeoutId !== null) {
+      window.clearTimeout(showTimeoutId);
+      showTimeoutId = null;
+    }
+    showWidget();
+    setCollapsed(false);
+    setExpanded(true);
+    if (location.hash !== "#register-interest") {
+      history.replaceState(null, "", "#register-interest");
+    }
+    var nameInput = form && form.querySelector('input[name="name"]');
+    if (nameInput) {
+      window.setTimeout(function () {
+        nameInput.focus({ preventScroll: true });
+      }, 150);
+    }
   }
 
   function setExpanded(open) {
@@ -119,10 +140,28 @@
     return;
   }
 
-  window.setTimeout(function () {
+  showTimeoutId = window.setTimeout(function () {
+    showTimeoutId = null;
     showWidget();
     if (isCollapsed()) setCollapsed(true);
   }, SHOW_DELAY_MS);
+
+  window.railintelEoiOpen = openEoiPanel;
+
+  document.addEventListener("click", function (event) {
+    var trigger = event.target.closest("[data-eoi-open]");
+    if (!trigger) return;
+    event.preventDefault();
+    openEoiPanel();
+  });
+
+  if (location.hash === "#register-interest") {
+    openEoiPanel();
+  }
+
+  window.addEventListener("hashchange", function () {
+    if (location.hash === "#register-interest") openEoiPanel();
+  });
 
   if (teaser) {
     teaser.addEventListener("click", function () {

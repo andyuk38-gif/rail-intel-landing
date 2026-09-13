@@ -88,6 +88,19 @@ body::before {
   line-height: 1.3;
 }
 
+.dev-banner a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.dev-banner a:hover,
+.dev-banner a:focus-visible {
+  color: #000;
+}
+
 /* Header */
 .header {
   position: relative;
