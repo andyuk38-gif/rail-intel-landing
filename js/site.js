@@ -1669,10 +1669,67 @@
   Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-journey]"), function (journey) {
     var steps = Array.prototype.slice.call(journey.querySelectorAll("[data-trainee-step]"));
     var railLinks = Array.prototype.slice.call(journey.querySelectorAll("[data-trainee-rail]"));
+    var railWrap = journey.querySelector(".trainee-journey__rail-wrap");
     var progress = journey.querySelector("[data-trainee-rail-progress]");
     var count = Number(journey.getAttribute("data-trainee-count")) || steps.length;
     var active = 0;
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var rotateMs = 6000;
+    var autoTimer = null;
+    var userPaused = false;
+    var scrollLock = false;
+
+    journey.style.setProperty("--trainee-rotate-duration", rotateMs + "ms");
+
+    function restartTimer(link) {
+      railLinks.forEach(function (railLink) {
+        var fill = railLink.querySelector("[data-trainee-rail-timer-fill]");
+        if (!fill) return;
+        fill.style.animation = "none";
+        void fill.offsetWidth;
+        fill.style.animation = "";
+      });
+      if (link && link.classList.contains("is-active") && !reduced && !userPaused) {
+        var fill = link.querySelector("[data-trainee-rail-timer-fill]");
+        if (fill) fill.style.animation = "";
+      }
+    }
+
+    function scrollInset() {
+      var banner = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dev-banner-height")) || 40;
+      var railHeight = railWrap ? railWrap.getBoundingClientRect().height : 0;
+      return banner + 72 + railHeight + 20;
+    }
+
+    function scrollToStep(index) {
+      var step = steps[index];
+      if (!step) return;
+      var anchor = step.querySelector(".trainee-journey__visual") || step.querySelector(".trainee-journey__content") || step;
+      var rect = anchor.getBoundingClientRect();
+      var viewportRoom = window.innerHeight - scrollInset();
+      var targetY = window.scrollY + rect.top - scrollInset();
+      if (rect.height < viewportRoom) {
+        targetY = window.scrollY + rect.top - scrollInset() - Math.max(0, (viewportRoom - rect.height) * 0.15);
+      }
+      window.scrollTo({ top: Math.max(0, targetY), behavior: reduced ? "auto" : "smooth" });
+    }
+
+    function stopAutoRotate() {
+      if (autoTimer) {
+        window.clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    function startAutoRotate() {
+      if (reduced || userPaused || scrollLock) return;
+      stopAutoRotate();
+      restartTimer(railLinks[active]);
+      autoTimer = window.setTimeout(function () {
+        var next = (active + 1) % steps.length;
+        goToStep(next, true);
+      }, rotateMs);
+    }
 
     function sync(index) {
       active = index;
@@ -1694,11 +1751,25 @@
       if (activeLink && window.matchMedia("(max-width: 960px)").matches) {
         activeLink.scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
       }
+      restartTimer(activeLink);
+    }
+
+    function goToStep(index, fromAuto) {
+      if (index < 0 || index >= steps.length) return;
+      scrollLock = true;
+      sync(index);
+      scrollToStep(index);
+      window.setTimeout(function () {
+        scrollLock = false;
+        startAutoRotate();
+      }, reduced ? 0 : 450);
+      if (!fromAuto) userPaused = true;
     }
 
     if ("IntersectionObserver" in window && steps.length) {
-      var observer = new IntersectionObserver(
+      var stepObserver = new IntersectionObserver(
         function (entries) {
+          if (scrollLock || userPaused) return;
           var visible = entries
             .filter(function (entry) {
               return entry.isIntersecting;
@@ -1709,27 +1780,61 @@
           if (!visible.length) return;
           var step = visible[0].target;
           var index = Number(step.getAttribute("data-trainee-step"));
-          if (!Number.isNaN(index) && index !== active) sync(index);
+          if (!Number.isNaN(index) && index !== active) {
+            sync(index);
+            startAutoRotate();
+          }
         },
-        { rootMargin: "-20% 0px -45% 0px", threshold: [0.2, 0.35, 0.5, 0.65] }
+        { rootMargin: "-24% 0px -40% 0px", threshold: [0.2, 0.35, 0.5, 0.65] }
       );
       steps.forEach(function (step) {
-        observer.observe(step);
+        stepObserver.observe(step);
       });
+
+      var journeyObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.2) startAutoRotate();
+            else stopAutoRotate();
+          });
+        },
+        { threshold: [0, 0.2, 0.45] }
+      );
+      journeyObserver.observe(journey);
     } else {
       sync(0);
     }
 
+    journey.addEventListener("mouseenter", function () {
+      userPaused = true;
+      stopAutoRotate();
+    });
+
+    journey.addEventListener("mouseleave", function () {
+      userPaused = false;
+      startAutoRotate();
+    });
+
+    journey.addEventListener("focusin", function () {
+      userPaused = true;
+      stopAutoRotate();
+    });
+
+    journey.addEventListener("focusout", function (event) {
+      if (journey.contains(event.relatedTarget)) return;
+      userPaused = false;
+      startAutoRotate();
+    });
+
     railLinks.forEach(function (link) {
       link.addEventListener("click", function (event) {
-        var index = Number(link.getAttribute("data-trainee-rail"));
-        var target = steps[index];
-        if (!target) return;
         event.preventDefault();
-        target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
-        sync(index);
+        var index = Number(link.getAttribute("data-trainee-rail"));
+        goToStep(index, false);
       });
     });
+
+    sync(0);
 
     steps.forEach(function (step) {
       var subtabs = Array.prototype.slice.call(step.querySelectorAll("[data-trainee-subtab]"));

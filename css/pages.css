@@ -2975,19 +2975,54 @@ body.lightbox-open {
 }
 
 .trainee-journey__rail-link {
+  position: relative;
   flex: 1 1 8.5rem;
   display: grid;
   gap: 0.15rem;
-  padding: 0.65rem 0.75rem;
+  padding: 0.65rem 0.75rem 0.85rem;
   border: 1px solid transparent;
   border-radius: 10px;
   text-decoration: none;
   color: var(--text-muted);
+  overflow: hidden;
   transition:
     border-color 0.2s ease,
     background 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
+}
+
+.trainee-journey__rail-timer {
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  bottom: 0.4rem;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.trainee-journey__rail-timer-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--trainee-accent);
+}
+
+.trainee-journey__rail-link.is-active .trainee-journey__rail-timer-fill {
+  animation: trainee-rail-timer var(--trainee-rotate-duration, 6s) linear forwards;
+}
+
+@keyframes trainee-rail-timer {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 .trainee-journey__rail-link:hover {
@@ -3456,9 +3491,11 @@ body.lightbox-open {
   .trainee-journey__rail-progress-fill,
   .trainee-journey__rail-link,
   .trainee-journey__marker-dot,
+  .trainee-journey__rail-timer-fill,
   .trainee-schedule-flow__rail-fill,
   .trainee-schedule-flow__num {
     transition: none;
+    animation: none !important;
   }
 }
 

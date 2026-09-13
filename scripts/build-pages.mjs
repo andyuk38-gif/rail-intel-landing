@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 207;
+const ASSET_VERSION = 208;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -872,6 +872,7 @@ function renderTraineeFlow(addon, base) {
       )}">
               <span class="trainee-journey__rail-index">${esc(step.step)}</span>
               <span class="trainee-journey__rail-title">${esc(step.title)}</span>
+              <span class="trainee-journey__rail-timer" aria-hidden="true"><span class="trainee-journey__rail-timer-fill" data-trainee-rail-timer-fill></span></span>
             </a>`
     )
     .join("\n");
