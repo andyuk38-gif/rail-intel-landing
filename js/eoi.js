@@ -66,6 +66,7 @@
   }
 
   function openEoiPanel() {
+    if (!widget || !widget.isConnected) return;
     if (showTimeoutId !== null) {
       window.clearTimeout(showTimeoutId);
       showTimeoutId = null;
@@ -77,6 +78,11 @@
     if (location.hash !== "#register-interest") {
       history.replaceState(null, "", "#register-interest");
     }
+    if (panel) {
+      window.setTimeout(function () {
+        panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }, 80);
+    }
     var nameInput = form && form.querySelector('input[name="name"]');
     if (nameInput) {
       window.setTimeout(function () {
@@ -84,6 +90,8 @@
       }, 150);
     }
   }
+
+  window.railintelEoiOpen = openEoiPanel;
 
   function setExpanded(open) {
     widget.dataset.expanded = open ? "true" : "false";
@@ -146,8 +154,6 @@
     showWidget();
     if (isCollapsed()) setCollapsed(true);
   }, SHOW_DELAY_MS);
-
-  window.railintelEoiOpen = openEoiPanel;
 
   if (location.hash === "#register-interest") {
     openEoiPanel();

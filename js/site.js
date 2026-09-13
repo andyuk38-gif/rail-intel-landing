@@ -8,6 +8,51 @@
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
 
+  /* ---------- Dev banner → EOI register-interest panel ---------- */
+
+  function homeRegisterInterestHref() {
+    var link = document.querySelector(".dev-banner__cta");
+    if (link && link.href) return link.href;
+    return window.location.origin + "/#register-interest";
+  }
+
+  function isHomePage() {
+    var path = window.location.pathname;
+    return path === "/" || /\/index\.html$/i.test(path);
+  }
+
+  function openRegisterInterest(event) {
+    if (event) event.preventDefault();
+
+    if (typeof window.railintelEoiOpen === "function") {
+      window.railintelEoiOpen();
+      return;
+    }
+
+    if (isHomePage()) {
+      if (location.hash !== "#register-interest") {
+        location.hash = "register-interest";
+      }
+      var attempts = 0;
+      var timer = window.setInterval(function () {
+        if (typeof window.railintelEoiOpen === "function") {
+          window.clearInterval(timer);
+          window.railintelEoiOpen();
+        } else if (++attempts > 40) {
+          window.clearInterval(timer);
+        }
+      }, 50);
+      return;
+    }
+
+    window.location.href = homeRegisterInterestHref();
+  }
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest(".dev-banner__cta, [data-eoi-open]")) return;
+    openRegisterInterest(event);
+  });
+
   /* ---------- Dropdown navigation ---------- */
 
   var menu = document.querySelector("[data-nav-menu]");
@@ -2169,25 +2214,5 @@
     });
 
     show(0);
-  });
-
-  /* ---------- Dev banner → EOI register-interest panel ---------- */
-
-  document.addEventListener("click", function (event) {
-    var link = event.target.closest("[data-eoi-open], .dev-banner__cta");
-    if (!link) return;
-
-    var widget = document.querySelector("[data-eoi-widget]");
-    if (widget && typeof window.railintelEoiOpen === "function") {
-      event.preventDefault();
-      window.railintelEoiOpen();
-      return;
-    }
-
-    var href = link.getAttribute("href") || "";
-    if (href === "#register-interest") {
-      event.preventDefault();
-      window.location.href = "/#register-interest";
-    }
   });
 })();
