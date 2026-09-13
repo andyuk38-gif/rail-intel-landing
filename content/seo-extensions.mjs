@@ -144,13 +144,6 @@ export const seoExtensions = {
     ],
   },
 
-  "qa-verifications": {
-    relatedLinks: [
-      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
-      { name: "Compare competency software", href: "guides/compare-rail-competency-software.html" },
-    ],
-  },
 
   /* ------------------------------------------------------------- features */
 

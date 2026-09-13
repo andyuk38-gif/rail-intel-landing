@@ -81,11 +81,6 @@ export const home = {
       answer:
         "The platform is launching in April 2027. You can register your interest now for early onboarding discounts and introductory module offers.",
     },
-    {
-      question: "How does Rail Intel compare to other UK rail competency systems?",
-      answer:
-        "We publish a buyer's guide and platform comparison covering Rail Intel alongside established options such as Velociti RailSmart EDS, AssessTech ACMS and RPD Assure.",
-    },
   ],
 };
 
@@ -105,11 +100,6 @@ export const staticPages = {
         question: "Which modules are add-ons?",
         answer:
           "QA Verifications, Task assignment, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks extend Rail Intel CMS when your operation needs them.",
-      },
-      {
-        question: "How does Rail Intel compare to RailSmart EDS or AssessTech ACMS?",
-        answer:
-          "See our rail competency software buyer's guide and platform comparison for a factual overview of UK market options including Velociti RailSmart EDS, AssessTech ACMS and RPD Assure.",
       },
     ],
     breadcrumbs: [

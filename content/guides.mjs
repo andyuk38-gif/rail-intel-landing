@@ -209,10 +209,6 @@ export const guides = [
           "The platform launches in April 2027. You can register your interest now for early onboarding, introductory module offers and a guided evaluation when your procurement timeline allows.",
       },
     ],
-    cta: {
-      label: "Compare platforms side by side",
-      href: "guides/compare-rail-competency-software.html",
-    },
   },
   {
     slug: "compare-rail-competency-software",
@@ -277,9 +273,5 @@ export const guides = [
           "Rail Intel offers 14-day module trials once live. Register your interest to join early onboarding ahead of the April 2027 launch.",
       },
     ],
-    cta: {
-      label: "Read the buyer's guide",
-      href: "guides/rail-competency-management-software.html",
-    },
   },
 ];

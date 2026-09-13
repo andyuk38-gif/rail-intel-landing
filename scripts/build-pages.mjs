@@ -30,7 +30,7 @@ import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 232;
+const ASSET_VERSION = 233;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1275,19 +1275,6 @@ ${cards}
           <ul class="spec-list">
 ${capacity}
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section page-section--tight">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Evaluating competency software?</h2>
-          <p>Read our buyer's guide and platform comparison for UK rail — including RailSmart EDS, AssessTech ACMS and RPD Assure.</p>
-        </div>
-        <div class="page-actions">
-          <a href="${base}guides/rail-competency-management-software.html" class="btn btn-ghost btn-lg">Buyer's guide</a>
-          <a href="${base}guides/compare-rail-competency-software.html" class="btn btn-ghost btn-lg">Compare platforms</a>
         </div>
       </div>
     </section>

@@ -61,7 +61,6 @@ export const products = [
     relatedLinks: [
       { name: "Rail Intel CMS", href: "" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-      { name: "Compare competency software", href: "guides/compare-rail-competency-software.html" },
       { name: "Security", href: "security.html" },
     ],
     href: "products/investigations.html",
@@ -718,7 +717,6 @@ export const featureGroups = [
       { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
       { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "QA Verifications add-on", href: "products/qa-verifications.html" },
-      { name: "Compare competency software", href: "guides/compare-rail-competency-software.html" },
     ],
     sections: [
       {
