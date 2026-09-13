@@ -61,29 +61,12 @@ export const homeGallery = {
       label: "Reporting",
       url: "cms.railintel.co.uk/reporting",
       wide: true,
-      carousel: true,
-      slides: [
-        {
-          src: "images/product/reporting-headline-metrics.png",
-          alt: "Reporting and analytics with headline metrics and licensing readiness",
-          width: 1024,
-          height: 545,
-          chips: {
-            safe: { title: "QA compliance rate", detail: "54% from live data" },
-            alert: { title: "Licence renewals", detail: "2 due within 6 weeks" },
-          },
-        },
-        {
-          src: "images/product/reporting-incident-statistics.png",
-          alt: "Incident data statistics with period and week filters, trends and breakdowns by type",
-          width: 1024,
-          height: 547,
-          chips: {
-            safe: { title: "Incident trends", detail: "Filter by period and week" },
-            alert: { title: "Incidents by type", detail: "Collision and SPAD split" },
-          },
-        },
-      ],
+      image: {
+        src: "images/product/reporting-headline-metrics.png",
+        alt: "Reporting and analytics with headline metrics and licensing readiness",
+        width: 1024,
+        height: 545,
+      },
       chips: {
         safe: { title: "QA compliance rate", detail: "54% from live data" },
         alert: { title: "Licence renewals", detail: "2 due within 6 weeks" },
