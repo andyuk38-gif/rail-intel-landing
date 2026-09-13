@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 203;
+const ASSET_VERSION = 204;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -169,39 +169,59 @@ function renderHead(base, { title, description }) {
 `;
 }
 
-function renderFooterNavLinks(base) {
-  return `<a href="${base}products/">Products</a>
-          <a href="${base}features/">Features</a>
-          <a href="${base}how-it-works.html">How it works</a>
-          <a href="${base}security.html">Security</a>
-          <a href="${base}get-started.html">Get started</a>
-          <a href="${site.app}">Log in</a>`;
-}
-
 function renderFooterMarkup(base) {
   return `  <footer class="footer">
     <div class="footer__backdrop" aria-hidden="true"></div>
-    <div class="container footer-grid">
-      <div class="footer-col footer-col--brand">
-        <p class="footer-brand">Rail Intel</p>
-        <p class="footer-tagline">Competency management for rail.</p>
-        <p class="footer-copy">&copy; <span data-year></span> Rail Intel. All rights reserved.</p>
+    <div class="footer__panel">
+      <div class="container footer-grid">
+        <div class="footer-col footer-col--brand">
+          <p class="footer-brand">Rail Intel</p>
+          <p class="footer-tagline">Competency management for rail — assessments, workforce records, medicals and licensing.</p>
+          <div class="footer-newsletter footer-newsletter--inline">
+            <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
+            <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
+            <form class="footer-newsletter__form" data-newsletter-form>
+              <label class="sr-only" for="newsletter-email">Email address</label>
+              <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p class="footer-newsletter__message" data-newsletter-message hidden></p>
+          </div>
+        </div>
+        <div class="footer-col footer-col--links">
+          <h2 class="footer-heading">Product</h2>
+          <nav class="footer-nav" aria-label="Product">
+            <a href="${base}products/">Products</a>
+            <a href="${base}features/">Features</a>
+            <a href="${base}how-it-works.html">How it works</a>
+          </nav>
+        </div>
+        <div class="footer-col footer-col--links">
+          <h2 class="footer-heading">Company</h2>
+          <nav class="footer-nav" aria-label="Company">
+            <a href="${base}security.html">Security</a>
+            <a href="${base}get-started.html">Get started</a>
+            <a href="${site.app}">Log in</a>
+          </nav>
+        </div>
+        <div class="footer-col footer-col--links">
+          <h2 class="footer-heading">Resources</h2>
+          <nav class="footer-nav" aria-label="Resources">
+            <a href="${base}products/investigations.html">Investigations</a>
+            <a href="${base}products/trainee-driver.html">Trainee Driver</a>
+            <a href="${base}features/competency-cycles.html">Competency &amp; Cycles</a>
+          </nav>
+        </div>
       </div>
-      <div class="footer-col footer-col--nav">
-        <h2 class="footer-heading">Explore</h2>
-        <nav class="footer-nav" aria-label="Footer">
-          ${renderFooterNavLinks(base)}
-        </nav>
-      </div>
-      <div class="footer-col footer-col--newsletter footer-newsletter">
-        <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>
-        <p class="footer-newsletter__text" data-content-key="footer.newsletter.text">Product updates, rail compliance insight and release notes — no spam.</p>
-        <form class="footer-newsletter__form" data-newsletter-form>
-          <label class="sr-only" for="newsletter-email">Email address</label>
-          <input id="newsletter-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-        <p class="footer-newsletter__message" data-newsletter-message hidden></p>
+      <div class="footer-bar">
+        <div class="container footer-bar__inner">
+          <p class="footer-bar__copy">Copyright &copy; <span data-year></span> Rail Intel. All rights reserved.</p>
+          <nav class="footer-bar__links" aria-label="Legal">
+            <a href="${base}security.html">Security</a>
+            <a href="${base}get-started.html">Contact</a>
+            <a href="${site.app}">CMS login</a>
+          </nav>
+        </div>
       </div>
     </div>
   </footer>`;
