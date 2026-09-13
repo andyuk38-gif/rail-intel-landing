@@ -4174,7 +4174,7 @@ body.lightbox-open {
 /* ---------- CMS signup (get-started) ---------- */
 
 .page-hero--compact {
-  padding-bottom: 0.5rem;
+  padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
 }
 
 .page-hero--compact .page-title {
@@ -4186,7 +4186,8 @@ body.lightbox-open {
 }
 
 .signup-page.page-section--tight {
-  padding-top: clamp(3rem, 8vh, 5rem);
+  padding-top: clamp(4.5rem, 12vh, 7.5rem);
+  border-top: 0;
 }
 
 .signup-page {
@@ -4197,11 +4198,28 @@ body.lightbox-open {
   max-width: 1120px;
   display: flex;
   flex-direction: column;
-  gap: 0.5in;
+  gap: 0;
+}
+
+.signup-procurement-notice {
+  display: block;
+  width: 100%;
+  margin-top: clamp(1.5rem, 4vh, 2.75rem);
+  margin-bottom: 0.5in;
 }
 
 .signup-procurement-notice .signup-panel__head {
   margin-bottom: 1rem;
+  width: 100%;
+  max-width: none;
+}
+
+.signup-procurement-notice .signup-form__title,
+.signup-procurement-notice .signup-form__lead,
+.signup-procurement-notice__text {
+  display: block;
+  width: 100%;
+  max-width: none !important;
 }
 
 .signup-procurement-notice .signup-form__lead,
@@ -4210,7 +4228,6 @@ body.lightbox-open {
   color: var(--text-muted);
   font-size: 0.95rem;
   line-height: 1.55;
-  max-width: none;
 }
 
 .signup-procurement-notice .signup-panel__head .signup-form__lead {
