@@ -4177,6 +4177,17 @@ body.lightbox-open {
   padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
 }
 
+.page-hero--get-started .page-hero__inner,
+.page-hero--get-started .page-hero__copy {
+  max-width: none;
+  width: 100%;
+}
+
+.page-hero--get-started .page-title {
+  max-width: none;
+  width: 100%;
+}
+
 .page-hero--compact .page-title {
   margin-bottom: 0;
 }
@@ -4207,6 +4218,8 @@ body.lightbox-open {
 
 .signup-onboard-welcome__title {
   margin: 0 0 0.75rem;
+  max-width: none;
+  width: 100%;
   font-size: clamp(1.2rem, 2.4vw, 1.55rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -4216,7 +4229,8 @@ body.lightbox-open {
 
 .signup-onboard-welcome__lead {
   margin: 0;
-  max-width: 62ch;
+  max-width: none;
+  width: 100%;
   font-size: 0.98rem;
   line-height: 1.62;
   color: var(--text-muted);

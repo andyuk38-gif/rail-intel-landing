@@ -1753,9 +1753,9 @@ export const security = {
 export const getStarted = {
   heroTitle: "Start onboarding with Rail Intel",
   welcome: {
-    title: "Welcome — and thank you for getting started",
+    title: "Welcome and thank you for getting started",
     lead:
-      "Our automated onboarding takes you smoothly from first application to a live CMS tenant. Complete the form below and we will keep you updated at every step — with instant email confirmation when you submit.",
+      "Our automated onboarding takes you smoothly from first application to a live CMS tenant. Complete the form below and we will keep you updated at every step with instant email confirmation when you submit.",
     steps: [
       {
         title: "Apply online",
