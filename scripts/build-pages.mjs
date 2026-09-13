@@ -16,7 +16,7 @@ import { homeGallery } from "../content/home-gallery.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 228;
+const ASSET_VERSION = 229;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -30,7 +30,7 @@ const appUrl = (key) => site[key] || site.app;
 
 function renderDevBanner(base) {
   const href = base ? `${base}#register-interest` : "/#register-interest";
-  return `<p>This site is currently under development. — <a href="${href}" class="dev-banner__cta" data-eoi-open>Register your interest to qualify for early onboarding discounts and FREE modules.</a></p>`;
+  return `<p>This site is currently under development.<span class="dev-banner__addon"> — <a href="${href}" class="dev-banner__cta" data-eoi-open>Register your interest to qualify for early onboarding discounts and FREE modules.</a></span></p>`;
 }
 
 function renderNavItems(base, items) {

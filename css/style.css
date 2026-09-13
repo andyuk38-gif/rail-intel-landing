@@ -101,6 +101,12 @@ body::before {
   color: #991b1b;
 }
 
+@media (max-width: 900px) {
+  .dev-banner__addon {
+    display: none;
+  }
+}
+
 /* Header */
 .header {
   position: relative;
