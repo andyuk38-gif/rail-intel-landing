@@ -131,7 +131,8 @@
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   }
 
-  function setPanel(panel) {
+  function setPanel(panel, opts) {
+    var shouldScroll = !opts || opts.scroll !== false;
     state.panel = panel;
     wizard.querySelectorAll("[data-signup-panel]").forEach(function (el) {
       var isCurrent = el.getAttribute("data-signup-panel") === panel;
@@ -153,7 +154,7 @@
     if (panel === "quote-modules" || panel === "purchase-modules") {
       refreshModules(true);
     }
-    scrollWizardIntoView();
+    if (shouldScroll) scrollWizardIntoView();
   }
 
   function fieldValue(id) {
@@ -546,7 +547,7 @@
     .catch(function () {});
 
   handleStripeReturn();
-  setPanel("company");
+  setPanel("company", { scroll: false });
 
   wizard.querySelectorAll("[data-signup-goto]").forEach(function (btn) {
     btn.addEventListener("click", function () {
