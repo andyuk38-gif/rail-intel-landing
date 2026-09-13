@@ -4193,7 +4193,7 @@ body.lightbox-open {
   max-width: 1120px;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.5in;
 }
 
 .signup-procurement-notice .signup-panel__head {
