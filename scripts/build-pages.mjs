@@ -996,7 +996,6 @@ ${renderQaSection(addon.qaSection, base)}
         <div class="page-section__head">
           <h2>Activating ${esc(addon.name)}</h2>
           <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator can enable it for your company directly.</p>
-          <p>Module identifier: <code>${esc(addon.moduleId)}</code></p>
         </div>
         <div class="page-actions">
           <a href="${site.app}" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
