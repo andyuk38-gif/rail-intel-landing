@@ -1748,8 +1748,30 @@ export const security = {
   },
 };
 
+/* ----------------------------------------------------------- get started */
+
+export const getStarted = {
+  procurementNotice: {
+    heading: "Procurement & supplier onboarding",
+    lead:
+      "If your organisation needs supplier onboarding documents — company registration, bank details, insurance, Cyber Essentials, DPA and related assurance — you do not need a separate portal on this site.",
+    body: [
+      "Mention it in your application notes or when you speak to our team. If you request a quotation, we can include the procurement pack with that quote. You can also request the pack later at any stage.",
+    ],
+    items: [
+      "Company registration & VAT",
+      "Bank details letter",
+      "Insurance certificates",
+      "Cyber Essentials",
+      "Data Processing Agreement",
+      "DPIA support information",
+    ],
+  },
+};
+
 /* ------------------------------------------------------------- procurement */
 
+/** CMS-managed supplier pack — not published as a public marketing page. */
 export const procurement = {
   title: "Supplier procurement pack",
   titleHtml:
