@@ -3272,6 +3272,7 @@ body::before {
 }
 
 .features__head .section-desc {
+  max-width: none;
   margin-bottom: 1.35rem;
 }
 
