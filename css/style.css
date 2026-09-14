@@ -1543,6 +1543,13 @@ body::before {
 
 .product-section--routes .product-section__inner {
   grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.48fr);
+  align-items: start;
+}
+
+.product-section--routes .product-gallery .browser-mockup {
+  max-width: none;
+  width: 100%;
 }
 
 .product-section--routes .routes-train-stage {
