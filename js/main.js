@@ -26,9 +26,14 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const restartRoutesTrain = () => {
     if (!routesTrain) return;
-    routesTrain.style.animation = "none";
-    void routesTrain.offsetHeight;
-    routesTrain.style.animation = "";
+    const animated = routesTrain.querySelectorAll(
+      ".routes-train-stage__train, .routes-train-stage__front-lights, .routes-train-stage__rear-light--running, .routes-train-stage__rear-light--tail"
+    );
+    animated.forEach((el) => {
+      el.style.animation = "none";
+      void el.offsetHeight;
+      el.style.animation = "";
+    });
   };
 
   if (!img || !tabs.length) return;
