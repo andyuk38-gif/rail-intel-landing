@@ -1986,7 +1986,7 @@ export const privacy = {
     {
       heading: "Third-party service providers",
       paragraphs: [
-        "**Microsoft Azure** hosts Rail Intel CMS and Investigations (App Service, PostgreSQL and Blob Storage) in the UK West region unless otherwise agreed with a customer.",
+        "**Microsoft Azure** hosts Rail Intel CMS and Investigations (App Service, PostgreSQL and Azure Storage) in Europe unless otherwise agreed with a customer.",
         "**Stripe** processes card payments for self-serve purchase paths. Stripe’s privacy notice applies to payment data they handle directly.",
         "**Email delivery** providers may send transactional messages (for example, application confirmations, sign-in codes where configured, and product notifications).",
         "We require processors that handle personal data on our behalf to protect it appropriately and only use it for the services they provide to us.",
