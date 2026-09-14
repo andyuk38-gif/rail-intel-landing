@@ -1927,3 +1927,112 @@ export const procurement = {
     email: "sales@railintel.co.uk",
   },
 };
+
+/* ------------------------------------------------------------------- privacy */
+
+export const privacy = {
+  title: "Privacy policy",
+  titleHtml:
+    'Privacy <span class="hero-title__accent">policy</span>',
+  lead:
+    "How Rail Intel collects, uses and protects personal information on this website and in our rail competency and investigation products.",
+  lastUpdated: "14 September 2026",
+  contactEmail: "sales@railintel.co.uk",
+  sections: [
+    {
+      heading: "Who we are",
+      paragraphs: [
+        "Rail Intel provides digital competency management and investigation software for the rail industry. This privacy policy explains how we handle personal information when you visit railintel.co.uk, subscribe to updates, apply to become a customer, or use Rail Intel CMS and Rail Intel Investigations.",
+        "For personal data processed in Rail Intel CMS or Investigations on behalf of a rail operator or infrastructure manager, that customer is usually the data controller and Rail Intel acts as a data processor. A Data Processing Agreement is available as part of customer onboarding.",
+      ],
+    },
+    {
+      heading: "Information we collect on this website",
+      paragraphs: [
+        "**Newsletter and product updates.** If you subscribe via the footer form or register your interest on the homepage, we collect your email address and a source label (for example, website footer or expression of interest). We use a hidden honeypot field to help filter automated submissions.",
+        "**Get started applications.** If you apply to onboard Rail Intel CMS, we collect company details (name and address), contact details (name, phone and email), your module selections, contract preferences, licence counts, optional notes, and — if you choose bank transfer — a purchase order document. If you pay by card, payment is handled by Stripe; we do not store full card numbers on our servers.",
+        "**Technical information.** When you use this site, our hosting provider and CMS API may process standard server logs (such as IP address, browser type, request time and pages viewed) to deliver the site, prevent abuse and maintain security.",
+        "**Browser storage on this site.** We use localStorage to remember when you have registered interest (so we do not show the prompt again) and sessionStorage to remember if you collapsed the interest panel. We do not use these stores for advertising or cross-site tracking.",
+      ],
+    },
+    {
+      heading: "How we use website information",
+      paragraphs: [
+        "We use the information above to respond to your enquiry, send product updates you have asked for, process onboarding applications and quotations, take payment where applicable, and improve our marketing site.",
+        "We do not sell your personal information. We do not use third-party advertising or analytics trackers on this website.",
+      ],
+    },
+    {
+      heading: "Legal bases (UK GDPR)",
+      paragraphs: [
+        "Where UK GDPR applies, we rely on: **consent** when you subscribe to news or register interest; **contract** (or steps prior to contract) when you submit a get-started application or accept a quotation; **legitimate interests** to operate, secure and improve our website, prevent fraud and communicate with prospective customers in a proportionate way; and **legal obligation** where we must retain records for tax, accounting or regulatory purposes.",
+      ],
+    },
+    {
+      heading: "Rail Intel CMS and Investigations",
+      paragraphs: [
+        "When your organisation uses Rail Intel CMS or Rail Intel Investigations, personal data about your workforce is entered by authorised users in your tenant. Typical categories include identity and contact details, employment and role information, competency and assessment records, medical and occupational-health information, licence and training data, incident and investigation records, documents and photographs uploaded to employee files, audit logs, and authentication data (including two-factor enrolment where enabled).",
+        "That data is stored in company-scoped tenants so one operator cannot access another’s records. Processing purposes, retention and subprocessors for customer data are set out in our Data Processing Agreement and procurement pack, which we provide during supplier onboarding.",
+      ],
+    },
+    {
+      heading: "Cookies and similar technologies",
+      paragraphs: [
+        "This marketing website does not set advertising cookies and does not show a cookie banner because we only use essential browser storage (localStorage and sessionStorage) for site functionality, as described above.",
+        "Rail Intel CMS and Investigations use session cookies and similar technologies so authenticated users can stay signed in securely. Those applications have their own sign-in and security controls.",
+        "We load typography from Google Fonts. When your browser requests those font files, Google may receive your IP address and basic technical data. You can limit this through your browser or network settings.",
+      ],
+    },
+    {
+      heading: "Third-party service providers",
+      paragraphs: [
+        "**Microsoft Azure** hosts Rail Intel CMS and Investigations (App Service, PostgreSQL and Blob Storage) in the UK West region unless otherwise agreed with a customer.",
+        "**Stripe** processes card payments for self-serve purchase paths. Stripe’s privacy notice applies to payment data they handle directly.",
+        "**Email delivery** providers may send transactional messages (for example, application confirmations, sign-in codes where configured, and product notifications).",
+        "We require processors that handle personal data on our behalf to protect it appropriately and only use it for the services they provide to us.",
+      ],
+    },
+    {
+      heading: "Retention",
+      paragraphs: [
+        "Newsletter subscriptions are kept until you unsubscribe or we no longer need the list for the purpose you signed up for.",
+        "Get-started applications, quotations and related correspondence are kept for as long as needed to process your onboarding, meet contractual and accounting requirements, and resolve disputes.",
+        "Customer workforce data in CMS or Investigations is retained according to your organisation’s contract and the Data Processing Agreement — typically for the life of the service agreement plus any agreed backup or legal-hold period.",
+        "Server logs on the marketing site are retained for a limited operational period.",
+      ],
+    },
+    {
+      heading: "Your rights",
+      paragraphs: [
+        "If UK GDPR applies to our processing as controller (for example, newsletter or application data), you may have the right to access, rectify, erase, restrict or object to processing, and to data portability where relevant. You may withdraw consent at any time for consent-based processing.",
+        "For workforce data held in CMS or Investigations, contact your employer or the organisation that provided you access — they are usually the controller. We will assist our customers with data-subject requests under the DPA.",
+        "You also have the right to complain to the UK Information Commissioner’s Office (ICO) at ico.org.uk.",
+      ],
+    },
+    {
+      heading: "International transfers",
+      paragraphs: [
+        "We aim to host customer application data in the United Kingdom. Where a subprocessor or support activity involves a transfer outside the UK, we use appropriate safeguards (such as UK adequacy regulations, UK International Data Transfer Agreement addendum, or equivalent contractual protections) as described in our DPA.",
+      ],
+    },
+    {
+      heading: "Security",
+      paragraphs: [
+        "We protect personal data with company-scoped tenants, role-based access, two-factor authentication options, encryption in transit and at rest, and Microsoft Azure hosting. More detail is on our Security page.",
+      ],
+    },
+    {
+      heading: "Changes to this policy",
+      paragraphs: [
+        "We may update this policy when our services, legal requirements or data practices change. The “Last updated” date at the top of this page shows when it was last revised. Significant changes may also be highlighted on the website or communicated to subscribers where appropriate.",
+      ],
+    },
+    {
+      heading: "Contact us",
+      paragraphs: [
+        "Questions about this privacy policy or how we handle personal data on this website can be sent to sales@railintel.co.uk.",
+        "Existing customers with data-protection or DPA questions should contact their Rail Intel account contact or email sales@railintel.co.uk.",
+      ],
+    },
+  ],
+};

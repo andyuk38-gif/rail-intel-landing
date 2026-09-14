@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, getStarted, languages } from "../content/site.mjs";
+import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, privacy, getStarted, languages } from "../content/site.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
 import {
   SITE_URL,
@@ -309,7 +309,7 @@ function renderFooterMarkup(base) {
         <div class="footer-col footer-col--links">
           <h2 class="footer-heading">Company</h2>
           <nav class="footer-nav" aria-label="Company">
-            <a href="${base}security.html">Security</a>
+            <a href="${base}privacy.html">Privacy policy</a>
             <a href="${base}get-started.html">Get started</a>
             <a href="${site.app}">Log in</a>
           </nav>
@@ -327,7 +327,7 @@ function renderFooterMarkup(base) {
         <div class="container footer-bar__inner">
           <p class="footer-bar__copy">Copyright &copy; <span data-year></span> Rail Intel. All rights reserved.</p>
           <nav class="footer-bar__links" aria-label="Legal">
-            <a href="${base}security.html">Security</a>
+            <a href="${base}privacy.html">Privacy policy</a>
             <a href="${base}get-started.html">Contact</a>
             <a href="${site.app}">CMS login</a>
           </nav>
@@ -2423,6 +2423,68 @@ ${azureItems}
   );
 }
 
+function privacyPage() {
+  const base = "";
+  const sections = privacy.sections
+    .map((section) => {
+      const paragraphs = section.paragraphs
+        .map((paragraph) => {
+          const html = rich(paragraph).replace(
+            /sales@railintel\.co\.uk/g,
+            '<a href="mailto:sales@railintel.co.uk">sales@railintel.co.uk</a>'
+          );
+          return `          <p>${html}</p>`;
+        })
+        .join("\n");
+      return `    <section class="page-section">
+      <div class="container" style="max-width:900px">
+        <div class="page-section__head">
+          <h2>${esc(section.heading)}</h2>
+        </div>
+${paragraphs}
+      </div>
+    </section>`;
+    })
+    .join("\n\n");
+
+  const pageSeo = staticPageSeo("privacy.html");
+
+  return (
+    renderHead(base, pageSeo) +
+    `
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Privacy policy</p>
+          <h1 class="page-title">${privacy.titleHtml || esc(privacy.title)}</h1>
+          <p class="page-lead">${esc(privacy.lead)}</p>
+          <p>Last updated: ${esc(privacy.lastUpdated)}</p>
+        </div>
+      </div>
+    </section>
+
+${sections}
+
+    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Related information</h2>
+          <p>For technical and organisational security measures, see our Security page. To request a Data Processing Agreement, start an application or contact our team.</p>
+        </div>
+        <div class="page-actions">
+          <a href="${base}security.html" class="btn btn-primary btn-lg">Security</a>
+          <a href="${base}get-started.html" class="btn btn-secondary btn-lg">Get started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
 /* ----------------------------------------------------- homepage gallery */
 
 const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : "");
@@ -2835,6 +2897,7 @@ for (const group of featureGroups) {
 
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
+emit("privacy.html", privacyPage());
 emit("get-started.html", getStartedPage());
 for (const guide of guides) {
   emit(`guides/${guide.slug}.html`, guidePage(guide));

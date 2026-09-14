@@ -137,6 +137,16 @@ export const staticPages = {
       { name: "Security", path: "security.html" },
     ],
   },
+  "privacy.html": {
+    title: "Rail Intel Privacy Policy | Website & Product Data",
+    description:
+      "Rail Intel privacy policy: how we collect and use personal data on railintel.co.uk, in onboarding, and in Rail Intel CMS and Investigations.",
+    keywords: "rail intel privacy policy, rail software GDPR, competency data privacy",
+    breadcrumbs: [
+      { name: "Rail Intel", path: "/" },
+      { name: "Privacy policy", path: "privacy.html" },
+    ],
+  },
   "get-started.html": {
     title: "Get Started with Rail Intel | Onboarding & Application",
     description:
@@ -294,6 +304,7 @@ export function allSitemapPaths({ products, addons, featureGroups, guideList = g
     "features/index.html",
     "how-it-works.html",
     "security.html",
+    "privacy.html",
     "get-started.html",
   ];
 
