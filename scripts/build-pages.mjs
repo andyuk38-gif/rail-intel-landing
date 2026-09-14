@@ -346,6 +346,13 @@ function renderFooterMarkup(base) {
               })
               .join("\n            ")}
           </nav>
+          <div class="footer-products-divider" aria-hidden="true"></div>
+          <h3 class="footer-heading footer-heading--sub">Addons</h3>
+          <nav class="footer-nav" aria-label="Addons">
+            ${addons
+              .map((addon) => `<a href="${base}products/${addon.slug}.html">${esc(addon.name)}</a>`)
+              .join("\n            ")}
+          </nav>
         </div>
         <div class="footer-col footer-col--links">
           <h2 class="footer-heading">Company</h2>
