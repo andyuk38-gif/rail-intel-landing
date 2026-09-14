@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=258" />
+  <link rel="stylesheet" href="css/style.css?v=259" />
   <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -646,7 +646,14 @@
 
     <section class="product-section product-section--reverse" aria-labelledby="safety-heading">
       <div class="container product-section__inner">
-        <div class="product-section__copy">
+        <div class="product-section__copy product-section__copy--safety">
+          <span class="hero-chip hero-chip--alert hero-chip--landscape safety-chip--top" data-gallery-chip="alert" aria-hidden="true">
+            <span class="hero-chip__dot"></span>
+            <span class="hero-chip__inline">
+              <strong data-chip-title>Incident allocated</strong>
+              <span data-chip-detail>Linked to the employee record</span>
+            </span>
+          </span>
           <p class="product-eyebrow">Safety operations</p>
           <h2 id="safety-heading">Incidents, plans and cab passes — linked to the person.</h2>
           <p class="product-lead">When something happens on the railway, the record should already know who was involved.</p>
@@ -655,6 +662,22 @@
             <li>Issue and track cab passes with a clear colour status.</li>
             <li>Safety briefs stay attached to the people who signed them — ready when you need to prove it.</li>
           </ul>
+          <div class="safety-copy-chips" aria-hidden="true">
+            <span class="hero-chip hero-chip--info" data-gallery-chip="extra-left">
+              <span class="hero-chip__dot"></span>
+              <span>
+                <strong data-chip-title>CDP raised</strong>
+                <span data-chip-detail>Competence development plan</span>
+              </span>
+            </span>
+            <span class="hero-chip hero-chip--safe" data-gallery-chip="extra-right">
+              <span class="hero-chip__dot"></span>
+              <span>
+                <strong data-chip-title>Severity tracking</strong>
+                <span data-chip-detail>Type and action taken</span>
+              </span>
+            </span>
+          </div>
         </div>
         <div class="product-section__media">
           <div class="product-gallery product-gallery--command product-gallery--safety" data-gallery>
@@ -668,27 +691,6 @@
                   <img src="images/product/incidents-cdp.png?v=241" alt="Monitoring and incidents view with allocated incidents and competence development plans" width="1024" height="759" data-gallery-main loading="lazy" decoding="async" />
                 </div>
               </div>
-              <span class="hero-chip hero-chip--alert hero-chip--landscape" data-gallery-chip="alert" aria-hidden="true">
-                <span class="hero-chip__dot"></span>
-                <span class="hero-chip__inline">
-                  <strong data-chip-title>Incident allocated</strong>
-                  <span data-chip-detail>Linked to the employee record</span>
-                </span>
-              </span>
-              <span class="hero-chip hero-chip--info hero-chip--bl" data-gallery-chip="extra-left" aria-hidden="true">
-                <span class="hero-chip__dot"></span>
-                <span>
-                  <strong data-chip-title>CDP raised</strong>
-                  <span data-chip-detail>Competence development plan</span>
-                </span>
-              </span>
-              <span class="hero-chip hero-chip--safe hero-chip--safety-mid" data-gallery-chip="extra-right" aria-hidden="true">
-                <span class="hero-chip__dot"></span>
-                <span>
-                  <strong data-chip-title>Severity tracking</strong>
-                  <span data-chip-detail>Type and action taken</span>
-                </span>
-              </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Safety operations screens">
               <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/incidents-cdp.png?v=241" data-alt="Monitoring and incidents view with allocated incidents and competence development plans" data-url="cms.railintel.co.uk/incidents" data-width="1024" data-height="759" data-chip-alert-title="Incident allocated" data-chip-alert-detail="Linked to the employee record" data-chip-extra-left-title="CDP raised" data-chip-extra-left-detail="Competence development plan" data-chip-extra-right-title="Severity tracking" data-chip-extra-right-detail="Type and action taken">Incidents &amp; CDP</button>
@@ -1018,6 +1020,6 @@
   <script src="js/site.js?v=253"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
-  <script src="js/main.js?v=256"></script>
+  <script src="js/main.js?v=257"></script>
 </body>
 </html>

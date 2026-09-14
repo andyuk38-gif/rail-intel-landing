@@ -560,7 +560,8 @@ body::before {
   display: block;
 }
 
-.product-gallery.is-chip-swapping .hero-chip {
+.product-gallery.is-chip-swapping .hero-chip,
+.product-section__inner.is-chip-swapping .hero-chip {
   opacity: 0.35;
 }
 
@@ -1443,19 +1444,27 @@ body::before {
 
 .product-gallery--safety .float-stage {
   max-width: 692px;
-  padding-bottom: 5.5rem;
 }
 
-.product-gallery--safety .hero-chip {
+.product-section__copy--safety {
+  position: relative;
+  padding-top: 4.25rem;
+}
+
+.product-section__copy--safety .hero-chip {
+  position: static;
+  display: none;
   white-space: normal;
-  max-width: 14.75rem;
+  max-width: 15rem;
+  animation: none;
 }
 
-.product-gallery--safety .hero-chip--alert.hero-chip--landscape {
-  top: -2.75rem;
-  right: calc(100% + 0.35rem);
+.product-section__copy--safety .safety-chip--top {
+  position: absolute;
+  top: 0;
+  right: 0;
   left: auto;
-  bottom: auto;
+  display: none;
   flex-direction: row;
   align-items: center;
   max-width: none;
@@ -1463,43 +1472,52 @@ body::before {
   white-space: nowrap;
   padding: 0.65rem 1rem;
   gap: 0.7rem;
+  animation: hero-chip-float-x 9.5s ease-in-out 0.8s infinite alternate;
 }
 
-.product-gallery--safety .hero-chip--alert .hero-chip__inline {
+.product-section__copy--safety .safety-chip--top .hero-chip__inline {
   display: flex;
   align-items: baseline;
   gap: 0.45rem;
 }
 
-.product-gallery--safety .hero-chip--alert .hero-chip__inline strong,
-.product-gallery--safety .hero-chip--alert .hero-chip__inline [data-chip-detail] {
+.product-section__copy--safety .safety-chip--top .hero-chip__inline strong,
+.product-section__copy--safety .safety-chip--top .hero-chip__inline [data-chip-detail] {
   display: inline;
 }
 
-.product-gallery--safety .hero-chip--alert .hero-chip__inline [data-chip-detail] {
+.product-section__copy--safety .safety-chip--top .hero-chip__inline [data-chip-detail] {
   font-size: 0.8125rem;
 }
 
-.product-gallery--safety .hero-chip--alert .hero-chip__inline [data-chip-detail]::before {
+.product-section__copy--safety .safety-chip--top .hero-chip__inline [data-chip-detail]::before {
   content: "·";
   margin-right: 0.35rem;
   opacity: 0.55;
 }
 
-.product-gallery--safety .hero-chip--bl {
-  top: calc(100% + 1rem);
-  bottom: auto;
-  left: calc(-2.5rem);
-  right: auto;
+.product-section__copy--safety .safety-copy-chips {
+  display: none;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 1.5rem;
 }
 
-.product-gallery--safety .hero-chip--safety-mid {
-  top: 34%;
-  bottom: auto;
-  left: calc(-3rem);
-  right: auto;
-  max-width: 13.75rem;
-  animation: hero-chip-float 8.5s ease-in-out 0.35s infinite alternate-reverse;
+.product-section__copy--safety .safety-copy-chips .hero-chip {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  .product-section__copy--safety .safety-chip--top,
+  .product-section__copy--safety .safety-copy-chips {
+    display: flex;
+  }
+
+  .product-section__copy--safety .safety-copy-chips .hero-chip {
+    display: flex;
+  }
 }
 
 .workforce-scan-panel {

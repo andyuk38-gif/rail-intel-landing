@@ -11,10 +11,14 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   let carouselIndex = 0;
   let carouselSlides = [];
   let activeTab = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
+  const chipScope = gallery.closest(".product-section__inner") || gallery;
+  const findChip = (name) =>
+    gallery.querySelector(`[data-gallery-chip="${name}"]`) ||
+    chipScope.querySelector(`[data-gallery-chip="${name}"]`);
   const chips = {
-    alert: gallery.querySelector('[data-gallery-chip="alert"]'),
-    extraLeft: gallery.querySelector('[data-gallery-chip="extra-left"]'),
-    extraRight: gallery.querySelector('[data-gallery-chip="extra-right"]'),
+    alert: findChip("alert"),
+    extraLeft: findChip("extra-left"),
+    extraRight: findChip("extra-right"),
   };
   const scanPanel = gallery.closest(".product-section")?.querySelector("[data-gallery-scan-panel]");
   if (!img || !tabs.length) return;
@@ -134,12 +138,14 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     if (!hasChipCopy) return;
 
     gallery.classList.add("is-chip-swapping");
+    chipScope.classList.add("is-chip-swapping");
     window.setTimeout(() => {
       setChip(chips.alert, chipCopy.alertTitle, chipCopy.alertDetail);
       setChip(chips.extraLeft, chipCopy.extraLeftTitle, chipCopy.extraLeftDetail);
       setChip(chips.extraRight, chipCopy.extraRightTitle, chipCopy.extraRightDetail);
       toggleScanPanel(tab);
       gallery.classList.remove("is-chip-swapping");
+      chipScope.classList.remove("is-chip-swapping");
     }, 120);
   };
 
