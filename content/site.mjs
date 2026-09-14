@@ -2012,7 +2012,7 @@ export const privacy = {
     {
       heading: "International transfers",
       paragraphs: [
-        "We aim to host customer application data in the United Kingdom. Where a subprocessor or support activity involves a transfer outside the UK, we use appropriate safeguards (such as UK adequacy regulations, UK International Data Transfer Agreement addendum, or equivalent contractual protections) as described in our DPA.",
+        "We aim to host customer application data in the declared hosting (Azure) region. Where a subprocessor or support activity involves a transfer outside of Europe, we use appropriate safeguards (such as UK adequacy regulations, UK International Data Transfer Agreement addendum, or equivalent contractual protections) as described in our DPA.",
       ],
     },
     {
