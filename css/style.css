@@ -4501,6 +4501,23 @@ body::before {
   color: rgba(255, 255, 255, 0.42);
 }
 
+.footer-heading--sub {
+  margin-top: 0.85rem;
+}
+
+.footer-nav--plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-nav--plain li {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
 .footer-nav {
   display: flex;
   flex-direction: column;

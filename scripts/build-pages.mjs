@@ -11,7 +11,7 @@ import { createHash } from "crypto";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
+import { site, products, upcomingProducts, addons, capacityAddons, featureGroups, howItWorks, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
 import {
   SITE_URL,
@@ -346,6 +346,10 @@ function renderFooterMarkup(base) {
               })
               .join("\n            ")}
           </nav>
+          <p class="footer-heading footer-heading--sub">${esc(upcomingProducts.label)}</p>
+          <ul class="footer-nav footer-nav--plain">
+            ${upcomingProducts.items.map((name) => `<li>${esc(name)}</li>`).join("\n            ")}
+          </ul>
         </div>
         <div class="footer-col footer-col--links">
           <h2 class="footer-heading">Company</h2>

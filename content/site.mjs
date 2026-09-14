@@ -140,6 +140,12 @@ export const products = [
   },
 ];
 
+/** Standalone apps coming soon — shown in the footer without links until pages exist. */
+export const upcomingProducts = {
+  label: "New for 2027",
+  items: ["Operations Control Center", "Rostering"],
+};
+
 /* ---------------------------------------------------------------- add-ons */
 
 export const addons = [
