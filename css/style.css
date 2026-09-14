@@ -1552,8 +1552,9 @@ body::before {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-top: 0.5rem;
-  min-height: 3.75rem;
-  overflow: hidden;
+  min-height: 4.85rem;
+  overflow-x: hidden;
+  overflow-y: visible;
   pointer-events: none;
 }
 
@@ -1563,59 +1564,94 @@ body::before {
 
 .routes-train-stage__inner {
   position: relative;
-  height: 3.5rem;
-  overflow: hidden;
+  height: 4.5rem;
+  overflow: visible;
+}
+
+.routes-train-stage__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0.85rem;
+  pointer-events: none;
+}
+
+.routes-train-stage__ballast {
+  position: absolute;
+  inset: 0.28rem 0 0;
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.55), rgba(15, 23, 42, 0.92));
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.08);
+}
+
+.routes-train-stage__rails {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.12rem;
+  height: 0.28rem;
+  background:
+    linear-gradient(180deg, transparent 0%, transparent 34%, #64748b 34%, #cbd5e1 48%, #475569 100%),
+    linear-gradient(180deg, transparent 0%, transparent 34%, #64748b 34%, #cbd5e1 48%, #475569 100%);
+  background-size: 100% 0.12rem, 100% 0.12rem;
+  background-position: 0 0, 0 0.16rem;
+  background-repeat: no-repeat;
+  opacity: 0.85;
 }
 
 .routes-train-stage__train {
   position: absolute;
-  top: 0;
   left: 0;
+  bottom: 0.62rem;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   height: 3.5rem;
   opacity: 0.48;
   transform: translateX(100vw);
-  animation: routes-train-enter 9s ease-in-out infinite;
+  animation: routes-train-enter 16s ease-out forwards;
   will-change: transform;
 }
 
 .routes-train-stage__train > img {
   display: block;
-  height: 100%;
+  height: 3.5rem;
   width: auto;
   max-width: none;
   object-fit: contain;
-  object-position: left;
+  object-position: left bottom;
   user-select: none;
+  flex: none;
 }
 
 .routes-train-stage__train-mirror {
   display: block;
+  flex: none;
   transform: scaleX(-1);
+  transform-origin: center bottom;
 }
 
 .routes-train-stage__train-mirror-crop {
   display: block;
-  height: 100%;
+  height: 3.5rem;
   overflow: hidden;
   width: calc(3.5rem * 302 / 75);
 }
 
 .routes-train-stage__train-mirror-crop img {
   display: block;
-  height: 100%;
+  height: 3.5rem;
   width: auto;
   max-width: none;
   object-fit: contain;
-  object-position: left;
+  object-position: left bottom;
   user-select: none;
 }
 
 @keyframes routes-train-enter {
   0% { transform: translateX(100vw); }
-  62% { transform: translateX(0); }
-  78%, 100% { transform: translateX(0); }
+  88% { transform: translateX(0); }
+  100% { transform: translateX(0); }
 }
 
 @media (min-width: 1025px) {

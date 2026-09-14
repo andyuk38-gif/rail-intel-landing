@@ -22,6 +22,15 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   };
   const scanPanel = gallery.closest(".product-section")?.querySelector("[data-gallery-scan-panel]");
   const routesSection = gallery.closest(".product-section--routes");
+  const routesTrain = routesSection?.querySelector(".routes-train-stage__train");
+
+  const restartRoutesTrain = () => {
+    if (!routesTrain) return;
+    routesTrain.style.animation = "none";
+    void routesTrain.offsetHeight;
+    routesTrain.style.animation = "";
+  };
+
   if (!img || !tabs.length) return;
 
   // The caption is built from the alt text each tab already carries, so the
@@ -271,7 +280,10 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     const useCarousel = tab.hasAttribute("data-carousel") && slides.length > 1 && carouselEl && carouselTrack;
     if (useCarousel) {
       if (url && tab.dataset.url) url.textContent = tab.dataset.url;
-      if (routesSection) routesSection.classList.toggle("has-routes-train", tab.hasAttribute("data-routes-train"));
+      if (routesSection) {
+        routesSection.classList.toggle("has-routes-train", tab.hasAttribute("data-routes-train"));
+        if (tab.hasAttribute("data-routes-train")) restartRoutesTrain();
+      }
       updateChips(tab);
       updateCopy(tab);
       setSceneVisible(false);
@@ -283,7 +295,10 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     hideCarousel();
     caption.textContent = tab.dataset.alt || "";
     if (url && tab.dataset.url) url.textContent = tab.dataset.url;
-    if (routesSection) routesSection.classList.toggle("has-routes-train", tab.hasAttribute("data-routes-train"));
+    if (routesSection) {
+      routesSection.classList.toggle("has-routes-train", tab.hasAttribute("data-routes-train"));
+      if (tab.hasAttribute("data-routes-train")) restartRoutesTrain();
+    }
     updateChips(tab);
     updateCopy(tab);
 
