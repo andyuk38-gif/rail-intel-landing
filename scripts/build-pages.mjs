@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, privacy, getStarted, languages } from "../content/site.mjs";
+import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
 import {
   SITE_URL,
@@ -30,7 +30,8 @@ import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 247;
+const ASSET_VERSION = 249;
+const TURNSTILE_SITE_KEY = process.env.TURNSTILE_SITE_KEY?.trim() || contact.turnstileSiteKey?.trim() || "";
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -236,7 +237,13 @@ function mergedItem(item, slug) {
   return mergeItemSeo(item, slug);
 }
 
-function renderHead(base, pageSeo) {
+function renderHead(base, pageSeo, options = {}) {
+  const turnstileMeta = options.turnstileSiteKey
+    ? `  <meta name="turnstile-site-key" content="${esc(options.turnstileSiteKey)}" />\n`
+    : "";
+  const turnstileScript = options.turnstileSiteKey
+    ? `  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>\n`
+    : "";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -246,7 +253,7 @@ ${renderSeoMeta(pageSeo)}
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
-  <link rel="icon" href="${base}images/favicon-32.png" type="image/png" sizes="32x32" />
+${turnstileMeta}${turnstileScript}  <link rel="icon" href="${base}images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="${base}images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="${base}images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -331,7 +338,7 @@ function renderFooterMarkup(base) {
           <p class="footer-bar__copy">Copyright &copy; <span data-year></span> Rail Intel. All rights reserved.</p>
           <nav class="footer-bar__links" aria-label="Legal">
             <a href="${base}privacy.html">Privacy policy</a>
-            <a href="${base}get-started.html">Contact</a>
+            <a href="${base}contact.html">Contact</a>
             <a href="${site.app}">CMS login</a>
           </nav>
         </div>
@@ -2482,6 +2489,129 @@ ${sections}
   );
 }
 
+function contactPage() {
+  const base = "";
+  const pageSeo = staticPageSeo("contact.html");
+  const departmentOptions = contact.departments
+    .map((dept) => `                  <option value="${esc(dept)}">${esc(dept)}</option>`)
+    .join("\n");
+  const highlights = contact.highlights
+    .map(
+      (item) => `            <article class="contact-highlight">
+              <h3>${esc(item.title)}</h3>
+              <p>${esc(item.body)}</p>
+            </article>`
+    )
+    .join("\n");
+
+  return (
+    renderHead(base, pageSeo, { turnstileSiteKey: TURNSTILE_SITE_KEY }) +
+    `
+  <main class="contact-page">
+    <section class="page-hero page-hero--contact">
+      <div class="container">
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / Contact</p>
+            <h1 class="page-title">${contact.titleHtml || esc(contact.title)}</h1>
+            <p class="page-lead">${esc(contact.lead)}</p>
+          </div>
+          <div class="contact-hero-badge" aria-hidden="true">
+            <span class="contact-hero-badge__ring"></span>
+            <span class="contact-hero-badge__core">
+              <span class="contact-hero-badge__label">Response target</span>
+              <span class="contact-hero-badge__value">1 working day</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section contact-section">
+      <div class="container contact-layout">
+        <aside class="contact-aside" aria-label="Contact information">
+          <div class="contact-aside__intro">
+            <p class="contact-aside__eyebrow">Routed to the right team</p>
+            <p class="contact-aside__note">${esc(contact.responseNote)}</p>
+          </div>
+          <div class="contact-highlights">
+${highlights}
+          </div>
+          <div class="contact-aside__footer">
+            <p>Ready to onboard Rail Intel CMS?</p>
+            <a href="${base}get-started.html" class="btn btn-ghost">Start an application</a>
+          </div>
+        </aside>
+
+        <div class="contact-form-shell" data-contact-form-wrap>
+          <form class="contact-form panel" data-contact-form novalidate${TURNSTILE_SITE_KEY ? ' data-contact-requires-turnstile="true"' : ""}>
+            <input type="hidden" name="formStartedAt" value="" data-form-started-at />
+            <div class="contact-form__head">
+              <h2>${esc(contact.form.title)}</h2>
+              <p>${esc(contact.form.lead)}</p>
+            </div>
+            <div class="contact-form__grid">
+              <div class="field">
+                <label for="contactName">Your name *</label>
+                <input id="contactName" name="name" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="contactEmail">Email address *</label>
+                <input id="contactEmail" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <label for="contactCompany">Company</label>
+                <input id="contactCompany" name="company" autocomplete="organization" />
+              </div>
+              <div class="field">
+                <label for="contactPhone">Phone</label>
+                <input id="contactPhone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+              <div class="field field--full">
+                <label for="contactDepartment">Department *</label>
+                <div class="contact-select">
+                  <select id="contactDepartment" name="department" required>
+                    <option value="" disabled selected>Select a department</option>
+${departmentOptions}
+                  </select>
+                </div>
+              </div>
+              <div class="field field--full">
+                <label for="contactMessage">Message *</label>
+                <textarea id="contactMessage" name="message" rows="6" required placeholder="How can we help?"></textarea>
+              </div>
+            </div>
+            <input type="text" name="website" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
+${TURNSTILE_SITE_KEY ? `            <div class="contact-form__verify field field--full">
+              <p class="contact-form__verify-label">${esc(contact.form.verifyLabel)}</p>
+              <div class="contact-turnstile" data-turnstile></div>
+              <p class="contact-form__verify-note">${esc(contact.form.verifyNote)}</p>
+            </div>` : ""}
+            <div class="contact-form__actions">
+              <button type="submit" class="btn btn-primary btn-lg"${TURNSTILE_SITE_KEY ? " disabled" : ""}>${esc(contact.form.submitLabel)}</button>
+            </div>
+            <p class="contact-form__message" data-contact-message hidden></p>
+          </form>
+
+          <div class="contact-success panel" data-contact-success hidden>
+            <div class="contact-success__badge" aria-hidden="true">&#10003;</div>
+            <h2>${esc(contact.form.successTitle)}</h2>
+            <p>${esc(contact.form.successLead)}</p>
+            <a href="${base}/" class="btn btn-secondary">Back to home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+` +
+    renderFooter(base).replace(
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>',
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/contact.js?v=' + ASSET_VERSION + '"></script>'
+    )
+  );
+}
+
 /* ----------------------------------------------------- homepage gallery */
 
 const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : "");
@@ -2895,6 +3025,7 @@ for (const group of featureGroups) {
 emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
 emit("privacy.html", privacyPage());
+emit("contact.html", contactPage());
 emit("get-started.html", getStartedPage());
 for (const guide of guides) {
   emit(`guides/${guide.slug}.html`, guidePage(guide));

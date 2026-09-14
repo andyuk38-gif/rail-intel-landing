@@ -157,6 +157,16 @@ export const staticPages = {
       { name: "Get started", path: "get-started.html" },
     ],
   },
+  "contact.html": {
+    title: "Contact Rail Intel | Sales, Support & Enquiries",
+    description:
+      "Contact Rail Intel for sales, media, careers, technical support and billing enquiries. Send a message and we will route it to the right team.",
+    keywords: "contact rail intel, rail software support, rail intel sales",
+    breadcrumbs: [
+      { name: "Rail Intel", path: "/" },
+      { name: "Contact", path: "contact.html" },
+    ],
+  },
   "quotation.html": {
     title: "Your Quotation – Rail Intel",
     description: "Review and respond to your Rail Intel CMS quotation.",
@@ -305,6 +315,7 @@ export function allSitemapPaths({ products, addons, featureGroups, guideList = g
     "how-it-works.html",
     "security.html",
     "privacy.html",
+    "contact.html",
     "get-started.html",
   ];
 

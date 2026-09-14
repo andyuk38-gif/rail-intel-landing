@@ -30,8 +30,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=247" />
-  <link rel="stylesheet" href="css/pages.css?v=247" />
+  <link rel="stylesheet" href="css/style.css?v=249" />
+  <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -261,6 +261,7 @@
         </div>
           <p><strong>Newsletter and product updates.</strong> If you subscribe via the footer form or register your interest on the homepage, we collect your email address and a source label (for example, website footer or expression of interest). We use a hidden honeypot field to help filter automated submissions.</p>
           <p><strong>Get started applications.</strong> If you apply to onboard Rail Intel CMS, we collect company details (name and address), contact details (name, phone and email), your module selections, contract preferences, licence counts, optional notes, and — if you choose bank transfer — a purchase order document. If you pay by card, payment is handled by Stripe; we do not store full card numbers on our servers.</p>
+          <p><strong>Contact form.</strong> If you use our contact page, we collect your name, email, optional company and phone, department selection, message, and a Cloudflare Turnstile verification token to help prevent automated spam.</p>
           <p><strong>Technical information.</strong> When you use this site, our hosting provider and CMS API may process standard server logs (such as IP address, browser type, request time and pages viewed) to deliver the site, prevent abuse and maintain security.</p>
           <p><strong>Browser storage on this site.</strong> We use localStorage to remember when you have registered interest (so we do not show the prompt again) and sessionStorage to remember if you collapsed the interest panel. We do not use these stores for advertising or cross-site tracking.</p>
       </div>
@@ -314,6 +315,7 @@
           <p><strong>Microsoft Azure</strong> hosts Rail Intel CMS and Investigations (App Service, PostgreSQL and Azure Storage) in Europe unless otherwise agreed with a customer.</p>
           <p><strong>Stripe</strong> processes card payments for self-serve purchase paths. Stripe’s privacy notice applies to payment data they handle directly.</p>
           <p><strong>Email delivery</strong> providers may send transactional messages (for example, application confirmations, sign-in codes where configured, and product notifications).</p>
+          <p><strong>Cloudflare Turnstile</strong> on our contact form may process your IP address and browser signals to verify that submissions are from a human.</p>
           <p>We require processors that handle personal data on our behalf to protect it appropriately and only use it for the services they provide to us.</p>
       </div>
     </section>
@@ -441,7 +443,7 @@
           <p class="footer-bar__copy">Copyright &copy; <span data-year></span> Rail Intel. All rights reserved.</p>
           <nav class="footer-bar__links" aria-label="Legal">
             <a href="privacy.html">Privacy policy</a>
-            <a href="get-started.html">Contact</a>
+            <a href="contact.html">Contact</a>
             <a href="https://cms.railintel.co.uk">CMS login</a>
           </nav>
         </div>
@@ -449,7 +451,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=247"></script>
-  <script src="js/newsletter.js?v=247"></script>
+  <script src="js/site.js?v=249"></script>
+  <script src="js/newsletter.js?v=249"></script>
 </body>
 </html>

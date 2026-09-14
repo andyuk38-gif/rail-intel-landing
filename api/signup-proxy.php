@@ -21,6 +21,7 @@ $allowed = [
     'public/onboarding-addons',
     'public/signup-request',
     'public/newsletter/subscribe',
+    'public/contact',
 ];
 
 $ok = false;

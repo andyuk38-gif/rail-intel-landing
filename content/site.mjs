@@ -1951,6 +1951,7 @@ export const privacy = {
       paragraphs: [
         "**Newsletter and product updates.** If you subscribe via the footer form or register your interest on the homepage, we collect your email address and a source label (for example, website footer or expression of interest). We use a hidden honeypot field to help filter automated submissions.",
         "**Get started applications.** If you apply to onboard Rail Intel CMS, we collect company details (name and address), contact details (name, phone and email), your module selections, contract preferences, licence counts, optional notes, and — if you choose bank transfer — a purchase order document. If you pay by card, payment is handled by Stripe; we do not store full card numbers on our servers.",
+        "**Contact form.** If you use our contact page, we collect your name, email, optional company and phone, department selection, message, and a Cloudflare Turnstile verification token to help prevent automated spam.",
         "**Technical information.** When you use this site, our hosting provider and CMS API may process standard server logs (such as IP address, browser type, request time and pages viewed) to deliver the site, prevent abuse and maintain security.",
         "**Browser storage on this site.** We use localStorage to remember when you have registered interest (so we do not show the prompt again) and sessionStorage to remember if you collapsed the interest panel. We do not use these stores for advertising or cross-site tracking.",
       ],
@@ -1989,6 +1990,7 @@ export const privacy = {
         "**Microsoft Azure** hosts Rail Intel CMS and Investigations (App Service, PostgreSQL and Azure Storage) in Europe unless otherwise agreed with a customer.",
         "**Stripe** processes card payments for self-serve purchase paths. Stripe’s privacy notice applies to payment data they handle directly.",
         "**Email delivery** providers may send transactional messages (for example, application confirmations, sign-in codes where configured, and product notifications).",
+        "**Cloudflare Turnstile** on our contact form may process your IP address and browser signals to verify that submissions are from a human.",
         "We require processors that handle personal data on our behalf to protect it appropriately and only use it for the services they provide to us.",
       ],
     },
@@ -2035,4 +2037,41 @@ export const privacy = {
       ],
     },
   ],
+};
+
+/* ------------------------------------------------------------------- contact */
+
+export const contact = {
+  title: "Contact Rail Intel",
+  titleHtml: 'Contact <span class="hero-title__accent">Rail Intel</span>',
+  lead:
+    "Questions about Rail Intel CMS, Investigations, onboarding, media, careers or billing — send a message and we will route it to the right team.",
+  departments: ["Sales", "Media", "Careers", "Technical Support", "Billing/Accounts", "Other"],
+  highlights: [
+    {
+      title: "Sales & onboarding",
+      body: "Demos, pricing, procurement packs and getting your operation live on Rail Intel CMS.",
+    },
+    {
+      title: "Technical support",
+      body: "Help for existing CMS or Investigations customers — include your company code if you have one.",
+    },
+    {
+      title: "Billing & accounts",
+      body: "Invoices, purchase orders, supplier onboarding and payment queries.",
+    },
+  ],
+  responseNote: "We aim to respond within one working day. Messages are delivered securely to our CMS admin team.",
+  form: {
+    title: "Send a message",
+    lead: "Tell us how we can help. Required fields are marked with an asterisk.",
+    submitLabel: "Send message",
+    verifyLabel: "Verify you are human",
+    verifyNote: "Protected by Cloudflare Turnstile to reduce automated spam.",
+    successTitle: "Message sent",
+    successLead:
+      "Thank you — your enquiry has been delivered to our team. We will respond to your email as soon as possible, usually within one working day.",
+  },
+  /** Public Cloudflare Turnstile site key — override with TURNSTILE_SITE_KEY when building. */
+  turnstileSiteKey: "0x4AAAAAAE0YUEWLIo5E7wJC",
 };
