@@ -319,7 +319,10 @@ function renderFooterMarkup(base) {
     <div class="footer__panel">
       <div class="container footer-grid">
         <div class="footer-col footer-col--brand">
-          <p class="footer-brand">Rail Intel</p>
+          <a href="${base || "/"}" class="logo footer-brand">
+            <img src="${base}images/rail-intel-icon.png" alt="" class="logo-img" width="512" height="512" />
+            <span class="logo-text">Rail Intel</span>
+          </a>
           <p class="footer-tagline">${esc(site.footerTagline)}</p>
           <div class="footer-newsletter footer-newsletter--inline">
             <h2 class="footer-newsletter__title" data-content-key="footer.newsletter.heading">Stay in the loop</h2>

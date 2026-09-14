@@ -4477,10 +4477,11 @@ body::before {
 
 .footer-brand {
   margin: 0;
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
+  align-self: flex-start;
+}
+
+.footer-col--brand .logo.footer-brand {
+  text-shadow: none;
 }
 
 .footer-tagline {
