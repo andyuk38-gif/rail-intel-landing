@@ -30,7 +30,7 @@ import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 244;
+const ASSET_VERSION = 245;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -2428,13 +2428,7 @@ function privacyPage() {
   const sections = privacy.sections
     .map((section) => {
       const paragraphs = section.paragraphs
-        .map((paragraph) => {
-          const html = rich(paragraph).replace(
-            /sales@railintel\.co\.uk/g,
-            '<a href="mailto:sales@railintel.co.uk" class="privacy-email-link">sales@railintel.co.uk</a>'
-          );
-          return `          <p>${html}</p>`;
-        })
+        .map((paragraph) => `          <p>${rich(paragraph)}</p>`)
         .join("\n");
       return `    <section class="page-section">
       <div class="container" style="max-width:900px">
