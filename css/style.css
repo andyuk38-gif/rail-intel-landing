@@ -4969,6 +4969,20 @@ body::before {
 
 /* Expression of interest — homepage slide-out */
 
+:root {
+  --eoi-clearance: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+body:has(.eoi-widget[data-visible="true"]) .footer {
+  padding-bottom: var(--eoi-clearance);
+}
+
+@media (min-width: 641px) {
+  body:has(.eoi-widget[data-visible="true"]:not([data-collapsed="true"])) .footer-bar__inner {
+    padding-right: min(22rem, 40vw);
+  }
+}
+
 @property --eoi-teaser-angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -4998,11 +5012,12 @@ body::before {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+  bottom: var(--eoi-clearance);
 }
 
 .eoi-widget[data-visible="true"][data-collapsed="true"] {
   right: 0;
-  bottom: 1.25rem;
+  bottom: var(--eoi-clearance);
   transform: translateX(calc(100% - 3.85rem)) translateY(0) scale(1);
 }
 
@@ -5518,7 +5533,7 @@ body::before {
   .eoi-widget[data-visible="true"][data-collapsed="true"] {
     right: 0.75rem;
     left: 0.75rem;
-    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    bottom: var(--eoi-clearance);
     max-width: none;
     transform: none;
     align-items: stretch;
@@ -5570,16 +5585,12 @@ body::before {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  body:has(.eoi-widget[data-visible="true"][data-collapsed="true"]) .footer {
-    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
-  }
 }
 
 @media (max-width: 480px) {
-  .eoi-widget {
+  .eoi-widget[data-visible="true"] {
     right: 0.75rem;
-    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    bottom: var(--eoi-clearance);
     max-width: calc(100vw - 1.5rem);
   }
 
