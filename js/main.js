@@ -73,12 +73,14 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const toggleScanPanel = (tab) => {
     if (!scanPanel) return;
-    const showScan = tab.dataset.chipScan === "true";
-    scanPanel.hidden = !showScan;
+    scanPanel.hidden = false;
+
+    if (!tab.dataset.chipScanBullets) return;
+
     const titleEl = scanPanel.querySelector("[data-scan-title]");
     const pointsEl = scanPanel.querySelector("[data-scan-points]");
-    if (titleEl) titleEl.textContent = tab.dataset.chipSafeTitle || "";
-    if (pointsEl && tab.dataset.chipScanBullets) {
+    if (titleEl && tab.dataset.chipSafeTitle) titleEl.textContent = tab.dataset.chipSafeTitle;
+    if (pointsEl) {
       const items = tab.dataset.chipScanBullets.split("|").map((item) => item.trim()).filter(Boolean);
       pointsEl.replaceChildren(
         ...items.map((item) => {
@@ -87,13 +89,6 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
           return li;
         })
       );
-    }
-    if (!showScan) {
-      scanPanel.querySelectorAll("[data-licence-card-scan]").forEach((root) => {
-        if (window.stopLicenceCardScan) window.stopLicenceCardScan(root);
-      });
-    } else if (window.restartLicenceCardScans) {
-      window.restartLicenceCardScans();
     }
   };
 
