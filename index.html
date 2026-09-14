@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=267" />
+  <link rel="stylesheet" href="css/style.css?v=269" />
   <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -704,7 +704,14 @@
 
     <section class="product-section product-section--elevated product-section--routes has-routes-train has-routes-train-mask" aria-labelledby="routes-heading">
       <div class="container product-section__inner">
-        <div class="product-section__copy">
+        <div class="product-section__copy product-section__copy--routes">
+          <span class="hero-chip hero-chip--alert hero-chip--landscape routes-chip--top" data-gallery-chip="alert" aria-hidden="true">
+            <span class="hero-chip__dot"></span>
+            <span class="hero-chip__inline">
+              <strong data-chip-title>Competence status</strong>
+              <span data-chip-detail>Non-compliance flagged on record</span>
+            </span>
+          </span>
           <p class="product-eyebrow">Traction &amp; routes</p>
           <h2 id="routes-heading">Capturing Traction &amp; Route Competence</h2>
           <p class="product-lead">Traction and route competence is tracked against any non compliance or missing assessment documentation.</p>
@@ -714,25 +721,34 @@
           </ul>
         </div>
         <div class="product-section__media">
-          <div class="product-gallery" data-gallery>
-            <div class="browser-mockup browser-mockup--primary">
-              <div class="browser-mockup__chrome">
-                <span class="browser-mockup__dots"></span>
-                <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/routes</span>
-              </div>
-              <div class="browser-mockup__content traction-routes-scene">
-                <img src="images/product/traction-routes.png?v=260" alt="Traction and route overview for company configuration" width="1024" height="414" data-gallery-main loading="lazy" decoding="async" />
-                <div class="gallery-carousel" data-gallery-carousel hidden>
-                  <div class="gallery-carousel__viewport">
-                    <div class="gallery-carousel__track" data-gallery-carousel-track></div>
-                  </div>
+          <div class="product-gallery product-gallery--routes" data-gallery>
+            <div class="float-stage">
+              <span class="hero-chip hero-chip--safe routes-chip--media" data-gallery-chip="extra-left" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong data-chip-title>Route configuration</strong>
+                  <span data-chip-detail>Traction, routes and depots</span>
+                </span>
+              </span>
+              <div class="browser-mockup browser-mockup--primary">
+                <div class="browser-mockup__chrome">
+                  <span class="browser-mockup__dots"></span>
+                  <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/routes</span>
                 </div>
-                <div class="traction-routes-scene__header-mask" aria-hidden="true"></div>
+                <div class="browser-mockup__content traction-routes-scene">
+                  <img src="images/product/traction-routes.png?v=260" alt="Traction and route overview for company configuration" width="1024" height="414" data-gallery-main loading="lazy" decoding="async" />
+                  <div class="gallery-carousel" data-gallery-carousel hidden>
+                    <div class="gallery-carousel__viewport">
+                      <div class="gallery-carousel__track" data-gallery-carousel-track></div>
+                    </div>
+                  </div>
+                  <div class="traction-routes-scene__header-mask" aria-hidden="true"></div>
+                </div>
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Traction and routes screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png?v=260" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes" data-width="1024" data-height="414" data-routes-train="true">Traction &amp; routes</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/trainee-hours.png?v=266" data-alt="Trainee hours progress against the company standard" data-url="cms.railintel.co.uk/trainee-hours" data-width="1024" data-height="489" data-carousel data-carousel-interval="5000" data-carousel-slides="images/product/trainee-hours.png?v=266|images/product/trainee-hours-entry.png?v=266" data-carousel-alts="Trainee hours progress against the company standard|Adding a driving experience entry with darktime and encounters" data-carousel-widths="1024|1024" data-carousel-heights="489|489">Trainee hours</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png?v=260" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes" data-width="1024" data-height="414" data-routes-train="true" data-chip-alert-title="Competence status" data-chip-alert-detail="Non-compliance flagged on record" data-chip-extra-left-title="Route configuration" data-chip-extra-left-detail="Traction, routes and depots">Traction &amp; routes</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/trainee-hours.png?v=266" data-alt="Trainee hours progress against the company standard" data-url="cms.railintel.co.uk/trainee-hours" data-width="1024" data-height="489" data-carousel data-carousel-interval="5000" data-carousel-slides="images/product/trainee-hours.png?v=266|images/product/trainee-hours-entry.png?v=266" data-carousel-alts="Trainee hours progress against the company standard|Adding a driving experience entry with darktime and encounters" data-carousel-widths="1024|1024" data-carousel-heights="489|489" data-chip-alert-title="Hours progress" data-chip-alert-detail="Against company standards" data-chip-extra-left-title="Experience entries" data-chip-extra-left-detail="Darktime and encounters tracked">Trainee hours</button>
             </div>
           </div>
         </div>
