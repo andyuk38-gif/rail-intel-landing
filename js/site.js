@@ -1161,6 +1161,13 @@
         var isActive = i === featureActive;
         step.classList.toggle("is-active", isActive);
         step.setAttribute("aria-pressed", isActive ? "true" : "false");
+        if (isActive) {
+          step.classList.remove("is-border-pulse");
+          void step.offsetWidth;
+          step.classList.add("is-border-pulse");
+        } else {
+          step.classList.remove("is-border-pulse");
+        }
       });
       featureDots.forEach(function (dot, i) {
         dot.classList.toggle("is-active", i === featureActive);
@@ -1170,7 +1177,7 @@
       if (featureSwapTimer) clearTimeout(featureSwapTimer);
       featureSwapTimer = setTimeout(function () {
         featureShowcase.classList.remove("is-swapping");
-      }, featureReduced ? 0 : 320);
+      }, featureReduced ? 0 : 720);
 
       if (featureBadge) featureBadge.textContent = tile.dataset.featureBadge || "";
       if (featureTitle) featureTitle.textContent = tile.dataset.featureTitle || "";
@@ -1181,10 +1188,6 @@
         featureIcon.innerHTML = icon ? icon.innerHTML : "";
       }
 
-      tile.scrollIntoView({
-        block: "nearest",
-        behavior: featureReduced ? "auto" : "smooth",
-      });
     }
 
     function nextFeatureTile() {

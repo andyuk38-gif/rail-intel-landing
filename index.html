@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=277" />
+  <link rel="stylesheet" href="css/style.css?v=278" />
   <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -888,6 +888,7 @@
         </div>
 
         <div class="feature-showcase reveal" data-feature-showcase style="--feature-active: 0">
+          <div class="feature-showcase__stage">
           <article class="feature-spotlight" data-feature-spotlight aria-live="polite">
             <div class="feature-spotlight__glow" aria-hidden="true"></div>
             <div class="feature-spotlight__shine" aria-hidden="true"></div>
@@ -905,6 +906,7 @@
             </div>
           </article>
 
+          <div class="feature-showcase__tiles">
           <ul class="feature-tiles" role="list">
             <li>
               <button type="button" class="feature-tile is-active" data-feature-tile="0" data-feature-badge="Communications" data-feature-title="Intelligent alerts &amp; communications" data-feature-desc="A built-in communications hub drives alert emails and system notifications from conditional rules — covering competency expiries, incidents and welfare follow-up, not just passive reminders." data-feature-edge="When a fatality is recorded against a driver, Rail Intel remembers — sending automated welfare checks on each anniversary to support their health and wellbeing." aria-pressed="true">
@@ -997,6 +999,8 @@
               </button>
             </li>
           </ul>
+          </div>
+          </div>
 
           <div class="feature-showcase__nav">
             <button type="button" class="feature-showcase__nav-btn" data-feature-prev aria-label="Previous feature">
@@ -1199,7 +1203,7 @@
   </div>
   <!-- eoi:end -->
 
-  <script src="js/site.js?v=256"></script>
+  <script src="js/site.js?v=257"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
   <script src="js/main.js?v=266"></script>
