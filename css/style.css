@@ -1505,6 +1505,19 @@ body::before {
   margin-bottom: 0.85rem;
 }
 
+.workforce-scan-panel__pill {
+  margin: 0.35rem 0 0;
+  padding: 0.55rem 0.8rem;
+  width: fit-content;
+  max-width: 100%;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #94a3b8;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.28);
+  border-radius: 999px;
+}
+
 .workforce-scan-panel__points {
   margin: 0;
   padding: 0;
