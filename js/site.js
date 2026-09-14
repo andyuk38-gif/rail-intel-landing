@@ -1022,16 +1022,108 @@
     });
   }
 
-  var howFlow = document.querySelector(".how-flow");
+  var howFlow = document.querySelector("[data-how-flow]");
   if (howFlow) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    var howSteps = Array.prototype.slice.call(howFlow.querySelectorAll("[data-how-step]"));
+    var howDots = Array.prototype.slice.call(howFlow.querySelectorAll(".how-flow__dot"));
+    var howPrev = howFlow.querySelector("[data-how-prev]");
+    var howNext = howFlow.querySelector("[data-how-next]");
+    var howReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var howActive = 0;
+    var howTimer = null;
+    var howPaused = false;
+    var howInterval = 5500;
+
+    function setHowStep(index) {
+      if (!howSteps.length) return;
+      howActive = ((index % howSteps.length) + howSteps.length) % howSteps.length;
+      howFlow.style.setProperty("--how-active", howActive);
+      howSteps.forEach(function (step, i) {
+        var isActive = i === howActive;
+        step.classList.toggle("is-active", isActive);
+        if (isActive) step.setAttribute("aria-current", "step");
+        else step.removeAttribute("aria-current");
+        step.tabIndex = isActive ? 0 : -1;
+      });
+      howDots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === howActive);
+      });
+    }
+
+    function nextHowStep() {
+      setHowStep(howActive + 1);
+    }
+
+    function prevHowStep() {
+      setHowStep(howActive - 1);
+    }
+
+    function startHowTimer() {
+      if (howReduced || howSteps.length < 2) return;
+      if (howTimer) clearInterval(howTimer);
+      howTimer = setInterval(function () {
+        if (!howPaused) nextHowStep();
+      }, howInterval);
+    }
+
+    howSteps.forEach(function (step, i) {
+      step.addEventListener("click", function () {
+        setHowStep(i);
+        startHowTimer();
+      });
+      step.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          nextHowStep();
+          startHowTimer();
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          prevHowStep();
+          startHowTimer();
+        }
+      });
+    });
+
+    if (howPrev) {
+      howPrev.addEventListener("click", function () {
+        prevHowStep();
+        startHowTimer();
+      });
+    }
+
+    if (howNext) {
+      howNext.addEventListener("click", function () {
+        nextHowStep();
+        startHowTimer();
+      });
+    }
+
+    howFlow.addEventListener("mouseenter", function () {
+      howPaused = true;
+    });
+    howFlow.addEventListener("mouseleave", function () {
+      howPaused = false;
+    });
+    howFlow.addEventListener("focusin", function () {
+      howPaused = true;
+    });
+    howFlow.addEventListener("focusout", function (event) {
+      if (!howFlow.contains(event.relatedTarget)) howPaused = false;
+    });
+
+    setHowStep(0);
+
+    if (howReduced || !("IntersectionObserver" in window)) {
       howFlow.classList.add("is-visible");
+      startHowTimer();
     } else {
       var howFlowObserver = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
             entry.target.classList.add("is-visible");
+            startHowTimer();
             howFlowObserver.unobserve(entry.target);
           });
         },

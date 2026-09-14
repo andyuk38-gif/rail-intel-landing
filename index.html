@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=273" />
+  <link rel="stylesheet" href="css/style.css?v=274" />
   <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -809,22 +809,67 @@
       <div class="container">
         <h2 id="how-heading" class="section-title">How it works</h2>
         <p class="section-desc">Stand up the platform once. Then run the railway with live compliance.</p>
-        <div class="how-flow" role="list">
-          <article class="how-flow__step reveal" role="listitem">
-            <span class="how-flow__num" aria-hidden="true">1</span>
-            <h3>Configure your company</h3>
-            <p>Roles, standards, traction, routes and cycle templates — set up once to match how you already work.</p>
+        <div class="how-flow reveal" data-how-flow role="group" aria-label="How Rail Intel works" style="--how-active: 0">
+          <div class="how-flow__progress" aria-hidden="true">
+            <span class="how-flow__progress-rail"></span>
+            <span class="how-flow__progress-fill"></span>
+            <span class="how-flow__progress-glow"></span>
+          </div>
+          <article class="how-flow__step is-active" id="how-step-1" aria-current="step" data-how-step="0" tabindex="0">
+            <div class="how-flow__step-inner">
+              <div class="how-flow__step-head">
+                <span class="how-flow__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </span>
+                <span class="how-flow__num" aria-hidden="true">1</span>
+              </div>
+              <div class="how-flow__body">
+                <h3>Configure your company</h3>
+                <p>Roles, standards, traction, routes and cycle templates — set up once to match how you already work.</p>
+              </div>
+            </div>
           </article>
-          <article class="how-flow__step reveal" role="listitem">
-            <span class="how-flow__num" aria-hidden="true">2</span>
-            <h3>Assign and record</h3>
-            <p>Assign individuals to cycles. Capture assessments, medicals, licences and hours.</p>
+          <article class="how-flow__step" id="how-step-2" data-how-step="1" tabindex="-1">
+            <div class="how-flow__step-inner">
+              <div class="how-flow__step-head">
+                <span class="how-flow__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+                </span>
+                <span class="how-flow__num" aria-hidden="true">2</span>
+              </div>
+              <div class="how-flow__body">
+                <h3>Assign and record</h3>
+                <p>Assign individuals to cycles. Capture assessments, medicals, licences and hours.</p>
+              </div>
+            </div>
           </article>
-          <article class="how-flow__step reveal" role="listitem">
-            <span class="how-flow__num" aria-hidden="true">3</span>
-            <h3>Monitor and verify</h3>
-            <p>Watch live compliance and run QA verifications before anyone is unsafe to work.</p>
+          <article class="how-flow__step" id="how-step-3" data-how-step="2" tabindex="-1">
+            <div class="how-flow__step-inner">
+              <div class="how-flow__step-head">
+                <span class="how-flow__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                </span>
+                <span class="how-flow__num" aria-hidden="true">3</span>
+              </div>
+              <div class="how-flow__body">
+                <h3>Monitor and verify</h3>
+                <p>Watch live compliance and run QA verifications before anyone is unsafe to work.</p>
+              </div>
+            </div>
           </article>
+          <div class="how-flow__nav">
+            <button type="button" class="how-flow__nav-btn" data-how-prev aria-label="Previous step">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="how-flow__dots">
+              <span class="how-flow__dot is-active"></span>
+              <span class="how-flow__dot"></span>
+              <span class="how-flow__dot"></span>
+            </div>
+            <button type="button" class="how-flow__nav-btn" data-how-next aria-label="Next step">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -1057,7 +1102,7 @@
   </div>
   <!-- eoi:end -->
 
-  <script src="js/site.js?v=253"></script>
+  <script src="js/site.js?v=254"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
   <script src="js/main.js?v=266"></script>
