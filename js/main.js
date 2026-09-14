@@ -26,9 +26,12 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
   const restartRoutesTrain = () => {
     if (!routesTrain) return;
-    const animated = routesTrain.querySelectorAll(
-      ".routes-train-stage__train, .routes-train-stage__lens-beam--front, .routes-train-stage__lens-beam--rear"
-    );
+    const animated = [
+      routesTrain,
+      ...routesTrain.querySelectorAll(
+        ".routes-train-stage__lens-beam--front, .routes-train-stage__lens-beam--rear"
+      ),
+    ];
     animated.forEach((el) => {
       el.style.animation = "none";
       void el.offsetHeight;

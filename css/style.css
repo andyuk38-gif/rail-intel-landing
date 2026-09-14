@@ -1553,8 +1553,7 @@ body::before {
   margin-left: calc(50% - 50vw);
   margin-top: 0.5rem;
   min-height: 3.85rem;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: visible;
   pointer-events: none;
 }
 
@@ -1580,6 +1579,13 @@ body::before {
   will-change: transform;
 }
 
+.routes-train-stage__carriage--lead {
+  position: relative;
+  display: block;
+  flex: none;
+}
+
+.routes-train-stage__carriage--lead > img,
 .routes-train-stage__train > img {
   display: block;
   height: 3.5rem;
@@ -1601,10 +1607,18 @@ body::before {
 }
 
 .routes-train-stage__train-mirror-crop {
+  position: relative;
+  display: block;
+  height: 3.5rem;
+  overflow: visible;
+  width: calc(3.5rem * 302 / 75);
+}
+
+.routes-train-stage__train-mirror-clip {
   display: block;
   height: 3.5rem;
   overflow: hidden;
-  width: calc(3.5rem * 302 / 75);
+  width: 100%;
 }
 
 .routes-train-stage__train-mirror-crop img {
@@ -1619,69 +1633,49 @@ body::before {
 
 .routes-train-stage__lens-beam {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
   pointer-events: none;
-  width: 5rem;
-  height: 0.7rem;
-  filter: blur(0.45px);
+  width: 5.5rem;
+  height: 0.75rem;
+  opacity: 1;
 }
 
 .routes-train-stage__lens-beam::before {
   content: "";
   position: absolute;
   top: 50%;
-  width: 0.5rem;
-  height: 0.16rem;
+  width: 0.42rem;
+  height: 0.14rem;
   transform: translateY(-50%);
   border-radius: 1px;
-  filter: blur(0.35px);
 }
 
 .routes-train-stage__lens-beam--front {
-  left: 1.55rem;
-  bottom: 1.02rem;
-  transform-origin: 100% 50%;
-  transform: rotate(-10deg);
-  clip-path: polygon(100% 44%, 0% 4%, 0% 96%, 100% 56%);
-  background: linear-gradient(
-    to left,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.62) 16%,
-    rgba(255, 255, 255, 0.22) 38%,
-    rgba(255, 255, 255, 0.06) 58%,
-    transparent 100%
-  );
+  left: 0.42rem;
+  bottom: 0.98rem;
+  transform-origin: 0% 50%;
+  transform: rotate(-9deg);
+  clip-path: polygon(0% 50%, 100% 8%, 100% 92%, 0% 50%);
   animation: routes-front-beam 16s ease-out forwards;
 }
 
 .routes-train-stage__lens-beam--front::before {
-  right: 0;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
+  left: 0;
+  animation: routes-front-lens 16s ease-out forwards;
 }
 
 .routes-train-stage__lens-beam--rear {
-  right: 0.28rem;
-  bottom: 1.02rem;
+  left: 0.42rem;
+  bottom: 0.98rem;
   transform-origin: 0% 50%;
-  transform: rotate(10deg);
-  clip-path: polygon(0% 44%, 100% 4%, 100% 96%, 0% 56%);
-  background: linear-gradient(
-    to right,
-    rgba(239, 68, 68, 0.95) 0%,
-    rgba(239, 68, 68, 0.62) 16%,
-    rgba(239, 68, 68, 0.22) 38%,
-    rgba(239, 68, 68, 0.06) 58%,
-    transparent 100%
-  );
-  opacity: 0;
+  transform: rotate(-9deg);
+  clip-path: polygon(0% 50%, 100% 8%, 100% 92%, 0% 50%);
   animation: routes-rear-beam 16s ease-out forwards;
 }
 
 .routes-train-stage__lens-beam--rear::before {
   left: 0;
-  background: rgba(248, 113, 113, 0.95);
-  box-shadow: 0 0 6px rgba(239, 68, 68, 0.8);
+  animation: routes-rear-lens 16s ease-out forwards;
 }
 
 @keyframes routes-train-enter {
@@ -1691,13 +1685,71 @@ body::before {
 }
 
 @keyframes routes-front-beam {
-  0%, 87% { opacity: 1; }
-  88%, 100% { opacity: 0; }
+  0%, 87% {
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.68) 14%,
+      rgba(255, 255, 255, 0.28) 36%,
+      rgba(255, 255, 255, 0.08) 56%,
+      transparent 100%
+    );
+  }
+  88%, 100% {
+    background: linear-gradient(
+      to left,
+      rgba(239, 68, 68, 0.96) 0%,
+      rgba(239, 68, 68, 0.68) 14%,
+      rgba(239, 68, 68, 0.28) 36%,
+      rgba(239, 68, 68, 0.08) 56%,
+      transparent 100%
+    );
+  }
 }
 
 @keyframes routes-rear-beam {
-  0%, 87% { opacity: 0; }
-  88%, 100% { opacity: 1; }
+  0%, 87% {
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.68) 14%,
+      rgba(255, 255, 255, 0.28) 36%,
+      rgba(255, 255, 255, 0.08) 56%,
+      transparent 100%
+    );
+  }
+  88%, 100% {
+    background: linear-gradient(
+      to left,
+      rgba(239, 68, 68, 0.96) 0%,
+      rgba(239, 68, 68, 0.68) 14%,
+      rgba(239, 68, 68, 0.28) 36%,
+      rgba(239, 68, 68, 0.08) 56%,
+      transparent 100%
+    );
+  }
+}
+
+@keyframes routes-front-lens {
+  0%, 87% {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 7px rgba(255, 255, 255, 0.8);
+  }
+  88%, 100% {
+    background: rgba(248, 113, 113, 0.95);
+    box-shadow: 0 0 7px rgba(239, 68, 68, 0.82);
+  }
+}
+
+@keyframes routes-rear-lens {
+  0%, 87% {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 7px rgba(255, 255, 255, 0.8);
+  }
+  88%, 100% {
+    background: rgba(248, 113, 113, 0.95);
+    box-shadow: 0 0 7px rgba(239, 68, 68, 0.82);
+  }
 }
 
 @media (min-width: 1025px) {
@@ -2176,14 +2228,35 @@ body::before {
     transform: translateX(0);
   }
 
-  .routes-train-stage__lens-beam--front {
-    animation: none;
-    opacity: 0;
-  }
-
+  .routes-train-stage__lens-beam--front,
   .routes-train-stage__lens-beam--rear {
     animation: none;
     opacity: 1;
+  }
+
+  .routes-train-stage__lens-beam--front {
+    background: linear-gradient(
+      to left,
+      rgba(239, 68, 68, 0.96) 0%,
+      rgba(239, 68, 68, 0.28) 36%,
+      transparent 100%
+    );
+  }
+
+  .routes-train-stage__lens-beam--front::before,
+  .routes-train-stage__lens-beam--rear::before {
+    animation: none;
+    background: rgba(248, 113, 113, 0.95);
+    box-shadow: 0 0 7px rgba(239, 68, 68, 0.82);
+  }
+
+  .routes-train-stage__lens-beam--rear {
+    background: linear-gradient(
+      to left,
+      rgba(239, 68, 68, 0.96) 0%,
+      rgba(239, 68, 68, 0.28) 36%,
+      transparent 100%
+    );
   }
 }
 
