@@ -1368,6 +1368,11 @@ body::before {
   max-width: 692px;
 }
 
+.product-gallery--workforce .hero-chip {
+  white-space: normal;
+  max-width: 15.5rem;
+}
+
 .product-section__media {
   overflow: visible;
 }
