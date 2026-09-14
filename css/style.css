@@ -1692,8 +1692,11 @@ body::before {
   align-items: flex-end;
   height: 3.5rem;
   transform: translateX(100vw);
-  animation: routes-train-enter 16s ease-out forwards;
   will-change: transform;
+}
+
+.product-section--routes.is-routes-train-playing .routes-train-stage__train {
+  animation: routes-train-enter 16s ease-out forwards;
 }
 
 .routes-train-stage__carriage--lead {
@@ -1780,11 +1783,11 @@ body::before {
   border-radius: 40%;
 }
 
-.routes-train-stage__lens-beam--front {
+.product-section--routes.is-routes-train-playing .routes-train-stage__lens-beam--front {
   animation: routes-front-beam 16s ease-out forwards;
 }
 
-.routes-train-stage__lens-beam--front::before {
+.product-section--routes.is-routes-train-playing .routes-train-stage__lens-beam--front::before {
   animation: routes-front-lens 16s ease-out forwards;
 }
 

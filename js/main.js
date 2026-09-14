@@ -25,25 +25,42 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const scanPanel = gallery.closest(".product-section")?.querySelector("[data-gallery-scan-panel]");
   const routesSection = gallery.closest(".product-section--routes");
   const routesTrain = routesSection?.querySelector(".routes-train-stage__train");
+  let routesTrainInView = false;
 
-  const restartRoutesTrain = () => {
-    if (!routesTrain) return;
-    const animated = [
+  const getRoutesTrainAnimated = () => {
+    if (!routesTrain) return [];
+    return [
       routesTrain,
       ...routesTrain.querySelectorAll(".routes-train-stage__lens-beam--front"),
     ];
-    animated.forEach((el) => {
+  };
+
+  const resetRoutesTrain = () => {
+    if (!routesSection || !routesTrain) return;
+    routesSection.classList.remove("is-routes-train-playing");
+    getRoutesTrainAnimated().forEach((el) => {
       el.style.animation = "none";
       void el.offsetHeight;
       el.style.animation = "";
     });
   };
 
+  const playRoutesTrain = () => {
+    if (!routesSection || !routesTrain) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      routesSection.classList.add("is-routes-train-playing");
+      return;
+    }
+    resetRoutesTrain();
+    routesSection.classList.add("is-routes-train-playing");
+  };
+
   const syncRoutesSection = (tab) => {
     if (!routesSection) return;
     routesSection.classList.add("has-routes-train");
     routesSection.classList.toggle("has-routes-train-mask", tab.hasAttribute("data-routes-train"));
-    restartRoutesTrain();
+    if (routesTrainInView) playRoutesTrain();
+    else resetRoutesTrain();
   };
 
   if (!img || !tabs.length) return;
@@ -424,5 +441,18 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
       },
       { threshold: 0.25 }
     ).observe(video);
+  }
+
+  if (routesSection && routesTrain && "IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          routesTrainInView = entry.isIntersecting;
+          if (routesTrainInView) playRoutesTrain();
+          else resetRoutesTrain();
+        });
+      },
+      { threshold: 0.2 }
+    ).observe(routesSection);
   }
 });
