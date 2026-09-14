@@ -2151,21 +2151,25 @@
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-verify-scan-video]"), function (video) {
-    var maxLoops = Number(video.getAttribute("data-max-loops")) || 3;
     var loops = 0;
+    var maxLoops = video.hasAttribute("loop")
+      ? Infinity
+      : Number(video.getAttribute("data-max-loops")) || 3;
 
     function tryPlay() {
       if (reducedMotion || loops >= maxLoops) return;
       video.play().catch(function () {});
     }
 
-    video.addEventListener("ended", function () {
-      loops += 1;
-      if (loops < maxLoops) {
-        video.currentTime = 0;
-        tryPlay();
-      }
-    });
+    if (!video.hasAttribute("loop")) {
+      video.addEventListener("ended", function () {
+        loops += 1;
+        if (loops < maxLoops) {
+          video.currentTime = 0;
+          tryPlay();
+        }
+      });
+    }
 
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(

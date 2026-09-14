@@ -12,11 +12,11 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   let carouselSlides = [];
   let activeTab = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
   const chips = {
-    safe: gallery.querySelector('[data-gallery-chip="safe"]'),
     alert: gallery.querySelector('[data-gallery-chip="alert"]'),
     extraLeft: gallery.querySelector('[data-gallery-chip="extra-left"]'),
     extraRight: gallery.querySelector('[data-gallery-chip="extra-right"]'),
   };
+  const scanPanel = gallery.closest(".product-section")?.querySelector("[data-gallery-scan-panel]");
   if (!img || !tabs.length) return;
 
   // The caption is built from the alt text each tab already carries, so the
@@ -71,12 +71,15 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     if (detailEl) detailEl.textContent = detail || "";
   };
 
-  const toggleChipScan = (tab) => {
-    const scanWrap = chips.safe?.querySelector("[data-chip-scan]");
-    if (!scanWrap) return;
+  const toggleScanPanel = (tab) => {
+    if (!scanPanel) return;
     const showScan = tab.dataset.chipScan === "true";
-    scanWrap.hidden = !showScan;
-    const scanVideo = scanWrap.querySelector("[data-verify-scan-video]");
+    scanPanel.hidden = !showScan;
+    const titleEl = scanPanel.querySelector("[data-scan-title]");
+    const detailEl = scanPanel.querySelector("[data-scan-detail]");
+    if (titleEl) titleEl.textContent = tab.dataset.chipSafeTitle || "";
+    if (detailEl) detailEl.textContent = tab.dataset.chipSafeDetail || "";
+    const scanVideo = scanPanel.querySelector("[data-verify-scan-video]");
     if (!scanVideo) return;
     if (showScan) scanVideo.play().catch(() => {});
     else scanVideo.pause();
@@ -114,20 +117,18 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const updateChips = (tab, slideIndex = 0) => {
     const chipCopy = getChipCopy(tab, slideIndex);
     const hasChipCopy =
-      chipCopy.safeTitle ||
       chipCopy.alertTitle ||
       chipCopy.extraLeftTitle ||
       chipCopy.extraRightTitle ||
-      chips.safe?.querySelector("[data-chip-scan]");
+      scanPanel;
     if (!hasChipCopy) return;
 
     gallery.classList.add("is-chip-swapping");
     window.setTimeout(() => {
-      setChip(chips.safe, chipCopy.safeTitle, chipCopy.safeDetail);
       setChip(chips.alert, chipCopy.alertTitle, chipCopy.alertDetail);
       setChip(chips.extraLeft, chipCopy.extraLeftTitle, chipCopy.extraLeftDetail);
       setChip(chips.extraRight, chipCopy.extraRightTitle, chipCopy.extraRightDetail);
-      toggleChipScan(tab);
+      toggleScanPanel(tab);
       gallery.classList.remove("is-chip-swapping");
     }, 120);
   };
