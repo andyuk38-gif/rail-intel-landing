@@ -1435,7 +1435,7 @@ body::before {
 }
 
 .product-gallery--workforce .hero-chip--bl {
-  top: calc(100% + 1.15rem - 5mm);
+  top: calc(100% + 1.15rem - 15mm);
   bottom: auto;
   left: calc(-2.85rem + 5mm);
   right: auto;
@@ -1444,7 +1444,7 @@ body::before {
 .workforce-scan-panel {
   grid-column: 1 / -1;
   display: none;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 1.75rem 2rem;
   align-items: center;
   margin-top: 0.5rem;
@@ -1462,19 +1462,29 @@ body::before {
   display: grid;
 }
 
-.workforce-scan-panel__media {
-  position: relative;
+.workforce-scan-panel__leading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   min-width: 0;
   cursor: pointer;
 }
 
-.workforce-scan-panel__media:hover .workforce-scan-panel__expand,
-.workforce-scan-panel__media:focus-within .workforce-scan-panel__expand {
-  opacity: 1;
+.workforce-scan-panel__media {
+  position: relative;
+  min-width: 0;
+  flex: none;
 }
 
 .workforce-scan-panel__expand {
+  position: static;
+  flex: none;
   opacity: 0.85;
+}
+
+.workforce-scan-panel__leading:hover .workforce-scan-panel__expand,
+.workforce-scan-panel__leading:focus-within .workforce-scan-panel__expand {
+  opacity: 1;
 }
 
 .workforce-scan-panel__copy {
@@ -1499,24 +1509,26 @@ body::before {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.85rem;
+  gap: 1rem;
   max-width: 34rem;
-  text-align: left;
+  width: 100%;
 }
 
 .workforce-scan-panel__points li {
   position: relative;
-  padding-left: 1.35rem;
+  padding-top: 1.1rem;
   font-size: 0.9375rem;
   line-height: 1.55;
   color: #c4cad6;
+  text-align: center;
 }
 
 .workforce-scan-panel__points li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.55em;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -1617,9 +1629,57 @@ body::before {
 
 .licence-card-scan__status {
   margin: 0;
+  min-height: 2.6em;
   font-size: 0.8125rem;
   line-height: 1.45;
   color: #94a3b8;
+  transition: color 0.3s ease;
+}
+
+.licence-card-scan__tick {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.58);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.licence-card-scan__tick svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #34d399;
+  filter: drop-shadow(0 0 12px rgba(52, 211, 153, 0.85));
+}
+
+.licence-card-scan.is-success .licence-card-scan__card {
+  border-color: #6ee7b7;
+  box-shadow: inset 0 0 30px rgba(16, 185, 129, 0.22);
+}
+
+.licence-card-scan.is-success .licence-card-scan__beam {
+  animation: none;
+  opacity: 0;
+}
+
+.licence-card-scan.is-success .licence-card-scan__wash {
+  background: linear-gradient(to bottom, rgba(16, 185, 129, 0.08), transparent 35%, rgba(16, 185, 129, 0.08));
+}
+
+.licence-card-scan.is-success .licence-card-scan__indicator {
+  background: #6ee7b7;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.85);
+}
+
+.licence-card-scan.is-success .licence-card-scan__tick {
+  opacity: 1;
+}
+
+.licence-card-scan.is-success .licence-card-scan__status {
+  color: #6ee7b7;
 }
 
 .licence-card-scan--enlarged .licence-card-scan__card {

@@ -88,6 +88,13 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
         })
       );
     }
+    if (!showScan) {
+      scanPanel.querySelectorAll("[data-licence-card-scan]").forEach((root) => {
+        if (window.stopLicenceCardScan) window.stopLicenceCardScan(root);
+      });
+    } else if (window.restartLicenceCardScans) {
+      window.restartLicenceCardScans();
+    }
   };
 
   const getChipCopy = (tab, slideIndex = 0) => {

@@ -230,6 +230,8 @@
     lightboxVideo.removeAttribute("src");
     lightboxVideo.load();
     if (lightboxLicenceScan) {
+      var licenceClone = lightboxLicenceScan.querySelector("[data-licence-card-scan]");
+      if (licenceClone && window.stopLicenceCardScan) window.stopLicenceCardScan(licenceClone);
       lightboxLicenceScan.hidden = true;
       lightboxLicenceScan.replaceChildren();
     }
@@ -307,6 +309,7 @@
     lightbox.classList.add("is-open");
     document.body.classList.add("lightbox-open");
     lightbox.querySelector("[data-lightbox-close]").focus();
+    if (window.startLicenceCardScan) window.startLicenceCardScan(clone);
   }
 
   lightboxZoom.addEventListener("click", function () {
@@ -359,8 +362,7 @@
   });
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-scan-expand]"), function (wrap) {
-    var scanRoot = wrap.querySelector("[data-licence-card-scan]");
-    if (!scanRoot) return;
+    if (!wrap.querySelector("[data-licence-card-scan]")) return;
 
     function openScanLightbox(event) {
       if (event) {
@@ -2241,6 +2243,86 @@
     });
 
     sync(0);
+  });
+})();
+
+(function () {
+  var PHASE_ONE_MS = 2700;
+  var PHASE_TWO_MS = 2700;
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cycles = new WeakMap();
+
+  function isScanPanelVisible(root) {
+    var panel = root.closest("[data-gallery-scan-panel]");
+    return !panel || !panel.hidden;
+  }
+
+  function resetLicenceCardScan(root) {
+    var status = root.querySelector("[data-licence-scan-status]");
+    if (!status) return;
+    root.classList.remove("is-success");
+    status.textContent = "Reading licence number and dates…";
+  }
+
+  function stopLicenceCardScan(root) {
+    var timers = cycles.get(root);
+    if (timers) {
+      timers.forEach(clearTimeout);
+      cycles.delete(root);
+    }
+    resetLicenceCardScan(root);
+  }
+
+  function startLicenceCardScan(root) {
+    stopLicenceCardScan(root);
+    if (!isScanPanelVisible(root)) return;
+
+    var status = root.querySelector("[data-licence-scan-status]");
+    if (!status) return;
+
+    if (reducedMotion) {
+      status.textContent = "Detecting language and 9b restrictions…";
+      root.classList.add("is-success");
+      return;
+    }
+
+    var timers = [];
+    timers.push(
+      window.setTimeout(function () {
+        status.textContent = "Detecting language and 9b restrictions…";
+      }, PHASE_ONE_MS)
+    );
+    timers.push(
+      window.setTimeout(function () {
+        root.classList.add("is-success");
+      }, PHASE_ONE_MS + PHASE_TWO_MS)
+    );
+    cycles.set(root, timers);
+  }
+
+  window.startLicenceCardScan = startLicenceCardScan;
+  window.stopLicenceCardScan = stopLicenceCardScan;
+  window.restartLicenceCardScans = function () {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-licence-card-scan]"), function (root) {
+      if (isScanPanelVisible(root)) startLicenceCardScan(root);
+    });
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-licence-card-scan]"), function (root) {
+    if (!("IntersectionObserver" in window)) {
+      startLicenceCardScan(root);
+      return;
+    }
+
+    new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && isScanPanelVisible(root)) startLicenceCardScan(root);
+          else stopLicenceCardScan(root);
+        });
+      },
+      { threshold: 0.45 }
+    ).observe(root);
   });
 })();
 
