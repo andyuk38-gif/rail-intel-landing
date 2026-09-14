@@ -336,9 +336,12 @@ function renderFooterMarkup(base) {
         <div class="footer-col footer-col--links">
           <h2 class="footer-heading">Product</h2>
           <nav class="footer-nav" aria-label="Product">
-            <a href="${base}products/">Products</a>
-            <a href="${base}features/">Features</a>
-            <a href="${base}how-it-works.html">How it works</a>
+            ${products
+              .map((product) => {
+                const href = product.href === "" ? `${base}` : `${base}${product.href}`;
+                return `<a href="${href}">${esc(product.name)}</a>`;
+              })
+              .join("\n            ")}
           </nav>
         </div>
         <div class="footer-col footer-col--links">
