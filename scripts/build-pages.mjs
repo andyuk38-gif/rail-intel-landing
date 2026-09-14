@@ -334,8 +334,8 @@ function renderFooterMarkup(base) {
           </div>
         </div>
         <div class="footer-col footer-col--links">
-          <h2 class="footer-heading">Product</h2>
-          <nav class="footer-nav" aria-label="Product">
+          <h2 class="footer-heading">Products</h2>
+          <nav class="footer-nav" aria-label="Products">
             ${products
               .map((product) => {
                 const href = product.href === "" ? `${base}` : `${base}${product.href}`;
