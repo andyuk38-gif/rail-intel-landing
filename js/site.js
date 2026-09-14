@@ -1180,6 +1180,11 @@
         var icon = tile.querySelector(".feature-tile__icon");
         featureIcon.innerHTML = icon ? icon.innerHTML : "";
       }
+
+      tile.scrollIntoView({
+        block: "nearest",
+        behavior: featureReduced ? "auto" : "smooth",
+      });
     }
 
     function nextFeatureTile() {

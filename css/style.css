@@ -3468,6 +3468,21 @@ body::before {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.8rem;
   align-content: start;
+  max-height: 24.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 158, 11, 0.35) transparent;
+}
+
+.feature-tiles::-webkit-scrollbar {
+  width: 6px;
+}
+
+.feature-tiles::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.35);
 }
 
 .feature-tile {
@@ -3683,6 +3698,8 @@ body::before {
 
   .feature-tiles {
     grid-template-columns: 1fr;
+    max-height: none;
+    overflow: visible;
   }
 
   .feature-showcase__nav {
