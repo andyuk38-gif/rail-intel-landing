@@ -1520,6 +1520,81 @@ body::before {
   }
 }
 
+.traction-routes-scene {
+  position: relative;
+  overflow: hidden;
+}
+
+.traction-routes-scene__train-mask {
+  display: none;
+  position: absolute;
+  top: 21.6%;
+  left: 1.8%;
+  right: 1.8%;
+  height: 9.4%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(180deg, #171c2d 0%, #151a29 100%);
+}
+
+.product-gallery.has-traction-scene .traction-routes-scene__train-mask {
+  display: block;
+}
+
+.traction-routes-scene__train {
+  position: absolute;
+  left: 8.5%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  max-width: 90%;
+  height: 72%;
+  opacity: 0.4;
+  transform: translate3d(0, -65%, 0);
+  animation: traction-train-slide 7s linear infinite;
+  will-change: transform;
+}
+
+.traction-routes-scene__train > img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left;
+  user-select: none;
+}
+
+.traction-routes-scene__train-mirror {
+  display: block;
+  transform: scaleX(-1);
+}
+
+.traction-routes-scene__train-mirror-crop {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  width: calc(100% * 302 / 600);
+}
+
+.traction-routes-scene__train-mirror-crop img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left;
+  user-select: none;
+}
+
+@keyframes traction-train-slide {
+  0% { transform: translate3d(140%, -65%, 0); }
+  70% { transform: translate3d(20%, -65%, 0); }
+  88% { transform: translate3d(5%, -65%, 0); }
+  92%, 100% { transform: translate3d(0, -65%, 0); }
+}
+
 .workforce-scan-panel {
   grid-column: 1 / -1;
   display: none;
@@ -1982,6 +2057,10 @@ body::before {
   }
 
   .scan-title-reveal__focus {
+    display: none;
+  }
+
+  .product-gallery.has-traction-scene .traction-routes-scene__train-mask {
     display: none;
   }
 }

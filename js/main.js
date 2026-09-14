@@ -270,6 +270,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     const useCarousel = tab.hasAttribute("data-carousel") && slides.length > 1 && carouselEl && carouselTrack;
     if (useCarousel) {
       if (url && tab.dataset.url) url.textContent = tab.dataset.url;
+      gallery.classList.toggle("has-traction-scene", tab.hasAttribute("data-traction-scene"));
       updateChips(tab);
       updateCopy(tab);
       setSceneVisible(false);
@@ -281,6 +282,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     hideCarousel();
     caption.textContent = tab.dataset.alt || "";
     if (url && tab.dataset.url) url.textContent = tab.dataset.url;
+    gallery.classList.toggle("has-traction-scene", tab.hasAttribute("data-traction-scene"));
     updateChips(tab);
     updateCopy(tab);
 

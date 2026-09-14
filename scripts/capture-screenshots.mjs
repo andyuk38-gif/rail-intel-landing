@@ -287,6 +287,7 @@ async function captureEmployeeScreens(page) {
   await safeShot(page, "licence.png", () => employeeTab(page, "Licensing", "Licence"));
   await safeShot(page, "medical-record.png", () => employeeTab(page, "Medical", "Medical"));
   await safeShot(page, "current-cycles.png", () => employeeTab(page, "Operations", "Cycles"));
+  await safeShot(page, "traction-routes.png", () => employeeTab(page, "Operations", "Trains & Routes"));
   await safeShot(page, "incidents-cdp.png", () =>
     employeeTab(page, "Development", "Monitoring & Incidents")
   );
@@ -373,7 +374,7 @@ async function main() {
   await safeShot(page, "safety-briefs.png", () => clickAdmin(page, "Safety Briefs"));
   await safeShot(page, "trainee-hours.png", () => clickAdmin(page, "Trainee Driver"));
   await safeShot(page, "cycle-builder.png", () => clickAdmin(page, "Cycle Builder"));
-  await safeShot(page, "traction-routes.png", () => clickAdmin(page, "Traction, Routes & Depots"));
+  await safeShot(page, "traction-routes-config.png", () => clickAdmin(page, "Traction, Routes & Depots"));
   await safeShot(page, "org-structure.png", () => clickAdmin(page, "Organisation Structure"));
 
   // Reporting last of the top-level screens: it needs the content scrolled,
