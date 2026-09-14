@@ -345,6 +345,7 @@ function renderFooterMarkup(base) {
           <h2 class="footer-heading">Company</h2>
           <nav class="footer-nav" aria-label="Company">
             <a href="${base}privacy.html">Privacy policy</a>
+            <a href="${base}contact.html">Contact us</a>
             <a href="${base}get-started.html">Get started</a>
             <a href="${site.app}">Log in</a>
           </nav>
