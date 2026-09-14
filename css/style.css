@@ -1525,38 +1525,62 @@ body::before {
   overflow: hidden;
 }
 
-.traction-routes-scene__train-mask {
+.traction-routes-scene__header-mask {
   display: none;
   position: absolute;
   top: 21.6%;
   left: 1.8%;
   right: 1.8%;
   height: 9.4%;
-  overflow: hidden;
   pointer-events: none;
   z-index: 2;
   background: linear-gradient(180deg, #171c2d 0%, #151a29 100%);
 }
 
-.product-gallery.has-traction-scene .traction-routes-scene__train-mask {
+.product-section--routes.has-routes-train .traction-routes-scene__header-mask {
   display: block;
 }
 
-.traction-routes-scene__train {
+.product-section--routes .product-section__inner {
+  grid-template-rows: auto auto;
+}
+
+.product-section--routes .routes-train-stage {
+  display: none;
+  grid-column: 1 / -1;
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: 0.5rem;
+  min-height: 3.75rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.product-section--routes.has-routes-train .routes-train-stage {
+  display: block;
+}
+
+.routes-train-stage__inner {
+  position: relative;
+  height: 3.5rem;
+  overflow: hidden;
+}
+
+.routes-train-stage__train {
   position: absolute;
-  left: 8.5%;
-  top: 50%;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
-  max-width: 90%;
-  height: 72%;
-  opacity: 0.4;
-  transform: translate3d(0, -65%, 0);
-  animation: traction-train-slide 7s linear infinite;
+  height: 3.5rem;
+  opacity: 0.48;
+  transform: translateX(100vw);
+  animation: routes-train-enter 9s ease-in-out infinite;
   will-change: transform;
 }
 
-.traction-routes-scene__train > img {
+.routes-train-stage__train > img {
   display: block;
   height: 100%;
   width: auto;
@@ -1566,19 +1590,19 @@ body::before {
   user-select: none;
 }
 
-.traction-routes-scene__train-mirror {
+.routes-train-stage__train-mirror {
   display: block;
   transform: scaleX(-1);
 }
 
-.traction-routes-scene__train-mirror-crop {
+.routes-train-stage__train-mirror-crop {
   display: block;
   height: 100%;
   overflow: hidden;
-  width: calc(100% * 302 / 600);
+  width: calc(3.5rem * 302 / 75);
 }
 
-.traction-routes-scene__train-mirror-crop img {
+.routes-train-stage__train-mirror-crop img {
   display: block;
   height: 100%;
   width: auto;
@@ -1588,11 +1612,16 @@ body::before {
   user-select: none;
 }
 
-@keyframes traction-train-slide {
-  0% { transform: translate3d(140%, -65%, 0); }
-  70% { transform: translate3d(20%, -65%, 0); }
-  88% { transform: translate3d(5%, -65%, 0); }
-  92%, 100% { transform: translate3d(0, -65%, 0); }
+@keyframes routes-train-enter {
+  0% { transform: translateX(100vw); }
+  62% { transform: translateX(0); }
+  78%, 100% { transform: translateX(0); }
+}
+
+@media (min-width: 1025px) {
+  .product-section--routes .routes-train-stage {
+    margin-top: -3.6rem;
+  }
 }
 
 .workforce-scan-panel {
@@ -2060,8 +2089,9 @@ body::before {
     display: none;
   }
 
-  .product-gallery.has-traction-scene .traction-routes-scene__train-mask {
-    display: none;
+  .product-section--routes.has-routes-train .routes-train-stage__train {
+    animation: none;
+    transform: translateX(0);
   }
 }
 

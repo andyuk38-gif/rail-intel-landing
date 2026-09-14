@@ -21,6 +21,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     extraRight: findChip("extra-right"),
   };
   const scanPanel = gallery.closest(".product-section")?.querySelector("[data-gallery-scan-panel]");
+  const routesSection = gallery.closest(".product-section--routes");
   if (!img || !tabs.length) return;
 
   // The caption is built from the alt text each tab already carries, so the
@@ -270,7 +271,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     const useCarousel = tab.hasAttribute("data-carousel") && slides.length > 1 && carouselEl && carouselTrack;
     if (useCarousel) {
       if (url && tab.dataset.url) url.textContent = tab.dataset.url;
-      gallery.classList.toggle("has-traction-scene", tab.hasAttribute("data-traction-scene"));
+      if (routesSection) routesSection.classList.toggle("has-routes-train", tab.hasAttribute("data-routes-train"));
       updateChips(tab);
       updateCopy(tab);
       setSceneVisible(false);
@@ -282,7 +283,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     hideCarousel();
     caption.textContent = tab.dataset.alt || "";
     if (url && tab.dataset.url) url.textContent = tab.dataset.url;
-    gallery.classList.toggle("has-traction-scene", tab.hasAttribute("data-traction-scene"));
+    if (routesSection) routesSection.classList.toggle("has-routes-train", tab.hasAttribute("data-routes-train"));
     updateChips(tab);
     updateCopy(tab);
 

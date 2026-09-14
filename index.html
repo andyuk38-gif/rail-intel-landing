@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=260" />
+  <link rel="stylesheet" href="css/style.css?v=261" />
   <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -702,7 +702,7 @@
       </div>
     </section>
 
-    <section class="product-section product-section--elevated" aria-labelledby="routes-heading">
+    <section class="product-section product-section--elevated product-section--routes has-routes-train" aria-labelledby="routes-heading">
       <div class="container product-section__inner">
         <div class="product-section__copy">
           <p class="product-eyebrow">Routes and hours</p>
@@ -714,7 +714,7 @@
           </ul>
         </div>
         <div class="product-section__media">
-          <div class="product-gallery has-traction-scene" data-gallery>
+          <div class="product-gallery" data-gallery>
             <div class="browser-mockup browser-mockup--primary">
               <div class="browser-mockup__chrome">
                 <span class="browser-mockup__dots"></span>
@@ -722,21 +722,24 @@
               </div>
               <div class="browser-mockup__content traction-routes-scene">
                 <img src="images/product/traction-routes.png?v=260" alt="Traction and route overview for company configuration" width="1024" height="414" data-gallery-main loading="lazy" decoding="async" />
-                <div class="traction-routes-scene__train-mask" aria-hidden="true">
-                  <div class="traction-routes-scene__train">
-                    <img src="images/product/TractionHeaderImage.png" alt="" width="600" height="75" decoding="async" />
-                    <span class="traction-routes-scene__train-mirror">
-                      <span class="traction-routes-scene__train-mirror-crop">
-                        <img src="images/product/TractionHeaderImage.png" alt="" width="600" height="75" decoding="async" />
-                      </span>
-                    </span>
-                  </div>
-                </div>
+                <div class="traction-routes-scene__header-mask" aria-hidden="true"></div>
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Routes and hours screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png?v=260" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes" data-width="1024" data-height="414" data-traction-scene="true">Traction &amp; routes</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png?v=260" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes" data-width="1024" data-height="414" data-routes-train="true">Traction &amp; routes</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/trainee-hours.png" data-alt="Trainee hours and experience records" data-url="cms.railintel.co.uk/trainee-hours" data-width="682" data-height="561">Trainee hours</button>
+            </div>
+          </div>
+        </div>
+        <div class="routes-train-stage" aria-hidden="true">
+          <div class="container routes-train-stage__inner">
+            <div class="routes-train-stage__train">
+              <img src="images/product/TractionHeaderImage.png" alt="" width="600" height="75" decoding="async" />
+              <span class="routes-train-stage__train-mirror">
+                <span class="routes-train-stage__train-mirror-crop">
+                  <img src="images/product/TractionHeaderImage.png" alt="" width="600" height="75" decoding="async" />
+                </span>
+              </span>
             </div>
           </div>
         </div>
@@ -1030,6 +1033,6 @@
   <script src="js/site.js?v=253"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
-  <script src="js/main.js?v=258"></script>
+  <script src="js/main.js?v=259"></script>
 </body>
 </html>
