@@ -1209,6 +1209,16 @@
     var featureTitle = featureShowcase.querySelector("[data-feature-spotlight-title]");
     var featureDesc = featureShowcase.querySelector("[data-feature-spotlight-desc]");
     var featureEdge = featureShowcase.querySelector("[data-feature-spotlight-edge]");
+    var featureFlags = featureShowcase.querySelector("[data-feature-spotlight-flags]");
+    var featureFlagLabels = {
+      gb: "English",
+      es: "Spanish",
+      fr: "French",
+      cy: "Welsh",
+      it: "Italian",
+      de: "German",
+      ar: "Arabic",
+    };
     var featureReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var featureActive = 0;
     var featureTimer = null;
@@ -1243,6 +1253,34 @@
       if (featureIcon) {
         var icon = tile.querySelector(".feature-tile__icon");
         featureIcon.innerHTML = icon ? icon.innerHTML : "";
+      }
+      if (featureFlags) {
+        var flagCodes = (tile.dataset.featureFlags || "")
+          .split(",")
+          .map(function (code) {
+            return code.trim();
+          })
+          .filter(Boolean);
+        if (flagCodes.length) {
+          featureFlags.hidden = false;
+          featureFlags.innerHTML = flagCodes
+            .map(function (code) {
+              var label = featureFlagLabels[code] || code;
+              return (
+                '<span class="feature-spotlight__flag" title="' +
+                label +
+                '"><img src="images/flags/' +
+                code +
+                '.svg" alt="' +
+                label +
+                '" width="28" height="18" loading="lazy" decoding="async"></span>'
+              );
+            })
+            .join("");
+        } else {
+          featureFlags.hidden = true;
+          featureFlags.innerHTML = "";
+        }
       }
 
     }
