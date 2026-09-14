@@ -2249,6 +2249,7 @@
 (function () {
   var PHASE_ONE_MS = 2700;
   var PHASE_TWO_MS = 2700;
+  var RESTART_DELAY_MS = 5000;
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var cycles = new WeakMap();
 
@@ -2280,13 +2281,28 @@
     var status = root.querySelector("[data-licence-scan-status]");
     if (!status) return;
 
-    if (reducedMotion) {
-      status.textContent = "Detecting language and 9b restrictions…";
+    var timers = [];
+
+    function scheduleRestart() {
+      timers.push(
+        window.setTimeout(function () {
+          if (isScanPanelVisible(root)) startLicenceCardScan(root);
+        }, RESTART_DELAY_MS)
+      );
+    }
+
+    function showSuccess() {
+      status.textContent = "Licence verified as compliant";
       root.classList.add("is-success");
+      scheduleRestart();
+    }
+
+    if (reducedMotion) {
+      showSuccess();
+      cycles.set(root, timers);
       return;
     }
 
-    var timers = [];
     timers.push(
       window.setTimeout(function () {
         status.textContent = "Detecting language and 9b restrictions…";
@@ -2294,7 +2310,7 @@
     );
     timers.push(
       window.setTimeout(function () {
-        root.classList.add("is-success");
+        showSuccess();
       }, PHASE_ONE_MS + PHASE_TWO_MS)
     );
     cycles.set(root, timers);
