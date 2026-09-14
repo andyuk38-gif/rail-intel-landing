@@ -1582,7 +1582,7 @@ body::before {
 
 .product-gallery--routes .routes-chip--media {
   /* Sit in the screenshot tab row — chrome height keeps the chip above the traction header (~21.6%). */
-  top: 2.05rem;
+  top: calc(2.05rem - 20mm);
   bottom: auto;
   left: auto;
   right: 3.35rem;
