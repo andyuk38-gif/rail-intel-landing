@@ -1537,7 +1537,7 @@ body::before {
   background: linear-gradient(180deg, #171c2d 0%, #151a29 100%);
 }
 
-.product-section--routes.has-routes-train .traction-routes-scene__header-mask {
+.product-section--routes.has-routes-train-mask .traction-routes-scene__header-mask {
   display: block;
 }
 
