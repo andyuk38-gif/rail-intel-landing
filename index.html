@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=243" />
+  <link rel="stylesheet" href="css/style.css?v=244" />
   <link rel="stylesheet" href="css/pages.css?v=243" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -572,24 +572,53 @@
                 </div>
               </div>
               <span class="hero-chip hero-chip--safe" data-gallery-chip="safe" aria-hidden="true">
-                <span class="hero-chip__dot"></span>
-                <span>
-                  <strong data-chip-title>Digital scanning technology</strong>
-                  <span data-chip-detail>Scans your licence</span>
+                <span class="hero-chip__scan" data-chip-scan>
+                  <span class="verify-scan verify-scan--chip" data-verify-scan>
+                    <span class="verify-scan__chrome" aria-hidden="true">
+                      <span class="verify-scan__dot"></span>
+                      <span class="verify-scan__label">Scanning licence</span>
+                    </span>
+                    <span class="verify-scan__screen">
+                      <video class="verify-scan__video" data-verify-scan-video data-max-loops="3" muted playsinline preload="auto" aria-hidden="true">
+                        <source src="video/ScanningEmployeeRecord.mp4" type="video/mp4" />
+                      </video>
+                    </span>
+                  </span>
+                </span>
+                <span class="hero-chip__body">
+                  <span class="hero-chip__dot"></span>
+                  <span>
+                    <strong data-chip-title>Digital scanning technology</strong>
+                    <span data-chip-detail>Scans your licence</span>
+                  </span>
                 </span>
               </span>
-              <span class="hero-chip hero-chip--alert" data-gallery-chip="alert" aria-hidden="true">
+              <span class="hero-chip hero-chip--alert hero-chip--landscape" data-gallery-chip="alert" aria-hidden="true">
                 <span class="hero-chip__dot"></span>
-                <span>
+                <span class="hero-chip__inline">
                   <strong data-chip-title>Category tracking</strong>
                   <span data-chip-detail>B1, A and routes on record</span>
                 </span>
               </span>
+              <span class="hero-chip hero-chip--info hero-chip--bl" data-gallery-chip="extra-left" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong data-chip-title>Front &amp; back photos</strong>
+                  <span data-chip-detail>Stored securely on record</span>
+                </span>
+              </span>
+              <span class="hero-chip hero-chip--info hero-chip--br" data-gallery-chip="extra-right" aria-hidden="true">
+                <span class="hero-chip__dot"></span>
+                <span>
+                  <strong data-chip-title>Expiry monitoring</strong>
+                  <span data-chip-detail>Renewal warnings on dashboard</span>
+                </span>
+              </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Workforce record screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png?v=240" data-alt="Train driving licence record with front and back photos, expiry fields and category selection" data-url="cms.railintel.co.uk/licensing" data-width="1024" data-height="611" data-wide="true" data-chip-safe-title="Digital scanning technology" data-chip-safe-detail="Scans your licence" data-chip-alert-title="Category tracking" data-chip-alert-detail="B1, A and routes on record">Licensing</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/medical-record.png?v=240" data-alt="Record new medical form for occupational health and ORR medicals" data-url="cms.railintel.co.uk/medicals" data-width="1024" data-height="561" data-wide="true" data-chip-safe-title="ORR registered clinicians" data-chip-safe-detail="Doctors and psychologists on our system" data-chip-alert-title="Fitness status" data-chip-alert-detail="Unfit or expired flags not safe to work">Medicals</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/training-quals.png?v=240" data-alt="Training records and qualifications overview on an employee record" data-url="cms.railintel.co.uk/training" data-width="1024" data-height="519" data-wide="true" data-chip-safe-title="QA Verifications link" data-chip-safe-detail="Training evidence checked on record" data-chip-alert-title="Certificates attached" data-chip-alert-detail="Upload proof to every entry">Training</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png?v=240" data-alt="Train driving licence record with front and back photos, expiry fields and category selection" data-url="cms.railintel.co.uk/licensing" data-width="1024" data-height="611" data-wide="true" data-chip-scan="true" data-chip-safe-title="Digital scanning technology" data-chip-safe-detail="Scans your licence" data-chip-alert-title="Category tracking" data-chip-alert-detail="B1, A and routes on record" data-chip-extra-left-title="Front &amp; back photos" data-chip-extra-left-detail="Stored securely on record" data-chip-extra-right-title="Expiry monitoring" data-chip-extra-right-detail="Renewal warnings on dashboard">Licensing</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/medical-record.png?v=240" data-alt="Record new medical form for occupational health and ORR medicals" data-url="cms.railintel.co.uk/medicals" data-width="1024" data-height="561" data-wide="true" data-chip-safe-title="ORR registered clinicians" data-chip-safe-detail="Doctors and psychologists on our system" data-chip-alert-title="Fitness status" data-chip-alert-detail="Unfit or expired flags not safe to work" data-chip-extra-left-title="Renewal reminders" data-chip-extra-left-detail="Dashboard feed and email alerts" data-chip-extra-right-title="ORR medical types" data-chip-extra-right-detail="Periodic and return-to-work">Medicals</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/training-quals.png?v=240" data-alt="Training records and qualifications overview on an employee record" data-url="cms.railintel.co.uk/training" data-width="1024" data-height="519" data-wide="true" data-chip-safe-title="QA Verifications link" data-chip-safe-detail="Training evidence checked on record" data-chip-alert-title="Certificates attached" data-chip-alert-detail="Upload proof to every entry" data-chip-extra-left-title="Competence records" data-chip-extra-left-detail="Courses and qualifications held" data-chip-extra-right-title="Evidence on record" data-chip-extra-right-detail="Certificates linked to entries">Training</button>
             </div>
           </div>
         </div>
@@ -944,9 +973,9 @@
   </div>
   <!-- eoi:end -->
 
-  <script src="js/site.js?v=243"></script>
+  <script src="js/site.js?v=244"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
-  <script src="js/main.js?v=243"></script>
+  <script src="js/main.js?v=244"></script>
 </body>
 </html>

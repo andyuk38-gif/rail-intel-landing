@@ -14,6 +14,8 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const chips = {
     safe: gallery.querySelector('[data-gallery-chip="safe"]'),
     alert: gallery.querySelector('[data-gallery-chip="alert"]'),
+    extraLeft: gallery.querySelector('[data-gallery-chip="extra-left"]'),
+    extraRight: gallery.querySelector('[data-gallery-chip="extra-right"]'),
   };
   if (!img || !tabs.length) return;
 
@@ -57,11 +59,27 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   };
 
   const setChip = (chip, title, detail) => {
-    if (!chip || !title) return;
+    if (!chip) return;
+    if (!title) {
+      chip.hidden = true;
+      return;
+    }
+    chip.hidden = false;
     const titleEl = chip.querySelector("[data-chip-title]");
     const detailEl = chip.querySelector("[data-chip-detail]");
     if (titleEl) titleEl.textContent = title;
     if (detailEl) detailEl.textContent = detail || "";
+  };
+
+  const toggleChipScan = (tab) => {
+    const scanWrap = chips.safe?.querySelector("[data-chip-scan]");
+    if (!scanWrap) return;
+    const showScan = tab.dataset.chipScan === "true";
+    scanWrap.hidden = !showScan;
+    const scanVideo = scanWrap.querySelector("[data-verify-scan-video]");
+    if (!scanVideo) return;
+    if (showScan) scanVideo.play().catch(() => {});
+    else scanVideo.pause();
   };
 
   const getChipCopy = (tab, slideIndex = 0) => {
@@ -86,19 +104,30 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
       safeDetail: tab.dataset.chipSafeDetail || "",
       alertTitle: tab.dataset.chipAlertTitle || "",
       alertDetail: tab.dataset.chipAlertDetail || "",
+      extraLeftTitle: tab.dataset.chipExtraLeftTitle || "",
+      extraLeftDetail: tab.dataset.chipExtraLeftDetail || "",
+      extraRightTitle: tab.dataset.chipExtraRightTitle || "",
+      extraRightDetail: tab.dataset.chipExtraRightDetail || "",
     };
   };
 
   const updateChips = (tab, slideIndex = 0) => {
-    if (!chips.safe && !chips.alert) return;
     const chipCopy = getChipCopy(tab, slideIndex);
-    const hasChipCopy = chipCopy.safeTitle || chipCopy.alertTitle;
+    const hasChipCopy =
+      chipCopy.safeTitle ||
+      chipCopy.alertTitle ||
+      chipCopy.extraLeftTitle ||
+      chipCopy.extraRightTitle ||
+      chips.safe?.querySelector("[data-chip-scan]");
     if (!hasChipCopy) return;
 
     gallery.classList.add("is-chip-swapping");
     window.setTimeout(() => {
       setChip(chips.safe, chipCopy.safeTitle, chipCopy.safeDetail);
       setChip(chips.alert, chipCopy.alertTitle, chipCopy.alertDetail);
+      setChip(chips.extraLeft, chipCopy.extraLeftTitle, chipCopy.extraLeftDetail);
+      setChip(chips.extraRight, chipCopy.extraRightTitle, chipCopy.extraRightDetail);
+      toggleChipScan(tab);
       gallery.classList.remove("is-chip-swapping");
     }, 120);
   };

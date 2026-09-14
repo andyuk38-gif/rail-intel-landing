@@ -1373,6 +1373,110 @@ body::before {
   max-width: 15.5rem;
 }
 
+.product-gallery--workforce .hero-chip--safe {
+  top: -1.5rem;
+  right: -2.5rem;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 11.5rem;
+  padding: 0;
+  overflow: hidden;
+}
+
+.product-gallery--workforce .hero-chip--safe .hero-chip__body {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+}
+
+.product-gallery--workforce .hero-chip--safe .hero-chip__scan:not([hidden]) + .hero-chip__body {
+  padding-top: 0.65rem;
+}
+
+.product-gallery--workforce .hero-chip--alert.hero-chip--landscape {
+  top: -4.75rem;
+  right: calc(100% + 0.35rem);
+  flex-direction: row;
+  align-items: center;
+  max-width: none;
+  width: max-content;
+  white-space: nowrap;
+  padding: 0.65rem 1rem;
+  gap: 0.7rem;
+}
+
+.product-gallery--workforce .hero-chip--alert .hero-chip__inline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.product-gallery--workforce .hero-chip--alert .hero-chip__inline strong,
+.product-gallery--workforce .hero-chip--alert .hero-chip__inline [data-chip-detail] {
+  display: inline;
+}
+
+.product-gallery--workforce .hero-chip--alert .hero-chip__inline [data-chip-detail] {
+  font-size: 0.8125rem;
+}
+
+.product-gallery--workforce .hero-chip--alert .hero-chip__inline [data-chip-detail]::before {
+  content: "·";
+  margin-right: 0.35rem;
+  opacity: 0.55;
+}
+
+.hero-chip--info {
+  border-color: rgba(56, 189, 248, 0.7);
+  background: linear-gradient(145deg, rgba(12, 24, 36, 0.98), rgba(8, 12, 20, 0.97));
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.65),
+    0 0 40px rgba(56, 189, 248, 0.28),
+    0 0 0 1px rgba(56, 189, 248, 0.24);
+  animation: hero-chip-float-x 10s ease-in-out 0.4s infinite alternate;
+}
+
+.hero-chip--info .hero-chip__dot {
+  background: #38bdf8;
+  box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.28), 0 0 16px rgba(56, 189, 248, 0.65);
+}
+
+.product-gallery--workforce .hero-chip--bl {
+  top: auto;
+  bottom: 2.75rem;
+  left: -2.85rem;
+  right: auto;
+}
+
+.product-gallery--workforce .hero-chip--br {
+  top: auto;
+  bottom: 1.35rem;
+  right: -2.85rem;
+  left: auto;
+  animation: hero-chip-float 8.5s ease-in-out 0.3s infinite alternate-reverse;
+}
+
+.verify-scan--chip {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: #06080d;
+}
+
+.verify-scan--chip .verify-scan__chrome {
+  padding: 0.45rem 0.65rem;
+}
+
+.verify-scan--chip .verify-scan__label {
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+}
+
+.verify-scan--chip .verify-scan__screen {
+  aspect-ratio: 16 / 11;
+}
+
 .product-section__media {
   overflow: visible;
 }
