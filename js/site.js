@@ -1136,6 +1136,25 @@
   var featureShowcase = document.querySelector("[data-feature-showcase]");
   if (featureShowcase) {
     var featureTiles = Array.prototype.slice.call(featureShowcase.querySelectorAll("[data-feature-tile]"));
+    featureTiles.forEach(function (tile) {
+      if (tile.querySelector(".feature-tile__frame")) return;
+      var frame = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      frame.setAttribute("class", "feature-tile__frame");
+      frame.setAttribute("aria-hidden", "true");
+      frame.setAttribute("focusable", "false");
+      frame.setAttribute("viewBox", "0 0 100 100");
+      frame.setAttribute("preserveAspectRatio", "none");
+      var track = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      track.setAttribute("x", "1.25");
+      track.setAttribute("y", "1.25");
+      track.setAttribute("width", "97.5");
+      track.setAttribute("height", "97.5");
+      track.setAttribute("rx", "11");
+      track.setAttribute("ry", "11");
+      track.setAttribute("pathLength", "1");
+      frame.appendChild(track);
+      tile.insertBefore(frame, tile.firstChild);
+    });
     var featureDots = Array.prototype.slice.call(featureShowcase.querySelectorAll(".feature-showcase__dot"));
     var featurePrev = featureShowcase.querySelector("[data-feature-prev]");
     var featureNext = featureShowcase.querySelector("[data-feature-next]");

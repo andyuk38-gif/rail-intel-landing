@@ -3503,80 +3503,66 @@ body::before {
   padding: 0.72rem 0.68rem;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 14px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.025);
   color: inherit;
   font: inherit;
   text-align: left;
   cursor: pointer;
   outline: none;
-  overflow: visible;
+  overflow: hidden;
   transition:
     border-color 0.45s ease,
+    background 0.45s ease,
     box-shadow 0.45s ease,
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.35s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.feature-tile::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 16px;
-  background: conic-gradient(
-    from 0deg,
-    rgba(255, 255, 255, 0.05) 0deg,
-    rgba(255, 255, 255, 0.05) 268deg,
-    #fbbf24 282deg,
-    #f59e0b 294deg,
-    rgba(255, 255, 255, 0.05) 308deg,
-    rgba(255, 255, 255, 0.05) 360deg
-  );
-  opacity: 0;
-  pointer-events: none;
-  z-index: 0;
-  transition: opacity 0.35s ease;
-}
-
-.feature-tile::after {
-  content: "";
+.feature-tile__frame {
   position: absolute;
   inset: 0;
-  border-radius: 13px;
-  background: rgba(255, 255, 255, 0.025);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
   pointer-events: none;
-  z-index: 1;
-  transition: background 0.45s ease, inset 0.35s ease, border-radius 0.35s ease;
+  z-index: 3;
+  overflow: visible;
 }
 
-.feature-tile.is-active::before {
+.feature-tile__frame rect {
+  fill: none;
+  stroke: #fbbf24;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.55));
+  stroke-dasharray: 0.1 0.9;
+  stroke-dashoffset: 0;
+}
+
+.feature-tile.is-active .feature-tile__frame {
   opacity: 1;
-  animation: feature-tile-border-travel 2.4s linear infinite;
 }
 
-.feature-tile.is-active::after {
-  inset: 2px;
-  border-radius: 12px;
-  background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.03));
+.feature-tile.is-active .feature-tile__frame rect {
+  animation: feature-tile-frame-travel 2.4s linear infinite;
 }
 
 .feature-tile:not(.is-active) {
   opacity: 0.78;
 }
 
-.feature-tile:not(.is-active):hover::after,
-.feature-tile:not(.is-active):focus-visible::after {
-  background: rgba(245, 158, 11, 0.06);
-}
-
-.feature-tile:hover,
-.feature-tile:focus-visible {
+.feature-tile:not(.is-active):hover,
+.feature-tile:not(.is-active):focus-visible {
   border-color: rgba(245, 158, 11, 0.28);
+  background: rgba(245, 158, 11, 0.06);
 }
 
 .feature-tile.is-active {
   opacity: 1;
-  border-color: transparent;
+  border-color: rgba(245, 158, 11, 0.22);
+  background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.03));
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.22),
     0 0 18px rgba(245, 158, 11, 0.08);
@@ -3722,13 +3708,9 @@ body::before {
   }
 }
 
-@keyframes feature-tile-border-travel {
-  from {
-    transform: rotate(0deg);
-  }
-
+@keyframes feature-tile-frame-travel {
   to {
-    transform: rotate(360deg);
+    stroke-dashoffset: -1;
   }
 }
 
@@ -3746,7 +3728,7 @@ body::before {
 
   .feature-showcase.is-swapping .feature-spotlight__shine,
   .feature-showcase.is-swapping .feature-spotlight__icon,
-  .feature-tile.is-active::before {
+  .feature-tile.is-active .feature-tile__frame rect {
     animation: none;
   }
 
