@@ -1,0 +1,13 @@
+# Hostinger hCDN caches static assets by path and ignores ?v= query strings.
+# After deploy, fresh HTML can load with week-old CSS and break carousel/layout sections.
+# Force revalidation so browsers and the CDN always check for updated stylesheets and scripts.
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>

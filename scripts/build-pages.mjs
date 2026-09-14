@@ -7,7 +7,8 @@
  *
  * Run: node scripts/build-pages.mjs
  */
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { createHash } from "crypto";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { site, products, addons, capacityAddons, featureGroups, howItWorks, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
@@ -30,7 +31,31 @@ import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 249;
+/** Derived from asset file contents so deploys always get a new ?v= even if CSS/JS changed. */
+const ASSET_INPUTS = [
+  "css/style.css",
+  "css/pages.css",
+  "js/site.js",
+  "js/newsletter.js",
+  "js/eoi.js",
+  "js/signup.js",
+  "js/contact.js",
+  "js/quotation.js",
+  "js/invoice.js",
+];
+
+function computeAssetVersion() {
+  const hash = createHash("sha256");
+  for (const rel of ASSET_INPUTS) {
+    const path = join(root, rel);
+    if (!existsSync(path)) continue;
+    hash.update(rel);
+    hash.update(readFileSync(path));
+  }
+  return parseInt(hash.digest("hex").slice(0, 7), 16);
+}
+
+const ASSET_VERSION = computeAssetVersion();
 const TURNSTILE_SITE_KEY = process.env.TURNSTILE_SITE_KEY?.trim() || contact.turnstileSiteKey?.trim() || "";
 
 const esc = (value) =>
@@ -2987,6 +3012,8 @@ function syncIndex() {
     .replace(/js\/site\.js\?v=\d+/, `js/site.js?v=${ASSET_VERSION}`)
     .replace(/js\/newsletter\.js\?v=\d+/, `js/newsletter.js?v=${ASSET_VERSION}`)
     .replace(/js\/eoi\.js\?v=\d+/, `js/eoi.js?v=${ASSET_VERSION}`)
+    .replace(/js\/contact\.js\?v=\d+/, `js/contact.js?v=${ASSET_VERSION}`)
+    .replace(/(\?v=)\d+/g, `$1${ASSET_VERSION}`)
     .replace(/<!-- site-asset-version:\d+ -->/, `<!-- site-asset-version:${ASSET_VERSION} -->`);
 
   writeFileSync(path, html);

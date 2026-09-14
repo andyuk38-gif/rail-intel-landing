@@ -35,10 +35,12 @@ git clean -fd
 After a successful deploy, view source on https://railintel.co.uk and confirm:
 
 ```html
-<!-- site-asset-version:91 -->
+<!-- site-asset-version:… -->
 ```
 
-The version number increases whenever `node scripts/build-pages.mjs` is run and `ASSET_VERSION` is bumped.
+The version number is derived automatically from CSS/JS file contents when `node scripts/build-pages.mjs` runs (see `computeAssetVersion()` in that script).
+
+**Stale layout after deploy:** Hostinger’s CDN caches `css/` and `js/` by path for up to a week and ignores `?v=` query strings. The root `.htaccess` sets `Cache-Control: max-age=0, must-revalidate` on those files so HTML and CSS stay in sync. If layout still looks broken once, hard-refresh or purge hCDN cache in hPanel.
 
 ### Alternative: reconnect Git in hPanel
 
