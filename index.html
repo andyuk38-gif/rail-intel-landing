@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=274" />
+  <link rel="stylesheet" href="css/style.css?v=275" />
   <link rel="stylesheet" href="css/pages.css?v=249" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
@@ -876,52 +876,109 @@
 
     <section class="features" id="features" aria-labelledby="features-heading">
       <div class="container">
-        <h2 id="features-heading" class="section-title">Why Rail Intel</h2>
-        <p class="section-desc">Built for safety-critical rail — not generic HR.</p>
-        <ul class="feature-grid">
-          <li class="feature-card">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </span>
-            <h3>Expiry alerts that matter</h3>
-            <p>Competencies, medicals and licences with due-soon and overdue in one place. Never miss a renewal.</p>
-          </li>
-          <li class="feature-card">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-            </span>
-            <h3>Audit-ready records</h3>
-            <p>Verification history, evidence on assessments, and exports for reviews, tenders and the regulator.</p>
-          </li>
-          <li class="feature-card">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            </span>
-            <h3>Built for rail</h3>
-            <p>Driver cycles, PTS, traction, routes, cab passes and safety briefs — not a generic HR tool.</p>
-          </li>
-          <li class="feature-card">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </span>
-            <h3>Team and roles</h3>
-            <p>Organise people by role and depot. Control who sees what with company permissions.</p>
-          </li>
-          <li class="feature-card">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 1 3 4 3s4-1 4-3v-5"/></svg>
-            </span>
-            <h3>Live reporting</h3>
-            <p>Incidents, monitoring, safety briefs and compliance rates on one analytics view.</p>
-          </li>
-          <li class="feature-card">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </span>
-            <h3>Secure access</h3>
-            <p>Company codes, logged access and role-based permissions. Only the right people see what they need.</p>
-          </li>
-        </ul>
+        <div class="features__head reveal">
+          <h2 id="features-heading" class="section-title">Why Rail Intel</h2>
+          <p class="section-desc">Built for safety-critical rail — not generic HR.</p>
+          <div class="features__diff" aria-label="How Rail Intel differs from generic HR tools">
+            <span class="features__diff-pill">Live compliance</span>
+            <span class="features__diff-pill">Rail-native workflows</span>
+            <span class="features__diff-pill">Audit-ready evidence</span>
+            <span class="features__diff-pill features__diff-pill--muted">vs spreadsheet HR stacks</span>
+          </div>
+        </div>
+
+        <div class="feature-showcase reveal" data-feature-showcase style="--feature-active: 0">
+          <article class="feature-spotlight" data-feature-spotlight aria-live="polite">
+            <div class="feature-spotlight__glow" aria-hidden="true"></div>
+            <div class="feature-spotlight__shine" aria-hidden="true"></div>
+            <div class="feature-spotlight__inner">
+              <span class="feature-spotlight__badge" data-feature-spotlight-badge>Proactive</span>
+              <span class="feature-spotlight__icon" data-feature-spotlight-icon aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </span>
+              <h3 class="feature-spotlight__title" data-feature-spotlight-title>Expiry alerts that matter</h3>
+              <p class="feature-spotlight__desc" data-feature-spotlight-desc>Competencies, medicals and licences with due-soon and overdue in one place. Never miss a renewal.</p>
+              <p class="feature-spotlight__edge">
+                <span class="feature-spotlight__edge-label">Why we excel</span>
+                <span data-feature-spotlight-edge>Flags due-soon and overdue before anyone signs on — not passive calendar reminders.</span>
+              </p>
+            </div>
+          </article>
+
+          <ul class="feature-tiles" role="list">
+            <li>
+              <button type="button" class="feature-tile is-active" data-feature-tile="0" data-feature-badge="Proactive" data-feature-title="Expiry alerts that matter" data-feature-desc="Competencies, medicals and licences with due-soon and overdue in one place. Never miss a renewal." data-feature-edge="Flags due-soon and overdue before anyone signs on — not passive calendar reminders." aria-pressed="true">
+                <span class="feature-tile__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+                <span class="feature-tile__copy">
+                  <strong>Expiry alerts</strong>
+                  <span>Before sign-on, not after</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="feature-tile" data-feature-tile="1" data-feature-badge="Audit-grade" data-feature-title="Audit-ready records" data-feature-desc="Verification history, evidence on assessments, and exports for reviews, tenders and the regulator." data-feature-edge="Evidence and exports regulators expect — not stitched-together spreadsheets." aria-pressed="false">
+                <span class="feature-tile__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span>
+                <span class="feature-tile__copy">
+                  <strong>Audit-ready</strong>
+                  <span>Evidence the regulator expects</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="feature-tile" data-feature-tile="2" data-feature-badge="Rail-native" data-feature-title="Built for rail" data-feature-desc="Driver cycles, PTS, traction, routes, cab passes and safety briefs — not a generic HR tool." data-feature-edge="PTS, traction, routes and cab passes built in — not bolted-on HR fields." aria-pressed="false">
+                <span class="feature-tile__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+                <span class="feature-tile__copy">
+                  <strong>Built for rail</strong>
+                  <span>Not generic HR modules</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="feature-tile" data-feature-tile="3" data-feature-badge="Operational" data-feature-title="Team and roles" data-feature-desc="Organise people by role and depot. Control who sees what with company permissions." data-feature-edge="Depot and role permissions that match how rail runs — not flat org charts." aria-pressed="false">
+                <span class="feature-tile__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span class="feature-tile__copy">
+                  <strong>Team &amp; roles</strong>
+                  <span>Depot-aware permissions</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="feature-tile" data-feature-tile="4" data-feature-badge="Live insight" data-feature-title="Live reporting" data-feature-desc="Incidents, monitoring, safety briefs and compliance rates on one analytics view." data-feature-edge="One compliance picture across the operation — not siloed HR dashboards." aria-pressed="false">
+                <span class="feature-tile__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 1 3 4 3s4-1 4-3v-5"/></svg></span>
+                <span class="feature-tile__copy">
+                  <strong>Live reporting</strong>
+                  <span>One operational view</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="feature-tile" data-feature-tile="5" data-feature-badge="Controlled" data-feature-title="Secure access" data-feature-desc="Company codes, logged access and role-based permissions. Only the right people see what they need." data-feature-edge="Logged, permissioned access per role — not everyone sees everything." aria-pressed="false">
+                <span class="feature-tile__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <span class="feature-tile__copy">
+                  <strong>Secure access</strong>
+                  <span>Role-based by design</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+
+          <div class="feature-showcase__nav">
+            <button type="button" class="feature-showcase__nav-btn" data-feature-prev aria-label="Previous feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="feature-showcase__dots">
+              <span class="feature-showcase__dot is-active"></span>
+              <span class="feature-showcase__dot"></span>
+              <span class="feature-showcase__dot"></span>
+              <span class="feature-showcase__dot"></span>
+              <span class="feature-showcase__dot"></span>
+              <span class="feature-showcase__dot"></span>
+            </div>
+            <button type="button" class="feature-showcase__nav-btn" data-feature-next aria-label="Next feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1102,7 +1159,7 @@
   </div>
   <!-- eoi:end -->
 
-  <script src="js/site.js?v=254"></script>
+  <script src="js/site.js?v=255"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
   <script src="js/main.js?v=266"></script>
