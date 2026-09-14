@@ -3538,8 +3538,7 @@ body::before {
 }
 
 .feature-tile__frame-track {
-  stroke: rgba(255, 255, 255, 0.12);
-  stroke-width: 1.5;
+  display: none;
 }
 
 .feature-tile__frame-glow {
@@ -3563,7 +3562,7 @@ body::before {
 
 .feature-tile.is-active {
   opacity: 1;
-  border-color: rgba(245, 158, 11, 0.22);
+  border-color: transparent;
   background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.03));
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.22),
