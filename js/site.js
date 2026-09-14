@@ -1144,7 +1144,41 @@
       frame.setAttribute("focusable", "false");
       frame.setAttribute("viewBox", "0 0 100 100");
       frame.setAttribute("preserveAspectRatio", "none");
+      var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      var gradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+      gradient.setAttribute("id", "feature-tile-comet-" + tile.dataset.featureTile);
+      gradient.setAttribute("gradientUnits", "userSpaceOnUse");
+      gradient.setAttribute("x1", "0");
+      gradient.setAttribute("y1", "0");
+      gradient.setAttribute("x2", "100");
+      gradient.setAttribute("y2", "0");
+      [
+        ["0%", "#f59e0b", "0"],
+        ["18%", "#fbbf24", "1"],
+        ["28%", "#f59e0b", "0.45"],
+        ["42%", "#f59e0b", "0"],
+        ["100%", "#f59e0b", "0"],
+      ].forEach(function (stopValues) {
+        var stop = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+        stop.setAttribute("offset", stopValues[0]);
+        stop.setAttribute("stop-color", stopValues[1]);
+        stop.setAttribute("stop-opacity", stopValues[2]);
+        gradient.appendChild(stop);
+      });
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        var gradientSpin = document.createElementNS("http://www.w3.org/2000/svg", "animateTransform");
+        gradientSpin.setAttribute("attributeName", "gradientTransform");
+        gradientSpin.setAttribute("type", "rotate");
+        gradientSpin.setAttribute("from", "0 50 50");
+        gradientSpin.setAttribute("to", "360 50 50");
+        gradientSpin.setAttribute("dur", "2.8s");
+        gradientSpin.setAttribute("repeatCount", "indefinite");
+        gradient.appendChild(gradientSpin);
+      }
+      defs.appendChild(gradient);
+      frame.appendChild(defs);
       var track = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      track.setAttribute("class", "feature-tile__frame-track");
       track.setAttribute("x", "1.25");
       track.setAttribute("y", "1.25");
       track.setAttribute("width", "97.5");
@@ -1152,7 +1186,18 @@
       track.setAttribute("rx", "11");
       track.setAttribute("ry", "11");
       track.setAttribute("pathLength", "1");
+      var glow = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      glow.setAttribute("class", "feature-tile__frame-glow");
+      glow.setAttribute("x", "1.25");
+      glow.setAttribute("y", "1.25");
+      glow.setAttribute("width", "97.5");
+      glow.setAttribute("height", "97.5");
+      glow.setAttribute("rx", "11");
+      glow.setAttribute("ry", "11");
+      glow.setAttribute("pathLength", "1");
+      glow.setAttribute("stroke", "url(#feature-tile-comet-" + tile.dataset.featureTile + ")");
       frame.appendChild(track);
+      frame.appendChild(glow);
       tile.insertBefore(frame, tile.firstChild);
     });
     var featureDots = Array.prototype.slice.call(featureShowcase.querySelectorAll(".feature-showcase__dot"));

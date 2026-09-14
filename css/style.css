@@ -3532,21 +3532,23 @@ body::before {
 
 .feature-tile__frame rect {
   fill: none;
-  stroke: #fbbf24;
-  stroke-width: 2;
   vector-effect: non-scaling-stroke;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.55));
-  stroke-dasharray: 0.1 0.9;
-  stroke-dashoffset: 0;
+  stroke-linejoin: round;
+}
+
+.feature-tile__frame-track {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1.5;
+}
+
+.feature-tile__frame-glow {
+  stroke-width: 2.25;
+  filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
 }
 
 .feature-tile.is-active .feature-tile__frame {
   opacity: 1;
-}
-
-.feature-tile.is-active .feature-tile__frame rect {
-  animation: feature-tile-frame-travel 2.4s linear infinite;
 }
 
 .feature-tile:not(.is-active) {
@@ -3708,12 +3710,6 @@ body::before {
   }
 }
 
-@keyframes feature-tile-frame-travel {
-  to {
-    stroke-dashoffset: -1;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .features__diff-pill {
     animation: none;
@@ -3727,8 +3723,7 @@ body::before {
   }
 
   .feature-showcase.is-swapping .feature-spotlight__shine,
-  .feature-showcase.is-swapping .feature-spotlight__icon,
-  .feature-tile.is-active .feature-tile__frame rect {
+  .feature-showcase.is-swapping .feature-spotlight__icon {
     animation: none;
   }
 
