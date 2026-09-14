@@ -4973,16 +4973,6 @@ body::before {
   --eoi-clearance: calc(5.5rem + env(safe-area-inset-bottom, 0px));
 }
 
-body:has(.eoi-widget[data-visible="true"]) .footer {
-  padding-bottom: var(--eoi-clearance);
-}
-
-@media (min-width: 641px) {
-  body:has(.eoi-widget[data-visible="true"]:not([data-collapsed="true"])) .footer-bar__inner {
-    padding-right: min(22rem, 40vw);
-  }
-}
-
 @property --eoi-teaser-angle {
   syntax: "<angle>";
   initial-value: 0deg;
