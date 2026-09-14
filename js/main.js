@@ -10,6 +10,8 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   let carouselTimer = null;
   let carouselIndex = 0;
   let carouselSlides = [];
+  let carouselInterval = 3000;
+  let carouselHeld = false;
   let activeTab = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
   const chipScope = gallery.closest(".product-section__inner") || gallery;
   const findChip = (name) =>
@@ -28,9 +30,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     if (!routesTrain) return;
     const animated = [
       routesTrain,
-      ...routesTrain.querySelectorAll(
-        ".routes-train-stage__lens-beam--front, .routes-train-stage__lens-beam--rear"
-      ),
+      ...routesTrain.querySelectorAll(".routes-train-stage__lens-beam--front"),
     ];
     animated.forEach((el) => {
       el.style.animation = "none";
@@ -257,30 +257,47 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     applyCarouselTransform(false);
   };
 
+  // The main image stays hidden behind the carousel, but the lightbox reads its
+  // src, so it has to follow whichever slide is on show.
+  const syncMainImage = (slide) => {
+    if (!img || !slide) return;
+    if (img.getAttribute("src") !== slide.src) img.src = slide.src;
+    img.alt = slide.alt || "";
+    if (slide.width) img.width = Number(slide.width);
+    if (slide.height) img.height = Number(slide.height);
+  };
+
   const advanceCarousel = () => {
     if (carouselSlides.length < 2) return;
     carouselIndex = (carouselIndex + 1) % carouselSlides.length;
     applyCarouselTransform(true);
     caption.textContent = carouselSlides[carouselIndex].alt || "";
+    syncMainImage(carouselSlides[carouselIndex]);
     updateChips(activeTab, carouselIndex);
+  };
+
+  const playCarousel = () => {
+    stopCarousel();
+    if (carouselSlides.length < 2 || carouselHeld) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    carouselTimer = window.setInterval(advanceCarousel, carouselInterval);
   };
 
   const hideCarousel = () => {
     stopCarousel();
+    carouselSlides = [];
     if (carouselEl) carouselEl.hidden = true;
     if (img) img.hidden = false;
   };
 
-  const startCarousel = (slides) => {
-    stopCarousel();
+  const startCarousel = (slides, interval) => {
     buildCarousel(slides);
+    carouselInterval = interval;
     if (carouselEl) carouselEl.hidden = false;
     if (img) img.hidden = true;
     caption.textContent = slides[0]?.alt || "";
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduced && slides.length > 1) {
-      carouselTimer = window.setInterval(advanceCarousel, 3000);
-    }
+    syncMainImage(slides[0]);
+    playCarousel();
   };
 
   const render = (tab) => {
@@ -295,7 +312,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
       updateChips(tab);
       updateCopy(tab);
       setSceneVisible(false);
-      startCarousel(slides);
+      startCarousel(slides, Number(tab.dataset.carouselInterval) || 3000);
       settle();
       return;
     }
@@ -369,6 +386,24 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
       show(next);
     });
   });
+
+  // Hovering the screenshot holds the current slide, so a visitor reading one
+  // screen never has it swapped out from under them. The listeners sit on the
+  // mockup rather than the carousel because the carousel is hidden between
+  // tabs and would miss the pointer leaving.
+  const mockup = gallery.querySelector(".browser-mockup");
+  if (mockup) {
+    const hold = (held) => {
+      if (carouselHeld === held) return;
+      carouselHeld = held;
+      if (held) stopCarousel();
+      else playCarousel();
+    };
+    mockup.addEventListener("mouseenter", () => hold(true));
+    mockup.addEventListener("mouseleave", () => hold(false));
+    mockup.addEventListener("focusin", () => hold(true));
+    mockup.addEventListener("focusout", () => hold(false));
+  }
 
   const initialTab = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
   setWideLayout(initialTab);

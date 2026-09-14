@@ -1553,7 +1553,7 @@ body::before {
   margin-left: calc(50% - 50vw);
   margin-top: 0.5rem;
   min-height: 3.85rem;
-  overflow: visible;
+  overflow: hidden;
   pointer-events: none;
 }
 
@@ -1631,51 +1631,60 @@ body::before {
   user-select: none;
 }
 
+/* The lens offsets map the headlight pixels in TractionHeaderImage.png
+   (x 9.5, y 49.5 of 600x75) onto the sprite rendered at 3.5rem tall. Both
+   carriages place the beam in their own local coordinates; the rear unit is
+   mirrored by its parent, so the same offsets land on its nose. */
 .routes-train-stage__lens-beam {
+  --lens-x: 0.44rem;
+  --lens-y: 1.19rem;
+  --beam-length: 4.75rem;
   position: absolute;
   z-index: 4;
   pointer-events: none;
-  width: 5.5rem;
-  height: 0.75rem;
-  opacity: 1;
+  width: var(--beam-length);
+  height: 0.85rem;
+  left: calc(var(--lens-x) - var(--beam-length));
+  bottom: calc(var(--lens-y) - 0.425rem);
+  transform-origin: 100% 50%;
+  transform: rotate(-4deg);
+  clip-path: polygon(100% 44%, 0% 2%, 0% 98%, 100% 56%);
+  filter: blur(0.5px);
 }
 
 .routes-train-stage__lens-beam::before {
   content: "";
   position: absolute;
+  right: -0.05rem;
   top: 50%;
-  width: 0.42rem;
-  height: 0.14rem;
+  width: 0.26rem;
+  height: 0.15rem;
   transform: translateY(-50%);
-  border-radius: 1px;
+  border-radius: 40%;
 }
 
 .routes-train-stage__lens-beam--front {
-  left: 0.42rem;
-  bottom: 0.98rem;
-  transform-origin: 0% 50%;
-  transform: rotate(-9deg);
-  clip-path: polygon(0% 50%, 100% 8%, 100% 92%, 0% 50%);
   animation: routes-front-beam 16s ease-out forwards;
 }
 
 .routes-train-stage__lens-beam--front::before {
-  left: 0;
   animation: routes-front-lens 16s ease-out forwards;
 }
 
 .routes-train-stage__lens-beam--rear {
-  left: 0.42rem;
-  bottom: 0.98rem;
-  transform-origin: 0% 50%;
-  transform: rotate(-9deg);
-  clip-path: polygon(0% 50%, 100% 8%, 100% 92%, 0% 50%);
-  animation: routes-rear-beam 16s ease-out forwards;
+  background: linear-gradient(
+    to left,
+    rgba(239, 68, 68, 0.96) 0%,
+    rgba(239, 68, 68, 0.6) 16%,
+    rgba(239, 68, 68, 0.24) 38%,
+    rgba(239, 68, 68, 0.07) 58%,
+    transparent 100%
+  );
 }
 
 .routes-train-stage__lens-beam--rear::before {
-  left: 0;
-  animation: routes-rear-lens 16s ease-out forwards;
+  background: rgba(248, 113, 113, 0.95);
+  box-shadow: 0 0 7px rgba(239, 68, 68, 0.85);
 }
 
 @keyframes routes-train-enter {
@@ -1689,9 +1698,9 @@ body::before {
     background: linear-gradient(
       to left,
       rgba(255, 255, 255, 0.96) 0%,
-      rgba(255, 255, 255, 0.68) 14%,
-      rgba(255, 255, 255, 0.28) 36%,
-      rgba(255, 255, 255, 0.08) 56%,
+      rgba(255, 255, 255, 0.66) 16%,
+      rgba(255, 255, 255, 0.28) 38%,
+      rgba(255, 255, 255, 0.08) 58%,
       transparent 100%
     );
   }
@@ -1699,32 +1708,9 @@ body::before {
     background: linear-gradient(
       to left,
       rgba(239, 68, 68, 0.96) 0%,
-      rgba(239, 68, 68, 0.68) 14%,
-      rgba(239, 68, 68, 0.28) 36%,
-      rgba(239, 68, 68, 0.08) 56%,
-      transparent 100%
-    );
-  }
-}
-
-@keyframes routes-rear-beam {
-  0%, 87% {
-    background: linear-gradient(
-      to left,
-      rgba(255, 255, 255, 0.96) 0%,
-      rgba(255, 255, 255, 0.68) 14%,
-      rgba(255, 255, 255, 0.28) 36%,
-      rgba(255, 255, 255, 0.08) 56%,
-      transparent 100%
-    );
-  }
-  88%, 100% {
-    background: linear-gradient(
-      to left,
-      rgba(239, 68, 68, 0.96) 0%,
-      rgba(239, 68, 68, 0.68) 14%,
-      rgba(239, 68, 68, 0.28) 36%,
-      rgba(239, 68, 68, 0.08) 56%,
+      rgba(239, 68, 68, 0.6) 16%,
+      rgba(239, 68, 68, 0.24) 38%,
+      rgba(239, 68, 68, 0.07) 58%,
       transparent 100%
     );
   }
@@ -1733,22 +1719,11 @@ body::before {
 @keyframes routes-front-lens {
   0%, 87% {
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 7px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 7px rgba(255, 255, 255, 0.85);
   }
   88%, 100% {
     background: rgba(248, 113, 113, 0.95);
-    box-shadow: 0 0 7px rgba(239, 68, 68, 0.82);
-  }
-}
-
-@keyframes routes-rear-lens {
-  0%, 87% {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 7px rgba(255, 255, 255, 0.8);
-  }
-  88%, 100% {
-    background: rgba(248, 113, 113, 0.95);
-    box-shadow: 0 0 7px rgba(239, 68, 68, 0.82);
+    box-shadow: 0 0 7px rgba(239, 68, 68, 0.85);
   }
 }
 
@@ -2228,35 +2203,20 @@ body::before {
     transform: translateX(0);
   }
 
-  .routes-train-stage__lens-beam--front,
-  .routes-train-stage__lens-beam--rear {
-    animation: none;
-    opacity: 1;
-  }
-
   .routes-train-stage__lens-beam--front {
+    animation: none;
     background: linear-gradient(
       to left,
       rgba(239, 68, 68, 0.96) 0%,
-      rgba(239, 68, 68, 0.28) 36%,
+      rgba(239, 68, 68, 0.24) 38%,
       transparent 100%
     );
   }
 
-  .routes-train-stage__lens-beam--front::before,
-  .routes-train-stage__lens-beam--rear::before {
+  .routes-train-stage__lens-beam--front::before {
     animation: none;
     background: rgba(248, 113, 113, 0.95);
-    box-shadow: 0 0 7px rgba(239, 68, 68, 0.82);
-  }
-
-  .routes-train-stage__lens-beam--rear {
-    background: linear-gradient(
-      to left,
-      rgba(239, 68, 68, 0.96) 0%,
-      rgba(239, 68, 68, 0.28) 36%,
-      transparent 100%
-    );
+    box-shadow: 0 0 7px rgba(239, 68, 68, 0.85);
   }
 }
 
