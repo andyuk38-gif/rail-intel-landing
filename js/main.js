@@ -79,7 +79,10 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
 
     const titleEl = scanPanel.querySelector("[data-scan-title]");
     const pointsEl = scanPanel.querySelector("[data-scan-points]");
-    if (titleEl && tab.dataset.chipSafeTitle) titleEl.textContent = tab.dataset.chipSafeTitle;
+    if (titleEl && tab.dataset.chipSafeTitle) {
+      if (window.setScanTitleReveal) window.setScanTitleReveal(titleEl, tab.dataset.chipSafeTitle);
+      else titleEl.textContent = tab.dataset.chipSafeTitle;
+    }
     if (pointsEl) {
       const items = tab.dataset.chipScanBullets.split("|").map((item) => item.trim()).filter(Boolean);
       pointsEl.replaceChildren(

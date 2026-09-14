@@ -2345,6 +2345,62 @@
 (function () {
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function setScanTitleReveal(el, text) {
+    if (!el || !text) return;
+
+    el.classList.add("scan-title-reveal");
+    el.setAttribute("aria-label", text);
+
+    if (reducedMotion) {
+      el.textContent = text;
+      return;
+    }
+
+    var track = document.createElement("span");
+    track.className = "scan-title-reveal__track";
+
+    var focus = document.createElement("span");
+    focus.className = "scan-title-reveal__focus";
+    focus.setAttribute("aria-hidden", "true");
+    focus.innerHTML =
+      '<span class="scan-title-reveal__star-glow"></span>' +
+      '<span class="scan-title-reveal__star-rays"></span>' +
+      '<span class="scan-title-reveal__star"></span>';
+
+    var chars = document.createElement("span");
+    chars.className = "scan-title-reveal__chars";
+
+    var index = 0;
+    Array.prototype.forEach.call(text, function (char) {
+      var span = document.createElement("span");
+      span.className = "scan-title-reveal__char";
+      span.style.setProperty("--i", String(index));
+      span.textContent = char === " " ? "\u00a0" : char;
+      chars.appendChild(span);
+      index += 1;
+    });
+
+    track.appendChild(focus);
+    track.appendChild(chars);
+    el.replaceChildren(track);
+
+    var staggerSec = 0.068;
+    var duration = Math.max(5.2, (index - 1) * staggerSec + 2.35);
+    el.style.setProperty("--scan-title-duration", duration + "s");
+    el.style.setProperty("--scan-title-stagger", staggerSec * 1000 + "ms");
+  }
+
+  window.setScanTitleReveal = setScanTitleReveal;
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-scan-title]"), function (el) {
+    var text = el.getAttribute("aria-label") || el.textContent.trim();
+    if (text) setScanTitleReveal(el, text);
+  });
+})();
+
+(function () {
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   Array.prototype.forEach.call(document.querySelectorAll("[data-verify-scan-video]"), function (video) {
     var loops = 0;
     var maxLoops = video.hasAttribute("loop")
