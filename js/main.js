@@ -76,13 +76,18 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
     const showScan = tab.dataset.chipScan === "true";
     scanPanel.hidden = !showScan;
     const titleEl = scanPanel.querySelector("[data-scan-title]");
-    const detailEl = scanPanel.querySelector("[data-scan-detail]");
+    const pointsEl = scanPanel.querySelector("[data-scan-points]");
     if (titleEl) titleEl.textContent = tab.dataset.chipSafeTitle || "";
-    if (detailEl) detailEl.textContent = tab.dataset.chipSafeDetail || "";
-    const scanVideo = scanPanel.querySelector("[data-verify-scan-video]");
-    if (!scanVideo) return;
-    if (showScan) scanVideo.play().catch(() => {});
-    else scanVideo.pause();
+    if (pointsEl && tab.dataset.chipScanBullets) {
+      const items = tab.dataset.chipScanBullets.split("|").map((item) => item.trim()).filter(Boolean);
+      pointsEl.replaceChildren(
+        ...items.map((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          return li;
+        })
+      );
+    }
   };
 
   const getChipCopy = (tab, slideIndex = 0) => {

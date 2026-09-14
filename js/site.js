@@ -181,15 +181,22 @@
     '<button type="button" class="lightbox__btn" data-lightbox-close>Close</button>' +
     "</span>" +
     "</div>" +
-    '<div class="lightbox__stage"><img class="lightbox__img" alt="" data-lightbox-img /></div>';
+    '<div class="lightbox__stage">' +
+    '<img class="lightbox__img" alt="" data-lightbox-img />' +
+    '<video class="lightbox__video" data-lightbox-video hidden muted loop playsinline controls></video>' +
+    '<div class="lightbox__licence-scan" data-lightbox-licence-scan hidden></div>' +
+    "</div>";
   document.body.appendChild(lightbox);
 
   var lightboxImg = lightbox.querySelector("[data-lightbox-img]");
+  var lightboxVideo = lightbox.querySelector("[data-lightbox-video]");
+  var lightboxLicenceScan = lightbox.querySelector("[data-lightbox-licence-scan]");
   var lightboxMeta = lightbox.querySelector("[data-lightbox-meta]");
   var lightboxOpen = lightbox.querySelector("[data-lightbox-open]");
   var lightboxZoom = lightbox.querySelector("[data-lightbox-zoom]");
   var lastFocused = null;
   var actualSize = false;
+  var lightboxMode = "image";
 
   function describe() {
     var natural = lightboxImg.naturalWidth;
@@ -214,9 +221,27 @@
     describe();
   }
 
+  function resetLightboxMedia() {
+    lightboxImg.hidden = false;
+    lightboxImg.removeAttribute("style");
+    lightboxImg.removeAttribute("src");
+    lightboxVideo.hidden = true;
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute("src");
+    lightboxVideo.load();
+    if (lightboxLicenceScan) {
+      lightboxLicenceScan.hidden = true;
+      lightboxLicenceScan.replaceChildren();
+    }
+    lightboxOpen.hidden = false;
+    lightboxZoom.hidden = false;
+  }
+
   function showLightbox(img) {
     lastFocused = document.activeElement;
     actualSize = false;
+    lightboxMode = "image";
+    resetLightboxMedia();
 
     var onReady = function () {
       applyScale();
@@ -239,6 +264,51 @@
     else lightboxImg.addEventListener("load", onReady, { once: true });
   }
 
+  function showVideoLightbox(video) {
+    var source = video.querySelector("source");
+    var src = source ? source.getAttribute("src") : video.currentSrc || video.src;
+    if (!src) return;
+
+    lastFocused = document.activeElement;
+    lightboxMode = "video";
+    resetLightboxMedia();
+
+    lightboxImg.hidden = true;
+    lightboxVideo.hidden = false;
+    lightboxVideo.src = src;
+    lightboxVideo.setAttribute("aria-label", video.getAttribute("aria-label") || "Scanning animation");
+    lightboxMeta.textContent = video.getAttribute("aria-label") || "Scanning animation";
+    lightboxOpen.hidden = true;
+    lightboxZoom.hidden = true;
+
+    lightbox.classList.add("is-open");
+    document.body.classList.add("lightbox-open");
+    lightbox.querySelector("[data-lightbox-close]").focus();
+    lightboxVideo.play().catch(function () {});
+  }
+
+  function showLicenceScanLightbox(scanRoot) {
+    var card = scanRoot.querySelector("[data-licence-card-scan]");
+    if (!card || !lightboxLicenceScan) return;
+
+    lastFocused = document.activeElement;
+    lightboxMode = "licence-scan";
+    resetLightboxMedia();
+
+    lightboxImg.hidden = true;
+    var clone = card.cloneNode(true);
+    clone.classList.add("licence-card-scan--enlarged");
+    lightboxLicenceScan.appendChild(clone);
+    lightboxLicenceScan.hidden = false;
+    lightboxMeta.textContent = "Licence scanning";
+    lightboxOpen.hidden = true;
+    lightboxZoom.hidden = true;
+
+    lightbox.classList.add("is-open");
+    document.body.classList.add("lightbox-open");
+    lightbox.querySelector("[data-lightbox-close]").focus();
+  }
+
   lightboxZoom.addEventListener("click", function () {
     actualSize = !actualSize;
     applyScale();
@@ -247,7 +317,8 @@
   function hideLightbox() {
     lightbox.classList.remove("is-open");
     document.body.classList.remove("lightbox-open");
-    lightboxImg.removeAttribute("src");
+    resetLightboxMedia();
+    lightboxMode = "image";
     if (lastFocused && lastFocused.focus) lastFocused.focus();
   }
 
@@ -285,6 +356,32 @@
 
     if (getComputedStyle(frame).position === "static") frame.style.position = "relative";
     frame.appendChild(button);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-scan-expand]"), function (wrap) {
+    var scanRoot = wrap.querySelector("[data-licence-card-scan]");
+    if (!scanRoot) return;
+
+    function openScanLightbox(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      showLicenceScanLightbox(wrap);
+    }
+
+    wrap.addEventListener("click", function (event) {
+      if (event.target.closest("[data-lightbox-close]")) return;
+      openScanLightbox(event);
+    });
+
+    var trigger = wrap.querySelector("[data-scan-expand-trigger]");
+    if (trigger) {
+      trigger.addEventListener("click", function (event) {
+        event.stopPropagation();
+        openScanLightbox(event);
+      });
+    }
   });
 
   /* ---------- Tunnel Mode demo ---------- */

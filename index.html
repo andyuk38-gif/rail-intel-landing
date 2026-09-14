@@ -36,8 +36,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=245" />
-  <link rel="stylesheet" href="css/pages.css?v=243" />
+  <link rel="stylesheet" href="css/style.css?v=248" />
+  <link rel="stylesheet" href="css/pages.css?v=248" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -594,29 +594,44 @@
               </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Workforce record screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png?v=240" data-alt="Train driving licence record with front and back photos, expiry fields and category selection" data-url="cms.railintel.co.uk/licensing" data-width="1024" data-height="611" data-wide="true" data-chip-scan="true" data-chip-safe-title="Digital scanning technology" data-chip-safe-detail="Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories and routes for you to review, eliminating manual input errors." data-chip-alert-title="Automation" data-chip-alert-detail="Fields populated from your licence" data-chip-extra-left-title="Front &amp; back photos" data-chip-extra-left-detail="Stored securely on record" data-chip-extra-right-title="Expiry monitoring" data-chip-extra-right-detail="Renewal warnings on dashboard">Licensing</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png?v=240" data-alt="Train driving licence record with front and back photos, expiry fields and category selection" data-url="cms.railintel.co.uk/licensing" data-width="1024" data-height="611" data-wide="true" data-chip-scan="true" data-chip-safe-title="Digital scanning technology" data-chip-scan-bullets="Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories and routes for you to review, eliminating manual input errors.|If the front or back of the licence is placed into the wrong field, the system detects this and places each side in the correct holder — eliminating upload errors." data-chip-alert-title="Automation" data-chip-alert-detail="Fields populated from your licence" data-chip-extra-left-title="Front &amp; back photos" data-chip-extra-left-detail="Stored securely on record" data-chip-extra-right-title="Expiry monitoring" data-chip-extra-right-detail="Renewal warnings on dashboard">Licensing</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/medical-record.png?v=240" data-alt="Record new medical form for occupational health and ORR medicals" data-url="cms.railintel.co.uk/medicals" data-width="1024" data-height="561" data-wide="true" data-chip-safe-title="ORR registered clinicians" data-chip-safe-detail="Doctors and psychologists on our system" data-chip-alert-title="Fitness status" data-chip-alert-detail="Unfit or expired flags not safe to work" data-chip-extra-left-title="Renewal reminders" data-chip-extra-left-detail="Dashboard feed and email alerts" data-chip-extra-right-title="ORR medical types" data-chip-extra-right-detail="Periodic and return-to-work">Medicals</button>
               <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/training-quals.png?v=240" data-alt="Training records and qualifications overview on an employee record" data-url="cms.railintel.co.uk/training" data-width="1024" data-height="519" data-wide="true" data-chip-safe-title="QA Verifications link" data-chip-safe-detail="Training evidence checked on record" data-chip-alert-title="Certificates attached" data-chip-alert-detail="Upload proof to every entry" data-chip-extra-left-title="Competence records" data-chip-extra-left-detail="Courses and qualifications held" data-chip-extra-right-title="Evidence on record" data-chip-extra-right-detail="Certificates linked to entries">Training</button>
             </div>
           </div>
         </div>
         <div class="workforce-scan-panel" data-gallery-scan-panel>
-          <div class="workforce-scan-panel__media">
+          <div class="workforce-scan-panel__media" data-scan-expand>
             <div class="verify-scan verify-scan--panel" data-verify-scan>
               <div class="verify-scan__chrome" aria-hidden="true">
                 <span class="verify-scan__dot"></span>
                 <span class="verify-scan__label">Scanning licence</span>
               </div>
-              <div class="verify-scan__screen">
-                <video class="verify-scan__video" data-verify-scan-video loop muted playsinline preload="auto" aria-label="Scanning a train driving licence in Rail Intel CMS">
-                  <source src="video/ScanningEmployeeRecord.mp4" type="video/mp4" />
-                </video>
+              <div class="verify-scan__screen verify-scan__screen--licence">
+                <div class="licence-card-scan" data-licence-card-scan>
+                  <div class="licence-card-scan__card" aria-hidden="true">
+                    <span class="licence-card-scan__frame"></span>
+                    <span class="licence-card-scan__placeholder licence-card-scan__placeholder--1"></span>
+                    <span class="licence-card-scan__placeholder licence-card-scan__placeholder--2"></span>
+                    <span class="licence-card-scan__placeholder licence-card-scan__placeholder--3"></span>
+                    <span class="licence-card-scan__beam"></span>
+                    <span class="licence-card-scan__wash"></span>
+                    <span class="licence-card-scan__indicator"></span>
+                  </div>
+                  <p class="licence-card-scan__status">Reading licence number and dates…</p>
+                </div>
               </div>
             </div>
+            <button type="button" class="shot__expand workforce-scan-panel__expand" data-scan-expand-trigger aria-label="Enlarge scanning animation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            </button>
           </div>
           <div class="workforce-scan-panel__copy">
             <strong data-scan-title>Digital scanning technology</strong>
-            <p data-scan-detail>Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories and routes for you to review, eliminating manual input errors.</p>
+            <ul class="workforce-scan-panel__points" data-scan-points>
+              <li>Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories and routes for you to review, eliminating manual input errors.</li>
+              <li>If the front or back of the licence is placed into the wrong field, the system detects this and places each side in the correct holder — eliminating upload errors.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -970,9 +985,9 @@
   </div>
   <!-- eoi:end -->
 
-  <script src="js/site.js?v=246"></script>
+  <script src="js/site.js?v=248"></script>
   <script src="js/newsletter.js?v=243"></script>
   <script src="js/eoi.js?v=243"></script>
-  <script src="js/main.js?v=245"></script>
+  <script src="js/main.js?v=248"></script>
 </body>
 </html>

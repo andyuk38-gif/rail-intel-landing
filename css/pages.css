@@ -2245,9 +2245,30 @@
   overflow: auto;
 }
 
-.lightbox__img {
+.lightbox__img,
+.lightbox__video {
   display: block;
   border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox__video {
+  width: min(92vw, 56rem);
+  max-height: calc(100vh - 7rem);
+  background: #06080d;
+}
+
+.lightbox__img[hidden],
+.lightbox__video[hidden],
+.lightbox__licence-scan[hidden] {
+  display: none;
+}
+
+.lightbox__licence-scan {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(8, 12, 20, 0.92);
+  border: 1px solid rgba(99, 102, 241, 0.35);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
