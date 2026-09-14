@@ -1441,6 +1441,67 @@ body::before {
   right: auto;
 }
 
+.product-gallery--safety .float-stage {
+  max-width: 692px;
+  padding-bottom: 5.5rem;
+}
+
+.product-gallery--safety .hero-chip {
+  white-space: normal;
+  max-width: 14.75rem;
+}
+
+.product-gallery--safety .hero-chip--alert.hero-chip--landscape {
+  top: -2.75rem;
+  right: calc(100% + 0.35rem);
+  left: auto;
+  bottom: auto;
+  flex-direction: row;
+  align-items: center;
+  max-width: none;
+  width: max-content;
+  white-space: nowrap;
+  padding: 0.65rem 1rem;
+  gap: 0.7rem;
+}
+
+.product-gallery--safety .hero-chip--alert .hero-chip__inline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.product-gallery--safety .hero-chip--alert .hero-chip__inline strong,
+.product-gallery--safety .hero-chip--alert .hero-chip__inline [data-chip-detail] {
+  display: inline;
+}
+
+.product-gallery--safety .hero-chip--alert .hero-chip__inline [data-chip-detail] {
+  font-size: 0.8125rem;
+}
+
+.product-gallery--safety .hero-chip--alert .hero-chip__inline [data-chip-detail]::before {
+  content: "·";
+  margin-right: 0.35rem;
+  opacity: 0.55;
+}
+
+.product-gallery--safety .hero-chip--bl {
+  top: calc(100% + 1rem);
+  bottom: auto;
+  left: calc(-2.5rem);
+  right: auto;
+}
+
+.product-gallery--safety .hero-chip--safety-mid {
+  top: 34%;
+  bottom: auto;
+  left: calc(-3rem);
+  right: auto;
+  max-width: 13.75rem;
+  animation: hero-chip-float 8.5s ease-in-out 0.35s infinite alternate-reverse;
+}
+
 .workforce-scan-panel {
   grid-column: 1 / -1;
   display: none;
