@@ -30,7 +30,7 @@ import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
 
-const ASSET_VERSION = 245;
+const ASSET_VERSION = 247;
 
 const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -42,9 +42,11 @@ const appUrl = (key) => site[key] || site.app;
 
 /* ------------------------------------------------------------------ chrome */
 
-function renderDevBanner(base) {
-  const href = base ? `${base}#register-interest` : "/#register-interest";
-  return `<p>This site is currently under development.<span class="dev-banner__addon"> — <a href="${href}" class="dev-banner__cta" data-eoi-open>Register your interest to qualify for early onboarding discounts and FREE modules.</a></span></p>`;
+function renderDevBanner() {
+  return `<div class="dev-banner__inner">
+      <p>Rail Intel is launching in April 2027</p>
+      <button type="button" class="dev-banner__btn" data-eoi-open>Register interest</button>
+    </div>`;
 }
 
 function renderNavItems(base, items) {
@@ -255,15 +257,16 @@ ${renderSeoMeta(pageSeo)}
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
-    .dev-banner { background: #f59e0b; color: #0c0f14; text-align: center; padding: 0.55rem 1.5rem; }
+    .dev-banner { background: #f59e0b; color: #0c0f14; padding: 0.55rem 1.5rem; }
+    .dev-banner__inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.65rem 1rem; width: 100%; max-width: 1200px; margin: 0 auto; }
     .dev-banner p { margin: 0; font-size: 0.8125rem; font-weight: 600; }
-    .dev-banner__cta { color: #b91c1c; font-weight: 700; text-decoration: underline; }
+    .dev-banner__btn { border: 0; border-radius: 999px; padding: 0.35rem 0.85rem; font-family: inherit; font-size: 0.75rem; font-weight: 700; background: #0c0f14; color: #fff; cursor: pointer; }
   </style>
 </head>
 <body>
   <div class="site-chrome">
     <div class="dev-banner" role="status">
-      ${renderDevBanner(base)}
+      ${renderDevBanner()}
     </div>
     <header class="header">
       <div class="container">

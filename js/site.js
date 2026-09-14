@@ -20,22 +20,14 @@
     }
   }
 
-  function hideDevBannerEoiCta() {
-    Array.prototype.forEach.call(document.querySelectorAll(".dev-banner__cta"), function (link) {
-      var paragraph = link.closest("p");
-      if (!paragraph) return;
-      paragraph.textContent = "This site is currently under development.";
+  function hideDevBannerEoiButton() {
+    Array.prototype.forEach.call(document.querySelectorAll(".dev-banner__btn"), function (btn) {
+      btn.hidden = true;
     });
   }
 
   if (isEoiRegistered()) {
-    hideDevBannerEoiCta();
-  }
-
-  function homeRegisterInterestHref() {
-    var link = document.querySelector(".dev-banner__cta");
-    if (link && link.href) return link.href;
-    return window.location.origin + "/#register-interest";
+    hideDevBannerEoiButton();
   }
 
   function isHomePage() {
@@ -70,11 +62,11 @@
       return;
     }
 
-    window.location.href = homeRegisterInterestHref();
+    window.location.href = window.location.origin + "/#register-interest";
   }
 
   document.addEventListener("click", function (event) {
-    if (!event.target.closest(".dev-banner__cta, [data-eoi-open]")) return;
+    if (!event.target.closest(".dev-banner__btn, [data-eoi-open]")) return;
     openRegisterInterest(event);
   });
 

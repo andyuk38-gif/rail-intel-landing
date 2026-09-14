@@ -129,18 +129,12 @@
     delete message.dataset.state;
   }
 
-  function hideDevBannerCta() {
-    var cta = document.querySelector(".dev-banner__cta");
-    if (!cta) return;
-    var paragraph = cta.closest("p");
-    if (paragraph) paragraph.textContent = "This site is currently under development.";
-  }
-
   function showSuccess() {
     if (form) form.hidden = true;
     if (successView) successView.hidden = false;
     setRegistered();
-    hideDevBannerCta();
+    var bannerBtn = document.querySelector(".dev-banner__btn");
+    if (bannerBtn) bannerBtn.hidden = true;
   }
 
   function subscribe(payload) {
