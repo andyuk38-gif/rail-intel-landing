@@ -1161,13 +1161,6 @@
         var isActive = i === featureActive;
         step.classList.toggle("is-active", isActive);
         step.setAttribute("aria-pressed", isActive ? "true" : "false");
-        if (isActive) {
-          step.classList.remove("is-border-pulse");
-          void step.offsetWidth;
-          step.classList.add("is-border-pulse");
-        } else {
-          step.classList.remove("is-border-pulse");
-        }
       });
       featureDots.forEach(function (dot, i) {
         dot.classList.toggle("is-active", i === featureActive);
