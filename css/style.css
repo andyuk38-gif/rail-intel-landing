@@ -3503,16 +3503,15 @@ body::before {
   padding: 0.72rem 0.68rem;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.025);
+  background: transparent;
   color: inherit;
   font: inherit;
   text-align: left;
   cursor: pointer;
   outline: none;
-  overflow: hidden;
+  overflow: visible;
   transition:
     border-color 0.45s ease,
-    background 0.45s ease,
     box-shadow 0.45s ease,
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.35s ease;
@@ -3522,30 +3521,32 @@ body::before {
 .feature-tile::before {
   content: "";
   position: absolute;
-  inset: -1px;
-  border-radius: 15px;
-  padding: 1.5px;
+  inset: -2px;
+  border-radius: 16px;
   background: conic-gradient(
     from 0deg,
-    transparent 0deg,
-    transparent 286deg,
-    rgba(251, 191, 36, 1) 306deg,
-    rgba(245, 158, 11, 0.45) 326deg,
-    transparent 346deg,
-    transparent 360deg
+    rgba(255, 255, 255, 0.05) 0deg,
+    rgba(255, 255, 255, 0.05) 268deg,
+    #fbbf24 282deg,
+    #f59e0b 294deg,
+    rgba(255, 255, 255, 0.05) 308deg,
+    rgba(255, 255, 255, 0.05) 360deg
   );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
   opacity: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 0;
   transition: opacity 0.35s ease;
+}
+
+.feature-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.45s ease, inset 0.35s ease, border-radius 0.35s ease;
 }
 
 .feature-tile.is-active::before {
@@ -3553,20 +3554,29 @@ body::before {
   animation: feature-tile-border-travel 2.4s linear infinite;
 }
 
+.feature-tile.is-active::after {
+  inset: 2px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.03));
+}
+
 .feature-tile:not(.is-active) {
   opacity: 0.78;
+}
+
+.feature-tile:not(.is-active):hover::after,
+.feature-tile:not(.is-active):focus-visible::after {
+  background: rgba(245, 158, 11, 0.06);
 }
 
 .feature-tile:hover,
 .feature-tile:focus-visible {
   border-color: rgba(245, 158, 11, 0.28);
-  background: rgba(245, 158, 11, 0.06);
 }
 
 .feature-tile.is-active {
   opacity: 1;
-  border-color: rgba(245, 158, 11, 0.24);
-  background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.03));
+  border-color: transparent;
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.22),
     0 0 18px rgba(245, 158, 11, 0.08);
@@ -3575,7 +3585,7 @@ body::before {
 
 .feature-tile__icon {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3595,7 +3605,7 @@ body::before {
 
 .feature-tile__copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
