@@ -39,7 +39,11 @@ body {
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
   background: url("../images/background.png") no-repeat center 45% / cover;
   opacity: 0.5;
   z-index: -1;
@@ -49,14 +53,13 @@ body::before {
   backface-visibility: hidden;
 }
 
-/* iOS and touch browsers repaint background-attachment: fixed on every scroll
-   frame, which makes the photo look jumpy and pixelated. The pseudo-element is
-   already viewport-fixed on desktop; on mobile it scrolls with the page instead. */
+/* Keep the photo viewport-sized on touch devices. Stretching the layer to the
+   full document height makes background-size: cover zoom the image far too much. */
 @media (max-width: 900px), (hover: none) and (pointer: coarse) {
   body::before {
-    position: absolute;
-    height: auto;
-    min-height: 100%;
+    background-position: center top;
+    background-size: auto 100%;
+    opacity: 0.42;
   }
 }
 
@@ -2868,35 +2871,78 @@ body::before {
 }
 
 @media (max-width: 640px) {
+  .footer .container {
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 1.5rem));
+  }
+
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 1.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 1.15rem;
+    padding: 1.85rem 0 1.35rem;
+  }
+
+  .footer-col--brand {
+    grid-column: 1 / -1;
+    padding-right: 0;
   }
 
   .footer-col {
     align-items: flex-start;
+    gap: 0.65rem;
   }
 
   .footer-nav {
     align-items: flex-start;
+    gap: 0.45rem;
   }
 
   .footer-tagline {
+    max-width: none;
+    font-size: 0.9rem;
+  }
+
+  .footer-newsletter--inline {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+  }
+
+  .footer-newsletter__text {
     max-width: none;
   }
 
   .footer-newsletter__form {
     flex-direction: column;
     max-width: none;
+    gap: 0.65rem;
+    margin-top: 0.75rem;
+  }
+
+  .footer-newsletter__form input {
+    flex: none;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.7rem 0.85rem;
+    font-size: 16px;
   }
 
   .footer-newsletter__form .btn {
     width: 100%;
+    min-height: 2.75rem;
+  }
+
+  .footer-heading {
+    margin-bottom: 0.2rem;
   }
 
   .footer-bar__inner {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 0 1.35rem;
+  }
+
+  .footer-bar__links {
+    gap: 0.35rem 0.9rem;
   }
 }
 
@@ -3667,31 +3713,73 @@ body::before {
   color: rgba(255, 255, 255, 0.62);
 }
 
-@media (max-width: 480px) {
-  .eoi-widget {
-    right: 0.85rem;
-    bottom: 0.85rem;
-    max-width: calc(100vw - 1.7rem);
-  }
-
+@media (max-width: 640px) {
   .eoi-widget[data-visible="true"][data-collapsed="true"] {
-    right: 0;
-    bottom: 0.85rem;
-    transform: translateX(calc(100% - 3.5rem)) translateY(0) scale(1);
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    max-width: none;
+    transform: none;
+    align-items: stretch;
   }
 
   .eoi-widget[data-visible="true"][data-collapsed="true"]:hover,
   .eoi-widget[data-visible="true"][data-collapsed="true"]:focus-within {
-    transform: translateX(calc(100% - 4rem)) translateY(0) scale(1);
+    transform: none;
+  }
+
+  .eoi-widget[data-collapsed="true"] .eoi-teaser-shell {
+    border-radius: 14px;
+    width: 100%;
   }
 
   .eoi-widget[data-collapsed="true"] .eoi-teaser {
-    min-width: 3.5rem;
-    padding: 0.8rem 0.5rem 0.95rem 0.4rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    width: 100%;
+    border-radius: 14px;
+    padding: 0.7rem 0.9rem;
+    gap: 0.65rem;
   }
 
+  .eoi-widget[data-collapsed="true"] .eoi-teaser__grip,
   .eoi-widget[data-collapsed="true"] .eoi-teaser__tab-label {
-    font-size: 0.66rem;
+    display: none;
+  }
+
+  .eoi-widget[data-collapsed="true"] .eoi-teaser__icon {
+    display: grid;
+  }
+
+  .eoi-widget[data-collapsed="true"] .eoi-teaser__text {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .eoi-widget[data-collapsed="true"] .eoi-teaser__label {
+    font-size: 0.68rem;
+  }
+
+  .eoi-widget[data-collapsed="true"] .eoi-teaser__date {
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  body:has(.eoi-widget[data-visible="true"][data-collapsed="true"]) .footer {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 480px) {
+  .eoi-widget {
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    max-width: calc(100vw - 1.5rem);
   }
 
   .eoi-widget[data-expanded="true"],
@@ -3705,7 +3793,7 @@ body::before {
   }
 
   .eoi-teaser__date {
-    font-size: 0.84rem;
+    font-size: 0.8rem;
   }
 }
 
