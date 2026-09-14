@@ -27,7 +27,7 @@ document.querySelectorAll("[data-gallery]").forEach((gallery) => {
   const restartRoutesTrain = () => {
     if (!routesTrain) return;
     const animated = routesTrain.querySelectorAll(
-      ".routes-train-stage__train, .routes-train-stage__front-lights, .routes-train-stage__rear-light--running, .routes-train-stage__rear-light--tail"
+      ".routes-train-stage__train, .routes-train-stage__lens-beam--front, .routes-train-stage__lens-beam--rear"
     );
     animated.forEach((el) => {
       el.style.animation = "none";
