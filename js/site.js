@@ -2369,25 +2369,11 @@
 
     var chars = document.createElement("span");
     chars.className = "scan-title-reveal__chars";
-
-    var index = 0;
-    Array.prototype.forEach.call(text, function (char) {
-      var span = document.createElement("span");
-      span.className = "scan-title-reveal__char";
-      span.style.setProperty("--i", String(index));
-      span.textContent = char === " " ? "\u00a0" : char;
-      chars.appendChild(span);
-      index += 1;
-    });
+    chars.textContent = text;
 
     track.appendChild(focus);
     track.appendChild(chars);
     el.replaceChildren(track);
-
-    var staggerSec = 0.068;
-    var duration = Math.max(5.2, (index - 1) * staggerSec + 2.35);
-    el.style.setProperty("--scan-title-duration", duration + "s");
-    el.style.setProperty("--scan-title-stagger", staggerSec * 1000 + "ms");
   }
 
   window.setScanTitleReveal = setScanTitleReveal;
