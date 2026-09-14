@@ -1575,8 +1575,13 @@ body::before {
   opacity: 0.55;
 }
 
+@keyframes routes-chip-float {
+  from { transform: translateY(-10px); }
+  to { transform: translateY(10px); }
+}
+
 .product-gallery--routes .routes-chip--media {
-  top: 11.5%;
+  top: 5.5%;
   bottom: auto;
   left: auto;
   right: 3.35rem;
@@ -1589,6 +1594,7 @@ body::before {
   padding: 0.65rem 1.05rem;
   white-space: normal;
   z-index: 5;
+  animation: routes-chip-float 9s ease-in-out 0.2s infinite alternate-reverse;
 }
 
 .product-gallery--routes .routes-chip--media .hero-chip__inline {
