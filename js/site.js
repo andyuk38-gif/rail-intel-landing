@@ -997,6 +997,7 @@
   var proofCards = Array.prototype.slice.call(document.querySelectorAll("[data-proof-tilt]"));
   if (proofCards.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     proofCards.forEach(function (card) {
+      if (card.closest("[data-proof-carousel]")) return;
       card.addEventListener("mousemove", function (event) {
         var item = card.closest("[data-proof-item]");
         if (item && !item.classList.contains("is-front")) return;
