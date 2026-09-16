@@ -708,9 +708,11 @@
 }
 
 .shot--full .shot__frame--fullwidth img {
-  width: 100%;
-  max-width: none;
+  display: block;
+  width: auto;
+  max-width: min(100%, var(--shot-display-width, 1024px));
   height: auto;
+  margin-inline: auto;
 }
 
 .shot__frame--rotate {
@@ -761,8 +763,9 @@
 }
 
 .shot-rotate--fullwidth .shot-rotate__panel img {
-  width: 100%;
-  max-width: none;
+  width: auto;
+  max-width: min(100%, var(--shot-display-width, 1024px));
+  margin-inline: auto;
 }
 
 .shot-rotate__controls {

@@ -414,7 +414,10 @@ function renderRotatingShot(shot, base, options = {}) {
     .join(" ");
   const frameClass = fullWidth ? "shot__frame shot__frame--rotate shot__frame--fullwidth" : "shot__frame shot__frame--rotate";
   const rotateClass = fullWidth ? "shot-rotate shot-rotate--fullwidth" : "shot-rotate";
-  const rotateStyle = fullWidth ? "" : ` style="--shot-rotate-max-width: ${maxWidth}px"`;
+  const nativeMaxWidth = Math.max(...sizes.map((size) => size.width));
+  const rotateStyle = fullWidth
+    ? ` style="--shot-display-width: ${nativeMaxWidth}px"`
+    : ` style="--shot-rotate-max-width: ${maxWidth}px"`;
 
   const slideMarkup = slides
     .map((slide, index) => {
@@ -423,8 +426,13 @@ function renderRotatingShot(shot, base, options = {}) {
       const displayHeight = Math.max(1, Math.round(size.height * scale));
       const active = index === 0;
       const panelStyle = fullWidth ? "" : ` style="--shot-native-width: ${displayWidth}px"`;
+      const slideSrc = `${base}${slide.src}?v=${ASSET_VERSION}`;
+      const slideSrcset = fullWidth ? ` srcset="${slideSrc} ${size.width}w"` : "";
+      const slideSizes = fullWidth ? ` sizes="(min-width: ${size.width}px) ${size.width}px, 100vw"` : "";
+      const slideWidth = scale === 1 ? size.width : displayWidth;
+      const slideHeight = scale === 1 ? size.height : displayHeight;
       return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}"${panelStyle}${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
-                <img src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" loading="lazy" decoding="async" />
+                <img src="${slideSrc}"${slideSrcset}${slideSizes} alt="${esc(slide.alt || shot.caption || "")}" width="${slideWidth}" height="${slideHeight}" loading="lazy" decoding="async" />
               </div>`;
     })
     .join("\n");
@@ -479,7 +487,11 @@ function renderShot(shot, base, options = {}) {
   const style = fill ? "" : ` style="max-width: ${width}px"`;
   const fullWidth = fill && scale === 1;
   const frameClass = fullWidth ? "shot__frame shot__frame--fullwidth" : "shot__frame";
-  const frameStyle = fill && !fullWidth ? ` style="--shot-native-width: ${width}px"` : "";
+  const frameStyle = fullWidth
+    ? ` style="--shot-display-width: ${size.width}px"`
+    : fill
+      ? ` style="--shot-native-width: ${width}px"`
+      : "";
 
   const copy =
     options.showcase && (shot.title || shot.lede)
@@ -489,9 +501,17 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
         }${shot.lede ? `            <p class="shot__lede">${esc(shot.lede)}</p>\n` : ""}          </div>\n`
       : "";
 
+  const imgWidth = scale === 1 ? size.width : width;
+  const imgHeight = scale === 1 ? size.height : height;
+  const loading = shot.eager ? "eager" : "lazy";
+  const decoding = shot.eager ? "sync" : "async";
+  const src = `${base}${shot.src}?v=${ASSET_VERSION}`;
+  const srcset = fullWidth ? ` srcset="${src} ${size.width}w"` : "";
+  const sizes = fullWidth ? ` sizes="(min-width: ${size.width}px) ${size.width}px, 100vw"` : "";
+
   return `        <figure class="${classes}"${style}>
 ${copy}          <div class="${frameClass}"${frameStyle}>
-            <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+            <img src="${src}"${srcset}${sizes} alt="${esc(shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
           </div>
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }

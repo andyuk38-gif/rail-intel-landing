@@ -397,7 +397,7 @@
   },
   "images/screens/verification/CheckConfigVerification.png": {
     "width": 1024,
-    "height": 748
+    "height": 733
   },
   "images/screens/verification/CheckConfigMedicalCustom.png": {
     "width": 1024,
@@ -441,7 +441,7 @@
   },
   "images/screens/verification/verification-run-overall-dark.png": {
     "width": 1024,
-    "height": 928
+    "height": 900
   },
   "images/screens/main-sys/account-two-factor.png": {
     "width": 535,

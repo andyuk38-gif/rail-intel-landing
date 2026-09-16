@@ -209,6 +209,7 @@ export const addons = [
               "Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.",
             scale: 1,
             full: true,
+            eager: true,
           },
         ],
       },
