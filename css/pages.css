@@ -615,11 +615,18 @@
 }
 
 .page-section--activation {
-  background: linear-gradient(180deg, #0e1218 0%, #0c0f14 100%);
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  border-top: 0;
+  background: transparent;
 }
 
 .page-section--activation h2 {
   margin-bottom: 1rem;
+}
+
+.page-section--activation .page-activation__copy p {
+  color: var(--text-muted);
 }
 
 .page-activation__row {

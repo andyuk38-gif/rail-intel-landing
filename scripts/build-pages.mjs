@@ -1440,6 +1440,23 @@ ${renderFaqSection(pageSeo.faq, base)}
   );
 }
 
+function renderActivationSection(addon) {
+  return `    <section class="page-section page-section--activation">
+      <div class="container">
+        <h2>Activating ${esc(addon.name)}</h2>
+        <div class="page-activation__row">
+          <div class="page-activation__copy">
+            <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator can enable it for your company directly.</p>
+${addon.hideModuleId ? "" : `            <p>Module identifier: <code>${esc(addon.moduleId)}</code></p>\n`}
+          </div>
+          <div class="page-actions page-activation__actions">
+            <a href="${site.app}" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
 function addonPage(addon) {
   const base = "../";
   const note = addon.note
@@ -1499,23 +1516,9 @@ ${heroInner}
     </section>
 
 ${(addon.sections || []).map((section) => renderSection(section, base)).join("\n\n")}
-
-    <section class="page-section page-section--activation">
-      <div class="container">
-        <h2>Activating ${esc(addon.name)}</h2>
-        <div class="page-activation__row">
-          <div class="page-activation__copy">
-            <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator can enable it for your company directly.</p>
-${addon.hideModuleId ? "" : `            <p>Module identifier: <code>${esc(addon.moduleId)}</code></p>\n`}
-          </div>
-          <div class="page-actions page-activation__actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
-          </div>
-        </div>
-      </div>
-    </section>
 ${renderRelatedLinks(base, item.relatedLinks)}
 ${renderFaqSection(pageSeo.faq, base)}
+${renderActivationSection(addon)}
   </main>
 
 ` +
