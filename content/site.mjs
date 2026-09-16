@@ -188,14 +188,18 @@ export const addons = [
       },
       {
         question: "How do I add the QA Verifications module?",
-        answer:
-          "QA Verifications is activated from the Add-ons library inside Rail Intel. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate — or start a 14-day trial where offered. The module is enabled for your company only; once active, verification checks are available from employee records and the company-wide QA Verifications page.",
+        answer: [
+          "QA Verifications is activated from the Add-ons library inside Rail Intel. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate — or start a 14-day trial where offered.",
+          "The module is enabled for your company only; once active, verification checks are available from employee records and the company-wide QA Verifications page.",
+        ],
         shot: {
           src: "images/screens/verification/qa-verifications-addon-tile.png",
           alt: "QA Verifications Module tile on the Add-ons page with an Activate control.",
           caption: "The QA Verifications Module tile in the Add-ons library.",
           scale: 1,
           full: true,
+          noExpand: true,
+          bordered: true,
         },
       },
     ],

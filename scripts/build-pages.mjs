@@ -224,12 +224,28 @@ function renderFaqShot(shot, base) {
   const imgWidth = scale === 1 ? size.width : Math.max(1, Math.round(size.width * scale));
   const imgHeight = scale === 1 ? size.height : Math.max(1, Math.round(size.height * scale));
   const frameStyle = ` style="--shot-display-width: ${size.width}px"`;
+  const figureClass = [
+    "procurement-faq__shot",
+    "shot",
+    "shot--full",
+    "reveal",
+    shot.bordered ? "procurement-faq__shot--bordered" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const noExpand = shot.noExpand ? ' data-no-expand=""' : "";
 
-  return `            <figure class="procurement-faq__shot shot shot--full reveal"${frameStyle}>
-              <div class="shot__frame shot__frame--fullwidth"${frameStyle}>
+  return `            <figure class="${figureClass}"${frameStyle}>
+              <div class="shot__frame shot__frame--fullwidth"${frameStyle}${noExpand}>
                 <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.alt || shot.caption || "")}" width="${imgWidth}" height="${imgHeight}" loading="lazy" decoding="async" />
               </div>
 ${shot.caption ? `              <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}            </figure>`;
+}
+
+function renderFaqAnswerParagraphs(answer, textClass = "") {
+  const parts = Array.isArray(answer) ? answer : [answer];
+  const classAttr = textClass ? ` class="${textClass}"` : "";
+  return parts.map((part) => `              <p${classAttr}>${esc(part)}</p>`).join("\n");
 }
 
 function renderFaqSection(faq, base = "") {
@@ -249,12 +265,16 @@ ${faq
           <dd class="procurement-faq__answer procurement-faq__answer--media">
             <div class="procurement-faq__media-row">
 ${renderFaqShot(entry.shot, base)}
-              <p class="procurement-faq__text">${esc(entry.answer)}</p>
+              <div class="procurement-faq__copy">
+${renderFaqAnswerParagraphs(entry.answer, "procurement-faq__text")}
+              </div>
             </div>
           </dd>`;
     }
     return `          <dt>${esc(entry.question)}</dt>
-          <dd>${esc(entry.answer)}</dd>`;
+          <dd>
+${renderFaqAnswerParagraphs(entry.answer)}
+          </dd>`;
   })
   .join("\n")}
         </dl>

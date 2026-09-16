@@ -332,7 +332,7 @@
   var frames = document.querySelectorAll(".shot__frame, .browser-mockup__content, .shot-viewer__frame-inner");
   Array.prototype.forEach.call(frames, function (frame) {
     var img = frame.querySelector("img");
-    if (!img || frame.querySelector(".shot__expand")) return;
+    if (!img || frame.querySelector(".shot__expand") || frame.hasAttribute("data-no-expand")) return;
 
     var button = document.createElement("button");
     button.type = "button";

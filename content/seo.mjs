@@ -213,7 +213,7 @@ export function faqJsonLd(faq, pageUrlValue) {
       name: entry.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: entry.answer,
+        text: Array.isArray(entry.answer) ? entry.answer.join(" ") : entry.answer,
       },
     })),
     url: pageUrlValue,

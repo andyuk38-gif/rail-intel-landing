@@ -6067,11 +6067,22 @@ body.lightbox-open {
   gap: 1.5rem 2rem;
 }
 
-.procurement-faq__text {
+.procurement-faq__copy {
   flex: 1;
   min-width: 0;
+}
+
+.procurement-faq__text {
   margin: 0;
   color: var(--text-muted);
+}
+
+.procurement-faq__text + .procurement-faq__text {
+  margin-top: 0.75rem;
+}
+
+.procurement-faq dd > p + p {
+  margin-top: 0.75rem;
 }
 
 .procurement-faq__shot {
@@ -6083,6 +6094,18 @@ body.lightbox-open {
 .procurement-faq__shot .shot__caption {
   margin-top: 0.5rem;
   font-size: 0.8125rem;
+}
+
+.page-section--crisp .procurement-faq__shot--bordered .shot__frame {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0d12;
+}
+
+.page-section--crisp .procurement-faq__shot--bordered .shot__frame img {
+  display: block;
+  border-radius: 12px;
 }
 
 @media (max-width: 720px) {
