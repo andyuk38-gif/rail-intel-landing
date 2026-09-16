@@ -270,6 +270,7 @@ export const addons = [
               alt: "Verification report header showing overall failed outcome and outcome counts.",
               label: "Overview",
               accent: "#f43f5e",
+              scale: 1,
             },
             {
               step: "02",
@@ -280,6 +281,7 @@ export const addons = [
               alt: "Summary visuals with overall outcome and checks-by-section donut charts.",
               label: "Summary",
               accent: "#38bdf8",
+              scale: 1,
             },
             {
               step: "03",
@@ -290,6 +292,7 @@ export const addons = [
               alt: "Cab passes section showing a compliant black route-learning pass preview.",
               label: "Cab passes",
               accent: "#34d399",
+              scale: 1,
             },
             {
               step: "04",
@@ -300,6 +303,7 @@ export const addons = [
               alt: "Incidents and CDP section showing an advisory for a missing CDP after an incident.",
               label: "Incidents",
               accent: "#f59e0b",
+              scale: 1,
             },
           ],
         },
