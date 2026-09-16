@@ -257,6 +257,8 @@ export const addons = [
         ],
         reportRoll: {
           interval: 5000,
+          note:
+            "Each screenshot shows one example section of the report — not the complete document.",
           steps: [
             {
               step: "01",

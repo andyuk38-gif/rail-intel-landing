@@ -897,6 +897,10 @@ function renderReportRoll(section, base) {
     })
     .join("\n");
 
+  const note = roll.note
+    ? `            <p class="report-roll__note">${esc(roll.note)}</p>`
+    : "";
+
   return `      <div class="report-roll reveal" data-report-roll data-report-roll-interval="${interval}">
         <div class="report-roll__layout">
           <div class="report-roll__copy">
@@ -911,6 +915,7 @@ function renderReportRoll(section, base) {
 ${panels}
               </div>
             </div>
+${note}
           </div>
         </div>
         <div class="report-roll__controls">

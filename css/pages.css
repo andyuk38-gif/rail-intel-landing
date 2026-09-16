@@ -858,6 +858,13 @@
   min-width: 0;
 }
 
+.report-roll__note {
+  margin: 0.65rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
 .report-roll__frame-wrap {
   position: relative;
   overflow: hidden;
