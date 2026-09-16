@@ -5584,8 +5584,13 @@ body.lightbox-open {
   cursor: not-allowed;
 }
 
-.signup-form .field--full {
+.signup-form .field--full,
+.signup-form__grid .field--full {
   grid-column: 1 / -1;
+}
+
+.signup-wizard__body[data-signup-panel="company"] .signup-form__grid {
+  grid-template-columns: 1fr;
 }
 
 .signup-form__honeypot {
