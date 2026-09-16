@@ -272,10 +272,6 @@ export const seoExtensions = {
           "Yes. The administrator must enter a reason before the lock is applied. The lock, their name and the reason are written to the audit trail.",
       },
     ],
-    relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
-      { name: "QA Verifications", href: "products/qa-verifications.html" },
-    ],
   },
 
   "medicals-licensing": {

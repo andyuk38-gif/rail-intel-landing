@@ -1108,16 +1108,12 @@ export const featureGroups = [
         height: 182,
       },
       {
-        src: "images/regulators/raib.webp",
+        src: "images/regulators/raib.png",
         alt: "Rail Accident Investigation Branch (RAIB)",
         width: 250,
         height: 86,
         class: "raib",
       },
-    ],
-    relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
-      { name: "QA Verifications", href: "products/qa-verifications.html" },
     ],
     sections: [
       {
