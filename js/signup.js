@@ -406,6 +406,14 @@
     };
   }
 
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
   function renderDealOffers(deals) {
     if (!dealOffersEl) return;
     if (!deals || !deals.length) {
@@ -420,15 +428,24 @@
         if (deal.freeAddonNames && deal.freeAddonNames.length) {
           perks.push("free modules: " + deal.freeAddonNames.join(", "));
         }
+        var detail = "";
+        if (deal.description) detail += escapeHtml(deal.description);
+        if (perks.length) detail += (detail ? " " : "") + "(" + escapeHtml(perks.join("; ")) + ")";
         return (
-          '<p><strong>' +
-          deal.label +
-          "</strong> — use code <code>" +
-          deal.code +
-          "</code>" +
-          (deal.description ? ". " + deal.description : "") +
-          (perks.length ? " (" + perks.join("; ") + ")" : "") +
-          "</p>"
+          '<article class="signup-deal-banner" role="note">' +
+          '<span class="signup-deal-banner__spark" aria-hidden="true"></span>' +
+          '<p class="signup-deal-banner__line">' +
+          '<span class="signup-deal-banner__label">' +
+          escapeHtml(deal.label) +
+          "</span>" +
+          '<span class="signup-deal-banner__sep" aria-hidden="true">—</span>' +
+          "<span>use code </span>" +
+          '<span class="signup-deal-banner__code">' +
+          escapeHtml(deal.code) +
+          "</span>" +
+          (detail ? "<span>. " + detail + "</span>" : "") +
+          "</p>" +
+          "</article>"
         );
       })
       .join("");

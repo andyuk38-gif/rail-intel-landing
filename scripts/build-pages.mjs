@@ -2474,7 +2474,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
               <h2 class="signup-form__title">How would you like to proceed?</h2>
               <p class="signup-form__lead">Request a tailored quotation or proceed directly to purchase and onboarding.</p>
             </div>
-            <div class="signup-form__note" data-signup-deal-offers hidden></div>
+            <div class="signup-deal-banners" data-signup-deal-offers hidden></div>
             <div class="signup-form__grid signup-form__grid--glass" style="margin-bottom:1rem">
               <div class="field field--full">
                 <label for="dealCode">Deal code (optional)</label>
