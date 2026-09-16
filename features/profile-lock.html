@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=10479823" />
-  <link rel="stylesheet" href="../css/pages.css?v=10479823" />
+  <link rel="stylesheet" href="../css/style.css?v=262894633" />
+  <link rel="stylesheet" href="../css/pages.css?v=262894633" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -257,7 +257,8 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--regulators">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Profile Lock</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">Preserve the record when it matters</h1>
@@ -266,33 +267,57 @@
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="../features/" class="btn btn-ghost btn-lg">All features</a>
           </div>
+          </div>
+          <div class="page-hero__media">
+          <div class="page-hero__regulators" aria-label="UK rail regulators">
+            <img class="page-hero__regulator-logo" src="../images/regulators/orr.png" alt="Office of Rail and Road (ORR)" width="260" height="182" loading="lazy" decoding="async" />
+            <img class="page-hero__regulator-logo page-hero__regulator-logo--raib" src="../images/regulators/raib.webp" alt="Rail Accident Investigation Branch (RAIB)" width="250" height="86" loading="lazy" decoding="async" />
+          </div>
+          </div>
         </div>
       </div>
     </section>
 
 
-    <section class="page-section">
+    <section class="page-section page-section--aside">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__aside">
+          <div class="page-section__aside-copy">
           <h2>Evidence preservation for investigations</h2>
           <p>Before the lock is applied, the administrator must record a reason. Every section of the record then becomes read-only for all users until an administrator unlocks the profile. The record remains readable for review and export, but amendments that would alter the evidential snapshot are blocked.</p>
           <p>That gives investigators and your assurance team a stable artefact to work from — whether the inquiry is external, from an industry safety body, or internal to your operation.</p>
-          <ul class="spec-list">
-            <li><strong>Company administrator only</strong> — lock and unlock are not available to general users.</li>
-            <li><strong>Point-in-time preservation</strong> for ORR, RAIB or internal investigation workflows.</li>
-            <li><strong>Read-only across every section</strong> until an administrator releases the lock.</li>
-            <li><strong>Reason required</strong> — the lock, who applied it and why are retained in the audit trail.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--two">
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Company administrator only</h3>
+              <p class="spec-tile__detail">Lock and unlock are not available to general users.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">Point-in-time preservation</h3>
+              <p class="spec-tile__detail">For ORR, RAIB or internal investigation workflows.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Read-only across every section</h3>
+              <p class="spec-tile__detail">Until an administrator releases the lock.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Reason required</h3>
+              <p class="spec-tile__detail">The lock, who applied it and why are retained in the audit trail.</p>
+            </article>
+          </div>
+          </div>
+          <div class="page-section__aside-media">
         <figure class="shot reveal" style="max-width: 484px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/lock-employee-profile.png?v=10479823" alt="The lock confirmation — a reason is required before the record is preserved as evidence." width="484" height="410" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/lock-employee-profile.png?v=262894633" alt="The lock confirmation — a reason is required before the record is preserved as evidence." width="484" height="410" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The lock confirmation — a reason is required before the record is preserved as evidence.</figcaption>
         </figure>
-      </div>
-
+          </div>
+        </div>
       </div>
     </section>
 
@@ -409,7 +434,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=10479823"></script>
-  <script src="../js/newsletter.js?v=10479823"></script>
+  <script src="../js/site.js?v=262894633"></script>
+  <script src="../js/newsletter.js?v=262894633"></script>
 </body>
 </html>

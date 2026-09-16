@@ -1012,6 +1012,27 @@ ${dots}
       </div>`;
 }
 
+function renderAsideSection(section, base, { body, bullets }) {
+  const media = section.shots?.length
+    ? `          <div class="page-section__aside-media">
+${section.shots.map((shot) => renderShot(shot, base)).join("\n")}
+          </div>`
+    : "";
+
+  return `    <section class="page-section page-section--aside">
+      <div class="container">
+        <div class="page-section__aside">
+          <div class="page-section__aside-copy">
+          <h2>${esc(section.heading)}</h2>
+${body}
+${bullets}
+          </div>
+${media}
+        </div>
+      </div>
+    </section>`;
+}
+
 function renderSection(section, base) {
   const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
 
@@ -1022,6 +1043,10 @@ function renderSection(section, base) {
           .map((item) => `            <li>${rich(item)}</li>`)
           .join("\n")}\n          </ul>`
       : "";
+
+  if (section.layout === "aside") {
+    return renderAsideSection(section, base, { body, bullets });
+  }
 
   const gallery = section.shotGrid === "gallery";
   const viewer = section.shotGrid === "viewer";
@@ -1905,6 +1930,23 @@ ${renderFaqSection(pageSeo.faq, base)}
   );
 }
 
+function renderHeroRegulators(regulators, base) {
+  if (!regulators?.length) return "";
+
+  const items = regulators
+    .map((logo) => {
+      const modifier = logo.class ? ` page-hero__regulator-logo--${esc(logo.class)}` : "";
+      const width = logo.width ? ` width="${logo.width}"` : "";
+      const height = logo.height ? ` height="${logo.height}"` : "";
+      return `            <img class="page-hero__regulator-logo${modifier}" src="${base}${esc(logo.src)}" alt="${esc(logo.alt)}"${width}${height} loading="lazy" decoding="async" />`;
+    })
+    .join("\n");
+
+  return `          <div class="page-hero__regulators" aria-label="UK rail regulators">
+${items}
+          </div>`;
+}
+
 function renderHeroIntro(intro) {
   if (!intro) return "";
 
@@ -1957,13 +1999,18 @@ ${
           </div>`
 }${renderHeroIntro(group.heroIntro)}`;
 
-  const heroInner = group.heroShot
-    ? `        <div class="page-hero__inner page-hero__inner--split${group.heroIntro ? " page-hero__inner--with-intro" : ""}">
+  const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
+  const heroAside = group.heroShot
+    ? renderShot(group.heroShot, base, { fill: true })
+    : heroRegulators;
+
+  const heroInner = heroAside
+    ? `        <div class="page-hero__inner page-hero__inner--split${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
           <div class="page-hero__media">
-${renderShot(group.heroShot, base, { fill: true })}
+${group.heroShot ? renderShot(group.heroShot, base, { fill: true }) : ""}${heroRegulators}
           </div>
         </div>`
     : `        <div class="page-hero__inner">

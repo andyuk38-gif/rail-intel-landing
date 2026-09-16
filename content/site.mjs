@@ -1100,6 +1100,21 @@ export const featureGroups = [
     tagline: "Preserve the record when it matters",
     lead:
       "When an employee record may become material to an external regulatory investigation, an industry safety inquiry, or an internal investigation, the record must not change underneath the reviewers. Profile lock freezes the employee record at a point in time — only a company administrator can apply or release the lock.",
+    heroRegulators: [
+      {
+        src: "images/regulators/orr.png",
+        alt: "Office of Rail and Road (ORR)",
+        width: 260,
+        height: 182,
+      },
+      {
+        src: "images/regulators/raib.webp",
+        alt: "Rail Accident Investigation Branch (RAIB)",
+        width: 250,
+        height: 86,
+        class: "raib",
+      },
+    ],
     relatedLinks: [
       { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "QA Verifications", href: "products/qa-verifications.html" },
@@ -1107,15 +1122,17 @@ export const featureGroups = [
     sections: [
       {
         heading: "Evidence preservation for investigations",
+        layout: "aside",
+        bulletTiles: true,
         body: [
           "Before the lock is applied, the administrator must record a reason. Every section of the record then becomes read-only for all users until an administrator unlocks the profile. The record remains readable for review and export, but amendments that would alter the evidential snapshot are blocked.",
           "That gives investigators and your assurance team a stable artefact to work from — whether the inquiry is external, from an industry safety body, or internal to your operation.",
         ],
         bullets: [
-          "**Company administrator only** — lock and unlock are not available to general users.",
-          "**Point-in-time preservation** for ORR, RAIB or internal investigation workflows.",
-          "**Read-only across every section** until an administrator releases the lock.",
-          "**Reason required** — the lock, who applied it and why are retained in the audit trail.",
+          "**Company administrator only** Lock and unlock are not available to general users.",
+          "**Point-in-time preservation** For ORR, RAIB or internal investigation workflows.",
+          "**Read-only across every section** Until an administrator releases the lock.",
+          "**Reason required** The lock, who applied it and why are retained in the audit trail.",
         ],
         shots: [
           {
