@@ -425,6 +425,29 @@ ${copy}          <div class="shot__frame">
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
 
+function renderHeroVideo(video, base) {
+  const label = video.label || "Scanning employee record";
+  const caption = video.caption || "";
+  const ariaLabel = video.ariaLabel || label;
+  const maxLoops = video.maxLoops || 3;
+  const width = video.width || 684;
+  const height = video.height || 668;
+
+  return `        <figure class="shot shot--full reveal">
+          <div class="verify-scan" data-verify-scan>
+            <div class="verify-scan__chrome" aria-hidden="true">
+              <span class="verify-scan__dot"></span>
+              <span class="verify-scan__label">${esc(label)}</span>
+            </div>
+            <div class="verify-scan__screen">
+              <video class="verify-scan__video" data-verify-scan-video data-max-loops="${maxLoops}" muted playsinline preload="metadata" width="${width}" height="${height}" aria-label="${esc(ariaLabel)}">
+                <source src="${base}${video.src}?v=${ASSET_VERSION}" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+${caption ? `          <figcaption class="shot__caption">${esc(caption)}</figcaption>\n` : ""}        </figure>`;
+}
+
 function renderGallery(section, base) {
   const slides = (section.shots || [])
     .map((shot, index) => {
@@ -1184,6 +1207,37 @@ function addonPage(addon) {
     ? `        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>`
     : "";
 
+  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
+    addon.name
+  )}</p>
+          <span class="page-badge page-badge--addon">Add-on module</span>
+          <h1 class="page-title">${esc(addon.tagline)}</h1>
+          <p class="page-lead">${esc(addon.lead)}</p>
+${note}
+          <div class="page-actions">
+            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
+            <a href="${base}products/" class="btn btn-ghost btn-lg">All add-ons</a>
+          </div>`;
+
+  const heroMedia = addon.heroVideo
+    ? renderHeroVideo(addon.heroVideo, base)
+    : addon.heroShot
+      ? renderShot(addon.heroShot, base, { fill: true })
+      : null;
+
+  const heroInner = heroMedia
+    ? `        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
+${heroCopy}
+          </div>
+          <div class="page-hero__media">
+${heroMedia}
+          </div>
+        </div>`
+    : `        <div class="page-hero__inner">
+${heroCopy}
+        </div>`;
+
   const item = mergedItem(addon, addon.slug);
   const pageSeo = seoForItem(item, {
     path: `products/${addon.slug}.html`,
@@ -1198,19 +1252,7 @@ function addonPage(addon) {
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
-      addon.name
-    )}</p>
-          <span class="page-badge page-badge--addon">Add-on module</span>
-          <h1 class="page-title">${esc(addon.tagline)}</h1>
-          <p class="page-lead">${esc(addon.lead)}</p>
-${note}
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}products/" class="btn btn-ghost btn-lg">All add-ons</a>
-          </div>
-        </div>
+${heroInner}
       </div>
     </section>
 

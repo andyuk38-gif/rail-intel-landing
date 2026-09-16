@@ -278,6 +278,10 @@
   margin-top: 0.65rem;
 }
 
+.page-hero__media .verify-scan {
+  width: 100%;
+}
+
 .page-hero--intro-split {
   padding: calc(7rem + var(--dev-banner-height)) 0 2.25rem;
 }

@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=83414716" />
-  <link rel="stylesheet" href="../css/pages.css?v=83414716" />
+  <link rel="stylesheet" href="../css/style.css?v=51841944" />
+  <link rel="stylesheet" href="../css/pages.css?v=51841944" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -236,7 +236,8 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / QA Verifications</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
           <h1 class="page-title">Prove compliance instead of asserting it</h1>
@@ -245,6 +246,23 @@
           <div class="page-actions">
             <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
+          </div>
+          </div>
+          <div class="page-hero__media">
+        <figure class="shot shot--full reveal">
+          <div class="verify-scan" data-verify-scan>
+            <div class="verify-scan__chrome" aria-hidden="true">
+              <span class="verify-scan__dot"></span>
+              <span class="verify-scan__label">Scanning employee record</span>
+            </div>
+            <div class="verify-scan__screen">
+              <video class="verify-scan__video" data-verify-scan-video data-max-loops="3" muted playsinline preload="metadata" width="684" height="668" aria-label="QA verification scanning each section of an employee record">
+                <source src="../video/ScanningEmployeeRecord.mp4?v=51841944" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+          <figcaption class="shot__caption">Each section of the employee record is checked in turn — competency, medical, licence and more.</figcaption>
+        </figure>
           </div>
         </div>
       </div>
@@ -266,7 +284,7 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/verification/verification-run-overall.png?v=83414716" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1382" height="1120" loading="lazy" decoding="async" />
+            <img src="../images/screens/verification/verification-run-overall-dark.png?v=51841944" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.</figcaption>
         </figure>
@@ -288,7 +306,7 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/verification/CheckConfigVerification.png?v=83414716" alt="Check configuration controls which sections are tested and how each is scored." width="1024" height="748" loading="lazy" decoding="async" />
+            <img src="../images/screens/verification/CheckConfigVerification.png?v=51841944" alt="Check configuration controls which sections are tested and how each is scored." width="1024" height="748" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Check configuration controls which sections are tested and how each is scored.</figcaption>
         </figure>
@@ -401,7 +419,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=83414716"></script>
-  <script src="../js/newsletter.js?v=83414716"></script>
+  <script src="../js/site.js?v=51841944"></script>
+  <script src="../js/newsletter.js?v=51841944"></script>
 </body>
 </html>

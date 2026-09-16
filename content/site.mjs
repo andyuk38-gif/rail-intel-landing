@@ -177,6 +177,13 @@ export const addons = [
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
       { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
     ],
+    heroVideo: {
+      src: "video/ScanningEmployeeRecord.mp4",
+      label: "Scanning employee record",
+      caption:
+        "Each section of the employee record is checked in turn — competency, medical, licence and more.",
+      ariaLabel: "QA verification scanning each section of an employee record",
+    },
     sections: [
       {
         heading: "Run a verification against live record data",
@@ -192,7 +199,7 @@ export const addons = [
         ],
         shots: [
           {
-            src: "images/screens/verification/verification-run-overall.png",
+            src: "images/screens/verification/verification-run-overall-dark.png",
             caption:
               "Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.",
             scale: 1,
