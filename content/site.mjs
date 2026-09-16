@@ -311,6 +311,31 @@ export const addons = [
           ],
         },
       },
+      {
+        heading: "Meet periodic verification standards without manual sampling",
+        fullWidth: true,
+        bulletTiles: true,
+        crispShots: true,
+        body: [
+          "Many operators are required to evidence compliance on a quarterly, six-monthly or annual cycle — but meeting that obligation by pulling records and checking them by hand is slow, inconsistent and hard to defend under scrutiny. Sampled run analysis replaces that process with a single action.",
+          "Choose the percentage of employees to include, run the sample, and Rail Intel selects individuals at random, verifies each record against your configured checks, and presents the results with donut analytics and a highlighted list of who was included. The run is retained in history alongside every other verification, so you have a clear audit trail of what was tested, when, and by whom.",
+        ],
+        bullets: [
+          "**Percentage-based sampling** — set the proportion of employees to include and run the check in one step.",
+          "**Random selection** — individuals are chosen automatically, removing bias from manual pick-and-choose.",
+          "**Instant analytics** — review sampled compliance through summary visuals and highlighted employees.",
+          "**Audit-ready history** — sampled runs are stored with the same evidence trail as a full company-wide verification.",
+        ],
+        shots: [
+          {
+            src: "images/screens/verification/verification-sampled-run-analysis.png",
+            caption:
+              "Select a sample percentage and run verification across randomly chosen employees — no spreadsheets, no manual record review.",
+            scale: 1,
+            full: true,
+          },
+        ],
+      },
     ],
   },
 
