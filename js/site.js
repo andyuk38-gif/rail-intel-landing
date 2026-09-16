@@ -2984,7 +2984,8 @@
       var width = Number(img.getAttribute("width")) || img.naturalWidth || stage.clientWidth;
       var height = Number(img.getAttribute("height")) || img.naturalHeight || width * 0.75;
       if (!width) return 0;
-      return Math.max(1, Math.round(stage.clientWidth * (height / width)));
+      var displayWidth = Math.min(stage.clientWidth, width);
+      return Math.max(1, Math.round(displayWidth * (height / width)));
     }
 
     function syncStage() {

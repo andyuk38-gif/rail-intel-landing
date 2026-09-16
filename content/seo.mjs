@@ -110,7 +110,7 @@ export const staticPages = {
   "features/index.html": {
     title: "Rail Intel Features | Competency, Medicals & Workforce Records",
     description:
-      "Core Rail Intel CMS features: competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, administration and digital cab passes.",
+      "Core Rail Intel CMS features: competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, communications hub, administration and digital cab passes.",
     keywords: "rail competency features, competence cycles, medicals licensing rail, workforce records",
     breadcrumbs: [
       { name: "Rail Intel", path: "/" },

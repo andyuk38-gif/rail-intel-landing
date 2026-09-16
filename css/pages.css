@@ -696,6 +696,7 @@
 }
 
 .shot--full .shot__frame {
+  width: fit-content;
   max-width: min(100%, var(--shot-native-width, none));
   margin-inline: auto;
 }
@@ -737,9 +738,9 @@
 
 .shot-rotate__panel img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: auto;
   max-width: min(100%, var(--shot-native-width, 1024px));
+  height: auto;
 }
 
 .shot-rotate__controls {
@@ -883,6 +884,9 @@
 
 .report-roll__frame-wrap {
   position: relative;
+  width: 100%;
+  max-width: min(100%, var(--report-roll-max-width, 512px));
+  margin-inline: auto;
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -952,9 +956,9 @@
 
 .report-roll__slide-frame img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: auto;
   max-width: 100%;
+  height: auto;
 }
 
 .report-roll__panel[aria-hidden="true"] .shot__expand {
@@ -1498,7 +1502,7 @@
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .shot-grid--showcase > .reveal:nth-child(1) { transition-delay: 0.02s; }
@@ -2650,7 +2654,8 @@
 
 .shot__frame img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
 }
 

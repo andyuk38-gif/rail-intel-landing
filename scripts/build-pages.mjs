@@ -418,7 +418,7 @@ function renderRotatingShot(shot, base, options = {}) {
       const displayWidth = Math.max(1, Math.round(size.width * scale));
       const displayHeight = Math.max(1, Math.round(size.height * scale));
       const active = index === 0;
-      return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}" style="--shot-native-width: ${size.width}px"${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
+      return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}" style="--shot-native-width: ${displayWidth}px"${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
                 <img src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" loading="lazy" decoding="async" />
               </div>`;
     })
@@ -472,7 +472,7 @@ function renderShot(shot, base, options = {}) {
     .filter(Boolean)
     .join(" ");
   const style = fill ? "" : ` style="max-width: ${width}px"`;
-  const frameStyle = fill ? ` style="--shot-native-width: ${size.width}px"` : "";
+  const frameStyle = fill ? ` style="--shot-native-width: ${width}px"` : "";
 
   const copy =
     options.showcase && (shot.title || shot.lede)
@@ -877,11 +877,19 @@ function renderReportRoll(section, base) {
 
   const interval = roll.interval || 5000;
   const first = steps[0];
+  const maxDisplayWidth = Math.max(
+    ...steps.map((step) => {
+      const size = manifest[step.src];
+      if (!size) throw new Error(`Missing screenshot in manifest: ${step.src}`);
+      const scale = typeof step.scale === "number" ? step.scale : 0.5;
+      return Math.max(1, Math.round(size.width * scale));
+    })
+  );
   const panels = steps
     .map((step, index) => {
       const size = manifest[step.src];
       if (!size) throw new Error(`Missing screenshot in manifest: ${step.src}`);
-      const scale = typeof step.scale === "number" ? step.scale : 1;
+      const scale = typeof step.scale === "number" ? step.scale : 0.5;
       const width = Math.max(1, Math.round(size.width * scale));
       const height = Math.max(1, Math.round(size.height * scale));
       const accent = step.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
@@ -905,7 +913,7 @@ function renderReportRoll(section, base) {
     ? `            <p class="report-roll__note">${esc(roll.note)}</p>`
     : "";
 
-  return `      <div class="report-roll reveal" data-report-roll data-report-roll-interval="${interval}">
+  return `      <div class="report-roll reveal" data-report-roll data-report-roll-interval="${interval}" style="--report-roll-max-width: ${maxDisplayWidth}px">
         <div class="report-roll__layout">
           <div class="report-roll__copy">
             <p class="report-roll__step" data-report-roll-step>${esc(first.step || "01")}</p>

@@ -170,6 +170,31 @@ export const seoExtensions = {
     ],
   },
 
+  "communications-hub": {
+    seoTitle: "Rail Communications Hub | Automated Emails & System Notifications",
+    seoDescription:
+      "Automate alert emails and in-app system notifications from conditional rules — competency expiries, medical renewals, incidents, welfare follow-up and on-record messaging.",
+    seoKeywords:
+      "rail competency notifications, automated compliance alerts, workforce email notifications, system notifications rail software",
+    faq: [
+      {
+        question: "What triggers automated communications in Rail Intel?",
+        answer:
+          "Conditional rules across competency, medicals, licensing, incidents, monitoring and messaging drive both email alerts and in-app system notifications when configured criteria are met.",
+      },
+      {
+        question: "Can we control the emails that are sent?",
+        answer:
+          "Yes. Company administrators configure email templates in Administration, so the wording and branding match your operation while the triggers stay rule-governed.",
+      },
+    ],
+    relatedLinks: [
+      { name: "Workforce Records", href: "features/workforce-records.html" },
+      { name: "Administration", href: "features/administration.html" },
+      { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
+    ],
+  },
+
   "workforce-records": {
     seoTitle: "Rail Workforce Records | One Employee Record for Competence",
     seoDescription:
