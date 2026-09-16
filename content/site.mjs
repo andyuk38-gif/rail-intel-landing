@@ -214,13 +214,16 @@ export const addons = [
       },
       {
         heading: "Configure what a check actually tests",
+        fullWidth: true,
+        bulletTiles: true,
         body: [
           "The check configuration decides which sections are examined and how strict each one is, so verification reflects your standards rather than a generic template. Companies running different standards for drivers, instructors and managers can hold each to the right bar.",
         ],
         bullets: [
           "**Per-section configuration** of what is examined and what counts as a pass.",
-          "**Permission-gated running** via `qa-verifications.run`, so only authorised staff can execute checks.",
+          "**Permission-gated running** via the qa-verifications.run permission, so only authorised staff can execute checks.",
           "**Launch from any employee record** once the module is active.",
+          "**Company administrator control** so only a company admin can set which sections are checked and what counts as a pass.",
         ],
         shots: [
           {
