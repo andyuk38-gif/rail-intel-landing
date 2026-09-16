@@ -198,7 +198,7 @@ export const seoExtensions = {
   "workforce-records": {
     seoTitle: "Rail Workforce Records | One Employee Record for Competence",
     seoDescription:
-      "Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — the system of record for safety-critical staff.",
+      "Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — with printable profiles and company-admin profile lock for investigation evidence.",
     seoKeywords: "rail workforce records, employee competence record, safety critical personnel, driver record software",
     faq: [
       {
@@ -210,6 +210,16 @@ export const seoExtensions = {
         question: "Can drivers see only their own record?",
         answer:
           "Yes. Own-record access can be configured so drivers view their profile without the company directory.",
+      },
+      {
+        question: "Can I print an employee profile?",
+        answer:
+          "Yes. Rail Intel generates a full-colour professional profile or a print-friendly layout from the live record, which you can print or save as PDF.",
+      },
+      {
+        question: "Can a profile be locked for an investigation?",
+        answer:
+          "Yes. A company administrator can lock an employee profile to preserve a point-in-time snapshot for external regulatory, industry safety or internal investigations, with an audit trail of who locked it and when.",
       },
     ],
     relatedLinks: [

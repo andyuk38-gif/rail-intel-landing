@@ -1062,6 +1062,41 @@ export const featureGroups = [
           },
         ],
       },
+      {
+        heading: "Printable employee profile",
+        body: [
+          "When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record — not a spreadsheet assembled by hand.",
+          "Choose a full-colour professional layout for on-screen review and stakeholder circulation, or a print-friendly version optimised for paper and PDF. Both draw from the same underlying record data, so what you print is what the system holds at the moment you generate it.",
+        ],
+        bullets: [
+          "**Full-colour professional profile** for formal packs and management review.",
+          "**Print-friendly layout** for paper copies and archival PDF.",
+          "**Generated from live record data** — competencies, medicals, licensing and supporting sections in one document.",
+          "**Print or save as PDF** directly from the employee record.",
+        ],
+      },
+      {
+        heading: "Lock a profile for evidence preservation",
+        body: [
+          "When an employee record may become material to an external regulatory investigation, an industry safety inquiry, or an internal investigation, the record must not change underneath the reviewers. Profile lock freezes the employee record at a point in time — only a company administrator can apply or release the lock.",
+          "Before the lock is applied, the administrator must record a reason. Every section of the record then becomes read-only for all users — medicals, competence, training, incidents, cycles, notes and documents cannot be added, changed or deleted until an administrator unlocks the profile. The lock, the administrator's name and the reason are written to the audit trail.",
+        ],
+        bullets: [
+          "**Company administrator only** — lock and unlock are not available to general users.",
+          "**Point-in-time preservation** for ORR, RAIB or internal investigation workflows.",
+          "**Read-only across every section** until an administrator releases the lock.",
+          "**Reason required** — the lock, who applied it and why are retained in the audit trail.",
+        ],
+        shots: [
+          {
+            src: "images/screens/main-sys/lock-employee-profile.png",
+            caption:
+              "The lock confirmation — a reason is required before the record is preserved as evidence.",
+            scale: 1,
+            full: true,
+          },
+        ],
+      },
     ],
   },
 
