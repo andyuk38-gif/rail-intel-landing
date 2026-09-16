@@ -6048,7 +6048,11 @@ body.lightbox-open {
   .quotation-a4-wrap .ri-doc-header,
   .quotation-a4-wrap .ri-doc-header tbody,
   .quotation-a4-wrap .ri-doc-header tr,
-  .quotation-a4-wrap .ri-doc-header td {
+  .quotation-a4-wrap .ri-doc-header td,
+  .quotation-a4-wrap .ri-doc-header-contact,
+  .quotation-a4-wrap .ri-doc-header-contact tbody,
+  .quotation-a4-wrap .ri-doc-header-contact tr,
+  .quotation-a4-wrap .ri-doc-header-contact td {
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -6063,21 +6067,29 @@ body.lightbox-open {
     box-sizing: border-box !important;
   }
 
+  .quotation-a4-wrap .ri-doc-header-spacer {
+    display: none !important;
+  }
+
   .quotation-a4-wrap .ri-doc-header-right {
     text-align: left !important;
     padding-top: 1rem !important;
   }
 
-  .quotation-a4-wrap .ri-doc-header-brand {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
+  .quotation-a4-wrap .ri-doc-header-contact .ri-doc-header-right {
     text-align: left !important;
+    padding-top: 0.75rem !important;
   }
 
   .quotation-a4-wrap .ri-doc-letterhead-logo {
     margin-left: 0 !important;
     margin-right: auto !important;
+    float: none !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-header-rule,
+  .quotation-a4-wrap .ri-doc-header-contact-wrap {
+    clear: both !important;
   }
 
   .quotation-a4-wrap .ri-doc-letterhead-contact {
