@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=51841944" />
-  <link rel="stylesheet" href="../css/pages.css?v=51841944" />
+  <link rel="stylesheet" href="../css/style.css?v=83897815" />
+  <link rel="stylesheet" href="../css/pages.css?v=83897815" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -254,7 +254,7 @@
             </div>
             <div class="verify-scan__screen">
               <video class="verify-scan__video" data-verify-scan-video data-max-loops="3" muted playsinline preload="metadata" width="684" height="668" aria-label="QA verification scanning each section of an employee record">
-                <source src="../video/ScanningEmployeeRecord.mp4?v=51841944" type="video/mp4" />
+                <source src="../video/ScanningEmployeeRecord.mp4?v=83897815" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -265,23 +265,39 @@
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section page-section--wide">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--wide">
           <h2>Run a verification against live record data</h2>
           <p>A verification reads the employee's actual record — cycles, assessments, medicals, licence expiry and monitoring history — and evaluates each section against your configured criteria. Every check resolves to compliant, advisory, review or not applicable, so a partial pass is visible rather than hidden behind a single score.</p>
           <p>Runs are stored, not just displayed. The company-wide QA Verifications page keeps the full history with overall compliance rate, per-section breakdown and pass rates across employees, which is what an auditor actually asks to see.</p>
-          <ul class="spec-list">
-            <li><strong>Section-level outcomes</strong> so you can see precisely which part of a record failed.</li>
-            <li><strong>Run history retained</strong> per employee and company-wide, with the date and the assessor.</li>
-            <li><strong>Compliance rate and pass rate</strong> calculated across the latest run for every employee.</li>
-            <li><strong>Derogations tracked separately</strong> from advisories and reviews.</li>
-          </ul>
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Section-level outcomes</h3>
+              <p class="spec-tile__detail">so you can see precisely which part of a record failed.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">Run history retained</h3>
+              <p class="spec-tile__detail">per employee and company-wide, with the date and the assessor.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Compliance rate and pass rate</h3>
+              <p class="spec-tile__detail">calculated across the latest run for every employee.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Derogations tracked separately</h3>
+              <p class="spec-tile__detail">from advisories and reviews.</p>
+            </article>
+          </div>
         </div>
-      <div class="shot-grid shot-grid--two">
+      <div class="shot-grid shot-grid--full">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/verification/verification-run-overall-dark.png?v=51841944" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
+            <img src="../images/screens/verification/verification-run-overall-dark.png?v=83897815" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.</figcaption>
         </figure>
@@ -303,7 +319,7 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/verification/CheckConfigVerification.png?v=51841944" alt="Check configuration controls which sections are tested and how each is scored." width="1024" height="748" loading="lazy" decoding="async" />
+            <img src="../images/screens/verification/CheckConfigVerification.png?v=83897815" alt="Check configuration controls which sections are tested and how each is scored." width="1024" height="748" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Check configuration controls which sections are tested and how each is scored.</figcaption>
         </figure>
@@ -416,7 +432,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=51841944"></script>
-  <script src="../js/newsletter.js?v=51841944"></script>
+  <script src="../js/site.js?v=83897815"></script>
+  <script src="../js/newsletter.js?v=83897815"></script>
 </body>
 </html>

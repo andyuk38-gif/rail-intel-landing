@@ -190,6 +190,8 @@ export const addons = [
     sections: [
       {
         heading: "Run a verification against live record data",
+        fullWidth: true,
+        bulletTiles: true,
         body: [
           "A verification reads the employee's actual record — cycles, assessments, medicals, licence expiry and monitoring history — and evaluates each section against your configured criteria. Every check resolves to compliant, advisory, review or not applicable, so a partial pass is visible rather than hidden behind a single score.",
           "Runs are stored, not just displayed. The company-wide QA Verifications page keeps the full history with overall compliance rate, per-section breakdown and pass rates across employees, which is what an auditor actually asks to see.",

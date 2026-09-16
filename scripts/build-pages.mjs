@@ -781,25 +781,55 @@ ${items}
       </div>`;
 }
 
+function parseBulletTile(item) {
+  const match = String(item).match(/^\*\*(.+?)\*\*\s*(.*)$/);
+  if (match) return { title: match[1], detail: match[2] };
+  return { title: String(item), detail: "" };
+}
+
+const SPEC_TILE_ACCENTS = ["#38bdf8", "#f59e0b", "#34d399", "#a78bfa"];
+
+function renderSpecTiles(section) {
+  const items = section.tiles || (section.bullets || []).map(parseBulletTile);
+  if (!items.length) return "";
+
+  return `          <div class="spec-tiles" role="list">\n${items
+    .map((tile, index) => {
+      const accent = tile.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
+      const step = tile.step || String(index + 1).padStart(2, "0");
+      return `            <article class="spec-tile" style="--spec-tile-accent: ${esc(accent)}" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
+              <h3 class="spec-tile__title">${esc(tile.title || "")}</h3>
+              <p class="spec-tile__detail">${rich(tile.detail || "")}</p>
+            </article>`;
+    })
+    .join("\n")}\n          </div>`;
+}
+
 function renderSection(section, base) {
   const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
 
-  const bullets = section.bullets
-    ? `          <ul class="spec-list">\n${section.bullets
-        .map((item) => `            <li>${rich(item)}</li>`)
-        .join("\n")}\n          </ul>`
-    : "";
+  const bullets = section.bulletTiles
+    ? renderSpecTiles(section)
+    : section.bullets
+      ? `          <ul class="spec-list">\n${section.bullets
+          .map((item) => `            <li>${rich(item)}</li>`)
+          .join("\n")}\n          </ul>`
+      : "";
 
   const gallery = section.shotGrid === "gallery";
   const viewer = section.shotGrid === "viewer";
   const spotlight = section.shotGrid === "spotlight";
   const showcase = section.shotGrid === "showcase";
   const heroStack = section.shotGrid === "hero-stack";
-  const gridClass = showcase
-    ? "shot-grid shot-grid--showcase"
-    : heroStack
-      ? "shot-grid shot-grid--hero-stack"
-      : "shot-grid shot-grid--two";
+  const wide = Boolean(section.fullWidth);
+  const gridClass = wide
+    ? "shot-grid shot-grid--full"
+    : showcase
+      ? "shot-grid shot-grid--showcase"
+      : heroStack
+        ? "shot-grid shot-grid--hero-stack"
+        : "shot-grid shot-grid--two";
 
   let shots = "";
   if (section.shots) {
@@ -827,9 +857,9 @@ function renderSection(section, base) {
     }
   }
 
-  return `    <section class="page-section${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+  return `    <section class="page-section${wide ? " page-section--wide" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
-        <div class="page-section__head">
+        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
           <h2>${esc(section.heading)}</h2>
 ${body}
 ${bullets}
