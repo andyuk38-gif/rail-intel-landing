@@ -406,6 +406,7 @@ function renderRotatingShot(shot, base, options = {}) {
   });
 
   const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+  const maxWidth = Math.max(...sizes.map((size) => Math.round(size.width * scale)));
   const interval = shot.rotate.interval || 5000;
   const classes = ["shot", shot.full ? "shot--full" : null, options.showcase ? "shot--showcase" : null, "reveal"]
     .filter(Boolean)
@@ -417,7 +418,9 @@ function renderRotatingShot(shot, base, options = {}) {
       const displayWidth = Math.max(1, Math.round(size.width * scale));
       const displayHeight = Math.max(1, Math.round(size.height * scale));
       const active = index === 0;
-      return `              <img class="shot-rotate__slide${active ? " is-active" : ""}" src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" data-aspect="${size.width} / ${size.height}" loading="lazy" decoding="async"${active ? "" : ' aria-hidden="true"'} />`;
+      return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}" style="--shot-native-width: ${size.width}px"${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
+                <img src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" loading="lazy" decoding="async" />
+              </div>`;
     })
     .join("\n");
 
@@ -431,7 +434,7 @@ function renderRotatingShot(shot, base, options = {}) {
 
   return `        <figure class="${classes}">
           <div class="shot__frame shot__frame--rotate">
-            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="${interval}">
+            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="${interval}" style="--shot-rotate-max-width: ${maxWidth}px">
               <div class="shot-rotate__stage" data-shot-rotate-stage>
 ${slideMarkup}
               </div>
@@ -469,6 +472,7 @@ function renderShot(shot, base, options = {}) {
     .filter(Boolean)
     .join(" ");
   const style = fill ? "" : ` style="max-width: ${width}px"`;
+  const frameStyle = fill ? ` style="--shot-native-width: ${size.width}px"` : "";
 
   const copy =
     options.showcase && (shot.title || shot.lede)
@@ -479,7 +483,7 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
       : "";
 
   return `        <figure class="${classes}"${style}>
-${copy}          <div class="shot__frame">
+${copy}          <div class="shot__frame"${frameStyle}>
             <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
           </div>
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;

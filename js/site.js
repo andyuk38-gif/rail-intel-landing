@@ -2821,11 +2821,11 @@
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-shot-rotate]"), function (root) {
     var stage = root.querySelector("[data-shot-rotate-stage]");
-    var slides = Array.prototype.slice.call(root.querySelectorAll(".shot-rotate__slide"));
+    var panels = Array.prototype.slice.call(root.querySelectorAll("[data-shot-rotate-panel]"));
     var dots = Array.prototype.slice.call(root.querySelectorAll("[data-shot-rotate-dot]"));
     var prevBtn = root.querySelector("[data-shot-rotate-prev]");
     var nextBtn = root.querySelector("[data-shot-rotate-next]");
-    if (!stage || slides.length < 2) return;
+    if (!stage || panels.length < 2) return;
 
     var interval = Number(root.getAttribute("data-shot-rotate-interval")) || 5000;
     var index = 0;
@@ -2833,17 +2833,20 @@
     var paused = false;
     var visible = false;
 
-    function slideHeight(slide) {
+    function slideHeight(panel) {
+      var slide = panel.querySelector("img");
+      if (!slide) return 0;
       var width = Number(slide.getAttribute("width")) || slide.naturalWidth || stage.clientWidth;
       var height = Number(slide.getAttribute("height")) || slide.naturalHeight || width * 0.75;
       if (!width) return 0;
-      return Math.max(1, Math.round(stage.clientWidth * (height / width)));
+      var displayWidth = Math.min(stage.clientWidth, width);
+      return Math.max(1, Math.round(displayWidth * (height / width)));
     }
 
     function syncStage() {
-      var activeSlide = slides[index];
-      if (!activeSlide) return;
-      stage.style.height = slideHeight(activeSlide) + "px";
+      var activePanel = panels[index];
+      if (!activePanel) return;
+      stage.style.height = slideHeight(activePanel) + "px";
     }
 
     function syncDots() {
@@ -2856,11 +2859,11 @@
     }
 
     function show(nextIndex, userInitiated) {
-      index = ((nextIndex % slides.length) + slides.length) % slides.length;
-      slides.forEach(function (slide, slideIndex) {
-        var active = slideIndex === index;
-        slide.classList.toggle("is-active", active);
-        slide.setAttribute("aria-hidden", active ? "false" : "true");
+      index = ((nextIndex % panels.length) + panels.length) % panels.length;
+      panels.forEach(function (panel, panelIndex) {
+        var active = panelIndex === index;
+        panel.classList.toggle("is-active", active);
+        panel.setAttribute("aria-hidden", active ? "false" : "true");
       });
       syncDots();
       syncStage();
@@ -2913,8 +2916,9 @@
       });
     });
 
-    slides.forEach(function (slide) {
-      if (slide.complete) return;
+    panels.forEach(function (panel) {
+      var slide = panel.querySelector("img");
+      if (!slide || slide.complete) return;
       slide.addEventListener("load", syncStage);
     });
 
