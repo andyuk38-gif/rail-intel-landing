@@ -682,7 +682,7 @@
 }
 
 .page-section--wide .page-section__head--wide > p {
-  max-width: 52rem;
+  max-width: none;
 }
 
 .shot-grid--full {

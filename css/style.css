@@ -44,8 +44,10 @@ body::before {
   width: 100%;
   height: 100%;
   height: 100dvh;
-  background: url("../images/background.png") no-repeat center 45% / cover;
-  opacity: 0.5;
+  background:
+    linear-gradient(180deg, rgba(12, 15, 20, 0.82) 0%, rgba(12, 15, 20, 0.9) 52%, rgba(12, 15, 20, 0.86) 100%),
+    url("../images/background.png") no-repeat center 45% / cover;
+  opacity: 1;
   z-index: -1;
   pointer-events: none;
   transform: translateZ(0);
@@ -57,9 +59,9 @@ body::before {
    full document height makes background-size: cover zoom the image far too much. */
 @media (max-width: 900px), (hover: none) and (pointer: coarse) {
   body::before {
-    background-position: center top;
-    background-size: auto 100%;
-    opacity: 0.42;
+    background:
+      linear-gradient(180deg, rgba(12, 15, 20, 0.86) 0%, rgba(12, 15, 20, 0.92) 100%),
+      url("../images/background.png") no-repeat center top / auto 100%;
   }
 }
 
