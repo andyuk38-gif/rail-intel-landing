@@ -161,6 +161,9 @@ export const addons = [
     tagline: "Prove compliance instead of asserting it",
     lead:
       "QA Verifications runs structured checks across an employee's competency, medical and licence data, scores every section, and keeps the run history as evidence. Instead of assembling a compliance picture by hand before an audit, you produce it on demand.",
+    heroExtra:
+      "Any compliance issues are live and produced in real time on your dashboard. As a manager, any individual assigned to your team is purely a reflection on your dashboard stats.",
+    hideHeroActions: true,
     faq: [
       {
         question: "What does QA Verifications check?",

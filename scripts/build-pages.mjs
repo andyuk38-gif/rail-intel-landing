@@ -1213,11 +1213,14 @@ function addonPage(addon) {
           <span class="page-badge page-badge--addon">Add-on module</span>
           <h1 class="page-title">${esc(addon.tagline)}</h1>
           <p class="page-lead">${esc(addon.lead)}</p>
-${note}
-          <div class="page-actions">
+${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}${note}${
+    addon.hideHeroActions
+      ? ""
+      : `          <div class="page-actions">
             <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="${base}products/" class="btn btn-ghost btn-lg">All add-ons</a>
-          </div>`;
+          </div>`
+  }`;
 
   const heroMedia = addon.heroVideo
     ? renderHeroVideo(addon.heroVideo, base)
