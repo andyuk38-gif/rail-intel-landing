@@ -790,6 +790,208 @@
   }
 }
 
+.page-section--report-roll .page-section__head {
+  margin-bottom: 1.5rem;
+}
+
+.report-roll {
+  margin-top: 0.5rem;
+  padding: 1.35rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(ellipse 80% 55% at 0% 0%, rgba(56, 189, 248, 0.08), transparent 58%),
+    linear-gradient(180deg, rgba(14, 18, 28, 0.96) 0%, rgba(10, 13, 18, 0.98) 100%);
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.34);
+}
+
+.report-roll__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 2rem 2.5rem;
+  align-items: center;
+}
+
+.report-roll__copy {
+  position: relative;
+  padding-left: 1rem;
+  border-left: 3px solid var(--report-roll-accent, var(--accent));
+  min-height: 12rem;
+}
+
+.report-roll__step {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--report-roll-accent, var(--accent));
+}
+
+.report-roll__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.report-roll__text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.report-roll.is-swapping .report-roll__title,
+.report-roll.is-swapping .report-roll__text,
+.report-roll.is-swapping .report-roll__step {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.report-roll__visual {
+  min-width: 0;
+}
+
+.report-roll__stage {
+  position: relative;
+  height: clamp(16rem, 34vw, 24rem);
+  perspective: 1500px;
+  perspective-origin: 50% 46%;
+  overflow: visible;
+}
+
+.report-roll__stage::before {
+  content: "";
+  position: absolute;
+  inset: auto 10% -8%;
+  height: 42%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.08), transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.report-roll__ring {
+  position: absolute;
+  inset: 0 2%;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--report-roll-active, 0) * -90deg));
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.report-roll__panel {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--report-roll-i) * 90deg)) translateZ(clamp(10rem, 20vw, 15rem));
+  backface-visibility: hidden;
+}
+
+.report-roll__panel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0d12;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 24px 48px rgba(0, 0, 0, 0.45);
+}
+
+.report-roll__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.report-roll__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.report-roll__btn:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-hover);
+}
+
+.report-roll__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.report-roll__dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.report-roll__dot[aria-current="true"] {
+  width: 1.35rem;
+  background: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .report-roll__layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .report-roll__copy {
+    min-height: 0;
+  }
+
+  .report-roll__stage {
+    height: clamp(14rem, 52vw, 18rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .report-roll__ring {
+    transition: none;
+    transform: none !important;
+  }
+
+  .report-roll__panel {
+    position: relative;
+    transform: none !important;
+  }
+
+  .report-roll__panel[aria-hidden="true"] {
+    display: none;
+  }
+}
+
 .spec-tiles {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

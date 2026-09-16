@@ -866,6 +866,64 @@ function renderSpecTiles(section) {
     .join("\n")}\n          </div>`;
 }
 
+function renderReportRoll(section, base) {
+  const roll = section.reportRoll;
+  const steps = roll?.steps || [];
+  if (!steps.length) return "";
+
+  const interval = roll.interval || 5000;
+  const first = steps[0];
+  const panels = steps
+    .map((step, index) => {
+      const size = manifest[step.src];
+      if (!size) throw new Error(`Missing screenshot in manifest: ${step.src}`);
+      const scale = typeof step.scale === "number" ? step.scale : 1;
+      const width = Math.max(1, Math.round(size.width * scale));
+      const height = Math.max(1, Math.round(size.height * scale));
+      const accent = step.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
+      return `              <div class="report-roll__panel" data-report-roll-panel="${index}" data-report-roll-step="${esc(step.step || String(index + 1).padStart(2, "0"))}" data-report-roll-title="${esc(step.title || "")}" data-report-roll-text="${esc(step.text || "")}" style="--report-roll-i: ${index}; --report-roll-accent: ${esc(accent)}"${index === 0 ? "" : ' aria-hidden="true"'}>
+                <img src="${base}${step.src}?v=${ASSET_VERSION}" alt="${esc(step.alt || step.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+              </div>`;
+    })
+    .join("\n");
+
+  const dots = steps
+    .map((step, index) => {
+      const label = step.label || step.title || `Step ${index + 1}`;
+      const active = index === 0;
+      return `              <button type="button" class="report-roll__dot" data-report-roll-dot="${index}" role="tab" aria-label="${esc(label)}" aria-selected="${active ? "true" : "false"}"${active ? ' aria-current="true"' : ""}></button>`;
+    })
+    .join("\n");
+
+  return `      <div class="report-roll reveal" data-report-roll data-report-roll-interval="${interval}">
+        <div class="report-roll__layout">
+          <div class="report-roll__copy">
+            <p class="report-roll__step" data-report-roll-step>${esc(first.step || "01")}</p>
+            <h3 class="report-roll__title" data-report-roll-title>${esc(first.title || "")}</h3>
+            <p class="report-roll__text" data-report-roll-text>${esc(first.text || "")}</p>
+          </div>
+          <div class="report-roll__visual">
+            <div class="report-roll__stage" data-report-roll-stage>
+              <div class="report-roll__ring" data-report-roll-ring style="--report-roll-active: 0">
+${panels}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="report-roll__controls">
+          <button type="button" class="report-roll__btn" data-report-roll-prev aria-label="Previous report step">
+            <span aria-hidden="true">↑</span>
+          </button>
+          <div class="report-roll__dots" data-report-roll-dots role="tablist" aria-label="Report steps">
+${dots}
+          </div>
+          <button type="button" class="report-roll__btn" data-report-roll-next aria-label="Next report step">
+            <span aria-hidden="true">↓</span>
+          </button>
+        </div>
+      </div>`;
+}
+
 function renderSection(section, base) {
   const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
 
@@ -917,7 +975,9 @@ function renderSection(section, base) {
     }
   }
 
-  return `    <section class="page-section${wide ? " page-section--wide" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+  const reportRoll = section.reportRoll ? renderReportRoll(section, base) : "";
+
+  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
         <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
           <h2>${esc(section.heading)}</h2>
@@ -925,6 +985,7 @@ ${body}
 ${bullets}
         </div>
 ${shots}
+${reportRoll}
       </div>
     </section>`;
 }

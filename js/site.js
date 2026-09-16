@@ -2951,3 +2951,132 @@
     });
   });
 })();
+
+(function () {
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-report-roll]"), function (root) {
+    var ring = root.querySelector("[data-report-roll-ring]");
+    var panels = Array.prototype.slice.call(root.querySelectorAll("[data-report-roll-panel]"));
+    var dots = Array.prototype.slice.call(root.querySelectorAll("[data-report-roll-dot]"));
+    var prevBtn = root.querySelector("[data-report-roll-prev]");
+    var nextBtn = root.querySelector("[data-report-roll-next]");
+    var stepEl = root.querySelector("[data-report-roll-step]");
+    var titleEl = root.querySelector("[data-report-roll-title]");
+    var textEl = root.querySelector("[data-report-roll-text]");
+    var copyEl = root.querySelector(".report-roll__copy");
+    if (!ring || panels.length < 2) return;
+
+    var interval = Number(root.getAttribute("data-report-roll-interval")) || 5000;
+    var index = 0;
+    var timer = null;
+    var paused = false;
+    var visible = false;
+
+    function syncCopy(panel) {
+      if (!panel) return;
+      if (stepEl) stepEl.textContent = panel.getAttribute("data-report-roll-step") || "";
+      if (titleEl) titleEl.textContent = panel.getAttribute("data-report-roll-title") || "";
+      if (textEl) textEl.textContent = panel.getAttribute("data-report-roll-text") || "";
+      if (copyEl) {
+        copyEl.style.setProperty("--report-roll-accent", panel.style.getPropertyValue("--report-roll-accent") || "#f59e0b");
+      }
+    }
+
+    function syncDots() {
+      dots.forEach(function (dot, dotIndex) {
+        var active = dotIndex === index;
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+        if (active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    }
+
+    function show(nextIndex, userInitiated) {
+      index = ((nextIndex % panels.length) + panels.length) % panels.length;
+      var panel = panels[index];
+
+      if (!reducedMotion) {
+        ring.style.setProperty("--report-roll-active", String(index));
+      }
+
+      panels.forEach(function (item, itemIndex) {
+        var active = itemIndex === index;
+        item.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+
+      root.classList.add("is-swapping");
+      window.setTimeout(function () {
+        syncCopy(panel);
+        root.classList.remove("is-swapping");
+      }, reducedMotion ? 0 : 140);
+
+      syncDots();
+      if (userInitiated && visible && !paused && !reducedMotion) start();
+    }
+
+    function advance() {
+      if (paused) return;
+      show(index + 1, false);
+    }
+
+    function start() {
+      stop();
+      if (reducedMotion || paused || !visible) return;
+      timer = window.setInterval(advance, interval);
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    root.addEventListener("mouseenter", function () {
+      paused = true;
+      stop();
+    });
+
+    root.addEventListener("mouseleave", function () {
+      paused = false;
+      if (visible) start();
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        show(index - 1, true);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        show(index + 1, true);
+      });
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        show(Number(dot.getAttribute("data-report-roll-dot")) || 0, true);
+      });
+    });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            visible = entry.isIntersecting;
+            if (visible) start();
+            else stop();
+          });
+        },
+        { threshold: 0.3 }
+      ).observe(root);
+    } else {
+      visible = true;
+      start();
+    }
+
+    show(0, false);
+  });
+})();
