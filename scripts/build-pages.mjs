@@ -2429,7 +2429,15 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 </div>
                 <div class="field">
                   <label for="currentContractEndDate">Current contract end date <span class="field-optional">(optional)</span></label>
-                  <input id="currentContractEndDate" name="currentContractEndDate" type="date" />
+                  <div class="signup-date-field">
+                    <input id="currentContractEndDate" name="currentContractEndDate" type="date" autocomplete="off" />
+                    <button type="button" class="signup-date-field__open" aria-label="Open calendar" data-signup-date-open="currentContractEndDate">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                        <path d="M16 2v4M8 2v4M3 10h18"></path>
+                      </svg>
+                    </button>
+                  </div>
                   <label class="signup-form__check">
                     <input id="noCurrentContract" name="noCurrentContract" type="checkbox" />
                     <span>No contract or expired contract</span>

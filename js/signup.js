@@ -193,16 +193,33 @@
     return !!(el && el.checked);
   }
 
+  function openSignupDatePicker(dateEl) {
+    if (!dateEl || dateEl.disabled) return;
+    if (typeof dateEl.showPicker === "function") {
+      try {
+        dateEl.showPicker();
+        return;
+      } catch (_err) {
+        /* Safari can throw if not triggered from a direct user gesture */
+      }
+    }
+    dateEl.focus();
+  }
+
   function syncCurrentContractDateField() {
     var dateEl = document.getElementById("currentContractEndDate");
     var noContractEl = document.getElementById("noCurrentContract");
+    var openBtn = document.querySelector('[data-signup-date-open="currentContractEndDate"]');
     if (!dateEl) return;
-    dateEl.removeAttribute("min");
     if (noContractEl && noContractEl.checked) {
       dateEl.value = "";
       dateEl.disabled = true;
+      dateEl.removeAttribute("min");
+      if (openBtn) openBtn.disabled = true;
     } else {
       dateEl.disabled = false;
+      dateEl.min = todayIsoDate();
+      if (openBtn) openBtn.disabled = false;
     }
   }
 
@@ -212,7 +229,24 @@
     if (endDate && !/^\d{4}-\d{2}-\d{2}$/.test(endDate)) {
       return "Please enter a valid contract end date.";
     }
+    if (endDate && endDate < todayIsoDate()) {
+      return "Contract end date must be today or in the future.";
+    }
     return "";
+  }
+
+  function initSignupDateFields() {
+    document.querySelectorAll("[data-signup-date-open]").forEach(function (btn) {
+      var inputId = btn.getAttribute("data-signup-date-open");
+      var dateEl = inputId ? document.getElementById(inputId) : null;
+      if (!dateEl) return;
+      btn.addEventListener("click", function () {
+        openSignupDatePicker(dateEl);
+      });
+      dateEl.addEventListener("click", function () {
+        openSignupDatePicker(dateEl);
+      });
+    });
   }
 
   function contactPhoneCountryIso() {
@@ -747,6 +781,7 @@
     });
   }
 
+  initSignupDateFields();
   syncCurrentContractDateField();
   var noCurrentContractEl = document.getElementById("noCurrentContract");
   if (noCurrentContractEl) {

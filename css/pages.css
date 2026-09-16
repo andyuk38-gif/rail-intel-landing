@@ -5415,9 +5415,9 @@ body.lightbox-open {
   position: relative;
   display: flex;
   align-items: center;
-  flex: 0 0 auto;
-  min-width: 7.25rem;
-  max-width: 9.5rem;
+  flex: 0 1 14.5rem;
+  min-width: 12rem;
+  max-width: 17rem;
 }
 
 .signup-phone-field__flag {
@@ -5458,11 +5458,24 @@ body.lightbox-open {
 }
 
 .signup-phone-field > input {
-  flex: 1 1 auto;
+  flex: 1 1 8rem;
   min-width: 0;
 }
 
-.signup-wizard-glass .field input,
+@media (max-width: 520px) {
+  .signup-phone-field {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .signup-phone-field__code {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.signup-wizard-glass .field input:not([type="checkbox"]):not([type="radio"]),
 .signup-wizard-glass .field textarea {
   width: 100%;
   padding: 0.8rem 0.95rem;
@@ -5474,7 +5487,7 @@ body.lightbox-open {
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
-.signup-wizard-glass .field input:focus,
+.signup-wizard-glass .field input:not([type="checkbox"]):not([type="radio"]):focus,
 .signup-wizard-glass .field textarea:focus {
   outline: none;
   border-color: color-mix(in srgb, var(--accent) 55%, rgba(255, 255, 255, 0.2));
@@ -5485,20 +5498,90 @@ body.lightbox-open {
 .signup-wizard-glass .field label.signup-form__check,
 .signup-form__check {
   display: flex;
-  align-items: center;
-  gap: 0.55rem;
+  align-items: flex-start;
+  gap: 0.6rem;
+  width: 100%;
   margin-top: 0.65rem;
   margin-bottom: 0;
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.82);
   cursor: pointer;
 }
 
-.signup-form__check input {
+.signup-form__check input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0.12rem 0 0;
+  padding: 0;
+  flex: 0 0 auto;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.signup-form__check span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.signup-date-field {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.signup-wizard-glass .field input[type="date"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-right: 2.85rem;
+  color-scheme: dark;
+}
+
+.signup-wizard-glass .field input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 2.85rem;
+  height: 100%;
   margin: 0;
-  flex-shrink: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.signup-wizard-glass .field input[type="date"]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.signup-date-field__open {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+}
+
+.signup-date-field__open:hover,
+.signup-date-field__open:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+.signup-date-field__open:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .signup-form .field--full {
