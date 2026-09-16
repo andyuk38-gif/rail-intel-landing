@@ -271,6 +271,11 @@ export const seoExtensions = {
         answer:
           "Yes. The administrator must enter a reason before the lock is applied. The lock, their name and the reason are written to the audit trail.",
       },
+      {
+        question: "Why does Rail Intel include profile lock?",
+        answer:
+          "When an employee record may become material to an investigation, its evidential value depends on it not changing while reviewers examine it. Profile lock supports that requirement for inquiries led by the Office of Rail and Road (ORR), the Rail Accident Investigation Branch (RAIB) and your own internal investigations. A company administrator applies the lock with a documented reason; the record is then preserved at a point in time and every section becomes read-only until the lock is released. That gives regulators, investigators and your assurance team a stable artefact to work from — not a record that has been amended under review.",
+      },
     ],
   },
 
