@@ -46,17 +46,52 @@
       "</div>";
   }
 
-  function scrollQuotationIntoView() {
-    if (!view) return;
+  function fixedChromeInset() {
+    var chrome = document.querySelector(".site-chrome");
+    var bottom = chrome ? chrome.getBoundingClientRect().bottom : 0;
+    return Math.max(bottom, 96) + 16;
+  }
+
+  function setQuotationCompleteState() {
+    var heroTitle = document.querySelector(".page-hero .page-title");
+    var heroSection = document.querySelector(".page-hero");
+    var breadcrumb = document.querySelector(".page-hero .breadcrumb");
+    if (heroTitle) heroTitle.textContent = "Thank you";
+    if (heroSection) heroSection.classList.add("page-hero--complete");
+    if (breadcrumb) breadcrumb.hidden = true;
+  }
+
+  function scrollThankYouIntoView(container) {
+    if (!container) return;
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var top = view.getBoundingClientRect().top + window.scrollY - 100;
-    window.scrollTo({ top: Math.max(0, top), behavior: reduced ? "auto" : "smooth" });
-    view.setAttribute("tabindex", "-1");
-    try {
-      view.focus({ preventScroll: true });
-    } catch (e) {
-      view.focus();
+    var behavior = reduced ? "auto" : "smooth";
+
+    function align() {
+      var target =
+        document.querySelector(".page-hero--complete .page-title") ||
+        container.querySelector("#quotation-thank-you") ||
+        container.querySelector(".signup-form__title") ||
+        container;
+      var inset = fixedChromeInset();
+      target.style.scrollMarginTop = inset + "px";
+      target.scrollIntoView({ behavior: behavior, block: "start", inline: "nearest" });
+      target.setAttribute("tabindex", "-1");
+      try {
+        target.focus({ preventScroll: true });
+      } catch (e) {
+        target.focus();
+      }
     }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        align();
+        setTimeout(align, 80);
+        setTimeout(function () {
+          align();
+        }, 420);
+      });
+    });
   }
 
   function renderError(message) {
@@ -107,14 +142,12 @@
         body: JSON.stringify({ action: action }),
       }, 1)
         .then(function (body) {
+          setQuotationCompleteState();
           view.innerHTML =
-            '<h2 class="signup-form__title">Thank you</h2>' +
-            '<p class="signup-form__lead signup-form__lead--success">' +
+            '<p class="signup-form__lead signup-form__lead--success" id="quotation-thank-you">' +
             (body.message || "Your response has been recorded.") +
             "</p>";
-          requestAnimationFrame(function () {
-            scrollQuotationIntoView();
-          });
+          scrollThankYouIntoView(view);
         })
         .catch(function (err) {
           if (msgEl) {

@@ -6116,6 +6116,16 @@ body.lightbox-open {
 [data-quotation-view] .signup-form__title,
 [data-invoice-view] .signup-form__title {
   text-align: center;
+  scroll-margin-top: calc(var(--dev-banner-height, 2.5rem) + 6.25rem);
+}
+
+.page-hero--complete {
+  padding-bottom: clamp(0.75rem, 2vh, 1.25rem) !important;
+}
+
+.page-hero--complete .page-title {
+  margin-bottom: 0;
+  scroll-margin-top: calc(var(--dev-banner-height, 2.5rem) + 6.25rem);
 }
 
 [data-quotation-view] .signup-form__lead--success,
