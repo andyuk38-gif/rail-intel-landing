@@ -74,12 +74,15 @@ $status = 0;
 
 if (function_exists('curl_init')) {
     $ch = curl_init($url);
+    $timeout = $method === 'GET' ? 30 : 60;
     curl_setopt_array($ch, [
         CURLOPT_CUSTOMREQUEST => $method,
         CURLOPT_HTTPHEADER => $headers,
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT => 60,
+        CURLOPT_CONNECTTIMEOUT => 8,
+        CURLOPT_TIMEOUT => $timeout,
         CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_TCP_KEEPALIVE => 1,
     ]);
     if ($method === 'POST' && $body !== false && $body !== '') {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);

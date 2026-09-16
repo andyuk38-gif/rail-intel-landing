@@ -5839,21 +5839,130 @@ body.lightbox-open {
 .quotation-a4-wrap {
   margin: 1.5rem auto 0;
   max-width: 794px;
+  width: 100%;
   background: #e2e8f0;
   padding: 1rem;
   border-radius: 12px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
 }
 
 .quotation-a4-wrap .ri-quotation-doc,
+.quotation-a4-wrap .ri-invoice-doc,
 .quotation-a4-wrap > div {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Quotation / invoice document — narrow viewports */
+@media (max-width: 640px) {
+  [data-quotation-view],
+  [data-invoice-view] {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  [data-quotation-view].signup-form.panel,
+  [data-invoice-view].signup-form.panel {
+    padding: 1rem 0.75rem;
+  }
+
+  .quotation-a4-wrap {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .quotation-a4-wrap .ri-quotation-doc,
+  .quotation-a4-wrap .ri-invoice-doc {
+    padding: 1.25rem 0.875rem 1.5rem !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-header h1 {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-meta {
+    gap: 0.75rem 1rem !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-meta > div {
+    min-width: 0 !important;
+    flex: 1 1 9rem;
+  }
+
+  .quotation-a4-wrap .ri-doc-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -2px 0.5rem;
+  }
+
+  .quotation-a4-wrap .ri-doc-table-wrap table {
+    min-width: 520px;
+  }
+
+  .quotation-a4-wrap .ri-doc-totals-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .quotation-a4-wrap .ri-doc-totals-wrap table {
+    max-width: 100% !important;
+  }
+
+  .quotation-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quotation-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .quotation-actions {
   justify-content: center;
   margin-top: 1.5rem;
+}
+
+.doc-load-skeleton {
+  padding: 0.25rem 0 1rem;
+}
+
+.doc-load-skeleton__block {
+  height: 0.85rem;
+  margin-top: 0.75rem;
+  border-radius: 0.35rem;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  background-size: 200% 100%;
+  animation: doc-load-shimmer 1.4s ease-in-out infinite;
+}
+
+.doc-load-skeleton__block--short {
+  width: 62%;
+}
+
+@keyframes doc-load-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 [data-quotation-view] .signup-form__title,

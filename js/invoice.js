@@ -20,6 +20,32 @@
     return apiBase.replace(/\/$/, "") + "/" + normalized;
   }
 
+  function fetchJson(path, retriesLeft) {
+    if (retriesLeft === undefined) retriesLeft = 2;
+    return fetch(apiUrl(path)).then(function (res) {
+      if ((res.status === 502 || res.status === 503) && retriesLeft > 0) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, 600);
+        }).then(function () {
+          return fetchJson(path, retriesLeft - 1);
+        });
+      }
+      return res.json().then(function (data) {
+        if (!res.ok) throw new Error(data.error || "Request failed");
+        return data;
+      });
+    });
+  }
+
+  function showLoading() {
+    view.innerHTML =
+      '<div class="doc-load-skeleton" aria-busy="true" aria-live="polite">' +
+      '<p class="signup-form__lead">Loading your invoice…</p>' +
+      '<div class="doc-load-skeleton__block"></div>' +
+      '<div class="doc-load-skeleton__block doc-load-skeleton__block--short"></div>' +
+      "</div>";
+  }
+
   function renderError(message) {
     view.innerHTML =
       '<h2 class="signup-form__title">Invoice unavailable</h2>' +
@@ -53,13 +79,8 @@
     return;
   }
 
-  fetch(apiUrl("/public/invoice/" + encodeURIComponent(token)))
-    .then(function (res) {
-      return res.json().then(function (data) {
-        if (!res.ok) throw new Error(data.error || "Invoice not found");
-        return data;
-      });
-    })
+  showLoading();
+  fetchJson("/public/invoice/" + encodeURIComponent(token))
     .then(renderInvoice)
     .catch(function (err) {
       renderError(err.message || "This invoice is no longer available.");

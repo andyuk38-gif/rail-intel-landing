@@ -20,6 +20,32 @@
     return apiBase.replace(/\/$/, "") + "/" + normalized;
   }
 
+  function fetchJson(path, options, retriesLeft) {
+    if (retriesLeft === undefined) retriesLeft = 2;
+    return fetch(apiUrl(path), options).then(function (res) {
+      if ((res.status === 502 || res.status === 503) && retriesLeft > 0) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, 600);
+        }).then(function () {
+          return fetchJson(path, options, retriesLeft - 1);
+        });
+      }
+      return res.json().then(function (data) {
+        if (!res.ok) throw new Error(data.error || "Request failed");
+        return data;
+      });
+    });
+  }
+
+  function showLoading() {
+    view.innerHTML =
+      '<div class="doc-load-skeleton" aria-busy="true" aria-live="polite">' +
+      '<p class="signup-form__lead">Loading your quotation…</p>' +
+      '<div class="doc-load-skeleton__block"></div>' +
+      '<div class="doc-load-skeleton__block doc-load-skeleton__block--short"></div>' +
+      "</div>";
+  }
+
   function renderError(message) {
     view.innerHTML =
       '<h2 class="signup-form__title">Quotation unavailable</h2>' +
@@ -62,17 +88,11 @@
         msgEl.dataset.state = "info";
       }
 
-      fetch(apiUrl("/public/quotation/" + encodeURIComponent(token) + "/respond"), {
+      fetchJson("/public/quotation/" + encodeURIComponent(token) + "/respond", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: action }),
-      })
-        .then(function (res) {
-          return res.json().then(function (body) {
-            if (!res.ok) throw new Error(body.error || "Could not submit response");
-            return body;
-          });
-        })
+      }, 1)
         .then(function (body) {
           view.innerHTML =
             '<h2 class="signup-form__title">Thank you</h2>' +
@@ -101,13 +121,8 @@
     return;
   }
 
-  fetch(apiUrl("/public/quotation/" + encodeURIComponent(token)))
-    .then(function (res) {
-      return res.json().then(function (data) {
-        if (!res.ok) throw new Error(data.error || "Quotation not found");
-        return data;
-      });
-    })
+  showLoading();
+  fetchJson("/public/quotation/" + encodeURIComponent(token))
     .then(renderQuotation)
     .catch(function (err) {
       renderError(err.message || "This quotation is no longer available.");
