@@ -23,17 +23,19 @@
     "A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.";
   var progressFill = document.querySelector("[data-signup-progress]");
 
+  var TOTAL_STEPS = 6;
   var PANEL_STEP = {
     company: 1,
-    contact: 2,
-    "path-choice": 3,
-    "quote-requirements": 4,
-    "quote-modules": 4,
-    "purchase-modules": 4,
-    "purchase-payment": 4,
-    "purchase-pay": 4,
-    "quote-complete": 5,
-    "purchase-complete": 5,
+    "current-setup": 2,
+    contact: 3,
+    "path-choice": 4,
+    "quote-requirements": 5,
+    "quote-modules": 5,
+    "purchase-modules": 5,
+    "purchase-payment": 5,
+    "purchase-pay": 5,
+    "quote-complete": 6,
+    "purchase-complete": 6,
   };
 
   var state = {
@@ -123,7 +125,7 @@
   }
 
   function updateProgress(step) {
-    if (progressFill) progressFill.style.width = Math.min(100, step * 20) + "%";
+    if (progressFill) progressFill.style.width = Math.min(100, (step / TOTAL_STEPS) * 100) + "%";
   }
 
   function scrollWizardIntoView() {
@@ -169,6 +171,12 @@
   function validateCompany() {
     if (!fieldValue("companyName")) return "Please enter your company name.";
     if (!fieldValue("companyAddress")) return "Please enter your registered address.";
+    return "";
+  }
+
+  function validateCurrentSetup() {
+    if (!fieldValue("currentSupplier")) return "Please enter your current supplier.";
+    if (!fieldValue("currentContractEndDate")) return "Please enter when your current contract ends.";
     return "";
   }
 
@@ -386,6 +394,8 @@
       contactEmail: fieldValue("contactEmail"),
       contactPhone: fieldValue("contactPhone"),
       notes: fieldValue("notes") || fieldValue("purchaseNotes"),
+      currentSupplier: fieldValue("currentSupplier"),
+      currentContractEndDate: fieldValue("currentContractEndDate"),
       source: "railintel.co.uk",
       website: fieldValue("website"),
     };
@@ -514,15 +524,22 @@
 
   function gotoPanel(target) {
     hideMessage(getMsgEl(state.panel));
+    if (target === "current-setup") {
+      var companyErr = validateCompany();
+      if (companyErr) {
+        showMessage(getMsgEl("company"), companyErr, "error");
+        return;
+      }
+    }
     if (target === "contact") {
-      var err = validateCompany();
-      if (err) {
-        showMessage(getMsgEl("company"), err, "error");
+      var setupErr = validateCompany() || validateCurrentSetup();
+      if (setupErr) {
+        showMessage(getMsgEl(validateCompany() ? "current-setup" : "company"), setupErr, "error");
         return;
       }
     }
     if (target === "path-choice") {
-      var contactErr = validateContact();
+      var contactErr = validateContact() || validateCurrentSetup() || validateCompany();
       if (contactErr) {
         showMessage(getMsgEl("contact"), contactErr, "error");
         return;
@@ -567,7 +584,7 @@
   var submitQuoteBtn = document.querySelector("[data-signup-submit-quote]");
   if (submitQuoteBtn) {
     submitQuoteBtn.addEventListener("click", function () {
-      var contactErr = validateContact() || validateCompany();
+      var contactErr = validateContact() || validateCurrentSetup() || validateCompany();
       if (contactErr) {
         showMessage(getMsgEl("quote-modules"), contactErr, "error");
         return;
@@ -579,7 +596,7 @@
   var savePurchaseBtn = document.querySelector("[data-signup-save-purchase]");
   if (savePurchaseBtn) {
     savePurchaseBtn.addEventListener("click", function () {
-      var contactErr = validateContact() || validateCompany();
+      var contactErr = validateContact() || validateCurrentSetup() || validateCompany();
       if (contactErr) {
         showMessage(getMsgEl("purchase-modules"), contactErr, "error");
         return;
