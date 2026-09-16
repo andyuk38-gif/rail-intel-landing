@@ -5880,6 +5880,32 @@ body.lightbox-open {
   min-height: 12rem;
 }
 
+.signup-wizard__body[data-signup-panel="company"] {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(18rem, 34vh, 24rem);
+}
+
+.signup-wizard__body[data-signup-panel="company"] .signup-form__grid {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.signup-wizard__body[data-signup-panel="company"] .field--grow {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.signup-wizard__body[data-signup-panel="company"] .field--grow textarea {
+  flex: 1 1 auto;
+  min-height: 8rem;
+  resize: vertical;
+}
+
 .signup-wizard__body.is-entering {
   animation: signup-panel-in 0.38s cubic-bezier(0.4, 0, 0.2, 1);
 }
