@@ -46,6 +46,19 @@
       "</div>";
   }
 
+  function scrollQuotationIntoView() {
+    if (!view) return;
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var top = view.getBoundingClientRect().top + window.scrollY - 100;
+    window.scrollTo({ top: Math.max(0, top), behavior: reduced ? "auto" : "smooth" });
+    view.setAttribute("tabindex", "-1");
+    try {
+      view.focus({ preventScroll: true });
+    } catch (e) {
+      view.focus();
+    }
+  }
+
   function renderError(message) {
     view.innerHTML =
       '<h2 class="signup-form__title">Quotation unavailable</h2>' +
@@ -99,6 +112,9 @@
             '<p class="signup-form__lead signup-form__lead--success">' +
             (body.message || "Your response has been recorded.") +
             "</p>";
+          requestAnimationFrame(function () {
+            scrollQuotationIntoView();
+          });
         })
         .catch(function (err) {
           if (msgEl) {

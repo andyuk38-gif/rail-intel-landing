@@ -197,7 +197,7 @@
     var dateEl = document.getElementById("currentContractEndDate");
     var noContractEl = document.getElementById("noCurrentContract");
     if (!dateEl) return;
-    dateEl.min = todayIsoDate();
+    dateEl.removeAttribute("min");
     if (noContractEl && noContractEl.checked) {
       dateEl.value = "";
       dateEl.disabled = true;
@@ -212,15 +212,52 @@
     if (endDate && !/^\d{4}-\d{2}-\d{2}$/.test(endDate)) {
       return "Please enter a valid contract end date.";
     }
-    if (endDate && endDate < todayIsoDate()) {
-      return "Contract end date must be today or in the future.";
-    }
     return "";
+  }
+
+  function contactPhoneCountryIso() {
+    var el = document.getElementById("contactPhoneCountry");
+    return (el && el.value) || "GB";
+  }
+
+  function contactPhoneDialCode() {
+    if (window.RiPhoneCountries) {
+      return window.RiPhoneCountries.getDialForIso(contactPhoneCountryIso());
+    }
+    return "+44";
+  }
+
+  function formattedContactPhone() {
+    if (window.RiPhoneCountries) {
+      return window.RiPhoneCountries.formatPhone(contactPhoneDialCode(), fieldValue("contactPhone"));
+    }
+    return fieldValue("contactPhone");
+  }
+
+  function syncContactPhoneFlag() {
+    var selectEl = document.getElementById("contactPhoneCountry");
+    var flagEl = document.querySelector("[data-phone-flag]");
+    if (!selectEl || !flagEl || !window.RiPhoneCountries) return;
+    flagEl.textContent = window.RiPhoneCountries.getFlagForIso(selectEl.value);
+  }
+
+  function initContactPhoneCountry() {
+    var selectEl = document.getElementById("contactPhoneCountry");
+    if (!selectEl || !window.RiPhoneCountries) return;
+    window.RiPhoneCountries.populateSelect(selectEl, "GB");
+    syncContactPhoneFlag();
+    selectEl.addEventListener("change", syncContactPhoneFlag);
   }
 
   function validateContact() {
     if (!fieldValue("contactName")) return "Please enter a contact name.";
-    if (!fieldValue("contactPhone")) return "Please enter a contact phone number.";
+    var national = fieldValue("contactPhone");
+    if (!national) return "Please enter a contact phone number.";
+    if (window.RiPhoneCountries) {
+      var digits = window.RiPhoneCountries.normalizeNationalNumber(contactPhoneDialCode(), national);
+      if (digits.length < 6) return "Please enter a valid phone number.";
+      if (digits.length > 15) return "Please enter a valid phone number.";
+    }
     var email = fieldValue("contactEmail");
     if (!email) return "Please enter a contact email.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
@@ -431,7 +468,7 @@
       companyAddress: fieldValue("companyAddress"),
       contactName: fieldValue("contactName"),
       contactEmail: fieldValue("contactEmail"),
-      contactPhone: fieldValue("contactPhone"),
+      contactPhone: formattedContactPhone(),
       notes: fieldValue("notes") || fieldValue("purchaseNotes"),
       currentSupplier: fieldValue("currentSupplier"),
       noCurrentContract: noCurrentContractChecked(),
@@ -715,6 +752,8 @@
   if (noCurrentContractEl) {
     noCurrentContractEl.addEventListener("change", syncCurrentContractDateField);
   }
+
+  initContactPhoneCountry();
 
   handleStripeReturn();
   setPanel("company", { scroll: false });

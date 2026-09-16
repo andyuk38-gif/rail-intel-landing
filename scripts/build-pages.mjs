@@ -38,6 +38,7 @@ const ASSET_INPUTS = [
   "js/site.js",
   "js/newsletter.js",
   "js/eoi.js",
+  "js/phone-country-codes.js",
   "js/signup.js",
   "js/contact.js",
   "js/quotation.js",
@@ -2427,7 +2428,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                   <input id="currentSupplier" name="currentSupplier" autocomplete="organization" placeholder="e.g. incumbent CMS or spreadsheet process" />
                 </div>
                 <div class="field">
-                  <label for="currentContractEndDate">Current contract end date</label>
+                  <label for="currentContractEndDate">Current contract end date <span class="field-optional">(optional)</span></label>
                   <input id="currentContractEndDate" name="currentContractEndDate" type="date" />
                   <label class="signup-form__check">
                     <input id="noCurrentContract" name="noCurrentContract" type="checkbox" />
@@ -2454,7 +2455,21 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 </div>
                 <div class="field">
                   <label for="contactPhone">Contact phone *</label>
-                  <input id="contactPhone" name="contactPhone" type="tel" required autocomplete="tel" />
+                  <div class="signup-phone-field">
+                    <div class="signup-phone-field__code">
+                      <span class="signup-phone-field__flag" data-phone-flag aria-hidden="true">🇬🇧</span>
+                      <select id="contactPhoneCountry" name="contactPhoneCountry" aria-label="Country code"></select>
+                    </div>
+                    <input
+                      id="contactPhone"
+                      name="contactPhone"
+                      type="tel"
+                      required
+                      autocomplete="tel-national"
+                      inputmode="tel"
+                      placeholder="Phone number"
+                    />
+                  </div>
                 </div>
                 <div class="field field--full">
                   <label for="contactEmail">Contact email *</label>
@@ -2640,7 +2655,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
 ` +
     renderFooter(base).replace(
       '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>',
-      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/signup.js?v=' + ASSET_VERSION + '"></script>'
+      '<script src="' + base + 'js/site.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/phone-country-codes.js?v=' + ASSET_VERSION + '"></script>\n  <script src="' + base + 'js/signup.js?v=' + ASSET_VERSION + '"></script>'
     )
   );
 }

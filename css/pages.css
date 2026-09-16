@@ -5393,11 +5393,73 @@ body.lightbox-open {
   gap: 1rem;
 }
 
-.signup-wizard-glass .field label {
+.signup-wizard-glass .field label:not(.signup-form__check) {
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 0.35rem;
+}
+
+.signup-wizard-glass .field .field-optional {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.signup-phone-field {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.signup-phone-field__code {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 7.25rem;
+  max-width: 9.5rem;
+}
+
+.signup-phone-field__flag {
+  position: absolute;
+  left: 0.7rem;
+  z-index: 1;
+  font-size: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.signup-phone-field__code select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.65rem 0.55rem 2.15rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 12, 22, 0.72);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: inherit;
+  font-size: 0.875rem;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.65) 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.65) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) calc(50% + 2px),
+    calc(100% - 9px) calc(50% + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.signup-phone-field__code select:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.75);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
+.signup-phone-field > input {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .signup-wizard-glass .field input,
@@ -5420,19 +5482,22 @@ body.lightbox-open {
   background: rgba(8, 10, 14, 0.62);
 }
 
+.signup-wizard-glass .field label.signup-form__check,
 .signup-form__check {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.55rem;
   margin-top: 0.65rem;
+  margin-bottom: 0;
   font-size: 0.875rem;
+  font-weight: 500;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.82);
   cursor: pointer;
 }
 
 .signup-form__check input {
-  margin-top: 0.15rem;
+  margin: 0;
   flex-shrink: 0;
 }
 
