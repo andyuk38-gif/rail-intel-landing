@@ -274,7 +274,7 @@ export const seoExtensions = {
       {
         question: "Why does Rail Intel include profile lock?",
         answer:
-          "When an employee record may become material to an investigation, its evidential value depends on it not changing while reviewers examine it. Profile lock supports that requirement for inquiries led by the Office of Rail and Road (ORR), the Rail Accident Investigation Branch (RAIB) and your own internal investigations. A company administrator applies the lock with a documented reason; the record is then preserved at a point in time and every section becomes read-only until the lock is released. That gives regulators, investigators and your assurance team a stable artefact to work from — not a record that has been amended under review.",
+          "When an employee record may become material to an investigation, its evidential value depends on it not changing while reviewers examine it. Profile lock supports that requirement for inquiries led by the Office of Rail and Road (ORR), the Rail Accident Investigation Branch (RAIB) and your own internal investigations. During a RAIB inquiry, your organisation nominates a Single Point of Contact (SPOC) — the person investigators liaise with on evidence and access. In Rail Intel CMS, that responsibility sits with the company administrator: only they can apply or release a profile lock, and they must record a documented reason when they do. The record is then preserved at a point in time and every section becomes read-only until the lock is released. That gives regulators, investigators and your assurance team a stable artefact to work from — not a record that has been amended under review.",
       },
     ],
   },
