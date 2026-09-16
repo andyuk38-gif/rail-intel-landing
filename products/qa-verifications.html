@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=264310181" />
-  <link rel="stylesheet" href="../css/pages.css?v=264310181" />
+  <link rel="stylesheet" href="../css/style.css?v=19497080" />
+  <link rel="stylesheet" href="../css/pages.css?v=19497080" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -254,7 +254,7 @@
             </div>
             <div class="verify-scan__screen">
               <video class="verify-scan__video" data-verify-scan-video data-max-loops="3" muted playsinline preload="metadata" width="684" height="668" aria-label="QA verification scanning each section of an employee record">
-                <source src="../video/ScanningEmployeeRecord.mp4?v=264310181" type="video/mp4" />
+                <source src="../video/ScanningEmployeeRecord.mp4?v=19497080" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -297,7 +297,7 @@
       <div class="shot-grid shot-grid--full">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/verification/verification-run-overall-dark.png?v=264310181" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
+            <img src="../images/screens/verification/verification-run-overall-dark.png?v=19497080" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.</figcaption>
         </figure>
@@ -335,11 +335,23 @@
         </div>
       <div class="shot-grid shot-grid--full">
         <figure class="shot shot--full reveal">
-          <div class="shot__frame">
-            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="5000" style="--shot-rotate-aspect: 1024 / 997">
-              <div class="shot-rotate__stage">
-              <img class="shot-rotate__slide is-active" src="../images/screens/verification/CheckConfigVerification.png?v=264310181" alt="Check configuration overview with every verification section listed." width="1024" height="748" loading="lazy" decoding="async" />
-              <img class="shot-rotate__slide" src="../images/screens/verification/CheckConfigMedicalCustom.png?v=264310181" alt="Medical checks expanded and custom company policy checks on the configuration page." width="1024" height="997" loading="lazy" decoding="async" aria-hidden="true" />
+          <div class="shot__frame shot__frame--rotate">
+            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="5000">
+              <div class="shot-rotate__stage" data-shot-rotate-stage>
+              <img class="shot-rotate__slide is-active" src="../images/screens/verification/CheckConfigVerification.png?v=19497080" alt="Check configuration overview with every verification section listed." width="1024" height="748" data-aspect="1024 / 748" loading="lazy" decoding="async" />
+              <img class="shot-rotate__slide" src="../images/screens/verification/CheckConfigMedicalCustom.png?v=19497080" alt="Medical checks expanded and custom company policy checks on the configuration page." width="1024" height="997" data-aspect="1024 / 997" loading="lazy" decoding="async" aria-hidden="true" />
+              </div>
+              <div class="shot-rotate__controls">
+                <button type="button" class="shot-rotate__btn" data-shot-rotate-prev aria-label="Previous screenshot">
+                  <span aria-hidden="true">←</span>
+                </button>
+                <div class="shot-rotate__dots" data-shot-rotate-dots role="tablist" aria-label="Screenshots">
+              <button type="button" class="shot-rotate__dot" data-shot-rotate-dot="0" role="tab" aria-label="Overview" aria-selected="true" aria-current="true"></button>
+              <button type="button" class="shot-rotate__dot" data-shot-rotate-dot="1" role="tab" aria-label="Medical &amp; custom" aria-selected="false"></button>
+                </div>
+                <button type="button" class="shot-rotate__btn" data-shot-rotate-next aria-label="Next screenshot">
+                  <span aria-hidden="true">→</span>
+                </button>
               </div>
             </div>
           </div>
@@ -454,7 +466,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=264310181"></script>
-  <script src="../js/newsletter.js?v=264310181"></script>
+  <script src="../js/site.js?v=19497080"></script>
+  <script src="../js/newsletter.js?v=19497080"></script>
 </body>
 </html>

@@ -2820,30 +2820,61 @@
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-shot-rotate]"), function (root) {
+    var stage = root.querySelector("[data-shot-rotate-stage]");
     var slides = Array.prototype.slice.call(root.querySelectorAll(".shot-rotate__slide"));
-    if (slides.length < 2 || reducedMotion) return;
+    var dots = Array.prototype.slice.call(root.querySelectorAll("[data-shot-rotate-dot]"));
+    var prevBtn = root.querySelector("[data-shot-rotate-prev]");
+    var nextBtn = root.querySelector("[data-shot-rotate-next]");
+    if (!stage || slides.length < 2) return;
 
     var interval = Number(root.getAttribute("data-shot-rotate-interval")) || 5000;
     var index = 0;
     var timer = null;
     var paused = false;
+    var visible = false;
 
-    function show(nextIndex) {
+    function slideHeight(slide) {
+      var width = Number(slide.getAttribute("width")) || slide.naturalWidth || stage.clientWidth;
+      var height = Number(slide.getAttribute("height")) || slide.naturalHeight || width * 0.75;
+      if (!width) return 0;
+      return Math.max(1, Math.round(stage.clientWidth * (height / width)));
+    }
+
+    function syncStage() {
+      var activeSlide = slides[index];
+      if (!activeSlide) return;
+      stage.style.height = slideHeight(activeSlide) + "px";
+    }
+
+    function syncDots() {
+      dots.forEach(function (dot, dotIndex) {
+        var active = dotIndex === index;
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+        if (active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    }
+
+    function show(nextIndex, userInitiated) {
       index = ((nextIndex % slides.length) + slides.length) % slides.length;
       slides.forEach(function (slide, slideIndex) {
         var active = slideIndex === index;
         slide.classList.toggle("is-active", active);
         slide.setAttribute("aria-hidden", active ? "false" : "true");
       });
+      syncDots();
+      syncStage();
+      if (userInitiated && visible && !paused && !reducedMotion) start();
     }
 
     function advance() {
       if (paused) return;
-      show(index + 1);
+      show(index + 1, false);
     }
 
     function start() {
       stop();
+      if (reducedMotion || paused || !visible) return;
       timer = window.setInterval(advance, interval);
     }
 
@@ -2856,24 +2887,67 @@
 
     root.addEventListener("mouseenter", function () {
       paused = true;
+      stop();
     });
 
     root.addEventListener("mouseleave", function () {
       paused = false;
+      if (visible) start();
     });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        show(index - 1, true);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        show(index + 1, true);
+      });
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        show(Number(dot.getAttribute("data-shot-rotate-dot")) || 0, true);
+      });
+    });
+
+    slides.forEach(function (slide) {
+      if (slide.complete) return;
+      slide.addEventListener("load", syncStage);
+    });
+
+    window.addEventListener("resize", syncStage);
+
+    if (typeof ResizeObserver !== "undefined") {
+      new ResizeObserver(syncStage).observe(stage);
+    }
 
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
-            if (entry.isIntersecting) start();
-            else stop();
+            visible = entry.isIntersecting;
+            if (visible) {
+              syncStage();
+              start();
+            } else {
+              stop();
+            }
           });
         },
         { threshold: 0.35 }
       ).observe(root);
     } else {
+      visible = true;
+      syncStage();
       start();
     }
+
+    show(0, false);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(syncStage);
+    });
   });
 })();

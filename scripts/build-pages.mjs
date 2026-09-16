@@ -406,10 +406,7 @@ function renderRotatingShot(shot, base, options = {}) {
   });
 
   const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
-  const maxHeight = Math.max(...sizes.map((size) => size.height));
-  const width = sizes[0].width;
   const interval = shot.rotate.interval || 5000;
-  const aspect = `${width} / ${maxHeight}`;
   const classes = ["shot", shot.full ? "shot--full" : null, options.showcase ? "shot--showcase" : null, "reveal"]
     .filter(Boolean)
     .join(" ");
@@ -420,15 +417,34 @@ function renderRotatingShot(shot, base, options = {}) {
       const displayWidth = Math.max(1, Math.round(size.width * scale));
       const displayHeight = Math.max(1, Math.round(size.height * scale));
       const active = index === 0;
-      return `              <img class="shot-rotate__slide${active ? " is-active" : ""}" src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" loading="lazy" decoding="async"${active ? "" : ' aria-hidden="true"'} />`;
+      return `              <img class="shot-rotate__slide${active ? " is-active" : ""}" src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" data-aspect="${size.width} / ${size.height}" loading="lazy" decoding="async"${active ? "" : ' aria-hidden="true"'} />`;
+    })
+    .join("\n");
+
+  const dots = slides
+    .map((slide, index) => {
+      const label = slide.label || `Screenshot ${index + 1}`;
+      const active = index === 0;
+      return `              <button type="button" class="shot-rotate__dot" data-shot-rotate-dot="${index}" role="tab" aria-label="${esc(label)}" aria-selected="${active ? "true" : "false"}"${active ? ' aria-current="true"' : ""}></button>`;
     })
     .join("\n");
 
   return `        <figure class="${classes}">
-          <div class="shot__frame">
-            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="${interval}" style="--shot-rotate-aspect: ${aspect}">
-              <div class="shot-rotate__stage">
+          <div class="shot__frame shot__frame--rotate">
+            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="${interval}">
+              <div class="shot-rotate__stage" data-shot-rotate-stage>
 ${slideMarkup}
+              </div>
+              <div class="shot-rotate__controls">
+                <button type="button" class="shot-rotate__btn" data-shot-rotate-prev aria-label="Previous screenshot">
+                  <span aria-hidden="true">←</span>
+                </button>
+                <div class="shot-rotate__dots" data-shot-rotate-dots role="tablist" aria-label="Screenshots">
+${dots}
+                </div>
+                <button type="button" class="shot-rotate__btn" data-shot-rotate-next aria-label="Next screenshot">
+                  <span aria-hidden="true">→</span>
+                </button>
               </div>
             </div>
           </div>

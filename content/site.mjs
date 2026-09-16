@@ -237,10 +237,12 @@ export const addons = [
                 {
                   src: "images/screens/verification/CheckConfigVerification.png",
                   alt: "Check configuration overview with every verification section listed.",
+                  label: "Overview",
                 },
                 {
                   src: "images/screens/verification/CheckConfigMedicalCustom.png",
                   alt: "Medical checks expanded and custom company policy checks on the configuration page.",
+                  label: "Medical & custom",
                 },
               ],
             },
