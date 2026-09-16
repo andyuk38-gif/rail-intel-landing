@@ -189,7 +189,7 @@ export const addons = [
       {
         question: "How do I add the QA Verifications module?",
         answer: [
-          "QA Verifications is activated from the Add-ons library inside Rail Intel. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate — or start a 14-day trial where offered.",
+          "QA Verifications is activated from the Add-ons library inside Rail Intel CMS. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate — or start a 14-day trial where offered.",
           "The module is enabled for your company only; once active, verification checks are available from employee records and the company-wide QA Verifications page.",
         ],
         shot: {
@@ -1424,7 +1424,7 @@ export const featureGroups = [
       {
         heading: "Modules, licences and integrations",
         body: [
-          "Optional modules are activated from the Add-ons library inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator enables it for the company directly.",
+          "Optional modules are activated from the Add-ons library inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator enables it for the company directly.",
           "Every company includes two administrator seats; additional Company Admin licences are purchased by quantity and managed in Team Management. Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval.",
         ],
         bullets: [

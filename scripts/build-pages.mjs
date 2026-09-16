@@ -1424,7 +1424,7 @@ ${renderQaSection(addon.qaSection, base)}
       <div class="container">
         <div class="page-section__head">
           <h2>Activating ${esc(addon.name)}</h2>
-          <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your company administrator can activate it directly.</p>
+          <p>Add-on modules are activated from the Add-ons page inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your company administrator can activate it directly.</p>
         </div>
         <div class="page-actions">
           <a href="${site.app}" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
@@ -1446,7 +1446,7 @@ function renderActivationSection(addon) {
         <h2>Activating ${esc(addon.name)}</h2>
         <div class="page-activation__row">
           <div class="page-activation__copy">
-            <p>Add-on modules are activated from the Add-ons page inside Rail Intel. Each module can be taken on an annual subscription or trialled for 14 days, and your company administrator can activate it directly.</p>
+            <p>Add-on modules are activated from the Add-ons page inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your company administrator can activate it directly.</p>
 ${addon.hideModuleId ? "" : `            <p>Module identifier: <code>${esc(addon.moduleId)}</code></p>\n`}
           </div>
           <div class="page-actions page-activation__actions">
