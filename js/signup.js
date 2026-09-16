@@ -19,6 +19,8 @@
   var successMessageQuote = document.querySelector("[data-signup-success-message]");
   var successNoteQuote = document.querySelector("[data-signup-success-note]");
   var successMessagePurchase = document.querySelector("[data-signup-success-message-purchase]");
+  var dealOffersEl = document.querySelector("[data-signup-deal-offers]");
+  var dealCodeMsgEl = document.querySelector("[data-signup-deal-code-msg]");
   var QUOTE_SUCCESS_HELPER =
     "A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.";
   var progressFill = document.querySelector("[data-signup-progress]");
@@ -46,6 +48,7 @@
     paymentMethod: null,
     modules: [],
     modulesLoadedAt: 0,
+    validatedDealCode: null,
   };
 
   function apiUrl(path) {
@@ -387,6 +390,7 @@
   }
 
   function collectBasePayload() {
+    var dealCode = state.validatedDealCode || fieldValue("dealCode");
     return {
       companyName: fieldValue("companyName"),
       companyAddress: fieldValue("companyAddress"),
@@ -398,7 +402,75 @@
       currentContractEndDate: fieldValue("currentContractEndDate"),
       source: "railintel.co.uk",
       website: fieldValue("website"),
+      dealCode: dealCode || undefined,
     };
+  }
+
+  function renderDealOffers(deals) {
+    if (!dealOffersEl) return;
+    if (!deals || !deals.length) {
+      dealOffersEl.hidden = true;
+      dealOffersEl.textContent = "";
+      return;
+    }
+    dealOffersEl.innerHTML = deals
+      .map(function (deal) {
+        var perks = [];
+        if (deal.discountPercent > 0) perks.push(deal.discountPercent + "% off catalogue items");
+        if (deal.freeAddonNames && deal.freeAddonNames.length) {
+          perks.push("free modules: " + deal.freeAddonNames.join(", "));
+        }
+        return (
+          '<p><strong>' +
+          deal.label +
+          "</strong> — use code <code>" +
+          deal.code +
+          "</code>" +
+          (deal.description ? ". " + deal.description : "") +
+          (perks.length ? " (" + perks.join("; ") + ")" : "") +
+          "</p>"
+        );
+      })
+      .join("");
+    dealOffersEl.hidden = false;
+  }
+
+  function validateDealCodeInput() {
+    var code = fieldValue("dealCode");
+    if (!code) {
+      state.validatedDealCode = null;
+      if (dealCodeMsgEl) dealCodeMsgEl.hidden = true;
+      return Promise.resolve(true);
+    }
+    return apiFetch("/public/deal-code/validate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: code }),
+    })
+      .then(function (data) {
+        if (data && data.ok && data.deal) {
+          state.validatedDealCode = data.deal.code;
+          var perks = [];
+          if (data.deal.discountPercent > 0) perks.push(data.deal.discountPercent + "% off");
+          if (data.deal.freeAddonNames && data.deal.freeAddonNames.length) {
+            perks.push("includes free: " + data.deal.freeAddonNames.join(", "));
+          }
+          showMessage(
+            dealCodeMsgEl,
+            data.deal.label + " — code accepted" + (perks.length ? " (" + perks.join("; ") + ")" : "") + ".",
+            "success",
+          );
+          return true;
+        }
+        state.validatedDealCode = null;
+        showMessage(dealCodeMsgEl, (data && data.error) || "This deal code is not valid.", "error");
+        return false;
+      })
+      .catch(function (err) {
+        state.validatedDealCode = null;
+        showMessage(dealCodeMsgEl, err.message || "Could not validate deal code.", "error");
+        return false;
+      });
   }
 
   function readFileAsBase64(file) {
@@ -426,6 +498,9 @@
       return;
     }
     if (btn) btn.disabled = true;
+
+    validateDealCodeInput().then(function (dealOk) {
+      if (!dealOk) return;
 
     var payload = Object.assign({}, collectBasePayload(), {
       requestType: "quote",
@@ -461,6 +536,7 @@
       .finally(function () {
         if (btn) btn.disabled = false;
       });
+    });
   }
 
   function savePurchaseDraft() {
@@ -468,6 +544,9 @@
     var btn = document.querySelector("[data-signup-save-purchase]");
     hideMessage(msgEl);
     if (btn) btn.disabled = true;
+
+    return validateDealCodeInput().then(function (dealOk) {
+      if (!dealOk) return;
 
     var payload = Object.assign({}, collectBasePayload(), {
       requestType: "purchase",
@@ -489,6 +568,7 @@
       .finally(function () {
         if (btn) btn.disabled = false;
       });
+    });
   }
 
   function handleStripeReturn() {
@@ -562,6 +642,20 @@
       renderBankDetails();
     })
     .catch(function () {});
+
+  apiFetch("/public/deal-codes")
+    .then(function (data) {
+      renderDealOffers(data && data.deals);
+    })
+    .catch(function () {});
+
+  var dealCodeInput = document.getElementById("dealCode");
+  if (dealCodeInput) {
+    dealCodeInput.addEventListener("blur", function () {
+      if (fieldValue("dealCode")) validateDealCodeInput();
+      else if (dealCodeMsgEl) dealCodeMsgEl.hidden = true;
+    });
+  }
 
   handleStripeReturn();
   setPanel("company", { scroll: false });

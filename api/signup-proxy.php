@@ -40,6 +40,9 @@ if (str_starts_with($path, 'public/invoice/')) {
 if ($path === 'public/procurement-pack' || str_starts_with($path, 'public/procurement-pack/')) {
     $ok = true;
 }
+if ($path === 'public/deal-codes' || str_starts_with($path, 'public/deal-code/')) {
+    $ok = true;
+}
 if (!$ok) {
     http_response_code(403);
     echo json_encode(['error' => 'path not allowed']);
