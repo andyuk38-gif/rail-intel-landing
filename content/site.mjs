@@ -172,14 +172,15 @@ export const addons = [
           "It evaluates live employee record data — competency cycles, assessments, medicals, licence expiry and monitoring history — against configured criteria with section-level outcomes.",
       },
       {
-        question: "Can I use QA Verifications for ORR audits?",
+        question: "Can I use QA Verifications for external audits?",
         answer:
           "Yes. Run history is retained per employee and company-wide with compliance rates and section breakdowns, so you can produce evidence on demand rather than assembling it manually.",
       },
-    ],
-    relatedLinks: [
-      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
+      {
+        question: "Can I see compliance when I forget to run a report?",
+        answer:
+          "Yes. Compliance is not only visible when you run a formal verification. As record data changes, issues surface on the manager dashboard in real time — advisory and review items, lapsed competencies and other findings appear in the live feed for your team, so you can see where you stand without waiting for a scheduled check.",
+      },
     ],
     heroVideo: {
       src: "video/ScanningEmployeeRecord.mp4",
