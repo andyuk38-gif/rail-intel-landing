@@ -2551,7 +2551,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
               </div>
               <div class="field field--full">
                 <label for="adminLicences">Admin licences required *</label>
-                <input id="adminLicences" name="adminLicences" type="number" min="1" step="1" value="2" placeholder="Enter total admin licences required" required />
+                <input id="adminLicences" name="adminLicences" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Enter total admin licences required" required />
                 <p class="signup-form__hint">2 administrator seats are included with the platform licence. Only additional seats are quoted.</p>
               </div>
             </div>

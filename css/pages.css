@@ -5487,6 +5487,12 @@ body.lightbox-open {
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
+.signup-wizard-glass .field input::placeholder,
+.signup-wizard-glass .field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.48);
+  opacity: 1;
+}
+
 .signup-wizard-glass .field input:not([type="checkbox"]):not([type="radio"]):focus,
 .signup-wizard-glass .field textarea:focus {
   outline: none;
