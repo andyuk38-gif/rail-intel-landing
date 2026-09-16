@@ -618,8 +618,35 @@
   background: linear-gradient(180deg, #0e1218 0%, #0c0f14 100%);
 }
 
-.page-section--activation .page-section__head {
+.page-section--activation h2 {
+  margin-bottom: 1rem;
+}
+
+.page-activation__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.page-activation__copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-activation__copy p {
   max-width: none;
+}
+
+.page-activation__actions {
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .page-activation__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .page-section__head {

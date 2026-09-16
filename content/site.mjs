@@ -164,6 +164,7 @@ export const addons = [
     heroExtra:
       "Any compliance issues are live and produced in real time on your dashboard. As a manager, any individual assigned to your team is purely a reflection on your dashboard stats.",
     hideHeroActions: true,
+    hideModuleId: true,
     faq: [
       {
         question: "What does QA Verifications check?",
