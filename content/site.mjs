@@ -231,6 +231,19 @@ export const addons = [
             caption: "Check configuration controls which sections are tested and how each is scored.",
             scale: 1,
             full: true,
+            rotate: {
+              interval: 5000,
+              slides: [
+                {
+                  src: "images/screens/verification/CheckConfigVerification.png",
+                  alt: "Check configuration overview with every verification section listed.",
+                },
+                {
+                  src: "images/screens/verification/CheckConfigMedicalCustom.png",
+                  alt: "Medical checks expanded and custom company policy checks on the configuration page.",
+                },
+              ],
+            },
           },
         ],
       },

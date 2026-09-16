@@ -395,7 +395,51 @@ function renderFooter(base) {
 
 /* --------------------------------------------------------------- fragments */
 
+function renderRotatingShot(shot, base, options = {}) {
+  const slides = shot.rotate?.slides || [];
+  if (slides.length < 2) throw new Error(`Rotating shot needs at least two slides: ${shot.src}`);
+
+  const sizes = slides.map((slide) => {
+    const size = manifest[slide.src];
+    if (!size) throw new Error(`Missing screenshot in manifest: ${slide.src}`);
+    return size;
+  });
+
+  const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+  const maxHeight = Math.max(...sizes.map((size) => size.height));
+  const width = sizes[0].width;
+  const interval = shot.rotate.interval || 5000;
+  const aspect = `${width} / ${maxHeight}`;
+  const classes = ["shot", shot.full ? "shot--full" : null, options.showcase ? "shot--showcase" : null, "reveal"]
+    .filter(Boolean)
+    .join(" ");
+
+  const slideMarkup = slides
+    .map((slide, index) => {
+      const size = sizes[index];
+      const displayWidth = Math.max(1, Math.round(size.width * scale));
+      const displayHeight = Math.max(1, Math.round(size.height * scale));
+      const active = index === 0;
+      return `              <img class="shot-rotate__slide${active ? " is-active" : ""}" src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" loading="lazy" decoding="async"${active ? "" : ' aria-hidden="true"'} />`;
+    })
+    .join("\n");
+
+  return `        <figure class="${classes}">
+          <div class="shot__frame">
+            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="${interval}" style="--shot-rotate-aspect: ${aspect}">
+              <div class="shot-rotate__stage">
+${slideMarkup}
+              </div>
+            </div>
+          </div>
+${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
+}
+
 function renderShot(shot, base, options = {}) {
+  if (shot.rotate?.slides?.length > 1) {
+    return renderRotatingShot(shot, base, options);
+  }
+
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
 

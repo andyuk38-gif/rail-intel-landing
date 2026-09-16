@@ -695,6 +695,36 @@
   width: 100%;
 }
 
+.shot-rotate {
+  width: 100%;
+}
+
+.shot-rotate__stage {
+  position: relative;
+  aspect-ratio: var(--shot-rotate-aspect, 16 / 10);
+  background: #0a0d12;
+}
+
+.shot-rotate__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.65s ease;
+}
+
+.shot-rotate__slide.is-active {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shot-rotate__slide:not(.is-active) {
+    display: none;
+  }
+}
+
 .spec-tiles {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
