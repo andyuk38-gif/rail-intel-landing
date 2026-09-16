@@ -263,7 +263,7 @@ export const addons = [
               title: "Run outcome at a glance",
               text:
                 "The report opens with the employee identity, who ran the check, and the overall result — with compliant, advisory, review and derogation counts across every section tested.",
-              src: "images/screens/verification/report/verification-report-overview.jpg",
+              src: "images/screens/verification/report/verification-report-overview.png",
               alt: "Verification report header showing overall failed outcome and outcome counts.",
               label: "Overview",
               accent: "#f43f5e",
@@ -273,7 +273,7 @@ export const addons = [
               title: "Summary visuals",
               text:
                 "Donut charts summarise the run at a glance — overall outcome split and how many checks fell into each report section, so you can see where the weight of issues sits before scrolling.",
-              src: "images/screens/verification/report/verification-report-summary-visuals.jpg",
+              src: "images/screens/verification/report/verification-report-summary-visuals.png",
               alt: "Summary visuals with overall outcome and checks-by-section donut charts.",
               label: "Summary",
               accent: "#38bdf8",
@@ -283,7 +283,7 @@ export const addons = [
               title: "Section detail — cab passes",
               text:
                 "Each section expands with the specific finding, status and a preview of the underlying record. A compliant cab pass shows the live pass, validity and who issued it.",
-              src: "images/screens/verification/report/verification-report-cab-pass.jpg",
+              src: "images/screens/verification/report/verification-report-cab-pass.png",
               alt: "Cab passes section showing a compliant black route-learning pass preview.",
               label: "Cab passes",
               accent: "#34d399",
@@ -293,7 +293,7 @@ export const addons = [
               title: "Section detail — incidents & CDP",
               text:
                 "Advisory and review items name the rule that failed, explain why, and link straight back to the record to fix it — such as an incident within the investigation grace period with no CDP yet created.",
-              src: "images/screens/verification/report/verification-report-incidents-cdp.jpg",
+              src: "images/screens/verification/report/verification-report-incidents-cdp.png",
               alt: "Incidents and CDP section showing an advisory for a missing CDP after an incident.",
               label: "Incidents",
               accent: "#f59e0b",

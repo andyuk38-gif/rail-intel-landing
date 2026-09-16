@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=44241858" />
-  <link rel="stylesheet" href="../css/pages.css?v=44241858" />
+  <link rel="stylesheet" href="../css/style.css?v=55594128" />
+  <link rel="stylesheet" href="../css/pages.css?v=55594128" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -254,7 +254,7 @@
             </div>
             <div class="verify-scan__screen">
               <video class="verify-scan__video" data-verify-scan-video data-max-loops="3" muted playsinline preload="metadata" width="684" height="668" aria-label="QA verification scanning each section of an employee record">
-                <source src="../video/ScanningEmployeeRecord.mp4?v=44241858" type="video/mp4" />
+                <source src="../video/ScanningEmployeeRecord.mp4?v=55594128" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -297,7 +297,7 @@
       <div class="shot-grid shot-grid--full">
         <figure class="shot shot--full reveal">
           <div class="shot__frame">
-            <img src="../images/screens/verification/verification-run-overall-dark.png?v=44241858" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
+            <img src="../images/screens/verification/verification-run-overall-dark.png?v=55594128" alt="Company-wide run history with overall compliance rate and a stacked section breakdown by outcome." width="1024" height="930" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company-wide run history with overall compliance rate and a stacked section breakdown by outcome.</figcaption>
         </figure>
@@ -339,8 +339,8 @@
           <div class="shot__frame shot__frame--rotate">
             <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="5000">
               <div class="shot-rotate__stage" data-shot-rotate-stage>
-              <img class="shot-rotate__slide is-active" src="../images/screens/verification/CheckConfigVerification.png?v=44241858" alt="Check configuration overview with every verification section listed." width="1024" height="748" data-aspect="1024 / 748" loading="lazy" decoding="async" />
-              <img class="shot-rotate__slide" src="../images/screens/verification/CheckConfigMedicalCustom.png?v=44241858" alt="Medical checks expanded and custom company policy checks on the configuration page." width="1024" height="997" data-aspect="1024 / 997" loading="lazy" decoding="async" aria-hidden="true" />
+              <img class="shot-rotate__slide is-active" src="../images/screens/verification/CheckConfigVerification.png?v=55594128" alt="Check configuration overview with every verification section listed." width="1024" height="748" data-aspect="1024 / 748" loading="lazy" decoding="async" />
+              <img class="shot-rotate__slide" src="../images/screens/verification/CheckConfigMedicalCustom.png?v=55594128" alt="Medical checks expanded and custom company policy checks on the configuration page." width="1024" height="997" data-aspect="1024 / 997" loading="lazy" decoding="async" aria-hidden="true" />
               </div>
               <div class="shot-rotate__controls">
                 <button type="button" class="shot-rotate__btn" data-shot-rotate-prev aria-label="Previous screenshot">
@@ -379,19 +379,28 @@
             <p class="report-roll__text" data-report-roll-text>The report opens with the employee identity, who ran the check, and the overall result — with compliant, advisory, review and derogation counts across every section tested.</p>
           </div>
           <div class="report-roll__visual">
-            <div class="report-roll__stage" data-report-roll-stage>
-              <div class="report-roll__ring" data-report-roll-ring style="--report-roll-active: 0">
-              <div class="report-roll__panel" data-report-roll-panel="0" data-report-roll-step="01" data-report-roll-title="Run outcome at a glance" data-report-roll-text="The report opens with the employee identity, who ran the check, and the overall result — with compliant, advisory, review and derogation counts across every section tested." style="--report-roll-i: 0; --report-roll-accent: #f43f5e">
-                <img src="../images/screens/verification/report/verification-report-overview.jpg?v=44241858" alt="Verification report header showing overall failed outcome and outcome counts." width="1024" height="673" loading="lazy" decoding="async" />
+            <div class="report-roll__frame-wrap">
+              <p class="report-roll__pause" data-report-roll-pause hidden>Paused</p>
+              <div class="report-roll__stage" data-report-roll-stage>
+              <div class="report-roll__panel" data-report-roll-panel="0" data-report-roll-step="01" data-report-roll-title="Run outcome at a glance" data-report-roll-text="The report opens with the employee identity, who ran the check, and the overall result — with compliant, advisory, review and derogation counts across every section tested." style="--report-roll-accent: #f43f5e" aria-hidden="false">
+                <div class="shot__frame report-roll__slide-frame">
+                  <img src="../images/screens/verification/report/verification-report-overview.png?v=55594128" alt="Verification report header showing overall failed outcome and outcome counts." width="1024" height="673" loading="lazy" decoding="async" />
+                </div>
               </div>
-              <div class="report-roll__panel" data-report-roll-panel="1" data-report-roll-step="02" data-report-roll-title="Summary visuals" data-report-roll-text="Donut charts summarise the run at a glance — overall outcome split and how many checks fell into each report section, so you can see where the weight of issues sits before scrolling." style="--report-roll-i: 1; --report-roll-accent: #38bdf8" aria-hidden="true">
-                <img src="../images/screens/verification/report/verification-report-summary-visuals.jpg?v=44241858" alt="Summary visuals with overall outcome and checks-by-section donut charts." width="1024" height="491" loading="lazy" decoding="async" />
+              <div class="report-roll__panel" data-report-roll-panel="1" data-report-roll-step="02" data-report-roll-title="Summary visuals" data-report-roll-text="Donut charts summarise the run at a glance — overall outcome split and how many checks fell into each report section, so you can see where the weight of issues sits before scrolling." style="--report-roll-accent: #38bdf8" aria-hidden="true">
+                <div class="shot__frame report-roll__slide-frame">
+                  <img src="../images/screens/verification/report/verification-report-summary-visuals.png?v=55594128" alt="Summary visuals with overall outcome and checks-by-section donut charts." width="1024" height="491" loading="lazy" decoding="async" />
+                </div>
               </div>
-              <div class="report-roll__panel" data-report-roll-panel="2" data-report-roll-step="03" data-report-roll-title="Section detail — cab passes" data-report-roll-text="Each section expands with the specific finding, status and a preview of the underlying record. A compliant cab pass shows the live pass, validity and who issued it." style="--report-roll-i: 2; --report-roll-accent: #34d399" aria-hidden="true">
-                <img src="../images/screens/verification/report/verification-report-cab-pass.jpg?v=44241858" alt="Cab passes section showing a compliant black route-learning pass preview." width="1024" height="497" loading="lazy" decoding="async" />
+              <div class="report-roll__panel" data-report-roll-panel="2" data-report-roll-step="03" data-report-roll-title="Section detail — cab passes" data-report-roll-text="Each section expands with the specific finding, status and a preview of the underlying record. A compliant cab pass shows the live pass, validity and who issued it." style="--report-roll-accent: #34d399" aria-hidden="true">
+                <div class="shot__frame report-roll__slide-frame">
+                  <img src="../images/screens/verification/report/verification-report-cab-pass.png?v=55594128" alt="Cab passes section showing a compliant black route-learning pass preview." width="1024" height="497" loading="lazy" decoding="async" />
+                </div>
               </div>
-              <div class="report-roll__panel" data-report-roll-panel="3" data-report-roll-step="04" data-report-roll-title="Section detail — incidents &amp; CDP" data-report-roll-text="Advisory and review items name the rule that failed, explain why, and link straight back to the record to fix it — such as an incident within the investigation grace period with no CDP yet created." style="--report-roll-i: 3; --report-roll-accent: #f59e0b" aria-hidden="true">
-                <img src="../images/screens/verification/report/verification-report-incidents-cdp.jpg?v=44241858" alt="Incidents and CDP section showing an advisory for a missing CDP after an incident." width="1024" height="249" loading="lazy" decoding="async" />
+              <div class="report-roll__panel" data-report-roll-panel="3" data-report-roll-step="04" data-report-roll-title="Section detail — incidents &amp; CDP" data-report-roll-text="Advisory and review items name the rule that failed, explain why, and link straight back to the record to fix it — such as an incident within the investigation grace period with no CDP yet created." style="--report-roll-accent: #f59e0b" aria-hidden="true">
+                <div class="shot__frame report-roll__slide-frame">
+                  <img src="../images/screens/verification/report/verification-report-incidents-cdp.png?v=55594128" alt="Incidents and CDP section showing an advisory for a missing CDP after an incident." width="1024" height="249" loading="lazy" decoding="async" />
+                </div>
               </div>
               </div>
             </div>
@@ -520,7 +529,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=44241858"></script>
-  <script src="../js/newsletter.js?v=44241858"></script>
+  <script src="../js/site.js?v=55594128"></script>
+  <script src="../js/newsletter.js?v=55594128"></script>
 </body>
 </html>

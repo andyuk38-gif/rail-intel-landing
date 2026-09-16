@@ -881,8 +881,10 @@ function renderReportRoll(section, base) {
       const width = Math.max(1, Math.round(size.width * scale));
       const height = Math.max(1, Math.round(size.height * scale));
       const accent = step.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
-      return `              <div class="report-roll__panel" data-report-roll-panel="${index}" data-report-roll-step="${esc(step.step || String(index + 1).padStart(2, "0"))}" data-report-roll-title="${esc(step.title || "")}" data-report-roll-text="${esc(step.text || "")}" style="--report-roll-i: ${index}; --report-roll-accent: ${esc(accent)}"${index === 0 ? "" : ' aria-hidden="true"'}>
-                <img src="${base}${step.src}?v=${ASSET_VERSION}" alt="${esc(step.alt || step.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+      return `              <div class="report-roll__panel" data-report-roll-panel="${index}" data-report-roll-step="${esc(step.step || String(index + 1).padStart(2, "0"))}" data-report-roll-title="${esc(step.title || "")}" data-report-roll-text="${esc(step.text || "")}" style="--report-roll-accent: ${esc(accent)}"${index === 0 ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
+                <div class="shot__frame report-roll__slide-frame">
+                  <img src="${base}${step.src}?v=${ASSET_VERSION}" alt="${esc(step.alt || step.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
+                </div>
               </div>`;
     })
     .join("\n");
@@ -903,8 +905,9 @@ function renderReportRoll(section, base) {
             <p class="report-roll__text" data-report-roll-text>${esc(first.text || "")}</p>
           </div>
           <div class="report-roll__visual">
-            <div class="report-roll__stage" data-report-roll-stage>
-              <div class="report-roll__ring" data-report-roll-ring style="--report-roll-active: 0">
+            <div class="report-roll__frame-wrap">
+              <p class="report-roll__pause" data-report-roll-pause hidden>Paused</p>
+              <div class="report-roll__stage" data-report-roll-stage>
 ${panels}
               </div>
             </div>

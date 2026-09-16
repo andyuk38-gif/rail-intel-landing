@@ -407,7 +407,15 @@
     "width": 1024,
     "height": 497
   },
+  "images/screens/verification/report/verification-report-cab-pass.png": {
+    "width": 1024,
+    "height": 497
+  },
   "images/screens/verification/report/verification-report-incidents-cdp.jpg": {
+    "width": 1024,
+    "height": 249
+  },
+  "images/screens/verification/report/verification-report-incidents-cdp.png": {
     "width": 1024,
     "height": 249
   },
@@ -419,7 +427,15 @@
     "width": 1024,
     "height": 673
   },
+  "images/screens/verification/report/verification-report-overview.png": {
+    "width": 1024,
+    "height": 673
+  },
   "images/screens/verification/report/verification-report-summary-visuals.jpg": {
+    "width": 1024,
+    "height": 491
+  },
+  "images/screens/verification/report/verification-report-summary-visuals.png": {
     "width": 1024,
     "height": 491
   },

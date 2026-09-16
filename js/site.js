@@ -2956,7 +2956,7 @@
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-report-roll]"), function (root) {
-    var ring = root.querySelector("[data-report-roll-ring]");
+    var stage = root.querySelector("[data-report-roll-stage]");
     var panels = Array.prototype.slice.call(root.querySelectorAll("[data-report-roll-panel]"));
     var dots = Array.prototype.slice.call(root.querySelectorAll("[data-report-roll-dot]"));
     var prevBtn = root.querySelector("[data-report-roll-prev]");
@@ -2965,13 +2965,29 @@
     var titleEl = root.querySelector("[data-report-roll-title]");
     var textEl = root.querySelector("[data-report-roll-text]");
     var copyEl = root.querySelector(".report-roll__copy");
-    if (!ring || panels.length < 2) return;
+    var pauseEl = root.querySelector("[data-report-roll-pause]");
+    if (!stage || panels.length < 2) return;
 
     var interval = Number(root.getAttribute("data-report-roll-interval")) || 5000;
     var index = 0;
     var timer = null;
     var paused = false;
     var visible = false;
+
+    function panelHeight(panel) {
+      var img = panel.querySelector("img");
+      if (!img) return 0;
+      var width = Number(img.getAttribute("width")) || img.naturalWidth || stage.clientWidth;
+      var height = Number(img.getAttribute("height")) || img.naturalHeight || width * 0.75;
+      if (!width) return 0;
+      return Math.max(1, Math.round(stage.clientWidth * (height / width)));
+    }
+
+    function syncStage() {
+      var panel = panels[index];
+      if (!panel) return;
+      stage.style.height = panelHeight(panel) + "px";
+    }
 
     function syncCopy(panel) {
       if (!panel) return;
@@ -2992,18 +3008,22 @@
       });
     }
 
+    function setPausedState(isPaused) {
+      paused = isPaused;
+      root.classList.toggle("is-paused", isPaused);
+      if (pauseEl) pauseEl.hidden = !isPaused;
+    }
+
     function show(nextIndex, userInitiated) {
       index = ((nextIndex % panels.length) + panels.length) % panels.length;
       var panel = panels[index];
-
-      if (!reducedMotion) {
-        ring.style.setProperty("--report-roll-active", String(index));
-      }
 
       panels.forEach(function (item, itemIndex) {
         var active = itemIndex === index;
         item.setAttribute("aria-hidden", active ? "false" : "true");
       });
+
+      syncStage();
 
       root.classList.add("is-swapping");
       window.setTimeout(function () {
@@ -3034,12 +3054,12 @@
     }
 
     root.addEventListener("mouseenter", function () {
-      paused = true;
+      setPausedState(true);
       stop();
     });
 
     root.addEventListener("mouseleave", function () {
-      paused = false;
+      setPausedState(false);
       if (visible) start();
     });
 
@@ -3061,22 +3081,41 @@
       });
     });
 
+    panels.forEach(function (panel) {
+      var img = panel.querySelector("img");
+      if (img && !img.complete) img.addEventListener("load", syncStage);
+    });
+
+    window.addEventListener("resize", syncStage);
+
+    if (typeof ResizeObserver !== "undefined") {
+      new ResizeObserver(syncStage).observe(stage);
+    }
+
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
             visible = entry.isIntersecting;
-            if (visible) start();
-            else stop();
+            if (visible) {
+              syncStage();
+              start();
+            } else {
+              stop();
+            }
           });
         },
         { threshold: 0.3 }
       ).observe(root);
     } else {
       visible = true;
+      syncStage();
       start();
     }
 
     show(0, false);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(syncStage);
+    });
   });
 })();
