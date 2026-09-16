@@ -447,6 +447,10 @@
     "width": 1024,
     "height": 131
   },
+  "images/screens/verification/qa-verifications-addon-tile.png": {
+    "width": 410,
+    "height": 303
+  },
   "images/screens/main-sys/account-two-factor.png": {
     "width": 535,
     "height": 830

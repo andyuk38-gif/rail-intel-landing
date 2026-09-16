@@ -216,20 +216,38 @@ function renderRelatedLinks(base, links) {
     </section>`;
 }
 
-function renderFaqSection(faq) {
+function renderFaqShot(shot, base) {
+  const size = manifest[shot.src];
+  if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
+
+  const scale = typeof shot.scale === "number" ? shot.scale : 1;
+  const imgWidth = scale === 1 ? size.width : Math.max(1, Math.round(size.width * scale));
+  const imgHeight = scale === 1 ? size.height : Math.max(1, Math.round(size.height * scale));
+  const frameStyle = ` style="--shot-display-width: ${size.width}px"`;
+
+  return `            <figure class="procurement-faq__shot shot shot--full reveal">
+              <div class="shot__frame shot__frame--fullwidth"${frameStyle}>
+                <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.alt || shot.caption || "")}" width="${imgWidth}" height="${imgHeight}" loading="lazy" decoding="async" />
+              </div>
+${shot.caption ? `              <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}            </figure>`;
+}
+
+function renderFaqSection(faq, base = "") {
   if (!faq?.length) return "";
+  const hasShots = faq.some((entry) => entry.shot);
   return `
-    <section class="page-section page-section--tight" aria-label="Frequently asked questions">
+    <section class="page-section page-section--tight${hasShots ? " page-section--crisp" : ""}" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
         </div>
         <dl class="procurement-faq">
 ${faq
-  .map(
-    (entry) => `          <dt>${esc(entry.question)}</dt>
-          <dd>${esc(entry.answer)}</dd>`
-  )
+  .map((entry) => {
+    const shot = entry.shot && base ? `\n${renderFaqShot(entry.shot, base)}` : "";
+    return `          <dt>${esc(entry.question)}</dt>
+          <dd>${esc(entry.answer)}${shot}</dd>`;
+  })
   .join("\n")}
         </dl>
       </div>
@@ -1104,7 +1122,7 @@ ${sections}
       </div>
     </section>
 ${renderRelatedLinks(base, item.relatedLinks)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -1386,7 +1404,7 @@ ${renderQaSection(addon.qaSection, base)}
       </div>
     </section>
 ${renderRelatedLinks(base, item.relatedLinks)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -1469,7 +1487,7 @@ ${addon.hideModuleId ? "" : `            <p>Module identifier: <code>${esc(addon
       </div>
     </section>
 ${renderRelatedLinks(base, item.relatedLinks)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -1564,7 +1582,7 @@ ${capacity}
         </div>
       </div>
     </section>
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -1848,7 +1866,7 @@ ${renderCta(base, {
   showAppCta: group.showAppCta,
 })}
 ${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -1943,7 +1961,7 @@ ${renderCta(base, {
   showAppCta: group.showAppCta,
 })}
 ${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -2003,7 +2021,7 @@ ${renderCta(base, {
   body: "Language support is part of core Rail Intel. Users can select and switch language at sign-in or from the header — no separate enable step.",
 })}
 ${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -2132,7 +2150,7 @@ ${cards}
         </div>
       </div>
     </section>
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -3185,7 +3203,7 @@ ${cta}
     </section>
 
 ${renderGuideSections(guide)}
-${renderFaqSection(pageSeo.faq)}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +

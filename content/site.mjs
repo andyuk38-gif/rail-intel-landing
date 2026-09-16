@@ -186,6 +186,18 @@ export const addons = [
         answer:
           "Check configuration is flexible and available to company administrators only. Each built-in check and report section can be switched on or off to match your company's standards. Anything switched off is not evaluated at run time and does not appear on the verification report, so the outcome reflects only what your organisation has chosen to test.",
       },
+      {
+        question: "How do I add the QA Verifications module?",
+        answer:
+          "QA Verifications is activated from the Add-ons library inside Rail Intel. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate — or start a 14-day trial where offered. The module is enabled for your company only; once active, verification checks are available from employee records and the company-wide QA Verifications page.",
+        shot: {
+          src: "images/screens/verification/qa-verifications-addon-tile.png",
+          alt: "QA Verifications Module tile on the Add-ons page with an Activate control.",
+          caption: "The QA Verifications Module tile in the Add-ons library.",
+          scale: 1,
+          full: true,
+        },
+      },
     ],
     heroVideo: {
       src: "video/ScanningEmployeeRecord.mp4",

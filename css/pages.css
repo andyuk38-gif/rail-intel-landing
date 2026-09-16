@@ -6061,6 +6061,10 @@ body.lightbox-open {
   color: var(--text-muted);
 }
 
+.procurement-faq__shot {
+  margin-top: 1.25rem;
+}
+
 .procurement-empty {
   color: var(--text-muted);
   font-size: 0.9rem;
