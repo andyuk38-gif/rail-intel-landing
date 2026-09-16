@@ -181,6 +181,11 @@ export const addons = [
         answer:
           "Yes. Compliance is not only visible when you run a formal verification. As record data changes, issues surface on the manager dashboard in real time — advisory and review items, lapsed competencies and other findings appear in the live feed for your team, so you can see where you stand without waiting for a scheduled check.",
       },
+      {
+        question: "What if I do not want a particular element checked?",
+        answer:
+          "Check configuration is flexible and available to company administrators only. Each built-in check and report section can be switched on or off to match your company's standards. Anything switched off is not evaluated at run time and does not appear on the verification report, so the outcome reflects only what your organisation has chosen to test.",
+      },
     ],
     heroVideo: {
       src: "video/ScanningEmployeeRecord.mp4",
