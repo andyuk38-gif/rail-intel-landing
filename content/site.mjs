@@ -192,6 +192,7 @@ export const addons = [
         heading: "Run a verification against live record data",
         fullWidth: true,
         bulletTiles: true,
+        crispShots: true,
         body: [
           "A verification reads the employee's actual record — cycles, assessments, medicals, licence expiry and monitoring history — and evaluates each section against your configured criteria. Every check resolves to compliant, advisory, review or not applicable, so a partial pass is visible rather than hidden behind a single score.",
           "Runs are stored, not just displayed. The company-wide QA Verifications page keeps the full history with overall compliance rate, per-section breakdown and pass rates across employees, which is what an auditor actually asks to see.",
@@ -217,6 +218,7 @@ export const addons = [
         heading: "Configure what a check actually tests",
         fullWidth: true,
         bulletTiles: true,
+        crispShots: true,
         body: [
           "The check configuration decides which sections are examined and how strict each one is, so verification reflects your standards rather than a generic template. Companies running different standards for drivers, instructors and managers can hold each to the right bar.",
         ],
@@ -253,6 +255,7 @@ export const addons = [
       {
         heading: "The report produced for one employee",
         fullWidth: true,
+        crispShots: true,
         body: [
           "When you run a verification against an individual record, Rail Intel produces a structured report you can review on screen, filter for issues and print or save as PDF. Each section of the employee record is scored in turn — the report is the evidence.",
         ],

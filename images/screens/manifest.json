@@ -397,11 +397,11 @@
   },
   "images/screens/verification/CheckConfigVerification.png": {
     "width": 1024,
-    "height": 733
+    "height": 748
   },
   "images/screens/verification/CheckConfigMedicalCustom.png": {
     "width": 1024,
-    "height": 688
+    "height": 997
   },
   "images/screens/verification/report/verification-report-cab-pass.jpg": {
     "width": 1024,
@@ -409,7 +409,7 @@
   },
   "images/screens/verification/report/verification-report-cab-pass.png": {
     "width": 1024,
-    "height": 492
+    "height": 497
   },
   "images/screens/verification/report/verification-report-incidents-cdp.jpg": {
     "width": 1024,
@@ -429,7 +429,7 @@
   },
   "images/screens/verification/report/verification-report-overview.png": {
     "width": 1024,
-    "height": 671
+    "height": 673
   },
   "images/screens/verification/report/verification-report-summary-visuals.jpg": {
     "width": 1024,
@@ -437,11 +437,11 @@
   },
   "images/screens/verification/report/verification-report-summary-visuals.png": {
     "width": 1024,
-    "height": 485
+    "height": 491
   },
   "images/screens/verification/verification-run-overall-dark.png": {
     "width": 1024,
-    "height": 772
+    "height": 930
   },
   "images/screens/main-sys/account-two-factor.png": {
     "width": 535,

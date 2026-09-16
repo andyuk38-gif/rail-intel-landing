@@ -830,6 +830,34 @@
   }
 }
 
+/* ---------- Native-resolution screenshots (QA Verifications) ---------- */
+
+/* Captures are 1024px wide; the container is wider, so the width is capped to
+   the native size to avoid the browser upscaling and softening the image. */
+.page-section--crisp .shot__frame--fullwidth {
+  width: 100%;
+  max-width: min(100%, var(--shot-display-width, 1024px));
+  margin-inline: auto;
+}
+
+/* A single frame around the capture — the panel chrome is part of the image. */
+.page-section--crisp .shot__frame,
+.page-section--crisp .report-roll__frame-wrap {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.page-section--crisp .shot-rotate__stage,
+.page-section--crisp .report-roll__slide-frame {
+  background: transparent;
+}
+
+.page-section--crisp .shot-rotate__controls {
+  border-top: 0;
+  background: transparent;
+}
+
 .page-section--report-roll .page-section__head {
   margin-bottom: 1.5rem;
 }
@@ -979,8 +1007,8 @@
 
 .report-roll__slide-frame img {
   display: block;
-  width: 100%;
-  max-width: none;
+  width: auto;
+  max-width: 100%;
   height: auto;
 }
 

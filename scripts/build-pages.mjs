@@ -418,6 +418,7 @@ function renderRotatingShot(shot, base, options = {}) {
   const rotateStyle = fullWidth
     ? ` style="--shot-display-width: ${nativeMaxWidth}px"`
     : ` style="--shot-rotate-max-width: ${maxWidth}px"`;
+  const frameStyle = fullWidth ? ` style="--shot-display-width: ${nativeMaxWidth}px"` : "";
 
   const slideMarkup = slides
     .map((slide, index) => {
@@ -443,7 +444,7 @@ function renderRotatingShot(shot, base, options = {}) {
     .join("\n");
 
   return `        <figure class="${classes}">
-          <div class="${frameClass}">
+          <div class="${frameClass}"${frameStyle}>
             <div class="${rotateClass}" data-shot-rotate data-shot-rotate-interval="${interval}"${rotateStyle}>
               <div class="shot-rotate__stage" data-shot-rotate-stage>
 ${slideMarkup}
@@ -1018,7 +1019,7 @@ function renderSection(section, base) {
 
   const reportRoll = section.reportRoll ? renderReportRoll(section, base) : "";
 
-  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
         <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
           <h2>${esc(section.heading)}</h2>
