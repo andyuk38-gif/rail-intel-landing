@@ -2423,12 +2423,16 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
               </div>
               <div class="signup-form__grid">
                 <div class="field">
-                  <label for="currentSupplier">Current supplier *</label>
-                  <input id="currentSupplier" name="currentSupplier" required autocomplete="organization" placeholder="e.g. incumbent CMS or spreadsheet process" />
+                  <label for="currentSupplier">Current supplier</label>
+                  <input id="currentSupplier" name="currentSupplier" autocomplete="organization" placeholder="e.g. incumbent CMS or spreadsheet process" />
                 </div>
                 <div class="field">
-                  <label for="currentContractEndDate">Current contract end date *</label>
-                  <input id="currentContractEndDate" name="currentContractEndDate" type="date" required />
+                  <label for="currentContractEndDate">Current contract end date</label>
+                  <input id="currentContractEndDate" name="currentContractEndDate" type="date" />
+                  <label class="signup-form__check">
+                    <input id="noCurrentContract" name="noCurrentContract" type="checkbox" />
+                    <span>No contract or expired contract</span>
+                  </label>
                 </div>
               </div>
               <p class="signup-form__message" data-signup-msg="current-setup" hidden></p>

@@ -177,9 +177,44 @@
     return "";
   }
 
+  function todayIsoDate() {
+    var d = new Date();
+    return (
+      d.getFullYear() +
+      "-" +
+      String(d.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(d.getDate()).padStart(2, "0")
+    );
+  }
+
+  function noCurrentContractChecked() {
+    var el = document.getElementById("noCurrentContract");
+    return !!(el && el.checked);
+  }
+
+  function syncCurrentContractDateField() {
+    var dateEl = document.getElementById("currentContractEndDate");
+    var noContractEl = document.getElementById("noCurrentContract");
+    if (!dateEl) return;
+    dateEl.min = todayIsoDate();
+    if (noContractEl && noContractEl.checked) {
+      dateEl.value = "";
+      dateEl.disabled = true;
+    } else {
+      dateEl.disabled = false;
+    }
+  }
+
   function validateCurrentSetup() {
-    if (!fieldValue("currentSupplier")) return "Please enter your current supplier.";
-    if (!fieldValue("currentContractEndDate")) return "Please enter when your current contract ends.";
+    if (noCurrentContractChecked()) return "";
+    var endDate = fieldValue("currentContractEndDate");
+    if (endDate && !/^\d{4}-\d{2}-\d{2}$/.test(endDate)) {
+      return "Please enter a valid contract end date.";
+    }
+    if (endDate && endDate < todayIsoDate()) {
+      return "Contract end date must be today or in the future.";
+    }
     return "";
   }
 
@@ -399,7 +434,8 @@
       contactPhone: fieldValue("contactPhone"),
       notes: fieldValue("notes") || fieldValue("purchaseNotes"),
       currentSupplier: fieldValue("currentSupplier"),
-      currentContractEndDate: fieldValue("currentContractEndDate"),
+      noCurrentContract: noCurrentContractChecked(),
+      currentContractEndDate: noCurrentContractChecked() ? undefined : fieldValue("currentContractEndDate") || undefined,
       source: "railintel.co.uk",
       website: fieldValue("website"),
       dealCode: dealCode || undefined,
@@ -672,6 +708,12 @@
       if (fieldValue("dealCode")) validateDealCodeInput();
       else if (dealCodeMsgEl) dealCodeMsgEl.hidden = true;
     });
+  }
+
+  syncCurrentContractDateField();
+  var noCurrentContractEl = document.getElementById("noCurrentContract");
+  if (noCurrentContractEl) {
+    noCurrentContractEl.addEventListener("change", syncCurrentContractDateField);
   }
 
   handleStripeReturn();
