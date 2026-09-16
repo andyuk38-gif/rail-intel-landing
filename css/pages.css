@@ -726,6 +726,9 @@
 }
 
 .page-section__aside-media {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
   position: sticky;
   top: calc(5.5rem + var(--dev-banner-height));
   align-self: start;
@@ -734,6 +737,26 @@
 
 .page-section__aside-media .shot {
   margin: 0;
+}
+
+.page-section__aside-note {
+  max-width: 484px;
+}
+
+.page-section__aside-note-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.page-section__aside-note p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .page-section h2 {

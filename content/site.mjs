@@ -1099,6 +1099,7 @@ export const featureGroups = [
     summary: "Freeze an employee record for investigation evidence — company administrators only.",
     tagline: "Preserve the record when it matters",
     hideHeroActions: true,
+    hideCta: true,
     lead:
       "When an employee record may become material to an external regulatory investigation, an industry safety inquiry, or an internal investigation, the record must not change underneath the reviewers. Profile lock freezes the employee record at a point in time — only a company administrator can apply or release the lock.",
     heroRegulators: [
@@ -1139,6 +1140,11 @@ export const featureGroups = [
             scale: 1,
           },
         ],
+        asideNote: {
+          heading: "Everything here is included",
+          body:
+            "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
+        },
       },
     ],
   },

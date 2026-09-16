@@ -1013,9 +1013,19 @@ ${dots}
 }
 
 function renderAsideSection(section, base, { body, bullets }) {
-  const media = section.shots?.length
+  const shotsHtml = section.shots?.length
+    ? section.shots.map((shot) => renderShot(shot, base)).join("\n")
+    : "";
+  const noteHtml = section.asideNote
+    ? `          <div class="page-section__aside-note">
+            <h3 class="page-section__aside-note-title">${esc(section.asideNote.heading)}</h3>
+            <p>${esc(section.asideNote.body)}</p>
+          </div>`
+    : "";
+  const media = shotsHtml || noteHtml
     ? `          <div class="page-section__aside-media">
-${section.shots.map((shot) => renderShot(shot, base)).join("\n")}
+${shotsHtml}
+${noteHtml}
           </div>`
     : "";
 
@@ -2031,13 +2041,17 @@ ${heroInner}
 ${demo}
 ${group.sections.map((section) => renderSection(section, base)).join("\n\n")}
 
-${renderCta(base, {
-  ...(group.cta || {
-    heading: "Everything here is included",
-    body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
-  }),
-  showAppCta: group.showAppCta,
-})}
+${
+  group.hideCta
+    ? ""
+    : renderCta(base, {
+        ...(group.cta || {
+          heading: "Everything here is included",
+          body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
+        }),
+        showAppCta: group.showAppCta,
+      })
+}
 ${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
 ${renderFaqSection(pageSeo.faq, base)}
   </main>
