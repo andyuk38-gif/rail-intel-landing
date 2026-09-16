@@ -14,6 +14,7 @@
   var form = widget.querySelector("[data-eoi-form]");
   var closeBtn = widget.querySelector("[data-eoi-close]");
   var dismissBtn = widget.querySelector("[data-eoi-dismiss]");
+  var teaserDismissBtn = widget.querySelector("[data-eoi-teaser-dismiss]");
   var message = widget.querySelector("[data-eoi-message]");
   var successView = widget.querySelector("[data-eoi-success]");
   var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
@@ -199,6 +200,14 @@
 
   if (dismissBtn) {
     dismissBtn.addEventListener("click", function () {
+      setCollapsed(true);
+    });
+  }
+
+  if (teaserDismissBtn) {
+    teaserDismissBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
       setCollapsed(true);
     });
   }
