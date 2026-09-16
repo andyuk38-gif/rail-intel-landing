@@ -701,6 +701,18 @@
   margin-inline: auto;
 }
 
+.shot--full .shot__frame--fullwidth {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.shot--full .shot__frame--fullwidth img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
 .shot__frame--rotate {
   overflow: hidden;
 }
@@ -741,6 +753,16 @@
   width: auto;
   max-width: min(100%, var(--shot-native-width, 1024px));
   height: auto;
+}
+
+.shot-rotate--fullwidth .shot-rotate__stage {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.shot-rotate--fullwidth .shot-rotate__panel img {
+  width: 100%;
+  max-width: none;
 }
 
 .shot-rotate__controls {

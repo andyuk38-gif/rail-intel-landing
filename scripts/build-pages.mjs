@@ -406,11 +406,15 @@ function renderRotatingShot(shot, base, options = {}) {
   });
 
   const scale = typeof shot.scale === "number" ? shot.scale : 0.5;
+  const fullWidth = scale === 1 && shot.full;
   const maxWidth = Math.max(...sizes.map((size) => Math.round(size.width * scale)));
   const interval = shot.rotate.interval || 5000;
   const classes = ["shot", shot.full ? "shot--full" : null, options.showcase ? "shot--showcase" : null, "reveal"]
     .filter(Boolean)
     .join(" ");
+  const frameClass = fullWidth ? "shot__frame shot__frame--rotate shot__frame--fullwidth" : "shot__frame shot__frame--rotate";
+  const rotateClass = fullWidth ? "shot-rotate shot-rotate--fullwidth" : "shot-rotate";
+  const rotateStyle = fullWidth ? "" : ` style="--shot-rotate-max-width: ${maxWidth}px"`;
 
   const slideMarkup = slides
     .map((slide, index) => {
@@ -418,7 +422,8 @@ function renderRotatingShot(shot, base, options = {}) {
       const displayWidth = Math.max(1, Math.round(size.width * scale));
       const displayHeight = Math.max(1, Math.round(size.height * scale));
       const active = index === 0;
-      return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}" style="--shot-native-width: ${displayWidth}px"${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
+      const panelStyle = fullWidth ? "" : ` style="--shot-native-width: ${displayWidth}px"`;
+      return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}"${panelStyle}${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
                 <img src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${displayWidth}" height="${displayHeight}" loading="lazy" decoding="async" />
               </div>`;
     })
@@ -433,8 +438,8 @@ function renderRotatingShot(shot, base, options = {}) {
     .join("\n");
 
   return `        <figure class="${classes}">
-          <div class="shot__frame shot__frame--rotate">
-            <div class="shot-rotate" data-shot-rotate data-shot-rotate-interval="${interval}" style="--shot-rotate-max-width: ${maxWidth}px">
+          <div class="${frameClass}">
+            <div class="${rotateClass}" data-shot-rotate data-shot-rotate-interval="${interval}"${rotateStyle}>
               <div class="shot-rotate__stage" data-shot-rotate-stage>
 ${slideMarkup}
               </div>
@@ -472,7 +477,9 @@ function renderShot(shot, base, options = {}) {
     .filter(Boolean)
     .join(" ");
   const style = fill ? "" : ` style="max-width: ${width}px"`;
-  const frameStyle = fill ? ` style="--shot-native-width: ${width}px"` : "";
+  const fullWidth = fill && scale === 1;
+  const frameClass = fullWidth ? "shot__frame shot__frame--fullwidth" : "shot__frame";
+  const frameStyle = fill && !fullWidth ? ` style="--shot-native-width: ${width}px"` : "";
 
   const copy =
     options.showcase && (shot.title || shot.lede)
@@ -483,7 +490,7 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
       : "";
 
   return `        <figure class="${classes}"${style}>
-${copy}          <div class="shot__frame"${frameStyle}>
+${copy}          <div class="${frameClass}"${frameStyle}>
             <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${width}" height="${height}" loading="lazy" decoding="async" />
           </div>
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
