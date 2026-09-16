@@ -6057,10 +6057,43 @@ body.lightbox-open {
     max-width: 100% !important;
   }
 
-  .quotation-a4-wrap .ri-doc-header {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 1rem !important;
+  .quotation-a4-wrap .ri-doc-header,
+  .quotation-a4-wrap .ri-doc-header tbody,
+  .quotation-a4-wrap .ri-doc-header tr,
+  .quotation-a4-wrap .ri-doc-header td {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-header-cell {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-header-right {
+    text-align: left !important;
+    padding-top: 1rem !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-header-brand {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-letterhead-logo {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .quotation-a4-wrap .ri-doc-letterhead-contact {
+    text-align: left !important;
   }
 
   .quotation-a4-wrap .ri-doc-header h1 {
