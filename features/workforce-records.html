@@ -4,24 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rail Workforce Records | One Employee Record for Competence</title>
-  <meta name="description" content="Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — with printable profiles and company-admin profile lock for investigation evidence." />
+  <meta name="description" content="Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role." />
   <meta name="robots" content="index, follow" />
   <meta name="keywords" content="rail workforce records, employee competence record, safety critical personnel, driver record software" />
   <link rel="canonical" href="https://railintel.co.uk/features/workforce-records.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Rail Intel" />
   <meta property="og:title" content="Rail Workforce Records | One Employee Record for Competence" />
-  <meta property="og:description" content="Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — with printable profiles and company-admin profile lock for investigation evidence." />
+  <meta property="og:description" content="Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role." />
   <meta property="og:url" content="https://railintel.co.uk/features/workforce-records.html" />
   <meta property="og:image" content="https://railintel.co.uk/images/product/team-compliance.png" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rail Workforce Records | One Employee Record for Competence" />
-  <meta name="twitter:description" content="Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — with printable profiles and company-admin profile lock for investigation evidence." />
+  <meta name="twitter:description" content="Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role." />
   <meta name="twitter:image" content="https://railintel.co.uk/images/product/team-compliance.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Rail Workforce Records | One Employee Record for Competence","description":"Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — with printable profiles and company-admin profile lock for investigation evidence.","url":"https://railintel.co.uk/features/workforce-records.html","isPartOf":{"@type":"WebSite","name":"Rail Intel","url":"https://railintel.co.uk"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Rail Workforce Records | One Employee Record for Competence","description":"Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role.","url":"https://railintel.co.uk/features/workforce-records.html","isPartOf":{"@type":"WebSite","name":"Rail Intel","url":"https://railintel.co.uk"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Rail Intel","item":"https://railintel.co.uk/"},{"@type":"ListItem","position":2,"name":"Features","item":"https://railintel.co.uk/features/index.html"},{"@type":"ListItem","position":3,"name":"Workforce Records","item":"https://railintel.co.uk/features/workforce-records.html"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What sits on one workforce record?","acceptedAnswer":{"@type":"Answer","text":"Status, competence cycles, cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role."}},{"@type":"Question","name":"Can drivers see only their own record?","acceptedAnswer":{"@type":"Answer","text":"Yes. Own-record access can be configured so drivers view their profile without the company directory."}},{"@type":"Question","name":"Can I print an employee profile?","acceptedAnswer":{"@type":"Answer","text":"Yes. Rail Intel generates a full-colour professional profile or a print-friendly layout from the live record, which you can print or save as PDF."}},{"@type":"Question","name":"Can a profile be locked for an investigation?","acceptedAnswer":{"@type":"Answer","text":"Yes. A company administrator can lock an employee profile to preserve a point-in-time snapshot for external regulatory, industry safety or internal investigations, with an audit trail of who locked it and when."}}],"url":"https://railintel.co.uk/features/workforce-records.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What sits on one workforce record?","acceptedAnswer":{"@type":"Answer","text":"Status, competence cycles, cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role."}},{"@type":"Question","name":"Can drivers see only their own record?","acceptedAnswer":{"@type":"Answer","text":"Yes. Own-record access can be configured so drivers view their profile without the company directory."}}],"url":"https://railintel.co.uk/features/workforce-records.html"}</script>
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
@@ -165,6 +165,20 @@
                   <span>
                     <span class="nav-panel__title">Workforce Records</span>
                     <span class="nav-panel__desc">The employee record: cab passes, training, experience, documents and messaging.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/printable-profile.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Printable Profile</span>
+                    <span class="nav-panel__desc">Full-colour or print-friendly employee profiles generated from the live record.</span>
+                  </span>
+                </a>
+                <a class="nav-panel__item" href="../features/profile-lock.html">
+                  <span class="nav-panel__dot" aria-hidden="true"></span>
+                  <span>
+                    <span class="nav-panel__title">Profile Lock</span>
+                    <span class="nav-panel__desc">Freeze an employee record for investigation evidence — company administrators only.</span>
                   </span>
                 </a>
                 <a class="nav-panel__item" href="../features/medicals-licensing.html">
@@ -384,49 +398,6 @@
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
-          <h2>Printable employee profile</h2>
-          <p>When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record — not a spreadsheet assembled by hand.</p>
-          <p>Choose a full-colour professional layout for on-screen review and stakeholder circulation, or a print-friendly version optimised for paper and PDF. Both draw from the same underlying record data, so what you print is what the system holds at the moment you generate it.</p>
-          <ul class="spec-list">
-            <li><strong>Full-colour professional profile</strong> for formal packs and management review.</li>
-            <li><strong>Print-friendly layout</strong> for paper copies and archival PDF.</li>
-            <li><strong>Generated from live record data</strong> — competencies, medicals, licensing and supporting sections in one document.</li>
-            <li><strong>Print or save as PDF</strong> directly from the employee record.</li>
-          </ul>
-        </div>
-
-
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Lock a profile for evidence preservation</h2>
-          <p>When an employee record may become material to an external regulatory investigation, an industry safety inquiry, or an internal investigation, the record must not change underneath the reviewers. Profile lock freezes the employee record at a point in time — only a company administrator can apply or release the lock.</p>
-          <p>Before the lock is applied, the administrator must record a reason. Every section of the record then becomes read-only for all users — medicals, competence, training, incidents, cycles, notes and documents cannot be added, changed or deleted until an administrator unlocks the profile. The lock, the administrator's name and the reason are written to the audit trail.</p>
-          <ul class="spec-list">
-            <li><strong>Company administrator only</strong> — lock and unlock are not available to general users.</li>
-            <li><strong>Point-in-time preservation</strong> for ORR, RAIB or internal investigation workflows.</li>
-            <li><strong>Read-only across every section</strong> until an administrator releases the lock.</li>
-            <li><strong>Reason required</strong> — the lock, who applied it and why are retained in the audit trail.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 484px">
-            <img src="../images/screens/main-sys/lock-employee-profile.png?v=10479823" alt="The lock confirmation — a reason is required before the record is preserved as evidence." width="484" height="410" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">The lock confirmation — a reason is required before the record is preserved as evidence.</figcaption>
-        </figure>
-      </div>
-
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
           <h2>Everything here is included</h2>
           <p>These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.</p>
         </div>
@@ -439,7 +410,7 @@
 
     <section class="page-section page-section--tight">
       <div class="container">
-        <p class="page-lead">Related: <a href="../features/competency-cycles.html">Competency &amp; Cycles</a>, <a href="../features/medicals-licensing.html">Medicals &amp; Licensing</a></p>
+        <p class="page-lead">Related: <a href="../features/competency-cycles.html">Competency &amp; Cycles</a>, <a href="../features/printable-profile.html">Printable Profile</a>, <a href="../features/profile-lock.html">Profile Lock</a></p>
       </div>
     </section>
 
@@ -456,14 +427,6 @@
           <dt>Can drivers see only their own record?</dt>
           <dd>
               <p>Yes. Own-record access can be configured so drivers view their profile without the company directory.</p>
-          </dd>
-          <dt>Can I print an employee profile?</dt>
-          <dd>
-              <p>Yes. Rail Intel generates a full-colour professional profile or a print-friendly layout from the live record, which you can print or save as PDF.</p>
-          </dd>
-          <dt>Can a profile be locked for an investigation?</dt>
-          <dd>
-              <p>Yes. A company administrator can lock an employee profile to preserve a point-in-time snapshot for external regulatory, industry safety or internal investigations, with an audit trail of who locked it and when.</p>
           </dd>
         </dl>
       </div>

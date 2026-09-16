@@ -198,7 +198,7 @@ export const seoExtensions = {
   "workforce-records": {
     seoTitle: "Rail Workforce Records | One Employee Record for Competence",
     seoDescription:
-      "Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — with printable profiles and company-admin profile lock for investigation evidence.",
+      "Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role.",
     seoKeywords: "rail workforce records, employee competence record, safety critical personnel, driver record software",
     faq: [
       {
@@ -211,20 +211,70 @@ export const seoExtensions = {
         answer:
           "Yes. Own-record access can be configured so drivers view their profile without the company directory.",
       },
+    ],
+    relatedLinks: [
+      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
+      { name: "Printable Profile", href: "features/printable-profile.html" },
+      { name: "Profile Lock", href: "features/profile-lock.html" },
+    ],
+  },
+
+  "printable-profile": {
+    seoTitle: "Printable Rail Employee Profiles | Rail Intel",
+    seoDescription:
+      "Generate full-colour or print-friendly employee profiles from live rail competence records for audits, management review and formal packs — print or save as PDF.",
+    seoKeywords:
+      "rail employee profile print, competence profile PDF, printable driver record, audit employee profile",
+    faq: [
       {
         question: "Can I print an employee profile?",
         answer:
           "Yes. Rail Intel generates a full-colour professional profile or a print-friendly layout from the live record, which you can print or save as PDF.",
       },
       {
-        question: "Can a profile be locked for an investigation?",
+        question: "What data is included on the profile?",
         answer:
-          "Yes. A company administrator can lock an employee profile to preserve a point-in-time snapshot for external regulatory, industry safety or internal investigations, with an audit trail of who locked it and when.",
+          "The profile draws from the live record — competencies, medicals, licensing and supporting sections in one document, generated at the moment you create it.",
+      },
+      {
+        question: "What is the difference between full-colour and print-friendly?",
+        answer:
+          "Full-colour is designed for on-screen review and stakeholder circulation. Print-friendly is optimised for paper copies and archival PDF, but both use the same underlying record data.",
       },
     ],
     relatedLinks: [
+      { name: "Workforce Records", href: "features/workforce-records.html" },
+      { name: "Profile Lock", href: "features/profile-lock.html" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
+    ],
+  },
+
+  "profile-lock": {
+    seoTitle: "Employee Profile Lock for Rail Investigations | Rail Intel",
+    seoDescription:
+      "Company administrators can lock rail employee profiles to preserve a point-in-time record for ORR, RAIB or internal investigations, with a required reason and full audit trail.",
+    seoKeywords:
+      "rail employee profile lock, investigation evidence preservation, ORR audit record, RAIB investigation, competence record freeze",
+    faq: [
+      {
+        question: "Who can lock an employee profile?",
+        answer:
+          "Only a company administrator can lock or unlock a profile. General users cannot apply or release a lock.",
+      },
+      {
+        question: "What happens while a profile is locked?",
+        answer:
+          "Every section of the record becomes read-only for all users — medicals, competence, training, incidents, cycles, notes and documents cannot be added, changed or deleted until an administrator unlocks the profile.",
+      },
+      {
+        question: "Is a reason recorded when a profile is locked?",
+        answer:
+          "Yes. The administrator must enter a reason before the lock is applied. The lock, their name and the reason are written to the audit trail.",
+      },
+    ],
+    relatedLinks: [
+      { name: "Workforce Records", href: "features/workforce-records.html" },
+      { name: "QA Verifications", href: "products/qa-verifications.html" },
     ],
   },
 
