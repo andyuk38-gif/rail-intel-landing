@@ -6061,8 +6061,34 @@ body.lightbox-open {
   color: var(--text-muted);
 }
 
+.procurement-faq__media-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem 2rem;
+}
+
+.procurement-faq__text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--text-muted);
+}
+
 .procurement-faq__shot {
-  margin-top: 1.25rem;
+  flex: 0 0 auto;
+  width: min(100%, var(--shot-display-width, 410px));
+  margin: 0;
+}
+
+.procurement-faq__shot .shot__caption {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 720px) {
+  .procurement-faq__media-row {
+    flex-direction: column;
+  }
 }
 
 .procurement-empty {

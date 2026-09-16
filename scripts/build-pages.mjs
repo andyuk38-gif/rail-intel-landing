@@ -225,7 +225,7 @@ function renderFaqShot(shot, base) {
   const imgHeight = scale === 1 ? size.height : Math.max(1, Math.round(size.height * scale));
   const frameStyle = ` style="--shot-display-width: ${size.width}px"`;
 
-  return `            <figure class="procurement-faq__shot shot shot--full reveal">
+  return `            <figure class="procurement-faq__shot shot shot--full reveal"${frameStyle}>
               <div class="shot__frame shot__frame--fullwidth"${frameStyle}>
                 <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.alt || shot.caption || "")}" width="${imgWidth}" height="${imgHeight}" loading="lazy" decoding="async" />
               </div>
@@ -244,9 +244,17 @@ function renderFaqSection(faq, base = "") {
         <dl class="procurement-faq">
 ${faq
   .map((entry) => {
-    const shot = entry.shot && base ? `\n${renderFaqShot(entry.shot, base)}` : "";
+    if (entry.shot && base) {
+      return `          <dt>${esc(entry.question)}</dt>
+          <dd class="procurement-faq__answer procurement-faq__answer--media">
+            <div class="procurement-faq__media-row">
+${renderFaqShot(entry.shot, base)}
+              <p class="procurement-faq__text">${esc(entry.answer)}</p>
+            </div>
+          </dd>`;
+    }
     return `          <dt>${esc(entry.question)}</dt>
-          <dd>${esc(entry.answer)}${shot}</dd>`;
+          <dd>${esc(entry.answer)}</dd>`;
   })
   .join("\n")}
         </dl>
