@@ -426,13 +426,10 @@ function renderRotatingShot(shot, base, options = {}) {
       const displayHeight = Math.max(1, Math.round(size.height * scale));
       const active = index === 0;
       const panelStyle = fullWidth ? "" : ` style="--shot-native-width: ${displayWidth}px"`;
-      const slideSrc = `${base}${slide.src}?v=${ASSET_VERSION}`;
-      const slideSrcset = fullWidth ? ` srcset="${slideSrc} ${size.width}w"` : "";
-      const slideSizes = fullWidth ? ` sizes="(min-width: ${size.width}px) ${size.width}px, 100vw"` : "";
       const slideWidth = scale === 1 ? size.width : displayWidth;
       const slideHeight = scale === 1 ? size.height : displayHeight;
       return `              <div class="shot-rotate__panel${active ? " is-active" : ""}" data-shot-rotate-panel="${index}"${panelStyle}${active ? ' aria-hidden="false"' : ' aria-hidden="true"'}>
-                <img src="${slideSrc}"${slideSrcset}${slideSizes} alt="${esc(slide.alt || shot.caption || "")}" width="${slideWidth}" height="${slideHeight}" loading="lazy" decoding="async" />
+                <img src="${base}${slide.src}?v=${ASSET_VERSION}" alt="${esc(slide.alt || shot.caption || "")}" width="${slideWidth}" height="${slideHeight}" loading="lazy" decoding="async" />
               </div>`;
     })
     .join("\n");
@@ -505,13 +502,10 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
   const imgHeight = scale === 1 ? size.height : height;
   const loading = shot.eager ? "eager" : "lazy";
   const decoding = shot.eager ? "sync" : "async";
-  const src = `${base}${shot.src}?v=${ASSET_VERSION}`;
-  const srcset = fullWidth ? ` srcset="${src} ${size.width}w"` : "";
-  const sizes = fullWidth ? ` sizes="(min-width: ${size.width}px) ${size.width}px, 100vw"` : "";
 
   return `        <figure class="${classes}"${style}>
 ${copy}          <div class="${frameClass}"${frameStyle}>
-            <img src="${src}"${srcset}${sizes} alt="${esc(shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
+            <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
           </div>
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }

@@ -709,10 +709,9 @@
 
 .shot--full .shot__frame--fullwidth img {
   display: block;
-  width: auto;
-  max-width: min(100%, var(--shot-display-width, 1024px));
+  width: 100%;
+  max-width: none;
   height: auto;
-  margin-inline: auto;
 }
 
 .shot__frame--rotate {
@@ -746,7 +745,7 @@
 
 .shot-rotate__panel.is-active {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
   pointer-events: auto;
 }
 
@@ -763,9 +762,8 @@
 }
 
 .shot-rotate--fullwidth .shot-rotate__panel img {
-  width: auto;
-  max-width: min(100%, var(--shot-display-width, 1024px));
-  margin-inline: auto;
+  width: 100%;
+  max-width: none;
 }
 
 .shot-rotate__controls {
@@ -966,7 +964,7 @@
 
 .report-roll__panel[aria-hidden="false"] {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
   pointer-events: auto;
   z-index: 1;
 }
