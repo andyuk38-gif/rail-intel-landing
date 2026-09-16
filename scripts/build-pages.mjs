@@ -2406,9 +2406,9 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                   <label for="companyName">Company name *</label>
                   <input id="companyName" name="companyName" required autocomplete="organization" />
                 </div>
-                <div class="field field--full field--grow">
+                <div class="field field--full">
                   <label for="companyAddress">Registered address *</label>
-                  <textarea id="companyAddress" name="companyAddress" rows="4" required></textarea>
+                  <textarea id="companyAddress" name="companyAddress" rows="5" required></textarea>
                 </div>
               </div>
               <p class="signup-form__message" data-signup-msg="company" hidden></p>
