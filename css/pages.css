@@ -6339,71 +6339,20 @@ body.lightbox-open {
 }
 
 .signup-path-tile--invoice .signup-glass-tile__content {
-  padding-right: 6.75rem;
+  padding-right: 7.5rem;
 }
 
-.signup-path-tile__card-icons {
+.signup-path-tile__stripe-badge {
   position: absolute;
-  top: 0.9rem;
-  right: 0.9rem;
+  top: 0.75rem;
+  right: 0.75rem;
   z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  display: block;
+  width: min(7.5rem, 42%);
+  height: auto;
   pointer-events: none;
-}
-
-.signup-card-brand {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  min-width: 2.1rem;
-  height: 1.35rem;
-  padding: 0 0.35rem;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
-  font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.signup-card-brand--visa {
-  background: #fff;
-  color: #1a1f71;
-}
-
-.signup-card-brand--amex {
-  background: #006fcf;
-  color: #fff;
-  font-size: 0.5rem;
-  letter-spacing: 0.01em;
-}
-
-.signup-card-brand--mastercard {
-  min-width: 2.1rem;
-  padding: 0 0.3rem;
-  background: #f4f4f4;
-}
-
-.signup-card-brand__mc-circle {
-  width: 0.72rem;
-  height: 0.72rem;
-  border-radius: 50%;
-}
-
-.signup-card-brand__mc-circle--red {
-  background: #eb001b;
-  margin-right: -0.28rem;
-}
-
-.signup-card-brand__mc-circle--yellow {
-  background: #f79e1b;
+  opacity: 0.96;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
 .signup-path-tile:hover .signup-glass-tile__surface,

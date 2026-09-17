@@ -30,8 +30,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=240763642" />
-  <link rel="stylesheet" href="css/pages.css?v=240763642" />
+  <link rel="stylesheet" href="css/style.css?v=14001687" />
+  <link rel="stylesheet" href="css/pages.css?v=14001687" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -362,14 +362,15 @@
                 </button>
                 <button type="button" class="signup-glass-tile signup-path-tile signup-path-tile--invoice" data-signup-intent="invoice">
                   <span class="signup-glass-tile__surface">
-                    <span class="signup-path-tile__card-icons" aria-hidden="true">
-                      <span class="signup-card-brand signup-card-brand--visa">Visa</span>
-                      <span class="signup-card-brand signup-card-brand--mastercard">
-                        <span class="signup-card-brand__mc-circle signup-card-brand__mc-circle--red"></span>
-                        <span class="signup-card-brand__mc-circle signup-card-brand__mc-circle--yellow"></span>
-                      </span>
-                      <span class="signup-card-brand signup-card-brand--amex">Amex</span>
-                    </span>
+                    <img
+                      class="signup-path-tile__stripe-badge"
+                      src="images/stripe-accepted-cards.png"
+                      width="521"
+                      height="165"
+                      alt=""
+                      aria-hidden="true"
+                      decoding="async"
+                    />
                     <span class="signup-glass-tile__content">
                       <strong>Pay an invoice</strong>
                       <span>Find your invoice and pay securely by credit or debit card via Stripe.</span>
@@ -659,9 +660,9 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=240763642"></script>
-  <script src="js/phone-country-codes.js?v=240763642"></script>
-  <script src="js/signup.js?v=240763642"></script>
-  <script src="js/newsletter.js?v=240763642"></script>
+  <script src="js/site.js?v=14001687"></script>
+  <script src="js/phone-country-codes.js?v=14001687"></script>
+  <script src="js/signup.js?v=14001687"></script>
+  <script src="js/newsletter.js?v=14001687"></script>
 </body>
 </html>

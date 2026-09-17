@@ -2417,14 +2417,15 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 </button>
                 <button type="button" class="signup-glass-tile signup-path-tile signup-path-tile--invoice" data-signup-intent="invoice">
                   <span class="signup-glass-tile__surface">
-                    <span class="signup-path-tile__card-icons" aria-hidden="true">
-                      <span class="signup-card-brand signup-card-brand--visa">Visa</span>
-                      <span class="signup-card-brand signup-card-brand--mastercard">
-                        <span class="signup-card-brand__mc-circle signup-card-brand__mc-circle--red"></span>
-                        <span class="signup-card-brand__mc-circle signup-card-brand__mc-circle--yellow"></span>
-                      </span>
-                      <span class="signup-card-brand signup-card-brand--amex">Amex</span>
-                    </span>
+                    <img
+                      class="signup-path-tile__stripe-badge"
+                      src="images/stripe-accepted-cards.png"
+                      width="521"
+                      height="165"
+                      alt=""
+                      aria-hidden="true"
+                      decoding="async"
+                    />
                     <span class="signup-glass-tile__content">
                       <strong>Pay an invoice</strong>
                       <span>Find your invoice and pay securely by credit or debit card via Stripe.</span>
