@@ -6348,32 +6348,172 @@ body.lightbox-open {
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    108deg,
-    rgba(10, 14, 24, 0.94) 0%,
-    rgba(10, 14, 24, 0.72) 48%,
-    rgba(10, 14, 24, 0.28) 100%
+    102deg,
+    rgba(10, 14, 24, 0.97) 0%,
+    rgba(10, 14, 24, 0.88) 42%,
+    rgba(10, 14, 24, 0.45) 72%,
+    rgba(10, 14, 24, 0.18) 100%
   );
   pointer-events: none;
-}
-
-.signup-path-tile__bg-art {
-  position: absolute;
-  top: -8%;
-  right: -10%;
-  bottom: -12%;
-  left: 18%;
-  z-index: 0;
-  background: url("../images/invoice-tile-cards.png") right center / contain no-repeat;
-  opacity: 0.34;
-  mix-blend-mode: screen;
-  transform: rotate(-7deg) scale(1.05);
-  pointer-events: none;
-  filter: saturate(0.9);
 }
 
 .signup-path-tile--invoice .signup-glass-tile__content {
   position: relative;
   z-index: 2;
+  max-width: 62%;
+}
+
+.signup-path-tile__card-scene {
+  position: absolute;
+  top: 0.55rem;
+  right: -0.35rem;
+  width: 11.5rem;
+  height: 7.25rem;
+  z-index: 0;
+  opacity: 0.48;
+  pointer-events: none;
+  transform: rotate(-6deg);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s;
+}
+
+.signup-path-tile__card {
+  position: absolute;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.signup-path-tile__card--back {
+  top: 0.35rem;
+  right: 1.15rem;
+  width: 8.6rem;
+  height: 5.35rem;
+  transform: rotate(10deg);
+  background:
+    linear-gradient(135deg, rgba(122, 28, 44, 0.95) 0%, rgba(74, 14, 28, 0.98) 100%);
+}
+
+.signup-path-tile__card--front {
+  top: 1.15rem;
+  right: 0.2rem;
+  width: 9.1rem;
+  height: 5.65rem;
+  padding: 0.7rem 0.75rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(245, 158, 11, 0.22), transparent 42%),
+    linear-gradient(145deg, #1f3354 0%, #0f1a2f 48%, #0a1220 100%);
+}
+
+.signup-path-tile__card--front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(118deg, transparent 35%, rgba(255, 255, 255, 0.08) 50%, transparent 68%),
+    repeating-linear-gradient(
+      -24deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  pointer-events: none;
+}
+
+.signup-path-tile__card-chip {
+  position: relative;
+  z-index: 1;
+  width: 1.35rem;
+  height: 1rem;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #f0d78c 0%, #c9a227 42%, #9a7b1c 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.signup-path-tile__card-chip::before,
+.signup-path-tile__card-chip::after {
+  content: "";
+  position: absolute;
+  background: rgba(122, 92, 18, 0.35);
+}
+
+.signup-path-tile__card-chip::before {
+  top: 0.2rem;
+  bottom: 0.2rem;
+  left: 42%;
+  width: 1px;
+}
+
+.signup-path-tile__card-chip::after {
+  left: 0.28rem;
+  right: 0.28rem;
+  top: 48%;
+  height: 1px;
+}
+
+.signup-path-tile__card-number {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.signup-path-tile__card-number span {
+  display: block;
+  height: 0.22rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.28));
+}
+
+.signup-path-tile__card-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.signup-path-tile__card-holder {
+  display: block;
+  width: 3.1rem;
+  height: 0.18rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.signup-path-tile__card-network {
+  display: flex;
+  align-items: center;
+}
+
+.signup-path-tile__card-network span {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+}
+
+.signup-path-tile__card-network span:first-child {
+  background: rgba(235, 0, 27, 0.88);
+  margin-right: -0.38rem;
+}
+
+.signup-path-tile__card-network span:last-child {
+  background: rgba(247, 158, 27, 0.9);
+}
+
+.signup-path-tile--invoice:hover .signup-path-tile__card-scene,
+.signup-path-tile--invoice:focus-visible .signup-path-tile__card-scene {
+  opacity: 0.58;
+  transform: rotate(-4deg) translateY(-2px);
 }
 
 .signup-path-tile:hover .signup-glass-tile__surface,
@@ -6518,10 +6658,18 @@ body.lightbox-open {
     grid-template-columns: 1fr;
   }
 
-  .signup-path-tile__bg-art {
-    left: 0;
-    opacity: 0.26;
-    transform: rotate(-5deg) scale(1.08);
+  .signup-path-tile--invoice .signup-glass-tile__content {
+    max-width: none;
+    padding-top: 5.75rem;
+  }
+
+  .signup-path-tile__card-scene {
+    top: 0.65rem;
+    right: 0.65rem;
+    left: auto;
+    width: 10.5rem;
+    opacity: 0.4;
+    transform: rotate(-4deg);
   }
 
   .signup-wizard__steps,

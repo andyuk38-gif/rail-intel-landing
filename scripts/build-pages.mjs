@@ -2417,7 +2417,21 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 </button>
                 <button type="button" class="signup-glass-tile signup-path-tile signup-path-tile--invoice" data-signup-intent="invoice">
                   <span class="signup-glass-tile__surface">
-                    <span class="signup-path-tile__bg-art" aria-hidden="true"></span>
+                    <span class="signup-path-tile__card-scene" aria-hidden="true">
+                      <span class="signup-path-tile__card signup-path-tile__card--back"></span>
+                      <span class="signup-path-tile__card signup-path-tile__card--front">
+                        <span class="signup-path-tile__card-chip"></span>
+                        <span class="signup-path-tile__card-number">
+                          <span></span><span></span><span></span><span></span>
+                        </span>
+                        <span class="signup-path-tile__card-meta">
+                          <span class="signup-path-tile__card-holder"></span>
+                          <span class="signup-path-tile__card-network">
+                            <span></span><span></span>
+                          </span>
+                        </span>
+                      </span>
+                    </span>
                     <span class="signup-glass-tile__content">
                       <strong>Pay an invoice</strong>
                       <span>Find your invoice and pay securely by credit or debit card via Stripe.</span>
