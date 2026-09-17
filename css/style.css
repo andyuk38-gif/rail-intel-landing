@@ -11,6 +11,8 @@
   --radius: 12px;
   --font-sans: "Outfit", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --copy-size: 1.1875rem;
+  --copy-line: 1.6;
   --dev-banner-height: 2.5rem;
 }
 
@@ -446,8 +448,8 @@ body::before {
 }
 
 .hero-desc {
-  font-size: 1.0625rem;
-  line-height: 1.62;
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: #a7aebc;
   max-width: 52ch;
   margin: 0 0 2.25rem;
@@ -1070,9 +1072,9 @@ body::before {
   z-index: 1;
   margin: 0;
   flex: 1;
-  font-size: 0.9375rem;
+  font-size: var(--copy-size);
   color: var(--text-muted);
-  line-height: 1.48;
+  line-height: var(--copy-line);
   transition: color 0.3s ease;
 }
 
@@ -1268,8 +1270,8 @@ body::before {
 }
 
 .proof-carousel .proof-card p {
-  font-size: 0.875rem;
-  line-height: 1.44;
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: #f8f9fc;
   text-shadow: none;
   transform: translateZ(2px);
@@ -1383,7 +1385,8 @@ body::before {
 }
 
 .product-lead {
-  font-size: 1.0625rem;
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: var(--text-muted);
   margin: 0 0 1.25rem;
 }
@@ -1400,9 +1403,9 @@ body::before {
 .product-bullets li {
   position: relative;
   padding-left: 1.25rem;
-  font-size: 0.9375rem;
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: var(--text-muted);
-  line-height: 1.55;
 }
 
 .product-bullets li::before {
@@ -2892,8 +2895,8 @@ body::before {
 }
 
 .scope-card p {
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: var(--text-muted);
   margin: 0;
 }
@@ -4184,8 +4187,8 @@ body::before {
 }
 
 .how-flow__body p {
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: var(--text-muted);
   margin: 0;
 }
@@ -4494,6 +4497,8 @@ body::before {
 }
 
 .cta-desc {
+  font-size: var(--copy-size);
+  line-height: var(--copy-line);
   color: var(--text-muted);
   margin: 0 0 1.5rem;
 }

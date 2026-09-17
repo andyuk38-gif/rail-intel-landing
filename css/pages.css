@@ -680,12 +680,18 @@
 
 .page-lead,
 .page-section p,
+.page-section__aside-note p,
+.steps p,
+.product-lead,
+.product-bullets li,
+.procurement-faq dt,
 .procurement-faq dd,
 .procurement-faq dd p,
 .spec-list li,
-.spec-tile__detail {
-  font-size: 1.1875rem;
-  line-height: 1.6;
+.spec-tile__detail,
+.card p {
+  font-size: var(--copy-size, 1.1875rem);
+  line-height: var(--copy-line, 1.6);
 }
 
 .page-lead {
@@ -810,8 +816,6 @@
 
 .page-section__aside-note p {
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.55;
   color: var(--text-muted);
 }
 
@@ -3263,8 +3267,6 @@ body.lightbox-open {
 }
 
 .card p {
-  font-size: 0.9375rem;
-  line-height: 1.55;
   color: var(--text-muted);
   margin: 0;
 }
@@ -3407,7 +3409,6 @@ body.lightbox-open {
 
 .steps p {
   margin: 0;
-  font-size: 0.9375rem;
   color: var(--text-muted);
 }
 
@@ -6980,6 +6981,7 @@ body.lightbox-open {
 
 .procurement-faq dt {
   font-weight: 600;
+  color: var(--text);
   margin-bottom: 0.35rem;
 }
 
