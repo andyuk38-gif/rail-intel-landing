@@ -3181,3 +3181,64 @@
   else if (mq.addListener) mq.addListener(fitAll);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
 })();
+
+(function () {
+  var asides = document.querySelectorAll(".page-section--tunnel-cab .page-section__aside");
+  if (!asides.length) return;
+
+  var mq = window.matchMedia("(min-width: 901px)");
+
+  function fitTunnelCabAside(aside) {
+    var copy = aside.querySelector(".page-section__aside-copy");
+    var media = aside.querySelector(".page-section__aside-media");
+    var frame = aside.querySelector(".page-section__aside-visual .shot__frame");
+    var tiles = aside.querySelector(".spec-tiles");
+    var h2 = copy && copy.querySelector("h2");
+    if (!copy || !media || !frame || !tiles) return;
+
+    if (!mq.matches) {
+      copy.style.removeProperty("min-height");
+      media.style.removeProperty("margin-top");
+      tiles.style.removeProperty("width");
+      tiles.style.removeProperty("height");
+      return;
+    }
+
+    media.style.marginTop = "0";
+    if (h2) {
+      var delta = frame.getBoundingClientRect().top - h2.getBoundingClientRect().top;
+      if (delta > 0.5) media.style.marginTop = -Math.round(delta) + "px";
+    }
+
+    void media.offsetHeight;
+
+    var frameBottom = frame.getBoundingClientRect().bottom;
+    var copyTop = copy.getBoundingClientRect().top;
+    copy.style.minHeight = Math.max(0, Math.round(frameBottom - copyTop)) + "px";
+
+    void copy.offsetHeight;
+
+    var tilesTop = tiles.getBoundingClientRect().top;
+    var availableHeight = Math.max(120, frameBottom - tilesTop);
+    var availableWidth = copy.clientWidth;
+    var side = Math.min(availableWidth, availableHeight);
+
+    tiles.style.width = Math.round(side) + "px";
+    tiles.style.height = Math.round(side) + "px";
+  }
+
+  function fitAll() {
+    Array.prototype.forEach.call(asides, fitTunnelCabAside);
+  }
+
+  asides.forEach(function (aside) {
+    var img = aside.querySelector(".page-section__aside-visual .shot__frame img");
+    if (img && !img.complete) img.addEventListener("load", fitAll, { once: true });
+  });
+
+  fitAll();
+  window.addEventListener("resize", fitAll);
+  if (mq.addEventListener) mq.addEventListener("change", fitAll);
+  else if (mq.addListener) mq.addListener(fitAll);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+})();

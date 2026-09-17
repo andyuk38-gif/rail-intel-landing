@@ -795,13 +795,13 @@
 }
 
 .page-section--tunnel-cab .page-section__aside {
-  align-items: stretch;
+  align-items: start;
 }
 
 .page-section--tunnel-cab .page-section__aside-copy {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
   min-height: 0;
 }
 
@@ -819,7 +819,6 @@
 .page-section--tunnel-cab .page-section__aside-copy .spec-tiles {
   flex: 0 0 auto;
   width: 100%;
-  aspect-ratio: 1;
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -844,49 +843,70 @@
 .page-section--tunnel-cab .page-section__aside-media {
   position: static;
   top: auto;
-  align-self: stretch;
-  justify-content: center;
-}
-
-.page-section--tunnel-cab .page-section__aside-media .shot {
+  align-self: start;
+  justify-content: flex-start;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: min(100%, 28rem) !important;
-  margin-left: auto;
-  margin-right: 0;
-  height: 100%;
-  min-height: 0;
+  align-items: flex-end;
 }
 
-.page-section--tunnel-cab .page-section__aside-media .shot--bordered .shot__frame {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
+.page-section--tunnel-cab .page-section__aside-visual {
+  width: 100%;
+  max-width: min(100%, 28rem);
+  margin-left: auto;
+}
+
+.page-section--tunnel-cab .page-section__aside-visual .shot {
+  margin: 0;
+  width: 100%;
+  max-width: none !important;
+}
+
+.page-section--tunnel-cab .page-section__aside-visual .shot[style] {
+  max-width: none !important;
+  width: 100%;
+}
+
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame {
+  width: 100%;
+  aspect-ratio: 434 / 585;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 16px;
-  overflow: hidden;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.35),
     0 24px 48px rgba(0, 0, 0, 0.42);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.page-section--tunnel-cab .page-section__aside-media .shot--bordered .shot__frame img {
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame img {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   border-radius: 15px;
+  transition: filter 0.25s ease;
 }
 
-.page-section--tunnel-cab .page-section__aside-media .shot__caption {
-  flex: 0 0 auto;
-  margin-top: 0.75rem;
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame:hover img,
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame:focus-within img {
+  filter: brightness(0.68);
+}
+
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.page-section--tunnel-cab .page-section__aside-media > .shot__caption {
+  width: 100%;
+  max-width: min(100%, 28rem);
+  margin: 0.75rem 0 0;
+  margin-left: auto;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
 }
 
 .page-section h2 {

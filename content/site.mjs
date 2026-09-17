@@ -836,10 +836,10 @@ export const featureGroups = [
         ],
         bulletTiles: true,
         bullets: [
-          "**One-tap dark mode** from the assessment header, kept for the session.",
-          "**Dimmable brightness** on mobile and tablet (40% to 135%), set by the assessor.",
-          "**Cab safety notice** at the start of an assessable event, with a direct Turn on dark mode action.",
-          "**App-wide dark theme** available from the user menu when you are not assessing.",
+          "**One-tap dark mode** from the assessment header — switch before the cab goes dark and the choice stays for the rest of the session.",
+          "**Dimmable brightness** on mobile and tablet, from 40% up to 135%, adjusted by hand to suit cab conditions — not auto-detected.",
+          "**Cab safety notice** at the start of an assessable event, with a direct Turn on dark mode action when windscreen glare matters.",
+          "**App-wide dark theme** from the user menu when you are not assessing — the same dark palette across the whole app.",
         ],
         shots: [
           {

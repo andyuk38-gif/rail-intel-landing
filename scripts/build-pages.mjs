@@ -1023,7 +1023,19 @@ ${dots}
 
 function renderAsideSection(section, base, { body, bullets }) {
   const shotsHtml = section.shots?.length
-    ? section.shots.map((shot) => renderShot(shot, base)).join("\n")
+    ? section.mod === "tunnel-cab"
+      ? section.shots
+          .map((shot) => {
+            const figure = renderShot({ ...shot, hideCaption: true }, base);
+            const caption = shot.caption
+              ? `          <p class="shot__caption">${esc(shot.caption)}</p>\n`
+              : "";
+            return `          <div class="page-section__aside-visual">
+${figure}          </div>
+${caption}`;
+          })
+          .join("\n")
+      : section.shots.map((shot) => renderShot(shot, base)).join("\n")
     : "";
   const noteHtml = section.asideNote
     ? `          <div class="page-section__aside-note">
