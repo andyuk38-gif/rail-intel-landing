@@ -678,23 +678,9 @@
   margin: 0 0 1rem;
 }
 
-.page-lead,
-.page-section p,
-.page-section__aside-note p,
-.steps p,
-.product-lead,
-.product-bullets li,
-.procurement-faq dt,
-.procurement-faq dd,
-.procurement-faq dd p,
-.spec-list li,
-.spec-tile__detail,
-.card p {
-  font-size: var(--copy-size, 1.1875rem);
-  line-height: var(--copy-line, 1.6);
-}
-
 .page-lead {
+  font-size: 1.1875rem;
+  line-height: 1.6;
   color: var(--text-muted);
   margin: 0 0 2rem;
   max-width: 46rem;
@@ -816,6 +802,8 @@
 
 .page-section__aside-note p {
   margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
   color: var(--text-muted);
 }
 
@@ -834,6 +822,8 @@
 }
 
 .page-section--tunnel-cab .page-section__aside-copy > p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
   color: var(--text-muted);
   margin: 0 0 1.25rem;
 }
@@ -864,11 +854,13 @@
 }
 
 .page-section--tunnel-cab .page-section__aside-copy .spec-tile__title {
-  font-size: 1.1875rem;
+  font-size: 0.98rem;
 }
 
 .page-section--tunnel-cab .page-section__aside-copy .spec-tile__detail {
   flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .page-section--tunnel-cab .page-section__aside-media {
@@ -998,6 +990,8 @@
 .spec-list li {
   position: relative;
   padding-left: 1.3rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
   color: var(--text-muted);
 }
 
@@ -1542,7 +1536,7 @@
 
 .spec-tile__title {
   margin: 0 0 0.55rem;
-  font-size: 1.1875rem;
+  font-size: 1.02rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.3;
@@ -1551,6 +1545,8 @@
 
 .spec-tile__detail {
   margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
   color: var(--text-muted);
 }
 
@@ -3267,6 +3263,8 @@ body.lightbox-open {
 }
 
 .card p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
   color: var(--text-muted);
   margin: 0;
 }
@@ -3409,6 +3407,7 @@ body.lightbox-open {
 
 .steps p {
   margin: 0;
+  font-size: 0.9375rem;
   color: var(--text-muted);
 }
 
@@ -6981,7 +6980,6 @@ body.lightbox-open {
 
 .procurement-faq dt {
   font-weight: 600;
-  color: var(--text);
   margin-bottom: 0.35rem;
 }
 
