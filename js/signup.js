@@ -24,6 +24,7 @@
   var invoiceStripeBtn = document.querySelector("[data-signup-invoice-stripe-pay]");
   var QUOTE_SUCCESS_HELPER =
     "A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.";
+  var progressWrap = wizard.querySelector(".signup-progress");
   var progressFill = document.querySelector("[data-signup-progress]");
 
   var QUOTE_PANEL_STEP = {
@@ -146,6 +147,13 @@
   }
 
   function syncSteppers(panel) {
+    var showSteps = state.intent !== null && panel !== "intent";
+    if (progressWrap) progressWrap.hidden = !showSteps;
+    if (!showSteps) {
+      if (stepperQuote) stepperQuote.hidden = true;
+      if (stepperInvoice) stepperInvoice.hidden = true;
+      return;
+    }
     var step = panelStep(panel);
     var isInvoice = state.intent === "invoice";
     if (stepperQuote) stepperQuote.hidden = isInvoice;
