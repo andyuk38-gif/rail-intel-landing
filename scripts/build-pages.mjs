@@ -2381,7 +2381,6 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
         <div class="signup-wizard-glass" data-cms-signup-wizard>
           <div class="signup-wizard__header">
             <p class="signup-wizard__eyebrow">Request quotation <span class="signup-wizard__eyebrow-lower">or</span> pay an invoice</p>
-            <p class="signup-wizard__login">Already have an account? <a href="${site.app}">Log in to CMS</a></p>
           </div>
           <div class="signup-progress" aria-hidden="true">
             <div class="signup-progress__track"><div class="signup-progress__fill" data-signup-progress style="width:20%"></div></div>
@@ -2404,7 +2403,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
             <div class="signup-wizard__body is-active" data-signup-panel="intent">
               <div class="signup-panel__head">
                 <h2 class="signup-form__title">How would you like to get started?</h2>
-                <p class="signup-form__lead">Request a formal quotation or pay an outstanding invoice by card.</p>
+                <p class="signup-form__lead">Request a quotation or pay an outstanding invoice by card.</p>
               </div>
               <div class="signup-path-tiles">
                 <button type="button" class="signup-glass-tile signup-path-tile" data-signup-intent="quote">
@@ -2417,20 +2416,16 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 </button>
                 <button type="button" class="signup-glass-tile signup-path-tile signup-path-tile--invoice" data-signup-intent="invoice">
                   <span class="signup-glass-tile__surface">
-                    <span class="signup-path-tile__card-scene" aria-hidden="true">
-                      <span class="signup-path-tile__card signup-path-tile__card--back"></span>
-                      <span class="signup-path-tile__card signup-path-tile__card--front">
-                        <span class="signup-path-tile__card-chip"></span>
-                        <span class="signup-path-tile__card-number">
-                          <span></span><span></span><span></span><span></span>
-                        </span>
-                        <span class="signup-path-tile__card-meta">
-                          <span class="signup-path-tile__card-holder"></span>
-                          <span class="signup-path-tile__card-network">
-                            <span></span><span></span>
-                          </span>
-                        </span>
-                      </span>
+                    <span class="signup-path-tile__pay-art" aria-hidden="true">
+                      <span class="signup-path-tile__pay-glow"></span>
+                      <img
+                        class="signup-path-tile__pay-cards"
+                        src="images/invoice-pay-cards.png"
+                        width="512"
+                        height="397"
+                        alt=""
+                        decoding="async"
+                      />
                     </span>
                     <span class="signup-glass-tile__content">
                       <strong>Pay an invoice</strong>
