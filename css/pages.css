@@ -5392,6 +5392,10 @@ body.lightbox-open {
   max-width: 62ch;
 }
 
+.signup-wizard__body[data-signup-panel="current-setup"] .signup-form__lead {
+  max-width: none;
+}
+
 .signup-form__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
