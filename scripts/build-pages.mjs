@@ -2416,13 +2416,12 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 </button>
                 <button type="button" class="signup-glass-tile signup-path-tile signup-path-tile--invoice" data-signup-intent="invoice">
                   <span class="signup-glass-tile__surface">
-                    <span class="signup-path-tile__pay-art" aria-hidden="true">
-                      <span class="signup-path-tile__pay-glow"></span>
+                    <span class="signup-path-tile__stripe-pill" aria-hidden="true">
                       <img
-                        class="signup-path-tile__pay-cards"
-                        src="images/invoice-pay-cards.png"
-                        width="512"
-                        height="397"
+                        class="signup-path-tile__stripe-pill-img"
+                        src="images/stripe-powered-pill.png"
+                        width="300"
+                        height="81"
                         alt=""
                         decoding="async"
                       />
