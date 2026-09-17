@@ -142,7 +142,7 @@ export const products = [
 
 /** Standalone apps coming soon — shown in the footer without links until pages exist. */
 export const upcomingProducts = {
-  label: "New for 2027",
+  label: "New for 2027/28",
   items: ["Operations Control Center", "Rostering", "Assessment Hub", "Standards Document Control Center"],
 };
 
