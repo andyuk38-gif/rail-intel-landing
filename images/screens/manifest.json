@@ -139,17 +139,13 @@
     "width": 1394,
     "height": 909
   },
-  "images/screens/driver-reports/driver-report-form.png": {
-    "width": 1295,
-    "height": 1118
+  "images/screens/driver-reports/driver-report-form-dark.png": {
+    "width": 1024,
+    "height": 997
   },
-  "images/screens/driver-reports/driver-report-overview.png": {
-    "width": 1562,
-    "height": 572
-  },
-  "images/screens/driver-reports/submitted-report.png": {
-    "width": 1562,
-    "height": 874
+  "images/screens/driver-reports/submitted-report-dark.png": {
+    "width": 1024,
+    "height": 636
   },
   "images/screens/leave-absence/employee-leave-record-summary.png": {
     "width": 1558,

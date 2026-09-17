@@ -669,6 +669,7 @@ export const addons = [
     slug: "driver-reports",
     name: "Driver Reports",
     moduleId: "driver-reports",
+    hideActivation: true,
     summary: "Signed operational reports from drivers, exportable to your investigations system.",
     tagline: "Capture the driver's account while it is fresh",
     lead:
@@ -676,6 +677,8 @@ export const addons = [
     sections: [
       {
         heading: "A structured report, signed by the driver",
+        fullWidth: true,
+        mod: "fluid-shot",
         body: [
           "The form captures the operational context alongside the narrative, so a report is usable as evidence later rather than an unattributed paragraph. Reports are held on the employee record and synchronise company-wide for management review.",
           "Where the Investigations connector is configured, the API supports exporting reports into that system, so the driver's account reaches the investigation without being re-keyed.",
@@ -688,16 +691,20 @@ export const addons = [
         ],
         shots: [
           {
-            src: "images/screens/driver-reports/driver-report-overview.png",
-            caption: "Company-wide overview of submitted driver reports.",
+            src: "images/screens/driver-reports/driver-report-form-dark.png",
+            caption:
+              "The report form captures operational context as structured fields — turn, headcode, conditions, narrative and signature.",
+            scale: 1,
+            full: true,
+            eager: true,
+            noExpand: true,
           },
           {
-            src: "images/screens/driver-reports/driver-report-form.png",
-            caption: "The report form captures operational context as structured fields.",
-          },
-          {
-            src: "images/screens/driver-reports/submitted-report.png",
+            src: "images/screens/driver-reports/submitted-report-dark.png",
             caption: "A submitted report as it is retained against the driver's record.",
+            scale: 1,
+            full: true,
+            noExpand: true,
           },
         ],
       },

@@ -89,10 +89,7 @@ export const seoExtensions = {
           "Where the Investigations connector is configured, driver reports can export to Rail Intel Investigations without re-keying.",
       },
     ],
-    relatedLinks: [
-      { name: "Rail Intel Investigations", href: "products/investigations.html" },
-      { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
-    ],
+    relatedLinks: [],
   },
 
   "leave-absence": {
