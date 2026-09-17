@@ -3199,9 +3199,7 @@
     if (!mq.matches) {
       copy.style.removeProperty("min-height");
       media.style.removeProperty("margin-top");
-      tiles.style.removeProperty("width");
-      tiles.style.removeProperty("height");
-      tiles.style.removeProperty("max-width");
+      tiles.style.removeProperty("min-height");
       return;
     }
 
@@ -3220,11 +3218,7 @@
     void copy.offsetHeight;
 
     var tilesTop = tiles.getBoundingClientRect().top;
-    var availableHeight = Math.max(140, frameBottom - tilesTop);
-
-    tiles.style.width = "100%";
-    tiles.style.maxWidth = "none";
-    tiles.style.height = Math.round(availableHeight) + "px";
+    tiles.style.minHeight = Math.max(140, Math.round(frameBottom - tilesTop)) + "px";
   }
 
   function fitAll() {

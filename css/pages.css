@@ -819,14 +819,14 @@
 }
 
 .page-section--tunnel-cab .page-section__aside-copy .spec-tiles {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   width: 100%;
   max-width: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
-  margin-top: auto;
+  margin-top: 0;
   min-height: 0;
 }
 
@@ -879,7 +879,6 @@
 .page-section--tunnel-cab .page-section__aside-visual .shot__frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 434 / 668;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 16px;
@@ -905,9 +904,7 @@
 .page-section--tunnel-cab .page-section__aside-visual .shot__frame img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
   border-radius: 15px;
   transition: filter 0.25s ease;
 }
