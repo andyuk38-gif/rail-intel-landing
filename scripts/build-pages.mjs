@@ -1038,7 +1038,7 @@ ${noteHtml}
           </div>`
     : "";
 
-  return `    <section class="page-section page-section--aside">
+  return `    <section class="page-section page-section--aside${section.mod ? ` page-section--${section.mod}` : ""}">
       <div class="container">
         <div class="page-section__aside">
           <div class="page-section__aside-copy">
