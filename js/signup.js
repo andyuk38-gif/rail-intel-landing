@@ -11,44 +11,42 @@
   if (!wizard || !form) return;
 
   var moduleListQuote = document.querySelector("[data-signup-modules]");
-  var moduleListPurchase = document.querySelector("[data-signup-modules-purchase]");
-  var paymentOptions = document.querySelector("[data-signup-payment-options]");
-  var bankDetailsEl = document.querySelector("[data-signup-bank-details]");
-  var stripePanel = document.querySelector("[data-signup-stripe-panel]");
-  var bankPanel = document.querySelector("[data-signup-bank-panel]");
   var successMessageQuote = document.querySelector("[data-signup-success-message]");
   var successNoteQuote = document.querySelector("[data-signup-success-note]");
-  var successMessagePurchase = document.querySelector("[data-signup-success-message-purchase]");
+  var successMessageInvoice = document.querySelector("[data-signup-success-message-invoice]");
   var dealOffersEl = document.querySelector("[data-signup-deal-offers]");
   var dealCodeMsgEl = document.querySelector("[data-signup-deal-code-msg]");
+  var stepFiveLabel = document.querySelector("[data-signup-step-five-label]");
+  var invoicePreviewWrap = document.querySelector("[data-signup-invoice-preview]");
+  var invoicePreviewHtml = document.querySelector("[data-signup-invoice-preview-html]");
+  var invoiceStripeBtn = document.querySelector("[data-signup-invoice-stripe-pay]");
   var QUOTE_SUCCESS_HELPER =
     "A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.";
   var progressFill = document.querySelector("[data-signup-progress]");
 
   var TOTAL_STEPS = 6;
   var PANEL_STEP = {
-    company: 1,
-    "current-setup": 2,
-    contact: 3,
-    "path-choice": 4,
+    intent: 1,
+    company: 2,
+    "current-setup": 3,
+    contact: 4,
     "quote-requirements": 5,
     "quote-modules": 5,
-    "purchase-modules": 5,
-    "purchase-payment": 5,
-    "purchase-pay": 5,
+    "invoice-pay": 5,
     "quote-complete": 6,
-    "purchase-complete": 6,
+    "invoice-complete": 6,
   };
 
   var state = {
-    panel: "company",
-    path: null,
+    panel: "intent",
+    intent: null,
     signupId: null,
     config: null,
-    paymentMethod: null,
     modules: [],
     modulesLoadedAt: 0,
     validatedDealCode: null,
+    invoiceToken: null,
+    invoiceData: null,
   };
 
   function apiUrl(path) {
@@ -156,10 +154,40 @@
       item.classList.toggle("is-complete", n < step);
     });
     updateProgress(step);
-    if (panel === "quote-modules" || panel === "purchase-modules") {
+    if (panel === "quote-modules") {
       refreshModules(true);
     }
+    if (stepFiveLabel) {
+      stepFiveLabel.textContent = state.intent === "invoice" ? "Payment" : "Quote";
+    }
+    if (panel === "invoice-pay") {
+      var emailField = document.getElementById("invoiceEmail");
+      if (emailField && !emailField.value && fieldValue("contactEmail")) {
+        emailField.value = fieldValue("contactEmail");
+      }
+    }
     if (shouldScroll) scrollWizardIntoView();
+  }
+
+  function hideInvoicePreview() {
+    state.invoiceToken = null;
+    state.invoiceData = null;
+    if (invoicePreviewWrap) invoicePreviewWrap.hidden = true;
+    if (invoicePreviewHtml) invoicePreviewHtml.innerHTML = "";
+    if (invoiceStripeBtn) invoiceStripeBtn.disabled = false;
+  }
+
+  function showInvoicePreview(data) {
+    state.invoiceToken = data.token || state.invoiceToken;
+    state.invoiceData = data;
+    if (invoicePreviewHtml && data.previewHtml) {
+      invoicePreviewHtml.innerHTML = data.previewHtml;
+    }
+    if (invoicePreviewWrap) invoicePreviewWrap.hidden = false;
+    if (invoiceStripeBtn) {
+      invoiceStripeBtn.disabled = !data.canPayOnline;
+      invoiceStripeBtn.hidden = !!data.paid;
+    }
   }
 
   function fieldValue(id) {
@@ -371,10 +399,6 @@
       moduleListQuote.innerHTML = html;
       syncTileSelection(moduleListQuote);
     }
-    if (moduleListPurchase) {
-      moduleListPurchase.innerHTML = html;
-      syncTileSelection(moduleListPurchase);
-    }
   }
 
   function showModulesLoading() {
@@ -386,7 +410,6 @@
       '<div class="signup-modules-loading__bar" aria-hidden="true"><span></span></div>' +
       "</div>";
     if (moduleListQuote) moduleListQuote.innerHTML = loading;
-    if (moduleListPurchase) moduleListPurchase.innerHTML = loading;
   }
 
   function showModulesError(message) {
@@ -398,7 +421,6 @@
       '<button type="button" class="btn btn-ghost" data-signup-reload-modules>Retry</button>' +
       "</div>";
     if (moduleListQuote) moduleListQuote.innerHTML = html;
-    if (moduleListPurchase) moduleListPurchase.innerHTML = html;
     wizard.querySelectorAll("[data-signup-reload-modules]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         refreshModules(true);
@@ -425,67 +447,6 @@
       });
   }
 
-  function renderPaymentOptions() {
-    if (!paymentOptions || !state.config) return;
-    var html = "";
-    if (state.config.stripeEnabled) {
-      html +=
-        '<label class="signup-glass-tile signup-payment-tile">' +
-        '<input type="radio" class="signup-glass-tile__input" name="paymentMethod" value="stripe" />' +
-        '<span class="signup-glass-tile__surface">' +
-        '<span class="signup-glass-tile__bg" aria-hidden="true"></span>' +
-        '<span class="signup-glass-tile__check signup-glass-tile__check--radio" aria-hidden="true"></span>' +
-        '<span class="signup-glass-tile__content">' +
-        "<strong>Pay by card (Stripe)</strong>" +
-        "<span>Secure card payment — submitted immediately after payment.</span>" +
-        "</span></span></label>";
-    }
-    if (state.config.bankTransferEnabled) {
-      html +=
-        '<label class="signup-glass-tile signup-payment-tile">' +
-        '<input type="radio" class="signup-glass-tile__input" name="paymentMethod" value="bank_transfer" />' +
-        '<span class="signup-glass-tile__surface">' +
-        '<span class="signup-glass-tile__bg" aria-hidden="true"></span>' +
-        '<span class="signup-glass-tile__check signup-glass-tile__check--radio" aria-hidden="true"></span>' +
-        '<span class="signup-glass-tile__content">' +
-        "<strong>Bank transfer</strong>" +
-        "<span>Upload your purchase order and pay by BACS.</span>" +
-        "</span></span></label>";
-    }
-    if (!html) {
-      html =
-        '<p class="signup-form__lead">Online payment is not configured yet. Please contact <a href="mailto:sales@railintel.co.uk">sales@railintel.co.uk</a>.</p>';
-    }
-    paymentOptions.innerHTML = html;
-    paymentOptions.querySelectorAll(".signup-payment-tile").forEach(function (tile) {
-      var input = tile.querySelector('input[name="paymentMethod"]');
-      if (!input) return;
-      input.addEventListener("change", function () {
-        paymentOptions.querySelectorAll(".signup-payment-tile").forEach(function (t) {
-          var i = t.querySelector('input[name="paymentMethod"]');
-          t.classList.toggle("is-selected", !!(i && i.checked));
-        });
-      });
-    });
-  }
-
-  function renderBankDetails() {
-    if (!bankDetailsEl || !state.config || !state.config.bankDetails) return;
-    var b = state.config.bankDetails;
-    bankDetailsEl.innerHTML =
-      '<dl class="signup-bank-details__grid">' +
-      "<div><dt>Account name</dt><dd>" +
-      b.accountName +
-      "</dd></div>" +
-      "<div><dt>Sort code</dt><dd>" +
-      b.sortCode +
-      "</dd></div>" +
-      "<div><dt>Account number</dt><dd>" +
-      b.accountNumber +
-      "</dd></div>" +
-      "</dl>";
-  }
-
   function collectAddonsFrom(container) {
     var addons = [];
     if (!container) return addons;
@@ -503,7 +464,7 @@
       contactName: fieldValue("contactName"),
       contactEmail: fieldValue("contactEmail"),
       contactPhone: formattedContactPhone(),
-      notes: fieldValue("notes") || fieldValue("purchaseNotes"),
+      notes: fieldValue("notes"),
       currentSupplier: fieldValue("currentSupplier"),
       noCurrentContract: noCurrentContractChecked(),
       currentContractEndDate: noCurrentContractChecked() ? undefined : fieldValue("currentContractEndDate") || undefined,
@@ -597,20 +558,6 @@
       });
   }
 
-  function readFileAsBase64(file) {
-    return new Promise(function (resolve, reject) {
-      var reader = new FileReader();
-      reader.onload = function () {
-        var result = String(reader.result || "");
-        resolve(result.indexOf(",") >= 0 ? result.split(",")[1] : result);
-      };
-      reader.onerror = function () {
-        reject(new Error("Could not read file"));
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
   function submitQuote() {
     var msgEl = getMsgEl("quote-modules");
     var btn = document.querySelector("[data-signup-submit-quote]");
@@ -663,71 +610,144 @@
     });
   }
 
-  function savePurchaseDraft() {
-    var msgEl = getMsgEl("purchase-modules");
-    var btn = document.querySelector("[data-signup-save-purchase]");
+  function lookupInvoice() {
+    var msgEl = getMsgEl("invoice-pay");
+    var btn = document.querySelector("[data-signup-invoice-lookup]");
     hideMessage(msgEl);
+    hideInvoicePreview();
+
+    var invoiceNumber = fieldValue("invoiceNumber");
+    var email = fieldValue("invoiceEmail");
+    if (!invoiceNumber) {
+      showMessage(msgEl, "Please enter your invoice number.", "error");
+      return;
+    }
+    if (!email) {
+      showMessage(msgEl, "Please enter the email address your invoice was sent to.", "error");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMessage(msgEl, "Please enter a valid email address.", "error");
+      return;
+    }
+
     if (btn) btn.disabled = true;
-
-    return validateDealCodeInput().then(function (dealOk) {
-      if (!dealOk) return;
-
-    var payload = Object.assign({}, collectBasePayload(), {
-      requestType: "purchase",
-      requestedAddons: collectAddonsFrom(moduleListPurchase),
-    });
-
-    return apiFetch("/public/signup-request", {
+    apiFetch("/public/invoice/lookup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ invoiceNumber: invoiceNumber, email: email }),
     })
       .then(function (data) {
-        state.signupId = data.id;
-        setPanel("purchase-payment");
+        if (data.paid) {
+          showMessage(msgEl, "This invoice has already been paid.", "success");
+        }
+        showInvoicePreview(data);
+        if (!data.canPayOnline && !data.paid) {
+          showMessage(
+            msgEl,
+            "Card payment is not available for this invoice right now. Please pay by bank transfer using the details on the invoice, or contact sales@railintel.co.uk.",
+            "error",
+          );
+        }
       })
       .catch(function (err) {
-        showMessage(msgEl, err.message || "Something went wrong.", "error");
+        showMessage(msgEl, err.message || "Could not find that invoice.", "error");
       })
       .finally(function () {
         if (btn) btn.disabled = false;
       });
-    });
   }
 
-  function handleStripeReturn() {
+  function startInvoiceStripeCheckout() {
+    if (!state.invoiceToken) return;
+    var msgEl = getMsgEl("invoice-pay");
+    hideMessage(msgEl);
+    if (invoiceStripeBtn) invoiceStripeBtn.disabled = true;
+
+    apiFetch("/public/invoice/" + encodeURIComponent(state.invoiceToken) + "/stripe-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{}",
+    })
+      .then(function (data) {
+        if (data.url) window.location.href = data.url;
+        else throw new Error("No checkout URL returned");
+      })
+      .catch(function (err) {
+        showMessage(msgEl, err.message || "Checkout failed", "error");
+        if (invoiceStripeBtn) invoiceStripeBtn.disabled = false;
+      });
+  }
+
+  function handleInvoiceStripeReturn() {
     var params = new URLSearchParams(window.location.search);
-    var signupId = params.get("signupId");
+    var invoiceToken = params.get("invoiceToken");
     var sessionId = params.get("session_id");
     var payment = params.get("payment");
-    if (!signupId || !sessionId || payment !== "success") return;
+    if (!invoiceToken || !sessionId || payment !== "success") return;
 
-    state.signupId = signupId;
-    state.path = "purchase";
-    setPanel("purchase-pay");
-    showMessage(getMsgEl("purchase-pay"), "Confirming payment…", "info");
+    state.intent = "invoice";
+    state.invoiceToken = invoiceToken;
+    setPanel("invoice-pay", { scroll: false });
+    showMessage(getMsgEl("invoice-pay"), "Confirming payment…", "info");
 
     apiFetch(
-      "/public/signup-request/verify-payment?signupId=" +
-        encodeURIComponent(signupId) +
+      "/public/invoice/verify-payment?token=" +
+        encodeURIComponent(invoiceToken) +
         "&sessionId=" +
-        encodeURIComponent(sessionId)
+        encodeURIComponent(sessionId),
     )
       .then(function (data) {
-        if (successMessagePurchase) {
-          successMessagePurchase.textContent =
-            data.message || "Payment received. Your application is with our team.";
+        if (successMessageInvoice) {
+          successMessageInvoice.textContent =
+            data.message || "Thank you — your invoice payment has been received. A receipt will be emailed to you shortly.";
         }
-        setPanel("purchase-complete");
+        setPanel("invoice-complete");
         window.history.replaceState({}, "", window.location.pathname);
       })
       .catch(function (err) {
-        showMessage(getMsgEl("purchase-pay"), err.message || "Payment verification failed", "error");
+        showMessage(getMsgEl("invoice-pay"), err.message || "Payment verification failed", "error");
       });
+  }
+
+  function handleStartupParams() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("payment") === "success") return;
+    var invoiceToken = params.get("invoiceToken");
+    var intent = params.get("intent");
+    if (invoiceToken) {
+      state.intent = "invoice";
+      state.invoiceToken = invoiceToken;
+      apiFetch("/public/invoice/" + encodeURIComponent(invoiceToken))
+        .then(function (data) {
+          showInvoicePreview(Object.assign({ token: invoiceToken }, data));
+          if (data.invoiceNumber) {
+            var numberField = document.getElementById("invoiceNumber");
+            if (numberField) numberField.value = data.invoiceNumber;
+          }
+          if (data.contactEmail) {
+            var emailField = document.getElementById("invoiceEmail");
+            if (emailField) emailField.value = data.contactEmail;
+          }
+          setPanel("invoice-pay", { scroll: false });
+        })
+        .catch(function () {});
+      return;
+    }
+    if (intent === "invoice") {
+      state.intent = "invoice";
+      setPanel("company", { scroll: false });
+    }
   }
 
   function gotoPanel(target) {
     hideMessage(getMsgEl(state.panel));
+    if (target === "company") {
+      if (!state.intent) {
+        showMessage(getMsgEl("intent"), "Please choose how you would like to get started.", "error");
+        return;
+      }
+    }
     if (target === "current-setup") {
       var companyErr = validateCompany();
       if (companyErr) {
@@ -742,7 +762,7 @@
         return;
       }
     }
-    if (target === "path-choice") {
+    if (target === "quote-requirements" || target === "invoice-pay") {
       var contactErr = validateContact() || validateCurrentSetup() || validateCompany();
       if (contactErr) {
         showMessage(getMsgEl("contact"), contactErr, "error");
@@ -756,14 +776,20 @@
         return;
       }
     }
+    if (target === "invoice-pay") {
+      hideInvoicePreview();
+    }
     setPanel(target);
+  }
+
+  function advanceFromContact() {
+    if (state.intent === "invoice") gotoPanel("invoice-pay");
+    else gotoPanel("quote-requirements");
   }
 
   apiFetch("/public/signup-config")
     .then(function (data) {
       state.config = data;
-      renderPaymentOptions();
-      renderBankDetails();
     })
     .catch(function () {});
 
@@ -790,8 +816,9 @@
 
   initContactPhoneCountry();
 
-  handleStripeReturn();
-  setPanel("company", { scroll: false });
+  handleInvoiceStripeReturn();
+  handleStartupParams();
+  if (!state.intent) setPanel("intent", { scroll: false });
 
   wizard.querySelectorAll("[data-signup-goto]").forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -799,12 +826,19 @@
     });
   });
 
-  wizard.querySelectorAll("[data-signup-path]").forEach(function (btn) {
+  var advanceContactBtn = document.querySelector("[data-signup-advance-from-contact]");
+  if (advanceContactBtn) {
+    advanceContactBtn.addEventListener("click", advanceFromContact);
+  }
+
+  wizard.querySelectorAll("[data-signup-intent]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      state.path = btn.getAttribute("data-signup-path");
-      hideMessage(getMsgEl("path-choice"));
-      if (state.path === "quote") setPanel("quote-requirements");
-      else if (state.path === "purchase") setPanel("purchase-modules");
+      state.intent = btn.getAttribute("data-signup-intent");
+      hideMessage(getMsgEl("intent"));
+      wizard.querySelectorAll("[data-signup-intent]").forEach(function (tile) {
+        tile.classList.toggle("is-selected", tile === btn);
+      });
+      setPanel("company");
     });
   });
 
@@ -820,107 +854,12 @@
     });
   }
 
-  var savePurchaseBtn = document.querySelector("[data-signup-save-purchase]");
-  if (savePurchaseBtn) {
-    savePurchaseBtn.addEventListener("click", function () {
-      var contactErr = validateContact() || validateCurrentSetup() || validateCompany();
-      if (contactErr) {
-        showMessage(getMsgEl("purchase-modules"), contactErr, "error");
-        return;
-      }
-      savePurchaseDraft();
-    });
+  var invoiceLookupBtn = document.querySelector("[data-signup-invoice-lookup]");
+  if (invoiceLookupBtn) {
+    invoiceLookupBtn.addEventListener("click", lookupInvoice);
   }
 
-  if (paymentOptions) {
-    paymentOptions.addEventListener("change", function (event) {
-      var target = event.target;
-      if (!target || target.name !== "paymentMethod") return;
-      state.paymentMethod = target.value;
-      var continueBtn = document.querySelector("[data-signup-payment-continue]");
-      if (continueBtn) continueBtn.disabled = false;
-    });
-  }
-
-  var paymentContinueBtn = document.querySelector("[data-signup-payment-continue]");
-  if (paymentContinueBtn) {
-    paymentContinueBtn.addEventListener("click", function () {
-      if (!state.paymentMethod) return;
-      hideMessage(getMsgEl("purchase-payment"));
-      if (stripePanel) stripePanel.hidden = state.paymentMethod !== "stripe";
-      if (bankPanel) bankPanel.hidden = state.paymentMethod !== "bank_transfer";
-      setPanel("purchase-pay");
-    });
-  }
-
-  var stripePayBtn = document.querySelector("[data-signup-stripe-pay]");
-  if (stripePayBtn) {
-    stripePayBtn.addEventListener("click", function () {
-      if (!state.signupId) return;
-      var el = getMsgEl("purchase-pay");
-      hideMessage(el);
-      stripePayBtn.disabled = true;
-
-      apiFetch("/public/signup-request/" + encodeURIComponent(state.signupId) + "/stripe-checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: "{}",
-      })
-        .then(function (data) {
-          if (data.url) window.location.href = data.url;
-          else throw new Error("No checkout URL returned");
-        })
-        .catch(function (err) {
-          showMessage(el, err.message || "Checkout failed", "error");
-          stripePayBtn.disabled = false;
-        });
-    });
-  }
-
-  var bankSubmitBtn = document.querySelector("[data-signup-bank-submit]");
-  if (bankSubmitBtn) {
-    bankSubmitBtn.addEventListener("click", function () {
-      if (!state.signupId) return;
-      var el = getMsgEl("purchase-pay");
-      var fileInput = document.querySelector("[data-signup-po-file]");
-      var bankRef = document.getElementById("bankReference");
-      hideMessage(el);
-
-      if (!fileInput || !fileInput.files || !fileInput.files[0]) {
-        showMessage(el, "Please upload your purchase order document.", "error");
-        return;
-      }
-      var file = fileInput.files[0];
-      if (file.size > 10 * 1024 * 1024) {
-        showMessage(el, "Purchase order must be 10 MB or smaller.", "error");
-        return;
-      }
-
-      bankSubmitBtn.disabled = true;
-      readFileAsBase64(file)
-        .then(function (base64) {
-          return apiFetch("/public/signup-request/" + encodeURIComponent(state.signupId) + "/bank-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              poFileName: file.name,
-              poFileContentBase64: base64,
-              bankReference: bankRef ? bankRef.value : "",
-            }),
-          });
-        })
-        .then(function (data) {
-          if (successMessagePurchase) {
-            successMessagePurchase.textContent = data.message || "Application submitted.";
-          }
-          setPanel("purchase-complete");
-        })
-        .catch(function (err) {
-          showMessage(el, err.message || "Submission failed", "error");
-        })
-        .finally(function () {
-          bankSubmitBtn.disabled = false;
-        });
-    });
+  if (invoiceStripeBtn) {
+    invoiceStripeBtn.addEventListener("click", startInvoiceStripeCheckout);
   }
 })();

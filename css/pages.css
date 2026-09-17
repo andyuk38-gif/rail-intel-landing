@@ -6261,6 +6261,29 @@ body.lightbox-open {
   animation-delay: 80ms;
 }
 
+.signup-path-tile.is-selected .signup-glass-tile__surface {
+  border-color: color-mix(in srgb, var(--accent) 70%, #fff);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.34),
+    0 0 0 1px color-mix(in srgb, var(--accent) 35%, rgba(255, 255, 255, 0.2)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.signup-fee-notice {
+  margin: 1.25rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.1);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #f8f9fc;
+}
+
+.signup-invoice-pay {
+  margin-top: 1.5rem;
+}
+
 .signup-path-tile .signup-glass-tile__surface {
   flex-direction: column;
   align-items: flex-start;
@@ -6287,22 +6310,13 @@ body.lightbox-open {
 }
 
 .signup-path-tile .signup-glass-tile__bg {
-  opacity: 0.16;
-  background-image: url("../images/gbr-bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
+  display: none;
 }
 
 .signup-path-tile .signup-glass-tile__surface {
   background:
-    linear-gradient(
-      180deg,
-      rgba(8, 10, 14, 0.4) 0%,
-      rgba(8, 10, 14, 0.62) 50%,
-      rgba(8, 10, 14, 0.94) 100%
-    ),
-    linear-gradient(155deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+    linear-gradient(155deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%),
+    linear-gradient(180deg, rgba(14, 18, 28, 0.96) 0%, rgba(10, 14, 24, 0.98) 100%);
 }
 
 .signup-path-tile .signup-glass-tile__content strong {
@@ -6326,10 +6340,6 @@ body.lightbox-open {
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-.signup-path-tile:hover .signup-glass-tile__bg,
-.signup-path-tile:focus-visible .signup-glass-tile__bg {
-  opacity: 0.22;
-}
 
 .quotation-preview {
   margin: 1.25rem 0;
