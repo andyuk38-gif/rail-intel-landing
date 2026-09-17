@@ -670,6 +670,8 @@ export const addons = [
     name: "Driver Reports",
     moduleId: "driver-reports",
     hideActivation: true,
+    hideHeroActions: true,
+    heroLeadFullWidth: true,
     summary: "Signed operational reports from drivers, exportable to your investigations system.",
     tagline: "Capture the driver's account while it is fresh",
     lead:
@@ -678,6 +680,7 @@ export const addons = [
       {
         heading: "A structured report, signed by the driver",
         fullWidth: true,
+        bulletTiles: true,
         mod: "fluid-shot",
         body: [
           "The form captures the operational context alongside the narrative, so a report is usable as evidence later rather than an unattributed paragraph. Reports are held on the employee record and synchronise company-wide for management review.",
