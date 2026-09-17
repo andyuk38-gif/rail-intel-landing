@@ -2325,6 +2325,23 @@ ${renderShot(
   );
 }
 
+function renderGetStartedPoBanner() {
+  const banner = getStarted.poBanner;
+  return `              <div class="signup-po-banner" role="note" aria-label="${esc(banner.label)}">
+                <span class="signup-po-banner__icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 12h6M9 16h4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <div class="signup-po-banner__content">
+                  <p class="signup-po-banner__label">${esc(banner.label)}</p>
+                  <p class="signup-po-banner__text">${esc(banner.text)}</p>
+                </div>
+              </div>`;
+}
+
 function renderGetStartedWelcome() {
   const steps = getStarted.welcome.steps
     .map(
@@ -2405,6 +2422,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 <h2 class="signup-form__title">How would you like to get started?</h2>
                 <p class="signup-form__lead">Request a quotation or pay an outstanding invoice by card.</p>
               </div>
+${renderGetStartedPoBanner()}
               <div class="signup-path-tiles">
                 <button type="button" class="signup-glass-tile signup-path-tile" data-signup-intent="quote">
                   <span class="signup-glass-tile__surface">
