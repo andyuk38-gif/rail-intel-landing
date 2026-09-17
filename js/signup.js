@@ -17,6 +17,8 @@
   var dealOffersEl = document.querySelector("[data-signup-deal-offers]");
   var dealCodeMsgEl = document.querySelector("[data-signup-deal-code-msg]");
   var stepFiveLabel = document.querySelector("[data-signup-step-five-label]");
+  var stepperQuote = wizard.querySelector("[data-signup-stepper-quote]");
+  var stepperInvoice = wizard.querySelector("[data-signup-stepper-invoice]");
   var invoicePreviewWrap = document.querySelector("[data-signup-invoice-preview]");
   var invoicePreviewHtml = document.querySelector("[data-signup-invoice-preview-html]");
   var invoiceStripeBtn = document.querySelector("[data-signup-invoice-stripe-pay]");
@@ -24,17 +26,20 @@
     "A member of the team will generate your quote within 24 hours. If we need any further information, we will reach out by email.";
   var progressFill = document.querySelector("[data-signup-progress]");
 
-  var TOTAL_STEPS = 6;
-  var PANEL_STEP = {
+  var QUOTE_PANEL_STEP = {
     intent: 1,
     company: 2,
     "current-setup": 3,
     contact: 4,
     "quote-requirements": 5,
     "quote-modules": 5,
-    "invoice-pay": 5,
     "quote-complete": 6,
-    "invoice-complete": 6,
+  };
+
+  var INVOICE_PANEL_STEP = {
+    intent: 1,
+    "invoice-pay": 2,
+    "invoice-complete": 3,
   };
 
   var state = {
@@ -125,8 +130,34 @@
     if (el) el.hidden = true;
   }
 
+  function totalSteps() {
+    return state.intent === "invoice" ? 3 : 6;
+  }
+
+  function panelStep(panel) {
+    if (state.intent === "invoice") {
+      return INVOICE_PANEL_STEP[panel] || 1;
+    }
+    return QUOTE_PANEL_STEP[panel] || 1;
+  }
+
   function updateProgress(step) {
-    if (progressFill) progressFill.style.width = Math.min(100, (step / TOTAL_STEPS) * 100) + "%";
+    if (progressFill) progressFill.style.width = Math.min(100, (step / totalSteps()) * 100) + "%";
+  }
+
+  function syncSteppers(panel) {
+    var step = panelStep(panel);
+    var isInvoice = state.intent === "invoice";
+    if (stepperQuote) stepperQuote.hidden = isInvoice;
+    if (stepperInvoice) stepperInvoice.hidden = !isInvoice;
+    var activeStepper = isInvoice ? stepperInvoice : stepperQuote;
+    if (!activeStepper) return;
+    activeStepper.querySelectorAll("[data-signup-step-indicator]").forEach(function (item) {
+      var n = Number(item.getAttribute("data-signup-step-indicator"));
+      item.classList.toggle("is-active", n === step);
+      item.classList.toggle("is-complete", n < step);
+    });
+    updateProgress(step);
   }
 
   function scrollWizardIntoView() {
@@ -147,24 +178,12 @@
         el.classList.add("is-entering");
       }
     });
-    var step = PANEL_STEP[panel] || 1;
-    wizard.querySelectorAll("[data-signup-step-indicator]").forEach(function (item) {
-      var n = Number(item.getAttribute("data-signup-step-indicator"));
-      item.classList.toggle("is-active", n === step);
-      item.classList.toggle("is-complete", n < step);
-    });
-    updateProgress(step);
+    syncSteppers(panel);
     if (panel === "quote-modules") {
       refreshModules(true);
     }
     if (stepFiveLabel) {
       stepFiveLabel.textContent = state.intent === "invoice" ? "Payment" : "Quote";
-    }
-    if (panel === "invoice-pay") {
-      var emailField = document.getElementById("invoiceEmail");
-      if (emailField && !emailField.value && fieldValue("contactEmail")) {
-        emailField.value = fieldValue("contactEmail");
-      }
     }
     if (shouldScroll) scrollWizardIntoView();
   }
@@ -736,12 +755,19 @@
     }
     if (intent === "invoice") {
       state.intent = "invoice";
-      setPanel("company", { scroll: false });
+      setPanel("invoice-pay", { scroll: false });
     }
   }
 
   function gotoPanel(target) {
     hideMessage(getMsgEl(state.panel));
+    if (target === "intent") {
+      state.intent = null;
+      hideInvoicePreview();
+      wizard.querySelectorAll("[data-signup-intent]").forEach(function (tile) {
+        tile.classList.remove("is-selected");
+      });
+    }
     if (target === "company") {
       if (!state.intent) {
         showMessage(getMsgEl("intent"), "Please choose how you would like to get started.", "error");
@@ -762,7 +788,7 @@
         return;
       }
     }
-    if (target === "quote-requirements" || target === "invoice-pay") {
+    if (target === "quote-requirements") {
       var contactErr = validateContact() || validateCurrentSetup() || validateCompany();
       if (contactErr) {
         showMessage(getMsgEl("contact"), contactErr, "error");
@@ -783,8 +809,7 @@
   }
 
   function advanceFromContact() {
-    if (state.intent === "invoice") gotoPanel("invoice-pay");
-    else gotoPanel("quote-requirements");
+    gotoPanel("quote-requirements");
   }
 
   apiFetch("/public/signup-config")
@@ -835,10 +860,12 @@
     btn.addEventListener("click", function () {
       state.intent = btn.getAttribute("data-signup-intent");
       hideMessage(getMsgEl("intent"));
+      hideInvoicePreview();
       wizard.querySelectorAll("[data-signup-intent]").forEach(function (tile) {
         tile.classList.toggle("is-selected", tile === btn);
       });
-      setPanel("company");
+      if (state.intent === "invoice") setPanel("invoice-pay");
+      else setPanel("company");
     });
   });
 

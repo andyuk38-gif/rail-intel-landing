@@ -2386,13 +2386,18 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
           <div class="signup-progress" aria-hidden="true">
             <div class="signup-progress__track"><div class="signup-progress__fill" data-signup-progress style="width:20%"></div></div>
           </div>
-          <ol class="signup-wizard__steps signup-wizard__steps--6" data-signup-stepper aria-label="Application progress">
+          <ol class="signup-wizard__steps signup-wizard__steps--6" data-signup-stepper-quote aria-label="Application progress">
             <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span class="signup-wizard__step-num">1</span> Get started</li>
             <li class="signup-wizard__step" data-signup-step-indicator="2"><span class="signup-wizard__step-num">2</span> Company</li>
             <li class="signup-wizard__step" data-signup-step-indicator="3"><span class="signup-wizard__step-num">3</span> Current setup</li>
             <li class="signup-wizard__step" data-signup-step-indicator="4"><span class="signup-wizard__step-num">4</span> Contact</li>
             <li class="signup-wizard__step" data-signup-step-indicator="5"><span class="signup-wizard__step-num">5</span> <span data-signup-step-five-label>Quote</span></li>
             <li class="signup-wizard__step" data-signup-step-indicator="6"><span class="signup-wizard__step-num">6</span> Done</li>
+          </ol>
+          <ol class="signup-wizard__steps signup-wizard__steps--3" data-signup-stepper-invoice aria-label="Invoice payment progress" hidden>
+            <li class="signup-wizard__step is-active" data-signup-step-indicator="1"><span class="signup-wizard__step-num">1</span> Get started</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="2"><span class="signup-wizard__step-num">2</span> Payment</li>
+            <li class="signup-wizard__step" data-signup-step-indicator="3"><span class="signup-wizard__step-num">3</span> Done</li>
           </ol>
 
           <form data-cms-signup-form novalidate>
@@ -2602,7 +2607,7 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
               </div>
             </div>
             <div class="signup-wizard__actions">
-              <button type="button" class="btn btn-ghost" data-signup-goto="contact">Back</button>
+              <button type="button" class="btn btn-ghost" data-signup-goto="intent">Back</button>
               <button type="button" class="btn btn-primary" data-signup-invoice-lookup>Find invoice</button>
             </div>
             <div class="signup-invoice-pay" data-signup-invoice-preview hidden>
