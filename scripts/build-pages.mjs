@@ -1570,7 +1570,7 @@ ${heroInner}
 ${(addon.sections || []).map((section) => renderSection(section, base)).join("\n\n")}
 ${renderRelatedLinks(base, item.relatedLinks)}
 ${renderFaqSection(pageSeo.faq, base)}
-${renderActivationSection(addon)}
+${addon.hideActivation ? "" : renderActivationSection(addon)}
   </main>
 
 ` +

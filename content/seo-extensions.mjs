@@ -46,10 +46,7 @@ export const seoExtensions = {
           "When the module is active, safety-brief coverage surfaces in Reporting alongside medical and competency metrics.",
       },
     ],
-    relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
-      { name: "Reporting", href: "features/reporting-administration.html" },
-    ],
+    relatedLinks: [],
   },
 
   "trainee-driver": {

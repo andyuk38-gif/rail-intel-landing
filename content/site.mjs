@@ -413,6 +413,7 @@ export const addons = [
     slug: "safety-briefs",
     name: "Safety Briefs",
     moduleId: "safety-briefs",
+    hideActivation: true,
     summary: "Record who received which brief, in person or remotely, with evidence.",
     tagline: "Evidence that the brief actually landed",
     lead:
@@ -420,6 +421,9 @@ export const addons = [
     sections: [
       {
         heading: "Attendance captured per employee",
+        fullWidth: true,
+        bulletTiles: true,
+        crispShots: true,
         body: [
           "Each brief is recorded against the individual, not a distribution list. In-person briefings capture the provider's details; remote delivery records the method used. The result is a per-employee history you can filter and evidence, and a company-wide view of coverage.",
           "When the module is active, safety-brief coverage also surfaces in Reporting alongside your other compliance measures, so a gap in briefing shows up in the same place as a lapsed medical.",
@@ -432,8 +436,12 @@ export const addons = [
         ],
         shots: [
           {
-            src: "images/screens/safety-briefs/employee-sboverview.png",
-            caption: "Safety brief history on an employee record, showing delivery method and provider.",
+            src: "images/screens/safety-briefs/safety-brief-records-dark.png",
+            caption:
+              "Safety brief records in dark mode — choose a brief type and record in-person or remote attendance.",
+            scale: 1,
+            full: true,
+            eager: true,
           },
         ],
       },
