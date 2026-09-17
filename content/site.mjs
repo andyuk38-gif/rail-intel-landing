@@ -2156,7 +2156,7 @@ export const getStarted = {
   poBanner: {
     label: "Purchase order (PO)",
     text:
-      "If you wish to procure via purchase order, please follow the quotation path below. Each step is automated to provide a smooth, guided experience from application through to your formal quotation.",
+      "If you wish to procure via purchase order, please follow the quotation path below. Each step is automated to provide a smooth, guided experience from application through to CMS onboarding.",
   },
   procurementNotice: {
     heading: "Procurement & supplier onboarding",
