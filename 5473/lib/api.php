@@ -6,7 +6,6 @@ require_once __DIR__ . '/password.php';
 require_once __DIR__ . '/jwt.php';
 require_once __DIR__ . '/mailer.php';
 require_once __DIR__ . '/newsletter.php';
-require_once __DIR__ . '/accounting.php';
 
 function admin_json($data, int $status = 200): void
 {
@@ -113,7 +112,6 @@ function admin_handle_api(string $method, string $path): void
             'fullName' => $admin['full_name'],
             'companyCode' => $admin['company_code'],
             'mfaEnabled' => (bool) $admin['mfa_enabled'],
-            'isSystemAdmin' => admin_is_system_admin($db, $email),
         ]);
     }
 
@@ -309,10 +307,6 @@ function admin_handle_api(string $method, string $path): void
             $content[$row['key']] = ['value' => $row['published_value'], 'type' => $row['field_type']];
         }
         admin_json(['content' => $content]);
-    }
-
-    if (admin_handle_accounting($method, $path, $db, $email, $cfg)) {
-        return;
     }
 
     if ($method === 'GET' && $path === '/plugins') {
