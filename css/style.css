@@ -870,9 +870,7 @@ body::before {
   z-index: 3;
   transform:
     rotateY(calc(var(--proof-i, 0) * var(--carousel-angle)))
-    translateZ(var(--carousel-radius))
-    rotateX(calc(-1 * var(--carousel-tilt)))
-    translateY(-2.35rem);
+    translateZ(var(--carousel-radius));
 }
 
 .proof-carousel__item.is-adjacent {
@@ -902,23 +900,32 @@ body::before {
 .proof-carousel__item.is-front .proof-card {
   opacity: 1;
   filter: none;
-  border-color: rgba(255, 255, 255, 0.38);
+  border-color: rgba(255, 255, 255, 0.42);
   background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 28%, transparent 54%),
-    linear-gradient(225deg, color-mix(in srgb, var(--proof-accent, var(--accent)) 20%, transparent) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(18, 22, 34, 0.94) 0%, rgba(12, 16, 28, 0.97) 100%);
+    linear-gradient(155deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 28%, transparent 54%),
+    linear-gradient(225deg, color-mix(in srgb, var(--proof-accent, var(--accent)) 18%, transparent) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(20, 24, 36, 0.98) 0%, rgba(14, 18, 30, 1) 100%);
   box-shadow:
-    0 28px 56px rgba(0, 0, 0, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 24px 48px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 1px 0 0 rgba(255, 255, 255, 0.08),
-    inset -1px 0 0 rgba(255, 255, 255, 0.08),
-    0 0 0 1px color-mix(in srgb, var(--proof-accent, var(--accent)) 30%, rgba(255, 255, 255, 0.16)),
-    0 0 52px color-mix(in srgb, var(--proof-glow, rgba(245, 158, 11, 0.2)) 95%, transparent);
+    inset 1px 0 0 rgba(255, 255, 255, 0.1),
+    inset -1px 0 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px color-mix(in srgb, var(--proof-accent, var(--accent)) 34%, rgba(255, 255, 255, 0.18)),
+    0 0 36px color-mix(in srgb, var(--proof-glow, rgba(245, 158, 11, 0.2)) 72%, transparent);
+  transform-style: flat;
+  transform:
+    rotateX(calc(-1 * var(--carousel-tilt)))
+    translate3d(0, -2.35rem, 0);
+  transform-origin: 50% 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  backface-visibility: hidden;
 }
 
 .proof-carousel__item.is-front .proof-card__glow {
-  opacity: 1;
+  opacity: 0.42;
 }
 
 .proof-carousel__item.is-front .proof-card__shine {
@@ -927,7 +934,6 @@ body::before {
 
 .proof-carousel__item.is-front .proof-card__cta {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .proof-carousel__dots {
@@ -1283,8 +1289,29 @@ body::before {
   transform: translateY(-4px) translateZ(2px);
 }
 
+.proof-carousel__item.is-front .proof-card:hover,
+.proof-carousel__item.is-front .proof-card:focus-visible {
+  transform:
+    rotateX(calc(-1 * var(--carousel-tilt)))
+    translate3d(0, calc(-2.35rem - 4px), 0);
+}
+
 .proof-carousel .proof-card:active {
   transform: translateY(-1px) scale(0.995) translateZ(2px);
+}
+
+.proof-carousel__item.is-front .proof-card:active {
+  transform:
+    rotateX(calc(-1 * var(--carousel-tilt)))
+    translate3d(0, calc(-2.35rem - 1px), 0)
+    scale(0.998);
+}
+
+.proof-carousel__item.is-front .proof-card__icon,
+.proof-carousel__item.is-front .proof-label,
+.proof-carousel__item.is-front .proof-card p,
+.proof-carousel__item.is-front .proof-card__cta {
+  transform: none;
 }
 
 @keyframes proof-shine {
