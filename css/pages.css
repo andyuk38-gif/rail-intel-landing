@@ -274,6 +274,21 @@
   width: 100%;
 }
 
+.page-hero__media .shot--bordered .shot__frame {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 24px 48px rgba(0, 0, 0, 0.42);
+}
+
+.page-hero__media .shot--bordered .shot__frame img {
+  display: block;
+  border-radius: 15px;
+}
+
 .page-hero__media .shot__caption {
   margin-top: 0.65rem;
 }

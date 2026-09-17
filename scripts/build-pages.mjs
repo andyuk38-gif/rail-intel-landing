@@ -526,17 +526,25 @@ function renderShot(shot, base, options = {}) {
   const width = Math.max(1, Math.round(size.width * scale));
   const height = Math.max(1, Math.round(size.height * scale));
   const fill = Boolean(shot.full || options.fill);
-  const classes = ["shot", shot.full ? "shot--full" : null, options.showcase ? "shot--showcase" : null, "reveal"]
+  const classes = [
+    "shot",
+    shot.full ? "shot--full" : null,
+    shot.bordered ? "shot--bordered" : null,
+    options.showcase ? "shot--showcase" : null,
+    "reveal",
+  ]
     .filter(Boolean)
     .join(" ");
   const style = fill ? "" : ` style="max-width: ${width}px"`;
   const fullWidth = fill && scale === 1;
   const frameClass = fullWidth ? "shot__frame shot__frame--fullwidth" : "shot__frame";
-  const frameStyle = fullWidth
-    ? ` style="--shot-display-width: ${size.width}px"`
+  const frameStyleValue = fullWidth
+    ? `--shot-display-width: ${size.width}px`
     : fill
-      ? ` style="--shot-native-width: ${width}px"`
+      ? `--shot-native-width: ${width}px`
       : "";
+  const frameStyle = frameStyleValue ? ` style="${frameStyleValue}"` : "";
+  const noExpand = shot.noExpand ? ' data-no-expand=""' : "";
 
   const copy =
     options.showcase && (shot.title || shot.lede)
@@ -552,7 +560,7 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
   const decoding = shot.eager ? "sync" : "async";
 
   return `        <figure class="${classes}"${style}>
-${copy}          <div class="${frameClass}"${frameStyle}>
+${copy}          <div class="${frameClass}"${frameStyle}${noExpand}>
             <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
           </div>
 ${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;

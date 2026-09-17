@@ -810,14 +810,18 @@ export const featureGroups = [
     name: "Tunnel Mode",
     summary: "Dark, dimmable assessing that cuts windscreen glare in tunnels and at night.",
     tagline: "Assess in the cab without lighting up the windscreen",
+    taglineHtml:
+      'Assess in the cab without <span class="hero-title__accent">lighting</span> up the windscreen',
     lead:
       "A bright tablet in a dark cab is a distraction — for the driver and for the assessor. Tunnel Mode is the assessor switching dark mode on and dimming the screen on mobile or tablet. It does not detect the tunnel automatically; the person in the cab decides when the glass is too bright.",
     heroShot: {
       src: "images/screens/assessing/AssessInDark.jpg",
       caption: "Assessor using a dim tablet in a dark cab — glare stays off the windscreen.",
-      scale: 1,
+      scale: 0.88,
       full: true,
       eager: true,
+      bordered: true,
+      noExpand: true,
     },
     hideHeroActions: true,
     sections: [
