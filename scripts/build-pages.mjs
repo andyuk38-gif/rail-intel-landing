@@ -1117,7 +1117,7 @@ function renderSection(section, base) {
 
   const reportRoll = section.reportRoll ? renderReportRoll(section, base) : "";
 
-  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
         <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
           <h2>${esc(section.heading)}</h2>

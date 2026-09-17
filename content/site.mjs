@@ -423,7 +423,7 @@ export const addons = [
         heading: "Attendance captured per employee",
         fullWidth: true,
         bulletTiles: true,
-        crispShots: true,
+        mod: "fluid-shot",
         body: [
           "Each brief is recorded against the individual, not a distribution list. In-person briefings capture the provider's details; remote delivery records the method used. The result is a per-employee history you can filter and evidence, and a company-wide view of coverage.",
           "When the module is active, safety-brief coverage also surfaces in Reporting alongside your other compliance measures, so a gap in briefing shows up in the same place as a lapsed medical.",
@@ -442,6 +442,7 @@ export const addons = [
             scale: 1,
             full: true,
             eager: true,
+            noExpand: true,
           },
         ],
       },

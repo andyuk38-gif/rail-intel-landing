@@ -1179,6 +1179,18 @@
   background: transparent;
 }
 
+.page-section--fluid-shot .shot__frame--fullwidth {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.page-section--fluid-shot .shot__frame {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
 .page-section--report-roll .page-section__head {
   margin-bottom: 1.5rem;
 }
