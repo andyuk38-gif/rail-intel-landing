@@ -6349,12 +6349,13 @@ body.lightbox-open {
   z-index: 2;
   display: inline-flex;
   align-items: center;
-  padding: 0.42rem 0.72rem;
-  border-radius: 999px;
+  justify-content: center;
+  padding: 0.48rem 0.52rem;
+  border-radius: 12px;
   background: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
   border: 1px solid rgba(255, 255, 255, 0.72);
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.3),
+    0 8px 22px rgba(0, 0, 0, 0.28),
     0 0 0 1px rgba(15, 23, 42, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
   pointer-events: none;
@@ -6365,7 +6366,7 @@ body.lightbox-open {
 
 .signup-path-tile__stripe-pill-img {
   display: block;
-  width: 12.5rem;
+  width: 9.75rem;
   max-width: 100%;
   height: auto;
   image-rendering: -webkit-optimize-contrast;
@@ -6523,7 +6524,7 @@ body.lightbox-open {
   }
 
   .signup-path-tile--invoice .signup-glass-tile__content {
-    padding-top: 4.25rem;
+    padding-top: 3.75rem;
   }
 
   .signup-path-tile__stripe-pill {
@@ -6533,11 +6534,12 @@ body.lightbox-open {
     width: fit-content;
     max-width: calc(100% - 1.5rem);
     margin-left: auto;
-    padding: 0.38rem 0.62rem;
+    padding: 0.42rem 0.48rem;
+    border-radius: 11px;
   }
 
   .signup-path-tile__stripe-pill-img {
-    width: min(12.5rem, 100%);
+    width: min(9.75rem, 100%);
   }
 
   .signup-wizard__steps,
