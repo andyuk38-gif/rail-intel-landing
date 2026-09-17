@@ -414,6 +414,8 @@ export const addons = [
     name: "Safety Briefs",
     moduleId: "safety-briefs",
     hideActivation: true,
+    hideHeroActions: true,
+    heroLeadFullWidth: true,
     summary: "Record who received which brief, in person or remotely, with evidence.",
     tagline: "Evidence that the brief actually landed",
     lead:

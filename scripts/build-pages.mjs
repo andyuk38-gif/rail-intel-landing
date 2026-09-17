@@ -1561,7 +1561,7 @@ ${heroCopy}
     renderHead(base, pageSeo) +
     `
   <main>
-    <section class="page-hero">
+    <section class="page-hero${addon.heroLeadFullWidth ? " page-hero--full-lead" : ""}">
       <div class="container">
 ${heroInner}
       </div>
