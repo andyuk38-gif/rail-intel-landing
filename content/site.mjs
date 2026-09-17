@@ -817,11 +817,12 @@ export const featureGroups = [
     heroShot: {
       src: "images/screens/assessing/AssessInDark.jpg",
       caption: "Assessor using a dim tablet in a dark cab — glare stays off the windscreen.",
-      scale: 0.88,
+      scale: 0.5,
       full: true,
       eager: true,
       bordered: true,
       noExpand: true,
+      hideCaption: true,
     },
     hideHeroActions: true,
     sections: [

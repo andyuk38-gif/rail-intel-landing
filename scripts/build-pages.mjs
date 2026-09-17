@@ -563,7 +563,7 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
 ${copy}          <div class="${frameClass}"${frameStyle}${noExpand}>
             <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
           </div>
-${shot.caption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
+${shot.caption && !shot.hideCaption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
 
 function renderHeroVideo(video, base) {
@@ -2023,8 +2023,9 @@ ${
     ? renderShot(group.heroShot, base, { fill: true })
     : heroRegulators;
 
+  const tunnelHero = group.slug === "tunnel-mode";
   const heroInner = heroAside
-    ? `        <div class="page-hero__inner page-hero__inner--split${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}">
+    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
@@ -2042,7 +2043,7 @@ ${heroCopy}
     renderHead(base, pageSeo) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}">
       <div class="container">
 ${heroInner}
       </div>

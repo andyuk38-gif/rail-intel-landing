@@ -289,6 +289,26 @@
   border-radius: 15px;
 }
 
+.page-hero__inner--split.page-hero__inner--tunnel {
+  align-items: start;
+}
+
+.page-hero__inner--tunnel .page-hero__media .shot {
+  margin-left: auto;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.page-hero__inner--tunnel .page-hero__media .shot__frame {
+  margin-inline: 0;
+}
+
+.page-hero__inner--tunnel .page-hero__media .shot__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .page-hero__media .shot__caption {
   margin-top: 0.65rem;
 }

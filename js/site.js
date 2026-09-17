@@ -3124,3 +3124,60 @@
     });
   });
 })();
+
+(function () {
+  var inners = document.querySelectorAll(".page-hero__inner--tunnel");
+  if (!inners.length) return;
+
+  var mq = window.matchMedia("(min-width: 901px)");
+
+  function fitTunnelHero(inner) {
+    var copy = inner.querySelector(".page-hero__copy");
+    var media = inner.querySelector(".page-hero__media");
+    var frame = inner.querySelector(".page-hero__media .shot__frame");
+    var img = frame && frame.querySelector("img");
+    var lead = copy && copy.querySelector(".page-lead");
+    if (!copy || !media || !frame || !img) return;
+
+    if (!mq.matches) {
+      frame.style.removeProperty("width");
+      frame.style.removeProperty("height");
+      frame.style.removeProperty("max-height");
+      return;
+    }
+
+    var top = copy.getBoundingClientRect().top;
+    var bottom = lead ? lead.getBoundingClientRect().bottom : copy.getBoundingClientRect().bottom;
+    var targetHeight = Math.max(160, bottom - top);
+    var aspect =
+      img.naturalWidth && img.naturalHeight
+        ? img.naturalWidth / img.naturalHeight
+        : Number(img.getAttribute("width")) / Number(img.getAttribute("height")) || 1.175;
+    var maxWidth = media.clientWidth;
+    var targetWidth = Math.min(maxWidth, Math.round(targetHeight * aspect));
+
+    frame.style.width = targetWidth + "px";
+    frame.style.height = targetHeight + "px";
+    frame.style.maxHeight = targetHeight + "px";
+  }
+
+  function fitAll() {
+    Array.prototype.forEach.call(inners, fitTunnelHero);
+  }
+
+  function bindImage(img) {
+    if (img.complete) fitAll();
+    else img.addEventListener("load", fitAll, { once: true });
+  }
+
+  inners.forEach(function (inner) {
+    var img = inner.querySelector(".page-hero__media .shot__frame img");
+    if (img) bindImage(img);
+  });
+
+  fitAll();
+  window.addEventListener("resize", fitAll);
+  if (mq.addEventListener) mq.addEventListener("change", fitAll);
+  else if (mq.addListener) mq.addListener(fitAll);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+})();
