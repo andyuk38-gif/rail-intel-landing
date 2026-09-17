@@ -108,6 +108,9 @@ CREATE TABLE IF NOT EXISTS audit_log (
 );
 SQL);
 
+    require_once __DIR__ . '/accounting.php';
+    admin_accounting_migrate($db);
+
     admin_seed_content($db);
 }
 

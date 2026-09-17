@@ -33,6 +33,7 @@ $asset = match ($relative) {
     '/', '/index.html' => null,
     '/assets/css/admin.css' => __DIR__ . '/assets/css/admin.css',
     '/assets/js/admin.js' => __DIR__ . '/assets/js/admin.js',
+    '/assets/js/accounts.js' => __DIR__ . '/assets/js/accounts.js',
     default => __DIR__ . $relative,
 };
 

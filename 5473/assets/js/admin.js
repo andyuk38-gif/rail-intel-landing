@@ -1,12 +1,16 @@
 const BASE = document.querySelector('meta[name="admin-base"]')?.content || "/5473";
 const API = `${BASE}/api`;
 
+import { renderAccounts } from "./accounts.js";
+
 const state = {
   token: localStorage.getItem("siteAdminToken") || "",
   user: null,
   route: "dashboard",
   campaignId: null,
   selectedBlockIndex: 0,
+  accountsTab: "overview",
+  accountsPeriod: null,
 };
 
 const api = async (path, options = {}) => {
@@ -142,6 +146,9 @@ function shell(contentNode) {
     ["newsletter", "Newsletter"],
     ["plugins", "Plugins"],
   ];
+  if (state.user?.isSystemAdmin) {
+    navItems.push(["accounts", "Accounts"]);
+  }
   const root = el(`
     <div class="shell">
       <aside class="sidebar">
@@ -569,6 +576,12 @@ async function render() {
       case "media": view = await renderMedia(); break;
       case "newsletter": view = await renderNewsletter(); break;
       case "plugins": view = await renderPlugins(); break;
+      case "accounts":
+        if (!state.user?.isSystemAdmin) {
+          throw new Error("Accounts access requires system administrator privileges.");
+        }
+        view = await renderAccounts({ api, el, escapeHtml, shell, state, setRoute, BASE, API });
+        break;
       default: view = await renderDashboard();
     }
     app.appendChild(view);
