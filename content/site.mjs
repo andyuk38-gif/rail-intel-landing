@@ -672,6 +672,7 @@ export const addons = [
     hideActivation: true,
     hideHeroActions: true,
     heroLeadFullWidth: true,
+    heroTitleNoWrap: true,
     summary: "Signed operational reports from drivers, exportable to your investigations system.",
     tagline: "Capture the driver's account while it is fresh",
     lead:
@@ -687,7 +688,7 @@ export const addons = [
           "Where the Investigations connector is configured, the API supports exporting reports into that system, so the driver's account reaches the investigation without being re-keyed.",
         ],
         bullets: [
-          "**Operational context captured**: turn, headcode and conditions alongside the narrative.",
+          "**Operational context captured** turn, headcode and conditions alongside the narrative.",
           "**Signed by the driver** and retained on their record.",
           "**Company-wide overview** for managers reviewing submitted reports.",
           "**Exportable to Investigations** where that connector is active.",
