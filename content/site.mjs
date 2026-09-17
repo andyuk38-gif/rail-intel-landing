@@ -676,7 +676,7 @@ export const addons = [
     summary: "Signed operational reports from drivers, exportable to your investigations system.",
     tagline: "Capture the driver's account while it is fresh",
     lead:
-      "Driver Reports captures a structured, signed account of an operational event — turn, headcode, conditions and narrative — on the driver's own record. Because the report is structured rather than free text in an email, it can be reported on and exported to an investigations system.",
+      "Driver Reports captures a structured, signed account of an operational event, turn, headcode, conditions and narrative, on the driver's own record. Because the report is structured rather than free text in an email, it can be reported on and exported to an investigations system.",
     sections: [
       {
         heading: "A structured report, signed by the driver",
