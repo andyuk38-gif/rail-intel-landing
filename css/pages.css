@@ -889,6 +889,28 @@
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame::before {
+  content: "Reducing Glare";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: inherit;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .page-section--tunnel-cab .page-section__aside-visual .shot__frame::after {
   content: "";
   position: absolute;
@@ -914,6 +936,8 @@
   filter: brightness(0.48);
 }
 
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame:hover::before,
+.page-section--tunnel-cab .page-section__aside-visual .shot__frame:focus-within::before,
 .page-section--tunnel-cab .page-section__aside-visual .shot__frame:hover::after,
 .page-section--tunnel-cab .page-section__aside-visual .shot__frame:focus-within::after {
   opacity: 1;
