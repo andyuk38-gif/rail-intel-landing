@@ -163,11 +163,13 @@ export const seoExtensions = {
         answer:
           "Mobile and tablet assessments include a brightness slider under the header, from full daylight down to a cab-friendly level.",
       },
+      {
+        question: "Do assessors need to change device settings?",
+        answer:
+          "No. When an assessment starts on a mobile or tablet, Rail Intel prompts the assessor to switch to dark mode in the app — there is no need to open the device settings. A brightness slider under the assessment header lets them dim the screen further, to the level they need, without leaving the assessment.",
+      },
     ],
-    relatedLinks: [
-      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-      { name: "Digital Cab Passes", href: "features/digital-cab-passes.html" },
-    ],
+    relatedLinks: [],
   },
 
   "communications-hub": {
