@@ -6339,20 +6339,45 @@ body.lightbox-open {
 }
 
 .signup-path-tile--invoice .signup-glass-tile__content {
-  padding-right: 7.5rem;
+  padding-right: 8.25rem;
 }
 
-.signup-path-tile__stripe-badge {
+.signup-path-tile__payments {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.85rem;
+  right: 0.85rem;
   z-index: 3;
-  display: block;
-  width: min(7.5rem, 42%);
-  height: auto;
   pointer-events: none;
-  opacity: 0.96;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+.signup-path-tile__payments-shell {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0.4rem 0.55rem 0.45rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.75) inset;
+}
+
+.signup-path-tile__payments-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), transparent 55%);
+  pointer-events: none;
+}
+
+.signup-path-tile__payments-img {
+  display: block;
+  width: 7.35rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .signup-path-tile:hover .signup-glass-tile__surface,
@@ -6495,6 +6520,27 @@ body.lightbox-open {
   .signup-payment-options,
   .signup-path-tiles {
     grid-template-columns: 1fr;
+  }
+
+  .signup-path-tile--invoice .signup-glass-tile__content {
+    padding-right: 0;
+    padding-top: 4.5rem;
+  }
+
+  .signup-path-tile__payments {
+    top: 0.75rem;
+    right: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .signup-path-tile__payments-shell {
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+  }
+
+  .signup-path-tile__payments-img {
+    width: min(8.5rem, 100%);
   }
 
   .signup-wizard__steps,
