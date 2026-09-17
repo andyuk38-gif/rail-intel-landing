@@ -3200,6 +3200,7 @@
       copy.style.removeProperty("min-height");
       media.style.removeProperty("margin-top");
       tiles.style.removeProperty("min-height");
+      tiles.style.removeProperty("height");
       return;
     }
 
@@ -3211,14 +3212,17 @@
 
     void media.offsetHeight;
 
-    var frameBottom = frame.getBoundingClientRect().bottom;
+    var frameRect = frame.getBoundingClientRect();
+    var frameBottom = frameRect.bottom;
     var copyTop = copy.getBoundingClientRect().top;
     copy.style.minHeight = Math.max(0, Math.round(frameBottom - copyTop)) + "px";
 
     void copy.offsetHeight;
 
     var tilesTop = tiles.getBoundingClientRect().top;
-    tiles.style.minHeight = Math.max(140, Math.round(frameBottom - tilesTop)) + "px";
+    var tilesMin = Math.round(frameBottom - tilesTop);
+    tiles.style.minHeight = Math.max(140, tilesMin) + "px";
+    tiles.style.height = Math.max(140, tilesMin) + "px";
   }
 
   function fitAll() {

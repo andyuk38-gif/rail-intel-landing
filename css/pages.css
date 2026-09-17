@@ -805,6 +805,7 @@
   flex-direction: column;
   height: auto;
   min-height: 0;
+  justify-content: flex-start;
 }
 
 .page-section--tunnel-cab .page-section__aside-copy > p {
@@ -945,16 +946,6 @@
 
 .page-section--tunnel-cab .page-section__aside-visual .shot__frame:hover {
   border-color: rgba(255, 255, 255, 0.22);
-}
-
-.page-section--tunnel-cab .page-section__aside-media > .shot__caption {
-  width: 100%;
-  max-width: min(100%, 28rem);
-  margin: 0.75rem 0 0;
-  margin-left: auto;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--text-muted);
 }
 
 .page-section h2 {

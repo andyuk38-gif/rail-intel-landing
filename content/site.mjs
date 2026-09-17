@@ -844,8 +844,7 @@ export const featureGroups = [
         shots: [
           {
             src: "images/screens/assessing/dark-switch-safety.png",
-            caption:
-              "The cab safety notice: switch to dark mode to reduce windscreen glare in tunnels.",
+            alt: "Cab safety notice offering one-tap dark mode during an assessment",
             scale: 1,
             bordered: true,
             noExpand: true,

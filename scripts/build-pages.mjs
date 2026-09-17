@@ -561,7 +561,7 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
 
   return `        <figure class="${classes}"${style}>
 ${copy}          <div class="${frameClass}"${frameStyle}${noExpand}>
-            <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
+            <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.alt || shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
           </div>
 ${shot.caption && !shot.hideCaption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
@@ -1027,12 +1027,8 @@ function renderAsideSection(section, base, { body, bullets }) {
       ? section.shots
           .map((shot) => {
             const figure = renderShot({ ...shot, hideCaption: true }, base);
-            const caption = shot.caption
-              ? `          <p class="shot__caption">${esc(shot.caption)}</p>\n`
-              : "";
             return `          <div class="page-section__aside-visual">
-${figure}          </div>
-${caption}`;
+${figure}          </div>`;
           })
           .join("\n")
       : section.shots.map((shot) => renderShot(shot, base)).join("\n")
