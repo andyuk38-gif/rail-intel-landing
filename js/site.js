@@ -3201,6 +3201,7 @@
       media.style.removeProperty("margin-top");
       tiles.style.removeProperty("width");
       tiles.style.removeProperty("height");
+      tiles.style.removeProperty("max-width");
       return;
     }
 
@@ -3219,12 +3220,11 @@
     void copy.offsetHeight;
 
     var tilesTop = tiles.getBoundingClientRect().top;
-    var availableHeight = Math.max(120, frameBottom - tilesTop);
-    var availableWidth = copy.clientWidth;
-    var side = Math.min(availableWidth, availableHeight);
+    var availableHeight = Math.max(140, frameBottom - tilesTop);
 
-    tiles.style.width = Math.round(side) + "px";
-    tiles.style.height = Math.round(side) + "px";
+    tiles.style.width = "100%";
+    tiles.style.maxWidth = "none";
+    tiles.style.height = Math.round(availableHeight) + "px";
   }
 
   function fitAll() {
