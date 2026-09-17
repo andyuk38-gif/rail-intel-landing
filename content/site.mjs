@@ -834,6 +834,7 @@ export const featureGroups = [
           "When an assessment starts, Rail Intel reminds assessors that windscreen reflections matter — especially through tunnels — and offers dark mode in one tap. The Dark / Light control sits in the assessment header, so switching never means leaving the flow.",
           "On mobile and tablet, a brightness slider sits under the header. Dim the screen from full daylight down to a soft cab-friendly level, and reset it when you are out of the tunnel. Both controls are manual: the tablet does not read the ambient light and switch on its own.",
         ],
+        bulletTiles: true,
         bullets: [
           "**One-tap dark mode** from the assessment header, kept for the session.",
           "**Dimmable brightness** on mobile and tablet (40% to 135%), set by the assessor.",

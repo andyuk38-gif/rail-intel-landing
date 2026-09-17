@@ -798,9 +798,11 @@
   align-items: stretch;
 }
 
-.page-section--tunnel-cab .page-section__aside-copy .spec-list {
-  grid-template-columns: 1fr;
-  gap: 0.85rem;
+.page-section--tunnel-cab .page-section__aside-copy {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 .page-section--tunnel-cab .page-section__aside-copy > p {
@@ -814,9 +816,29 @@
   margin-bottom: 1.25rem;
 }
 
-.page-section--tunnel-cab .page-section__aside-copy .spec-list li {
-  font-size: 1rem;
-  line-height: 1.6;
+.page-section--tunnel-cab .page-section__aside-copy .spec-tiles {
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: auto;
+  min-height: 0;
+}
+
+.page-section--tunnel-cab .page-section__aside-copy .spec-tile {
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-section--tunnel-cab .page-section__aside-copy .spec-tile__detail {
+  flex: 1;
 }
 
 .page-section--tunnel-cab .page-section__aside-media {
