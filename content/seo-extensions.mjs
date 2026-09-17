@@ -168,6 +168,11 @@ export const seoExtensions = {
         answer:
           "No. When an assessment starts on a mobile or tablet, Rail Intel prompts the assessor to switch to dark mode in the app — there is no need to open the device settings. A brightness slider under the assessment header lets them dim the screen further, to the level they need, without leaving the assessment.",
       },
+      {
+        question: "Is Tunnel Mode a paid add-on?",
+        answer:
+          "No. Tunnel Mode is included in core Rail Intel at no extra cost. Safety-related assessment features are part of the standard platform — we do not charge separately for tools that help assessors work safely in the cab.",
+      },
     ],
     relatedLinks: [],
   },
