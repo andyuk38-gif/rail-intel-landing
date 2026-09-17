@@ -2418,15 +2418,12 @@ ${getStarted.procurementNotice.items.map((item) => `            <li>${esc(item)}
                 <button type="button" class="signup-glass-tile signup-path-tile signup-path-tile--invoice" data-signup-intent="invoice">
                   <span class="signup-glass-tile__surface">
                     <span class="signup-path-tile__card-icons" aria-hidden="true">
-                      <span class="signup-card-brand signup-card-brand--visa" title="Visa">
-                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><path fill="#fff" d="M16.2 16.5h-2.3l1.4-8.9h2.3l-1.4 8.9zm9.8-8.7c-.5-.2-1.2-.4-2.1-.4-2.3 0-3.9 1.2-3.9 3 0 1.3 1.2 2 2.1 2.4.9.5 1.2.8 1.2 1.2 0 .6-.7.9-1.4.9-1.4 0-2.1-.2-3.3-.7l-.5-.2-.5 3.1c.9.4 2.5.7 4.2.7 2.5 0 4.1-1.2 4.1-3.1 0-1-.6-1.8-2-2.4-.8-.4-1.3-.7-1.3-1.1 0-.4.4-.7 1.2-.7 1 0 1.7.2 2.3.4l.3.1.5-2.9zm6.5-.2h-1.8c-.6 0-1 .3-1.2.8l-3.4 8.1h2.4l.5-1.3h3l.3 1.3h2.1l-2.4-8.9zm-3.5 5.7.9-2.5.5 2.5h-1.4zM14 7.6l-2.2 5.6-.2-1.1c-.4-1.3-1.6-2.7-3-3.4l2 7.8h2.4l3.6-8.9H14zM9.6 7.6H6.1l-.1.3c2.8.7 4.7 2.4 5.5 4.4l-.8-4.1c-.1-.5-.5-.6-1.1-.6z"/></svg>
+                      <span class="signup-card-brand signup-card-brand--visa">Visa</span>
+                      <span class="signup-card-brand signup-card-brand--mastercard">
+                        <span class="signup-card-brand__mc-circle signup-card-brand__mc-circle--red"></span>
+                        <span class="signup-card-brand__mc-circle signup-card-brand__mc-circle--yellow"></span>
                       </span>
-                      <span class="signup-card-brand signup-card-brand--mastercard" title="Mastercard">
-                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#252525"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/><path fill="#FF5F00" d="M19 7.2a7 7 0 0 1 0 9.6 7 7 0 0 1 0-9.6z"/></svg>
-                      </span>
-                      <span class="signup-card-brand signup-card-brand--amex" title="American Express">
-                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#006FCF"/><path fill="#fff" d="M8.5 15.5V8.5h2.8l.6 1.4.6-1.4h8.5v1.4h-2.1v.8h2v1.3h-2v.8h2.1v1.4h-2.7l-.6-1.4-.6 1.4H15v-7h-1.8l-1.5 3.5-1.5-3.5H8.5zm2.2-1.2.9-2.1.9 2.1h-1.8zm5.8-4.3h3.2l1 2.4 1-2.4h3.2v7h-1.6v-4.3l-1.5 3.5h-1.2l-1.5-3.5v4.3h-1.6v-7zm11.5 0h4.8v1.3h-3.2v1.2h3v1.3h-3v1.2h3.2v1.3h-4.8v-7z"/></svg>
-                      </span>
+                      <span class="signup-card-brand signup-card-brand--amex">Amex</span>
                     </span>
                     <span class="signup-glass-tile__content">
                       <strong>Pay an invoice</strong>
