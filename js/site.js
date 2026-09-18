@@ -2178,8 +2178,10 @@
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var rotateMs = 6000;
     var autoTimer = null;
-    var userPaused = false;
+    var autoPaused = false;
+    var userScrolled = false;
     var scrollLock = false;
+    var programmaticScrollUntil = 0;
 
     journey.style.setProperty("--trainee-rotate-duration", rotateMs + "ms");
 
@@ -2191,7 +2193,7 @@
         void fill.offsetWidth;
         fill.style.animation = "";
       });
-      if (link && link.classList.contains("is-active") && !reduced && !userPaused) {
+      if (link && link.classList.contains("is-active") && !reduced && !autoPaused && !userScrolled) {
         var fill = link.querySelector("[data-trainee-rail-timer-fill]");
         if (fill) fill.style.animation = "";
       }
@@ -2212,7 +2214,7 @@
 
     function scrollToStep(index) {
       var step = steps[index];
-      if (!step) return;
+      if (!step) return false;
       var anchor =
         step.querySelector(".trainee-journey__content") ||
         step.querySelector(".trainee-journey__head") ||
@@ -2220,12 +2222,27 @@
       var rect = anchor.getBoundingClientRect();
       var inset = updateScrollInset();
       var targetY = window.scrollY + rect.top - inset;
-      if (rect.top >= inset - 4 && rect.top <= inset + 24) return;
+      if (rect.top >= inset - 4 && rect.top <= inset + 24) return false;
+      programmaticScrollUntil = Date.now() + 1200;
       window.scrollTo({ top: Math.max(0, targetY), behavior: reduced ? "auto" : "smooth" });
+      return true;
     }
 
     updateScrollInset();
     window.addEventListener("resize", updateScrollInset);
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (Date.now() < programmaticScrollUntil) return;
+        if (userScrolled) return;
+        var rect = journey.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        userScrolled = true;
+        stopAutoRotate();
+      },
+      { passive: true }
+    );
 
     function stopAutoRotate() {
       if (autoTimer) {
@@ -2234,8 +2251,13 @@
       }
     }
 
+    function releaseScrollLock() {
+      scrollLock = false;
+      startAutoRotate();
+    }
+
     function startAutoRotate() {
-      if (reduced || userPaused || scrollLock) return;
+      if (reduced || autoPaused || userScrolled || scrollLock) return;
       stopAutoRotate();
       restartTimer(railLinks[active]);
       autoTimer = window.setTimeout(function () {
@@ -2269,20 +2291,45 @@
 
     function goToStep(index, fromAuto) {
       if (index < 0 || index >= steps.length) return;
+      var prevActive = active;
       scrollLock = true;
       sync(index);
-      scrollToStep(index);
-      window.setTimeout(function () {
-        scrollLock = false;
-        startAutoRotate();
-      }, reduced ? 0 : 450);
-      if (!fromAuto) userPaused = true;
+      var shouldScroll = !fromAuto || index > prevActive;
+      var didScroll = shouldScroll ? scrollToStep(index) : false;
+
+      if (reduced || !didScroll) {
+        releaseScrollLock();
+      } else {
+        var released = false;
+        function tryRelease() {
+          if (released) return;
+          released = true;
+          releaseScrollLock();
+        }
+        window.setTimeout(tryRelease, 1200);
+        window.addEventListener("scrollend", tryRelease, { once: true });
+      }
+    }
+
+    function resolveVisibleStepIndex(visible) {
+      if (!visible.length) return null;
+      var index = Number(visible[0].target.getAttribute("data-trainee-step"));
+      if (Number.isNaN(index)) return null;
+      if (index < active) {
+        var forwardEntry = visible.find(function (entry) {
+          return Number(entry.target.getAttribute("data-trainee-step")) >= active;
+        });
+        if (forwardEntry) {
+          index = Number(forwardEntry.target.getAttribute("data-trainee-step"));
+        }
+      }
+      return index;
     }
 
     if ("IntersectionObserver" in window && steps.length) {
       var stepObserver = new IntersectionObserver(
         function (entries) {
-          if (scrollLock || userPaused) return;
+          if (scrollLock) return;
           var visible = entries
             .filter(function (entry) {
               return entry.isIntersecting;
@@ -2290,13 +2337,10 @@
             .sort(function (a, b) {
               return b.intersectionRatio - a.intersectionRatio;
             });
-          if (!visible.length) return;
-          var step = visible[0].target;
-          var index = Number(step.getAttribute("data-trainee-step"));
-          if (!Number.isNaN(index) && index !== active) {
-            sync(index);
-            startAutoRotate();
-          }
+          var index = resolveVisibleStepIndex(visible);
+          if (index === null || index === active) return;
+          sync(index);
+          startAutoRotate();
         },
         { rootMargin: "-24% 0px -40% 0px", threshold: [0.2, 0.35, 0.5, 0.65] }
       );
@@ -2319,23 +2363,23 @@
     }
 
     journey.addEventListener("mouseenter", function () {
-      userPaused = true;
+      autoPaused = true;
       stopAutoRotate();
     });
 
     journey.addEventListener("mouseleave", function () {
-      userPaused = false;
+      autoPaused = false;
       startAutoRotate();
     });
 
     journey.addEventListener("focusin", function () {
-      userPaused = true;
+      autoPaused = true;
       stopAutoRotate();
     });
 
     journey.addEventListener("focusout", function (event) {
       if (journey.contains(event.relatedTarget)) return;
-      userPaused = false;
+      autoPaused = false;
       startAutoRotate();
     });
 
@@ -2451,8 +2495,6 @@
         });
       });
     });
-
-    sync(0);
   });
 
   /* ---------- CDP Monitoring experience ---------- */
