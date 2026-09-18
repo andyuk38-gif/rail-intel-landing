@@ -388,14 +388,21 @@ export const addons = [
       {
         heading: "Tasks with an owner, a status and a record",
         fullWidth: true,
-        mod: "fluid-shot",
+        bulletTiles: true,
+        crispShots: true,
+        mod: "task-shots",
         body: [
           "Every task has an assignee and a status, and can optionally be linked to the employee record it concerns. That link is what makes the task useful later: when you open a record you can see the outstanding actions attached to it, rather than searching email for what was agreed.",
           "Tasks appear both as a company-wide page under Administration and as a tab on the employee profile, so managers and record owners work from the same list.",
         ],
+        bullets: [
+          "**Assign to any user** in the company.",
+          "**Optional employee link** so the action stays attached to the record.",
+          "**Status tracking** from open through to completion.",
+          "**Visible on the dashboard** as an open-task count.",
+        ],
         shotBreak: {
           after: 1,
-          layout: "stack",
           heading: "Raising a task takes seconds",
           body: [
             "The point of the module is that creating an action is quick enough that people actually do it at the moment of the finding, not later.",
@@ -404,12 +411,11 @@ export const addons = [
         shots: [
           {
             src: "images/screens/tasks/task-employee-list.png",
-            alt:
-              "Assign to any user, optional employee link, status tracking and dashboard visibility — with tasks linked to the employee record.",
+            caption:
+              "Tasks linked to the employee record, filter by open, closed or all, with status and assignee at a glance.",
             scale: 1,
             full: true,
             eager: true,
-            hideCaption: true,
             noExpand: true,
           },
           {
@@ -417,7 +423,6 @@ export const addons = [
             caption:
               "Opening a task shows its detail, history, reassignment and the record it relates to.",
             scale: 1,
-            full: true,
             noExpand: true,
           },
           {
