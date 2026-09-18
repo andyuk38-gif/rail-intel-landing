@@ -762,6 +762,7 @@ export const addons = [
       {
         heading: "Entitlements and balances per employee",
         fullWidth: true,
+        mod: "leave-overview",
         body: [
           "Each employee has an entitlement for the leave year with the balance maintained as requests are approved. Anyone in the company can raise a request when the module is active; managers approve and manage according to their permissions.",
         ],
@@ -776,7 +777,6 @@ export const addons = [
             src: "images/screens/leave-absence/leave-absence-overview.png",
             caption: "Employee leave record with entitlement, balance and leave statement.",
             scale: 1,
-            full: true,
           },
         ],
       },

@@ -736,6 +736,23 @@
   max-width: none;
 }
 
+.page-section--leave-overview .shot-grid--full .shot {
+  max-width: none !important;
+  width: 100%;
+}
+
+.page-section--leave-overview .shot__frame {
+  width: min(100%, 1024px);
+  max-width: none;
+  margin-inline: 0;
+}
+
+.page-section--leave-overview .shot__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .page-hero--leave-absence .page-hero__copy {
   max-width: none;
 }
