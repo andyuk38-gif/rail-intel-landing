@@ -768,7 +768,6 @@ export const addons = [
             src: "images/screens/leave-absence/leave-absence-overview.png",
             caption: "Employee leave record with entitlement, balance and leave statement.",
             scale: 1,
-            full: true,
           },
           {
             src: "images/screens/leave-absence/leave-absence-apply-for-leave.png",
