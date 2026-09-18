@@ -4108,7 +4108,7 @@ body.lightbox-open {
 }
 
 .trainee-progress-pill {
-  --trainee-pill-cycle: 3.2s;
+  --trainee-pill-cycle: 6s;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -4121,6 +4121,7 @@ body.lightbox-open {
 
 .trainee-progress-pill__shell {
   position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -4137,7 +4138,18 @@ body.lightbox-open {
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 0 32px rgba(45, 212, 191, 0.06);
   overflow: hidden;
-  animation: trainee-pill-shell var(--trainee-pill-cycle) ease-in-out infinite;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__shell {
+  animation: trainee-pill-shell var(--trainee-pill-cycle) ease-in-out 1 forwards;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__shell {
+  border-color: rgba(245, 158, 11, 0.42);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 36px rgba(245, 158, 11, 0.2);
 }
 
 .trainee-progress-pill__shell::before {
@@ -4175,7 +4187,21 @@ body.lightbox-open {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  animation: trainee-pill-trace var(--trainee-pill-cycle) linear infinite;
+  opacity: 0.85;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__shell::after {
+  animation: trainee-pill-trace var(--trainee-pill-cycle) linear 1 forwards;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__shell::after {
+  opacity: 1;
+  background: linear-gradient(
+    120deg,
+    rgba(45, 212, 191, 0.85),
+    rgba(251, 191, 36, 0.95) 52%,
+    rgba(252, 211, 77, 0.9)
+  );
 }
 
 .trainee-progress-pill__label {
@@ -4201,7 +4227,14 @@ body.lightbox-open {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: trainee-pill-qualified var(--trainee-pill-cycle) ease-in-out infinite;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__label--to {
+  animation: trainee-pill-qualified var(--trainee-pill-cycle) ease-in-out 1 forwards;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__label--to {
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.45));
 }
 
 .trainee-progress-pill__dot {
@@ -4210,7 +4243,14 @@ body.lightbox-open {
   border-radius: 50%;
   background: #2dd4bf;
   box-shadow: 0 0 10px rgba(45, 212, 191, 0.75);
-  animation: trainee-pill-dot-pulse var(--trainee-pill-cycle) ease-in-out infinite;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__dot {
+  animation: trainee-pill-dot-pulse 1.8s ease-in-out infinite;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__dot--gold {
+  animation: trainee-pill-dot-celebrate 0.9s ease-out 1 forwards;
 }
 
 .trainee-progress-pill__dot--gold {
@@ -4241,11 +4281,20 @@ body.lightbox-open {
 .trainee-progress-pill__track-fill {
   position: absolute;
   inset: 0 auto 0 0;
-  width: 24%;
+  width: 22%;
   border-radius: inherit;
   background: linear-gradient(90deg, #2dd4bf, #fbbf24);
   box-shadow: 0 0 12px rgba(45, 212, 191, 0.45);
-  animation: trainee-pill-track var(--trainee-pill-cycle) ease-in-out infinite;
+  opacity: 0.72;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__track-fill {
+  animation: trainee-pill-track var(--trainee-pill-cycle) cubic-bezier(0.4, 0, 0.2, 1) 1 forwards;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__track-fill {
+  width: 100%;
+  opacity: 1;
 }
 
 .trainee-progress-pill__arrow {
@@ -4260,7 +4309,16 @@ body.lightbox-open {
   background: rgba(245, 158, 11, 0.1);
   border: 1px solid rgba(245, 158, 11, 0.24);
   box-shadow: 0 0 18px rgba(245, 158, 11, 0.16);
-  animation: trainee-pill-arrow var(--trainee-pill-cycle) ease-in-out infinite;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__arrow {
+  animation: trainee-pill-arrow var(--trainee-pill-cycle) ease-in-out 1 forwards;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__arrow {
+  color: #fcd34d;
+  box-shadow: 0 0 22px rgba(245, 158, 11, 0.28);
+  transform: translateX(2px);
 }
 
 .trainee-progress-pill__arrow svg {
@@ -4270,6 +4328,8 @@ body.lightbox-open {
 }
 
 .trainee-progress-pill__outcome {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
@@ -4286,8 +4346,63 @@ body.lightbox-open {
   border: 1px solid rgba(245, 158, 11, 0.18);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
   opacity: 0;
-  transform: translateY(8px) scale(0.98);
-  animation: trainee-pill-outcome var(--trainee-pill-cycle) ease-in-out infinite;
+  transform: translateY(10px) scale(0.96);
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__outcome {
+  animation: trainee-pill-outcome var(--trainee-pill-cycle) ease-out 1 forwards;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__outcome {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.28);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    0 0 24px rgba(245, 158, 11, 0.12);
+}
+
+.trainee-progress-pill__fireworks {
+  position: absolute;
+  z-index: 1;
+  inset: -1.5rem -0.5rem auto auto;
+  width: min(16rem, 72%);
+  height: 5rem;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.trainee-progress-pill__burst {
+  position: absolute;
+  right: 18%;
+  top: 58%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+  opacity: 0;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__burst {
+  animation: trainee-pill-burst 1.15s ease-out forwards;
+}
+
+.trainee-progress-pill__spark {
+  position: absolute;
+  right: 18%;
+  top: 58%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--spark-color, #fbbf24);
+  box-shadow: 0 0 10px var(--spark-glow, rgba(251, 191, 36, 0.65));
+  opacity: 0;
+  transform: translate(50%, -50%);
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__spark {
+  animation: trainee-pill-spark 1.45s ease-out var(--spark-delay, 0s) forwards;
 }
 
 .trainee-progress-pill__outcome-mark {
@@ -4311,28 +4426,20 @@ body.lightbox-open {
 }
 
 @keyframes trainee-pill-track {
-  0%,
-  36% {
+  0% {
     width: 22%;
     opacity: 0.72;
   }
 
-  46%,
-  58% {
+  100% {
     width: 100%;
     opacity: 1;
-  }
-
-  68%,
-  100% {
-    width: 22%;
-    opacity: 0.72;
   }
 }
 
 @keyframes trainee-pill-shell {
   0%,
-  42% {
+  72% {
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow:
       0 14px 36px rgba(0, 0, 0, 0.28),
@@ -4340,80 +4447,54 @@ body.lightbox-open {
       0 0 32px rgba(45, 212, 191, 0.06);
   }
 
-  50%,
-  62% {
+  82%,
+  100% {
     border-color: rgba(245, 158, 11, 0.42);
     box-shadow:
       0 16px 40px rgba(0, 0, 0, 0.32),
       inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 0 36px rgba(245, 158, 11, 0.18);
-  }
-
-  70%,
-  100% {
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow:
-      0 14px 36px rgba(0, 0, 0, 0.28),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 0 32px rgba(45, 212, 191, 0.06);
+      0 0 36px rgba(245, 158, 11, 0.2);
   }
 }
 
 @keyframes trainee-pill-qualified {
   0%,
-  44% {
+  78% {
     filter: none;
   }
 
-  50%,
-  62% {
-    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.45));
-  }
-
-  70%,
+  88%,
   100% {
-    filter: none;
+    filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.45));
   }
 }
 
 @keyframes trainee-pill-arrow {
   0%,
-  40% {
+  76% {
     transform: translateX(0);
     color: #fbbf24;
   }
 
-  50%,
-  58% {
+  88%,
+  100% {
     transform: translateX(2px);
     color: #fcd34d;
     box-shadow: 0 0 22px rgba(245, 158, 11, 0.28);
-  }
-
-  68%,
-  100% {
-    transform: translateX(0);
-    color: #fbbf24;
   }
 }
 
 @keyframes trainee-pill-outcome {
   0%,
-  44% {
+  80% {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(10px) scale(0.96);
   }
 
-  50%,
-  64% {
+  90%,
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-
-  74%,
-  100% {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.98);
   }
 }
 
@@ -4430,37 +4511,74 @@ body.lightbox-open {
   }
 }
 
+@keyframes trainee-pill-dot-celebrate {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.35);
+    box-shadow: 0 0 18px rgba(251, 191, 36, 0.85);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes trainee-pill-burst {
+  0% {
+    opacity: 0.85;
+    box-shadow:
+      0 0 0 0 rgba(251, 191, 36, 0.55),
+      0 0 0 0 rgba(45, 212, 191, 0.35);
+  }
+
+  65% {
+    opacity: 0.55;
+    box-shadow:
+      0 0 0 16px rgba(251, 191, 36, 0),
+      0 0 0 24px rgba(45, 212, 191, 0);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes trainee-pill-spark {
+  0% {
+    opacity: 1;
+    transform: translate(50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(50% + var(--spark-x) * 3.75rem), calc(-50% + var(--spark-y) * 2.75rem)) scale(0.15);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .trainee-progress-pill__shell {
+  .trainee-progress-pill.is-running .trainee-progress-pill__shell,
+  .trainee-progress-pill.is-running .trainee-progress-pill__shell::after,
+  .trainee-progress-pill.is-running .trainee-progress-pill__track-fill,
+  .trainee-progress-pill.is-running .trainee-progress-pill__dot,
+  .trainee-progress-pill.is-running .trainee-progress-pill__label--to,
+  .trainee-progress-pill.is-running .trainee-progress-pill__arrow,
+  .trainee-progress-pill.is-running .trainee-progress-pill__outcome,
+  .trainee-progress-pill.is-complete .trainee-progress-pill__burst,
+  .trainee-progress-pill.is-complete .trainee-progress-pill__spark,
+  .trainee-progress-pill.is-complete .trainee-progress-pill__dot--gold {
     animation: none;
   }
 
-  .trainee-progress-pill__shell::after {
-    animation: none;
+  .trainee-progress-pill.is-complete .trainee-progress-pill__shell::after {
     background: linear-gradient(
       120deg,
       rgba(45, 212, 191, 0.45),
       rgba(245, 158, 11, 0.35) 52%,
       rgba(252, 211, 77, 0.4)
     );
-  }
-
-  .trainee-progress-pill__track-fill,
-  .trainee-progress-pill__dot,
-  .trainee-progress-pill__label--to,
-  .trainee-progress-pill__arrow,
-  .trainee-progress-pill__outcome {
-    animation: none;
-  }
-
-  .trainee-progress-pill__track-fill {
-    width: 100%;
-    opacity: 1;
-  }
-
-  .trainee-progress-pill__outcome {
-    opacity: 1;
-    transform: none;
   }
 }
 

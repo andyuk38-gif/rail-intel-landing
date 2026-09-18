@@ -2166,6 +2166,51 @@
     });
   });
 
+  /* ---------- Trainee Driver progress pill ---------- */
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-progress-pill]"), function (pill) {
+    var trackFill = pill.querySelector(".trainee-progress-pill__track-fill");
+    if (!trackFill) return;
+
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var started = false;
+
+    function complete() {
+      pill.classList.remove("is-running");
+      pill.classList.add("is-complete");
+      var outcome = pill.querySelector(".trainee-progress-pill__outcome");
+      if (outcome) outcome.removeAttribute("aria-hidden");
+    }
+
+    function start() {
+      if (started) return;
+      started = true;
+      if (reduced) {
+        complete();
+        return;
+      }
+      pill.classList.add("is-running");
+      trackFill.addEventListener("animationend", complete, { once: true });
+    }
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              start();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+      observer.observe(pill);
+    } else {
+      start();
+    }
+  });
+
   /* ---------- Trainee Driver vertical journey ---------- */
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-journey]"), function (journey) {
