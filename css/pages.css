@@ -4069,6 +4069,14 @@ body.lightbox-open {
   pointer-events: none;
 }
 
+.page-hero--trainee.page-hero--full-lead .page-title {
+  max-width: none;
+}
+
+.page-hero--trainee.page-hero--full-lead .page-lead {
+  max-width: none;
+}
+
 .page-section--trainee-journey {
   padding-top: 2.5rem;
 }

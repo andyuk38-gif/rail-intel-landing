@@ -1466,13 +1466,9 @@ function traineeDriverPage(addon) {
     addon.name
   )}</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
-          <h1 class="page-title">${esc(addon.tagline)}</h1>
+          <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span></h1>
           <p class="page-lead">${esc(addon.lead)}</p>
-${note}
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}products/" class="btn btn-ghost btn-lg">All add-ons</a>
-          </div>`;
+${note}`;
 
   const heroInner = `        <div class="page-hero__inner">
 ${heroCopy}
@@ -1490,7 +1486,7 @@ ${heroCopy}
     renderHead(base, pageSeo) +
     `
   <main>
-    <section class="page-hero page-hero--trainee">
+    <section class="page-hero page-hero--trainee page-hero--full-lead">
       <div class="container">
 ${heroInner}
       </div>
