@@ -1803,7 +1803,8 @@
 
 .shot-grid--split-70-30 > .shot:first-child .shot__frame img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
 }
 
