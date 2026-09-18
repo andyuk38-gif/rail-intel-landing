@@ -163,6 +163,26 @@
     "width": 1024,
     "height": 541
   },
+  "images/screens/leave-absence/leave-absence-policy-dark.png": {
+    "width": 1024,
+    "height": 785
+  },
+  "images/screens/leave-absence/leave-absence-reporting-dark.png": {
+    "width": 1024,
+    "height": 783
+  },
+  "images/screens/leave-absence/leave-absence-entitlements-dark.png": {
+    "width": 1024,
+    "height": 679
+  },
+  "images/screens/leave-absence/leave-absence-set-entitlement-dark.png": {
+    "width": 427,
+    "height": 388
+  },
+  "images/screens/leave-absence/leave-absence-dashboard-dark.png": {
+    "width": 1024,
+    "height": 904
+  },
   "images/screens/leave-absence/leave-absence-reporting.png": {
     "width": 1159,
     "height": 695

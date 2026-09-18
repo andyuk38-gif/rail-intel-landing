@@ -783,21 +783,44 @@ export const addons = [
       },
       {
         heading: "Leave year policy and reporting",
+        mod: "leave-policy",
+        crispShots: true,
+        shotGrid: "hero-stack",
         body: [
           "The leave year and its policy are configurable, so the module reflects how your organisation actually operates. Reporting shows absence patterns across the company, and each employee record carries its own summary.",
         ],
         shots: [
           {
-            src: "images/screens/leave-absence/leave-absence-year-policy.png",
+            src: "images/screens/leave-absence/leave-absence-policy-dark.png",
             caption: "Leave year and policy configuration.",
+            scale: 0.5,
+            noExpand: true,
           },
           {
-            src: "images/screens/leave-absence/leave-absence-reporting.png",
+            src: "images/screens/leave-absence/leave-absence-reporting-dark.png",
             caption: "Absence reporting across the company.",
+            scale: 0.5,
+            noExpand: true,
           },
           {
-            src: "images/screens/leave-absence/employee-leave-record-summary.png",
-            caption: "The leave and absence summary held on an individual employee record.",
+            src: "images/screens/leave-absence/leave-absence-entitlements-dark.png",
+            caption: "Annual leave entitlements across the company.",
+            scale: 1,
+            full: true,
+            noExpand: true,
+          },
+          {
+            src: "images/screens/leave-absence/leave-absence-set-entitlement-dark.png",
+            caption: "Set entitlement with carry-over projection.",
+            scale: 1,
+            noExpand: true,
+          },
+          {
+            src: "images/screens/leave-absence/leave-absence-dashboard-dark.png",
+            caption: "Requests and absences held on each employee record.",
+            scale: 1,
+            full: true,
+            noExpand: true,
           },
         ],
       },
