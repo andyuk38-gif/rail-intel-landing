@@ -829,7 +829,7 @@ export const addons = [
         ],
         shots: [
           {
-            src: "images/screens/medical/medication-check-view.png",
+            src: "images/screens/medical/medication-check-view-submitted.png",
             alt: "View medication check — submitted record with OH recommendations and medications.",
             scale: 1,
             hideCaption: true,

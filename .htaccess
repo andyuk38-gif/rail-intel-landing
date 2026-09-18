@@ -10,4 +10,8 @@
   <FilesMatch "\.(css|js)$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
+
+  <FilesMatch "\.(png|jpe?g|webp|gif|svg)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
 </IfModule>
