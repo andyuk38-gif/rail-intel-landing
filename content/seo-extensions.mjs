@@ -122,9 +122,9 @@ export const seoExtensions = {
     seoKeywords: "rail medication declaration, fitness for duty medication, occupational health rail, medical record software",
     faq: [
       {
-        question: "Is the Medical tab included without this module?",
+        question: "What does the Medication Checks add-on provide?",
         answer:
-          "Yes. Core Rail Intel includes medical records and the company Medicals page. Medication Checks adds declaration and OH check workflows on top.",
+          "Medication Checks adds medication declaration and occupational health check workflows to the medical record, including optional employee self-submission for manager review. It is a separate paid module. Core Rail Intel already includes the medical section and company Medicals page without it.",
       },
       {
         question: "Can employees submit their own declarations?",

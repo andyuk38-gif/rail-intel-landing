@@ -781,7 +781,7 @@ export const addons = [
     lead:
       "Medication can affect fitness to work, and a declaration that sits in an email is not a control. Medication Checks adds declaration and occupational-health check workflows to the medical record, including optional employee self-submission for manager review.",
     note:
-      "The Medical tab and company Medicals page are core Rail Intel. This module adds the medication declaration and OH check workflows on top of them.",
+      "The medical section and company Medicals page are core Rail Intel. This module adds the medication declaration and OH check workflows on top of them.",
     heroShot: {
       src: "images/screens/medical/medication-checks-icon.jpg",
       alt: "Medication checks module icon",
@@ -822,9 +822,9 @@ export const addons = [
         mod: "medication-checks",
         crispShots: true,
         body: [
-          "Once a medication check is submitted, it becomes a dated record on the employee's medical tab — not a form sitting in someone's inbox. Status, outcome, clinician and provider are held together so the fitness position is visible at a glance.",
+          "Once a medication check is submitted, it becomes a dated record on the employee's medical tab, not a form sitting in someone's inbox. Status, outcome, clinician and provider are held together so the fitness position is visible at a glance.",
           "Managers can see who submitted the check and who reviewed it. OH recommendations sit on the same record with a due date and completion status, so follow-up does not rely on a separate tracker.",
-          "Medications are stored in a structured table — dosage, quantity, duration and reason — which means the data is searchable and available for reporting alongside other medical compliance measures.",
+          "Medications are stored in a structured table, dosage, quantity, duration and reason, which means the data is searchable and available for reporting alongside other medical compliance measures.",
           "Deleting a check is restricted to company administrators, or to users who have been granted that permission under Roles & Permissions by a company administrator.",
         ],
         shots: [
