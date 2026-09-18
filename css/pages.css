@@ -4170,7 +4170,7 @@ body.lightbox-open {
     0 14px 36px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 0 32px rgba(45, 212, 191, 0.06);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .trainee-progress-pill.is-running .trainee-progress-pill__shell {
@@ -4300,34 +4300,109 @@ body.lightbox-open {
   flex: 1 1 auto;
   min-width: 5.75rem;
   padding: 0 0.15rem;
+  overflow: visible;
 }
 
 .trainee-progress-pill__track {
   position: relative;
   flex: 1 1 auto;
-  height: 2px;
+  height: 3px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  overflow: hidden;
+  overflow: visible;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #4a3424 0%, #2a1810 48%, #17100b 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .trainee-progress-pill__track-fill {
   position: absolute;
   inset: 0 auto 0 0;
-  width: 22%;
+  width: 4%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #2dd4bf, #fbbf24);
-  box-shadow: 0 0 12px rgba(45, 212, 191, 0.45);
-  opacity: 0.72;
+  overflow: visible;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(28, 18, 12, 0.98) 0%,
+      rgba(68, 38, 22, 0.95) 16%,
+      rgba(146, 64, 14, 0.92) 48%,
+      rgba(234, 88, 12, 0.94) 72%,
+      rgba(251, 146, 60, 0.96) 86%,
+      rgba(254, 243, 199, 0.98) 94%,
+      rgba(255, 255, 255, 0.92) 100%
+    );
+  background-size: 220% 100%;
+  box-shadow:
+    0 0 10px rgba(249, 115, 22, 0.42),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.35));
+  opacity: 1;
+}
+
+.trainee-progress-pill__track-fill::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 1.35rem;
+  height: 0.65rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(254, 243, 199, 0.9) 0%, rgba(251, 146, 60, 0.55) 38%, transparent 72%);
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.trainee-progress-pill__track-fill::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  width: 0.55rem;
+  height: 0.55rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, #fff 0%, #fef08a 24%, #fb923c 52%, #ea580c 72%, transparent 76%);
+  box-shadow:
+    0 0 3px #fff,
+    0 0 8px #fbbf24,
+    0 0 16px rgba(249, 115, 22, 0.78),
+    0 0 24px rgba(251, 146, 60, 0.42);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .trainee-progress-pill.is-running .trainee-progress-pill__track-fill {
-  animation: trainee-pill-track var(--trainee-pill-cycle) cubic-bezier(0.4, 0, 0.2, 1) 1 forwards;
+  animation:
+    trainee-pill-track var(--trainee-pill-cycle) cubic-bezier(0.4, 0, 0.2, 1) 1 forwards,
+    trainee-fuse-shimmer calc(var(--trainee-pill-cycle) * 0.55) linear infinite;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__track-fill::before {
+  animation: trainee-fuse-ember 0.18s ease-in-out infinite alternate;
+}
+
+.trainee-progress-pill.is-running .trainee-progress-pill__track-fill::after {
+  animation: trainee-fuse-spark 0.11s ease-in-out infinite;
 }
 
 .trainee-progress-pill.is-complete .trainee-progress-pill__track-fill {
   width: 100%;
   opacity: 1;
+  background: linear-gradient(90deg, #2dd4bf, #fbbf24);
+  background-size: 100% 100%;
+  box-shadow: 0 0 12px rgba(45, 212, 191, 0.45);
+  filter: none;
+}
+
+.trainee-progress-pill.is-complete .trainee-progress-pill__track-fill::before,
+.trainee-progress-pill.is-complete .trainee-progress-pill__track-fill::after {
+  opacity: 0;
 }
 
 .trainee-progress-pill__arrow {
@@ -4415,12 +4490,50 @@ body.lightbox-open {
 
 @keyframes trainee-pill-track {
   0% {
-    width: 22%;
-    opacity: 0.72;
+    width: 4%;
   }
 
   100% {
     width: 100%;
+  }
+}
+
+@keyframes trainee-fuse-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes trainee-fuse-ember {
+  0% {
+    opacity: 0.72;
+    transform: translateY(-50%) scaleX(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scaleX(1.08);
+  }
+}
+
+@keyframes trainee-fuse-spark {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translateY(calc(-50% - 0.5px)) scale(1.14);
+    opacity: 0.88;
+  }
+
+  68% {
+    transform: translateY(calc(-50% + 0.5px)) scale(0.92);
     opacity: 1;
   }
 }
@@ -4516,6 +4629,8 @@ body.lightbox-open {
   .trainee-progress-pill.is-running .trainee-progress-pill__shell,
   .trainee-progress-pill.is-running .trainee-progress-pill__shell::after,
   .trainee-progress-pill.is-running .trainee-progress-pill__track-fill,
+  .trainee-progress-pill.is-running .trainee-progress-pill__track-fill::before,
+  .trainee-progress-pill.is-running .trainee-progress-pill__track-fill::after,
   .trainee-progress-pill.is-running .trainee-progress-pill__dot,
   .trainee-progress-pill.is-running .trainee-progress-pill__label--to,
   .trainee-progress-pill.is-running .trainee-progress-pill__arrow,
