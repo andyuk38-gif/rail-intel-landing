@@ -374,8 +374,6 @@ export const addons = [
       src: "images/screens/tasks/workspace-tasks-addon.png",
       alt:
         "Workspace navigation with Documents, Tasks add-on and Employee Messaging & Notes.",
-      scale: 1,
-      full: true,
       eager: true,
       hideCaption: true,
       noExpand: true,
@@ -390,6 +388,7 @@ export const addons = [
         fullWidth: true,
         bulletTiles: true,
         crispShots: true,
+        mod: "task-shots",
         body: [
           "Every task has an assignee and a status, and can optionally be linked to the employee record it concerns. That link is what makes the task useful later: when you open a record you can see the outstanding actions attached to it, rather than searching email for what was agreed.",
           "Tasks appear both as a company-wide page under Administration and as a tab on the employee profile, so managers and record owners work from the same list.",
@@ -410,6 +409,7 @@ export const addons = [
         shots: [
           {
             src: "images/screens/tasks/task-employee-list.png",
+            src2x: "images/screens/tasks/task-employee-list@2x.png",
             caption:
               "Tasks linked to the employee record — filter by open, closed or all, with status and assignee at a glance.",
             scale: 1,
@@ -427,7 +427,7 @@ export const addons = [
           {
             src: "images/screens/tasks/task-create-form.png",
             caption: "Creating a task: title, assignee, linked employee and due detail.",
-            scale: 1,
+            scale: 0.5,
             noExpand: true,
           },
         ],

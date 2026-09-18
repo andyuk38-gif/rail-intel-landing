@@ -317,7 +317,11 @@
   },
   "images/screens/tasks/task-employee-list.png": {
     "width": 1024,
-    "height": 221
+    "height": 344
+  },
+  "images/screens/tasks/task-employee-list@2x.png": {
+    "width": 2048,
+    "height": 688
   },
   "images/screens/tasks/task-detail-open.png": {
     "width": 1009,

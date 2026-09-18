@@ -559,10 +559,13 @@ ${shot.step ? `            <p class="shot__step">${esc(shot.step)}</p>\n` : ""}$
   const imgHeight = scale === 1 ? size.height : height;
   const loading = shot.eager ? "eager" : "lazy";
   const decoding = shot.eager ? "sync" : "async";
+  const srcset = shot.src2x
+    ? ` srcset="${base}${shot.src}?v=${ASSET_VERSION} 1x, ${base}${shot.src2x}?v=${ASSET_VERSION} 2x"`
+    : "";
 
   return `        <figure class="${classes}"${style}>
 ${copy}          <div class="${frameClass}"${frameStyle}${noExpand}>
-            <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.alt || shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
+            <img src="${base}${shot.src}?v=${ASSET_VERSION}"${srcset} alt="${esc(shot.alt || shot.caption || shot.title || "")}" width="${imgWidth}" height="${imgHeight}" loading="${loading}" decoding="${decoding}" />
           </div>
 ${shot.caption && !shot.hideCaption ? `          <figcaption class="shot__caption">${esc(shot.caption)}</figcaption>\n` : ""}        </figure>`;
 }
@@ -1559,7 +1562,7 @@ ${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\
   const heroMedia = addon.heroVideo
     ? renderHeroVideo(addon.heroVideo, base)
     : addon.heroShot
-      ? renderShot(addon.heroShot, base, { fill: true })
+      ? renderShot(addon.heroShot, base, { fill: !addon.heroShotStacked })
       : null;
 
   const heroSplitModifier = addon.heroShot?.circle ? " page-hero__inner--icon" : "";
