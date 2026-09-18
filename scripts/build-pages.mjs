@@ -1467,7 +1467,31 @@ function traineeDriverPage(addon) {
   )}</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
           <div class="page-hero__trainee-grid">
-            <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span>.</h1>
+            <div class="page-hero__trainee-title">
+              <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span>.</h1>
+              <div class="trainee-progress-pill" role="img" aria-label="Progression from Trainee to Qualified">
+                <div class="trainee-progress-pill__shell">
+                  <span class="trainee-progress-pill__label trainee-progress-pill__label--from">
+                    <span class="trainee-progress-pill__dot" aria-hidden="true"></span>
+                    Trainee
+                  </span>
+                  <span class="trainee-progress-pill__connector" aria-hidden="true">
+                    <span class="trainee-progress-pill__track">
+                      <span class="trainee-progress-pill__track-fill"></span>
+                    </span>
+                    <span class="trainee-progress-pill__arrow">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 8h8.5M9.5 5.5 12 8l-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                  </span>
+                  <span class="trainee-progress-pill__label trainee-progress-pill__label--to">
+                    <span class="trainee-progress-pill__dot trainee-progress-pill__dot--gold" aria-hidden="true"></span>
+                    Qualified
+                  </span>
+                </div>
+              </div>
+            </div>
             <div class="page-hero__trainee-body">
               <p class="page-lead">${esc(addon.lead)}</p>
 ${note}            </div>
