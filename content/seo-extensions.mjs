@@ -22,6 +22,11 @@ export const seoExtensions = {
         answer:
           "Any user in the company can raise a task when the module is active. Assignees update status from open through to completion according to their permissions.",
       },
+      {
+        question: "How do you get notified of a task?",
+        answer:
+          "When a task is assigned to you, Rail Intel's communications hub picks it up and notifies you by email and with an in-app system notification — so the follow-up reaches you even if you are not already in the application.",
+      },
     ],
     relatedLinks: [],
   },
