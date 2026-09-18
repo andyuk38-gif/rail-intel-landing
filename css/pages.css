@@ -1318,6 +1318,29 @@
   height: auto;
 }
 
+.page-section--crisp .shot-grid--hero-stack {
+  margin-top: 1.75rem;
+  align-items: start;
+}
+
+.page-section--crisp .shot-grid--hero-stack .shot__frame img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.page-hero__inner--stacked .page-hero__media .shot--full .shot__frame--fullwidth {
+  width: 100%;
+  max-width: min(100%, var(--shot-display-width, 1024px));
+  margin-inline: 0;
+}
+
+.page-hero__inner--stacked .page-hero__media .shot__frame img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
 .page-section--report-roll .page-section__head {
   margin-bottom: 1.5rem;
 }

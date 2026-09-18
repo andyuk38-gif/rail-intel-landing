@@ -537,7 +537,7 @@ function renderShot(shot, base, options = {}) {
     .filter(Boolean)
     .join(" ");
   const style = fill && !shot.circle ? "" : shot.circle ? "" : ` style="max-width: ${width}px"`;
-  const fullWidth = fill && scale === 1 && !shot.circle;
+  const fullWidth = Boolean(shot.full) && scale === 1 && !shot.circle;
   const frameClass = fullWidth ? "shot__frame shot__frame--fullwidth" : "shot__frame";
   const frameStyleValue = fullWidth
     ? `--shot-display-width: ${size.width}px`
@@ -1132,7 +1132,7 @@ ${renderShotList(headShots, false)}
       </div>
 ${breakBlock}
       <div class="shot-grid shot-grid--hero-stack">
-${renderShotList(tailShots, true)}
+${renderShotList(tailShots, false)}
       </div>`;
     } else {
       shots = `      <div class="${gridClass}">

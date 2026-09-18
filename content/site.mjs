@@ -389,7 +389,7 @@ export const addons = [
         heading: "Tasks with an owner, a status and a record",
         fullWidth: true,
         bulletTiles: true,
-        mod: "fluid-shot",
+        crispShots: true,
         body: [
           "Every task has an assignee and a status, and can optionally be linked to the employee record it concerns. That link is what makes the task useful later: when you open a record you can see the outstanding actions attached to it, rather than searching email for what was agreed.",
           "Tasks appear both as a company-wide page under Administration and as a tab on the employee profile, so managers and record owners work from the same list.",
