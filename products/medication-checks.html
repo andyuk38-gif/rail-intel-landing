@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=115390794" />
-  <link rel="stylesheet" href="../css/pages.css?v=115390794" />
+  <link rel="stylesheet" href="../css/style.css?v=58285806" />
+  <link rel="stylesheet" href="../css/pages.css?v=58285806" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -255,7 +255,7 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--nowrap-title">
       <div class="container">
         <div class="page-hero__inner page-hero__inner--split page-hero__inner--icon">
           <div class="page-hero__copy">
@@ -268,7 +268,7 @@
           <div class="page-hero__media">
         <figure class="shot shot--circle reveal">
           <div class="shot__frame" data-no-expand="">
-            <img src="../images/screens/medical/medication-checks-icon.jpg?v=115390794" alt="Medication checks module icon" width="840" height="880" loading="lazy" decoding="async" />
+            <img src="../images/screens/medical/medication-checks-icon.jpg?v=58285806" alt="Medication checks module icon" width="840" height="880" loading="lazy" decoding="async" />
           </div>
         </figure>
           </div>
@@ -276,34 +276,89 @@
       </div>
     </section>
 
-    <section class="page-section page-section--wide page-section--crisp">
+    <section class="page-section page-section--aside page-section--crisp page-section--medication-checks">
       <div class="container">
-        <div class="page-section__head page-section__head--wide">
+        <div class="page-section__aside">
+          <div class="page-section__aside-copy">
           <h2>Declarations, OH outcomes and attachments</h2>
           <p>Declarations are recorded against the employee's medical record, so the medication position sits with the fitness position rather than apart from it. Occupational health outcomes and supporting report attachments are held alongside.</p>
           <p>Employees can optionally submit their own declaration for manager review, which keeps the process moving without requiring a manager to transcribe it.</p>
-          <ul class="spec-list">
-            <li><strong>Medication declarations</strong> recorded against the medical record.</li>
-            <li><strong>Occupational health outcomes</strong> captured with the declaration.</li>
-            <li><strong>Report attachments</strong> stored with the check.</li>
-            <li><strong>Optional employee self-submission</strong> routed to a manager for review.</li>
-          </ul>
-        </div>
-      <div class="shot-grid shot-grid--full">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 869px">
-            <img src="../images/screens/medical/medication-check-form.png?v=115390794" alt="Add medication check — capture medications, outcome and clinician details." width="869" height="1187" loading="lazy" decoding="async" />
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Medication declarations</h3>
+              <p class="spec-tile__detail">recorded against the medical record.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">Occupational health outcomes</h3>
+              <p class="spec-tile__detail">captured with the declaration.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Report attachments</h3>
+              <p class="spec-tile__detail">stored with the check.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Optional employee self-submission</h3>
+              <p class="spec-tile__detail">routed to a manager for review.</p>
+            </article>
+          </div>
+          </div>
+          <div class="page-section__aside-media">
+        <figure class="shot reveal" style="max-width: 869px">
+          <div class="shot__frame">
+            <img src="../images/screens/medical/medication-check-form.png?v=58285806" alt="Add medication check — capture medications, outcome and clinician details." width="869" height="1187" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Add medication check — capture medications, outcome and clinician details.</figcaption>
         </figure>
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 754px">
-            <img src="../images/screens/medical/medication-check-view.png?v=115390794" alt="View medication check — submitted record with OH recommendations and medications." width="754" height="781" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">View medication check — submitted record with OH recommendations and medications.</figcaption>
-        </figure>
-      </div>
 
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--aside page-section--crisp page-section--medication-checks">
+      <div class="container">
+        <div class="page-section__aside page-section__aside--reverse">
+          <div class="page-section__aside-media">
+        <figure class="shot reveal" style="max-width: 754px">
+          <div class="shot__frame">
+            <img src="../images/screens/medical/medication-check-view.png?v=58285806" alt="View medication check — submitted record with OH recommendations and medications." width="754" height="781" loading="lazy" decoding="async" />
+          </div>
+        </figure>
+
+          </div>
+          <div class="page-section__aside-copy">
+          <h2>Submission, tracking and reporting</h2>
+          <p>Once a medication check is submitted, it becomes a dated record on the employee's medical tab — not a form sitting in someone's inbox. Status, outcome, clinician and provider are held together so the fitness position is visible at a glance.</p>
+          <p>Managers can see who submitted the check and who reviewed it. OH recommendations sit on the same record with a due date and completion status, so follow-up does not rely on a separate tracker.</p>
+          <p>Medications are stored in a structured table — dosage, quantity, duration and reason — which means the data is searchable and available for reporting alongside other medical compliance measures.</p>
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Submitted status on record</h3>
+              <p class="spec-tile__detail">with outcome, clinician and provider visible together.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">OH recommendations tracked</h3>
+              <p class="spec-tile__detail">with due dates and completion status on the check.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Structured medication data</h3>
+              <p class="spec-tile__detail">ready for workforce reporting and assurance review.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Review trail retained</h3>
+              <p class="spec-tile__detail">— submitted by and reviewed by captured on each check.</p>
+            </article>
+          </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -399,7 +454,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=115390794"></script>
-  <script src="../js/newsletter.js?v=115390794"></script>
+  <script src="../js/site.js?v=58285806"></script>
+  <script src="../js/newsletter.js?v=58285806"></script>
 </body>
 </html>

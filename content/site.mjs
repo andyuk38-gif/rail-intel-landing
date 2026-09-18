@@ -775,6 +775,7 @@ export const addons = [
     moduleId: "medication-checks",
     hideActivation: true,
     hideHeroActions: true,
+    heroTitleNoWrap: true,
     summary: "Medication declarations and occupational health checks on the medical record.",
     tagline: "Declarations that reach the right people",
     lead:
@@ -792,7 +793,9 @@ export const addons = [
     sections: [
       {
         heading: "Declarations, OH outcomes and attachments",
-        fullWidth: true,
+        layout: "aside",
+        mod: "medication-checks",
+        bulletTiles: true,
         crispShots: true,
         body: [
           "Declarations are recorded against the employee's medical record, so the medication position sits with the fitness position rather than apart from it. Occupational health outcomes and supporting report attachments are held alongside.",
@@ -808,14 +811,34 @@ export const addons = [
           {
             src: "images/screens/medical/medication-check-form.png",
             caption: "Add medication check — capture medications, outcome and clinician details.",
-            full: true,
             scale: 1,
           },
+        ],
+      },
+      {
+        heading: "Submission, tracking and reporting",
+        layout: "aside",
+        asideReverse: true,
+        mod: "medication-checks",
+        bulletTiles: true,
+        crispShots: true,
+        body: [
+          "Once a medication check is submitted, it becomes a dated record on the employee's medical tab — not a form sitting in someone's inbox. Status, outcome, clinician and provider are held together so the fitness position is visible at a glance.",
+          "Managers can see who submitted the check and who reviewed it. OH recommendations sit on the same record with a due date and completion status, so follow-up does not rely on a separate tracker.",
+          "Medications are stored in a structured table — dosage, quantity, duration and reason — which means the data is searchable and available for reporting alongside other medical compliance measures.",
+        ],
+        bullets: [
+          "**Submitted status on record** with outcome, clinician and provider visible together.",
+          "**OH recommendations tracked** with due dates and completion status on the check.",
+          "**Structured medication data** ready for workforce reporting and assurance review.",
+          "**Review trail retained** — submitted by and reviewed by captured on each check.",
+        ],
+        shots: [
           {
             src: "images/screens/medical/medication-check-view.png",
-            caption: "View medication check — submitted record with OH recommendations and medications.",
-            full: true,
+            alt: "View medication check — submitted record with OH recommendations and medications.",
             scale: 1,
+            hideCaption: true,
           },
         ],
       },

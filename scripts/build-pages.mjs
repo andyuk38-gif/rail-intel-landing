@@ -1047,15 +1047,20 @@ ${noteHtml}
           </div>`
     : "";
 
-  return `    <section class="page-section page-section--aside${section.mod ? ` page-section--${section.mod}` : ""}">
-      <div class="container">
-        <div class="page-section__aside">
-          <div class="page-section__aside-copy">
+  const asideReverse = Boolean(section.asideReverse);
+  const copyBlock = `          <div class="page-section__aside-copy">
           <h2>${esc(section.heading)}</h2>
 ${body}
 ${bullets}
-          </div>
-${media}
+          </div>`;
+  const asideInner = asideReverse ? `${media}
+${copyBlock}` : `${copyBlock}
+${media}`;
+
+  return `    <section class="page-section page-section--aside${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}">
+      <div class="container">
+        <div class="page-section__aside${asideReverse ? " page-section__aside--reverse" : ""}">
+${asideInner}
         </div>
       </div>
     </section>`;
