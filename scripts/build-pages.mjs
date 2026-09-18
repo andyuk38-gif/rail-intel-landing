@@ -1456,20 +1456,8 @@ ${visual}
     </section>`;
 }
 
-function traineeDriverPage(addon) {
-  const base = "../";
-  const note = addon.note
-    ? `              <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>\n`
-    : "";
-
-  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
-    addon.name
-  )}</p>
-          <span class="page-badge page-badge--addon">Add-on module</span>
-          <div class="page-hero__trainee-grid">
-            <div class="page-hero__trainee-title">
-              <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span>.</h1>
-              <div class="trainee-progress-pill" role="img" aria-label="Progression from Trainee to Qualified">
+function renderTraineeProgressPill() {
+  return `              <div class="trainee-progress-pill" role="img" aria-label="Progression from Trainee to Qualified">
                 <div class="trainee-progress-pill__shell">
                   <span class="trainee-progress-pill__label trainee-progress-pill__label--from">
                     <span class="trainee-progress-pill__dot" aria-hidden="true"></span>
@@ -1490,7 +1478,27 @@ function traineeDriverPage(addon) {
                     Qualified
                   </span>
                 </div>
-              </div>
+                <p class="trainee-progress-pill__outcome" aria-hidden="true">
+                  <span class="trainee-progress-pill__outcome-mark" aria-hidden="true">✓</span>
+                  Programme complete — ready for qualification sign-off
+                </p>
+              </div>`;
+}
+
+function traineeDriverPage(addon) {
+  const base = "../";
+  const note = addon.note
+    ? `              <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>\n`
+    : "";
+
+  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
+    addon.name
+  )}</p>
+          <span class="page-badge page-badge--addon">Add-on module</span>
+          <div class="page-hero__trainee-grid">
+            <div class="page-hero__trainee-title">
+              <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span>.</h1>
+${renderTraineeProgressPill()}
             </div>
             <div class="page-hero__trainee-body">
               <p class="page-lead">${esc(addon.lead)}</p>
