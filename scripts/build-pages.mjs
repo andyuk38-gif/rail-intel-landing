@@ -1459,18 +1459,21 @@ ${visual}
 function traineeDriverPage(addon) {
   const base = "../";
   const note = addon.note
-    ? `        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>`
+    ? `              <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>\n`
     : "";
 
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
     addon.name
   )}</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
-          <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span></h1>
-          <p class="page-lead">${esc(addon.lead)}</p>
-${note}`;
+          <div class="page-hero__trainee-grid">
+            <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span></h1>
+            <div class="page-hero__trainee-body">
+              <p class="page-lead">${esc(addon.lead)}</p>
+${note}            </div>
+          </div>`;
 
-  const heroInner = `        <div class="page-hero__inner">
+  const heroInner = `        <div class="page-hero__inner page-hero__inner--trainee-split">
 ${heroCopy}
         </div>`;
 

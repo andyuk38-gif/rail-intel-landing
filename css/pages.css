@@ -4077,6 +4077,42 @@ body.lightbox-open {
   max-width: none;
 }
 
+.page-hero__inner--trainee-split {
+  max-width: none;
+}
+
+.page-hero__trainee-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.5rem 3.5rem;
+  align-items: start;
+  width: 100%;
+}
+
+.page-hero__inner--trainee-split .page-title {
+  max-width: none;
+  margin: 0;
+}
+
+.page-hero__trainee-body .page-lead {
+  max-width: none;
+}
+
+.page-hero__trainee-body .page-lead:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .page-hero__trainee-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .page-hero__inner--trainee-split .page-title {
+    margin-bottom: 0;
+  }
+}
+
 .page-section--trainee-journey {
   padding-top: 2.5rem;
 }
