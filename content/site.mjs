@@ -820,18 +820,12 @@ export const addons = [
         layout: "aside",
         asideReverse: true,
         mod: "medication-checks",
-        bulletTiles: true,
         crispShots: true,
         body: [
           "Once a medication check is submitted, it becomes a dated record on the employee's medical tab — not a form sitting in someone's inbox. Status, outcome, clinician and provider are held together so the fitness position is visible at a glance.",
           "Managers can see who submitted the check and who reviewed it. OH recommendations sit on the same record with a due date and completion status, so follow-up does not rely on a separate tracker.",
           "Medications are stored in a structured table — dosage, quantity, duration and reason — which means the data is searchable and available for reporting alongside other medical compliance measures.",
-        ],
-        bullets: [
-          "**Submitted status on record** with outcome, clinician and provider visible together.",
-          "**OH recommendations tracked** with due dates and completion status on the check.",
-          "**Structured medication data** ready for workforce reporting and assurance review.",
-          "**Review trail retained** — submitted by and reviewed by captured on each check.",
+          "Deleting a check is restricted to company administrators, or to users who have been granted that permission under Roles & Permissions by a company administrator.",
         ],
         shots: [
           {
