@@ -4382,11 +4382,7 @@ body.lightbox-open {
   transform: translateY(10px) scale(0.96);
 }
 
-.trainee-progress-pill.is-running .trainee-progress-pill__outcome {
-  animation: trainee-pill-outcome var(--trainee-pill-cycle) ease-out 1 forwards;
-}
-
-.trainee-progress-pill.is-complete .trainee-progress-pill__outcome {
+.trainee-progress-pill.is-outcome-visible .trainee-progress-pill__outcome {
   opacity: 1;
   transform: translateY(0) scale(1);
   background: rgba(245, 158, 11, 0.12);
@@ -4394,6 +4390,7 @@ body.lightbox-open {
   box-shadow:
     0 10px 28px rgba(0, 0, 0, 0.18),
     0 0 24px rgba(245, 158, 11, 0.12);
+  animation: trainee-pill-outcome-reveal 0.65s ease-out forwards;
 }
 
 .trainee-progress-pill__outcome-mark {
@@ -4475,14 +4472,12 @@ body.lightbox-open {
   }
 }
 
-@keyframes trainee-pill-outcome {
-  0%,
-  80% {
+@keyframes trainee-pill-outcome-reveal {
+  0% {
     opacity: 0;
     transform: translateY(10px) scale(0.96);
   }
 
-  90%,
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -4524,7 +4519,7 @@ body.lightbox-open {
   .trainee-progress-pill.is-running .trainee-progress-pill__dot,
   .trainee-progress-pill.is-running .trainee-progress-pill__label--to,
   .trainee-progress-pill.is-running .trainee-progress-pill__arrow,
-  .trainee-progress-pill.is-running .trainee-progress-pill__outcome,
+  .trainee-progress-pill.is-outcome-visible .trainee-progress-pill__outcome,
   .trainee-progress-pill.is-complete .trainee-progress-pill__dot--gold {
     animation: none;
   }

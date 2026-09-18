@@ -2168,7 +2168,7 @@
 
   /* ---------- Trainee Driver progress pill ---------- */
 
-  function launchTraineeHeroFireworks(container, durationMs, originEl) {
+  function launchTraineeHeroFireworks(container, durationMs, originEl, onComplete) {
     if (!container || container.dataset.fireworksRunning === "true") return;
     container.dataset.fireworksRunning = "true";
 
@@ -2398,6 +2398,7 @@
         container.classList.remove("is-active", "is-fading");
         container.dataset.fireworksRunning = "false";
         if (canvas.parentNode === container) container.removeChild(canvas);
+        if (typeof onComplete === "function") onComplete();
       }
     }
 
@@ -2428,16 +2429,27 @@
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var started = false;
 
+    function showOutcome() {
+      var outcome = pill.querySelector(".trainee-progress-pill__outcome");
+      if (!outcome) return;
+      outcome.removeAttribute("aria-hidden");
+      pill.classList.add("is-outcome-visible");
+    }
+
     function complete() {
       pill.classList.remove("is-running");
       pill.classList.add("is-complete");
-      var outcome = pill.querySelector(".trainee-progress-pill__outcome");
-      if (outcome) outcome.removeAttribute("aria-hidden");
-      if (!reduced) {
-        var grid = pill.closest(".page-hero__trainee-grid");
-        var fireworksRoot = grid && grid.querySelector("[data-trainee-hero-fireworks]");
-        var qualifiedLabel = pill.querySelector(".trainee-progress-pill__label--to");
-        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 8000, qualifiedLabel);
+      if (reduced) {
+        showOutcome();
+        return;
+      }
+      var grid = pill.closest(".page-hero__trainee-grid");
+      var fireworksRoot = grid && grid.querySelector("[data-trainee-hero-fireworks]");
+      var qualifiedLabel = pill.querySelector(".trainee-progress-pill__label--to");
+      if (fireworksRoot) {
+        launchTraineeHeroFireworks(fireworksRoot, 8000, qualifiedLabel, showOutcome);
+      } else {
+        showOutcome();
       }
     }
 
