@@ -1095,6 +1095,22 @@ function renderSection(section, base) {
         ? "shot-grid shot-grid--hero-stack"
         : "shot-grid shot-grid--two";
 
+  const renderShotList = (shotList, listHeroStack = heroStack) =>
+    shotList
+      .map((shot, index) =>
+        renderShot(
+          {
+            ...shot,
+            step: shot.step || (showcase ? String(index + 1).padStart(2, "0") : undefined),
+            full: showcase ? true : shot.full,
+            scale: showcase ? shot.scale ?? 1 : shot.scale,
+          },
+          base,
+          { showcase, fill: showcase || listHeroStack || shot.full }
+        )
+      )
+      .join("\n");
+
   let shots = "";
   if (section.shots) {
     if (viewer) {
@@ -1103,21 +1119,25 @@ function renderSection(section, base) {
       shots = renderSpotlightGallery(section, base);
     } else if (gallery) {
       shots = renderGallery(section, base);
+    } else if (section.shotBreak) {
+      const breakAfter = section.shotBreak.after ?? 1;
+      const headShots = section.shots.slice(0, breakAfter);
+      const tailShots = section.shots.slice(breakAfter);
+      const breakBlock = `      <div class="page-section__shot-break page-section__head page-section__head--wide">
+          <h3 class="page-section__subheading">${esc(section.shotBreak.heading)}</h3>
+${(section.shotBreak.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n")}
+        </div>`;
+      shots = `      <div class="shot-grid shot-grid--full">
+${renderShotList(headShots, false)}
+      </div>
+${breakBlock}
+      <div class="shot-grid shot-grid--hero-stack">
+${renderShotList(tailShots, true)}
+      </div>`;
     } else {
-      shots = `      <div class="${gridClass}">\n${section.shots
-        .map((shot, index) =>
-          renderShot(
-            {
-              ...shot,
-              step: shot.step || (showcase ? String(index + 1).padStart(2, "0") : undefined),
-              full: showcase ? true : shot.full,
-              scale: showcase ? shot.scale ?? 1 : shot.scale,
-            },
-            base,
-            { showcase, fill: showcase || heroStack || shot.full }
-          )
-        )
-        .join("\n")}\n      </div>`;
+      shots = `      <div class="${gridClass}">
+${renderShotList(section.shots)}
+      </div>`;
     }
   }
 
@@ -1545,7 +1565,14 @@ ${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\
   const heroSplitModifier = addon.heroShot?.circle ? " page-hero__inner--icon" : "";
 
   const heroInner = heroMedia
-    ? `        <div class="page-hero__inner page-hero__inner--split${heroSplitModifier}">
+    ? addon.heroShotStacked
+      ? `        <div class="page-hero__inner page-hero__inner--stacked${heroSplitModifier}">
+${heroCopy}
+          <div class="page-hero__media">
+${heroMedia}
+          </div>
+        </div>`
+      : `        <div class="page-hero__inner page-hero__inner--split${heroSplitModifier}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>

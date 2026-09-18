@@ -23,10 +23,7 @@ export const seoExtensions = {
           "Any user in the company can raise a task when the module is active. Assignees update status from open through to completion according to their permissions.",
       },
     ],
-    relatedLinks: [
-      { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
-      { name: "QA Verifications", href: "products/qa-verifications.html" },
-    ],
+    relatedLinks: [],
   },
 
   "safety-briefs": {

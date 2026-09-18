@@ -315,6 +315,22 @@
     "width": 1010,
     "height": 752
   },
+  "images/screens/tasks/task-employee-list.png": {
+    "width": 1024,
+    "height": 221
+  },
+  "images/screens/tasks/task-detail-open.png": {
+    "width": 1009,
+    "height": 753
+  },
+  "images/screens/tasks/task-create-form.png": {
+    "width": 489,
+    "height": 605
+  },
+  "images/screens/tasks/workspace-tasks-addon.png": {
+    "width": 1024,
+    "height": 173
+  },
   "images/screens/train-routes/add-route.png": {
     "width": 1384,
     "height": 522

@@ -736,6 +736,21 @@
   max-width: none;
 }
 
+.page-hero__inner--stacked {
+  max-width: none;
+}
+
+.page-hero__inner--stacked .page-hero__media {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.page-hero__inner--stacked .page-hero__media .shot {
+  margin: 0;
+  width: 100%;
+  max-width: none;
+}
+
 .page-hero--nowrap-title .page-title {
   white-space: nowrap;
   font-size: clamp(1.55rem, 2.8vw, 2.85rem);
@@ -1274,6 +1289,33 @@
   border: 0;
   box-shadow: none;
   background: transparent;
+}
+
+.page-section__shot-break {
+  margin: 2.5rem 0 0;
+  padding-top: 0;
+}
+
+.page-section__subheading {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+  color: var(--text);
+}
+
+.page-section--fluid-shot .shot-grid--hero-stack {
+  margin-top: 1.75rem;
+  align-items: start;
+}
+
+.page-section--fluid-shot .shot-grid--hero-stack .shot__frame {
+  width: 100%;
+}
+
+.page-section--fluid-shot .shot-grid--hero-stack .shot__frame img {
+  width: 100%;
+  height: auto;
 }
 
 .page-section--report-roll .page-section__head {

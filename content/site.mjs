@@ -366,6 +366,20 @@ export const addons = [
     slug: "task-assignment",
     name: "Task assignment",
     moduleId: "task-assignment",
+    hideActivation: true,
+    hideHeroActions: true,
+    heroLeadFullWidth: true,
+    heroShotStacked: true,
+    heroShot: {
+      src: "images/screens/tasks/workspace-tasks-addon.png",
+      alt:
+        "Workspace navigation with Documents, Tasks add-on and Employee Messaging & Notes.",
+      scale: 1,
+      full: true,
+      eager: true,
+      hideCaption: true,
+      noExpand: true,
+    },
     summary: "Assign follow-up actions to people and tie them to an employee record.",
     tagline: "Close the loop after the finding",
     lead:
@@ -373,6 +387,9 @@ export const addons = [
     sections: [
       {
         heading: "Tasks with an owner, a status and a record",
+        fullWidth: true,
+        bulletTiles: true,
+        mod: "fluid-shot",
         body: [
           "Every task has an assignee and a status, and can optionally be linked to the employee record it concerns. That link is what makes the task useful later: when you open a record you can see the outstanding actions attached to it, rather than searching email for what was agreed.",
           "Tasks appear both as a company-wide page under Administration and as a tab on the employee profile, so managers and record owners work from the same list.",
@@ -383,26 +400,35 @@ export const addons = [
           "**Status tracking** from open through to completion.",
           "**Visible on the dashboard** as an open-task count.",
         ],
+        shotBreak: {
+          after: 1,
+          heading: "Raising a task takes seconds",
+          body: [
+            "The point of the module is that creating an action is quick enough that people actually do it at the moment of the finding, not later.",
+          ],
+        },
         shots: [
           {
-            src: "images/screens/tasks/task-overview.png",
-            caption: "Company-wide task list with assignee, linked employee and current status.",
+            src: "images/screens/tasks/task-employee-list.png",
+            caption:
+              "Tasks linked to the employee record — filter by open, closed or all, with status and assignee at a glance.",
+            scale: 1,
+            full: true,
+            eager: true,
+            noExpand: true,
           },
           {
-            src: "images/screens/tasks/task-view-popup.png",
-            caption: "Opening a task shows its detail, history and the record it relates to.",
+            src: "images/screens/tasks/task-detail-open.png",
+            caption:
+              "Opening a task shows its detail, history, reassignment and the record it relates to.",
+            scale: 1,
+            noExpand: true,
           },
-        ],
-      },
-      {
-        heading: "Raising a task takes seconds",
-        body: [
-          "The point of the module is that creating an action is quick enough that people actually do it at the moment of the finding, not later.",
-        ],
-        shots: [
           {
-            src: "images/screens/tasks/add-new-task.png",
+            src: "images/screens/tasks/task-create-form.png",
             caption: "Creating a task: title, assignee, linked employee and due detail.",
+            scale: 1,
+            noExpand: true,
           },
         ],
       },
