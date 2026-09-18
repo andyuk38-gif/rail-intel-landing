@@ -1457,29 +1457,6 @@ ${visual}
 }
 
 function renderTraineeProgressPill() {
-  const sparks = [
-    [-1.15, -0.75, "#2dd4bf", "rgba(45, 212, 191, 0.7)"],
-    [-0.95, -0.35, "#fbbf24", "rgba(251, 191, 36, 0.7)"],
-    [-0.55, -0.95, "#fcd34d", "rgba(252, 211, 77, 0.65)"],
-    [-0.2, -0.55, "#ffffff", "rgba(255, 255, 255, 0.55)"],
-    [0.15, -0.85, "#f59e0b", "rgba(245, 158, 11, 0.7)"],
-    [0.45, -0.45, "#2dd4bf", "rgba(45, 212, 191, 0.65)"],
-    [0.75, -0.7, "#fbbf24", "rgba(251, 191, 36, 0.7)"],
-    [1.05, -0.25, "#fcd34d", "rgba(252, 211, 77, 0.65)"],
-    [1.2, -0.65, "#f59e0b", "rgba(245, 158, 11, 0.7)"],
-    [-0.85, 0.35, "#2dd4bf", "rgba(45, 212, 191, 0.6)"],
-    [-0.35, 0.55, "#fbbf24", "rgba(251, 191, 36, 0.65)"],
-    [0.25, 0.45, "#ffffff", "rgba(255, 255, 255, 0.5)"],
-    [0.65, 0.35, "#fcd34d", "rgba(252, 211, 77, 0.6)"],
-    [1.05, 0.25, "#f59e0b", "rgba(245, 158, 11, 0.65)"],
-    [-0.55, 0.85, "#2dd4bf", "rgba(45, 212, 191, 0.55)"],
-    [0.15, 0.75, "#fbbf24", "rgba(251, 191, 36, 0.6)"],
-  ]
-    .map(function (spark, index) {
-      return `                  <span class="trainee-progress-pill__spark" style="--spark-x:${spark[0]};--spark-y:${spark[1]};--spark-color:${spark[2]};--spark-glow:${spark[3]};--spark-delay:${(index * 0.035).toFixed(3)}s"></span>`;
-    })
-    .join("\n");
-
   return `              <div class="trainee-progress-pill" data-trainee-progress-pill role="img" aria-label="Progression from Trainee to Qualified">
                 <div class="trainee-progress-pill__shell">
                   <span class="trainee-progress-pill__label trainee-progress-pill__label--from">
@@ -1500,10 +1477,6 @@ function renderTraineeProgressPill() {
                     <span class="trainee-progress-pill__dot trainee-progress-pill__dot--gold" aria-hidden="true"></span>
                     Qualified
                   </span>
-                </div>
-                <div class="trainee-progress-pill__fireworks" aria-hidden="true">
-                  <span class="trainee-progress-pill__burst"></span>
-${sparks}
                 </div>
                 <p class="trainee-progress-pill__outcome" aria-hidden="true">
                   <span class="trainee-progress-pill__outcome-mark" aria-hidden="true">✓</span>
@@ -1530,6 +1503,7 @@ ${renderTraineeProgressPill()}
             <div class="page-hero__trainee-body">
               <p class="page-lead">${esc(addon.lead)}</p>
 ${note}            </div>
+            <div class="trainee-hero-fireworks" data-trainee-hero-fireworks aria-hidden="true"></div>
           </div>`;
 
   const heroInner = `        <div class="page-hero__inner page-hero__inner--trainee-split">

@@ -2168,6 +2168,207 @@
 
   /* ---------- Trainee Driver progress pill ---------- */
 
+  /* ---------- Trainee Driver progress pill ---------- */
+
+  function launchTraineeHeroFireworks(container, durationMs) {
+    if (!container || container.dataset.fireworksRunning === "true") return;
+    container.dataset.fireworksRunning = "true";
+
+    var canvas = document.createElement("canvas");
+    canvas.className = "trainee-hero-fireworks__canvas";
+    container.appendChild(canvas);
+    container.classList.add("is-active");
+    container.classList.remove("is-fading");
+
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var rockets = [];
+    var particles = [];
+    var flashes = [];
+    var width = 0;
+    var height = 0;
+    var start = performance.now();
+    var launchTimer = null;
+    var fadeStart = durationMs - 1100;
+    var colors = ["#fbbf24", "#f59e0b", "#fcd34d", "#2dd4bf", "#38bdf8", "#ffffff", "#fb923c"];
+
+    function resize(force) {
+      var rect = container.getBoundingClientRect();
+      var nextWidth = Math.max(1, rect.width);
+      var nextHeight = Math.max(1, rect.height);
+      if (!force && nextWidth === width && nextHeight === height) return;
+      width = nextWidth;
+      height = nextHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function pickColor() {
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function launchRocket() {
+      var x = width * (0.12 + Math.random() * 0.76);
+      var targetY = height * (0.12 + Math.random() * 0.42);
+      var speed = 4.8 + Math.random() * 1.8;
+      rockets.push({
+        x: x,
+        y: height + 8,
+        vy: -speed,
+        targetY: targetY,
+        color: pickColor(),
+        trail: [],
+      });
+    }
+
+    function explode(x, y, color) {
+      flashes.push({ x: x, y: y, radius: 8, life: 1, color: color });
+      var count = 28 + Math.floor(Math.random() * 14);
+      for (var i = 0; i < count; i += 1) {
+        var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.35;
+        var speed = 1.4 + Math.random() * 2.8;
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 1,
+          decay: 0.011 + Math.random() * 0.012,
+          color: Math.random() > 0.18 ? color : pickColor(),
+          size: 1.4 + Math.random() * 1.4,
+          gravity: 0.034 + Math.random() * 0.02,
+        });
+      }
+    }
+
+    function drawRocket(rocket, alpha) {
+      var trail = rocket.trail;
+      trail.push({ x: rocket.x, y: rocket.y });
+      if (trail.length > 12) trail.shift();
+
+      ctx.globalCompositeOperation = "lighter";
+      for (var i = 0; i < trail.length; i += 1) {
+        var point = trail[i];
+        var trailAlpha = alpha * ((i + 1) / trail.length) * 0.55;
+        ctx.beginPath();
+        ctx.fillStyle = rocket.color;
+        ctx.globalAlpha = trailAlpha;
+        ctx.arc(point.x, point.y, 1 + i * 0.08, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = "#ffffff";
+      ctx.globalAlpha = alpha;
+      ctx.arc(rocket.x, rocket.y, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.fillStyle = rocket.color;
+      ctx.globalAlpha = alpha * 0.95;
+      ctx.arc(rocket.x, rocket.y, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function frame(now) {
+      var elapsed = now - start;
+      var fade =
+        elapsed >= fadeStart ? Math.max(0, 1 - (elapsed - fadeStart) / (durationMs - fadeStart)) : 1;
+
+      if (elapsed >= durationMs - 1100 && !container.classList.contains("is-fading")) {
+        container.classList.add("is-fading");
+      }
+
+        resize();
+        ctx.clearRect(0, 0, width, height);
+      ctx.globalCompositeOperation = "lighter";
+
+      for (var r = rockets.length - 1; r >= 0; r -= 1) {
+        var rocket = rockets[r];
+        rocket.y += rocket.vy;
+        rocket.vy *= 0.985;
+        drawRocket(rocket, fade);
+
+        if (rocket.y <= rocket.targetY || rocket.vy >= -0.35) {
+          explode(rocket.x, rocket.y, rocket.color);
+          rockets.splice(r, 1);
+        }
+      }
+
+      for (var f = flashes.length - 1; f >= 0; f -= 1) {
+        var flash = flashes[f];
+        flash.life -= 0.08;
+        flash.radius += 2.4;
+        if (flash.life <= 0) {
+          flashes.splice(f, 1);
+          continue;
+        }
+        var gradient = ctx.createRadialGradient(flash.x, flash.y, 0, flash.x, flash.y, flash.radius);
+        gradient.addColorStop(0, flash.color);
+        gradient.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.globalAlpha = flash.life * 0.45 * fade;
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(flash.x, flash.y, flash.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      for (var p = particles.length - 1; p >= 0; p -= 1) {
+        var particle = particles[p];
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.vy += particle.gravity;
+        particle.vx *= 0.985;
+        particle.life -= particle.decay;
+
+        if (particle.life <= 0) {
+          particles.splice(p, 1);
+          continue;
+        }
+
+        ctx.globalAlpha = particle.life * fade;
+        ctx.fillStyle = particle.color;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size * particle.life, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "source-over";
+
+      if (elapsed < durationMs) {
+        window.requestAnimationFrame(frame);
+      } else {
+        if (launchTimer) window.clearInterval(launchTimer);
+        container.classList.remove("is-active", "is-fading");
+        container.dataset.fireworksRunning = "false";
+        if (canvas.parentNode === container) container.removeChild(canvas);
+      }
+    }
+
+    resize(true);
+    launchRocket();
+    launchTimer = window.setInterval(function () {
+      if (performance.now() - start < durationMs - 700) launchRocket();
+    }, 420);
+
+    window.requestAnimationFrame(frame);
+    window.addEventListener(
+      "resize",
+      function onResize() {
+        if (container.dataset.fireworksRunning !== "true") {
+          window.removeEventListener("resize", onResize);
+          return;
+        }
+        resize(true);
+      },
+      { passive: true }
+    );
+  }
+
   Array.prototype.forEach.call(document.querySelectorAll("[data-trainee-progress-pill]"), function (pill) {
     var trackFill = pill.querySelector(".trainee-progress-pill__track-fill");
     if (!trackFill) return;
@@ -2180,6 +2381,11 @@
       pill.classList.add("is-complete");
       var outcome = pill.querySelector(".trainee-progress-pill__outcome");
       if (outcome) outcome.removeAttribute("aria-hidden");
+      if (!reduced) {
+        var grid = pill.closest(".page-hero__trainee-grid");
+        var fireworksRoot = grid && grid.querySelector("[data-trainee-hero-fireworks]");
+        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 4000);
+      }
     }
 
     function start() {

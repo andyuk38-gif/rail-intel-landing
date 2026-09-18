@@ -4087,6 +4087,40 @@ body.lightbox-open {
   gap: 2.5rem 3.5rem;
   align-items: start;
   width: 100%;
+  position: relative;
+}
+
+.page-hero__trainee-body {
+  position: relative;
+  z-index: 1;
+}
+
+.trainee-hero-fireworks {
+  position: absolute;
+  top: -0.25rem;
+  right: 0;
+  width: calc(50% - 1.75rem);
+  height: calc(100% + 1.5rem);
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  overflow: visible;
+}
+
+.trainee-hero-fireworks.is-active {
+  opacity: 1;
+}
+
+.trainee-hero-fireworks.is-fading {
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+
+.trainee-hero-fireworks__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .page-hero__inner--trainee-split .page-title {
@@ -4363,48 +4397,6 @@ body.lightbox-open {
     0 0 24px rgba(245, 158, 11, 0.12);
 }
 
-.trainee-progress-pill__fireworks {
-  position: absolute;
-  z-index: 1;
-  inset: -1.5rem -0.5rem auto auto;
-  width: min(16rem, 72%);
-  height: 5rem;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.trainee-progress-pill__burst {
-  position: absolute;
-  right: 18%;
-  top: 58%;
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  transform: translate(50%, -50%);
-  opacity: 0;
-}
-
-.trainee-progress-pill.is-complete .trainee-progress-pill__burst {
-  animation: trainee-pill-burst 1.15s ease-out forwards;
-}
-
-.trainee-progress-pill__spark {
-  position: absolute;
-  right: 18%;
-  top: 58%;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--spark-color, #fbbf24);
-  box-shadow: 0 0 10px var(--spark-glow, rgba(251, 191, 36, 0.65));
-  opacity: 0;
-  transform: translate(50%, -50%);
-}
-
-.trainee-progress-pill.is-complete .trainee-progress-pill__spark {
-  animation: trainee-pill-spark 1.45s ease-out var(--spark-delay, 0s) forwards;
-}
-
 .trainee-progress-pill__outcome-mark {
   display: inline-flex;
   align-items: center;
@@ -4526,38 +4518,6 @@ body.lightbox-open {
   }
 }
 
-@keyframes trainee-pill-burst {
-  0% {
-    opacity: 0.85;
-    box-shadow:
-      0 0 0 0 rgba(251, 191, 36, 0.55),
-      0 0 0 0 rgba(45, 212, 191, 0.35);
-  }
-
-  65% {
-    opacity: 0.55;
-    box-shadow:
-      0 0 0 16px rgba(251, 191, 36, 0),
-      0 0 0 24px rgba(45, 212, 191, 0);
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes trainee-pill-spark {
-  0% {
-    opacity: 1;
-    transform: translate(50%, -50%) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(50% + var(--spark-x) * 3.75rem), calc(-50% + var(--spark-y) * 2.75rem)) scale(0.15);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .trainee-progress-pill.is-running .trainee-progress-pill__shell,
   .trainee-progress-pill.is-running .trainee-progress-pill__shell::after,
@@ -4566,8 +4526,6 @@ body.lightbox-open {
   .trainee-progress-pill.is-running .trainee-progress-pill__label--to,
   .trainee-progress-pill.is-running .trainee-progress-pill__arrow,
   .trainee-progress-pill.is-running .trainee-progress-pill__outcome,
-  .trainee-progress-pill.is-complete .trainee-progress-pill__burst,
-  .trainee-progress-pill.is-complete .trainee-progress-pill__spark,
   .trainee-progress-pill.is-complete .trainee-progress-pill__dot--gold {
     animation: none;
   }
@@ -4616,6 +4574,12 @@ body.lightbox-open {
   .trainee-progress-pill__outcome {
     max-width: 100%;
     text-wrap: balance;
+  }
+
+  .trainee-hero-fireworks {
+    width: 100%;
+    top: 42%;
+    height: 58%;
   }
 }
 
