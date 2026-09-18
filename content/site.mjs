@@ -485,7 +485,7 @@ export const addons = [
     summary: "Run a full trainee programme: schedules, train logs, hours and signed feedback.",
     tagline: "Run the full trainee programme, from policies to portfolio.",
     lead:
-      "The Trainee Driver module guides you through a five-step pathway: policies and agreements, training schedules, groups, enrolment and training-cycle assignment. Once live, each trainee gets a portfolio for policies, equipment, modules, attendance, train logs and reporting.",
+      "The Trainee module guides you through a five-step pathway: policies and agreements, training schedules, groups, enrolment and training-cycle assignment. Once live, each trainee gets a portfolio for policies, equipment, modules, attendance, train logs and reporting.",
     note:
       "Core Rail Intel already includes trainee hours and daylight/darkness progress on the Experience Records tab. This module adds the programme management around it.",
     heroShot: {
