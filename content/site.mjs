@@ -765,7 +765,7 @@ export const addons = [
         shots: [
           {
             src: "images/screens/leave-absence/leave-absence-overview.png",
-            caption: "Leave and absence overview across the company.",
+            caption: "Employee leave record with entitlement, balance and leave statement.",
           },
           {
             src: "images/screens/leave-absence/leave-absence-entitlements.png",
