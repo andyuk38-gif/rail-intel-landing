@@ -736,6 +736,29 @@
   max-width: none;
 }
 
+.page-hero--leave-absence .page-hero__copy {
+  max-width: none;
+}
+
+.page-hero--leave-absence .page-hero__inner--split {
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 31%);
+  align-items: start;
+}
+
+.page-hero--leave-absence .page-hero__media .shot {
+  margin-left: auto;
+  width: 100%;
+  max-width: 488px;
+}
+
+.page-hero--leave-absence .page-hero__media .shot__frame img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
 .page-hero__inner--stacked {
   max-width: none;
 }

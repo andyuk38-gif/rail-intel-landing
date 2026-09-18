@@ -1603,7 +1603,7 @@ ${heroCopy}
     renderHead(base, pageSeo) +
     `
   <main>
-    <section class="page-hero${addon.heroLeadFullWidth ? " page-hero--full-lead" : ""}${addon.heroTitleNoWrap ? " page-hero--nowrap-title" : ""}">
+    <section class="page-hero${addon.heroLeadFullWidth ? " page-hero--full-lead" : ""}${addon.heroTitleNoWrap ? " page-hero--nowrap-title" : ""}${addon.heroMod ? ` page-hero--${addon.heroMod}` : ""}">
       <div class="container">
 ${heroInner}
       </div>

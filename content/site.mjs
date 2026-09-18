@@ -750,10 +750,18 @@ export const addons = [
     tagline: "Absence that reconciles with competence",
     lead:
       "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on. Leave & Absence tracks entitlements and absence with an approval workflow, and keeps the record next to the competency data rather than in a separate HR system.",
+    hideHeroActions: true,
+    heroLeadFullWidth: true,
+    heroMod: "leave-absence",
+    heroShot: {
+      src: "images/screens/leave-absence/leave-absence-apply-for-leave.png",
+      caption: "Apply for leave, holiday, unpaid or other, submitted for manager approval.",
+      scale: 1,
+    },
     sections: [
       {
         heading: "Entitlements and balances per employee",
-        shotGrid: "split-70-30",
+        fullWidth: true,
         body: [
           "Each employee has an entitlement for the leave year with the balance maintained as requests are approved. Anyone in the company can raise a request when the module is active; managers approve and manage according to their permissions.",
         ],
@@ -768,11 +776,7 @@ export const addons = [
             src: "images/screens/leave-absence/leave-absence-overview.png",
             caption: "Employee leave record with entitlement, balance and leave statement.",
             scale: 1,
-          },
-          {
-            src: "images/screens/leave-absence/leave-absence-apply-for-leave.png",
-            caption: "Apply for leave, holiday, unpaid or other, submitted for manager approval.",
-            scale: 1,
+            full: true,
           },
         ],
       },
