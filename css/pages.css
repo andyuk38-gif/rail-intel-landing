@@ -329,10 +329,15 @@
 
 .page-hero__inner--icon {
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2.5rem 3.5rem;
+  gap: 2rem 2.5rem;
+  align-items: center;
 }
 
 .page-hero__inner--icon .page-hero__copy {
+  max-width: none;
+}
+
+.page-hero__inner--icon .page-lead {
   max-width: none;
 }
 
@@ -845,12 +850,12 @@
 }
 
 .page-section--medication-checks .page-section__aside {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: 2.5rem 3rem;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.32fr);
+  gap: 2rem 2.5rem;
 }
 
-.page-section__aside--reverse {
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+.page-section--medication-checks .page-section__aside--reverse {
+  grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.78fr);
 }
 
 .page-section--medication-checks .page-section__aside-copy .spec-tiles {
