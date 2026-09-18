@@ -793,13 +793,15 @@ export const addons = [
           {
             src: "images/screens/leave-absence/leave-absence-policy-dark.png",
             caption: "Leave year and policy configuration.",
-            scale: 0.5,
+            scale: 1,
+            full: true,
             noExpand: true,
           },
           {
             src: "images/screens/leave-absence/leave-absence-reporting-dark.png",
             caption: "Absence reporting across the company.",
-            scale: 0.5,
+            scale: 1,
+            full: true,
             noExpand: true,
           },
           {

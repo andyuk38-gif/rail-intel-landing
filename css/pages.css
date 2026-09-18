@@ -813,8 +813,14 @@
 }
 
 .page-section--leave-policy .shot-grid--hero-stack {
+  grid-template-columns: 1fr;
   margin-top: 2rem;
   align-items: start;
+}
+
+.page-section--leave-policy .shot-grid--hero-stack > .shot--full {
+  grid-column: auto;
+  max-width: none !important;
 }
 
 .page-section--leave-policy .shot-grid--hero-stack > .shot--full .shot__frame--fullwidth {
