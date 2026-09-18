@@ -671,7 +671,7 @@ export const addons = [
     qaSection: {
       heading: "On QA verification reports",
       body: [
-        "Trainee Driver manages the programme; it is not a standalone compliance audit. When the **QA Verifications** add-on is purchased and activated, verification runs can check trainee programme compliance against live record data.",
+        "Trainee add-on module manages the programme; it is not a standalone compliance audit. When the **QA Verifications** add-on is purchased and activated, verification runs can check trainee programme compliance against live record data.",
         "Trainee-related outcomes, such as unsigned policies, portfolio gaps and programme status, form part of the employee verification report alongside competency, medical and licence sections, with run history retained for audit.",
       ],
       bullets: [

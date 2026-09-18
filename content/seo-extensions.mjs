@@ -67,6 +67,11 @@ export const seoExtensions = {
         answer:
           "Yes. Experience Records cover trainee hours and daylight or darkness progress. The Trainee Driver module adds programme management around that core capability.",
       },
+      {
+        question: "How are bank holidays and non-working days excluded from the training schedule?",
+        answer:
+          "When you set a start date for a training schedule, Rail Intel projects the full pathway forward from that day. Upcoming bank holidays are picked up automatically, and each module's working-day rules determine which days count as training days, weekends and other non-working days are skipped so sessions are not placed on them. The calendar updates instantly, with holidays and skipped days marked, so you do not need to rebuild the timeline manually when a bank holiday changes.",
+      },
     ],
     relatedLinks: [
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
