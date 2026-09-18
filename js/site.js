@@ -2437,7 +2437,7 @@
         var grid = pill.closest(".page-hero__trainee-grid");
         var fireworksRoot = grid && grid.querySelector("[data-trainee-hero-fireworks]");
         var qualifiedLabel = pill.querySelector(".trainee-progress-pill__label--to");
-        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 5000, qualifiedLabel);
+        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 8000, qualifiedLabel);
       }
     }
 
