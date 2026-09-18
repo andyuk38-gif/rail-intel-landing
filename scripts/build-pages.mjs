@@ -1134,7 +1134,7 @@ ${(section.shotBreak.body || []).map((text) => `          <p>${rich(text)}</p>`)
 ${renderShotList(headShots, false)}
       </div>
 ${breakBlock}
-      <div class="shot-grid shot-grid--hero-stack">
+      <div class="shot-grid ${section.shotBreak.layout === "stack" ? "shot-grid--full shot-grid--stacked" : "shot-grid--hero-stack"}">
 ${renderShotList(tailShots, false)}
       </div>`;
     } else {
@@ -1562,7 +1562,7 @@ ${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\
   const heroMedia = addon.heroVideo
     ? renderHeroVideo(addon.heroVideo, base)
     : addon.heroShot
-      ? renderShot(addon.heroShot, base, { fill: !addon.heroShotStacked })
+      ? renderShot(addon.heroShot, base, { fill: true })
       : null;
 
   const heroSplitModifier = addon.heroShot?.circle ? " page-hero__inner--icon" : "";

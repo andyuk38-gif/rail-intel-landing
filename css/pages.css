@@ -747,8 +747,8 @@
 
 .page-hero__inner--stacked .page-hero__media .shot {
   margin: 0;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
 }
 
 .page-hero--nowrap-title .page-title {
@@ -1329,69 +1329,25 @@
   height: auto;
 }
 
-.page-section--task-shots .shot-grid--full .shot--full .shot__frame--fullwidth {
-  width: 100%;
-  max-width: none;
-  margin-inline: 0;
+.shot-grid--stacked .shot:not(.shot--full) {
+  margin-inline: auto;
 }
 
-.page-section--task-shots .shot-grid--full .shot--full .shot__frame--fullwidth img {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: auto;
-}
-
-.page-section--task-shots .shot-grid--hero-stack {
-  grid-template-columns: minmax(0, 1.75fr) minmax(0, 0.85fr);
-  gap: 1.5rem 2rem;
-  align-items: start;
-}
-
-.page-section--task-shots .shot-grid--hero-stack .shot:first-child {
-  max-width: none !important;
-  width: 100%;
-}
-
-.page-section--task-shots .shot-grid--hero-stack .shot:first-child .shot__frame {
-  width: 100%;
-  max-width: none;
-}
-
-.page-section--task-shots .shot-grid--hero-stack .shot:first-child .shot__frame img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
-
-.page-section--task-shots .shot-grid--hero-stack .shot:last-child {
-  justify-self: center;
-  align-self: start;
-  max-width: 16rem;
-}
-
-@media (max-width: 720px) {
-  .page-section--task-shots .shot-grid--hero-stack .shot:last-child {
-    max-width: 14rem;
-    margin-inline: auto;
-  }
-}
-
-.page-hero__inner--stacked .page-hero__media .shot__frame {
-  width: fit-content;
-  max-width: 100%;
-}
-
+.page-hero__inner--stacked .page-hero__media .shot__frame,
 .page-hero__inner--stacked .page-hero__media .shot--full .shot__frame--fullwidth {
   width: 100%;
-  max-width: min(100%, var(--shot-display-width, 1024px));
+  max-width: none;
   margin-inline: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
 }
 
 .page-hero__inner--stacked .page-hero__media .shot__frame img,
 .page-hero__inner--stacked .page-hero__media .shot--full .shot__frame--fullwidth img {
-  width: auto;
-  max-width: 100%;
+  display: block;
+  width: 100%;
+  max-width: none;
   height: auto;
 }
 
