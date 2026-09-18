@@ -483,7 +483,7 @@ export const addons = [
     name: "Trainee Driver",
     moduleId: "trainee-driver",
     summary: "Run a full trainee programme: schedules, train logs, hours and signed feedback.",
-    tagline: "Run the full trainee programme, from policies to portfolio",
+    tagline: "Run the full trainee programme, from policies to portfolio.",
     lead:
       "The Trainee Driver module guides you through a five-step pathway: policies and agreements, training schedules, groups, enrolment and training-cycle assignment. Once live, each trainee gets a portfolio for policies, equipment, modules, attendance, train logs and reporting.",
     note:

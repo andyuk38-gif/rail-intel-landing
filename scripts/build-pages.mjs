@@ -1467,7 +1467,7 @@ function traineeDriverPage(addon) {
   )}</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
           <div class="page-hero__trainee-grid">
-            <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span></h1>
+            <h1 class="page-title">Run the full trainee programme, from <span class="hero-title__accent">policies</span> to <span class="hero-title__accent">portfolio</span>.</h1>
             <div class="page-hero__trainee-body">
               <p class="page-lead">${esc(addon.lead)}</p>
 ${note}            </div>
