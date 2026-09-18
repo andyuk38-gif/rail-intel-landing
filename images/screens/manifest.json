@@ -251,6 +251,18 @@
     "width": 1389,
     "height": 725
   },
+  "images/screens/medical/medication-checks-icon.jpg": {
+    "width": 840,
+    "height": 880
+  },
+  "images/screens/medical/medication-check-form.png": {
+    "width": 869,
+    "height": 1187
+  },
+  "images/screens/medical/medication-check-view.png": {
+    "width": 754,
+    "height": 781
+  },
   "images/screens/medical/new-medical-record.png": {
     "width": 1396,
     "height": 1063

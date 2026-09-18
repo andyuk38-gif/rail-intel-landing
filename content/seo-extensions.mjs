@@ -132,10 +132,7 @@ export const seoExtensions = {
           "Optionally. Employees can submit a declaration for manager review, keeping medication position with fitness data on the record.",
       },
     ],
-    relatedLinks: [
-      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
-      { name: "QA Verifications", href: "products/qa-verifications.html" },
-    ],
+    relatedLinks: [],
   },
 
 

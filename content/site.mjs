@@ -773,15 +773,27 @@ export const addons = [
     slug: "medication-checks",
     name: "Medication Checks",
     moduleId: "medication-checks",
+    hideActivation: true,
+    hideHeroActions: true,
     summary: "Medication declarations and occupational health checks on the medical record.",
     tagline: "Declarations that reach the right people",
     lead:
       "Medication can affect fitness to work, and a declaration that sits in an email is not a control. Medication Checks adds declaration and occupational-health check workflows to the medical record, including optional employee self-submission for manager review.",
     note:
       "The Medical tab and company Medicals page are core Rail Intel. This module adds the medication declaration and OH check workflows on top of them.",
+    heroShot: {
+      src: "images/screens/medical/medication-checks-icon.jpg",
+      alt: "Medication checks module icon",
+      circle: true,
+      hideCaption: true,
+      noExpand: true,
+      scale: 1,
+    },
     sections: [
       {
         heading: "Declarations, OH outcomes and attachments",
+        fullWidth: true,
+        crispShots: true,
         body: [
           "Declarations are recorded against the employee's medical record, so the medication position sits with the fitness position rather than apart from it. Occupational health outcomes and supporting report attachments are held alongside.",
           "Employees can optionally submit their own declaration for manager review, which keeps the process moving without requiring a manager to transcribe it.",
@@ -794,12 +806,16 @@ export const addons = [
         ],
         shots: [
           {
-            src: "images/screens/medical/medical-orrdoc-list-names.png",
-            caption: "ORR medical documentation held against employee records.",
+            src: "images/screens/medical/medication-check-form.png",
+            caption: "Add medication check — capture medications, outcome and clinician details.",
+            full: true,
+            scale: 1,
           },
           {
-            src: "images/screens/medical/mecical-psychologist-list-names.png",
-            caption: "Occupational health and psychologist records alongside the medical history.",
+            src: "images/screens/medical/medication-check-view.png",
+            caption: "View medication check — submitted record with OH recommendations and medications.",
+            full: true,
+            scale: 1,
           },
         ],
       },

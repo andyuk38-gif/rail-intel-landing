@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=195874843" />
-  <link rel="stylesheet" href="../css/pages.css?v=195874843" />
+  <link rel="stylesheet" href="../css/style.css?v=115390794" />
+  <link rel="stylesheet" href="../css/pages.css?v=115390794" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -257,22 +257,28 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--icon">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../products/">Add-ons</a> / Medication Checks</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
           <h1 class="page-title">Declarations that reach the right people</h1>
           <p class="page-lead">Medication can affect fitness to work, and a declaration that sits in an email is not a control. Medication Checks adds declaration and occupational-health check workflows to the medical record, including optional employee self-submission for manager review.</p>
-        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> The Medical tab and company Medicals page are core Rail Intel. This module adds the medication declaration and OH check workflows on top of them.</p>          <div class="page-actions">
-            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="../products/" class="btn btn-ghost btn-lg">All add-ons</a>
+        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> The Medical tab and company Medicals page are core Rail Intel. This module adds the medication declaration and OH check workflows on top of them.</p>
+          </div>
+          <div class="page-hero__media">
+        <figure class="shot shot--circle reveal">
+          <div class="shot__frame" data-no-expand="">
+            <img src="../images/screens/medical/medication-checks-icon.jpg?v=115390794" alt="Medication checks module icon" width="840" height="880" loading="lazy" decoding="async" />
+          </div>
+        </figure>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section page-section--wide page-section--crisp">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--wide">
           <h2>Declarations, OH outcomes and attachments</h2>
           <p>Declarations are recorded against the employee's medical record, so the medication position sits with the fitness position rather than apart from it. Occupational health outcomes and supporting report attachments are held alongside.</p>
           <p>Employees can optionally submit their own declaration for manager review, which keeps the process moving without requiring a manager to transcribe it.</p>
@@ -283,29 +289,24 @@
             <li><strong>Optional employee self-submission</strong> routed to a manager for review.</li>
           </ul>
         </div>
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 695px">
-          <div class="shot__frame">
-            <img src="../images/screens/medical/medical-orrdoc-list-names.png?v=195874843" alt="ORR medical documentation held against employee records." width="695" height="363" loading="lazy" decoding="async" />
+      <div class="shot-grid shot-grid--full">
+        <figure class="shot shot--full reveal">
+          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 869px">
+            <img src="../images/screens/medical/medication-check-form.png?v=115390794" alt="Add medication check — capture medications, outcome and clinician details." width="869" height="1187" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">ORR medical documentation held against employee records.</figcaption>
+          <figcaption class="shot__caption">Add medication check — capture medications, outcome and clinician details.</figcaption>
         </figure>
-        <figure class="shot reveal" style="max-width: 695px">
-          <div class="shot__frame">
-            <img src="../images/screens/medical/mecical-psychologist-list-names.png?v=195874843" alt="Occupational health and psychologist records alongside the medical history." width="695" height="403" loading="lazy" decoding="async" />
+        <figure class="shot shot--full reveal">
+          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 754px">
+            <img src="../images/screens/medical/medication-check-view.png?v=115390794" alt="View medication check — submitted record with OH recommendations and medications." width="754" height="781" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Occupational health and psychologist records alongside the medical history.</figcaption>
+          <figcaption class="shot__caption">View medication check — submitted record with OH recommendations and medications.</figcaption>
         </figure>
       </div>
 
       </div>
     </section>
 
-    <section class="page-section page-section--tight">
-      <div class="container">
-        <p class="page-lead">Related: <a href="../features/medicals-licensing.html">Medicals &amp; Licensing</a>, <a href="../products/qa-verifications.html">QA Verifications</a></p>
-      </div>
-    </section>
 
     <section class="page-section page-section--tight" aria-label="Frequently asked questions">
       <div class="container">
@@ -324,21 +325,7 @@
         </dl>
       </div>
     </section>
-    <section class="page-section page-section--activation">
-      <div class="container">
-        <h2>Activating Medication Checks</h2>
-        <div class="page-activation__row">
-          <div class="page-activation__copy">
-            <p>Add-on modules are activated from the Add-ons page inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your company administrator can activate it directly.</p>
-            <p>Module identifier: <code>medication-checks</code></p>
 
-          </div>
-          <div class="page-actions page-activation__actions">
-            <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Activate in Rail Intel</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
@@ -412,7 +399,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=195874843"></script>
-  <script src="../js/newsletter.js?v=195874843"></script>
+  <script src="../js/site.js?v=115390794"></script>
+  <script src="../js/newsletter.js?v=115390794"></script>
 </body>
 </html>

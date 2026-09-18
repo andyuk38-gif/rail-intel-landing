@@ -530,17 +530,18 @@ function renderShot(shot, base, options = {}) {
     "shot",
     shot.full ? "shot--full" : null,
     shot.bordered ? "shot--bordered" : null,
+    shot.circle ? "shot--circle" : null,
     options.showcase ? "shot--showcase" : null,
     "reveal",
   ]
     .filter(Boolean)
     .join(" ");
-  const style = fill ? "" : ` style="max-width: ${width}px"`;
-  const fullWidth = fill && scale === 1;
+  const style = fill && !shot.circle ? "" : shot.circle ? "" : ` style="max-width: ${width}px"`;
+  const fullWidth = fill && scale === 1 && !shot.circle;
   const frameClass = fullWidth ? "shot__frame shot__frame--fullwidth" : "shot__frame";
   const frameStyleValue = fullWidth
     ? `--shot-display-width: ${size.width}px`
-    : fill
+    : fill && !shot.circle
       ? `--shot-native-width: ${width}px`
       : "";
   const frameStyle = frameStyleValue ? ` style="${frameStyleValue}"` : "";
@@ -1536,8 +1537,10 @@ ${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\
       ? renderShot(addon.heroShot, base, { fill: true })
       : null;
 
+  const heroSplitModifier = addon.heroShot?.circle ? " page-hero__inner--icon" : "";
+
   const heroInner = heroMedia
-    ? `        <div class="page-hero__inner page-hero__inner--split">
+    ? `        <div class="page-hero__inner page-hero__inner--split${heroSplitModifier}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
