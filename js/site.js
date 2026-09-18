@@ -2503,6 +2503,19 @@
       }
     }
 
+    function scrollRailLinkIntoView(link) {
+      if (!link || !window.matchMedia("(max-width: 960px)").matches) return;
+      var rail = link.closest(".trainee-journey__rail");
+      if (!rail) return;
+      var linkRect = link.getBoundingClientRect();
+      var railRect = rail.getBoundingClientRect();
+      var delta = linkRect.left - railRect.left + linkRect.width / 2 - railRect.width / 2;
+      rail.scrollTo({
+        left: rail.scrollLeft + delta,
+        behavior: reduced ? "auto" : "smooth",
+      });
+    }
+
     function scrollInset() {
       var chrome = document.querySelector(".site-chrome");
       var chromeBottom = chrome ? chrome.getBoundingClientRect().bottom : 0;
@@ -2587,9 +2600,7 @@
         journey.style.setProperty("--trainee-rail-width", percent + "%");
       }
       var activeLink = railLinks[index];
-      if (activeLink && window.matchMedia("(max-width: 960px)").matches) {
-        activeLink.scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
-      }
+      scrollRailLinkIntoView(activeLink);
       restartTimer(activeLink);
     }
 
@@ -2694,6 +2705,11 @@
         goToStep(index, false);
       });
     });
+
+    if (window.matchMedia("(max-width: 960px)").matches && !/^#trainee-step-\d+$/.test(location.hash || "")) {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    }
 
     sync(0);
 
