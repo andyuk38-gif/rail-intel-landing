@@ -1096,7 +1096,9 @@ function renderSection(section, base) {
       ? "shot-grid shot-grid--showcase"
       : heroStack
         ? "shot-grid shot-grid--hero-stack"
-        : "shot-grid shot-grid--two";
+        : section.shotGrid === "split-70-30"
+          ? "shot-grid shot-grid--split-70-30"
+          : "shot-grid shot-grid--two";
 
   const renderShotList = (shotList, listHeroStack = heroStack) =>
     shotList

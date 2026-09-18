@@ -1788,6 +1788,35 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
 }
 
+.shot-grid--split-70-30 {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  align-items: start;
+}
+
+.shot-grid--split-70-30 > .shot:first-child {
+  max-width: none !important;
+}
+
+.shot-grid--split-70-30 > .shot:first-child .shot__frame {
+  width: 100%;
+}
+
+.shot-grid--split-70-30 > .shot:last-child {
+  justify-self: center;
+  width: 100%;
+  max-width: 24rem;
+}
+
+@media (max-width: 900px) {
+  .shot-grid--split-70-30 {
+    grid-template-columns: 1fr;
+  }
+
+  .shot-grid--split-70-30 > .shot:last-child {
+    max-width: none;
+  }
+}
+
 .shot-grid--hero-stack {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem 1.75rem;
