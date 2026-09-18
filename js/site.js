@@ -2230,10 +2230,10 @@
 
     function launchRocket() {
       var origin = getLaunchOrigin();
-      var targetX = width * (0.56 + Math.random() * 0.34);
-      var targetY = height * (0.08 + Math.random() * 0.46);
-      var controlX = origin.x + (targetX - origin.x) * 0.42 + width * 0.06;
-      var controlY = Math.min(origin.y, targetY) - height * (0.1 + Math.random() * 0.08);
+      var targetX = width * (0.16 + Math.random() * 0.68);
+      var targetY = height * (0.02 + Math.random() * 0.14);
+      var controlX = origin.x + (targetX - origin.x) * 0.16;
+      var controlY = origin.y - height * (0.22 + Math.random() * 0.16);
       rockets.push({
         sx: origin.x,
         sy: origin.y,
@@ -2244,29 +2244,29 @@
         x: origin.x,
         y: origin.y,
         t: 0,
-        speed: 0.012 + Math.random() * 0.008,
+        speed: 0.008 + Math.random() * 0.005,
         color: pickColor(),
         trail: [],
       });
     }
 
     function explode(x, y, color) {
-      flashes.push({ x: x, y: y, radius: 12, life: 1, color: color });
-      var count = 38 + Math.floor(Math.random() * 16);
+      flashes.push({ x: x, y: y, radius: 14, life: 1, color: color });
+      var count = 42 + Math.floor(Math.random() * 18);
       for (var i = 0; i < count; i += 1) {
-        var angle = -Math.PI * 0.18 + (Math.PI * 1.12 * i) / count + (Math.random() - 0.5) * 0.28;
-        var speed = 2 + Math.random() * 3.6;
+        var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.24;
+        var speed = 1.2 + Math.random() * 2.6;
         particles.push({
           x: x,
           y: y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
+          vy: Math.sin(angle) * speed - 0.35,
           life: 1,
-          decay: 0.004 + Math.random() * 0.004,
-          fallDecay: 0.018 + Math.random() * 0.014,
+          decay: 0.0015 + Math.random() * 0.002,
+          fallDecay: 0.0035 + Math.random() * 0.003,
           color: Math.random() > 0.14 ? color : pickColor(),
-          size: 2.1 + Math.random() * 2.2,
-          gravity: 0.055 + Math.random() * 0.035,
+          size: 2.2 + Math.random() * 2.4,
+          gravity: 0.022 + Math.random() * 0.014,
           burstY: y,
           falling: false,
         });
@@ -2356,9 +2356,9 @@
         particle.x += particle.vx;
         particle.y += particle.vy;
         particle.vy += particle.gravity;
-        particle.vx *= 0.988;
+        particle.vx *= 0.993;
 
-        if (!particle.falling && particle.vy > 0.35 && particle.y > particle.burstY + 6) {
+        if (!particle.falling && particle.vy > 0.15 && particle.y > particle.burstY + 4) {
           particle.falling = true;
         }
 
@@ -2368,14 +2368,14 @@
           particle.life -= particle.decay;
         }
 
-        if (particle.life <= 0 || particle.y > height + 24) {
+        if (particle.life <= 0 || particle.y > height + 32) {
           particles.splice(p, 1);
           continue;
         }
 
         var fallFade =
-          particle.falling && particle.y > particle.burstY + 18
-            ? Math.max(0.35, 1 - (particle.y - particle.burstY) / (height * 0.55))
+          particle.falling && particle.y > particle.burstY + height * 0.14
+            ? Math.max(0.45, 1 - (particle.y - particle.burstY - height * 0.14) / (height * 0.78))
             : 1;
 
         ctx.shadowBlur = particle.falling ? 8 : 12;
@@ -2404,8 +2404,8 @@
     resize(true);
     launchRocket();
     launchTimer = window.setInterval(function () {
-      if (performance.now() - start < durationMs - 900) launchRocket();
-    }, 520);
+      if (performance.now() - start < durationMs - 1100) launchRocket();
+    }, 580);
 
     window.requestAnimationFrame(frame);
     window.addEventListener(
@@ -2437,7 +2437,7 @@
         var grid = pill.closest(".page-hero__trainee-grid");
         var fireworksRoot = grid && grid.querySelector("[data-trainee-hero-fireworks]");
         var qualifiedLabel = pill.querySelector(".trainee-progress-pill__label--to");
-        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 4000, qualifiedLabel);
+        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 5000, qualifiedLabel);
       }
     }
 
