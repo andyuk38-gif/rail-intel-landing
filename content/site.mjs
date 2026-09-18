@@ -761,8 +761,9 @@ export const addons = [
     sections: [
       {
         heading: "Entitlements and balances per employee",
-        fullWidth: true,
         mod: "leave-overview",
+        tileSplit: true,
+        bulletTiles: true,
         body: [
           "Each employee has an entitlement for the leave year with the balance maintained as requests are approved. Anyone in the company can raise a request when the module is active; managers approve and manage according to their permissions.",
         ],
