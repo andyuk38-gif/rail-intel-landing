@@ -1333,16 +1333,17 @@
   margin-inline: auto;
 }
 
+/* Task list capture is 1024px — cap at native size so the browser does not upscale it. */
 .page-section--task-shots .shot-grid--full .shot__frame--fullwidth {
   width: 100%;
-  max-width: none;
+  max-width: min(100%, var(--shot-display-width, 1024px));
   margin-inline: 0;
 }
 
 .page-section--task-shots .shot-grid--full .shot__frame--fullwidth img {
   display: block;
   width: 100%;
-  max-width: none;
+  max-width: 100%;
   height: auto;
 }
 
