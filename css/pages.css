@@ -4097,10 +4097,9 @@ body.lightbox-open {
 
 .trainee-hero-fireworks {
   position: absolute;
-  top: -0.25rem;
-  right: 0;
-  width: calc(50% - 1.75rem);
-  height: calc(100% + 1.5rem);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 4;
   opacity: 0;
@@ -4577,9 +4576,9 @@ body.lightbox-open {
   }
 
   .trainee-hero-fireworks {
+    inset: 0;
     width: 100%;
-    top: 42%;
-    height: 58%;
+    height: 100%;
   }
 }
 

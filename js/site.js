@@ -2168,9 +2168,7 @@
 
   /* ---------- Trainee Driver progress pill ---------- */
 
-  /* ---------- Trainee Driver progress pill ---------- */
-
-  function launchTraineeHeroFireworks(container, durationMs) {
+  function launchTraineeHeroFireworks(container, durationMs, originEl) {
     if (!container || container.dataset.fireworksRunning === "true") return;
     container.dataset.fireworksRunning = "true";
 
@@ -2189,7 +2187,7 @@
     var height = 0;
     var start = performance.now();
     var launchTimer = null;
-    var fadeStart = durationMs - 1100;
+    var fadeStart = durationMs - 1200;
     var colors = ["#fbbf24", "#f59e0b", "#fcd34d", "#2dd4bf", "#38bdf8", "#ffffff", "#fb923c"];
 
     function resize(force) {
@@ -2210,36 +2208,67 @@
       return colors[Math.floor(Math.random() * colors.length)];
     }
 
+    function getLaunchOrigin() {
+      if (!originEl) {
+        return { x: width * 0.18, y: height * 0.72 };
+      }
+      var containerRect = container.getBoundingClientRect();
+      var originRect = originEl.getBoundingClientRect();
+      return {
+        x: originRect.left + originRect.width * 0.72 - containerRect.left,
+        y: originRect.top + originRect.height * 0.5 - containerRect.top,
+      };
+    }
+
+    function arcPoint(t, x0, y0, x1, y1, cx, cy) {
+      var inv = 1 - t;
+      return {
+        x: inv * inv * x0 + 2 * inv * t * cx + t * t * x1,
+        y: inv * inv * y0 + 2 * inv * t * cy + t * t * y1,
+      };
+    }
+
     function launchRocket() {
-      var x = width * (0.12 + Math.random() * 0.76);
-      var targetY = height * (0.12 + Math.random() * 0.42);
-      var speed = 4.8 + Math.random() * 1.8;
+      var origin = getLaunchOrigin();
+      var targetX = width * (0.56 + Math.random() * 0.34);
+      var targetY = height * (0.08 + Math.random() * 0.46);
+      var controlX = origin.x + (targetX - origin.x) * 0.42 + width * 0.06;
+      var controlY = Math.min(origin.y, targetY) - height * (0.1 + Math.random() * 0.08);
       rockets.push({
-        x: x,
-        y: height + 8,
-        vy: -speed,
-        targetY: targetY,
+        sx: origin.x,
+        sy: origin.y,
+        tx: targetX,
+        ty: targetY,
+        cx: controlX,
+        cy: controlY,
+        x: origin.x,
+        y: origin.y,
+        t: 0,
+        speed: 0.012 + Math.random() * 0.008,
         color: pickColor(),
         trail: [],
       });
     }
 
     function explode(x, y, color) {
-      flashes.push({ x: x, y: y, radius: 8, life: 1, color: color });
-      var count = 28 + Math.floor(Math.random() * 14);
+      flashes.push({ x: x, y: y, radius: 12, life: 1, color: color });
+      var count = 38 + Math.floor(Math.random() * 16);
       for (var i = 0; i < count; i += 1) {
-        var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.35;
-        var speed = 1.4 + Math.random() * 2.8;
+        var angle = -Math.PI * 0.18 + (Math.PI * 1.12 * i) / count + (Math.random() - 0.5) * 0.28;
+        var speed = 2 + Math.random() * 3.6;
         particles.push({
           x: x,
           y: y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 1,
-          decay: 0.011 + Math.random() * 0.012,
-          color: Math.random() > 0.18 ? color : pickColor(),
-          size: 1.4 + Math.random() * 1.4,
-          gravity: 0.034 + Math.random() * 0.02,
+          decay: 0.004 + Math.random() * 0.004,
+          fallDecay: 0.018 + Math.random() * 0.014,
+          color: Math.random() > 0.14 ? color : pickColor(),
+          size: 2.1 + Math.random() * 2.2,
+          gravity: 0.055 + Math.random() * 0.035,
+          burstY: y,
+          falling: false,
         });
       }
     }
@@ -2247,30 +2276,33 @@
     function drawRocket(rocket, alpha) {
       var trail = rocket.trail;
       trail.push({ x: rocket.x, y: rocket.y });
-      if (trail.length > 12) trail.shift();
+      if (trail.length > 18) trail.shift();
 
       ctx.globalCompositeOperation = "lighter";
       for (var i = 0; i < trail.length; i += 1) {
         var point = trail[i];
-        var trailAlpha = alpha * ((i + 1) / trail.length) * 0.55;
+        var trailAlpha = alpha * ((i + 1) / trail.length) * 0.72;
         ctx.beginPath();
         ctx.fillStyle = rocket.color;
         ctx.globalAlpha = trailAlpha;
-        ctx.arc(point.x, point.y, 1 + i * 0.08, 0, Math.PI * 2);
+        ctx.arc(point.x, point.y, 1.2 + i * 0.12, 0, Math.PI * 2);
         ctx.fill();
       }
 
+      ctx.shadowBlur = 14;
+      ctx.shadowColor = rocket.color;
       ctx.beginPath();
       ctx.fillStyle = "#ffffff";
       ctx.globalAlpha = alpha;
-      ctx.arc(rocket.x, rocket.y, 2.2, 0, Math.PI * 2);
+      ctx.arc(rocket.x, rocket.y, 3.2, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.beginPath();
       ctx.fillStyle = rocket.color;
       ctx.globalAlpha = alpha * 0.95;
-      ctx.arc(rocket.x, rocket.y, 1.5, 0, Math.PI * 2);
+      ctx.arc(rocket.x, rocket.y, 2.2, 0, Math.PI * 2);
       ctx.fill();
+      ctx.shadowBlur = 0;
     }
 
     function frame(now) {
@@ -2278,38 +2310,41 @@
       var fade =
         elapsed >= fadeStart ? Math.max(0, 1 - (elapsed - fadeStart) / (durationMs - fadeStart)) : 1;
 
-      if (elapsed >= durationMs - 1100 && !container.classList.contains("is-fading")) {
+      if (elapsed >= durationMs - 1200 && !container.classList.contains("is-fading")) {
         container.classList.add("is-fading");
       }
 
-        resize();
-        ctx.clearRect(0, 0, width, height);
+      resize();
+      ctx.clearRect(0, 0, width, height);
       ctx.globalCompositeOperation = "lighter";
 
       for (var r = rockets.length - 1; r >= 0; r -= 1) {
         var rocket = rockets[r];
-        rocket.y += rocket.vy;
-        rocket.vy *= 0.985;
+        rocket.t += rocket.speed;
+        var point = arcPoint(rocket.t, rocket.sx, rocket.sy, rocket.tx, rocket.ty, rocket.cx, rocket.cy);
+        rocket.x = point.x;
+        rocket.y = point.y;
         drawRocket(rocket, fade);
 
-        if (rocket.y <= rocket.targetY || rocket.vy >= -0.35) {
-          explode(rocket.x, rocket.y, rocket.color);
+        if (rocket.t >= 1) {
+          explode(rocket.tx, rocket.ty, rocket.color);
           rockets.splice(r, 1);
         }
       }
 
       for (var f = flashes.length - 1; f >= 0; f -= 1) {
         var flash = flashes[f];
-        flash.life -= 0.08;
-        flash.radius += 2.4;
+        flash.life -= 0.06;
+        flash.radius += 3.2;
         if (flash.life <= 0) {
           flashes.splice(f, 1);
           continue;
         }
         var gradient = ctx.createRadialGradient(flash.x, flash.y, 0, flash.x, flash.y, flash.radius);
         gradient.addColorStop(0, flash.color);
+        gradient.addColorStop(0.45, "rgba(255,255,255,0.45)");
         gradient.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.globalAlpha = flash.life * 0.45 * fade;
+        ctx.globalAlpha = flash.life * 0.72 * fade;
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(flash.x, flash.y, flash.radius, 0, Math.PI * 2);
@@ -2321,19 +2356,36 @@
         particle.x += particle.vx;
         particle.y += particle.vy;
         particle.vy += particle.gravity;
-        particle.vx *= 0.985;
-        particle.life -= particle.decay;
+        particle.vx *= 0.988;
 
-        if (particle.life <= 0) {
+        if (!particle.falling && particle.vy > 0.35 && particle.y > particle.burstY + 6) {
+          particle.falling = true;
+        }
+
+        if (particle.falling) {
+          particle.life -= particle.fallDecay;
+        } else {
+          particle.life -= particle.decay;
+        }
+
+        if (particle.life <= 0 || particle.y > height + 24) {
           particles.splice(p, 1);
           continue;
         }
 
-        ctx.globalAlpha = particle.life * fade;
+        var fallFade =
+          particle.falling && particle.y > particle.burstY + 18
+            ? Math.max(0.35, 1 - (particle.y - particle.burstY) / (height * 0.55))
+            : 1;
+
+        ctx.shadowBlur = particle.falling ? 8 : 12;
+        ctx.shadowColor = particle.color;
+        ctx.globalAlpha = particle.life * fade * fallFade;
         ctx.fillStyle = particle.color;
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size * particle.life, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, particle.size * Math.max(0.35, particle.life), 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
 
       ctx.globalAlpha = 1;
@@ -2352,8 +2404,8 @@
     resize(true);
     launchRocket();
     launchTimer = window.setInterval(function () {
-      if (performance.now() - start < durationMs - 700) launchRocket();
-    }, 420);
+      if (performance.now() - start < durationMs - 900) launchRocket();
+    }, 520);
 
     window.requestAnimationFrame(frame);
     window.addEventListener(
@@ -2384,7 +2436,8 @@
       if (!reduced) {
         var grid = pill.closest(".page-hero__trainee-grid");
         var fireworksRoot = grid && grid.querySelector("[data-trainee-hero-fireworks]");
-        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 4000);
+        var qualifiedLabel = pill.querySelector(".trainee-progress-pill__label--to");
+        if (fireworksRoot) launchTraineeHeroFireworks(fireworksRoot, 4000, qualifiedLabel);
       }
     }
 
