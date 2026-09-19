@@ -752,7 +752,6 @@ export const addons = [
       "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on. Leave & Absence tracks entitlements and absence with an approval workflow, and keeps the record next to the competency data rather than in a separate HR system.",
     hideHeroActions: true,
     heroLeadFullWidth: true,
-    heroShotStacked: true,
     heroMod: "leave-absence",
     heroShot: {
       src: "images/screens/leave-absence/leave-absence-apply-for-leave.png",
