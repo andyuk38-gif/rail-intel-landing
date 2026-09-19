@@ -836,43 +836,26 @@
   height: auto;
 }
 
-.page-section--leave-policy .page-section__head--split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 427px);
-  gap: 1.75rem 2.5rem;
+.page-section--leave-policy .page-section__head--with-shot {
   max-width: none;
-  align-items: end;
 }
 
-.page-section--leave-policy .page-section__head-copy {
-  max-width: 46rem;
-}
-
-.page-section--leave-policy .page-section__head-media {
-  justify-self: end;
+.page-section--leave-policy .page-section__head--with-shot .page-section__head-media {
+  margin-top: 1.5rem;
   width: min(100%, 427px);
 }
 
-.page-section--leave-policy .page-section__head-media .shot {
+.page-section--leave-policy .page-section__head--with-shot .page-section__head-media .shot {
   margin: 0;
   max-width: none !important;
   width: 100%;
 }
 
-.page-section--leave-policy .page-section__head-media .shot__frame {
+.page-section--leave-policy .page-section__head--with-shot .page-section__head-media .shot__frame {
   width: 100%;
 }
 
 @media (max-width: 960px) {
-  .page-section--leave-policy .page-section__head--split {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .page-section--leave-policy .page-section__head-media {
-    justify-self: start;
-  }
-
   .page-section__tile-split {
     grid-template-columns: 1fr;
   }
@@ -880,6 +863,29 @@
 
 .page-hero--leave-absence .page-hero__copy {
   max-width: none;
+}
+
+.page-hero--leave-absence .page-hero__inner--stacked .page-hero__media {
+  margin-top: 1.75rem;
+  width: min(100%, 488px);
+}
+
+.page-hero--leave-absence .page-hero__inner--stacked .page-hero__media .shot {
+  margin: 0;
+  width: 100%;
+  max-width: 488px;
+}
+
+.page-hero--leave-absence .page-hero__inner--stacked .page-hero__media .shot__frame {
+  width: 100%;
+}
+
+.page-hero--leave-absence .page-hero__inner--stacked .page-hero__media .shot__frame img {
+  display: block;
+  width: 100%;
+  max-width: 488px;
+  height: auto;
+  margin-inline: 0;
 }
 
 .page-hero--leave-absence .page-hero__inner--split {

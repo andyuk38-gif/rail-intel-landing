@@ -1156,12 +1156,10 @@ ${renderShotList(section.shots)}
       )
     : "";
   const headBlock = section.headShot
-    ? `        <div class="page-section__head page-section__head--split">
-          <div class="page-section__head-copy">
+    ? `        <div class="page-section__head page-section__head--with-shot">
           <h2>${esc(section.heading)}</h2>
 ${body}
 ${bullets}
-          </div>
           <div class="page-section__head-media">
 ${headShotHtml}
           </div>
