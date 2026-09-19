@@ -125,6 +125,11 @@ export const seoExtensions = {
         answer:
           "Yes. Employees raise requests; assessing managers approve according to permissions, with email notification and a full audit trail on the record.",
       },
+      {
+        question: "Is Leave & Absence part of core Rail Intel or a purchased add-on?",
+        answer:
+          "Leave & Absence is a purchased add-on module, not part of core Rail Intel CMS. Core covers competency, medicals and workforce records; this module adds entitlements, leave requests, approval workflow and absence reporting on the same employee record when you activate it from the in-app Add-ons library. Like other add-ons, it can be trialled for 14 days or subscribed annually.",
+      },
     ],
     relatedLinks: [
       { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
