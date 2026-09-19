@@ -748,8 +748,12 @@ export const addons = [
     moduleId: "leave-absence",
     summary: "Entitlements, sickness and absence with manager approval and a full audit trail.",
     tagline: "Absence that reconciles with competence",
+    heroDek:
+      "Entitlements, sickness and absence with manager approval and a full audit trail on the employee record.",
     lead:
-      "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on. Leave & Absence tracks entitlements and absence with an approval workflow, and keeps the record next to the competency data rather than in a separate HR system.",
+      "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on.",
+    heroExtra:
+      "Leave & Absence tracks entitlements and absence with an approval workflow, and keeps the record next to the competency data rather than in a separate HR system.",
     hideHeroActions: true,
     heroLeadFullWidth: true,
     heroMod: "leave-absence",

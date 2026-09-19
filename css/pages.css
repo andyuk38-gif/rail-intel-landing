@@ -853,17 +853,34 @@
 .page-hero--leave-absence .page-hero__trio {
   display: grid;
   grid-template-columns: minmax(16rem, 1fr) minmax(0, 427px) minmax(14rem, 31%);
-  gap: 1.75rem 2.5rem;
-  align-items: start;
+  gap: 1.25rem 2.5rem;
+  align-items: stretch;
   margin-top: 1.25rem;
 }
 
-.page-hero--leave-absence .page-hero__trio-title {
+.page-hero--leave-absence .page-hero__trio-title-block {
   grid-column: 1;
   grid-row: 1;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
-  align-self: start;
+  min-height: 100%;
+}
+
+.page-hero--leave-absence .page-hero__trio-title-block .page-title {
+  margin: 0;
+}
+
+.page-hero--leave-absence .page-hero__trio-dek {
+  margin: 1.25rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.page-hero--leave-absence .page-hero__trio-title-block .page-hero__trio-dek {
+  margin-top: auto;
+  padding-top: 1.25rem;
 }
 
 .page-hero--leave-absence .page-hero__inline-shot {
@@ -873,6 +890,7 @@
   width: min(100%, 427px);
   min-width: 0;
   justify-self: start;
+  align-self: start;
 }
 
 .page-hero--leave-absence .page-hero__inline-shot .shot {
@@ -888,9 +906,16 @@
   background: transparent;
 }
 
-.page-hero--leave-absence .page-hero__trio-lead {
+.page-hero--leave-absence .page-hero__trio-copy {
   grid-column: 1 / span 2;
   grid-row: 2;
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.page-hero--leave-absence .page-hero__trio-copy .page-lead {
   margin: 0;
 }
 
@@ -926,12 +951,17 @@
     grid-template-columns: 1fr;
   }
 
-  .page-hero--leave-absence .page-hero__trio-title,
+  .page-hero--leave-absence .page-hero__trio-title-block,
   .page-hero--leave-absence .page-hero__inline-shot,
-  .page-hero--leave-absence .page-hero__trio-lead,
+  .page-hero--leave-absence .page-hero__trio-copy,
   .page-hero--leave-absence .page-hero__trio-media {
     grid-column: 1;
     grid-row: auto;
+  }
+
+  .page-hero--leave-absence .page-hero__trio-title-block .page-hero__trio-dek {
+    margin-top: 1.25rem;
+    padding-top: 0;
   }
 
   .page-hero--leave-absence .page-hero__inline-shot {
