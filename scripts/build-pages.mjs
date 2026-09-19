@@ -249,11 +249,57 @@ function renderFaqAnswerParagraphs(answer, textClass = "") {
   return parts.map((part) => `              <p${classAttr}>${esc(part)}</p>`).join("\n");
 }
 
-function renderFaqSection(faq, base = "") {
+function renderFaqAccordionAnswer(entry, base) {
+  if (entry.shot && base) {
+    return `            <div class="procurement-faq__answer procurement-faq__answer--media">
+              <div class="procurement-faq__media-row">
+${renderFaqShot(entry.shot, base)}
+                <div class="procurement-faq__copy">
+${renderFaqAnswerParagraphs(entry.answer, "procurement-faq__text")}
+                </div>
+              </div>
+            </div>`;
+  }
+
+  return `            <div class="faq-accordion__panel-inner">
+${renderFaqAnswerParagraphs(entry.answer)}
+            </div>`;
+}
+
+function renderFaqSection(faq, base = "", options = {}) {
   if (!faq?.length) return "";
   const hasShots = faq.some((entry) => entry.shot);
+  const accordion = Boolean(options.accordion);
+  const sectionClass = `page-section page-section--tight${accordion ? " page-section--faq-accordion" : ""}${hasShots ? " page-section--crisp" : ""}`;
+
+  if (accordion) {
+    return `
+    <section class="${sectionClass}" aria-label="Frequently asked questions">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq-accordion procurement-faq procurement-faq--accordion">
+${faq
+  .map(
+    (entry) => `          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">${esc(entry.question)}</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+${renderFaqAccordionAnswer(entry, base)}
+            </div>
+          </details>`
+  )
+  .join("\n")}
+        </div>
+      </div>
+    </section>`;
+  }
+
   return `
-    <section class="page-section page-section--tight${hasShots ? " page-section--crisp" : ""}" aria-label="Frequently asked questions">
+    <section class="${sectionClass}" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
@@ -1584,7 +1630,7 @@ ${renderTraineeFlow(addon, base)}
 
 ${renderQaSection(addon.qaSection, base)}
 
-${renderFaqSection(pageSeo.faq, base)}
+${renderFaqSection(pageSeo.faq, base, { accordion: true })}
   </main>
 
 ` +
@@ -1700,7 +1746,7 @@ ${heroInner}
     </section>
 
 ${(addon.sections || []).map((section) => renderSection(section, base)).join("\n\n")}
-${renderFaqSection(pageSeo.faq, base)}
+${renderFaqSection(pageSeo.faq, base, { accordion: true })}
   </main>
 
 ` +
