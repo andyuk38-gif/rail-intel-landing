@@ -885,7 +885,8 @@
 }
 
 .page-hero--leave-absence .page-hero__trio-left .page-title__subline {
-  margin: 0;
+  display: block;
+  margin-top: 0.75rem;
   font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
   font-weight: 600;
   line-height: 1.45;
