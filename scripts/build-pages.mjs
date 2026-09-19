@@ -934,21 +934,33 @@ function parseBulletTile(item) {
 
 const SPEC_TILE_ACCENTS = ["#38bdf8", "#f59e0b", "#34d399", "#a78bfa"];
 
+function renderSpecTileList(items, indent = "          ") {
+  if (!items.length) return "";
+
+  const inner = `${indent}  `;
+  return `${indent}<div class="spec-tiles" role="list">\n${items
+    .map((tile, index) => {
+      const item = typeof tile === "string" ? { detail: tile } : tile;
+      const accent = item.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
+      const step = item.step || String(index + 1).padStart(2, "0");
+      const title = item.title || "";
+      const bodyClass = title ? "" : " spec-tile--body";
+      const titleHtml = title
+        ? `\n${inner}  <h3 class="spec-tile__title">${esc(title)}</h3>`
+        : "";
+      return `${inner}<article class="spec-tile${bodyClass}" style="--spec-tile-accent: ${esc(accent)}" role="listitem">
+${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>${titleHtml}
+${inner}  <p class="spec-tile__detail">${rich(item.detail || "")}</p>
+${inner}</article>`;
+    })
+    .join("\n")}\n${indent}</div>`;
+}
+
 function renderSpecTiles(section) {
   const items = section.tiles || (section.bullets || []).map(parseBulletTile);
   if (!items.length) return "";
 
-  return `          <div class="spec-tiles" role="list">\n${items
-    .map((tile, index) => {
-      const accent = tile.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
-      const step = tile.step || String(index + 1).padStart(2, "0");
-      return `            <article class="spec-tile" style="--spec-tile-accent: ${esc(accent)}" role="listitem">
-              <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
-              <h3 class="spec-tile__title">${esc(tile.title || "")}</h3>
-              <p class="spec-tile__detail">${rich(tile.detail || "")}</p>
-            </article>`;
-    })
-    .join("\n")}\n          </div>`;
+  return renderSpecTileList(items);
 }
 
 function renderReportRoll(section, base) {
@@ -1596,11 +1608,11 @@ function addonPage(addon) {
           <span class="page-badge page-badge--addon">Add-on module</span>`;
 
   const heroExtraParagraphs = addon.heroExtras ?? (addon.heroExtra ? [addon.heroExtra] : []);
+  const heroTrioTileItems =
+    addon.heroTiles ?? [addon.lead, ...heroExtraParagraphs].filter(Boolean);
+  const heroTrioTilesHtml = renderSpecTileList(heroTrioTileItems, "            ");
   const heroExtraHtml = heroExtraParagraphs
     .map((paragraph) => `          <p class="page-lead">${esc(paragraph)}</p>`)
-    .join("\n");
-  const heroTrioLeadHtml = heroExtraParagraphs
-    .map((paragraph) => `            <p class="page-lead">${esc(paragraph)}</p>`)
     .join("\n");
 
   const heroTail = `${heroExtraHtml ? `${heroExtraHtml}\n` : ""}${note}${
@@ -1633,9 +1645,9 @@ ${heroMeta}
             <div class="page-hero__trio-left">
             <h1 class="page-title page-hero__trio-title">${esc(addon.tagline)}</h1>${
               addon.heroDek
-                ? `\n            <p class="page-title__subline">${esc(addon.heroDek)}</p>${
+                ? `\n            <p class="page-title__subline hero-title__accent">${esc(addon.heroDek)}</p>${
                     addon.heroDekExtra
-                      ? `\n            <p class="page-title__subline page-title__subline--extra">${esc(addon.heroDekExtra)}</p>`
+                      ? `\n            <p class="page-title__subline page-title__subline--extra hero-title__accent">${esc(addon.heroDekExtra)}</p>`
                       : ""
                   }`
                 : ""
@@ -1644,8 +1656,7 @@ ${heroMeta}
             <div class="page-hero__inline-shot">
 ${heroInlineShotRender}            </div>
             <div class="page-hero__trio-copy">
-            <p class="page-lead">${esc(addon.lead)}</p>
-${heroTrioLeadHtml ? `${heroTrioLeadHtml}\n` : ""}            </div>
+${heroTrioTilesHtml}            </div>
             <div class="page-hero__media page-hero__trio-media">
 ${heroMedia}
             </div>

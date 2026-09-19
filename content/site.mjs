@@ -754,10 +754,11 @@ export const addons = [
       "Annual leave balances, carry-over and sickness sit on the same record as competence data.",
     lead:
       "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on.",
-    heroExtras: [
+    heroTiles: [
+      "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on.",
       "Leave & Absence tracks entitlements and absence with an approval workflow, and keeps the record next to the competency data rather than in a separate HR system.",
       "Managers approve from their dashboard with email notification; every request and decision is retained on the employee record for audit.",
-      "Holiday, sickness and other absence types share one path — entitlements and carry-over follow your leave-year policy instead of spreadsheets.",
+      "Holiday, sickness and other absence types share one path, entitlements and carry-over follow your leave-year policy instead of spreadsheets.",
     ],
     hideHeroActions: true,
     heroLeadFullWidth: true,
