@@ -1631,11 +1631,11 @@ ${heroTail}`;
 ${heroMeta}
           <div class="page-hero__trio">
             <div class="page-hero__trio-left">
-            <h1 class="page-title page-hero__trio-title"><span class="page-title__headline">${esc(addon.tagline)}</span>${
+            <h1 class="page-title page-hero__trio-title"><span class="page-title__headline">${esc(addon.tagline)}</span></h1>${
               addon.heroDek
-                ? `\n              <span class="page-title__subline">${esc(addon.heroDek)}</span>`
+                ? `\n            <p class="page-title__subline">${esc(addon.heroDek)}</p>`
                 : ""
-            }</h1>
+            }
             </div>
             <div class="page-hero__inline-shot">
 ${heroInlineShotRender}            </div>
