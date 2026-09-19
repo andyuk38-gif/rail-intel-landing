@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=236044547" />
-  <link rel="stylesheet" href="../css/pages.css?v=236044547" />
+  <link rel="stylesheet" href="../css/style.css?v=60310275" />
+  <link rel="stylesheet" href="../css/pages.css?v=60310275" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -382,21 +382,35 @@
       </div>
     </section>
 
-    <section class="page-section page-section--tight" aria-label="Frequently asked questions">
+    <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
         </div>
-        <dl class="procurement-faq">
-          <dt>Is Rail Intel Investigations separate from CMS?</dt>
-          <dd>
+        <div class="faq-accordion procurement-faq procurement-faq--accordion">
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Is Rail Intel Investigations separate from CMS?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Yes. Investigations is a standalone app. An optional connector links one Investigations company to one CMS tenant when you want shared people and competency context.</p>
-          </dd>
-          <dt>Can final reports be signed and sealed?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Can final reports be signed and sealed?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Yes. The final report compiles case artefacts for PDF export with dual sign-off from the Lead Investigator and Designated Competent Person.</p>
-          </dd>
-        </dl>
+            </div>
+            </div>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -472,7 +486,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=236044547"></script>
-  <script src="../js/newsletter.js?v=236044547"></script>
+  <script src="../js/site.js?v=60310275"></script>
+  <script src="../js/newsletter.js?v=60310275"></script>
 </body>
 </html>

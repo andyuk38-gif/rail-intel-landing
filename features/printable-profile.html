@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=236044547" />
-  <link rel="stylesheet" href="../css/pages.css?v=236044547" />
+  <link rel="stylesheet" href="../css/style.css?v=60310275" />
+  <link rel="stylesheet" href="../css/pages.css?v=60310275" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -307,25 +307,46 @@
       </div>
     </section>
 
-    <section class="page-section page-section--tight" aria-label="Frequently asked questions">
+    <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
         </div>
-        <dl class="procurement-faq">
-          <dt>Can I print an employee profile?</dt>
-          <dd>
+        <div class="faq-accordion procurement-faq procurement-faq--accordion">
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Can I print an employee profile?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Yes. Rail Intel generates a full-colour professional profile or a print-friendly layout from the live record, which you can print or save as PDF.</p>
-          </dd>
-          <dt>What data is included on the profile?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">What data is included on the profile?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>The profile draws from the live record — competencies, medicals, licensing and supporting sections in one document, generated at the moment you create it.</p>
-          </dd>
-          <dt>What is the difference between full-colour and print-friendly?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">What is the difference between full-colour and print-friendly?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Full-colour is designed for on-screen review and stakeholder circulation. Print-friendly is optimised for paper copies and archival PDF, but both use the same underlying record data.</p>
-          </dd>
-        </dl>
+            </div>
+            </div>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -401,7 +422,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=236044547"></script>
-  <script src="../js/newsletter.js?v=236044547"></script>
+  <script src="../js/site.js?v=60310275"></script>
+  <script src="../js/newsletter.js?v=60310275"></script>
 </body>
 </html>

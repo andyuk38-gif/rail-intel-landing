@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=236044547" />
-  <link rel="stylesheet" href="../css/pages.css?v=236044547" />
+  <link rel="stylesheet" href="../css/style.css?v=60310275" />
+  <link rel="stylesheet" href="../css/pages.css?v=60310275" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -268,7 +268,7 @@
           <div class="page-hero__media">
         <figure class="shot shot--full shot--bordered reveal">
           <div class="shot__frame" style="--shot-native-width: 512px" data-no-expand="">
-            <img src="../images/screens/assessing/AssessInDark.jpg?v=236044547" alt="Assessor using a dim tablet in a dark cab — glare stays off the windscreen." width="512" height="435" loading="eager" decoding="sync" />
+            <img src="../images/screens/assessing/AssessInDark.jpg?v=60310275" alt="Assessor using a dim tablet in a dark cab — glare stays off the windscreen." width="512" height="435" loading="eager" decoding="sync" />
           </div>
         </figure>
           </div>
@@ -357,7 +357,7 @@
           <div class="page-section__aside-visual">
         <figure class="shot shot--bordered reveal" style="max-width: 434px">
           <div class="shot__frame" data-no-expand="">
-            <img src="../images/screens/assessing/dark-switch-safety.png?v=236044547" alt="Cab safety notice offering one-tap dark mode during an assessment" width="434" height="710" loading="lazy" decoding="async" />
+            <img src="../images/screens/assessing/dark-switch-safety.png?v=60310275" alt="Cab safety notice offering one-tap dark mode during an assessment" width="434" height="710" loading="lazy" decoding="async" />
           </div>
         </figure>          </div>
 
@@ -369,29 +369,57 @@
 
 
 
-    <section class="page-section page-section--tight" aria-label="Frequently asked questions">
+    <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
         </div>
-        <dl class="procurement-faq">
-          <dt>Does Tunnel Mode detect tunnels automatically?</dt>
-          <dd>
+        <div class="faq-accordion procurement-faq procurement-faq--accordion">
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Does Tunnel Mode detect tunnels automatically?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>No. The assessor switches dark mode and adjusts brightness manually — designed for the person in the cab to decide when glare is a problem.</p>
-          </dd>
-          <dt>Which devices support brightness control?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Which devices support brightness control?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Mobile and tablet assessments include a brightness slider under the header, from full daylight down to a cab-friendly level.</p>
-          </dd>
-          <dt>Do assessors need to change device settings?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Do assessors need to change device settings?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>No. When an assessment starts on a mobile or tablet, Rail Intel prompts the assessor to switch to dark mode in the app — there is no need to open the device settings. A brightness slider under the assessment header lets them dim the screen further, to the level they need, without leaving the assessment.</p>
-          </dd>
-          <dt>Is Tunnel Mode a paid add-on?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Is Tunnel Mode a paid add-on?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>No. Tunnel Mode is included in core Rail Intel at no extra cost. Safety-related assessment features are part of the standard platform — we do not charge separately for tools that help assessors work safely in the cab.</p>
-          </dd>
-        </dl>
+            </div>
+            </div>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -467,7 +495,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=236044547"></script>
-  <script src="../js/newsletter.js?v=236044547"></script>
+  <script src="../js/site.js?v=60310275"></script>
+  <script src="../js/newsletter.js?v=60310275"></script>
 </body>
 </html>

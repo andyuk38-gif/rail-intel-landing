@@ -32,8 +32,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=236044547" />
-  <link rel="stylesheet" href="../css/pages.css?v=236044547" />
+  <link rel="stylesheet" href="../css/style.css?v=60310275" />
+  <link rel="stylesheet" href="../css/pages.css?v=60310275" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -328,25 +328,46 @@
       </div>
     </section>
 
-    <section class="page-section page-section--tight" aria-label="Frequently asked questions">
+    <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
         </div>
-        <dl class="procurement-faq">
-          <dt>What is the main rail competency management software in the UK?</dt>
-          <dd>
+        <div class="faq-accordion procurement-faq procurement-faq--accordion">
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">What is the main rail competency management software in the UK?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Several established platforms serve UK rail, including Velociti RailSmart EDS, AssessTech ACMS and RPD Assure. Operators choose based on modularity, implementation support, field assessment UX and how well the system matches their competence management arrangement.</p>
-          </dd>
-          <dt>How is Rail Intel different?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">How is Rail Intel different?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>Rail Intel is built by a rail professional as a competency compliance engine with conditional rules, live verification and optional add-on modules. A separate Investigations app handles evidence-first case management with an optional CMS connector.</p>
-          </dd>
-          <dt>When can we evaluate Rail Intel?</dt>
-          <dd>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">When can we evaluate Rail Intel?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
               <p>The platform launches in April 2027. You can register your interest now for early onboarding, introductory module offers and a guided evaluation when your procurement timeline allows.</p>
-          </dd>
-        </dl>
+            </div>
+            </div>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -422,7 +443,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=236044547"></script>
-  <script src="../js/newsletter.js?v=236044547"></script>
+  <script src="../js/site.js?v=60310275"></script>
+  <script src="../js/newsletter.js?v=60310275"></script>
 </body>
 </html>

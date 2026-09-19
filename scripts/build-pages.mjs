@@ -266,14 +266,12 @@ ${renderFaqAnswerParagraphs(entry.answer)}
             </div>`;
 }
 
-function renderFaqSection(faq, base = "", options = {}) {
+function renderFaqSection(faq, base = "") {
   if (!faq?.length) return "";
   const hasShots = faq.some((entry) => entry.shot);
-  const accordion = Boolean(options.accordion);
-  const sectionClass = `page-section page-section--tight${accordion ? " page-section--faq-accordion" : ""}${hasShots ? " page-section--crisp" : ""}`;
+  const sectionClass = `page-section page-section--tight page-section--faq-accordion${hasShots ? " page-section--crisp" : ""}`;
 
-  if (accordion) {
-    return `
+  return `
     <section class="${sectionClass}" aria-label="Frequently asked questions">
       <div class="container">
         <div class="page-section__head">
@@ -294,37 +292,6 @@ ${renderFaqAccordionAnswer(entry, base)}
   )
   .join("\n")}
         </div>
-      </div>
-    </section>`;
-  }
-
-  return `
-    <section class="${sectionClass}" aria-label="Frequently asked questions">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Frequently asked questions</h2>
-        </div>
-        <dl class="procurement-faq">
-${faq
-  .map((entry) => {
-    if (entry.shot && base) {
-      return `          <dt>${esc(entry.question)}</dt>
-          <dd class="procurement-faq__answer procurement-faq__answer--media">
-            <div class="procurement-faq__media-row">
-${renderFaqShot(entry.shot, base)}
-              <div class="procurement-faq__copy">
-${renderFaqAnswerParagraphs(entry.answer, "procurement-faq__text")}
-              </div>
-            </div>
-          </dd>`;
-    }
-    return `          <dt>${esc(entry.question)}</dt>
-          <dd>
-${renderFaqAnswerParagraphs(entry.answer)}
-          </dd>`;
-  })
-  .join("\n")}
-        </dl>
       </div>
     </section>`;
 }
@@ -1630,7 +1597,7 @@ ${renderTraineeFlow(addon, base)}
 
 ${renderQaSection(addon.qaSection, base)}
 
-${renderFaqSection(pageSeo.faq, base, { accordion: true })}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
@@ -1746,7 +1713,7 @@ ${heroInner}
     </section>
 
 ${(addon.sections || []).map((section) => renderSection(section, base)).join("\n\n")}
-${renderFaqSection(pageSeo.faq, base, { accordion: true })}
+${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
