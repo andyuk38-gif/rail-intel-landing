@@ -1631,9 +1631,13 @@ ${heroTail}`;
 ${heroMeta}
           <div class="page-hero__trio">
             <div class="page-hero__trio-left">
-            <h1 class="page-title page-hero__trio-title"><span class="page-title__headline">${esc(addon.tagline)}</span></h1>${
+            <h1 class="page-title page-hero__trio-title">${esc(addon.tagline)}</h1>${
               addon.heroDek
-                ? `\n            <p class="page-title__subline">${esc(addon.heroDek)}</p>`
+                ? `\n            <p class="page-title__subline">${esc(addon.heroDek)}</p>${
+                    addon.heroDekExtra
+                      ? `\n            <p class="page-title__subline page-title__subline--extra">${esc(addon.heroDekExtra)}</p>`
+                      : ""
+                  }`
                 : ""
             }
             </div>

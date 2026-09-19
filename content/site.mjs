@@ -749,7 +749,9 @@ export const addons = [
     summary: "Entitlements, sickness and absence with manager approval and a full audit trail.",
     tagline: "Absence that reconciles with competence",
     heroDek:
-      "Entitlements, sickness and absence with manager approval and a full audit trail on the employee record. Annual leave balances, carry-over and sickness sit on the same record as competence data.",
+      "Entitlements, sickness and absence with manager approval and a full audit trail on the employee record.",
+    heroDekExtra:
+      "Annual leave balances, carry-over and sickness sit on the same record as competence data.",
     lead:
       "Absence matters in a safety-critical setting because it interacts with competence: a driver returning from long-term sickness may need reassessment before signing on.",
     heroExtras: [

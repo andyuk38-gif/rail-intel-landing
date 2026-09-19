@@ -878,20 +878,21 @@
 .page-hero--leave-absence .page-hero__trio-left .page-title {
   margin: 0;
   font-size: clamp(2.125rem, 4.4vw, 3rem);
-}
-
-.page-hero--leave-absence .page-hero__trio-left .page-title__headline {
-  display: block;
+  line-height: 1.12;
 }
 
 .page-hero--leave-absence .page-hero__trio-left .page-title__subline {
   display: block;
-  margin: 0.75rem 0 0;
+  margin: 1.25rem 0 0;
   font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
   font-weight: 600;
   line-height: 1.45;
   letter-spacing: -0.015em;
   color: rgba(255, 255, 255, 0.94);
+}
+
+.page-hero--leave-absence .page-hero__trio-left .page-title__subline--extra {
+  margin-top: 0.65rem;
 }
 
 .page-hero--leave-absence .page-hero__trio-copy {
