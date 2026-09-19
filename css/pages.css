@@ -816,6 +816,18 @@
   max-width: 84rem;
 }
 
+.page-section--leave-policy .page-section__head {
+  max-width: none;
+}
+
+.page-section--leave-policy .page-section__head > h2 {
+  max-width: 46rem;
+}
+
+.page-section--leave-policy .page-section__head > p {
+  max-width: none;
+}
+
 .page-section--leave-policy .shot-grid--hero-stack {
   grid-template-columns: 1fr;
   margin-top: 2rem;
