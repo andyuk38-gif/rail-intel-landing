@@ -747,7 +747,7 @@ export const addons = [
     name: "Leave & Absence",
     moduleId: "leave-absence",
     summary: "Entitlements, sickness and absence with manager approval and a full audit trail.",
-    tagline: "Absence that reconciles with competence",
+    tagline: "Absence that reconciles with fatigue",
     heroDek:
       "Entitlements, sickness and absence with manager approval and a full audit trail on the employee record.",
     heroDekExtra:
