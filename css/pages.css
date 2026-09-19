@@ -8289,7 +8289,7 @@ body.lightbox-open {
 }
 
 .faq-accordion__panel {
-  padding: 0 1.2rem 1.15rem;
+  padding: 1.05rem 1.2rem 1.15rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -8304,7 +8304,7 @@ body.lightbox-open {
 }
 
 .procurement-faq--accordion .procurement-faq__answer {
-  padding-top: 0.15rem;
+  padding-top: 0;
 }
 
 .procurement-faq--accordion .procurement-faq__answer--media {
