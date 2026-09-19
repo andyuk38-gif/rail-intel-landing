@@ -106,6 +106,16 @@ export const seoExtensions = {
     seoKeywords: "rail leave absence, driver absence management, competence return to work, safety critical absence",
     faq: [
       {
+        question: "Can an employee request leave?",
+        answer:
+          "Yes. Employees can request leave. Once submitted, the assigned manager is alerted by email and system notification to approve or reject the request.",
+      },
+      {
+        question: "How flexible is leave year policy configuration?",
+        answer:
+          "The leave year and its policy are configurable, so the module reflects how your organisation actually operates. You set entitlements, carry-over rules and how absence types are handled; those settings drive the balances maintained on each employee record and the reporting available across the company.",
+      },
+      {
         question: "Why is absence tracked beside competence?",
         answer:
           "Long-term absence can affect fitness to work. Holding leave data on the same record as competency and medicals keeps return-to-work decisions visible.",
