@@ -1595,7 +1595,15 @@ function addonPage(addon) {
   )}</p>
           <span class="page-badge page-badge--addon">Add-on module</span>`;
 
-  const heroTail = `${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}${note}${
+  const heroExtraParagraphs = addon.heroExtras ?? (addon.heroExtra ? [addon.heroExtra] : []);
+  const heroExtraHtml = heroExtraParagraphs
+    .map((paragraph) => `          <p class="page-lead">${esc(paragraph)}</p>`)
+    .join("\n");
+  const heroTrioLeadHtml = heroExtraParagraphs
+    .map((paragraph) => `            <p class="page-lead">${esc(paragraph)}</p>`)
+    .join("\n");
+
+  const heroTail = `${heroExtraHtml ? `${heroExtraHtml}\n` : ""}${note}${
     addon.hideHeroActions
       ? ""
       : `          <div class="page-actions">
@@ -1630,7 +1638,7 @@ ${heroMeta}
             }
             <div class="page-hero__trio-copy">
             <p class="page-lead">${esc(addon.lead)}</p>
-${addon.heroExtra ? `            <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}            </div>
+${heroTrioLeadHtml ? `${heroTrioLeadHtml}\n` : ""}            </div>
             </div>
             <div class="page-hero__inline-shot">
 ${heroInlineShotRender}            </div>
