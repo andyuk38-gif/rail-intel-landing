@@ -1636,12 +1636,12 @@ ${heroMeta}
                 ? `\n            <p class="page-title__subline">${esc(addon.heroDek)}</p>`
                 : ""
             }
-            <div class="page-hero__trio-copy">
-            <p class="page-lead">${esc(addon.lead)}</p>
-${heroTrioLeadHtml ? `${heroTrioLeadHtml}\n` : ""}            </div>
             </div>
             <div class="page-hero__inline-shot">
 ${heroInlineShotRender}            </div>
+            <div class="page-hero__trio-copy">
+            <p class="page-lead">${esc(addon.lead)}</p>
+${heroTrioLeadHtml ? `${heroTrioLeadHtml}\n` : ""}            </div>
             <div class="page-hero__media page-hero__trio-media">
 ${heroMedia}
             </div>
