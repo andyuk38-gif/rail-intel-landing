@@ -789,6 +789,12 @@ export const addons = [
         body: [
           "The leave year and its policy are configurable, so the module reflects how your organisation actually operates. Reporting shows absence patterns across the company, and each employee record carries its own summary.",
         ],
+        headShot: {
+          src: "images/screens/leave-absence/leave-absence-set-entitlement-dark.png",
+          caption: "Set entitlement with carry-over projection.",
+          scale: 1,
+          noExpand: true,
+        },
         shots: [
           {
             src: "images/screens/leave-absence/leave-absence-policy-dark.png",
@@ -809,12 +815,6 @@ export const addons = [
             caption: "Annual leave entitlements across the company.",
             scale: 1,
             full: true,
-            noExpand: true,
-          },
-          {
-            src: "images/screens/leave-absence/leave-absence-set-entitlement-dark.png",
-            caption: "Set entitlement with carry-over projection.",
-            scale: 1,
             noExpand: true,
           },
           {

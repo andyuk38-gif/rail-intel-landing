@@ -1148,6 +1148,30 @@ ${renderShotList(section.shots)}
 
   const reportRoll = section.reportRoll ? renderReportRoll(section, base) : "";
 
+  const headShotHtml = section.headShot
+    ? renderShot(
+        { ...section.headShot, scale: section.headShot.scale ?? 1 },
+        base,
+        { fill: true }
+      )
+    : "";
+  const headBlock = section.headShot
+    ? `        <div class="page-section__head page-section__head--split">
+          <div class="page-section__head-copy">
+          <h2>${esc(section.heading)}</h2>
+${body}
+${bullets}
+          </div>
+          <div class="page-section__head-media">
+${headShotHtml}
+          </div>
+        </div>`
+    : `        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
+          <h2>${esc(section.heading)}</h2>
+${body}
+${bullets}
+        </div>`;
+
   if (section.tileSplit) {
     const tileSplitShots = section.shots ? renderShotList(section.shots) : "";
     return `    <section class="page-section${section.mod ? ` page-section--${section.mod}` : ""}">
@@ -1170,11 +1194,7 @@ ${tileSplitShots}
 
   return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
-        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
-          <h2>${esc(section.heading)}</h2>
-${body}
-${bullets}
-        </div>
+${headBlock}
 ${shots}
 ${reportRoll}
       </div>
