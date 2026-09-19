@@ -753,6 +753,12 @@ export const addons = [
     hideHeroActions: true,
     heroLeadFullWidth: true,
     heroMod: "leave-absence",
+    heroInlineShot: {
+      src: "images/screens/leave-absence/leave-absence-set-entitlement-dark.png",
+      caption: "Set entitlement with carry-over projection.",
+      scale: 1,
+      noExpand: true,
+    },
     heroShot: {
       src: "images/screens/leave-absence/leave-absence-apply-for-leave.png",
       caption: "Apply for leave, holiday, unpaid or other, submitted for manager approval.",
@@ -789,12 +795,6 @@ export const addons = [
         body: [
           "The leave year and its policy are configurable, so the module reflects how your organisation actually operates. Reporting shows absence patterns across the company, and each employee record carries its own summary.",
         ],
-        headShot: {
-          src: "images/screens/leave-absence/leave-absence-set-entitlement-dark.png",
-          caption: "Set entitlement with carry-over projection.",
-          scale: 1,
-          noExpand: true,
-        },
         shots: [
           {
             src: "images/screens/leave-absence/leave-absence-policy-dark.png",

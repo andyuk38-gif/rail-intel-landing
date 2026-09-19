@@ -1586,13 +1586,19 @@ function addonPage(addon) {
     ? `        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>`
     : "";
 
+  const heroInlineShotHtml = addon.heroInlineShot
+    ? `          <div class="page-hero__inline-shot">
+${renderShot({ ...addon.heroInlineShot, scale: addon.heroInlineShot.scale ?? 1 }, base, { fill: true })}          </div>
+`
+    : "";
+
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
     addon.name
   )}</p>
           <span class="page-badge page-badge--addon">Add-on module</span>
           <h1 class="page-title">${esc(addon.tagline)}</h1>
           <p class="page-lead">${esc(addon.lead)}</p>
-${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}${note}${
+${heroInlineShotHtml}${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}${note}${
     addon.hideHeroActions
       ? ""
       : `          <div class="page-actions">
