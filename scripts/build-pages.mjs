@@ -1586,19 +1586,16 @@ function addonPage(addon) {
     ? `        <p class="page-lead" style="font-size:1rem"><strong>Note.</strong> ${esc(addon.note)}</p>`
     : "";
 
-  const heroInlineShotHtml = addon.heroInlineShot
-    ? `          <div class="page-hero__inline-shot">
-${renderShot({ ...addon.heroInlineShot, scale: addon.heroInlineShot.scale ?? 1 }, base, { fill: true })}          </div>
-`
+  const heroInlineShotRender = addon.heroInlineShot
+    ? renderShot({ ...addon.heroInlineShot, scale: addon.heroInlineShot.scale ?? 1 }, base, { fill: true })
     : "";
 
-  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
+  const heroMeta = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Add-ons</a> / ${esc(
     addon.name
   )}</p>
-          <span class="page-badge page-badge--addon">Add-on module</span>
-          <h1 class="page-title">${esc(addon.tagline)}</h1>
-          <p class="page-lead">${esc(addon.lead)}</p>
-${heroInlineShotHtml}${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}${note}${
+          <span class="page-badge page-badge--addon">Add-on module</span>`;
+
+  const heroTail = `${addon.heroExtra ? `          <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}${note}${
     addon.hideHeroActions
       ? ""
       : `          <div class="page-actions">
@@ -1606,6 +1603,11 @@ ${heroInlineShotHtml}${addon.heroExtra ? `          <p class="page-lead">${esc(a
             <a href="${base}products/" class="btn btn-ghost btn-lg">All add-ons</a>
           </div>`
   }`;
+
+  const heroCopy = `${heroMeta}
+          <h1 class="page-title">${esc(addon.tagline)}</h1>
+          <p class="page-lead">${esc(addon.lead)}</p>
+${heroTail}`;
 
   const heroMedia = addon.heroVideo
     ? renderHeroVideo(addon.heroVideo, base)
@@ -1616,7 +1618,20 @@ ${heroInlineShotHtml}${addon.heroExtra ? `          <p class="page-lead">${esc(a
   const heroSplitModifier = addon.heroShot?.circle ? " page-hero__inner--icon" : "";
 
   const heroInner = heroMedia
-    ? addon.heroShotStacked
+    ? addon.heroInlineShot && !addon.heroShotStacked
+      ? `        <div class="page-hero__inner page-hero__inner--inline-trio${heroSplitModifier}">
+${heroMeta}
+          <div class="page-hero__trio">
+            <h1 class="page-title page-hero__trio-title">${esc(addon.tagline)}</h1>
+            <div class="page-hero__inline-shot">
+${heroInlineShotRender}            </div>
+            <p class="page-lead page-hero__trio-lead">${esc(addon.lead)}</p>
+            <div class="page-hero__media page-hero__trio-media">
+${heroMedia}
+            </div>
+          </div>
+${heroTail}        </div>`
+    : addon.heroShotStacked
       ? `        <div class="page-hero__inner page-hero__inner--stacked${heroSplitModifier}">
 ${heroCopy}
           <div class="page-hero__media">
