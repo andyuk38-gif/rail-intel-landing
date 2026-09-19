@@ -1622,18 +1622,18 @@ ${heroTail}`;
       ? `        <div class="page-hero__inner page-hero__inner--inline-trio${heroSplitModifier}">
 ${heroMeta}
           <div class="page-hero__trio">
-            <div class="page-hero__trio-title-block">
-            <h1 class="page-title page-hero__trio-title"><span class="page-title__headline">${esc(addon.tagline)}</span>${
+            <div class="page-hero__trio-left">
+            <h1 class="page-title page-hero__trio-title"><span class="page-title__headline">${esc(addon.tagline)}</span></h1>${
               addon.heroDek
-                ? `\n              <span class="page-title__subline">${esc(addon.heroDek)}</span>`
+                ? `\n            <p class="page-title__subline">${esc(addon.heroDek)}</p>`
                 : ""
-            }</h1>
-            </div>
-            <div class="page-hero__inline-shot">
-${heroInlineShotRender}            </div>
+            }
             <div class="page-hero__trio-copy">
             <p class="page-lead">${esc(addon.lead)}</p>
 ${addon.heroExtra ? `            <p class="page-lead">${esc(addon.heroExtra)}</p>\n` : ""}            </div>
+            </div>
+            <div class="page-hero__inline-shot">
+${heroInlineShotRender}            </div>
             <div class="page-hero__media page-hero__trio-media">
 ${heroMedia}
             </div>
