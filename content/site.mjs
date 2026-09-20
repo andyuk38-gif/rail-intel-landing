@@ -1348,6 +1348,7 @@ export const featureGroups = [
         fullWidth: true,
         body: [
           "The complementary certificate (Part B) is held alongside the licence, covering the infrastructure, traction and routes the driver is certified for.",
+          "When a licence is digitally scanned, Rail Intel populates the certificate automatically from the extracted licence data and the entries already held on the individual's record. Manual entry is also available where required.",
         ],
         shots: [
           {
