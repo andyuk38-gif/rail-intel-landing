@@ -31,9 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=69993034" />
-  <link rel="stylesheet" href="../css/pages.css?v=69993034" />
-  <link rel="stylesheet" href="../css/profile-flipbook.css?v=69993034" />
+  <link rel="stylesheet" href="../css/style.css?v=33296085" />
+  <link rel="stylesheet" href="../css/pages.css?v=33296085" />
+  <link rel="stylesheet" href="../css/profile-flipbook.css?v=33296085" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -262,7 +262,7 @@
           <div class="page-hero__media">
         <figure class="shot shot--bordered reveal">
           <div class="shot__frame" style="--shot-native-width: 512px" data-no-expand="">
-            <img src="../images/product/printable-profile-hero.png?v=69993034" alt="Rail professional holding a printed Rail Intel Employee Profile brochure, matching the full-colour record layout." width="512" height="512" loading="eager" decoding="sync" />
+            <img src="../images/product/printable-profile-hero.png?v=33296085" alt="Rail professional holding a printed Rail Intel Employee Profile brochure, matching the full-colour record layout." width="512" height="512" loading="eager" decoding="sync" />
           </div>
         </figure>
           </div>
@@ -277,8 +277,11 @@
         <p class="profile-flipbook__lead">Drag a corner, swipe on tablet, or use the controls below. This interactive sample uses fictional data — your printed profile is generated from the live record at the moment you create it.</p>
       </div>
       <div class="profile-flipbook__stage">
-        <div class="profile-flipbook__book-wrap" data-flipbook-wrap>
-          <div class="profile-flipbook__book" id="profile-flipbook" data-profile-flipbook>
+        <div class="profile-flipbook__stage-panel">
+          <div class="profile-flipbook__book-wrap" data-flipbook-wrap>
+            <div class="profile-flipbook__spread-fill profile-flipbook__spread-fill--left" data-spread-fill-back aria-hidden="true"></div>
+            <div class="profile-flipbook__spread-fill profile-flipbook__spread-fill--right" data-spread-fill-forward aria-hidden="true" hidden></div>
+            <div class="profile-flipbook__book" id="profile-flipbook" data-profile-flipbook>
 <div class="brochure-page brochure-page--cover">
     <div class="brochure-page__geom" aria-hidden="true"></div>
     <div class="brochure-page__body brochure-cover__body">
@@ -857,15 +860,15 @@
       </footer>
     </div>
   </div>
+            </div>
+            <div class="profile-flipbook__curl-guards" aria-hidden="true">
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tl" data-flip-guard-back hidden></div>
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--bl" data-flip-guard-back hidden></div>
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tr" data-flip-guard-forward hidden></div>
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--br" data-flip-guard-forward hidden></div>
+            </div>
           </div>
-          <div class="profile-flipbook__curl-guards" aria-hidden="true">
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tl" data-flip-guard-back hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--bl" data-flip-guard-back hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tr" data-flip-guard-forward hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--br" data-flip-guard-forward hidden></div>
-          </div>
-        </div>
-        <div class="profile-flipbook__controls container" aria-label="Brochure navigation">
+          <div class="profile-flipbook__controls" aria-label="Brochure navigation">
           <button type="button" class="profile-flipbook__btn" data-flip-prev aria-label="Previous page">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Previous</span>
@@ -875,6 +878,7 @@
             <span>Next</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
+          </div>
         </div>
       </div>
     </section>
@@ -913,7 +917,7 @@
           <div class="page-section__aside-media">
         <figure class="shot reveal" style="max-width: 552px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/print-before-you-print.png?v=69993034" alt="Data protection notice shown before printing an employee profile." width="552" height="830" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/print-before-you-print.png?v=33296085" alt="Data protection notice shown before printing an employee profile." width="552" height="830" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Before you print — data protection notice, format choice and signed declaration.</figcaption>
         </figure>
@@ -1096,8 +1100,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=69993034"></script>
-  <script src="../js/newsletter.js?v=69993034"></script>
-  <script src="../js/profile-flipbook.js?v=69993034"></script>
+  <script src="../js/site.js?v=33296085"></script>
+  <script src="../js/newsletter.js?v=33296085"></script>
+  <script src="../js/profile-flipbook.js?v=33296085"></script>
 </body>
 </html>

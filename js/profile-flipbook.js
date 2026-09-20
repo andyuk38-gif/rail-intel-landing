@@ -6,6 +6,7 @@
   var PAGE_WIDTH = 420;
   var PAGE_HEIGHT = 594;
   var PAGE_RATIO = PAGE_WIDTH / PAGE_HEIGHT;
+  var CORNER_BOTTOM = "bottom";
 
   var root = document.querySelector("[data-profile-flipbook]");
   if (!root) return;
@@ -16,6 +17,8 @@
   var wrap = document.querySelector("[data-flipbook-wrap]");
   var guardsBack = document.querySelectorAll("[data-flip-guard-back]");
   var guardsForward = document.querySelectorAll("[data-flip-guard-forward]");
+  var fillBack = document.querySelector("[data-spread-fill-back]");
+  var fillForward = document.querySelector("[data-spread-fill-forward]");
 
   var flipInstance = null;
   var pageCount = 0;
@@ -74,62 +77,53 @@
     return metrics;
   }
 
-  function setGuardVisibility(nodes, visible) {
+  function getSpreadIndex() {
+    if (!flipInstance) return 0;
+    return flipInstance.getPageCollection().getCurrentSpreadIndex();
+  }
+
+  function getSpreadCount() {
+    if (!flipInstance) return 1;
+    return flipInstance.getPageCollection().getSpread().length;
+  }
+
+  function setNodeVisibility(nodes, visible) {
     nodes.forEach(function (node) {
       node.hidden = !visible;
     });
   }
 
-  function updateCurlGuards(index) {
-    var atStart = index <= 0;
-    var atEnd = index >= pageCount - 1;
+  function updateSpreadChrome() {
+    var spreadIndex = getSpreadIndex();
+    var spreadCount = getSpreadCount();
+    var atStart = spreadIndex <= 0;
+    var atEnd = spreadIndex >= spreadCount - 1;
 
-    setGuardVisibility(guardsBack, atStart);
-    setGuardVisibility(guardsForward, atEnd);
+    setNodeVisibility(guardsBack, atStart);
+    setNodeVisibility(guardsForward, atEnd);
+
+    if (fillBack) fillBack.hidden = !atStart;
+    if (fillForward) fillForward.hidden = !atEnd;
 
     if (wrap) {
       wrap.classList.toggle("is-at-start", atStart);
       wrap.classList.toggle("is-at-end", atEnd);
+      wrap.classList.toggle("is-spread", !atStart && !atEnd);
     }
   }
 
-  function resetFoldAnimation() {
-    if (!flipInstance) return;
+  function updateControls(pageIndex) {
+    var spreadIndex = getSpreadIndex();
+    var spreadCount = getSpreadCount();
 
-    var render = flipInstance.getRender();
-
-    render.finishAnimation();
-    render.setBottomPage(null);
-    render.setFlippingPage(null);
-    render.clearShadow();
-    flipInstance.updateState("read");
-  }
-
-  function cancelBoundaryFold(index) {
-    if (!flipInstance) return;
-
-    var controller = flipInstance.getFlipController();
-    var state = controller.getState();
-    if (state !== "fold_corner" && state !== "user_fold") return;
-
-    var calc = controller.getCalculation();
-    if (!calc || !calc.getDirection) return;
-
-    var isForward = calc.getDirection() === 0;
-    var isBack = calc.getDirection() === 1;
-
-    if ((index <= 0 && isBack) || (index >= pageCount - 1 && isForward)) {
-      resetFoldAnimation();
-    }
-  }
-
-  function updateControls(index) {
     if (pageLabel) {
-      pageLabel.textContent = "Page " + (index + 1) + " of " + pageCount;
+      pageLabel.textContent = "Page " + (pageIndex + 1) + " of " + pageCount;
     }
-    if (prevBtn) prevBtn.disabled = index <= 0;
-    if (nextBtn) nextBtn.disabled = index >= pageCount - 1;
-    updateCurlGuards(index);
+
+    if (prevBtn) prevBtn.disabled = spreadIndex <= 0;
+    if (nextBtn) nextBtn.disabled = spreadIndex >= spreadCount - 1;
+
+    updateSpreadChrome();
   }
 
   function flipOptions(metrics) {
@@ -174,25 +168,21 @@
       updateControls(event.data);
     });
 
-    flipInstance.on("changeState", function () {
-      cancelBoundaryFold(flipInstance.getCurrentPageIndex());
-    });
-
     updateControls(flipInstance.getCurrentPageIndex());
   }
 
   function bindControls() {
     if (prevBtn) {
       prevBtn.addEventListener("click", function () {
-        if (!flipInstance || flipInstance.getCurrentPageIndex() <= 0) return;
-        flipInstance.flipPrev();
+        if (!flipInstance || getSpreadIndex() <= 0) return;
+        flipInstance.flipPrev(CORNER_BOTTOM);
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener("click", function () {
-        if (!flipInstance || flipInstance.getCurrentPageIndex() >= pageCount - 1) return;
-        flipInstance.flipNext();
+        if (!flipInstance || getSpreadIndex() >= getSpreadCount() - 1) return;
+        flipInstance.flipNext(CORNER_BOTTOM);
       });
     }
   }

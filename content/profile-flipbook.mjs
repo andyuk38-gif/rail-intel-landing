@@ -508,18 +508,21 @@ export function renderProfileFlipbookSection(base) {
         <p class="profile-flipbook__lead">Drag a corner, swipe on tablet, or use the controls below. This interactive sample uses fictional data — your printed profile is generated from the live record at the moment you create it.</p>
       </div>
       <div class="profile-flipbook__stage">
-        <div class="profile-flipbook__book-wrap" data-flipbook-wrap>
-          <div class="profile-flipbook__book" id="profile-flipbook" data-profile-flipbook>
+        <div class="profile-flipbook__stage-panel">
+          <div class="profile-flipbook__book-wrap" data-flipbook-wrap>
+            <div class="profile-flipbook__spread-fill profile-flipbook__spread-fill--left" data-spread-fill-back aria-hidden="true"></div>
+            <div class="profile-flipbook__spread-fill profile-flipbook__spread-fill--right" data-spread-fill-forward aria-hidden="true" hidden></div>
+            <div class="profile-flipbook__book" id="profile-flipbook" data-profile-flipbook>
 ${pages}
+            </div>
+            <div class="profile-flipbook__curl-guards" aria-hidden="true">
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tl" data-flip-guard-back hidden></div>
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--bl" data-flip-guard-back hidden></div>
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tr" data-flip-guard-forward hidden></div>
+              <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--br" data-flip-guard-forward hidden></div>
+            </div>
           </div>
-          <div class="profile-flipbook__curl-guards" aria-hidden="true">
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tl" data-flip-guard-back hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--bl" data-flip-guard-back hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tr" data-flip-guard-forward hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--br" data-flip-guard-forward hidden></div>
-          </div>
-        </div>
-        <div class="profile-flipbook__controls container" aria-label="Brochure navigation">
+          <div class="profile-flipbook__controls" aria-label="Brochure navigation">
           <button type="button" class="profile-flipbook__btn" data-flip-prev aria-label="Previous page">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Previous</span>
@@ -529,6 +532,7 @@ ${pages}
             <span>Next</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
+          </div>
         </div>
       </div>
     </section>`;
