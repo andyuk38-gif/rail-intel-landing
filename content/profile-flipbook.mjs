@@ -513,8 +513,10 @@ export function renderProfileFlipbookSection(base) {
 ${pages}
           </div>
           <div class="profile-flipbook__curl-guards" aria-hidden="true">
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--back" data-flip-guard-back hidden></div>
-            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--forward" data-flip-guard-forward hidden></div>
+            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tl" data-flip-guard-back hidden></div>
+            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--bl" data-flip-guard-back hidden></div>
+            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--tr" data-flip-guard-forward hidden></div>
+            <div class="profile-flipbook__curl-guard profile-flipbook__curl-guard--br" data-flip-guard-forward hidden></div>
           </div>
         </div>
         <div class="profile-flipbook__controls container" aria-label="Brochure navigation">

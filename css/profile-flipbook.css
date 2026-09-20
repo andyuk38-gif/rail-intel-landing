@@ -489,26 +489,31 @@
 
 .profile-flipbook__curl-guard {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 52%;
+  width: 24%;
+  height: 24%;
   pointer-events: auto;
   touch-action: none;
   cursor: default;
 }
 
-.profile-flipbook__curl-guard--back {
+.profile-flipbook__curl-guard--tl {
+  top: 0;
   left: 0;
 }
 
-.profile-flipbook__curl-guard--forward {
+.profile-flipbook__curl-guard--bl {
+  bottom: 0;
+  left: 0;
+}
+
+.profile-flipbook__curl-guard--tr {
+  top: 0;
   right: 0;
 }
 
-@media (max-width: 768px) {
-  .profile-flipbook__curl-guard {
-    width: 32%;
-  }
+.profile-flipbook__curl-guard--br {
+  right: 0;
+  bottom: 0;
 }
 
 /* Fields & cards */
