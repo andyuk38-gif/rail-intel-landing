@@ -943,7 +943,7 @@ export const featureGroups = [
       src: "images/screens/assessing/AssessInDark.jpg",
       alt: "Assessor holding a bright tablet in a dark cab.",
       caption:
-        "In a dark cab, look over the top of a bright tablet and your reflection appears in the windscreen.",
+        "Who's that handsome chap ahead? …Oh — it's my reflection.",
       scale: 0.5,
       full: true,
       eager: true,
