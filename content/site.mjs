@@ -1123,6 +1123,16 @@ export const featureGroups = [
     summary: "Full-colour, print-friendly or dark-mode employee profiles from the live record.",
     tagline: "One document from the record, not a spreadsheet by hand",
     hideHeroActions: true,
+    heroShot: {
+      src: "images/product/printable-profile-hero.png",
+      alt:
+        "Rail professional holding a printed Rail Intel Employee Profile brochure, showing the full-colour front cover.",
+      scale: 0.5,
+      bordered: true,
+      eager: true,
+      hideCaption: true,
+      noExpand: true,
+    },
     lead:
       "When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record, not a spreadsheet assembled by hand.",
     relatedLinks: [
@@ -1135,9 +1145,9 @@ export const featureGroups = [
         layout: "aside",
         bulletTiles: true,
         body: [
-          "An employee profile is a complete extract of the live record. It can include personal data and special category information — occupational health, medical fitness and incident history — so producing one should never be casual.",
+          "An employee profile is a complete extract of the live record. It can include personal data and special category information, occupational health, medical fitness and incident history, so producing one should never be casual.",
           "Before the print dialog opens, Rail Intel presents a data protection notice. The user must confirm they have a lawful basis and a demonstrable business need to handle the data, and that copies will be kept secure, shared only with those who need them, and destroyed when no longer required.",
-          "The notice references UK GDPR and the Data Protection Act 2018 for UK operators. For international deployments, the same checkpoint applies — your organisation remains responsible for processing employee data under the data protection laws that apply in your jurisdiction.",
+          "The notice references UK GDPR and the Data Protection Act 2018 for UK operators. For international deployments, the same checkpoint applies, your organisation remains responsible for processing employee data under the data protection laws that apply in your jurisdiction.",
         ],
         bullets: [
           "**Mandatory confirmation** A recorded acknowledgement before print or PDF export.",

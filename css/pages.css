@@ -860,6 +860,18 @@
   }
 }
 
+.page-hero--printable-profile .page-hero__media .shot--bordered {
+  margin-left: auto;
+  max-width: min(100%, 28rem);
+}
+
+.page-hero--printable-profile .page-hero__media .shot__frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 .page-section--printable-formats .page-section__head {
   max-width: none;
 }

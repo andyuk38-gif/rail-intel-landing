@@ -2194,7 +2194,7 @@ ${heroCopy}
     renderHead(base, pageSeo) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}">
       <div class="container">
 ${heroInner}
       </div>

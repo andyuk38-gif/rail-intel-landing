@@ -482,5 +482,9 @@
   "images/screens/main-sys/print-before-you-print.png": {
     "width": 552,
     "height": 830
+  },
+  "images/product/printable-profile-hero.png": {
+    "width": 1024,
+    "height": 1024
   }
 }
