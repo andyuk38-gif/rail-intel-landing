@@ -1235,10 +1235,33 @@ ${reportRoll}
     </section>`;
 }
 
-function renderCta(base, { heading, body, showAppCta = true, secondaryHref, secondaryLabel }) {
-  const secondaryLink = secondaryHref
-    ? `          <a href="${secondaryHref.startsWith("../") || secondaryHref.startsWith("http") ? secondaryHref : `${base}${secondaryHref}`}" class="btn btn-ghost btn-lg">${esc(secondaryLabel || "Learn more")}</a>`
-    : `          <a href="${base}products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>`;
+function renderCta(
+  base,
+  {
+    heading,
+    body,
+    showAppCta = true,
+    primaryHref,
+    primaryLabel,
+    secondaryHref,
+    secondaryLabel,
+    showSecondary = true,
+  },
+) {
+  const resolveHref = (href) =>
+    href.startsWith("../") || href.startsWith("http") ? href : `${base}${href}`;
+
+  const primaryLink =
+    showAppCta === false
+      ? ""
+      : `          <a href="${primaryHref ? resolveHref(primaryHref) : site.app}" class="btn btn-primary btn-lg">${esc(primaryLabel || "Open Rail Intel")}</a>\n`;
+
+  const secondaryLink =
+    showSecondary === false
+      ? ""
+      : secondaryHref
+        ? `          <a href="${resolveHref(secondaryHref)}" class="btn btn-ghost btn-lg">${esc(secondaryLabel || "Learn more")}</a>`
+        : `          <a href="${base}products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>`;
 
   return `    <section class="page-section">
       <div class="container">
@@ -1247,11 +1270,7 @@ function renderCta(base, { heading, body, showAppCta = true, secondaryHref, seco
           <p>${esc(body)}</p>
         </div>
         <div class="page-actions">
-${
-  showAppCta === false
-    ? ""
-    : `          <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
-}${secondaryLink}
+${primaryLink}${secondaryLink}
         </div>
       </div>
     </section>`;

@@ -241,10 +241,7 @@ export const seoExtensions = {
           "Full-colour is branded for formal packs and on-screen circulation. Print-friendly is plain black on white to save ink on paper. Dark mode is high-contrast for reading as a PDF on screen and is not recommended for printing. All three use the same underlying record data.",
       },
     ],
-    relatedLinks: [
-      { name: "Profile Lock", href: "features/profile-lock.html" },
-      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-    ],
+    relatedLinks: [],
   },
 
   "profile-lock": {
