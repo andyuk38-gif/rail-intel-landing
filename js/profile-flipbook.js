@@ -126,6 +126,22 @@
     updateSpreadChrome();
   }
 
+  function softenPage(page) {
+    page.setDensity("soft");
+    page.setDrawingDensity("soft");
+  }
+
+  function softenCoverPages(instance) {
+    var collection = instance.getPageCollection();
+    var total = instance.getPageCount();
+
+    softenPage(collection.getPage(0));
+
+    if (total > 1) {
+      softenPage(collection.getPage(total - 1));
+    }
+  }
+
   function flipOptions(metrics) {
     var pageWidth = metrics ? metrics.pageWidth : PAGE_WIDTH;
     var pageHeight = metrics ? metrics.pageHeight : PAGE_HEIGHT;
@@ -163,6 +179,7 @@
 
     flipInstance = new window.St.PageFlip(root, flipOptions(metrics));
     flipInstance.loadFromHTML(pages);
+    softenCoverPages(flipInstance);
 
     flipInstance.on("flip", function (event) {
       updateControls(event.data);
@@ -172,6 +189,11 @@
       if (!wrap) return;
       var flipping = event.data === "user_fold" || event.data === "fold_corner" || event.data === "flipping";
       wrap.classList.toggle("is-flipping", flipping);
+      if (flipping) softenCoverPages(flipInstance);
+    });
+
+    flipInstance.on("init", function () {
+      softenCoverPages(flipInstance);
     });
 
     updateControls(flipInstance.getCurrentPageIndex());
@@ -198,6 +220,7 @@
     var metrics = syncWrapSize();
     var current = flipInstance.getCurrentPageIndex();
     flipInstance.update(flipOptions(metrics));
+    softenCoverPages(flipInstance);
     updateControls(current);
   }
 
