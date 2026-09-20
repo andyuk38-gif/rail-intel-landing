@@ -1229,10 +1229,10 @@ ${renderShotList(section.shots)}
       )
     : "";
   const headLogoHtml = renderSectionHeadLogo(section.headLogo, base);
-  const sectionHeading = renderSectionHeading(section, base);
+  const sectionHeadingMarkup = renderSectionHeadingMarkup(section, base);
   const headBlock = section.headLogo
     ? `        <div class="page-section__head page-section__head--with-logo">
-          <h2>${sectionHeading}</h2>
+${sectionHeadingMarkup}
           <div class="page-section__head-row">
             <div class="page-section__head-copy">
 ${body}
@@ -1245,7 +1245,7 @@ ${headLogoHtml}
         </div>`
     : section.headShot
       ? `        <div class="page-section__head page-section__head--with-shot">
-          <h2>${sectionHeading}</h2>
+${sectionHeadingMarkup}
 ${body}
 ${bullets}
           <div class="page-section__head-media">
@@ -1253,7 +1253,7 @@ ${headShotHtml}
           </div>
         </div>`
       : `        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
-          <h2>${sectionHeading}</h2>
+${sectionHeadingMarkup}
 ${body}
 ${bullets}
         </div>`;
@@ -1263,7 +1263,7 @@ ${bullets}
     return `    <section class="page-section${section.mod ? ` page-section--${section.mod}` : ""}"${sectionIdAttr(section)}>
       <div class="container">
         <div class="page-section__head">
-          <h2>${renderSectionHeading(section, base)}</h2>
+${renderSectionHeadingMarkup(section, base)}
 ${body}
         </div>
         <div class="page-section__tile-split">
@@ -2198,6 +2198,17 @@ function renderSectionHeading(section, base) {
     return `<span class="page-section__heading-with-flag"><img class="page-section__heading-flag" src="${base}images/flags/${esc(section.headingFlag)}.svg" alt="" width="28" height="18" aria-hidden="true" decoding="async" /><span>${esc(section.heading)}</span></span>`;
   }
   return esc(section.heading);
+}
+
+function renderSectionHeadingMarkup(section, base) {
+  const heading = renderSectionHeading(section, base);
+  if (!section.headingBadge) {
+    return `          <h2>${heading}</h2>`;
+  }
+  return `          <div class="page-section__heading-row">
+            <h2>${heading}</h2>
+            <span class="page-section__heading-pill">${esc(section.headingBadge)}</span>
+          </div>`;
 }
 
 function sectionIdAttr(section) {

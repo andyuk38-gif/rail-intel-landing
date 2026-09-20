@@ -1478,6 +1478,32 @@
   margin-bottom: 2rem;
 }
 
+.page-section__heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.page-section__heading-row h2 {
+  margin: 0;
+}
+
+.page-section__heading-pill {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
 .page-section__heading-with-flag {
   display: inline-flex;
   align-items: center;
@@ -1825,6 +1851,10 @@
 }
 
 .page-section--wide .page-section__head--wide > p {
+  max-width: none;
+}
+
+.page-section--wide .page-section__head--wide .page-section__heading-row {
   max-width: none;
 }
 

@@ -1345,6 +1345,7 @@ export const featureGroups = [
       },
       {
         heading: "Complementary certificates",
+        headingBadge: "Fully Automated",
         fullWidth: true,
         body: [
           "The complementary certificate (Part B) is held alongside the licence, covering the infrastructure, traction and routes the driver is certified for.",
