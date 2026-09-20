@@ -1262,9 +1262,9 @@ export const featureGroups = [
     slug: "medicals-licensing",
     name: "Medicals & Licensing",
     summary: "Medical fitness, ORR medicals, driving licences and complementary certificates.",
-    tagline: "Expiry is a date, not an opinion",
+    tagline: "Medicals and licensing — expiry is the stop",
     lead:
-      "Medical fitness and licensing are the hardest stops in the safety case: if either has expired, the person does not sign on. Rail Intel holds both as dated records with expiry monitoring, so the stop is enforced by the system rather than remembered by a person.",
+      "ORR medicals, fitness status, train driving licences, categories and complementary certificates are held on the same employee record, each with an expiry date. When a medical lapses, fitness is unfit, or a licence is out of date, the employee is marked off track and their assigned manager is notified immediately. Safety-critical duties are not available until the record is current; only non-safety-critical work remains possible. Rail Intel monitors every deadline and surfaces the position on the dashboard and in reporting, rather than leaving it to be noticed.",
     heroActions: [
       { href: "#medicals", label: "Medicals", primary: true },
       { href: "#licensing", label: "Licensing", ghost: true },
