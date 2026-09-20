@@ -1121,7 +1121,9 @@ export const featureGroups = [
     slug: "printable-profile",
     name: "Printable Profile",
     summary: "Full-colour, print-friendly or dark-mode employee profiles from the live record.",
-    tagline: "One document from the record, not a spreadsheet by hand",
+    tagline: "The most professional employee competence portfolio",
+    taglineHtml:
+      'The most <span class="hero-title__accent">professional</span> employee competence portfolio',
     hideHeroActions: true,
     heroShot: {
       src: "images/product/printable-profile-hero.png",
