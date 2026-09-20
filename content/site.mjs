@@ -1288,6 +1288,12 @@ export const featureGroups = [
           "When recording an ORR medical, the assessing psychologist and doctor are selected from registers built into Rail Intel. Both lists are pre-populated with ORR registered practitioners and searchable by name or registration code, so each medical is linked to the correct clinician from the outset.",
           "Where a newly appointed psychologist or doctor is not yet on the list, company administrators can add them directly from the medical form — keeping the register current as your panel of clinicians changes, without waiting for a system update.",
         ],
+        headLogo: {
+          src: "images/regulators/orr.png",
+          alt: "Office of Rail and Road (ORR)",
+          width: 260,
+          height: 182,
+        },
         shots: [
           {
             src: "images/screens/medical/orr-registered-psychologist-list.png",

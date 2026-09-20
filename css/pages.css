@@ -1221,6 +1221,50 @@
   margin-bottom: 2rem;
 }
 
+.page-section__head--with-logo {
+  max-width: none;
+}
+
+.page-section__head-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem 2.5rem;
+  align-items: start;
+}
+
+.page-section__head-copy {
+  min-width: 0;
+}
+
+.page-section__head-copy > p:last-child {
+  margin-bottom: 0;
+}
+
+.page-section__head-logo {
+  flex-shrink: 0;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.page-section__regulator-logo {
+  display: block;
+  width: auto;
+  max-width: 10rem;
+  height: auto;
+}
+
+@media (max-width: 720px) {
+  .page-section__head-row {
+    grid-template-columns: 1fr;
+  }
+
+  .page-section__head-logo {
+    justify-self: start;
+  }
+}
+
 .page-section__aside {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(14rem, 0.92fr);

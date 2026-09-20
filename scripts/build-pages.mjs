@@ -1194,8 +1194,22 @@ ${renderShotList(section.shots)}
         { fill: true }
       )
     : "";
-  const headBlock = section.headShot
-    ? `        <div class="page-section__head page-section__head--with-shot">
+  const headLogoHtml = renderSectionHeadLogo(section.headLogo, base);
+  const headBlock = section.headLogo
+    ? `        <div class="page-section__head page-section__head--with-logo">
+          <h2>${esc(section.heading)}</h2>
+          <div class="page-section__head-row">
+            <div class="page-section__head-copy">
+${body}
+${bullets}
+            </div>
+            <div class="page-section__head-logo">
+${headLogoHtml}
+            </div>
+          </div>
+        </div>`
+    : section.headShot
+      ? `        <div class="page-section__head page-section__head--with-shot">
           <h2>${esc(section.heading)}</h2>
 ${body}
 ${bullets}
@@ -1203,7 +1217,7 @@ ${bullets}
 ${headShotHtml}
           </div>
         </div>`
-    : `        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
+      : `        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
           <h2>${esc(section.heading)}</h2>
 ${body}
 ${bullets}
@@ -2131,6 +2145,15 @@ ${renderFaqSection(pageSeo.faq, base)}
 ` +
     renderFooter(base)
   );
+}
+
+function renderSectionHeadLogo(logo, base) {
+  if (!logo) return "";
+
+  const width = logo.width ? ` width="${logo.width}"` : "";
+  const height = logo.height ? ` height="${logo.height}"` : "";
+
+  return `            <img class="page-section__regulator-logo" src="${base}${esc(logo.src)}" alt="${esc(logo.alt)}"${width}${height} loading="lazy" decoding="async" />`;
 }
 
 function renderHeroRegulators(regulators, base) {
