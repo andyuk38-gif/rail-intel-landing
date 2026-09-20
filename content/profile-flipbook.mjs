@@ -55,6 +55,18 @@ function sectionLabel(text) {
   return `<p class="brochure-section-label">${esc(text)}</p>`;
 }
 
+function sectionIntro(text) {
+  return `<p class="brochure-section-intro">${esc(text)}</p>`;
+}
+
+function proseCard(title, paragraphs) {
+  const copy = paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("");
+  return `<article class="brochure-card brochure-card--prose">
+    <h3 class="brochure-card__title">${esc(title)}</h3>
+    <div class="brochure-card__prose">${copy}</div>
+  </article>`;
+}
+
 function pill(text) {
   return `<span class="brochure-pill brochure-pill--ok">${esc(text)}</span>`;
 }
@@ -63,13 +75,55 @@ function pageOpen(mod) {
   return `<div class="brochure-page${mod ? ` ${mod}` : ""}">`;
 }
 
+const FOOTER_LEFT = "Sarah Mitchell — confidential employee record";
+const FOOTER_REF = "RV-RI2847-20260920";
+const EMPLOYEE_META = "SARAH MITCHELL · RI-2847";
+
+function partFooter(part, continued) {
+  const label = continued ? `Part ${part} of 6 · continued` : `Part ${part} of 6`;
+  return brochureFooter(FOOTER_LEFT, FOOTER_REF, label);
+}
+
+function pageHeader(title, meta, continued) {
+  const continuedNote = continued ? `<p class="brochure-page__continued">Continued</p>` : "";
+  return `<header class="brochure-page__header">
+    <div class="brochure-page__heading">
+      <h2 class="brochure-page__title">${esc(title)}</h2>
+      ${continuedNote}
+    </div>
+    <p class="brochure-page__meta">${esc(meta)}</p>
+  </header>`;
+}
+
+function detailPage(title, body, part, continued) {
+  return `${pageOpen("brochure-page--detail")}
+    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
+    <div class="brochure-page__body">
+      ${pageHeader(title, EMPLOYEE_META, continued)}
+      <div class="brochure-page__stack">${body}</div>
+    </div>
+    ${partFooter(part, continued)}
+  </div>`;
+}
+
+function contentsPage(title, body, part, continued) {
+  return `${pageOpen("brochure-page--contents")}
+    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
+    <div class="brochure-page__body">
+      ${pageHeader(title, EMPLOYEE_META, continued)}
+      <div class="brochure-page__stack">${body}</div>
+    </div>
+    ${partFooter(part, continued)}
+  </div>`;
+}
+
 function renderCoverPage(base) {
   const placeholder = "—";
   return `${pageOpen("brochure-page--cover")}
     <div class="brochure-page__geom" aria-hidden="true"></div>
     <div class="brochure-page__body brochure-cover__body">
       <header class="brochure-cover__brand">
-        <img src="${base}images/rail-intel-icon.png" alt="" width="42" height="42" />
+        <img src="${base}images/rail-intel-icon.png" alt="" width="64" height="64" />
         <span class="brochure-cover__brand-text"><span>Rail</span> <span class="brochure-cover__brand-accent">Intel</span></span>
         <span class="brochure-cover__doc-type">
           <span>Rail Intel</span>
@@ -126,10 +180,7 @@ function renderCoverPage(base) {
 }
 
 function renderContentsPage() {
-  return `${pageOpen("brochure-page--contents")}
-    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
-    <div class="brochure-page__body">
-      ${brochureHeader("Summary & contents", "SARAH MITCHELL · RI-2847")}
+  const body = `
       <div class="brochure-stats">
         <div class="brochure-stat"><strong>4</strong><span>Competences</span></div>
         <div class="brochure-stat"><strong>2</strong><span>Training</span></div>
@@ -156,7 +207,12 @@ function renderContentsPage() {
           <li><span class="brochure-contents__num">04</span><span class="brochure-contents__text"><strong>Assessment cycles</strong><em>Assigned cycles · Cycle status</em></span><span class="brochure-contents__part">Part 5</span></li>
           <li><span class="brochure-contents__num">05</span><span class="brochure-contents__text"><strong>Medicals & fitness</strong><em>Medical examinations · Fitness declarations</em></span><span class="brochure-contents__part">Part 6</span></li>
         </ol>
-      </div>
+      </div>`;
+  return contentsPage("Summary & contents", body, 1, false);
+}
+
+function renderContentsContinuedPage() {
+  const body = `
       ${card(
         "Record metadata",
         [
@@ -182,17 +238,13 @@ function renderContentsPage() {
             <span class="brochure-signature__label">Received by (signature & date)</span>
           </div>
         </div>
-      </div>
-    </div>
-    ${brochureFooter("Sarah Mitchell — confidential employee record", "RV-RI2847-20260920", "Part 1 of 6")}
-  </div>`;
+      </div>`;
+  return contentsPage("Summary & contents", body, 1, true);
 }
 
 function renderPersonalPage() {
-  return `${pageOpen("brochure-page--detail")}
-    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
-    <div class="brochure-page__body">
-      ${brochureHeader("Personal details & employment", "SARAH MITCHELL · RI-2847")}
+  const body = `
+      ${sectionIntro("Personal and contact details are taken from the employee record at export. Emergency contacts and identity fields are included for depot verification and formal competence packs.")}
       ${sectionLabel("Personal & contact details")}
       ${card(
         "Identity",
@@ -218,7 +270,13 @@ function renderPersonalPage() {
       ${card(
         "Emergency contact",
         [field("Name", "David Mitchell"), field("Relationship", "Spouse"), field("Telephone", "+44 7700 900 301")].join("")
-      )}
+      )}`;
+  return detailPage("Personal details & employment", body, 2, false);
+}
+
+function renderPersonalContinuedPage() {
+  const body = `
+      ${sectionIntro("Employment status, role history and organisational details confirm the employee's current position and reporting line. This section supports rostering checks and management review.")}
       ${sectionLabel("Employment & status")}
       ${card(
         "Position",
@@ -244,16 +302,16 @@ function renderPersonalPage() {
           field("Union membership", "ASLEF"),
         ].join("")
       )}
-    </div>
-    ${brochureFooter("Sarah Mitchell — confidential employee record", "RV-RI2847-20260920", "Part 2 of 6")}
-  </div>`;
+      ${proseCard("About employment records", [
+        "Position and history fields reflect the live HR record, including promotions, depot transfers and additional responsibilities such as mentoring.",
+        "Printed profiles retain the assessing manager and monitoring status so competence teams can confirm who holds oversight of the employee.",
+      ])}`;
+  return detailPage("Personal details & employment", body, 2, true);
 }
 
 function renderLicencePage() {
-  return `${pageOpen("brochure-page--detail")}
-    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
-    <div class="brochure-page__body">
-      ${brochureHeader("Licence & cab passes", "SARAH MITCHELL · RI-2847")}
+  const body = `
+      ${sectionIntro("The train driving licence and issued cab passes confirm legal authority to drive and access the network. Both are checked against the live record before dispatch and rostering.")}
       ${sectionLabel("Train driving licence")}
       ${card(
         "Licence details",
@@ -277,6 +335,16 @@ function renderLicencePage() {
         ],
         true
       )}
+      ${proseCard("About cab passes", [
+        "Digital cab passes include a QR code for on-the-day verification. Printed profiles list pass numbers, issue dates and expiry so gate staff can confirm authority without system access.",
+        "Route familiarisation and engineering passes are shown separately from the standard cab pass to make restrictions clear during audit review.",
+      ])}`;
+  return detailPage("Licence & cab passes", body, 3, false);
+}
+
+function renderLicenceContinuedPage() {
+  const body = `
+      ${sectionIntro("Route knowledge endorsements confirm which lines and traction types the driver may operate. Digital cab passes and route endorsements are checked together before dispatch.")}
       ${sectionLabel("Route knowledge endorsements")}
       ${tableCard(
         "Endorsed routes",
@@ -297,17 +365,28 @@ function renderLicencePage() {
           field("Next review", "01 Apr 2027"),
         ].join("")
       )}
-    </div>
-    ${brochureFooter("Sarah Mitchell — confidential employee record", "RV-RI2847-20260920", "Part 3 of 6")}
-  </div>`;
+      ${proseCard("About route endorsements", [
+        "Endorsements are renewed through formal route knowledge assessments and recorded against the live licence record.",
+        "Printed profiles show the endorsement date and validity so depot teams can confirm authority before rostering.",
+      ])}`;
+  return detailPage("Licence & cab passes", body, 3, true);
 }
 
 function renderCompetencePage() {
-  return `${pageOpen("brochure-page--detail")}
-    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
-    <div class="brochure-page__body">
-      ${brochureHeader("Competence & training", "SARAH MITCHELL · RI-2847")}
+  const body = `
+      ${sectionIntro("Route and traction competence is drawn from the live record at the moment of export. Assessments show the routes, traction types and validity periods currently held by the employee.")}
       ${sectionLabel("Trains & routes competence")}
+      ${card(
+        "Competence summary",
+        [
+          field("Routes endorsed", "4 active routes"),
+          field("Traction types", "Class 155 · 158 · 170"),
+          field("Last assessment", "18 Aug 2026"),
+          field("Overall status", "Fully competent"),
+          field("Assessor of record", "James Porter"),
+          field("Next review", "15 Nov 2026"),
+        ].join("")
+      )}
       ${tableCard(
         "Competence assessments",
         ["Traction / route", "Assessed", "Assessor", "Result", "Expires"],
@@ -319,6 +398,27 @@ function renderCompetencePage() {
         ],
         true
       )}
+      ${card(
+        "Training summary",
+        [
+          field("Qualifications held", "2 current certificates"),
+          field("Training completed (12 mths)", "3 courses"),
+          field("Mandatory items due", "None overdue"),
+          field("Last course attended", "01 Sep 2026"),
+          field("Training provider", "Northern Academy"),
+          field("Development plan", "No open actions"),
+        ].join("")
+      )}
+      ${proseCard("About route competence", [
+        "Competence assessments confirm that the driver can safely operate booked traction over specified routes.",
+        "Expired or overdue assessments appear prominently in the live record and in printed packs for audit readiness.",
+      ])}`;
+  return detailPage("Competence & training", body, 4, false);
+}
+
+function renderCompetenceContinuedPage() {
+  const body = `
+      ${sectionIntro("Training and qualifications are maintained in line with operator standards and industry requirements. Mandatory safety training is refreshed on a fixed cycle; competence refreshes are triggered by route changes or at the assessment interval defined in the employee cycle.")}
       ${sectionLabel("Training & qualifications")}
       ${tableCard(
         "Qualifications",
@@ -339,16 +439,24 @@ function renderCompetencePage() {
         ],
         true
       )}
-    </div>
-    ${brochureFooter("Sarah Mitchell — confidential employee record", "RV-RI2847-20260920", "Part 4 of 6")}
-  </div>`;
+      ${card(
+        "Training compliance",
+        [
+          field("Mandatory training status", "Up to date"),
+          field("Next mandatory due", "22 Jun 2029"),
+          field("Competence refresh due", "15 Nov 2026"),
+          field("Records verified by", "James Porter"),
+          field("Last compliance review", "01 Sep 2026"),
+          field("Outstanding actions", "None"),
+        ].join("")
+      )}`;
+  return detailPage("Competence & training", body, 4, true);
 }
 
 function renderCyclesPage() {
-  return `${pageOpen("brochure-page--detail")}
-    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
-    <div class="brochure-page__body">
-      ${brochureHeader("Assessment cycles", "SARAH MITCHELL · RI-2847")}
+  const body = `
+      ${sectionIntro("Assessment cycles group formal competence checks into a managed review period. The active cycle shows progress, outstanding items and the assessor responsible for sign-off.")}
+      ${sectionLabel("Cycle overview")}
       ${tableCard(
         "Assigned cycles",
         ["Cycle", "Start", "Expiry", "Length", "Status"],
@@ -369,6 +477,16 @@ function renderCyclesPage() {
           field("Last assessment", "18 Aug 2026"),
         ].join("")
       )}
+      ${proseCard("About assessment cycles", [
+        "Each cycle records planned and completed assessments so managers can see whether the employee is on track before the expiry date.",
+        "Closed cycles remain on the profile to provide a clear audit trail of historic competence activity.",
+      ])}`;
+  return detailPage("Assessment cycles", body, 5, false);
+}
+
+function renderCyclesContinuedPage() {
+  const body = `
+      ${sectionIntro("Individual assessments within the current cycle are listed with due dates, completion status and outcomes. Monitoring notes capture assessor commentary and any follow-up actions.")}
       ${sectionLabel("Assessments in current cycle")}
       ${tableCard(
         "Completed & planned",
@@ -392,16 +510,16 @@ function renderCyclesPage() {
           field("Next formal review", "15 Nov 2026"),
         ].join("")
       )}
-    </div>
-    ${brochureFooter("Sarah Mitchell — confidential employee record", "RV-RI2847-20260920", "Part 5 of 6")}
-  </div>`;
+      ${proseCard("Monitoring & follow-up", [
+        "Assessor comments are retained on the live record and reproduced here for management review or formal competence packs.",
+        "Scheduled assessments appear without a completion date until the review has been recorded in Rail Intel.",
+      ])}`;
+  return detailPage("Assessment cycles", body, 5, true);
 }
 
 function renderMedicalsPage() {
-  return `${pageOpen("brochure-page--detail")}
-    <div class="brochure-page__geom brochure-page__geom--soft" aria-hidden="true"></div>
-    <div class="brochure-page__body">
-      ${brochureHeader("Medicals & fitness", "SARAH MITCHELL · RI-2847")}
+  const body = `
+      ${sectionIntro("Medical fitness records confirm the employee meets safety-critical standards. Examinations, screening results and declarations are reproduced from the occupational health record.")}
       ${sectionLabel("Medical examinations")}
       ${tableCard(
         "Fitness records",
@@ -426,6 +544,16 @@ function renderMedicalsPage() {
           field("Reviewed by", "James Porter"),
         ].join("")
       )}
+      ${proseCard("About fitness declarations", [
+        "Drivers confirm medication changes and fitness status at the required interval. Printed profiles include the latest declaration so managers can evidence compliance during competence reviews.",
+        "Restrictions and next review dates are shown alongside examination outcomes to support rostering decisions.",
+      ])}`;
+  return detailPage("Medicals & fitness", body, 6, false);
+}
+
+function renderMedicalsContinuedPage() {
+  const body = `
+      ${sectionIntro("Occupational health referrals, medical history and any restrictions are retained on the live record. Historic examinations provide an audit trail for safety-critical fitness decisions.")}
       ${card(
         "Occupational health",
         [
@@ -457,9 +585,11 @@ function renderMedicalsPage() {
           field("OH follow-up", "Not required"),
         ].join("")
       )}
-    </div>
-    ${brochureFooter("Sarah Mitchell — confidential employee record", "RV-RI2847-20260920", "Part 6 of 6")}
-  </div>`;
+      ${proseCard("Restrictions & review", [
+        "Any driving or route restrictions are shown prominently so depot teams can confirm fitness before rostering.",
+        "Corrective lens requirements and occupational health follow-up dates are included for completeness in formal competence packs.",
+      ])}`;
+  return detailPage("Medicals & fitness", body, 6, true);
 }
 
 function renderBackCoverPage(base) {
@@ -493,11 +623,17 @@ export function renderProfileFlipbookSection(base) {
   const pages = [
     renderCoverPage(base),
     renderContentsPage(),
+    renderContentsContinuedPage(),
     renderPersonalPage(),
+    renderPersonalContinuedPage(),
     renderLicencePage(),
+    renderLicenceContinuedPage(),
     renderCompetencePage(),
+    renderCompetenceContinuedPage(),
     renderCyclesPage(),
+    renderCyclesContinuedPage(),
     renderMedicalsPage(),
+    renderMedicalsContinuedPage(),
     renderBackCoverPage(base),
   ].join("\n");
 
