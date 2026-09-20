@@ -1327,17 +1327,17 @@ export const featureGroups = [
       {
         id: "licensing",
         heading: "Driving licences and categories",
+        fullWidth: true,
         body: [
           "Train driving licences are held with the front and back images, licence number, issue and expiry dates and the categories carried. Renewal warnings appear ahead of expiry with the number of days remaining.",
         ],
         shots: [
           {
-            src: "images/screens/licencing/licence1.png",
-            caption: "Train driving licence record with images, number and expiry.",
-          },
-          {
-            src: "images/screens/licencing/licence-categories.png",
-            caption: "The categories carried on the licence.",
+            src: "images/screens/licencing/licence-dark-mode.png",
+            caption:
+              "Train driving licence with front and back images, details and categories carried.",
+            scale: 1,
+            full: true,
           },
         ],
       },
