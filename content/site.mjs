@@ -1123,6 +1123,7 @@ export const featureGroups = [
     name: "Workforce Records",
     summary: "The employee record: cab passes, training, experience, documents and messaging.",
     tagline: "One record per person, not six systems",
+    hideCta: true,
     lead:
       "Every safety-critical person has one record holding their status, competence, passes, training, experience and documentation. When you need to answer whether someone is safe to work, the answer is in one place.",
     sections: [
@@ -1133,76 +1134,8 @@ export const featureGroups = [
         ],
         shots: [
           {
-            src: "images/screens/main-sys/employee-list.png",
+            src: "images/screens/main-sys/employee-list-dark.png",
             caption: "The employee directory with role, depot and status.",
-          },
-        ],
-      },
-      {
-        heading: "Cab passes",
-        body: [
-          "Cab pass authority and validity are held on the record, with issue and colour tracked so the pass in someone's pocket matches the pass in the system.",
-        ],
-        shots: [
-          {
-            src: "images/screens/cab-passes/cab-passes.png",
-            caption: "Cab pass register on the employee record.",
-          },
-          {
-            src: "images/screens/cab-passes/green-pass-issued.png",
-            caption: "An issued pass with its validity and status.",
-          },
-          {
-            src: "images/screens/cab-passes/issue-colour-question-popup.png",
-            caption: "Issuing a pass and recording its colour classification.",
-          },
-        ],
-      },
-      {
-        heading: "Training, qualifications and experience",
-        body: [
-          "Training records and qualifications are held with their provider and expiry, so a lapsing qualification is visible before it becomes a problem. Experience Records track driving experience and trainee hours, including daylight and darkness progress against your company standards.",
-        ],
-        shots: [
-          {
-            src: "images/screens/training-quals/training-quals-overview.png",
-            caption: "Training records and qualifications with expiry and provider.",
-          },
-          {
-            src: "images/screens/training-quals/add-new-training.png",
-            caption: "Adding a training record.",
-          },
-          {
-            src: "images/screens/training-quals/add-qual.png",
-            caption: "Adding a qualification.",
-          },
-          {
-            src: "images/screens/trainee-hours-manager-hours/trainee-hours-experience.png",
-            caption: "Experience records with trainee hours against the company standard.",
-          },
-          {
-            src: "images/screens/trainee-hours-manager-hours/overall-progress-trainee.png",
-            caption: "Overall progress for a trainee across their required hours.",
-          },
-        ],
-      },
-      {
-        heading: "Documents and messaging",
-        body: [
-          "Supporting evidence is uploaded against the record and counts against your company storage quota. Messaging and notes keep the conversation about a record attached to it, with email notification when a new message is raised.",
-        ],
-        shots: [
-          {
-            src: "images/screens/main-sys/document-upload-area.png",
-            caption: "Uploading supporting documentation to an employee record.",
-          },
-          {
-            src: "images/screens/messaging-employee/employee-messaging.png",
-            caption: "Messaging threads held against the employee record.",
-          },
-          {
-            src: "images/screens/messaging-employee/email-notify-new-message.png",
-            caption: "Email notification when a new message is raised.",
           },
         ],
       },

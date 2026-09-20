@@ -232,11 +232,7 @@ export const seoExtensions = {
           "Yes. Own-record access can be configured so drivers view their profile without the company directory.",
       },
     ],
-    relatedLinks: [
-      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
-      { name: "Printable Profile", href: "features/printable-profile.html" },
-      { name: "Profile Lock", href: "features/profile-lock.html" },
-    ],
+    relatedLinks: [],
   },
 
   "printable-profile": {

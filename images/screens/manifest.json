@@ -27,10 +27,6 @@
     "width": 1024,
     "height": 757
   },
-  "images/screens/cab-passes/cab-passes.png": {
-    "width": 1394,
-    "height": 757
-  },
   "images/screens/cab-passes/expired-pass-issued-dark.png": {
     "width": 554,
     "height": 280
@@ -39,17 +35,9 @@
     "width": 559,
     "height": 277
   },
-  "images/screens/cab-passes/green-pass-issued.png": {
-    "width": 1303,
-    "height": 833
-  },
   "images/screens/cab-passes/issue-colour-question-popup-dark.png": {
     "width": 435,
     "height": 482
-  },
-  "images/screens/cab-passes/issue-colour-question-popup.png": {
-    "width": 1400,
-    "height": 781
   },
   "images/screens/cab-passes/issue-digital-pass-email-dark.png": {
     "width": 433,
@@ -219,9 +207,9 @@
     "width": 1384,
     "height": 735
   },
-  "images/screens/main-sys/document-upload-area.png": {
-    "width": 1565,
-    "height": 666
+  "images/screens/main-sys/employee-list-dark.png": {
+    "width": 1024,
+    "height": 199
   },
   "images/screens/main-sys/employee-list.png": {
     "width": 1399,
@@ -423,33 +411,13 @@
     "width": 1327,
     "height": 1084
   },
-  "images/screens/trainee-hours-manager-hours/overall-progress-trainee.png": {
-    "width": 1286,
-    "height": 676
-  },
   "images/screens/trainee-hours-manager-hours/recorded-entries.png": {
     "width": 1289,
     "height": 210
   },
-  "images/screens/trainee-hours-manager-hours/trainee-hours-experience.png": {
-    "width": 1363,
-    "height": 1122
-  },
   "images/screens/trainee-hours-manager-hours/trainee-progress-rention-records.png": {
     "width": 1011,
     "height": 817
-  },
-  "images/screens/training-quals/add-new-training.png": {
-    "width": 651,
-    "height": 532
-  },
-  "images/screens/training-quals/add-qual.png": {
-    "width": 650,
-    "height": 687
-  },
-  "images/screens/training-quals/training-quals-overview.png": {
-    "width": 1567,
-    "height": 819
   },
   "images/screens/verification/CheckConfigVerification.png": {
     "width": 1024,
