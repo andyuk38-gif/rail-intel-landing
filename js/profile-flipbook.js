@@ -67,18 +67,58 @@
     return window.visualViewport ? window.visualViewport.height : window.innerHeight;
   }
 
+  function getSiteChromeHeight() {
+    var chrome = document.querySelector(".site-chrome");
+
+    if (chrome) {
+      return Math.ceil(chrome.getBoundingClientRect().bottom);
+    }
+
+    return 0;
+  }
+
   function getMaxBookHeight() {
     var height = getViewportHeight();
 
     if (isSinglePageMode()) {
       if (isMobileLandscape()) {
-        return Math.min(height * 0.88, height - 48);
+        return Math.min(height * 0.82, height - 56);
       }
 
-      return Math.min(height * 0.56, 500);
+      if (!wrap || !section) {
+        return Math.min(height * 0.46, 400);
+      }
+
+      var controls = section.querySelector(".profile-flipbook__controls");
+      var stagePanel = wrap.parentElement;
+      var intro = section.querySelector(".profile-flipbook__intro");
+      var controlsHeight = controls ? controls.offsetHeight + 12 : 52;
+      var introHeight = intro ? intro.offsetHeight + 10 : 0;
+      var panelStyles = stagePanel ? window.getComputedStyle(stagePanel) : null;
+      var padY = panelStyles ? parseFloat(panelStyles.paddingTop) + parseFloat(panelStyles.paddingBottom) : 0;
+      var chromeHeight = getSiteChromeHeight();
+      var available = height - chromeHeight - introHeight - padY - controlsHeight - 14;
+
+      if (stagePanel) {
+        var panelTop = stagePanel.getBoundingClientRect().top;
+        var liveAvailable = height - panelTop - padY - controlsHeight - 12;
+
+        if (liveAvailable > 200 && panelTop < height * 0.85) {
+          available = Math.max(available, liveAvailable);
+        }
+      }
+
+      return Math.max(240, Math.min(available, 440));
     }
 
     return Math.min(height * 0.68, 800);
+  }
+
+  function syncBrochureScale(metrics) {
+    if (!metrics) return;
+
+    var scale = metrics.pageWidth / PAGE_WIDTH;
+    root.style.setProperty("--brochure-scale", String(scale));
   }
 
   function updateLayoutClasses() {
@@ -151,6 +191,7 @@
 
     wrap.style.width = size.bookWidth + "px";
     wrap.style.height = size.bookHeight + "px";
+    syncBrochureScale(size);
     return size;
   }
 
@@ -334,5 +375,16 @@
 
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", scheduleResize);
+  }
+
+  if (section && "IntersectionObserver" in window) {
+    var visibilityObserver = new IntersectionObserver(
+      function (entries) {
+        if (entries[0] && entries[0].isIntersecting) scheduleResize();
+      },
+      { threshold: 0.15 }
+    );
+
+    visibilityObserver.observe(section);
   }
 })();
