@@ -443,15 +443,21 @@
 
 .medicals-licensing-hero-graphic__licence {
   line-height: 0;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  background: var(--bg);
+  border: 3px solid var(--bg);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .medicals-licensing-hero-graphic__licence-img {
   display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;
-  object-position: center top;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  transform: scale(1.04);
+  transform-origin: center center;
 }
 
 .medicals-licensing-hero-graphic__monitor {
