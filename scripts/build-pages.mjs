@@ -27,6 +27,7 @@ import {
 } from "../content/seo.mjs";
 import { mergeItemSeo } from "../content/seo-extensions.mjs";
 import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
+import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -43,6 +44,8 @@ const ASSET_INPUTS = [
   "js/contact.js",
   "js/quotation.js",
   "js/invoice.js",
+  "css/profile-flipbook.css",
+  "js/profile-flipbook.js",
 ];
 
 function computeAssetVersion() {
@@ -329,6 +332,10 @@ function renderHead(base, pageSeo, options = {}) {
   const turnstileScript = options.turnstileSiteKey
     ? `  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>\n`
     : "";
+  const extraStylesheets = (options.extraStylesheets || [])
+    .map((href) => `  <link rel="stylesheet" href="${base}${href}?v=${ASSET_VERSION}" />`)
+    .join("\n");
+  const extraStylesheetBlock = extraStylesheets ? `${extraStylesheets}\n` : "";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -346,7 +353,7 @@ ${turnstileMeta}${turnstileScript}  <link rel="icon" href="${base}images/favicon
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="${base}css/style.css?v=${ASSET_VERSION}" />
   <link rel="stylesheet" href="${base}css/pages.css?v=${ASSET_VERSION}" />
-  <style>
+${extraStylesheetBlock}  <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
     .dev-banner { background: #f59e0b; color: #0c0f14; padding: 0.55rem 1.5rem; }
@@ -443,12 +450,16 @@ function renderFooterMarkup(base) {
   </footer>`;
 }
 
-function renderFooter(base) {
+function renderFooter(base, options = {}) {
+  const extraScripts = (options.extraScripts || [])
+    .map((src) => `  <script src="${base}${src}?v=${ASSET_VERSION}"></script>`)
+    .join("\n");
+  const extraScriptBlock = extraScripts ? `${extraScripts}\n` : "";
   return `${renderFooterMarkup(base)}
 
   <script src="${base}js/site.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/newsletter.js?v=${ASSET_VERSION}"></script>
-</body>
+${extraScriptBlock}</body>
 </html>
 `;
 }
@@ -2149,7 +2160,11 @@ function featurePage(group) {
 
   const base = "../";
   const demo =
-    group.slug === "tunnel-mode" ? `\n${tunnelDemo(base, { link: false })}\n` : "\n";
+    group.slug === "tunnel-mode"
+      ? `\n${tunnelDemo(base, { link: false })}\n`
+      : group.slug === "printable-profile"
+        ? `\n${renderProfileFlipbookSection(base)}\n`
+        : "\n";
 
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
     group.name
@@ -2189,9 +2204,12 @@ ${heroCopy}
         </div>`;
 
   const pageSeo = featureSeo(group);
+  const flipbookPage = group.slug === "printable-profile";
+  const headOptions = flipbookPage ? { extraStylesheets: ["css/profile-flipbook.css"] } : {};
+  const footerOptions = flipbookPage ? { extraScripts: ["js/profile-flipbook.js"] } : {};
 
   return (
-    renderHead(base, pageSeo) +
+    renderHead(base, pageSeo, headOptions) +
     `
   <main>
     <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}">
@@ -2218,7 +2236,7 @@ ${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
-    renderFooter(base)
+    renderFooter(base, footerOptions)
   );
 }
 

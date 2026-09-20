@@ -1,0 +1,948 @@
+/* Printable Profile — interactive brochure flipbook */
+
+.profile-flipbook {
+  position: relative;
+  width: 100%;
+  padding: 2.5rem 0 4rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56, 189, 248, 0.08), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 85% 100%, rgba(245, 158, 11, 0.06), transparent 50%),
+    linear-gradient(180deg, #070b12 0%, #0a1019 45%, #070b12 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.profile-flipbook__intro {
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.profile-flipbook__intro h2 {
+  margin: 0.35rem 0 0.75rem;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.15;
+  color: #fff;
+}
+
+.profile-flipbook__lead {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.profile-flipbook__stage {
+  width: 100%;
+}
+
+.profile-flipbook__book-wrap {
+  position: relative;
+  width: min(100%, 70rem);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.profile-flipbook__book {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background: #070d17;
+}
+
+.profile-flipbook__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.profile-flipbook__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.profile-flipbook__btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.profile-flipbook__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.profile-flipbook__status {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.profile-flipbook__hint {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+@media (max-width: 640px) {
+  .profile-flipbook__hint {
+    display: none;
+  }
+}
+
+/* Brochure page canvas */
+
+.brochure-page {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  padding: 0;
+  color: #e8edf5;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 10px;
+  line-height: 1.35;
+  background: #012269;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.brochure-page__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.42rem;
+  min-height: 0;
+  padding: 1.2rem 1.15rem 0.35rem;
+  overflow: hidden;
+}
+
+.brochure-page__geom {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 42%;
+  pointer-events: none;
+  opacity: 0.26;
+  background: url("../images/brochure/page-header.png") no-repeat top center / 100% auto;
+  mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
+}
+
+.brochure-page__geom--soft {
+  height: 16%;
+  opacity: 0.18;
+}
+
+.brochure-page__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.55rem;
+  margin-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(107, 159, 212, 0.35);
+}
+
+.brochure-page__title {
+  margin: 0;
+  font-size: 1.35em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.brochure-page__meta {
+  margin: 0.15rem 0 0;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(107, 159, 212, 0.9);
+  white-space: nowrap;
+}
+
+.brochure-page__footer {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.45rem 1.25rem 0.65rem;
+  border-top: 1px solid rgba(107, 159, 212, 0.28);
+  background: linear-gradient(180deg, rgba(7, 13, 23, 0) 0%, rgba(7, 13, 23, 0.92) 35%);
+  font-size: 0.68em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.brochure-page__footer span:nth-child(2) {
+  text-align: center;
+}
+
+.brochure-page__footer span:nth-child(3) {
+  text-align: right;
+}
+
+/* Cover — matches employee-profile-brochure-page mockup */
+
+.brochure-cover__body {
+  flex: 1 1 auto;
+  min-height: 100%;
+  padding-top: 0.95rem;
+  padding-bottom: 0.55rem;
+}
+
+.brochure-cover__brand {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.brochure-cover__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: auto;
+  min-height: 0;
+}
+
+.brochure-cover__brand img {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.4rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.brochure-cover__brand-text {
+  font-size: 1.15em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.brochure-cover__brand-accent {
+  color: #e85d4a;
+}
+
+.brochure-cover__doc-type {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.08rem;
+  margin-left: auto;
+  font-size: 0.58em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.brochure-cover__hero {
+  position: relative;
+  z-index: 1;
+}
+
+.brochure-cover__kicker {
+  margin: 0 0 0.18rem;
+  font-size: 0.58em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b8fb8;
+}
+
+.brochure-cover__name {
+  margin: 0;
+  font-size: 1.95em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.brochure-cover__role {
+  margin: 0.12rem 0 0.7rem;
+  font-size: 0.98em;
+  font-weight: 500;
+  color: #8fa8c4;
+}
+
+.brochure-cover__identity {
+  display: grid;
+  grid-template-columns: 4.75rem 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  margin-bottom: 0.55rem;
+}
+
+.brochure-cover__photo {
+  display: block;
+  width: 4.75rem;
+  height: 5.8rem;
+  border-radius: 0.45rem;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brochure-cover__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.42rem 0.6rem;
+  padding-top: 0.08rem;
+}
+
+.brochure-cover__facts .brochure-field__label {
+  font-size: 0.5em;
+  letter-spacing: 0.12em;
+  color: #6b8fb8;
+}
+
+.brochure-cover__facts .brochure-field__value {
+  font-size: 0.78em;
+  font-weight: 600;
+}
+
+.brochure-cover__stamp {
+  display: inline-block;
+  margin: 0 0 0.65rem;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  font-size: 0.48em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.brochure-cover__notice {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #c9a24d;
+  border-radius: 0.45rem;
+  background: rgba(201, 162, 77, 0.08);
+}
+
+.brochure-cover__notice h3 {
+  margin: 0 0 0.28rem;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: #d4a853;
+}
+
+.brochure-cover__notice p {
+  margin: 0;
+  font-size: 0.5em;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.brochure-cover__footer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.brochure-cover__footer > div {
+  min-width: 0;
+}
+
+.brochure-cover__footer-label {
+  display: block;
+  font-size: 0.46em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b8fb8;
+}
+
+.brochure-cover__footer-value {
+  display: block;
+  margin-top: 0.08rem;
+  font-size: 0.52em;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Back cover */
+
+.brochure-back-cover__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1.4rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+}
+
+.brochure-back-cover__panel {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  max-width: 16rem;
+  margin: 0 auto;
+}
+
+.brochure-back-cover__logo {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 0.65rem;
+  object-fit: cover;
+}
+
+.brochure-back-cover__brand {
+  margin: 0;
+  font-size: 1.45em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.brochure-back-cover__tagline {
+  margin: 0.15rem 0 0;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.brochure-back-cover__hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.58em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #8fa8c4;
+}
+
+.brochure-back-cover__url {
+  margin: 0.55rem 0 0;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #6b9fd4;
+}
+
+.brochure-back-cover__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.48em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Block page-curl interaction on first / last pages */
+
+.profile-flipbook__curl-guards {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.profile-flipbook__curl-guard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: default;
+}
+
+.profile-flipbook__curl-guard--back {
+  left: 0;
+}
+
+.profile-flipbook__curl-guard--forward {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .profile-flipbook__curl-guard {
+    width: 32%;
+  }
+}
+
+/* Fields & cards */
+
+.brochure-field {
+  min-width: 0;
+}
+
+.brochure-field--wide {
+  grid-column: 1 / -1;
+}
+
+.brochure-field__label {
+  display: block;
+  margin-bottom: 0.12rem;
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(107, 159, 212, 0.82);
+}
+
+.brochure-field__value {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: #fff;
+  word-break: break-word;
+}
+
+.brochure-section-label {
+  position: relative;
+  z-index: 1;
+  margin: 0.15rem 0 0;
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(107, 159, 212, 0.88);
+}
+
+.brochure-card {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  padding: 0.48rem 0.58rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.45rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(4px);
+}
+
+.brochure-card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.45rem;
+  font-size: 0.82em;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brochure-card__title::before {
+  content: "";
+  width: 0.18rem;
+  height: 0.95em;
+  border-radius: 999px;
+  background: #4f8fd9;
+}
+
+.brochure-card__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem 0.55rem;
+}
+
+.brochure-card--summary .brochure-card__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Tables */
+
+.brochure-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72em;
+}
+
+.brochure-table th {
+  padding: 0.28rem 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.92em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+  color: rgba(107, 159, 212, 0.82);
+}
+
+.brochure-table td {
+  padding: 0.35rem 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.88);
+  vertical-align: top;
+}
+
+.brochure-table--compact th,
+.brochure-table--compact td {
+  padding: 0.25rem 0.2rem;
+}
+
+.brochure-pill {
+  display: inline-block;
+  padding: 0.12rem 0.35rem;
+  border: 1px solid rgba(45, 106, 79, 0.65);
+  border-radius: 999px;
+  font-size: 0.92em;
+  font-weight: 600;
+  color: #6ee7b7;
+  white-space: nowrap;
+}
+
+.brochure-pill--ok {
+  border-color: rgba(45, 106, 79, 0.65);
+  color: #6ee7b7;
+}
+
+/* Contents page */
+
+.brochure-stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.38rem;
+  margin-bottom: 0;
+}
+
+.brochure-stat {
+  padding: 0.55rem 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.4rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.brochure-stat strong {
+  display: block;
+  font-size: 1.45em;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.brochure-stat span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(107, 159, 212, 0.82);
+}
+
+.brochure-contents {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+}
+
+.brochure-contents__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.35rem;
+  font-size: 0.82em;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brochure-contents__heading::before {
+  content: "";
+  width: 0.18rem;
+  height: 0.95em;
+  border-radius: 999px;
+  background: #4f8fd9;
+}
+
+.brochure-contents__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.brochure-contents__list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.38rem;
+  align-items: start;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.brochure-contents__num {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: rgba(107, 159, 212, 0.88);
+}
+
+.brochure-contents__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.brochure-contents__text strong {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brochure-contents__text em {
+  font-size: 0.68em;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.brochure-contents__part {
+  font-size: 0.68em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+
+.brochure-declaration {
+  position: relative;
+  z-index: 1;
+}
+
+.brochure-declaration__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.82em;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brochure-declaration__heading::before {
+  content: "";
+  width: 0.18rem;
+  height: 0.95em;
+  border-radius: 999px;
+  background: #4f8fd9;
+}
+
+.brochure-declaration > p {
+  margin: 0 0 0.35rem;
+  font-size: 0.7em;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.brochure-declaration__signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.brochure-signature {
+  min-width: 0;
+}
+
+.brochure-signature__mark {
+  display: block;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+  font-family: "Segoe Script", "Bradley Hand", cursive;
+  font-size: 1.05em;
+  color: #fff;
+}
+
+.brochure-signature__line {
+  display: block;
+  height: 1.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.brochure-signature__label {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.65em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(107, 159, 212, 0.78);
+}
+
+.brochure-signature__name {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.72em;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Detail pages — tighter layout for dense content */
+
+.brochure-page--detail,
+.brochure-page--contents,
+.brochure-page--cover,
+.brochure-page--back-cover {
+  font-size: 9.35px;
+}
+
+.brochure-page--detail .brochure-card,
+.brochure-page--contents .brochure-card,
+.brochure-page--cover .brochure-card {
+  padding: 0.52rem 0.6rem;
+}
+
+.brochure-page--detail .brochure-card__grid,
+.brochure-page--contents .brochure-card__grid {
+  gap: 0.5rem 0.55rem;
+}
+
+.brochure-page--cover .brochure-cover__name {
+  font-size: 1.85em;
+}
+
+.brochure-page--cover .brochure-cover__identity {
+  grid-template-columns: 4.5rem 1fr;
+}
+
+.brochure-page--cover .brochure-cover__photo {
+  width: 4.5rem;
+  height: 5.5rem;
+}
+
+.brochure-page--detail .brochure-card__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Page-flip library overrides — flat spine, no hinge gap */
+
+.profile-flipbook__stage {
+  overflow: hidden;
+}
+
+.profile-flipbook__book-wrap {
+  filter: drop-shadow(0 28px 56px rgba(0, 0, 0, 0.5));
+}
+
+.profile-flipbook__book-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 20;
+  width: 4px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.55) 48%,
+    rgba(0, 0, 0, 0.55) 52%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+@media (min-width: 769px) {
+  .profile-flipbook__book-wrap::after {
+    opacity: 1;
+  }
+
+  .profile-flipbook__book-wrap.is-at-start::after,
+  .profile-flipbook__book-wrap.is-at-end::after {
+    opacity: 0;
+  }
+}
+
+.stf__parent {
+  margin: 0 auto;
+  background: #070d17 !important;
+}
+
+.stf__wrapper {
+  background: #070d17 !important;
+}
+
+.stf__block {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #070d17 !important;
+  outline: 1px solid rgba(7, 13, 23, 0.98);
+  outline-offset: -1px;
+}
+
+.stf__item {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  background: #070d17 !important;
+}
+
+.stf__item .brochure-page {
+  border-radius: 0;
+}
+
+.stf__outerShadow {
+  opacity: 0.72 !important;
+}
+
+.stf__innerShadow {
+  opacity: 0.82 !important;
+}
+
+.stf__hardShadow {
+  opacity: 0.65 !important;
+}
+
+.stf__hardInnerShadow {
+  opacity: 0.55 !important;
+}
