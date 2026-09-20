@@ -2212,7 +2212,7 @@ function renderMedicalsLicensingHeroGraphic(base) {
                 <div class="medicals-licensing-hero-graphic__orb medicals-licensing-hero-graphic__orb--medical"></div>
                 <div class="medicals-licensing-hero-graphic__card-wrap">
                   <div class="medicals-licensing-hero-graphic__licence">
-                    <img class="medicals-licensing-hero-graphic__licence-img" src="${base}images/product/licence-front-cms.png" alt="" width="548" height="352" loading="eager" decoding="async" />
+                    <img class="medicals-licensing-hero-graphic__licence-img" src="${base}images/product/uk-train-driving-licence-specimen.jpg" alt="" width="1200" height="800" loading="eager" decoding="async" />
                   </div>
                   <div class="medicals-licensing-hero-graphic__monitor">
                     <div class="medicals-licensing-hero-graphic__monitor-head">

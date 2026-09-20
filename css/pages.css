@@ -449,7 +449,8 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 0.65rem;
+  object-fit: contain;
+  object-position: center top;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
