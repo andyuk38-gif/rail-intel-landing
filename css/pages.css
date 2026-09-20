@@ -405,7 +405,7 @@
 
 .medicals-licensing-hero-graphic__stage {
   position: relative;
-  min-height: 15rem;
+  min-height: 19rem;
   perspective: 1200px;
   perspective-origin: 50% 42%;
 }
@@ -438,7 +438,7 @@
 .medicals-licensing-hero-graphic__card-wrap {
   position: relative;
   z-index: 1;
-  padding: 1.35rem 0.75rem 1.75rem;
+  padding: 1.35rem 0.75rem 0.5rem;
   transform-style: preserve-3d;
 }
 
@@ -470,35 +470,181 @@
   border-radius: inherit;
 }
 
-.medicals-licensing-hero-graphic__ecg-panel {
+.medicals-licensing-hero-graphic__scan-wash {
   position: absolute;
-  inset: auto 0 0;
-  height: 42%;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0) 0%, rgba(2, 6, 23, 0.55) 38%, rgba(2, 6, 23, 0.82) 100%);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.06) 0%,
+    transparent 32%,
+    transparent 68%,
+    rgba(16, 185, 129, 0.08) 100%
+  );
   pointer-events: none;
 }
 
-.medicals-licensing-hero-graphic__ecg {
+.medicals-licensing-hero-graphic__scan-beam {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.55rem;
-  height: 3.4rem;
-  padding: 0 0.65rem;
-  color: #34d399;
-  filter: drop-shadow(0 0 12px rgba(52, 211, 153, 0.65));
+  left: 0.65rem;
+  right: 0.65rem;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #34d399 18%, #6ee7b7 50%, #34d399 82%, transparent);
+  box-shadow:
+    0 0 14px rgba(52, 211, 153, 0.9),
+    0 0 28px rgba(16, 185, 129, 0.45);
+  filter: blur(0.2px);
+  animation: medicals-licensing-scan-beam 2.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.medicals-licensing-hero-graphic__ecg path {
+.medicals-licensing-hero-graphic__heartbeat {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  color: #fff;
+  z-index: 2;
+}
+
+.medicals-licensing-hero-graphic__heartbeat svg {
+  position: relative;
+  z-index: 1;
+  width: 1.05rem;
+  height: 1.05rem;
+  animation: medicals-licensing-heartbeat 1.15s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(248, 113, 113, 0.65));
+}
+
+.medicals-licensing-hero-graphic__heartbeat-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  background: rgba(239, 68, 68, 0.22);
+  animation: medicals-licensing-heartbeat-ring 1.15s ease-out infinite;
+}
+
+.medicals-licensing-hero-graphic__heartbeat-ring:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+.medicals-licensing-hero-graphic__monitor {
+  position: relative;
+  margin-top: 0.85rem;
+  padding: 0.65rem 0.7rem 0.7rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transform: rotateY(-14deg) rotateX(9deg) rotateZ(-1.5deg);
+  transform-origin: top center;
+}
+
+.medicals-licensing-hero-graphic__monitor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.medicals-licensing-hero-graphic__monitor-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.medicals-licensing-hero-graphic__monitor-heart {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: #f87171;
+  animation: medicals-licensing-heartbeat 1.15s ease-in-out infinite;
+}
+
+.medicals-licensing-hero-graphic__monitor-bpm {
+  color: #34d399;
+  font-variant-numeric: tabular-nums;
+}
+
+.medicals-licensing-hero-graphic__monitor-bpm-value {
+  display: inline-block;
+  animation: medicals-licensing-bpm-pulse 1.15s ease-in-out infinite;
+}
+
+.medicals-licensing-hero-graphic__monitor-screen {
+  position: relative;
+  height: 4.25rem;
+  overflow: hidden;
+  border-radius: 0.55rem;
+  background: #020617;
+  border: 1px solid rgba(52, 211, 153, 0.14);
+}
+
+.medicals-licensing-hero-graphic__monitor-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(52, 211, 153, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
+  background-size: 1rem 1rem;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.medicals-licensing-hero-graphic__monitor-trace {
+  position: absolute;
+  inset: 0.35rem 0;
+  width: 100%;
+  height: calc(100% - 0.7rem);
+  color: #34d399;
+  filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.55));
+}
+
+.medicals-licensing-hero-graphic__monitor-trace path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.6;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  stroke-dasharray: 420;
-  stroke-dashoffset: 420;
-  animation: medicals-licensing-ecg-draw 3.2s linear infinite;
+  stroke-dasharray: 560;
+  stroke-dashoffset: 560;
+  animation: medicals-licensing-ecg-scan 2.8s linear infinite;
+}
+
+.medicals-licensing-hero-graphic__monitor-cursor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #6ee7b7 18%, #34d399 50%, #6ee7b7 82%, transparent);
+  box-shadow:
+    0 0 12px rgba(52, 211, 153, 0.95),
+    0 0 24px rgba(16, 185, 129, 0.45);
+  animation: medicals-licensing-ecg-cursor 2.8s linear infinite;
+  pointer-events: none;
+}
+
+.medicals-licensing-hero-graphic__monitor-cursor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 36px;
+  background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.16), transparent);
 }
 
 .medicals-licensing-hero-graphic__sheen {
@@ -528,31 +674,6 @@
   pointer-events: none;
 }
 
-.medicals-licensing-hero-graphic__badge {
-  position: absolute;
-  top: 0.35rem;
-  right: -0.15rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
-  border-radius: 50%;
-  color: #fff;
-  background: linear-gradient(145deg, #34d399, #059669);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow:
-    0 10px 24px rgba(16, 185, 129, 0.42),
-    0 0 0 6px rgba(16, 185, 129, 0.12);
-  transform: translateZ(36px);
-  animation: medicals-licensing-badge-pulse 2.4s ease-in-out infinite;
-}
-
-.medicals-licensing-hero-graphic__badge svg {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
 @keyframes medicals-licensing-card-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -563,10 +684,48 @@
   50% { transform: translate3d(8px, -10px, 0) scale(1.08); opacity: 1; }
 }
 
-@keyframes medicals-licensing-ecg-draw {
-  0% { stroke-dashoffset: 420; opacity: 0.55; }
-  20% { opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0.85; }
+@keyframes medicals-licensing-scan-beam {
+  0% { top: 12%; opacity: 0.45; }
+  12% { opacity: 1; }
+  50% { top: 78%; opacity: 1; }
+  88% { opacity: 1; }
+  100% { top: 12%; opacity: 0.45; }
+}
+
+@keyframes medicals-licensing-ecg-scan {
+  0% { stroke-dashoffset: 560; opacity: 0.35; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.35; }
+}
+
+@keyframes medicals-licensing-ecg-cursor {
+  0% { left: 0; opacity: 0; }
+  4% { opacity: 1; }
+  96% { opacity: 1; }
+  100% { left: calc(100% - 2px); opacity: 0; }
+}
+
+@keyframes medicals-licensing-heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.18); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  56% { transform: scale(1); }
+}
+
+@keyframes medicals-licensing-heartbeat-ring {
+  0% { transform: scale(0.7); opacity: 0.75; }
+  70% { opacity: 0.2; }
+  100% { transform: scale(1.85); opacity: 0; }
+}
+
+@keyframes medicals-licensing-bpm-pulse {
+  0%, 100% { opacity: 0.72; }
+  14% { opacity: 1; }
+  28% { opacity: 0.72; }
+  42% { opacity: 0.92; }
+  56% { opacity: 0.72; }
 }
 
 @keyframes medicals-licensing-sheen {
@@ -574,17 +733,13 @@
   50% { opacity: 0.75; transform: translateX(8%); }
 }
 
-@keyframes medicals-licensing-badge-pulse {
-  0%, 100% { box-shadow: 0 10px 24px rgba(16, 185, 129, 0.42), 0 0 0 6px rgba(16, 185, 129, 0.12); }
-  50% { box-shadow: 0 12px 28px rgba(16, 185, 129, 0.55), 0 0 0 10px rgba(16, 185, 129, 0.18); }
-}
-
 @media (max-width: 900px) {
   .medicals-licensing-hero-graphic {
     margin-inline: auto;
   }
 
-  .medicals-licensing-hero-graphic__card-frame {
+  .medicals-licensing-hero-graphic__card-frame,
+  .medicals-licensing-hero-graphic__monitor {
     transform: rotateY(-8deg) rotateX(6deg);
   }
 }
@@ -593,14 +748,24 @@
   .medicals-licensing-hero-graphic__card,
   .medicals-licensing-hero-graphic__orb,
   .medicals-licensing-hero-graphic__sheen,
-  .medicals-licensing-hero-graphic__badge,
-  .medicals-licensing-hero-graphic__ecg path {
+  .medicals-licensing-hero-graphic__scan-beam,
+  .medicals-licensing-hero-graphic__heartbeat svg,
+  .medicals-licensing-hero-graphic__heartbeat-ring,
+  .medicals-licensing-hero-graphic__monitor-heart,
+  .medicals-licensing-hero-graphic__monitor-bpm-value,
+  .medicals-licensing-hero-graphic__monitor-cursor,
+  .medicals-licensing-hero-graphic__monitor-trace path {
     animation: none;
   }
 
-  .medicals-licensing-hero-graphic__ecg path {
+  .medicals-licensing-hero-graphic__monitor-trace path {
     stroke-dashoffset: 0;
     opacity: 0.9;
+  }
+
+  .medicals-licensing-hero-graphic__monitor-cursor {
+    left: calc(100% - 2px);
+    opacity: 0.65;
   }
 }
 
