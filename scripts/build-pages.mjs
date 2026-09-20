@@ -1108,8 +1108,39 @@ ${asideInner}
     </section>`;
 }
 
+function renderSectionBody(section, base) {
+  const paragraphs = section.body || [];
+  if (!section.bodyShot) {
+    return paragraphs.map((text) => `          <p>${rich(text)}</p>`).join("\n");
+  }
+
+  const after = section.bodyShot.after ?? 0;
+  const shotFigure = renderShot(
+    {
+      ...section.bodyShot,
+      full: true,
+      scale: section.bodyShot.scale ?? 1,
+      hideCaption: section.bodyShot.hideCaption ?? !section.bodyShot.caption,
+      noExpand: section.bodyShot.noExpand ?? true,
+    },
+    base,
+    { fill: true }
+  );
+  const parts = [];
+
+  paragraphs.forEach((text, index) => {
+    parts.push(`          <p>${rich(text)}</p>`);
+    if (index === after) {
+      parts.push(`          <div class="page-section__body-shot">
+${shotFigure}          </div>`);
+    }
+  });
+
+  return parts.join("\n");
+}
+
 function renderSection(section, base) {
-  const body = (section.body || []).map((text) => `          <p>${rich(text)}</p>`).join("\n");
+  const body = renderSectionBody(section, base);
 
   const bullets = section.bulletTiles
     ? renderSpecTiles(section)

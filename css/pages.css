@@ -1571,6 +1571,22 @@
   max-width: none;
 }
 
+.page-section__body-shot {
+  margin: 1.25rem 0 1.5rem;
+  max-width: none;
+}
+
+.page-section__body-shot .shot {
+  max-width: none !important;
+  margin: 0;
+}
+
+.page-section__body-shot .shot__frame--fullwidth img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
 .shot-grid--full {
   grid-template-columns: 1fr;
   margin-top: 2.5rem;
