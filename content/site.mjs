@@ -1268,6 +1268,7 @@ export const featureGroups = [
       "Safety-critical duties are not available until the record is current; only non-safety-critical work remains possible. Rail Intel monitors every deadline and surfaces the position on the dashboard and in reporting, rather than leaving it to be noticed.",
     ],
     heroGraphic: "medicals-licensing",
+    hideCta: true,
     heroActions: [
       { href: "#medicals", label: "Medicals", primary: true },
       { href: "#licensing", label: "Licensing", ghost: true },
@@ -1343,6 +1344,7 @@ export const featureGroups = [
       },
       {
         heading: "Complementary certificates",
+        fullWidth: true,
         body: [
           "The complementary certificate (Part B) is held alongside the licence, covering the infrastructure, traction and routes the driver is certified for.",
         ],

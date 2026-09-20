@@ -291,10 +291,7 @@ export const seoExtensions = {
           "Yes. Part B certificates are held with the licence, covering infrastructure, traction and routes the driver is certified for.",
       },
     ],
-    relatedLinks: [
-      { name: "Medication Checks add-on", href: "products/medication-checks.html" },
-      { name: "QA Verifications", href: "products/qa-verifications.html" },
-    ],
+    relatedLinks: [],
   },
 
   "incidents-monitoring": {
