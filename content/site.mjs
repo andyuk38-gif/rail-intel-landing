@@ -1126,7 +1126,7 @@ export const featureGroups = [
     heroShot: {
       src: "images/product/printable-profile-hero.png",
       alt:
-        "Rail professional holding a printed Rail Intel Employee Profile brochure, showing the full-colour front cover.",
+        "Rail professional holding a printed Rail Intel Employee Profile brochure, matching the full-colour record layout.",
       scale: 0.5,
       bordered: true,
       eager: true,

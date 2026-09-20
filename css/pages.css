@@ -860,6 +860,7 @@
   }
 }
 
+/* Printable Profile hero — natural tones, white page edges */
 .page-hero--printable-profile .page-hero__media .shot--bordered {
   margin-left: auto;
   max-width: min(100%, 28rem);
