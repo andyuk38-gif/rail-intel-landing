@@ -168,6 +168,12 @@
       updateControls(event.data);
     });
 
+    flipInstance.on("changeState", function (event) {
+      if (!wrap) return;
+      var flipping = event.data === "user_fold" || event.data === "fold_corner" || event.data === "flipping";
+      wrap.classList.toggle("is-flipping", flipping);
+    });
+
     updateControls(flipInstance.getCurrentPageIndex());
   }
 

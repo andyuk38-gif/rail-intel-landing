@@ -56,7 +56,24 @@ function sectionLabel(text) {
 }
 
 function sectionIntro(text) {
-  return `<p class="brochure-section-intro">${esc(text)}</p>`;
+  return `<article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>${esc(text)}</p></div>
+  </article>`;
+}
+
+function declarationPane(title, copy, signaturesHtml) {
+  return `<article class="brochure-card brochure-card--declaration">
+    <h3 class="brochure-card__title">${esc(title)}</h3>
+    <div class="brochure-card__prose"><p>${esc(copy)}</p></div>
+    <div class="brochure-declaration__signatures">${signaturesHtml}</div>
+  </article>`;
+}
+
+function contentsPane(title, listHtml) {
+  return `<article class="brochure-card brochure-card--contents">
+    <h3 class="brochure-card__title">${esc(title)}</h3>
+    <ol class="brochure-contents__list">${listHtml}</ol>
+  </article>`;
 }
 
 function proseCard(title, paragraphs) {
@@ -156,24 +173,26 @@ function renderCoverPage(base) {
           </div>
           <p class="brochure-cover__stamp">Confidential · not for onward disclosure</p>
         </div>
-        <aside class="brochure-cover__notice">
-          <h3>Data protection notice</h3>
-          <p>This document contains personal and special category data. Handle, store and dispose of it in line with UK GDPR, the Data Protection Act 2018 and applicable data protection laws in your jurisdiction.</p>
-        </aside>
-        <footer class="brochure-cover__footer">
-          <div>
-            <span class="brochure-cover__footer-label">Reference</span>
-            <span class="brochure-cover__footer-value">RV-PROFILE-EXAMPLE</span>
+        <article class="brochure-card brochure-cover__bottom-pane">
+          <div class="brochure-cover__notice">
+            <h3>Data protection notice</h3>
+            <p>This document contains personal and special category data. Handle, store and dispose of it in line with UK GDPR, the Data Protection Act 2018 and applicable data protection laws in your jurisdiction.</p>
           </div>
-          <div>
-            <span class="brochure-cover__footer-label">Produced</span>
-            <span class="brochure-cover__footer-value">${placeholder}</span>
+          <div class="brochure-cover__footer">
+            <div>
+              <span class="brochure-cover__footer-label">Reference</span>
+              <span class="brochure-cover__footer-value">RV-PROFILE-EXAMPLE</span>
+            </div>
+            <div>
+              <span class="brochure-cover__footer-label">Produced</span>
+              <span class="brochure-cover__footer-value">${placeholder}</span>
+            </div>
+            <div>
+              <span class="brochure-cover__footer-label">Produced by</span>
+              <span class="brochure-cover__footer-value">${placeholder}</span>
+            </div>
           </div>
-          <div>
-            <span class="brochure-cover__footer-label">Produced by</span>
-            <span class="brochure-cover__footer-value">${placeholder}</span>
-          </div>
-        </footer>
+        </article>
       </div>
     </div>
   </div>`;
@@ -198,16 +217,16 @@ function renderContentsPage() {
           field("Licence expiry", "11 Jan 2028"),
         ].join("")
       )}
-      <div class="brochure-contents">
-        <h3 class="brochure-contents__heading">Contents</h3>
-        <ol class="brochure-contents__list">
+      ${contentsPane(
+        "Contents",
+        `
           <li><span class="brochure-contents__num">01</span><span class="brochure-contents__text"><strong>Personal details & employment</strong><em>Personal & contact details · Employment & status</em></span><span class="brochure-contents__part">Part 2</span></li>
           <li><span class="brochure-contents__num">02</span><span class="brochure-contents__text"><strong>Licence & cab passes</strong><em>Train driving licence · Issued cab passes</em></span><span class="brochure-contents__part">Part 3</span></li>
           <li><span class="brochure-contents__num">03</span><span class="brochure-contents__text"><strong>Competence & training</strong><em>Route competence · Qualifications · Training records</em></span><span class="brochure-contents__part">Part 4</span></li>
           <li><span class="brochure-contents__num">04</span><span class="brochure-contents__text"><strong>Assessment cycles</strong><em>Assigned cycles · Cycle status</em></span><span class="brochure-contents__part">Part 5</span></li>
           <li><span class="brochure-contents__num">05</span><span class="brochure-contents__text"><strong>Medicals & fitness</strong><em>Medical examinations · Fitness declarations</em></span><span class="brochure-contents__part">Part 6</span></li>
-        </ol>
-      </div>`;
+        `
+      )}`;
   return contentsPage("Summary & contents", body, 1, false);
 }
 
@@ -224,10 +243,10 @@ function renderContentsContinuedPage() {
           field("Classification", "Confidential"),
         ].join("")
       )}
-      <div class="brochure-declaration">
-        <h3 class="brochure-declaration__heading">Declaration</h3>
-        <p>I confirm this profile was generated from the live employee record for authorised business use. All sections reflect the data held in Rail Intel at the time of production.</p>
-        <div class="brochure-declaration__signatures">
+      ${declarationPane(
+        "Declaration",
+        "I confirm this profile was generated from the live employee record for authorised business use. All sections reflect the data held in Rail Intel at the time of production.",
+        `
           <div class="brochure-signature">
             <span class="brochure-signature__mark" aria-hidden="true">J. Porter</span>
             <span class="brochure-signature__label">Produced by (signature)</span>
@@ -237,8 +256,9 @@ function renderContentsContinuedPage() {
             <span class="brochure-signature__line" aria-hidden="true"></span>
             <span class="brochure-signature__label">Received by (signature & date)</span>
           </div>
-        </div>
-      </div>`;
+        `
+      )}
+      ${sectionIntro("Handle printed copies securely, limit disclosure to those with a business need, and dispose of them when no longer required in line with your organisation's data protection policy.")}`;
   return contentsPage("Summary & contents", body, 1, true);
 }
 
@@ -287,21 +307,10 @@ function renderPersonalContinuedPage() {
           field("Start date", "03 Jun 2014"),
           field("Company", "Northern Rail Services"),
           field("Work status", "Active"),
-          field("Additional roles", "Mentor · Route trainer"),
           field("Monitoring status", "Standard cycle"),
         ].join("")
       )}
-      ${card(
-        "Employment history",
-        [
-          field("Previous role", "Trainee Driver"),
-          field("Previous depot", "Leeds Neville Hill"),
-          field("Promotion date", "03 Jun 2016"),
-          field("Line manager", "James Porter"),
-          field("Contract type", "Permanent — full time"),
-          field("Union membership", "ASLEF"),
-        ].join("")
-      )}`;
+      ${sectionIntro("Position and history fields reflect the live HR record. Printed profiles retain the assessing manager and monitoring status for competence oversight.")}`;
   return detailPage("Personal details & employment", body, 2, true);
 }
 
@@ -356,7 +365,8 @@ function renderLicenceContinuedPage() {
           field("Route restrictions", "None recorded"),
           field("Next review", "01 Apr 2027"),
         ].join("")
-      )}`;
+      )}
+      ${sectionIntro("Endorsements are renewed through formal route knowledge assessments. Printed profiles show endorsement date and validity for depot verification.")}`;
   return detailPage("Licence & cab passes", body, 3, true);
 }
 
@@ -393,17 +403,6 @@ function renderCompetenceContinuedPage() {
   const body = `
       ${sectionIntro("Training and qualifications are maintained in line with operator standards and industry requirements. Mandatory safety training is refreshed on a fixed cycle; competence refreshes are triggered by route changes or at the assessment interval defined in the employee cycle.")}
       ${sectionLabel("Training & qualifications")}
-      ${card(
-        "Training summary",
-        [
-          field("Qualifications held", "2 current certificates"),
-          field("Training completed (12 mths)", "3 courses"),
-          field("Mandatory items due", "None overdue"),
-          field("Last course attended", "01 Sep 2026"),
-          field("Training provider", "Northern Academy"),
-          field("Development plan", "No open actions"),
-        ].join("")
-      )}
       ${tableCard(
         "Qualifications",
         ["Qualification", "Type", "Certificate no.", "Obtained", "Expires"],
@@ -496,7 +495,6 @@ function renderMedicalsPage() {
         ],
         true
       )}
-      ${sectionLabel("Declarations")}
       ${card(
         "Latest fitness declaration",
         [
@@ -506,6 +504,8 @@ function renderMedicalsPage() {
           field("Next review", "28 Feb 2028"),
           field("Declared by", "Sarah Mitchell"),
           field("Reviewed by", "James Porter"),
+          field("Fitness category", "Safety critical"),
+          field("Night working", "Approved"),
         ].join("")
       )}`;
   return detailPage("Medicals & fitness", body, 6, false);
@@ -514,15 +514,16 @@ function renderMedicalsPage() {
 function renderMedicalsContinuedPage() {
   const body = `
       ${sectionIntro("Occupational health referrals, medical history and any restrictions are retained on the live record. Historic examinations provide an audit trail for safety-critical fitness decisions.")}
+      ${sectionLabel("Occupational health & history")}
       ${card(
-        "Occupational health",
+        "Occupational health & restrictions",
         [
           field("OH referral status", "Not required"),
-          field("Return-to-work plan", "Not applicable"),
           field("Last medication check", "01 Sep 2026"),
           field("Fitness category", "Safety critical"),
           field("Colour vision", "Normal — passed"),
-          field("Hearing standard", "Category A — passed"),
+          field("Driving restrictions", "None recorded"),
+          field("Corrective lenses", "Required — prescription held"),
         ].join("")
       )}
       ${tableCard(
@@ -531,20 +532,10 @@ function renderMedicalsContinuedPage() {
         [
           ["Periodic medical", "28 Feb 2024", pill("Fit"), "No restrictions"],
           ["Periodic medical", "01 Mar 2022", pill("Fit"), "Renewed without conditions"],
-          ["Night working assessment", "01 Mar 2022", pill("Approved"), "No conditions"],
-          ["Medication review", "01 Sep 2026", pill("Clear"), "No safety-critical impact"],
         ],
         true
       )}
-      ${card(
-        "Restrictions & adaptations",
-        [
-          field("Driving restrictions", "None recorded"),
-          field("Route restrictions", "None recorded"),
-          field("Corrective lenses", "Required — current prescription held"),
-          field("OH follow-up", "Not required"),
-        ].join("")
-      )}`;
+      ${sectionIntro("Any driving or route restrictions are shown prominently. Corrective lens requirements and occupational health follow-up dates are included for formal competence packs.")}`;
   return detailPage("Medicals & fitness", body, 6, true);
 }
 

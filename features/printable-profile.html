@@ -31,9 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=47827079" />
-  <link rel="stylesheet" href="../css/pages.css?v=47827079" />
-  <link rel="stylesheet" href="../css/profile-flipbook.css?v=47827079" />
+  <link rel="stylesheet" href="../css/style.css?v=15122705" />
+  <link rel="stylesheet" href="../css/pages.css?v=15122705" />
+  <link rel="stylesheet" href="../css/profile-flipbook.css?v=15122705" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -262,7 +262,7 @@
           <div class="page-hero__media">
         <figure class="shot shot--bordered reveal">
           <div class="shot__frame" style="--shot-native-width: 512px" data-no-expand="">
-            <img src="../images/product/printable-profile-hero.png?v=47827079" alt="Rail professional holding a printed Rail Intel Employee Profile brochure, matching the full-colour record layout." width="512" height="512" loading="eager" decoding="sync" />
+            <img src="../images/product/printable-profile-hero.png?v=15122705" alt="Rail professional holding a printed Rail Intel Employee Profile brochure, matching the full-colour record layout." width="512" height="512" loading="eager" decoding="sync" />
           </div>
         </figure>
           </div>
@@ -337,24 +337,26 @@
           </div>
           <p class="brochure-cover__stamp">Confidential · not for onward disclosure</p>
         </div>
-        <aside class="brochure-cover__notice">
-          <h3>Data protection notice</h3>
-          <p>This document contains personal and special category data. Handle, store and dispose of it in line with UK GDPR, the Data Protection Act 2018 and applicable data protection laws in your jurisdiction.</p>
-        </aside>
-        <footer class="brochure-cover__footer">
-          <div>
-            <span class="brochure-cover__footer-label">Reference</span>
-            <span class="brochure-cover__footer-value">RV-PROFILE-EXAMPLE</span>
+        <article class="brochure-card brochure-cover__bottom-pane">
+          <div class="brochure-cover__notice">
+            <h3>Data protection notice</h3>
+            <p>This document contains personal and special category data. Handle, store and dispose of it in line with UK GDPR, the Data Protection Act 2018 and applicable data protection laws in your jurisdiction.</p>
           </div>
-          <div>
-            <span class="brochure-cover__footer-label">Produced</span>
-            <span class="brochure-cover__footer-value">—</span>
+          <div class="brochure-cover__footer">
+            <div>
+              <span class="brochure-cover__footer-label">Reference</span>
+              <span class="brochure-cover__footer-value">RV-PROFILE-EXAMPLE</span>
+            </div>
+            <div>
+              <span class="brochure-cover__footer-label">Produced</span>
+              <span class="brochure-cover__footer-value">—</span>
+            </div>
+            <div>
+              <span class="brochure-cover__footer-label">Produced by</span>
+              <span class="brochure-cover__footer-value">—</span>
+            </div>
           </div>
-          <div>
-            <span class="brochure-cover__footer-label">Produced by</span>
-            <span class="brochure-cover__footer-value">—</span>
-          </div>
-        </footer>
+        </article>
       </div>
     </div>
   </div>
@@ -397,16 +399,16 @@
     <span class="brochure-field__value">11 Jan 2028</span>
   </div></div>
   </article>
-      <div class="brochure-contents">
-        <h3 class="brochure-contents__heading">Contents</h3>
-        <ol class="brochure-contents__list">
+      <article class="brochure-card brochure-card--contents">
+    <h3 class="brochure-card__title">Contents</h3>
+    <ol class="brochure-contents__list">
           <li><span class="brochure-contents__num">01</span><span class="brochure-contents__text"><strong>Personal details & employment</strong><em>Personal & contact details · Employment & status</em></span><span class="brochure-contents__part">Part 2</span></li>
           <li><span class="brochure-contents__num">02</span><span class="brochure-contents__text"><strong>Licence & cab passes</strong><em>Train driving licence · Issued cab passes</em></span><span class="brochure-contents__part">Part 3</span></li>
           <li><span class="brochure-contents__num">03</span><span class="brochure-contents__text"><strong>Competence & training</strong><em>Route competence · Qualifications · Training records</em></span><span class="brochure-contents__part">Part 4</span></li>
           <li><span class="brochure-contents__num">04</span><span class="brochure-contents__text"><strong>Assessment cycles</strong><em>Assigned cycles · Cycle status</em></span><span class="brochure-contents__part">Part 5</span></li>
           <li><span class="brochure-contents__num">05</span><span class="brochure-contents__text"><strong>Medicals & fitness</strong><em>Medical examinations · Fitness declarations</em></span><span class="brochure-contents__part">Part 6</span></li>
         </ol>
-      </div></div>
+  </article></div>
     </div>
     <footer class="brochure-page__footer">
     <span>Sarah Mitchell — confidential employee record</span>
@@ -447,10 +449,10 @@
     <span class="brochure-field__value">Confidential</span>
   </div></div>
   </article>
-      <div class="brochure-declaration">
-        <h3 class="brochure-declaration__heading">Declaration</h3>
-        <p>I confirm this profile was generated from the live employee record for authorised business use. All sections reflect the data held in Rail Intel at the time of production.</p>
-        <div class="brochure-declaration__signatures">
+      <article class="brochure-card brochure-card--declaration">
+    <h3 class="brochure-card__title">Declaration</h3>
+    <div class="brochure-card__prose"><p>I confirm this profile was generated from the live employee record for authorised business use. All sections reflect the data held in Rail Intel at the time of production.</p></div>
+    <div class="brochure-declaration__signatures">
           <div class="brochure-signature">
             <span class="brochure-signature__mark" aria-hidden="true">J. Porter</span>
             <span class="brochure-signature__label">Produced by (signature)</span>
@@ -461,7 +463,10 @@
             <span class="brochure-signature__label">Received by (signature & date)</span>
           </div>
         </div>
-      </div></div>
+  </article>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Handle printed copies securely, limit disclosure to those with a business need, and dispose of them when no longer required in line with your organisation's data protection policy.</p></div>
+  </article></div>
     </div>
     <footer class="brochure-page__footer">
     <span>Sarah Mitchell — confidential employee record</span>
@@ -480,7 +485,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Personal and contact details are taken from the employee record at export for depot verification and formal competence packs.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Personal and contact details are taken from the employee record at export for depot verification and formal competence packs.</p></div>
+  </article>
       <p class="brochure-section-label">Personal &amp; contact details</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Identity</h3>
@@ -541,7 +548,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Employment status, role history and organisational details confirm the employee's current position and reporting line. This section supports rostering checks and management review.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Employment status, role history and organisational details confirm the employee's current position and reporting line. This section supports rostering checks and management review.</p></div>
+  </article>
       <p class="brochure-section-label">Employment &amp; status</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Emergency contact</h3>
@@ -577,34 +586,12 @@
     <span class="brochure-field__label">Work status</span>
     <span class="brochure-field__value">Active</span>
   </div><div class="brochure-field">
-    <span class="brochure-field__label">Additional roles</span>
-    <span class="brochure-field__value">Mentor · Route trainer</span>
-  </div><div class="brochure-field">
     <span class="brochure-field__label">Monitoring status</span>
     <span class="brochure-field__value">Standard cycle</span>
   </div></div>
   </article>
-      <article class="brochure-card">
-    <h3 class="brochure-card__title">Employment history</h3>
-    <div class="brochure-card__grid"><div class="brochure-field">
-    <span class="brochure-field__label">Previous role</span>
-    <span class="brochure-field__value">Trainee Driver</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Previous depot</span>
-    <span class="brochure-field__value">Leeds Neville Hill</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Promotion date</span>
-    <span class="brochure-field__value">03 Jun 2016</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Line manager</span>
-    <span class="brochure-field__value">James Porter</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Contract type</span>
-    <span class="brochure-field__value">Permanent — full time</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Union membership</span>
-    <span class="brochure-field__value">ASLEF</span>
-  </div></div>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Position and history fields reflect the live HR record. Printed profiles retain the assessing manager and monitoring status for competence oversight.</p></div>
   </article></div>
     </div>
     <footer class="brochure-page__footer">
@@ -624,7 +611,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">The train driving licence and issued cab passes confirm legal authority to drive and access the network. Both are checked against the live record before dispatch and rostering.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>The train driving licence and issued cab passes confirm legal authority to drive and access the network. Both are checked against the live record before dispatch and rostering.</p></div>
+  </article>
       <p class="brochure-section-label">Train driving licence</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Licence details</h3>
@@ -674,7 +663,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Route knowledge endorsements confirm which lines and traction types the driver may operate. Digital cab passes and route endorsements are checked together before dispatch.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Route knowledge endorsements confirm which lines and traction types the driver may operate. Digital cab passes and route endorsements are checked together before dispatch.</p></div>
+  </article>
       <p class="brochure-section-label">Route knowledge endorsements</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Endorsed routes</h3>
@@ -698,6 +689,9 @@
     <span class="brochure-field__label">Next review</span>
     <span class="brochure-field__value">01 Apr 2027</span>
   </div></div>
+  </article>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Endorsements are renewed through formal route knowledge assessments. Printed profiles show endorsement date and validity for depot verification.</p></div>
   </article></div>
     </div>
     <footer class="brochure-page__footer">
@@ -717,7 +711,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Route and traction competence is drawn from the live record at the moment of export. Assessments show the routes, traction types and validity periods currently held by the employee.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Route and traction competence is drawn from the live record at the moment of export. Assessments show the routes, traction types and validity periods currently held by the employee.</p></div>
+  </article>
       <p class="brochure-section-label">Trains &amp; routes competence</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Competence summary</h3>
@@ -766,30 +762,10 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Training and qualifications are maintained in line with operator standards and industry requirements. Mandatory safety training is refreshed on a fixed cycle; competence refreshes are triggered by route changes or at the assessment interval defined in the employee cycle.</p>
-      <p class="brochure-section-label">Training &amp; qualifications</p>
-      <article class="brochure-card">
-    <h3 class="brochure-card__title">Training summary</h3>
-    <div class="brochure-card__grid"><div class="brochure-field">
-    <span class="brochure-field__label">Qualifications held</span>
-    <span class="brochure-field__value">2 current certificates</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Training completed (12 mths)</span>
-    <span class="brochure-field__value">3 courses</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Mandatory items due</span>
-    <span class="brochure-field__value">None overdue</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Last course attended</span>
-    <span class="brochure-field__value">01 Sep 2026</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Training provider</span>
-    <span class="brochure-field__value">Northern Academy</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Development plan</span>
-    <span class="brochure-field__value">No open actions</span>
-  </div></div>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Training and qualifications are maintained in line with operator standards and industry requirements. Mandatory safety training is refreshed on a fixed cycle; competence refreshes are triggered by route changes or at the assessment interval defined in the employee cycle.</p></div>
   </article>
+      <p class="brochure-section-label">Training &amp; qualifications</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Qualifications</h3>
     <table class="brochure-table brochure-table--compact">
@@ -822,7 +798,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Assessment cycles group formal competence checks into a managed review period. The active cycle shows progress, outstanding items and the assessor responsible for sign-off.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Assessment cycles group formal competence checks into a managed review period. The active cycle shows progress, outstanding items and the assessor responsible for sign-off.</p></div>
+  </article>
       <p class="brochure-section-label">Cycle overview</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Assigned cycles</h3>
@@ -871,7 +849,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Individual assessments within the current cycle are listed with due dates, completion status and outcomes. Monitoring notes capture assessor commentary and any follow-up actions.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Individual assessments within the current cycle are listed with due dates, completion status and outcomes. Monitoring notes capture assessor commentary and any follow-up actions.</p></div>
+  </article>
       <p class="brochure-section-label">Assessments in current cycle</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Completed &amp; planned</h3>
@@ -920,7 +900,9 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Medical fitness records confirm the employee meets safety-critical standards. Examinations, screening results and declarations are reproduced from the occupational health record.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Medical fitness records confirm the employee meets safety-critical standards. Examinations, screening results and declarations are reproduced from the occupational health record.</p></div>
+  </article>
       <p class="brochure-section-label">Medical examinations</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Fitness records</h3>
@@ -929,7 +911,6 @@
       <tbody><tr><td>Periodic medical (safety critical)</td><td>28 Feb 2026</td><td><span class="brochure-pill brochure-pill--ok">Fit</span></td><td>27 Feb 2028</td><td>Dr. H. Marsh</td></tr><tr><td>Vision screening</td><td>28 Feb 2026</td><td><span class="brochure-pill brochure-pill--ok">Pass</span></td><td>27 Feb 2028</td><td>Dr. H. Marsh</td></tr><tr><td>Audiometry</td><td>28 Feb 2026</td><td><span class="brochure-pill brochure-pill--ok">Pass</span></td><td>27 Feb 2028</td><td>Dr. H. Marsh</td></tr></tbody>
     </table>
   </article>
-      <p class="brochure-section-label">Declarations</p>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Latest fitness declaration</h3>
     <div class="brochure-card__grid"><div class="brochure-field">
@@ -950,6 +931,12 @@
   </div><div class="brochure-field">
     <span class="brochure-field__label">Reviewed by</span>
     <span class="brochure-field__value">James Porter</span>
+  </div><div class="brochure-field">
+    <span class="brochure-field__label">Fitness category</span>
+    <span class="brochure-field__value">Safety critical</span>
+  </div><div class="brochure-field">
+    <span class="brochure-field__label">Night working</span>
+    <span class="brochure-field__value">Approved</span>
   </div></div>
   </article></div>
     </div>
@@ -970,15 +957,15 @@
     <p class="brochure-page__meta">SARAH MITCHELL · RI-2847</p>
   </header>
       <div class="brochure-page__stack">
-      <p class="brochure-section-intro">Occupational health referrals, medical history and any restrictions are retained on the live record. Historic examinations provide an audit trail for safety-critical fitness decisions.</p>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Occupational health referrals, medical history and any restrictions are retained on the live record. Historic examinations provide an audit trail for safety-critical fitness decisions.</p></div>
+  </article>
+      <p class="brochure-section-label">Occupational health &amp; history</p>
       <article class="brochure-card">
-    <h3 class="brochure-card__title">Occupational health</h3>
+    <h3 class="brochure-card__title">Occupational health &amp; restrictions</h3>
     <div class="brochure-card__grid"><div class="brochure-field">
     <span class="brochure-field__label">OH referral status</span>
     <span class="brochure-field__value">Not required</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Return-to-work plan</span>
-    <span class="brochure-field__value">Not applicable</span>
   </div><div class="brochure-field">
     <span class="brochure-field__label">Last medication check</span>
     <span class="brochure-field__value">01 Sep 2026</span>
@@ -989,32 +976,22 @@
     <span class="brochure-field__label">Colour vision</span>
     <span class="brochure-field__value">Normal — passed</span>
   </div><div class="brochure-field">
-    <span class="brochure-field__label">Hearing standard</span>
-    <span class="brochure-field__value">Category A — passed</span>
+    <span class="brochure-field__label">Driving restrictions</span>
+    <span class="brochure-field__value">None recorded</span>
+  </div><div class="brochure-field">
+    <span class="brochure-field__label">Corrective lenses</span>
+    <span class="brochure-field__value">Required — prescription held</span>
   </div></div>
   </article>
       <article class="brochure-card">
     <h3 class="brochure-card__title">Medical history (summary)</h3>
     <table class="brochure-table brochure-table--compact">
       <thead><tr><th>Event</th><th>Date</th><th>Outcome</th><th>Notes</th></tr></thead>
-      <tbody><tr><td>Periodic medical</td><td>28 Feb 2024</td><td><span class="brochure-pill brochure-pill--ok">Fit</span></td><td>No restrictions</td></tr><tr><td>Periodic medical</td><td>01 Mar 2022</td><td><span class="brochure-pill brochure-pill--ok">Fit</span></td><td>Renewed without conditions</td></tr><tr><td>Night working assessment</td><td>01 Mar 2022</td><td><span class="brochure-pill brochure-pill--ok">Approved</span></td><td>No conditions</td></tr><tr><td>Medication review</td><td>01 Sep 2026</td><td><span class="brochure-pill brochure-pill--ok">Clear</span></td><td>No safety-critical impact</td></tr></tbody>
+      <tbody><tr><td>Periodic medical</td><td>28 Feb 2024</td><td><span class="brochure-pill brochure-pill--ok">Fit</span></td><td>No restrictions</td></tr><tr><td>Periodic medical</td><td>01 Mar 2022</td><td><span class="brochure-pill brochure-pill--ok">Fit</span></td><td>Renewed without conditions</td></tr></tbody>
     </table>
   </article>
-      <article class="brochure-card">
-    <h3 class="brochure-card__title">Restrictions &amp; adaptations</h3>
-    <div class="brochure-card__grid"><div class="brochure-field">
-    <span class="brochure-field__label">Driving restrictions</span>
-    <span class="brochure-field__value">None recorded</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Route restrictions</span>
-    <span class="brochure-field__value">None recorded</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">Corrective lenses</span>
-    <span class="brochure-field__value">Required — current prescription held</span>
-  </div><div class="brochure-field">
-    <span class="brochure-field__label">OH follow-up</span>
-    <span class="brochure-field__value">Not required</span>
-  </div></div>
+      <article class="brochure-card brochure-card--intro">
+    <div class="brochure-card__prose"><p>Any driving or route restrictions are shown prominently. Corrective lens requirements and occupational health follow-up dates are included for formal competence packs.</p></div>
   </article></div>
     </div>
     <footer class="brochure-page__footer">
@@ -1104,7 +1081,7 @@
           <div class="page-section__aside-media">
         <figure class="shot reveal" style="max-width: 552px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/print-before-you-print.png?v=47827079" alt="Data protection notice shown before printing an employee profile." width="552" height="830" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/print-before-you-print.png?v=15122705" alt="Data protection notice shown before printing an employee profile." width="552" height="830" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Before you print — data protection notice, format choice and signed declaration.</figcaption>
         </figure>
@@ -1287,8 +1264,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=47827079"></script>
-  <script src="../js/newsletter.js?v=47827079"></script>
-  <script src="../js/profile-flipbook.js?v=47827079"></script>
+  <script src="../js/site.js?v=15122705"></script>
+  <script src="../js/newsletter.js?v=15122705"></script>
+  <script src="../js/profile-flipbook.js?v=15122705"></script>
 </body>
 </html>
