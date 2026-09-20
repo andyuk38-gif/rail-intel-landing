@@ -1265,8 +1265,13 @@ export const featureGroups = [
     tagline: "Expiry is a date, not an opinion",
     lead:
       "Medical fitness and licensing are the hardest stops in the safety case: if either has expired, the person does not sign on. Rail Intel holds both as dated records with expiry monitoring, so the stop is enforced by the system rather than remembered by a person.",
+    heroActions: [
+      { href: "#medicals", label: "Medicals", primary: true },
+      { href: "#licensing", label: "Licensing", ghost: true },
+    ],
     sections: [
       {
+        id: "medicals",
         heading: "Medical records and fitness status",
         fullWidth: true,
         body: [
@@ -1317,6 +1322,7 @@ export const featureGroups = [
         ],
       },
       {
+        id: "licensing",
         heading: "Driving licences and categories",
         body: [
           "Train driving licences are held with the front and back images, licence number, issue and expiry dates and the categories carried. Renewal warnings appear ahead of expiry with the number of days remaining.",

@@ -1099,7 +1099,7 @@ ${bullets}
 ${copyBlock}` : `${copyBlock}
 ${media}`;
 
-  return `    <section class="page-section page-section--aside${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}">
+  return `    <section class="page-section page-section--aside${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}"${sectionIdAttr(section)}>
       <div class="container">
         <div class="page-section__aside${asideReverse ? " page-section__aside--reverse" : ""}">
 ${asideInner}
@@ -1257,7 +1257,7 @@ ${bullets}
 
   if (section.tileSplit) {
     const tileSplitShots = section.shots ? renderShotList(section.shots) : "";
-    return `    <section class="page-section${section.mod ? ` page-section--${section.mod}` : ""}">
+    return `    <section class="page-section${section.mod ? ` page-section--${section.mod}` : ""}"${sectionIdAttr(section)}>
       <div class="container">
         <div class="page-section__head">
           <h2>${renderSectionHeading(section, base)}</h2>
@@ -1275,7 +1275,7 @@ ${tileSplitShots}
     </section>`;
   }
 
-  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}">
+  return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}"${sectionIdAttr(section)}>
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
 ${headBlock}
 ${shots}
@@ -2196,6 +2196,40 @@ function renderSectionHeading(section, base) {
   return esc(section.heading);
 }
 
+function sectionIdAttr(section) {
+  return section.id ? ` id="${esc(section.id)}"` : "";
+}
+
+function renderHeroActions(group, base) {
+  if (group.hideHeroActions) return "";
+
+  const actions =
+    group.heroActions ||
+    [
+      ...(group.showAppCta === false
+        ? []
+        : [{ href: site.app, label: "Open Rail Intel", primary: true }]),
+      { href: `${base}features/`, label: "All features", ghost: true },
+    ];
+
+  const links = actions
+    .map((action) => {
+      const href =
+        action.href.startsWith("#") ||
+        action.href.startsWith("http") ||
+        action.href.startsWith("../")
+          ? action.href
+          : `${base}${action.href}`;
+      const classes = `btn btn-lg${action.primary ? " btn-primary" : action.ghost ? " btn-ghost" : ""}`;
+      return `            <a href="${esc(href)}" class="${classes}">${esc(action.label)}</a>`;
+    })
+    .join("\n");
+
+  return `          <div class="page-actions">
+${links}
+          </div>`;
+}
+
 function renderHeroRegulators(regulators, base) {
   if (!regulators?.length) return "";
 
@@ -2257,17 +2291,7 @@ function featurePage(group) {
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
           <p class="page-lead">${esc(group.lead)}</p>
-${
-  group.hideHeroActions
-    ? ""
-    : `          <div class="page-actions">
-${
-  group.showAppCta === false
-    ? ""
-    : `            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>\n`
-}            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
-          </div>`
-}${renderHeroIntro(group.heroIntro)}`;
+${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
   const heroAside = group.heroShot

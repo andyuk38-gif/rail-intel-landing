@@ -1216,6 +1216,10 @@
   }
 }
 
+.page-section[id] {
+  scroll-margin-top: calc(var(--dev-banner-height) + 5.75rem);
+}
+
 .page-section__head {
   max-width: 46rem;
   margin-bottom: 2rem;
