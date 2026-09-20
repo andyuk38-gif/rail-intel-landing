@@ -2,6 +2,25 @@
 # After deploy, fresh HTML can load with week-old CSS and break carousel/layout sections.
 # Force revalidation so browsers and the CDN always check for updated stylesheets and scripts.
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Canonical host: non-www only (fixes Search Console duplicate canonical warnings).
+  RewriteCond %{HTTP_HOST} ^www\.railintel\.co\.uk$ [NC]
+  RewriteRule ^ https://railintel.co.uk%{REQUEST_URI} [R=301,L]
+
+  # Homepage: /index.html → /
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # Directory index pages: trailing-slash URLs → explicit index.html (matches canonical tags).
+  RewriteCond %{THE_REQUEST} \s/+products/?[\s?] [NC]
+  RewriteRule ^products/?$ /products/index.html [R=301,L]
+
+  RewriteCond %{THE_REQUEST} \s/+features/?[\s?] [NC]
+  RewriteRule ^features/?$ /features/index.html [R=301,L]
+</IfModule>
+
 <IfModule mod_headers.c>
   <FilesMatch "\.(html)$">
     Header set Cache-Control "no-cache, must-revalidate"
