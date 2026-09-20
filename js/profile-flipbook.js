@@ -11,9 +11,11 @@
   var root = document.querySelector("[data-profile-flipbook]");
   if (!root) return;
 
+  var section = root.closest(".profile-flipbook");
   var prevBtn = document.querySelector("[data-flip-prev]");
   var nextBtn = document.querySelector("[data-flip-next]");
   var pageLabel = document.querySelector("[data-flip-page]");
+  var hintLabel = document.querySelector("[data-flip-hint]");
   var wrap = document.querySelector("[data-flipbook-wrap]");
   var guardsBack = document.querySelectorAll("[data-flip-guard-back]");
   var guardsForward = document.querySelectorAll("[data-flip-guard-forward]");
@@ -44,21 +46,80 @@
     });
   }
 
-  function isPortrait() {
-    return window.matchMedia("(max-width: 768px)").matches;
+  function isCoarsePointer() {
+    return window.matchMedia("(pointer: coarse)").matches;
+  }
+
+  function isSinglePageMode() {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    if (width <= 768) return true;
+    if (height <= 520 && width <= 960) return true;
+    return false;
+  }
+
+  function isMobileLandscape() {
+    return isSinglePageMode() && window.innerWidth > window.innerHeight;
+  }
+
+  function getViewportHeight() {
+    return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  }
+
+  function getMaxBookHeight() {
+    var height = getViewportHeight();
+
+    if (isSinglePageMode()) {
+      if (isMobileLandscape()) {
+        return Math.min(height * 0.88, height - 48);
+      }
+
+      return Math.min(height * 0.56, 500);
+    }
+
+    return Math.min(height * 0.68, 800);
+  }
+
+  function updateLayoutClasses() {
+    if (!section) return;
+
+    section.classList.toggle("is-single-page", isSinglePageMode());
+    section.classList.toggle("is-mobile-landscape", isMobileLandscape());
+  }
+
+  function updateHint() {
+    if (!hintLabel) return;
+
+    hintLabel.textContent = isSinglePageMode() ? "· swipe to turn" : "· drag corners to turn";
+  }
+
+  function getStageInnerWidth() {
+    var panel = wrap && wrap.parentElement;
+    if (!panel) return window.innerWidth;
+
+    var styles = window.getComputedStyle(panel);
+    var padLeft = parseFloat(styles.paddingLeft) || 0;
+    var padRight = parseFloat(styles.paddingRight) || 0;
+
+    return panel.clientWidth - padLeft - padRight;
   }
 
   function getBookMetrics() {
-    var stageWidth = wrap && wrap.parentElement ? wrap.parentElement.clientWidth : window.innerWidth;
-    var horizontalPad = isPortrait() ? 24 : 40;
-    var spread = isPortrait() ? 1 : 2;
-    var maxBookWidth = Math.min(stageWidth - horizontalPad, isPortrait() ? 520 : 1280);
-    var maxBookHeight = Math.min(window.innerHeight * 0.68, 800);
-    var heightFromWidth = maxBookWidth / (PAGE_RATIO * spread);
-    var bookHeight = Math.min(maxBookHeight, heightFromWidth);
-    var bookWidth = bookHeight * PAGE_RATIO * spread;
-    var pageWidth = bookWidth / spread;
-    var pageHeight = bookHeight;
+    var spread = isSinglePageMode() ? 1 : 2;
+    var stageInnerWidth = getStageInnerWidth();
+    var maxBookWidth = stageInnerWidth;
+    var maxBookHeight = getMaxBookHeight();
+    var pageWidth = maxBookWidth / spread;
+    var pageHeight = pageWidth / PAGE_RATIO;
+
+    if (pageHeight > maxBookHeight) {
+      pageHeight = maxBookHeight;
+      pageWidth = pageHeight * PAGE_RATIO;
+    }
+
+    var bookWidth = pageWidth * spread;
+    var bookHeight = pageHeight;
 
     return {
       bookWidth: Math.round(bookWidth),
@@ -68,13 +129,29 @@
     };
   }
 
-  function syncWrapSize() {
-    if (!wrap) return;
+  function syncWrapSize(metrics) {
+    if (!wrap) return metrics || getBookMetrics();
 
-    var metrics = getBookMetrics();
-    wrap.style.width = metrics.bookWidth + "px";
-    wrap.style.height = metrics.bookHeight + "px";
-    return metrics;
+    var size = metrics || getBookMetrics();
+    var block = root.querySelector(".stf__block");
+
+    if (block) {
+      var blockWidth = block.offsetWidth;
+      var blockHeight = block.offsetHeight;
+
+      if (blockWidth > 0 && blockHeight > 0) {
+        size = {
+          bookWidth: blockWidth,
+          bookHeight: blockHeight,
+          pageWidth: Math.round(blockWidth / (isSinglePageMode() ? 1 : 2)),
+          pageHeight: blockHeight,
+        };
+      }
+    }
+
+    wrap.style.width = size.bookWidth + "px";
+    wrap.style.height = size.bookHeight + "px";
+    return size;
   }
 
   function getSpreadIndex() {
@@ -123,6 +200,7 @@
     if (prevBtn) prevBtn.disabled = spreadIndex <= 0;
     if (nextBtn) nextBtn.disabled = spreadIndex >= spreadCount - 1;
 
+    updateHint();
     updateSpreadChrome();
   }
 
@@ -156,8 +234,8 @@
       maxHeight: pageHeight,
       maxShadowOpacity: 0.9,
       showCover: true,
-      mobileScrollSupport: false,
-      usePortrait: isPortrait(),
+      mobileScrollSupport: isSinglePageMode() || isCoarsePointer(),
+      usePortrait: isSinglePageMode(),
       drawShadow: true,
       flippingTime: 700,
       useMouseEvents: true,
@@ -173,6 +251,7 @@
   function initFlipbook() {
     if (!window.St || !window.St.PageFlip) return;
 
+    updateLayoutClasses();
     var metrics = syncWrapSize();
     var pages = root.querySelectorAll(".brochure-page");
     pageCount = pages.length;
@@ -194,9 +273,13 @@
 
     flipInstance.on("init", function () {
       softenCoverPages(flipInstance);
+      syncWrapSize(metrics);
     });
 
     updateControls(flipInstance.getCurrentPageIndex());
+    window.requestAnimationFrame(function () {
+      syncWrapSize(metrics);
+    });
   }
 
   function bindControls() {
@@ -216,15 +299,21 @@
   }
 
   function handleResize() {
+    updateLayoutClasses();
+
     if (!flipInstance || !wrap) return;
-    var metrics = syncWrapSize();
+
+    var metrics = getBookMetrics();
     var current = flipInstance.getCurrentPageIndex();
     flipInstance.update(flipOptions(metrics));
     softenCoverPages(flipInstance);
+    syncWrapSize(metrics);
     updateControls(current);
   }
 
   bindControls();
+  updateLayoutClasses();
+  updateHint();
 
   loadScript("https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js")
     .then(initFlipbook)
@@ -235,8 +324,15 @@
     });
 
   var resizeTimer;
-  window.addEventListener("resize", function () {
+  function scheduleResize() {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(handleResize, 150);
-  });
+  }
+
+  window.addEventListener("resize", scheduleResize);
+  window.addEventListener("orientationchange", scheduleResize);
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleResize);
+  }
 })();

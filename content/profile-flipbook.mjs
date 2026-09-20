@@ -585,10 +585,15 @@ export function renderProfileFlipbookSection(base) {
   ].join("\n");
 
   return `    <section class="profile-flipbook" aria-labelledby="profile-flipbook-heading">
-      <div class="profile-flipbook__intro container">
-        <p class="product-eyebrow">Full-colour brochure</p>
-        <h2 id="profile-flipbook-heading">Turn the pages of a live employee profile</h2>
-        <p class="profile-flipbook__lead">Drag a corner, swipe on tablet, or use the controls below. This interactive sample uses fictional data — your printed profile is generated from the live record at the moment you create it.</p>
+      <div class="profile-flipbook__intro">
+        <div class="profile-flipbook__intro-inner">
+          <div class="profile-flipbook__intro-copy">
+            <p class="product-eyebrow">Full-colour brochure</p>
+            <h2 id="profile-flipbook-heading">Turn the pages of a live employee profile</h2>
+            <p class="profile-flipbook__lead">Drag a corner, swipe on tablet, or use the controls below. This interactive sample uses fictional data, your printed profile is generated from the live record at the moment you create it.</p>
+            <p class="profile-flipbook__sample-pill" role="note">The following is sample data and an example, which may not reflect the true sections and data contained within; this may vary.</p>
+          </div>
+        </div>
       </div>
       <div class="profile-flipbook__stage">
         <div class="profile-flipbook__stage-panel">
@@ -610,7 +615,7 @@ ${pages}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Previous</span>
           </button>
-          <p class="profile-flipbook__status"><span data-flip-page>Page 1</span> <span class="profile-flipbook__hint">· drag corners to turn</span></p>
+          <p class="profile-flipbook__status"><span data-flip-page>Page 1</span> <span class="profile-flipbook__hint" data-flip-hint>· drag corners to turn</span></p>
           <button type="button" class="profile-flipbook__btn" data-flip-next aria-label="Next page">
             <span>Next</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>

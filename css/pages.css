@@ -873,6 +873,37 @@
   object-fit: cover;
 }
 
+@media (max-width: 900px) {
+  .page-hero--printable-profile .page-hero__media .shot--bordered {
+    margin-inline: auto;
+  }
+}
+
+@media (max-height: 520px) and (max-width: 960px) {
+  .page-hero--printable-profile {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .page-hero--printable-profile .page-hero__inner--split {
+    gap: 1rem;
+  }
+
+  .page-hero--printable-profile .page-title {
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+  }
+
+  .page-hero--printable-profile .page-lead {
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .page-hero--printable-profile .page-hero__media {
+    max-width: 9rem;
+    margin-inline: auto;
+  }
+}
+
 .page-section--printable-formats .page-section__head {
   max-width: none;
 }
