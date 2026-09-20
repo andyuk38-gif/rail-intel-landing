@@ -1283,6 +1283,27 @@ export const featureGroups = [
         ],
       },
       {
+        heading: "ORR registered psychologists and doctors",
+        body: [
+          "When recording an ORR medical, the assessing psychologist and doctor are selected from registers built into Rail Intel. Both lists are pre-populated with ORR registered practitioners and searchable by name or registration code, so each medical is linked to the correct clinician from the outset.",
+          "Where a newly appointed psychologist or doctor is not yet on the list, company administrators can add them directly from the medical form — keeping the register current as your panel of clinicians changes, without waiting for a system update.",
+        ],
+        shots: [
+          {
+            src: "images/screens/medical/orr-registered-psychologist-list.png",
+            caption:
+              "ORR registered psychologists, searchable by name or ORRPP code, with the option to add a new appointment.",
+            scale: 1,
+          },
+          {
+            src: "images/screens/medical/orr-registered-doctor-list.png",
+            caption:
+              "ORR registered doctors held in the same way, searchable by name or ORRDOC code.",
+            scale: 1,
+          },
+        ],
+      },
+      {
         heading: "Driving licences and categories",
         body: [
           "Train driving licences are held with the front and back images, licence number, issue and expiry dates and the categories carried. Renewal warnings appear ahead of expiry with the number of days remaining.",

@@ -271,6 +271,14 @@
     "width": 1024,
     "height": 577
   },
+  "images/screens/medical/orr-registered-psychologist-list.png": {
+    "width": 680,
+    "height": 413
+  },
+  "images/screens/medical/orr-registered-doctor-list.png": {
+    "width": 676,
+    "height": 405
+  },
   "images/screens/messaging-employee/email-notify-new-message.png": {
     "width": 980,
     "height": 505
