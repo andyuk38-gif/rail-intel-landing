@@ -442,6 +442,7 @@
 }
 
 .medicals-licensing-hero-graphic__licence {
+  position: relative;
   line-height: 0;
   border-radius: 0.7rem;
   overflow: hidden;
@@ -452,13 +453,23 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
+.medicals-licensing-hero-graphic__licence::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #1a3d6b;
+  pointer-events: none;
+}
+
 .medicals-licensing-hero-graphic__licence-img {
   display: block;
   width: 100%;
   height: auto;
-  transform: scale(1.065);
-  transform-origin: center top;
-  clip-path: inset(0 0 1.1% 0);
+  transform: scale(1.04);
+  transform-origin: center center;
 }
 
 .medicals-licensing-hero-graphic__monitor {
