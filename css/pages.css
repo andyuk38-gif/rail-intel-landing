@@ -456,8 +456,9 @@
   display: block;
   width: 100%;
   height: auto;
-  transform: scale(1.04);
-  transform-origin: center center;
+  transform: scale(1.065);
+  transform-origin: center top;
+  clip-path: inset(0 0 1.1% 0);
 }
 
 .medicals-licensing-hero-graphic__monitor {
