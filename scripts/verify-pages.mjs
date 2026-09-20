@@ -33,7 +33,6 @@ const pages = [
   "/features/languages.html",
   "/features/tunnel-mode.html",
   "/features/competency-cycles.html",
-  "/features/workforce-records.html",
   "/features/medicals-licensing.html",
   "/features/incidents-monitoring.html",
   "/features/cdp-monitoring.html",

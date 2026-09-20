@@ -1005,7 +1005,6 @@ export const featureGroups = [
     ],
     relatedLinks: [
       { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
-      { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "QA Verifications add-on", href: "products/qa-verifications.html" },
     ],
     sections: [
@@ -1119,30 +1118,6 @@ export const featureGroups = [
   },
 
   {
-    slug: "workforce-records",
-    name: "Workforce Records",
-    summary: "The employee record: cab passes, training, experience, documents and messaging.",
-    tagline: "One record per person, not six systems",
-    hideCta: true,
-    lead:
-      "Every safety-critical person has one record holding their status, competence, passes, training, experience and documentation. When you need to answer whether someone is safe to work, the answer is in one place.",
-    sections: [
-      {
-        heading: "The employee directory",
-        body: [
-          "The directory lists your safety-critical personnel with role, depot, status and company, and opens straight into the record. Access is permission-controlled, and drivers with own-record-only access see their own record instead of the directory.",
-        ],
-        shots: [
-          {
-            src: "images/screens/main-sys/employee-list-dark.png",
-            caption: "The employee directory with role, depot and status.",
-          },
-        ],
-      },
-    ],
-  },
-
-  {
     slug: "printable-profile",
     name: "Printable Profile",
     summary: "Full-colour or print-friendly employee profiles generated from the live record.",
@@ -1150,7 +1125,6 @@ export const featureGroups = [
     lead:
       "When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record — not a spreadsheet assembled by hand.",
     relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "Profile Lock", href: "features/profile-lock.html" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
     ],
@@ -1857,7 +1831,6 @@ export const featureGroups = [
       },
     ],
     relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "Administration", href: "features/administration.html" },
       { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
     ],

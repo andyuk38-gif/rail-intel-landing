@@ -108,10 +108,10 @@ export const staticPages = {
     ],
   },
   "features/index.html": {
-    title: "Rail Intel Features | Competency, Medicals & Workforce Records",
+    title: "Rail Intel Features | Competency, Medicals & Licensing",
     description:
-      "Core Rail Intel CMS features: competency cycles, workforce records, medicals and licensing, incidents, CDP monitoring, communications hub, administration and digital cab passes.",
-    keywords: "rail competency features, competence cycles, medicals licensing rail, workforce records",
+      "Core Rail Intel CMS features: competency cycles, medicals and licensing, incidents, CDP monitoring, communications hub, administration and digital cab passes.",
+    keywords: "rail competency features, competence cycles, medicals licensing rail, employee records",
     breadcrumbs: [
       { name: "Rail Intel", path: "/" },
       { name: "Features", path: "features/index.html" },

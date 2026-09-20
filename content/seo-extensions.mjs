@@ -133,7 +133,6 @@ export const seoExtensions = {
     ],
     relatedLinks: [
       { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
-      { name: "Workforce Records", href: "features/workforce-records.html" },
     ],
   },
 
@@ -209,30 +208,9 @@ export const seoExtensions = {
       },
     ],
     relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "Administration", href: "features/administration.html" },
       { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
     ],
-  },
-
-  "workforce-records": {
-    seoTitle: "Rail Workforce Records | One Employee Record for Competence",
-    seoDescription:
-      "Single rail employee records for cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role.",
-    seoKeywords: "rail workforce records, employee competence record, safety critical personnel, driver record software",
-    faq: [
-      {
-        question: "What sits on one workforce record?",
-        answer:
-          "Status, competence cycles, cab passes, training, qualifications, experience hours, documents and messaging — permission-controlled by role.",
-      },
-      {
-        question: "Can drivers see only their own record?",
-        answer:
-          "Yes. Own-record access can be configured so drivers view their profile without the company directory.",
-      },
-    ],
-    relatedLinks: [],
   },
 
   "printable-profile": {
@@ -259,7 +237,6 @@ export const seoExtensions = {
       },
     ],
     relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "Profile Lock", href: "features/profile-lock.html" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
     ],
@@ -428,7 +405,6 @@ export const seoExtensions = {
       },
     ],
     relatedLinks: [
-      { name: "Workforce Records", href: "features/workforce-records.html" },
       { name: "Tunnel Mode", href: "features/tunnel-mode.html" },
     ],
   },
@@ -452,7 +428,6 @@ export const seoExtensions = {
     ],
     relatedLinks: [
       { name: "Administration", href: "features/administration.html" },
-      { name: "Workforce Records", href: "features/workforce-records.html" },
     ],
   },
 };
