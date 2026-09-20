@@ -2200,6 +2200,41 @@ function sectionIdAttr(section) {
   return section.id ? ` id="${esc(section.id)}"` : "";
 }
 
+function renderHeroLead(lead) {
+  const paragraphs = Array.isArray(lead) ? lead : lead ? [lead] : [];
+  return paragraphs.map((paragraph) => `          <p class="page-lead">${esc(paragraph)}</p>`).join("\n");
+}
+
+function renderMedicalsLicensingHeroGraphic() {
+  return `            <div class="medicals-licensing-hero-graphic" aria-hidden="true">
+              <div class="medicals-licensing-hero-graphic__frame">
+                <div class="medicals-licensing-hero-graphic__licence">
+                  <div class="medicals-licensing-hero-graphic__header">
+                    <span class="medicals-licensing-hero-graphic__uk-badge">UK</span>
+                    <span class="medicals-licensing-hero-graphic__title">Train driving licence</span>
+                  </div>
+                  <div class="medicals-licensing-hero-graphic__body">
+                    <span class="medicals-licensing-hero-graphic__photo"></span>
+                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--1"></span>
+                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--2"></span>
+                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--3"></span>
+                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--4"></span>
+                  </div>
+                  <span class="medicals-licensing-hero-graphic__specimen">Specimen</span>
+                  <svg class="medicals-licensing-hero-graphic__ecg" viewBox="0 0 320 80" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0 40 H24 L32 16 L40 64 L48 28 L56 52 L64 40 H112 L120 10 L128 70 L136 24 L144 56 L152 40 H200 L208 20 L216 60 L224 32 L232 48 L240 40 H320" />
+                  </svg>
+                  <span class="medicals-licensing-hero-graphic__pulse" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                    </svg>
+                  </span>
+                </div>
+                <div class="medicals-licensing-hero-graphic__glow" aria-hidden="true"></div>
+              </div>
+            </div>`;
+}
+
 function renderHeroActions(group, base) {
   if (group.hideHeroActions) return "";
 
@@ -2290,22 +2325,26 @@ function featurePage(group) {
   )}</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
-          <p class="page-lead">${esc(group.lead)}</p>
+${renderHeroLead(group.lead)}
 ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
-  const heroAside = group.heroShot
+  const heroGraphic =
+    group.heroGraphic === "medicals-licensing" ? renderMedicalsLicensingHeroGraphic() : "";
+  const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
-    : heroRegulators;
+    : heroGraphic || heroRegulators;
+  const hasHeroMedia = Boolean(group.heroShot || group.heroGraphic || group.heroRegulators);
 
   const tunnelHero = group.slug === "tunnel-mode";
-  const heroInner = heroAside
-    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}">
+  const medicalsLicensingHero = group.heroGraphic === "medicals-licensing";
+  const heroInner = hasHeroMedia
+    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
           <div class="page-hero__media">
-${group.heroShot ? renderShot(group.heroShot, base, { fill: true }) : ""}${heroRegulators}
+${heroMedia}
           </div>
         </div>`
     : `        <div class="page-hero__inner">
@@ -2321,7 +2360,7 @@ ${heroCopy}
     renderHead(base, pageSeo, headOptions) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}">
       <div class="container">
 ${heroInner}
       </div>
