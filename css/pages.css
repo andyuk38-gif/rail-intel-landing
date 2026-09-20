@@ -443,10 +443,8 @@
 
 .medicals-licensing-hero-graphic__licence {
   position: relative;
-  border-radius: 0.75rem;
+  border-radius: 0.65rem;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: #f8fafc;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
@@ -454,6 +452,7 @@
   display: block;
   width: 100%;
   height: auto;
+  vertical-align: top;
 }
 
 .medicals-licensing-hero-graphic__scan-wash {
