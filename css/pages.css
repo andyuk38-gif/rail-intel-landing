@@ -442,14 +442,26 @@
 }
 
 .medicals-licensing-hero-graphic__licence {
+  position: relative;
   line-height: 0;
-  border-radius: 0.7rem;
+  border-radius: 1.35rem;
   overflow: hidden;
-  background: var(--bg);
-  border: 3px solid var(--bg);
+  background: linear-gradient(160deg, #182334 0%, #0b1220 100%);
   box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.28),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    0 18px 38px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(148, 163, 184, 0.16);
+}
+
+/* The specimen JPG carries a white margin and rounded-corner padding of its
+   own. The frame is drawn over those edges rather than cropping the artwork. */
+.medicals-licensing-hero-graphic__licence::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 9px solid #131d2c;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.3);
+  pointer-events: none;
 }
 
 .medicals-licensing-hero-graphic__licence-img {
