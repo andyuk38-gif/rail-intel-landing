@@ -53,44 +53,33 @@ export const cmsSoftware = {
   provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
 };
 
-export const homeDefinition = {
-  heading: "What is a rail competence management system?",
-  lead:
-    "A rail competence management system (CMS) is a structured framework and digital platform used by railway operators and infrastructure managers to track, assess, and assure the skills, training, and fitness of their safety-critical workforce.",
-  body: [
-    "It replaces spreadsheets with a live system of record for assessment cycles, medicals, driving licences, route and traction competence, and the audit trail behind every competence decision.",
-    "Rail Intel CMS is a modern rail competence management system built by a practising rail professional — with live expiry control, in-cab assessment, and audit-ready evidence when assurance teams or regulators ask.",
-  ],
-  bullets: [
-    "**Safety and compliance** — prove competence before sign-on, not after an incident.",
-    "**Risk reduction** — flag expired medicals, licences and competencies automatically.",
-    "**Audit readiness** — verification runs and assessment history on demand.",
-  ],
-  guideHref: "guides/rail-competency-management-software.html",
-};
-
 export const home = {
   path: "/",
   title: "Rail Intel | Rail Competence Management System",
   description:
     "Rail Intel is a rail competence management system for UK operators. Track assessment cycles, medicals, licences and workforce records with live verification and audit-ready evidence.",
   keywords:
-    "rail competence management system, rail competency management, rail compliance software, driver competence, assessment cycles, workforce records, medicals licensing rail",
+    "rail competence management system, rail competency management, rail compliance software, driver competence, assessment cycles, workforce records, medicals licences rail",
   faq: [
     {
       question: "What is a rail competence management system?",
       answer:
-        "A rail competence management system is the digital platform railway operators use to track, assess and assure the skills, training and fitness of safety-critical staff. Rail Intel CMS provides competency cycles, medicals, licences, field assessment and audit-ready evidence in one system of record.",
+        "A rail competence management system (CMS) is a structured framework and digital platform railway operators and infrastructure managers use to track, assess and assure the skills, training and fitness of their safety-critical workforce. It replaces spreadsheets with a live system of record for assessment cycles, medicals, driving licences, route and traction competence, and the audit trail behind every competence decision.",
     },
     {
       question: "What is Rail Intel?",
       answer:
-        "Rail Intel is a rail competence management system for UK operators. It tracks assessment cycles, medicals, licences and workforce records so expired skills are flagged before anyone reaches the railway.",
+        "Rail Intel is a modern rail competence management system for UK operators, built by a practising rail professional. It tracks assessment cycles, medicals, licences and workforce records with live expiry control, in-cab assessment, and audit-ready evidence when assurance teams or regulators ask.",
     },
     {
       question: "Who is Rail Intel for?",
       answer:
-        "Driver managers, competence teams, safety departments and operations leaders who need a live system of record instead of spreadsheets for competence, medicals and licensing.",
+        "Driver managers, competence teams, safety departments and operations leaders who need a live system of record instead of spreadsheets for competence, medicals and licences.",
+    },
+    {
+      question: "How does Rail Intel support safety and compliance?",
+      answer:
+        "Rail Intel helps prove competence before sign-on, not after an incident. Expired medicals, licences and competencies are flagged automatically, and verification runs and assessment history are available on demand for assurance teams and regulators.",
     },
     {
       question: "Does Rail Intel include add-on modules?",

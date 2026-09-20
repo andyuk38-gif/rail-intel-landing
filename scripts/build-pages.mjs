@@ -18,7 +18,6 @@ import {
   DEFAULT_OG_IMAGE,
   SITE_NAME,
   home as homeSeo,
-  homeDefinition,
   staticPages,
   pageUrl,
   seoForItem,
@@ -3764,29 +3763,6 @@ ${renderFaqSection(pageSeo.faq, base)}
 
 /* ---------------------------------------------------------- index.html sync */
 
-function renderHomeDefinition() {
-  const base = "";
-  const bullets = homeDefinition.bullets
-    .map((item) => `          <li>${rich(item)}</li>`)
-    .join("\n");
-  const body = homeDefinition.body.map((text) => `        <p>${rich(text)}</p>`).join("\n");
-
-  return `
-    <section class="page-section page-section--tight" aria-label="${esc(homeDefinition.heading)}">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>${esc(homeDefinition.heading)}</h2>
-          <p class="page-lead">${esc(homeDefinition.lead)}</p>
-        </div>
-${body}
-        <ul class="spec-list">
-${bullets}
-        </ul>
-        <p class="page-lead" style="margin-top:1.25rem"><a href="${base}${homeDefinition.guideHref}">Read the full buyer's guide to rail competence management systems &rarr;</a></p>
-      </div>
-    </section>`;
-}
-
 function renderIndexFaq() {
   return renderFaqSection(homeSeo.faq);
 }
@@ -3833,13 +3809,6 @@ function syncIndex() {
     "<!-- seo:start -->",
     "<!-- seo:end -->",
     `\n${renderSeoMeta(homeSeo)}\n  `
-  );
-
-  html = replaceBetween(
-    html,
-    "<!-- home-definition:start -->",
-    "<!-- home-definition:end -->",
-    renderHomeDefinition()
   );
 
   html = replaceBetween(html, "<!-- seo-faq:start -->", "<!-- seo-faq:end -->", renderIndexFaq());
