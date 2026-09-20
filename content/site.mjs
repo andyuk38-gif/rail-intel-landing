@@ -1136,7 +1136,7 @@ export const featureGroups = [
       noExpand: true,
     },
     lead:
-      "When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record, not a spreadsheet assembled by hand.",
+      "For audits, management review or formal packs, Rail Intel turns the live employee record into a branded competence portfolio — full-colour brochure, print-ready PDF, or on-screen layout, generated from the data already in the system.",
     relatedLinks: [
       { name: "Profile Lock", href: "features/profile-lock.html" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
