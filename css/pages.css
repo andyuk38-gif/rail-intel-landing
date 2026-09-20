@@ -860,6 +860,21 @@
   }
 }
 
+.page-section--printable-formats .page-section__head {
+  max-width: none;
+}
+
+.page-section--printable-formats .spec-tiles {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 960px) {
+  .page-section--printable-formats .spec-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
 .page-hero--leave-absence {
   padding-bottom: 2rem;
 }

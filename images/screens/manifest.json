@@ -478,5 +478,9 @@
   "images/screens/main-sys/login-screen-portrait.png": {
     "width": 560,
     "height": 911
+  },
+  "images/screens/main-sys/print-before-you-print.png": {
+    "width": 552,
+    "height": 830
   }
 }

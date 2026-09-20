@@ -216,14 +216,19 @@ export const seoExtensions = {
   "printable-profile": {
     seoTitle: "Printable Rail Employee Profiles | Rail Intel",
     seoDescription:
-      "Generate full-colour or print-friendly employee profiles from live rail competence records for audits, management review and formal packs — print or save as PDF.",
+      "Generate full-colour, print-friendly or dark-mode employee profiles from live rail competence records — with a data protection checkpoint before print or PDF export.",
     seoKeywords:
-      "rail employee profile print, competence profile PDF, printable driver record, audit employee profile",
+      "rail employee profile print, competence profile PDF, printable driver record, audit employee profile, GDPR employee profile",
     faq: [
       {
         question: "Can I print an employee profile?",
         answer:
-          "Yes. Rail Intel generates a full-colour professional profile or a print-friendly layout from the live record, which you can print or save as PDF.",
+          "Yes. Rail Intel generates a full-colour brochure, print-friendly layout or dark-mode PDF from the live record. A data protection notice and confirmation are required before the print dialog opens.",
+      },
+      {
+        question: "How does Rail Intel support data protection when printing?",
+        answer:
+          "Before export, users see a data protection notice and must confirm they have a lawful basis and business need to handle the information. The notice references UK GDPR and the Data Protection Act 2018, and the same checkpoint applies for international deployments under your applicable data protection laws.",
       },
       {
         question: "What data is included on the profile?",
@@ -231,9 +236,9 @@ export const seoExtensions = {
           "The profile draws from the live record — competencies, medicals, licensing and supporting sections in one document, generated at the moment you create it.",
       },
       {
-        question: "What is the difference between full-colour and print-friendly?",
+        question: "What is the difference between full-colour, print-friendly and dark mode?",
         answer:
-          "Full-colour is designed for on-screen review and stakeholder circulation. Print-friendly is optimised for paper copies and archival PDF, but both use the same underlying record data.",
+          "Full-colour is branded for formal packs and on-screen circulation. Print-friendly is plain black on white to save ink on paper. Dark mode is high-contrast for reading as a PDF on screen and is not recommended for printing. All three use the same underlying record data.",
       },
     ],
     relatedLinks: [

@@ -1120,25 +1120,67 @@ export const featureGroups = [
   {
     slug: "printable-profile",
     name: "Printable Profile",
-    summary: "Full-colour or print-friendly employee profiles generated from the live record.",
+    summary: "Full-colour, print-friendly or dark-mode employee profiles from the live record.",
     tagline: "One document from the record, not a spreadsheet by hand",
+    hideHeroActions: true,
     lead:
-      "When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record — not a spreadsheet assembled by hand.",
+      "When you need a complete picture of someone's competence status for an audit, management review or formal pack, Rail Intel produces a formatted employee profile from the live record, not a spreadsheet assembled by hand.",
     relatedLinks: [
       { name: "Profile Lock", href: "features/profile-lock.html" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
     ],
     sections: [
       {
-        heading: "Full-colour and print-friendly layouts",
+        heading: "Data protection before you print",
+        layout: "aside",
+        bulletTiles: true,
         body: [
-          "Choose a full-colour professional layout for on-screen review and stakeholder circulation, or a print-friendly version optimised for paper and PDF. Both draw from the same underlying record data, so what you print is what the system holds at the moment you generate it.",
+          "An employee profile is a complete extract of the live record. It can include personal data and special category information — occupational health, medical fitness and incident history — so producing one should never be casual.",
+          "Before the print dialog opens, Rail Intel presents a data protection notice. The user must confirm they have a lawful basis and a demonstrable business need to handle the data, and that copies will be kept secure, shared only with those who need them, and destroyed when no longer required.",
+          "The notice references UK GDPR and the Data Protection Act 2018 for UK operators. For international deployments, the same checkpoint applies — your organisation remains responsible for processing employee data under the data protection laws that apply in your jurisdiction.",
         ],
         bullets: [
-          "**Full-colour professional profile** for formal packs and management review.",
-          "**Print-friendly layout** for paper copies and archival PDF.",
-          "**Generated from live record data** — competencies, medicals, licensing and supporting sections in one document.",
-          "**Print or save as PDF** directly from the employee record.",
+          "**Mandatory confirmation** A recorded acknowledgement before print or PDF export.",
+          "**Lawful basis required** Users must attest they have authority and a business need.",
+          "**Handling guidance built in** Secure storage, limited disclosure and secure disposal.",
+          "**Optional signed declaration** Apply the user's signature to the attestation when required.",
+        ],
+        shots: [
+          {
+            src: "images/screens/main-sys/print-before-you-print.png",
+            alt: "Data protection notice shown before printing an employee profile.",
+            caption:
+              "Before you print — data protection notice, format choice and signed declaration.",
+            scale: 1,
+          },
+        ],
+      },
+      {
+        heading: "Flexibility in format",
+        mod: "printable-formats",
+        bulletTiles: true,
+        body: [
+          "The same live record can be output in three finishes. Each draws from identical data at the moment you generate the profile — only the presentation changes. Print or save as PDF directly from the employee record via your browser's print dialog.",
+        ],
+        tiles: [
+          {
+            title: "Full-colour brochure",
+            detail:
+              "Branded artwork on every page. Best for formal packs, stakeholder circulation and saving as a PDF.",
+            accent: "#a78bfa",
+          },
+          {
+            title: "Print friendly",
+            detail:
+              "Plain black on white with no artwork or colour fills — designed to save ink on paper copies.",
+            accent: "#38bdf8",
+          },
+          {
+            title: "Dark mode",
+            detail:
+              "High-contrast layout for on-screen reading as a PDF. Optimised for visibility, not for printing.",
+            accent: "#f59e0b",
+          },
         ],
       },
     ],
