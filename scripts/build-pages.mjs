@@ -2205,32 +2205,30 @@ function renderHeroLead(lead) {
   return paragraphs.map((paragraph) => `          <p class="page-lead">${esc(paragraph)}</p>`).join("\n");
 }
 
-function renderMedicalsLicensingHeroGraphic() {
+function renderMedicalsLicensingHeroGraphic(base) {
   return `            <div class="medicals-licensing-hero-graphic" aria-hidden="true">
-              <div class="medicals-licensing-hero-graphic__frame">
-                <div class="medicals-licensing-hero-graphic__licence">
-                  <div class="medicals-licensing-hero-graphic__header">
-                    <span class="medicals-licensing-hero-graphic__uk-badge">UK</span>
-                    <span class="medicals-licensing-hero-graphic__title">Train driving licence</span>
+              <div class="medicals-licensing-hero-graphic__stage">
+                <div class="medicals-licensing-hero-graphic__orb medicals-licensing-hero-graphic__orb--licence"></div>
+                <div class="medicals-licensing-hero-graphic__orb medicals-licensing-hero-graphic__orb--medical"></div>
+                <div class="medicals-licensing-hero-graphic__card-wrap">
+                  <div class="medicals-licensing-hero-graphic__card">
+                    <div class="medicals-licensing-hero-graphic__card-frame">
+                      <img class="medicals-licensing-hero-graphic__licence-img" src="${base}images/product/licence-front-cms.png" alt="" width="564" height="288" loading="eager" decoding="async" />
+                      <div class="medicals-licensing-hero-graphic__ecg-panel">
+                        <svg class="medicals-licensing-hero-graphic__ecg" viewBox="0 0 360 72" preserveAspectRatio="none" aria-hidden="true">
+                          <path d="M0 36 H28 L36 10 L44 62 L52 24 L60 48 L68 36 H120 L128 8 L136 64 L144 20 L152 52 L160 36 H212 L220 14 L228 58 L236 28 L244 44 L252 36 H360" />
+                        </svg>
+                      </div>
+                      <div class="medicals-licensing-hero-graphic__sheen"></div>
+                    </div>
+                    <div class="medicals-licensing-hero-graphic__shadow"></div>
                   </div>
-                  <div class="medicals-licensing-hero-graphic__body">
-                    <span class="medicals-licensing-hero-graphic__photo"></span>
-                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--1"></span>
-                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--2"></span>
-                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--3"></span>
-                    <span class="medicals-licensing-hero-graphic__line medicals-licensing-hero-graphic__line--4"></span>
-                  </div>
-                  <span class="medicals-licensing-hero-graphic__specimen">Specimen</span>
-                  <svg class="medicals-licensing-hero-graphic__ecg" viewBox="0 0 320 80" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M0 40 H24 L32 16 L40 64 L48 28 L56 52 L64 40 H112 L120 10 L128 70 L136 24 L144 56 L152 40 H200 L208 20 L216 60 L224 32 L232 48 L240 40 H320" />
-                  </svg>
-                  <span class="medicals-licensing-hero-graphic__pulse" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <div class="medicals-licensing-hero-graphic__badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
-                  </span>
+                  </div>
                 </div>
-                <div class="medicals-licensing-hero-graphic__glow" aria-hidden="true"></div>
               </div>
             </div>`;
 }
@@ -2330,7 +2328,7 @@ ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
   const heroGraphic =
-    group.heroGraphic === "medicals-licensing" ? renderMedicalsLicensingHeroGraphic() : "";
+    group.heroGraphic === "medicals-licensing" ? renderMedicalsLicensingHeroGraphic(base) : "";
   const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
     : heroGraphic || heroRegulators;
