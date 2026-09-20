@@ -442,80 +442,15 @@
 }
 
 .medicals-licensing-hero-graphic__licence {
-  position: relative;
-  border-radius: 0.65rem;
-  overflow: hidden;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  line-height: 0;
 }
 
 .medicals-licensing-hero-graphic__licence-img {
   display: block;
   width: 100%;
   height: auto;
-  vertical-align: top;
-}
-
-.medicals-licensing-hero-graphic__scan-wash {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(99, 102, 241, 0.06) 0%,
-    transparent 32%,
-    transparent 68%,
-    rgba(16, 185, 129, 0.08) 100%
-  );
-  pointer-events: none;
-}
-
-.medicals-licensing-hero-graphic__scan-beam {
-  position: absolute;
-  left: 0.65rem;
-  right: 0.65rem;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, #34d399 18%, #6ee7b7 50%, #34d399 82%, transparent);
-  box-shadow:
-    0 0 14px rgba(52, 211, 153, 0.9),
-    0 0 28px rgba(16, 185, 129, 0.45);
-  filter: blur(0.2px);
-  animation: medicals-licensing-scan-beam 2.8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.medicals-licensing-hero-graphic__heartbeat {
-  position: absolute;
-  top: 0.55rem;
-  right: 0.55rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  color: #fff;
-  z-index: 2;
-}
-
-.medicals-licensing-hero-graphic__heartbeat svg {
-  position: relative;
-  z-index: 1;
-  width: 1.05rem;
-  height: 1.05rem;
-  animation: medicals-licensing-heartbeat 1.15s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(248, 113, 113, 0.65));
-}
-
-.medicals-licensing-hero-graphic__heartbeat-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(248, 113, 113, 0.55);
-  background: rgba(239, 68, 68, 0.22);
-  animation: medicals-licensing-heartbeat-ring 1.15s ease-out infinite;
-}
-
-.medicals-licensing-hero-graphic__heartbeat-ring:nth-child(2) {
-  animation-delay: 0.45s;
+  border-radius: 0.65rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
 .medicals-licensing-hero-graphic__monitor {
@@ -632,14 +567,6 @@
   50% { transform: translate3d(8px, -10px, 0) scale(1.08); opacity: 1; }
 }
 
-@keyframes medicals-licensing-scan-beam {
-  0% { top: 12%; opacity: 0.45; }
-  12% { opacity: 1; }
-  50% { top: 78%; opacity: 1; }
-  88% { opacity: 1; }
-  100% { top: 12%; opacity: 0.45; }
-}
-
 @keyframes medicals-licensing-ecg-scan {
   0% { stroke-dashoffset: 560; opacity: 0.35; }
   8% { opacity: 1; }
@@ -662,12 +589,6 @@
   56% { transform: scale(1); }
 }
 
-@keyframes medicals-licensing-heartbeat-ring {
-  0% { transform: scale(0.7); opacity: 0.75; }
-  70% { opacity: 0.2; }
-  100% { transform: scale(1.85); opacity: 0; }
-}
-
 @keyframes medicals-licensing-bpm-pulse {
   0%, 100% { opacity: 0.72; }
   14% { opacity: 1; }
@@ -684,9 +605,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .medicals-licensing-hero-graphic__orb,
-  .medicals-licensing-hero-graphic__scan-beam,
-  .medicals-licensing-hero-graphic__heartbeat svg,
-  .medicals-licensing-hero-graphic__heartbeat-ring,
   .medicals-licensing-hero-graphic__monitor-heart,
   .medicals-licensing-hero-graphic__monitor-bpm-value,
   .medicals-licensing-hero-graphic__monitor-cursor,
