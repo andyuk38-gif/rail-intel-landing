@@ -1091,7 +1091,7 @@ ${noteHtml}
 
   const asideReverse = Boolean(section.asideReverse);
   const copyBlock = `          <div class="page-section__aside-copy">
-          <h2>${esc(section.heading)}</h2>
+          <h2>${renderSectionHeading(section, base)}</h2>
 ${body}
 ${bullets}
           </div>`;
@@ -1195,9 +1195,10 @@ ${renderShotList(section.shots)}
       )
     : "";
   const headLogoHtml = renderSectionHeadLogo(section.headLogo, base);
+  const sectionHeading = renderSectionHeading(section, base);
   const headBlock = section.headLogo
     ? `        <div class="page-section__head page-section__head--with-logo">
-          <h2>${esc(section.heading)}</h2>
+          <h2>${sectionHeading}</h2>
           <div class="page-section__head-row">
             <div class="page-section__head-copy">
 ${body}
@@ -1210,7 +1211,7 @@ ${headLogoHtml}
         </div>`
     : section.headShot
       ? `        <div class="page-section__head page-section__head--with-shot">
-          <h2>${esc(section.heading)}</h2>
+          <h2>${sectionHeading}</h2>
 ${body}
 ${bullets}
           <div class="page-section__head-media">
@@ -1218,7 +1219,7 @@ ${headShotHtml}
           </div>
         </div>`
       : `        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
-          <h2>${esc(section.heading)}</h2>
+          <h2>${sectionHeading}</h2>
 ${body}
 ${bullets}
         </div>`;
@@ -1228,7 +1229,7 @@ ${bullets}
     return `    <section class="page-section${section.mod ? ` page-section--${section.mod}` : ""}">
       <div class="container">
         <div class="page-section__head">
-          <h2>${esc(section.heading)}</h2>
+          <h2>${renderSectionHeading(section, base)}</h2>
 ${body}
         </div>
         <div class="page-section__tile-split">
@@ -2154,6 +2155,14 @@ function renderSectionHeadLogo(logo, base) {
   const height = logo.height ? ` height="${logo.height}"` : "";
 
   return `            <img class="page-section__regulator-logo" src="${base}${esc(logo.src)}" alt="${esc(logo.alt)}"${width}${height} loading="lazy" decoding="async" />`;
+}
+
+function renderSectionHeading(section, base) {
+  if (section.headingHtml) return section.headingHtml;
+  if (section.headingFlag) {
+    return `<span class="page-section__heading-with-flag"><img class="page-section__heading-flag" src="${base}images/flags/${esc(section.headingFlag)}.svg" alt="" width="28" height="18" aria-hidden="true" decoding="async" /><span>${esc(section.heading)}</span></span>`;
+  }
+  return esc(section.heading);
 }
 
 function renderHeroRegulators(regulators, base) {

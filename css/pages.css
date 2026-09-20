@@ -1221,6 +1221,20 @@
   margin-bottom: 2rem;
 }
 
+.page-section__heading-with-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.page-section__heading-flag {
+  display: block;
+  width: 1.75rem;
+  height: auto;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
 .page-section__head--with-logo {
   max-width: none;
 }
