@@ -309,6 +309,10 @@
   object-fit: cover;
 }
 
+.page-hero__inner--tunnel .page-hero__media .shot__caption {
+  text-align: center;
+}
+
 .page-hero__media .shot__caption {
   margin-top: 0.65rem;
 }
