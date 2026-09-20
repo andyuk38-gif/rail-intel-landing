@@ -1004,7 +1004,7 @@ export const featureGroups = [
       },
     ],
     relatedLinks: [
-      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
+      { name: "Medicals & Licences", href: "features/medicals-licensing.html" },
       { name: "QA Verifications add-on", href: "products/qa-verifications.html" },
     ],
     sections: [
@@ -1260,9 +1260,9 @@ export const featureGroups = [
 
   {
     slug: "medicals-licensing",
-    name: "Medicals & Licensing",
+    name: "Medicals & Licences",
     summary: "Medical fitness, ORR medicals, driving licences and complementary certificates.",
-    tagline: "Medicals and licensing",
+    tagline: "Medicals and licences",
     lead: [
       "ORR medicals, fitness status, train driving licences, categories and complementary certificates are held on the same employee record, each with an expiry date. When a medical lapses, fitness is unfit, or a licence is out of date, the employee is marked off track and their assigned manager is notified immediately.",
       "Safety-critical duties are not available until the record is current; only non-safety-critical work remains possible. Rail Intel monitors every deadline and surfaces the position on the dashboard and in reporting, rather than leaving it to be noticed.",
@@ -1271,7 +1271,7 @@ export const featureGroups = [
     hideCta: true,
     heroActions: [
       { href: "#medicals", label: "Medicals", primary: true },
-      { href: "#licensing", label: "Licensing", ghost: true },
+      { href: "#licensing", label: "Licences", ghost: true },
     ],
     sections: [
       {

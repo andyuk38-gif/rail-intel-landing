@@ -96,7 +96,7 @@ export const comparisonCriteria = [
     squared: "RailSmart EDS cycle and assessment management.",
   },
   {
-    label: "Medicals & licensing",
+    label: "Medicals & licences",
     railintel: "Core medicals, ORR records, licences, complementary certificates and expiry monitoring.",
     velociti: "Medical records and competency data in one platform (per vendor materials).",
     assesstech: "Dedicated licensing module; medical and fitness data on the ACMS record.",

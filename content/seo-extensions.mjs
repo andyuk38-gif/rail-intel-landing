@@ -132,7 +132,7 @@ export const seoExtensions = {
       },
     ],
     relatedLinks: [
-      { name: "Medicals & Licensing", href: "features/medicals-licensing.html" },
+      { name: "Medicals & Licences", href: "features/medicals-licensing.html" },
     ],
   },
 
@@ -275,7 +275,7 @@ export const seoExtensions = {
   },
 
   "medicals-licensing": {
-    seoTitle: "Rail Medicals & Licensing Software | ORR Medicals and Licences",
+    seoTitle: "Rail Medicals & Licences Software | ORR Medicals and Licences",
     seoDescription:
       "Track ORR medicals, fitness status, train driving licences, categories and complementary certificates with expiry monitoring before anyone signs on.",
     seoKeywords: "rail medical records, ORR medical, train driving licence software, complementary certificate rail",
