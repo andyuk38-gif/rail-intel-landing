@@ -181,6 +181,11 @@ export const seoExtensions = {
           "No. When an assessment starts on a mobile or tablet, Rail Intel prompts the assessor to switch to dark mode in the app — there is no need to open the device settings. A brightness slider under the assessment header lets them dim the screen further, to the level they need, without leaving the assessment.",
       },
       {
+        question: "Why don't I see the cab safety warning on my laptop?",
+        answer:
+          "The cab safety notice is shown at the start of an assessment on mobile and tablet only. Rail Intel surfaces it when you are assessing in the cab on a portable device, where windscreen glare from a bright screen is a genuine risk. Most assessors complete in-cab work on a tablet; laptop assessments, which are usually done away from the cab, do not trigger the prompt.",
+      },
+      {
         question: "Is Tunnel Mode a paid add-on?",
         answer:
           "No. Tunnel Mode is included in core Rail Intel at no extra cost. Safety-related assessment features are part of the standard platform — we do not charge separately for tools that help assessors work safely in the cab.",
