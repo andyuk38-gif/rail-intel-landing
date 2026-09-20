@@ -941,13 +941,14 @@ export const featureGroups = [
       "A bright tablet in a dark cab is a distraction — for the driver and for the assessor. Tunnel Mode is the assessor switching dark mode on and dimming the screen on mobile or tablet. It does not detect the tunnel automatically; the person in the cab decides when the glass is too bright.",
     heroShot: {
       src: "images/screens/assessing/AssessInDark.jpg",
-      caption: "Assessor using a dim tablet in a dark cab — glare stays off the windscreen.",
+      alt: "Assessor holding a bright tablet in a dark cab.",
+      caption:
+        "In a dark cab, look over the top of a bright tablet and your reflection appears in the windscreen.",
       scale: 0.5,
       full: true,
       eager: true,
       bordered: true,
       noExpand: true,
-      hideCaption: true,
     },
     hideHeroActions: true,
     hideCta: true,
