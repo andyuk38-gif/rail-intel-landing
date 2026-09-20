@@ -1160,7 +1160,9 @@ function renderSection(section, base) {
   const showcase = section.shotGrid === "showcase";
   const heroStack = section.shotGrid === "hero-stack";
   const wide = Boolean(section.fullWidth);
-  const gridClass = wide
+  const fullWidthShots =
+    wide && section.shots?.length > 0 && section.shots.every((shot) => shot.full);
+  const gridClass = fullWidthShots
     ? "shot-grid shot-grid--full"
     : showcase
       ? "shot-grid shot-grid--showcase"
