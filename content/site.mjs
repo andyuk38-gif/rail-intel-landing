@@ -1268,6 +1268,7 @@ export const featureGroups = [
     sections: [
       {
         heading: "Medical records and fitness status",
+        fullWidth: true,
         body: [
           "Medical records carry fitness status, the issuing clinician and the expiry date. A status of unfit or an expired medical marks the employee as not safe to work, which surfaces on the dashboard and in reporting rather than waiting to be noticed.",
           "The company Medicals page gives the position across the workforce, including which medicals are due within the next 30 days.",
@@ -1276,6 +1277,8 @@ export const featureGroups = [
           {
             src: "images/screens/medical/new-medical-record.png",
             caption: "Recording a new medical for occupational health and ORR medicals.",
+            scale: 1,
+            full: true,
           },
         ],
       },
