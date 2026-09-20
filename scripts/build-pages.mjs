@@ -18,6 +18,7 @@ import {
   DEFAULT_OG_IMAGE,
   SITE_NAME,
   home as homeSeo,
+  homeDefinition,
   staticPages,
   pageUrl,
   seoForItem,
@@ -421,6 +422,8 @@ function renderFooterMarkup(base) {
         <div class="footer-col footer-col--links">
           <h2 class="footer-heading">Company</h2>
           <nav class="footer-nav" aria-label="Company">
+            <a href="${base}guides/rail-competency-management-software.html">Rail competence management system</a>
+            <a href="${base}guides/compare-rail-competency-software.html">Compare rail CMS platforms</a>
             <a href="${base}privacy.html">Privacy policy</a>
             <a href="${base}contact.html">Contact us</a>
             <a href="${base}get-started.html">Get started</a>
@@ -1794,7 +1797,7 @@ function productsIndex() {
           <p class="breadcrumb"><a href="${base}">Rail Intel</a> / Product</p>
           <span class="page-badge page-badge--app">Products</span>
           <h1 class="page-title">Apps and the modules that extend them</h1>
-          <p class="page-lead">Rail Intel CMS is the competency system of record. Rail Intel Investigations is a separate app for evidence-first investigations. CMS add-on modules bolt on when your operation needs them.</p>
+          <p class="page-lead">Rail Intel CMS is a <a href="${base}guides/rail-competency-management-software.html">rail competence management system</a> and the competency system of record. Rail Intel Investigations is a separate app for evidence-first investigations. CMS add-on modules bolt on when your operation needs them.</p>
           <div class="page-actions">
             <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel CMS</a>
             <a href="${base}features/" class="btn btn-ghost btn-lg">See CMS core features</a>
@@ -2409,7 +2412,7 @@ function featuresIndex() {
           <p class="breadcrumb"><a href="${base}">Rail Intel</a> / Features</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">What you get before you add anything</h1>
-          <p class="page-lead">Core Rail Intel covers the whole competency lifecycle and the records that sit behind it. None of the capabilities below require a module purchase &mdash; they are controlled by the permissions you assign to each role.</p>
+          <p class="page-lead">Core Rail Intel covers the whole competency lifecycle in our <a href="${base}guides/rail-competency-management-software.html">rail competence management system</a>. None of the capabilities below require a module purchase &mdash; they are controlled by the permissions you assign to each role.</p>
           <div class="page-actions">
             <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="${base}products/" class="btn btn-ghost btn-lg">See add-on modules</a>
@@ -2470,7 +2473,7 @@ function howItWorksPage() {
         <div class="page-hero__inner">
           <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / How it works</p>
           <h1 class="page-title">${esc(howItWorks.title)}</h1>
-          <p class="page-lead">${esc(howItWorks.lead)}</p>
+          <p class="page-lead">Implementing a <a href="${base}guides/rail-competency-management-software.html">rail competence management system</a> follows six practical steps. ${esc(howItWorks.lead)}</p>
           <div class="page-actions">
             <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="features/" class="btn btn-ghost btn-lg">See the features</a>
@@ -3562,6 +3565,29 @@ ${renderFaqSection(pageSeo.faq, base)}
 
 /* ---------------------------------------------------------- index.html sync */
 
+function renderHomeDefinition() {
+  const base = "";
+  const bullets = homeDefinition.bullets
+    .map((item) => `          <li>${rich(item)}</li>`)
+    .join("\n");
+  const body = homeDefinition.body.map((text) => `        <p>${rich(text)}</p>`).join("\n");
+
+  return `
+    <section class="page-section page-section--tight" aria-label="${esc(homeDefinition.heading)}">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(homeDefinition.heading)}</h2>
+          <p class="page-lead">${esc(homeDefinition.lead)}</p>
+        </div>
+${body}
+        <ul class="spec-list">
+${bullets}
+        </ul>
+        <p class="page-lead" style="margin-top:1.25rem"><a href="${base}${homeDefinition.guideHref}">Read the full buyer's guide to rail competence management systems &rarr;</a></p>
+      </div>
+    </section>`;
+}
+
 function renderIndexFaq() {
   return renderFaqSection(homeSeo.faq);
 }
@@ -3608,6 +3634,13 @@ function syncIndex() {
     "<!-- seo:start -->",
     "<!-- seo:end -->",
     `\n${renderSeoMeta(homeSeo)}\n  `
+  );
+
+  html = replaceBetween(
+    html,
+    "<!-- home-definition:start -->",
+    "<!-- home-definition:end -->",
+    renderHomeDefinition()
   );
 
   html = replaceBetween(html, "<!-- seo-faq:start -->", "<!-- seo-faq:end -->", renderIndexFaq());

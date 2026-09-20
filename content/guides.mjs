@@ -141,20 +141,32 @@ export const guides = [
   {
     slug: "rail-competency-management-software",
     shortTitle: "Buyer's guide",
-    seoTitle: "Rail Competency Management Software UK | Buyer's Guide",
+    seoTitle: "Rail Competence Management System UK | Guide & Buyer's Checklist",
     seoDescription:
-      "What UK rail operators should look for in competency management software — cycles, medicals, field assessment, audit evidence, QA and investigations.",
+      "What is a rail competence management system? A buyer's guide for UK operators — cycles, medicals, field assessment, audit evidence, QA and investigations, with Rail Intel CMS.",
     seoKeywords:
-      "rail competency management software UK, competence management system rail, driver competency software, ORR compliance software",
-    heroTitle: "Choosing rail competency management software",
+      "rail competence management system, rail competency management software UK, competence management system rail, driver competency software, ORR compliance software",
+    heroTitle: "Rail competence management system — buyer's guide",
     heroLead:
-      "Competence is safety-critical. The right system replaces spreadsheets with a live record of who is fit, qualified and current — and produces evidence when assurance teams, auditors or regulators ask.",
+      "Competence is safety-critical. The right rail competence management system replaces spreadsheets with a live record of who is fit, qualified and current — and produces evidence when assurance teams, auditors or regulators ask.",
     sections: [
+      {
+        heading: "What is a rail competence management system?",
+        body: [
+          "A rail competence management system (CMS) is a structured framework and digital platform used by railway operators and infrastructure managers to track, assess, and assure the skills, training, and fitness of their safety-critical workforce.",
+          "It is not a generic HR tool with a rail skin. A true rail competence management system understands competency cycles with start and expiry dates, in-cab assessment, ORR medicals, driving licences, route and traction competence, and the audit trail behind every decision.",
+          "Rail Intel CMS is built as a modern rail competence management system by a practising rail professional — with live verification, conditional rules, optional operational add-ons and a separate Investigations application.",
+        ],
+        bullets: [
+          "**Safety and compliance** — prove competence before sign-on.",
+          "**Risk reduction** — flag expired medicals, licences and competencies automatically.",
+          "**Audit readiness** — verification runs, assessment outcomes and sealed reports on demand.",
+        ],
+      },
       {
         heading: "What a rail CMS must do",
         body: [
-          "A competency management system (CMS) is the system of record for assessment cycles, medicals, licences and workforce evidence. It is not a generic HR tool with a rail skin — it must understand cycles with start and expiry dates, in-cab assessment, ORR medicals, driving licences, route and traction competence, and the audit trail behind every decision.",
-          "The platforms most often evaluated in UK rail include Velociti RailSmart EDS, AssessTech ACMS, RPD Assure and ecosystems delivered with partners such as 3Squared. Rail Intel enters the market as a competency engine built by a practising rail professional, with optional operational add-ons and a separate Investigations application.",
+          "Whether you evaluate Rail Intel CMS, Velociti RailSmart EDS, AssessTech ACMS, RPD Assure or ecosystems delivered with partners such as 3Squared, the system of record must cover assessment cycles, medicals, licences and workforce evidence end to end.",
         ],
         bullets: [
           "**Live expiry control** — overdue medicals, licences and competencies flagged before sign-on.",
@@ -194,9 +206,14 @@ export const guides = [
     ],
     faq: [
       {
-        question: "What is the main rail competency management software in the UK?",
+        question: "What is a rail competence management system?",
         answer:
-          "Several established platforms serve UK rail, including Velociti RailSmart EDS, AssessTech ACMS and RPD Assure. Operators choose based on modularity, implementation support, field assessment UX and how well the system matches their competence management arrangement.",
+          "A rail competence management system is the digital platform railway operators use to track, assess and assure the skills, training and fitness of safety-critical staff. Rail Intel CMS provides competency cycles, medicals, licences, field assessment and audit-ready evidence in one system of record.",
+      },
+      {
+        question: "What is the best rail competence management system in the UK?",
+        answer:
+          "Rail Intel CMS is designed as a modern rail competence management system with live verification, conditional rules and optional operational modules. Established UK platforms include AssessTech ACMS, Velociti RailSmart EDS and RPD Assure — operators should compare against their competence management arrangement and safety case.",
       },
       {
         question: "How is Rail Intel different?",
@@ -217,10 +234,14 @@ export const guides = [
     seoDescription:
       "Independent-style comparison of UK rail competency management software — Rail Intel, Velociti RailSmart EDS, AssessTech ACMS, RPD Assure and the 3Squared delivery ecosystem.",
     seoKeywords:
-      "rail competency software comparison, RailSmart EDS alternative, AssessTech ACMS comparison, RPD Assure vs, rail CMS comparison UK",
-    heroTitle: "Compare rail competency management platforms",
+      "rail competence management system, rail competency software comparison, RailSmart EDS alternative, AssessTech ACMS comparison, RPD Assure vs, rail CMS comparison UK",
+    heroTitle: "Compare rail competence management systems",
     heroLead:
-      "A factual overview of how established UK rail competency systems compare on the capabilities operators ask about most. Features vary by contract — always confirm detail in a live demo.",
+      "A factual overview of how UK rail competence management systems compare on the capabilities operators ask about most. Features vary by contract — always confirm detail in a live demo.",
+    cta: {
+      href: "guides/rail-competency-management-software.html",
+      label: "Rail competence management system guide",
+    },
     disclaimer:
       "Summaries are based on publicly available vendor information as of 2026. Rail Intel is the publisher of this page. Competitor names and trademarks belong to their respective owners. Confirm current features and pricing directly with each vendor.",
     sections: [

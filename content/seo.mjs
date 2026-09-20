@@ -43,7 +43,7 @@ export const cmsSoftware = {
   operatingSystem: "Web",
   url: SITE_URL,
   description:
-    "Competency management for rail — assessment cycles, workforce records, medicals, licences and audit-ready compliance evidence.",
+    "Rail competence management system for UK operators — assessment cycles, workforce records, medicals, licences and audit-ready compliance evidence.",
   offers: {
     "@type": "Offer",
     price: "0",
@@ -53,18 +53,39 @@ export const cmsSoftware = {
   provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
 };
 
+export const homeDefinition = {
+  heading: "What is a rail competence management system?",
+  lead:
+    "A rail competence management system (CMS) is a structured framework and digital platform used by railway operators and infrastructure managers to track, assess, and assure the skills, training, and fitness of their safety-critical workforce.",
+  body: [
+    "It replaces spreadsheets with a live system of record for assessment cycles, medicals, driving licences, route and traction competence, and the audit trail behind every competence decision.",
+    "Rail Intel CMS is a modern rail competence management system built by a practising rail professional — with live expiry control, in-cab assessment, and audit-ready evidence when assurance teams or regulators ask.",
+  ],
+  bullets: [
+    "**Safety and compliance** — prove competence before sign-on, not after an incident.",
+    "**Risk reduction** — flag expired medicals, licences and competencies automatically.",
+    "**Audit readiness** — verification runs and assessment history on demand.",
+  ],
+  guideHref: "guides/rail-competency-management-software.html",
+};
+
 export const home = {
   path: "/",
-  title: "Rail Intel | Rail Competency Management Software",
+  title: "Rail Intel | Rail Competence Management System",
   description:
-    "Rail competency management software for UK rail. Track assessment cycles, medicals, licences and workforce records with audit-ready evidence and operational add-on modules.",
+    "Rail Intel is a rail competence management system for UK operators. Track assessment cycles, medicals, licences and workforce records with live verification and audit-ready evidence.",
   keywords:
-    "rail competency management, rail compliance software, driver competence, assessment cycles, workforce records, medicals licensing rail",
+    "rail competence management system, rail competency management, rail compliance software, driver competence, assessment cycles, workforce records, medicals licensing rail",
   faq: [
+    {
+      question: "What is a rail competence management system?",
+      answer:
+        "A rail competence management system is the digital platform railway operators use to track, assess and assure the skills, training and fitness of safety-critical staff. Rail Intel CMS provides competency cycles, medicals, licences, field assessment and audit-ready evidence in one system of record.",
+    },
     {
       question: "What is Rail Intel?",
       answer:
-        "Rail Intel is competency management software for rail operators. It tracks assessment cycles, medicals, licences and workforce records so expired skills are flagged before anyone reaches the railway.",
+        "Rail Intel is a rail competence management system for UK operators. It tracks assessment cycles, medicals, licences and workforce records so expired skills are flagged before anyone reaches the railway.",
     },
     {
       question: "Who is Rail Intel for?",
@@ -86,9 +107,9 @@ export const home = {
 
 export const staticPages = {
   "products/index.html": {
-    title: "Rail Intel Products | CMS, Investigations & Add-on Modules",
+    title: "Rail Intel Products | Rail Competence Management System & Modules",
     description:
-      "Explore Rail Intel CMS, Investigations and optional add-on modules including QA Verifications, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks.",
+      "Rail Intel CMS is a rail competence management system with optional add-on modules. Explore Investigations, QA Verifications, Safety Briefs, Trainee Driver, Driver Reports, Leave & Absence and Medication Checks.",
     keywords: "rail intel products, rail CMS modules, QA verifications rail, trainee driver software",
     faq: [
       {
@@ -108,9 +129,9 @@ export const staticPages = {
     ],
   },
   "features/index.html": {
-    title: "Rail Intel Features | Competency, Medicals & Licensing",
+    title: "Rail Intel Features | Core Rail Competence Management System",
     description:
-      "Core Rail Intel CMS features: competency cycles, medicals and licensing, incidents, CDP monitoring, communications hub, administration and digital cab passes.",
+      "Core features of the Rail Intel rail competence management system: competency cycles, medicals and licensing, incidents, CDP monitoring, communications hub, administration and digital cab passes.",
     keywords: "rail competency features, competence cycles, medicals licensing rail, employee records",
     breadcrumbs: [
       { name: "Rail Intel", path: "/" },
