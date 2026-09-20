@@ -290,6 +290,21 @@ export const seoExtensions = {
         answer:
           "Yes. Part B certificates are held with the licence, covering infrastructure, traction and routes the driver is certified for.",
       },
+      {
+        question: "What happens if a licence is in poor condition and cannot be digitally scanned?",
+        answer:
+          "If the image cannot be read reliably, you enter the licence details manually. The record remains complete without depending on the scan.",
+      },
+      {
+        question: "Can I photograph a licence using a phone or tablet?",
+        answer:
+          "Yes. You can capture the licence on a mobile device or tablet. Rail Intel checks the image and gives you the opportunity to crop it before submission.",
+      },
+      {
+        question: "What if the ORR doctor or psychologist is not listed when recording a medical?",
+        answer:
+          "If the assessing clinician is not yet on the register, company administrators can add them from the medical form, keeping your panel current without waiting for a system update.",
+      },
     ],
     relatedLinks: [],
   },
