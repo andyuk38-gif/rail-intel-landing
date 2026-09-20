@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=222327491" />
-  <link rel="stylesheet" href="../css/pages.css?v=222327491" />
+  <link rel="stylesheet" href="../css/style.css?v=187043735" />
+  <link rel="stylesheet" href="../css/pages.css?v=187043735" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -306,16 +306,17 @@
           <div class="page-section__body-shot">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1024px" data-no-expand="">
-            <img src="../images/screens/medical/not-safe-to-work-banner.png?v=222327491" alt="Not safe to work alert — medical expired and mandatory competency expired." width="1024" height="67" loading="lazy" decoding="async" />
+            <img src="../images/screens/medical/not-safe-to-work-banner.png?v=187043735" alt="Not safe to work alert — medical expired and mandatory competency expired." width="1024" height="67" loading="lazy" decoding="async" />
           </div>
         </figure>          </div>
           <p>The company Medicals page gives the position across the workforce, including which medicals are due within the next 30 days.</p>
 
         </div>
+
       <div class="shot-grid shot-grid--full">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1024px">
-            <img src="../images/screens/medical/new-medical-record.png?v=222327491" alt="Recording a new medical for occupational health and ORR medicals." width="1024" height="577" loading="lazy" decoding="async" />
+            <img src="../images/screens/medical/new-medical-record.png?v=187043735" alt="Recording a new medical for occupational health and ORR medicals." width="1024" height="577" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Recording a new medical for occupational health and ORR medicals.</figcaption>
         </figure>
@@ -339,16 +340,17 @@
             </div>
           </div>
         </div>
+
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 680px">
           <div class="shot__frame">
-            <img src="../images/screens/medical/orr-registered-psychologist-list.png?v=222327491" alt="ORR registered psychologists, searchable by name or ORRPP code, with the option to add a new appointment." width="680" height="413" loading="lazy" decoding="async" />
+            <img src="../images/screens/medical/orr-registered-psychologist-list.png?v=187043735" alt="ORR registered psychologists, searchable by name or ORRPP code, with the option to add a new appointment." width="680" height="413" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">ORR registered psychologists, searchable by name or ORRPP code, with the option to add a new appointment.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 676px">
           <div class="shot__frame">
-            <img src="../images/screens/medical/orr-registered-doctor-list.png?v=222327491" alt="ORR registered doctors held in the same way, searchable by name or ORRDOC code." width="676" height="405" loading="lazy" decoding="async" />
+            <img src="../images/screens/medical/orr-registered-doctor-list.png?v=187043735" alt="ORR registered doctors held in the same way, searchable by name or ORRDOC code." width="676" height="405" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">ORR registered doctors held in the same way, searchable by name or ORRDOC code.</figcaption>
         </figure>
@@ -364,10 +366,51 @@
           <p>Train driving licences are held with the front and back images, licence number, issue and expiry dates and the categories carried. Renewal warnings appear ahead of expiry with the number of days remaining.</p>
 
         </div>
+        <div class="workforce-scan-panel workforce-scan-panel--standalone">
+          <div class="workforce-scan-panel__leading" data-scan-expand>
+            <div class="workforce-scan-panel__media">
+              <div class="verify-scan verify-scan--panel" data-verify-scan>
+                <div class="verify-scan__chrome" aria-hidden="true">
+                  <span class="verify-scan__dot"></span>
+                  <span class="verify-scan__label">Scanning licence</span>
+                </div>
+                <div class="verify-scan__screen verify-scan__screen--licence">
+                  <div class="licence-card-scan" data-licence-card-scan>
+                    <div class="licence-card-scan__card" aria-hidden="true">
+                      <span class="licence-card-scan__frame"></span>
+                      <span class="licence-card-scan__placeholder licence-card-scan__placeholder--1"></span>
+                      <span class="licence-card-scan__placeholder licence-card-scan__placeholder--2"></span>
+                      <span class="licence-card-scan__placeholder licence-card-scan__placeholder--3"></span>
+                      <span class="licence-card-scan__beam"></span>
+                      <span class="licence-card-scan__wash"></span>
+                      <span class="licence-card-scan__indicator"></span>
+                      <span class="licence-card-scan__tick" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                      </span>
+                    </div>
+                    <p class="licence-card-scan__status" data-licence-scan-status>Reading licence number and dates…</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="shot__expand workforce-scan-panel__expand" data-scan-expand-trigger aria-label="Enlarge scanning animation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            </button>
+          </div>
+          <div class="workforce-scan-panel__copy">
+            <strong data-scan-title id="licence-scan-heading" aria-label="Digital Scanning &amp; Recognition Technology*">Digital Scanning &amp; Recognition Technology*</strong>
+            <ul class="workforce-scan-panel__points" data-scan-points>
+              <li>Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories, language and restrictions for you to review, eliminating manual input errors.</li>
+              <li>If the front or back of the licence is placed into the wrong field, the system detects this and places each side in the correct holder — eliminating upload errors.</li>
+              <li>Rail Intel automatically alerts you if a licence is due for renewal or has expired.</li>
+            </ul>
+            <p class="workforce-scan-panel__pill" id="licence-scan-disclaimer" aria-labelledby="licence-scan-heading">*Digital Scanning &amp; Recognition technology supports UK train licences only.</p>
+          </div>
+        </div>
       <div class="shot-grid shot-grid--full">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1024px">
-            <img src="../images/screens/licencing/licence-dark-mode.png?v=222327491" alt="Train driving licence with front and back images, details and categories carried." width="1024" height="533" loading="lazy" decoding="async" />
+            <img src="../images/screens/licencing/licence-dark-mode.png?v=187043735" alt="Train driving licence with front and back images, details and categories carried." width="1024" height="533" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Train driving licence with front and back images, details and categories carried.</figcaption>
         </figure>
@@ -383,16 +426,17 @@
           <p>The complementary certificate (Part B) is held alongside the licence, covering the infrastructure, traction and routes the driver is certified for.</p>
 
         </div>
+
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 682px">
           <div class="shot__frame">
-            <img src="../images/screens/licencing/comp-cert1.png?v=222327491" alt="Complementary certificate details held with the licence." width="682" height="507" loading="lazy" decoding="async" />
+            <img src="../images/screens/licencing/comp-cert1.png?v=187043735" alt="Complementary certificate details held with the licence." width="682" height="507" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Complementary certificate details held with the licence.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 573px">
           <div class="shot__frame">
-            <img src="../images/screens/licencing/comp-cert2.png?v=222327491" alt="Certificate coverage across traction and routes." width="573" height="404" loading="lazy" decoding="async" />
+            <img src="../images/screens/licencing/comp-cert2.png?v=187043735" alt="Certificate coverage across traction and routes." width="573" height="404" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Certificate coverage across traction and routes.</figcaption>
         </figure>
@@ -510,7 +554,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=222327491"></script>
-  <script src="../js/newsletter.js?v=222327491"></script>
+  <script src="../js/site.js?v=187043735"></script>
+  <script src="../js/newsletter.js?v=187043735"></script>
 </body>
 </html>

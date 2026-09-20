@@ -1329,6 +1329,7 @@ export const featureGroups = [
         id: "licensing",
         heading: "Driving licences and categories",
         fullWidth: true,
+        licenceScanPanel: true,
         body: [
           "Train driving licences are held with the front and back images, licence number, issue and expiry dates and the categories carried. Renewal warnings appear ahead of expiry with the number of days remaining.",
         ],

@@ -1219,6 +1219,7 @@ ${renderShotList(section.shots)}
   }
 
   const reportRoll = section.reportRoll ? renderReportRoll(section, base) : "";
+  const licenceScanPanel = section.licenceScanPanel ? renderLicenceScanPanel() : "";
 
   const headShotHtml = section.headShot
     ? renderShot(
@@ -1280,6 +1281,7 @@ ${tileSplitShots}
   return `    <section class="page-section${wide ? " page-section--wide" : ""}${section.crispShots ? " page-section--crisp" : ""}${section.mod ? ` page-section--${section.mod}` : ""}${section.reportRoll ? " page-section--report-roll" : ""}${gallery ? " page-section--gallery" : viewer ? " page-section--viewer" : spotlight ? " page-section--spotlight" : showcase ? " page-section--showcase" : ""}"${sectionIdAttr(section)}>
       <div class="container${gallery || viewer || spotlight || showcase ? " container--showcase" : ""}">
 ${headBlock}
+${licenceScanPanel}
 ${shots}
 ${reportRoll}
       </div>
@@ -2205,6 +2207,62 @@ function sectionIdAttr(section) {
 function renderHeroLead(lead) {
   const paragraphs = Array.isArray(lead) ? lead : lead ? [lead] : [];
   return paragraphs.map((paragraph) => `          <p class="page-lead">${esc(paragraph)}</p>`).join("\n");
+}
+
+const licenceScanPanelContent = {
+  title: "Digital Scanning & Recognition Technology*",
+  bullets: [
+    "Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories, language and restrictions for you to review, eliminating manual input errors.",
+    "If the front or back of the licence is placed into the wrong field, the system detects this and places each side in the correct holder — eliminating upload errors.",
+    "Rail Intel automatically alerts you if a licence is due for renewal or has expired.",
+  ],
+  disclaimer: "*Digital Scanning & Recognition technology supports UK train licences only.",
+};
+
+function renderLicenceScanPanel({ headingId = "licence-scan-heading", disclaimerId = "licence-scan-disclaimer" } = {}) {
+  const bullets = licenceScanPanelContent.bullets
+    .map((item) => `              <li>${esc(item)}</li>`)
+    .join("\n");
+
+  return `        <div class="workforce-scan-panel workforce-scan-panel--standalone">
+          <div class="workforce-scan-panel__leading" data-scan-expand>
+            <div class="workforce-scan-panel__media">
+              <div class="verify-scan verify-scan--panel" data-verify-scan>
+                <div class="verify-scan__chrome" aria-hidden="true">
+                  <span class="verify-scan__dot"></span>
+                  <span class="verify-scan__label">Scanning licence</span>
+                </div>
+                <div class="verify-scan__screen verify-scan__screen--licence">
+                  <div class="licence-card-scan" data-licence-card-scan>
+                    <div class="licence-card-scan__card" aria-hidden="true">
+                      <span class="licence-card-scan__frame"></span>
+                      <span class="licence-card-scan__placeholder licence-card-scan__placeholder--1"></span>
+                      <span class="licence-card-scan__placeholder licence-card-scan__placeholder--2"></span>
+                      <span class="licence-card-scan__placeholder licence-card-scan__placeholder--3"></span>
+                      <span class="licence-card-scan__beam"></span>
+                      <span class="licence-card-scan__wash"></span>
+                      <span class="licence-card-scan__indicator"></span>
+                      <span class="licence-card-scan__tick" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                      </span>
+                    </div>
+                    <p class="licence-card-scan__status" data-licence-scan-status>Reading licence number and dates…</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="shot__expand workforce-scan-panel__expand" data-scan-expand-trigger aria-label="Enlarge scanning animation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            </button>
+          </div>
+          <div class="workforce-scan-panel__copy">
+            <strong data-scan-title id="${esc(headingId)}" aria-label="${esc(licenceScanPanelContent.title)}">${esc(licenceScanPanelContent.title)}</strong>
+            <ul class="workforce-scan-panel__points" data-scan-points>
+${bullets}
+            </ul>
+            <p class="workforce-scan-panel__pill" id="${esc(disclaimerId)}" aria-labelledby="${esc(headingId)}">${esc(licenceScanPanelContent.disclaimer)}</p>
+          </div>
+        </div>`;
 }
 
 function renderMedicalsLicensingHeroGraphic(base) {
