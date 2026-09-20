@@ -53,7 +53,7 @@
     var horizontalPad = isPortrait() ? 24 : 40;
     var spread = isPortrait() ? 1 : 2;
     var maxBookWidth = Math.min(stageWidth - horizontalPad, isPortrait() ? 520 : 1280);
-    var maxBookHeight = Math.min(window.innerHeight * 0.74, 860);
+    var maxBookHeight = Math.min(window.innerHeight * 0.68, 800);
     var heightFromWidth = maxBookWidth / (PAGE_RATIO * spread);
     var bookHeight = Math.min(maxBookHeight, heightFromWidth);
     var bookWidth = bookHeight * PAGE_RATIO * spread;

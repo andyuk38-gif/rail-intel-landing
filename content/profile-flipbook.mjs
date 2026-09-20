@@ -244,7 +244,7 @@ function renderContentsContinuedPage() {
 
 function renderPersonalPage() {
   const body = `
-      ${sectionIntro("Personal and contact details are taken from the employee record at export. Emergency contacts and identity fields are included for depot verification and formal competence packs.")}
+      ${sectionIntro("Personal and contact details are taken from the employee record at export for depot verification and formal competence packs.")}
       ${sectionLabel("Personal & contact details")}
       ${card(
         "Identity",
@@ -266,10 +266,6 @@ function renderPersonalPage() {
           field("Address", "42 Station Road, Leeds", true),
           field("Postcode", "LS1 4DY"),
         ].join("")
-      )}
-      ${card(
-        "Emergency contact",
-        [field("Name", "David Mitchell"), field("Relationship", "Spouse"), field("Telephone", "+44 7700 900 301")].join("")
       )}`;
   return detailPage("Personal details & employment", body, 2, false);
 }
@@ -278,6 +274,10 @@ function renderPersonalContinuedPage() {
   const body = `
       ${sectionIntro("Employment status, role history and organisational details confirm the employee's current position and reporting line. This section supports rostering checks and management review.")}
       ${sectionLabel("Employment & status")}
+      ${card(
+        "Emergency contact",
+        [field("Name", "David Mitchell"), field("Relationship", "Spouse"), field("Telephone", "+44 7700 900 301")].join("")
+      )}
       ${card(
         "Position",
         [
@@ -301,11 +301,7 @@ function renderPersonalContinuedPage() {
           field("Contract type", "Permanent — full time"),
           field("Union membership", "ASLEF"),
         ].join("")
-      )}
-      ${proseCard("About employment records", [
-        "Position and history fields reflect the live HR record, including promotions, depot transfers and additional responsibilities such as mentoring.",
-        "Printed profiles retain the assessing manager and monitoring status so competence teams can confirm who holds oversight of the employee.",
-      ])}`;
+      )}`;
   return detailPage("Personal details & employment", body, 2, true);
 }
 
@@ -334,11 +330,7 @@ function renderLicencePage() {
           ["74291061", "Engineering train", "20 Jun 2026", "19 Jun 2027", "J. Porter", "Yes"],
         ],
         true
-      )}
-      ${proseCard("About cab passes", [
-        "Digital cab passes include a QR code for on-the-day verification. Printed profiles list pass numbers, issue dates and expiry so gate staff can confirm authority without system access.",
-        "Route familiarisation and engineering passes are shown separately from the standard cab pass to make restrictions clear during audit review.",
-      ])}`;
+      )}`;
   return detailPage("Licence & cab passes", body, 3, false);
 }
 
@@ -364,11 +356,7 @@ function renderLicenceContinuedPage() {
           field("Route restrictions", "None recorded"),
           field("Next review", "01 Apr 2027"),
         ].join("")
-      )}
-      ${proseCard("About route endorsements", [
-        "Endorsements are renewed through formal route knowledge assessments and recorded against the live licence record.",
-        "Printed profiles show the endorsement date and validity so depot teams can confirm authority before rostering.",
-      ])}`;
+      )}`;
   return detailPage("Licence & cab passes", body, 3, true);
 }
 
@@ -397,7 +385,14 @@ function renderCompetencePage() {
           ["Class 158 · York–Selby", "22 Nov 2024", "A. Reid", pill("Competent"), "21 Nov 2026"],
         ],
         true
-      )}
+      )}`;
+  return detailPage("Competence & training", body, 4, false);
+}
+
+function renderCompetenceContinuedPage() {
+  const body = `
+      ${sectionIntro("Training and qualifications are maintained in line with operator standards and industry requirements. Mandatory safety training is refreshed on a fixed cycle; competence refreshes are triggered by route changes or at the assessment interval defined in the employee cycle.")}
+      ${sectionLabel("Training & qualifications")}
       ${card(
         "Training summary",
         [
@@ -409,17 +404,6 @@ function renderCompetencePage() {
           field("Development plan", "No open actions"),
         ].join("")
       )}
-      ${proseCard("About route competence", [
-        "Competence assessments confirm that the driver can safely operate booked traction over specified routes.",
-        "Expired or overdue assessments appear prominently in the live record and in printed packs for audit readiness.",
-      ])}`;
-  return detailPage("Competence & training", body, 4, false);
-}
-
-function renderCompetenceContinuedPage() {
-  const body = `
-      ${sectionIntro("Training and qualifications are maintained in line with operator standards and industry requirements. Mandatory safety training is refreshed on a fixed cycle; competence refreshes are triggered by route changes or at the assessment interval defined in the employee cycle.")}
-      ${sectionLabel("Training & qualifications")}
       ${tableCard(
         "Qualifications",
         ["Qualification", "Type", "Certificate no.", "Obtained", "Expires"],
@@ -438,17 +422,6 @@ function renderCompetenceContinuedPage() {
           ["Safety briefing Q3", "Mandatory", "01 Sep 2026", "Depot briefing", pill("Completed"), "—"],
         ],
         true
-      )}
-      ${card(
-        "Training compliance",
-        [
-          field("Mandatory training status", "Up to date"),
-          field("Next mandatory due", "22 Jun 2029"),
-          field("Competence refresh due", "15 Nov 2026"),
-          field("Records verified by", "James Porter"),
-          field("Last compliance review", "01 Sep 2026"),
-          field("Outstanding actions", "None"),
-        ].join("")
       )}`;
   return detailPage("Competence & training", body, 4, true);
 }
@@ -476,11 +449,7 @@ function renderCyclesPage() {
           field("Outstanding items", "Route knowledge refresh"),
           field("Last assessment", "18 Aug 2026"),
         ].join("")
-      )}
-      ${proseCard("About assessment cycles", [
-        "Each cycle records planned and completed assessments so managers can see whether the employee is on track before the expiry date.",
-        "Closed cycles remain on the profile to provide a clear audit trail of historic competence activity.",
-      ])}`;
+      )}`;
   return detailPage("Assessment cycles", body, 5, false);
 }
 
@@ -509,11 +478,7 @@ function renderCyclesContinuedPage() {
           field("Assessor comments", "Consistently strong route knowledge"),
           field("Next formal review", "15 Nov 2026"),
         ].join("")
-      )}
-      ${proseCard("Monitoring & follow-up", [
-        "Assessor comments are retained on the live record and reproduced here for management review or formal competence packs.",
-        "Scheduled assessments appear without a completion date until the review has been recorded in Rail Intel.",
-      ])}`;
+      )}`;
   return detailPage("Assessment cycles", body, 5, true);
 }
 
@@ -528,7 +493,6 @@ function renderMedicalsPage() {
           ["Periodic medical (safety critical)", "28 Feb 2026", pill("Fit"), "27 Feb 2028", "Dr. H. Marsh"],
           ["Vision screening", "28 Feb 2026", pill("Pass"), "27 Feb 2028", "Dr. H. Marsh"],
           ["Audiometry", "28 Feb 2026", pill("Pass"), "27 Feb 2028", "Dr. H. Marsh"],
-          ["Drug & alcohol screening", "28 Feb 2026", pill("Negative"), "27 Feb 2028", "Occupational health"],
         ],
         true
       )}
@@ -543,11 +507,7 @@ function renderMedicalsPage() {
           field("Declared by", "Sarah Mitchell"),
           field("Reviewed by", "James Porter"),
         ].join("")
-      )}
-      ${proseCard("About fitness declarations", [
-        "Drivers confirm medication changes and fitness status at the required interval. Printed profiles include the latest declaration so managers can evidence compliance during competence reviews.",
-        "Restrictions and next review dates are shown alongside examination outcomes to support rostering decisions.",
-      ])}`;
+      )}`;
   return detailPage("Medicals & fitness", body, 6, false);
 }
 
@@ -584,11 +544,7 @@ function renderMedicalsContinuedPage() {
           field("Corrective lenses", "Required — current prescription held"),
           field("OH follow-up", "Not required"),
         ].join("")
-      )}
-      ${proseCard("Restrictions & review", [
-        "Any driving or route restrictions are shown prominently so depot teams can confirm fitness before rostering.",
-        "Corrective lens requirements and occupational health follow-up dates are included for completeness in formal competence packs.",
-      ])}`;
+      )}`;
   return detailPage("Medicals & fitness", body, 6, true);
 }
 
