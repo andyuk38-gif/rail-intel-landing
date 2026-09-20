@@ -1136,7 +1136,7 @@ export const featureGroups = [
       noExpand: true,
     },
     lead:
-      "For audits, management review or formal packs, Rail Intel turns the live employee record into a branded competence portfolio — full-colour brochure, print-ready PDF, or on-screen layout, generated from the data already in the system.",
+      "For audits, management review or formal packs, Rail Intel turns the live employee record into a branded competence portfolio, full-colour brochure, print-ready PDF, or on-screen layout, generated from the data already in the system.",
     relatedLinks: [
       { name: "Profile Lock", href: "features/profile-lock.html" },
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
