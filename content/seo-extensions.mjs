@@ -344,9 +344,9 @@ export const seoExtensions = {
     seoKeywords: "competence development plan rail, CDP monitoring, continuous competency cycle, rail monitoring tab",
     faq: [
       {
-        question: "Do open CDPs carry over when a cycle renews?",
+        question: "When do open CDPs carry over at cycle renewal?",
         answer:
-          "Yes. On continuous cycles, open CDP items and scheduled assessment events carry forward automatically when a new cycle period starts.",
+          "Carryover applies only where continuous cycle rules are in place. Rail Intel runs automated checks against the nested continuous requirements and the parent cycle they sit within before renewal completes. If the record qualifies, outstanding CDP items and scheduled assessment events move forward automatically. Where continuous is not configured, or those checks are not met, the system prompts you, and outstanding work is not carried over by default.",
       },
       {
         question: "Who can view and edit CDPs?",
