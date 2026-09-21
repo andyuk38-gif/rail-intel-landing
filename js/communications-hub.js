@@ -54,13 +54,17 @@
   var hasLoadedPreview = false;
   var currentTemplateKey = null;
   var SLIDE_MS = 420;
-  var HANDOFF_LIFT_MS = 300;
-  var HANDOFF_TRAVEL_MS = 480;
-  var HANDOFF_SETTLE_MS = 340;
-  var SECONDARY_IN_MS = 720;
+  var HANDOFF_LIFT_MS = 480;
+  var HANDOFF_TRAVEL_MS = 780;
+  var HANDOFF_SETTLE_MS = 560;
+  var SECONDARY_IN_MS = 1600;
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   root.style.setProperty("--comm-rotate-ms", ROTATE_MS + "ms");
+  root.style.setProperty("--comm-handoff-lift", HANDOFF_LIFT_MS + "ms");
+  root.style.setProperty("--comm-handoff-travel", HANDOFF_TRAVEL_MS + "ms");
+  root.style.setProperty("--comm-handoff-settle", HANDOFF_SETTLE_MS + "ms");
+  root.style.setProperty("--comm-handoff-secondary-in", SECONDARY_IN_MS + "ms");
 
   function templateNode(key) {
     return templates.find(function (el) {
@@ -191,7 +195,6 @@
   function clearHandoffClasses() {
     if (!duo) return;
     duo.classList.remove(
-      "is-handoff-fade-primary",
       "is-handoff-phase-lift",
       "is-handoff-phase-travel",
       "is-handoff-phase-settle",
@@ -316,7 +319,6 @@
 
     if (consoleEl) consoleEl.classList.add("is-changing");
     clearHandoffClasses();
-    duo.classList.add("is-handoff-fade-primary");
 
     after(40, function () {
       duo.classList.add("is-handoff-phase-lift");
@@ -333,10 +335,7 @@
 
           after(HANDOFF_SETTLE_MS, function () {
             duo.classList.add("is-handoff-commit");
-            duo.classList.remove(
-              "is-handoff-phase-settle",
-              "is-handoff-fade-primary"
-            );
+            duo.classList.remove("is-handoff-phase-settle");
 
             loadFrameContent(panes[0].frame, panes[0].stage, templateHtml(primaryKey), function () {
               loadFrameContent(panes[1].frame, panes[1].stage, templateHtml(secondaryKey), function () {
@@ -346,7 +345,7 @@
                   void duo.offsetWidth;
                   duo.classList.add("is-handoff-secondary-enter-active");
 
-                  waitPaneTransition(secondaryPane, SECONDARY_IN_MS + 100, function () {
+                  waitPaneTransition(secondaryPane, SECONDARY_IN_MS + 120, function () {
                     clearHandoffClasses();
                     updateAllFrameOverflow();
                     finishFrameChange(done);

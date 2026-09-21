@@ -409,19 +409,18 @@
   transform-origin: center center;
 }
 
-.comm-hub-mail__duo.is-handoff-fade-primary .comm-hub-mail__pane--primary {
-  opacity: 0;
-  transform: translate3d(0, 0, -24px) scale(0.985);
-  pointer-events: none;
-  transition:
-    opacity 0.34s ease,
-    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .comm-hub-mail__duo.is-handoff-phase-lift .comm-hub-mail__pane--secondary,
 .comm-hub-mail__duo.is-handoff-phase-travel .comm-hub-mail__pane--secondary,
 .comm-hub-mail__duo.is-handoff-phase-settle .comm-hub-mail__pane--secondary {
   z-index: 3;
+}
+
+.comm-hub-mail__duo.is-handoff-phase-lift .comm-hub-mail__pane--primary,
+.comm-hub-mail__duo.is-handoff-phase-travel .comm-hub-mail__pane--primary,
+.comm-hub-mail__duo.is-handoff-phase-settle .comm-hub-mail__pane--primary {
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
 }
 
 .comm-hub-mail__duo.is-handoff-phase-lift .comm-hub-mail__pane--secondary .comm-hub-mail__pane-head,
@@ -432,19 +431,19 @@
 
 .comm-hub-mail__duo.is-handoff-phase-lift .comm-hub-mail__pane--secondary {
   transform: translate3d(0, -14px, 58px) scale(1.05);
-  transition-duration: 0.3s;
+  transition-duration: var(--comm-handoff-lift, 480ms);
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .comm-hub-mail__duo.is-handoff-phase-travel .comm-hub-mail__pane--secondary {
   transform: translate3d(calc(-100% - 1rem), -14px, 58px) scale(1.05);
-  transition-duration: 0.48s;
+  transition-duration: var(--comm-handoff-travel, 780ms);
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .comm-hub-mail__duo.is-handoff-phase-settle .comm-hub-mail__pane--secondary {
   transform: translate3d(calc(-100% - 1rem), 0, 0) scale(1);
-  transition-duration: 0.34s;
+  transition-duration: var(--comm-handoff-settle, 560ms);
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -465,7 +464,7 @@
 }
 
 .comm-hub-mail__duo.is-handoff-commit .comm-hub-mail__pane--primary {
-  opacity: 0;
+  opacity: 1;
   transform: none;
   pointer-events: none;
 }
@@ -479,15 +478,15 @@
 .comm-hub-mail__duo.is-handoff-secondary-enter .comm-hub-mail__pane--secondary {
   transition: none;
   opacity: 1;
-  transform: translate3d(28%, 0, 0);
+  transform: translate3d(42%, 0, 0);
 }
 
 .comm-hub-mail__duo.is-handoff-secondary-enter.is-handoff-secondary-enter-active .comm-hub-mail__pane--secondary {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition:
-    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.55s ease;
+    transform var(--comm-handoff-secondary-in, 1600ms) cubic-bezier(0.12, 1, 0.24, 1),
+    opacity 0.8s ease;
 }
 
 .comm-hub-mail__duo.is-handoff-prev-exit .comm-hub-mail__pane--primary {
