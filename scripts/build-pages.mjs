@@ -2110,13 +2110,6 @@ function cdpMonitoringPage(group) {
   const base = "../";
   const accent = group.accent || "#38bdf8";
 
-  const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
-    group.name
-  )}</p>
-          <span class="page-badge page-badge--core">Included as standard</span>
-          <h1 class="page-title">${esc(group.tagline)}</h1>
-          <p class="page-lead">${esc(group.lead)}</p>`;
-
   const pageSeo = featureSeo(group);
 
   return (
@@ -2125,8 +2118,43 @@ function cdpMonitoringPage(group) {
   <main>
     <section class="page-hero page-hero--cdp page-hero--full-lead" style="--cdp-accent: ${esc(accent)}">
       <div class="container">
-        <div class="page-hero__inner">
-${heroCopy}
+        <div class="page-hero__inner page-hero__inner--cdp">
+          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
+    group.name
+  )}</p>
+          <span class="page-badge page-badge--core">Included as standard</span>
+          <div class="page-hero__title-row">
+            <div class="page-hero__copy">
+              <h1 class="page-title">${esc(group.tagline)}</h1>
+            </div>
+            <div class="cdp-hero-board reveal" aria-hidden="true">
+              <div class="cdp-hero-board__chrome">
+                <span class="cdp-hero-board__dot cdp-hero-board__dot--live"></span>
+                <span class="cdp-hero-board__label">Monitoring · Live record</span>
+              </div>
+              <div class="cdp-hero-board__grid">
+                <div class="cdp-hero-board__metric">
+                  <span class="cdp-hero-board__metric-label">Open CDPs</span>
+                  <strong>3</strong>
+                  <span class="cdp-hero-board__metric-note">Active development points</span>
+                </div>
+                <div class="cdp-hero-board__metric">
+                  <span class="cdp-hero-board__metric-label">Linked incidents</span>
+                  <strong>1</strong>
+                  <span class="cdp-hero-board__metric-note">Allocated to employee</span>
+                </div>
+                <div class="cdp-hero-board__metric cdp-hero-board__metric--accent">
+                  <span class="cdp-hero-board__metric-label">Cycle carryover</span>
+                  <strong>Auto</strong>
+                  <span class="cdp-hero-board__metric-note">Open items preserved</span>
+                </div>
+              </div>
+              <div class="cdp-hero-board__footer">
+                <span>Employee record · Development tab</span>
+              </div>
+            </div>
+          </div>
+          <p class="page-lead">${esc(group.lead)}</p>
         </div>
       </div>
     </section>

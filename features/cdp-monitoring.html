@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=179879020" />
-  <link rel="stylesheet" href="../css/pages.css?v=179879020" />
+  <link rel="stylesheet" href="../css/style.css?v=62553906" />
+  <link rel="stylesheet" href="../css/pages.css?v=62553906" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -250,10 +250,40 @@
   <main>
     <section class="page-hero page-hero--cdp page-hero--full-lead" style="--cdp-accent: #38bdf8">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--cdp">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / CDP Monitoring</p>
           <span class="page-badge page-badge--core">Included as standard</span>
-          <h1 class="page-title">Open development points that stay visible until they are closed</h1>
+          <div class="page-hero__title-row">
+            <div class="page-hero__copy">
+              <h1 class="page-title">Open development points that stay visible until they are closed</h1>
+            </div>
+            <div class="cdp-hero-board reveal" aria-hidden="true">
+              <div class="cdp-hero-board__chrome">
+                <span class="cdp-hero-board__dot cdp-hero-board__dot--live"></span>
+                <span class="cdp-hero-board__label">Monitoring · Live record</span>
+              </div>
+              <div class="cdp-hero-board__grid">
+                <div class="cdp-hero-board__metric">
+                  <span class="cdp-hero-board__metric-label">Open CDPs</span>
+                  <strong>3</strong>
+                  <span class="cdp-hero-board__metric-note">Active development points</span>
+                </div>
+                <div class="cdp-hero-board__metric">
+                  <span class="cdp-hero-board__metric-label">Linked incidents</span>
+                  <strong>1</strong>
+                  <span class="cdp-hero-board__metric-note">Allocated to employee</span>
+                </div>
+                <div class="cdp-hero-board__metric cdp-hero-board__metric--accent">
+                  <span class="cdp-hero-board__metric-label">Cycle carryover</span>
+                  <strong>Auto</strong>
+                  <span class="cdp-hero-board__metric-note">Open items preserved</span>
+                </div>
+              </div>
+              <div class="cdp-hero-board__footer">
+                <span>Employee record · Development tab</span>
+              </div>
+            </div>
+          </div>
           <p class="page-lead">A competence development plan (CDP) is how Rail Intel records what still needs to improve after an assessment, incident or monitoring review, what was agreed, who owns it and whether it was completed. CDPs live on the Monitoring tab of the employee record, link back to the competence activity that raised them, and carry forward automatically when a continuous cycle renews.</p>
         </div>
       </div>
@@ -402,7 +432,7 @@
                 <div class="cdp-chapter__split-visual">
               <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1522px">
                 <div class="shot__frame">
-                  <img src="../images/screens/monitor-plans-incidents/cdp-plan-overview.png?v=179879020" alt="Competence development plan overview for the employee." width="1522" height="270" sizes="(min-width: 1100px) 1522px, 96vw" loading="lazy" decoding="async" />
+                  <img src="../images/screens/monitor-plans-incidents/cdp-plan-overview.png?v=62553906" alt="Competence development plan overview for the employee." width="1522" height="270" sizes="(min-width: 1100px) 1522px, 96vw" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Competence development plan overview for the employee.</figcaption>
               </figure>
@@ -431,7 +461,7 @@
               <div class="cdp-chapter__shots cdp-chapter__shots--center">
               <figure class="cdp-chapter__figure shot cdp-chapter__figure--compact" style="--shot-native-width: 356px">
                 <div class="shot__frame">
-                  <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=179879020" alt="CDP monitoring events carry over when a continuous cycle renews." width="356" height="330" sizes="(min-width: 1100px) 356px, 96vw" loading="lazy" decoding="async" />
+                  <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=62553906" alt="CDP monitoring events carry over when a continuous cycle renews." width="356" height="330" sizes="(min-width: 1100px) 356px, 96vw" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">CDP monitoring events carry over when a continuous cycle renews.</figcaption>
               </figure>
@@ -473,7 +503,7 @@
               <div class="cdp-chapter__shots cdp-chapter__shots--full">
               <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1385px">
                 <div class="shot__frame">
-                  <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=179879020" alt="Configure permissions for each company job role." width="1385" height="1042" sizes="(min-width: 1100px) 1385px, 96vw" loading="lazy" decoding="async" />
+                  <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=62553906" alt="Configure permissions for each company job role." width="1385" height="1042" sizes="(min-width: 1100px) 1385px, 96vw" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Configure permissions for each company job role.</figcaption>
               </figure>
@@ -611,7 +641,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=179879020"></script>
-  <script src="../js/newsletter.js?v=179879020"></script>
+  <script src="../js/site.js?v=62553906"></script>
+  <script src="../js/newsletter.js?v=62553906"></script>
 </body>
 </html>

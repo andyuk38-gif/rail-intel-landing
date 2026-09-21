@@ -6195,6 +6195,37 @@ body.lightbox-open {
   z-index: 1;
 }
 
+.page-hero__inner--cdp {
+  max-width: none;
+}
+
+.page-hero__inner--cdp .page-hero__title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+  gap: 2.5rem 3rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+
+.page-hero__inner--cdp .page-hero__copy {
+  max-width: 40rem;
+}
+
+.page-hero__inner--cdp .page-title {
+  margin-bottom: 0;
+}
+
+.page-hero--cdp.page-hero--full-lead .page-lead {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+@media (max-width: 960px) {
+  .page-hero__inner--cdp .page-hero__title-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .cdp-hero-board {
   border: 1px solid color-mix(in srgb, var(--cdp-accent) 35%, transparent);
   border-radius: 18px;
