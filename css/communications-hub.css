@@ -315,7 +315,7 @@
 .comm-hub-mail {
   margin: 0;
   background: #eef2f7;
-  --comm-preview-frame-height: 22rem;
+  --comm-preview-frame-height: 38rem;
 }
 
 .comm-hub-mail__chrome {
@@ -961,7 +961,7 @@
   }
 
   .comm-hub-mail {
-    --comm-preview-frame-height: 18rem;
+    --comm-preview-frame-height: 28rem;
   }
 }
 
