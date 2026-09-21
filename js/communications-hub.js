@@ -58,13 +58,19 @@
   var HANDOFF_TRAVEL_MS = 720;
   var HANDOFF_SETTLE_MS = 520;
   var SECONDARY_IN_MS = 4500;
+  var CATEGORY_SWITCH_OUT_MS = 420;
+  var CATEGORY_SWITCH_IN_MS = 560;
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var animationGeneration = 0;
+  var pendingTimeouts = [];
 
   root.style.setProperty("--comm-rotate-ms", ROTATE_MS + "ms");
   root.style.setProperty("--comm-handoff-lift", HANDOFF_LIFT_MS + "ms");
   root.style.setProperty("--comm-handoff-travel", HANDOFF_TRAVEL_MS + "ms");
   root.style.setProperty("--comm-handoff-settle", HANDOFF_SETTLE_MS + "ms");
   root.style.setProperty("--comm-handoff-secondary-in", SECONDARY_IN_MS + "ms");
+  root.style.setProperty("--comm-category-switch-out", CATEGORY_SWITCH_OUT_MS + "ms");
+  root.style.setProperty("--comm-category-switch-in", CATEGORY_SWITCH_IN_MS + "ms");
 
   function templateNode(key) {
     return templates.find(function (el) {
@@ -214,8 +220,33 @@
     clearHandoffClasses();
   }
 
+  function abortActiveAnimation() {
+    animationGeneration += 1;
+    pendingTimeouts.forEach(clearTimeout);
+    pendingTimeouts = [];
+    clearHandoffClasses();
+    var viewport = root.querySelector("[data-comm-viewport]");
+    if (viewport) {
+      viewport.classList.remove(
+        "is-handoff-active",
+        "is-category-switch-out",
+        "is-category-switch-in",
+        "is-category-switch-active",
+        "is-category-switch-from-right",
+        "is-category-switch-from-left"
+      );
+    }
+    if (consoleEl) consoleEl.classList.remove("is-changing");
+    changing = false;
+  }
+
   function after(ms, callback) {
-    window.setTimeout(callback, ms);
+    var generation = animationGeneration;
+    var id = window.setTimeout(function () {
+      if (generation !== animationGeneration) return;
+      callback();
+    }, ms);
+    pendingTimeouts.push(id);
   }
 
   function waitPaneTransition(target, fallbackMs, callback) {
@@ -224,16 +255,18 @@
       return;
     }
 
+    var generation = animationGeneration;
     var finished = false;
     function complete() {
-      if (finished) return;
+      if (finished || generation !== animationGeneration) return;
       finished = true;
       target.removeEventListener("transitionend", onEnd);
       callback();
     }
 
     function onEnd(event) {
-      if (event.target !== target || event.propertyName !== "transform") return;
+      if (event.target !== target) return;
+      if (event.propertyName !== "transform" && event.propertyName !== "opacity") return;
       complete();
     }
 
@@ -338,11 +371,69 @@
     if (done) done();
   }
 
+  function animateCategorySwitch(primaryKey, secondaryKey, direction, done) {
+    var viewport = root.querySelector("[data-comm-viewport]");
+    var generation = animationGeneration;
+
+    function finish(doneFn) {
+      if (generation !== animationGeneration) return;
+      finishFrameChange(doneFn);
+    }
+
+    if (!viewport || prefersReducedMotion) {
+      loadPreviewPair(primaryKey, secondaryKey, function () {
+        finish(done);
+      });
+      return;
+    }
+
+    if (consoleEl) consoleEl.classList.add("is-changing");
+    clearHandoffClasses();
+    viewport.classList.remove(
+      "is-category-switch-in",
+      "is-category-switch-active",
+      "is-category-switch-from-right",
+      "is-category-switch-from-left"
+    );
+    viewport.classList.add("is-category-switch-out");
+
+    waitPaneTransition(viewport, CATEGORY_SWITCH_OUT_MS + 80, function () {
+      if (generation !== animationGeneration) return;
+      viewport.classList.remove("is-category-switch-out");
+
+      loadPreviewPair(primaryKey, secondaryKey, function () {
+        if (generation !== animationGeneration) return;
+        viewport.classList.add("is-category-switch-in");
+        viewport.classList.add(direction < 0 ? "is-category-switch-from-left" : "is-category-switch-from-right");
+        void viewport.offsetWidth;
+        viewport.classList.add("is-category-switch-active");
+
+        waitPaneTransition(viewport, CATEGORY_SWITCH_IN_MS + 80, function () {
+          if (generation !== animationGeneration) return;
+          viewport.classList.remove(
+            "is-category-switch-in",
+            "is-category-switch-active",
+            "is-category-switch-from-right",
+            "is-category-switch-from-left"
+          );
+          finish(done);
+        });
+      });
+    });
+  }
+
   function animatePromoteNext(primaryKey, secondaryKey, done) {
+    var generation = animationGeneration;
     var secondaryPane = duo.querySelector(".comm-hub-mail__pane--secondary");
+
+    function finish(doneFn) {
+      if (generation !== animationGeneration) return;
+      finishFrameChange(doneFn);
+    }
+
     if (!secondaryPane) {
       loadPreviewPair(primaryKey, secondaryKey, function () {
-        finishFrameChange(done);
+        finish(done);
       });
       return;
     }
@@ -352,38 +443,55 @@
     syncHandoffTravelDistance();
 
     var viewport = root.querySelector("[data-comm-viewport]");
-    if (viewport) viewport.classList.add("is-handoff-active");
+    if (viewport) {
+      viewport.classList.remove(
+        "is-category-switch-out",
+        "is-category-switch-in",
+        "is-category-switch-active",
+        "is-category-switch-from-right",
+        "is-category-switch-from-left"
+      );
+      viewport.classList.add("is-handoff-active");
+    }
 
     after(40, function () {
+      if (generation !== animationGeneration) return;
       duo.classList.add("is-handoff-phase-lift");
 
       after(HANDOFF_LIFT_MS, function () {
+        if (generation !== animationGeneration) return;
         duo.classList.add("is-handoff-phase-travel");
         void duo.offsetWidth;
         duo.classList.remove("is-handoff-phase-lift");
 
         after(HANDOFF_TRAVEL_MS, function () {
+          if (generation !== animationGeneration) return;
           duo.classList.add("is-handoff-phase-settle");
           void duo.offsetWidth;
           duo.classList.remove("is-handoff-phase-travel");
 
           after(HANDOFF_SETTLE_MS, function () {
+            if (generation !== animationGeneration) return;
             duo.classList.add("is-handoff-commit");
             duo.classList.remove("is-handoff-phase-settle");
 
             loadFrameContent(panes[0].frame, panes[0].stage, templateHtml(primaryKey), function () {
+              if (generation !== animationGeneration) return;
               loadFrameContent(panes[1].frame, panes[1].stage, templateHtml(secondaryKey), function () {
+                if (generation !== animationGeneration) return;
                 requestAnimationFrame(function () {
+                  if (generation !== animationGeneration) return;
                   duo.classList.remove("is-handoff-commit");
                   duo.classList.add("is-handoff-secondary-enter");
                   void duo.offsetWidth;
                   duo.classList.add("is-handoff-secondary-enter-active");
 
                   waitPaneTransition(secondaryPane, SECONDARY_IN_MS + 150, function () {
+                    if (generation !== animationGeneration) return;
                     clearHandoffClasses();
                     if (viewport) viewport.classList.remove("is-handoff-active");
                     updateAllFrameOverflow();
-                    finishFrameChange(done);
+                    finish(done);
                   });
                 });
               });
@@ -459,6 +567,11 @@
       return;
     }
 
+    if (options.mode === "category") {
+      animateCategorySwitch(primaryKey, secondaryKey, direction, done);
+      return;
+    }
+
     if (direction > 0 && canPromoteNext(options.previousIndex, options.index)) {
       animatePromoteNext(primaryKey, secondaryKey, done);
       return;
@@ -505,8 +618,21 @@
     duo.classList.toggle("is-single", visibleItems.length < 2);
   }
 
-  function setActiveItem(index, direction) {
-    if (!visibleItems.length || changing) return;
+  function categoryDirection(fromFilter, toFilter) {
+    var fromIdx = CATEGORY_ORDER.indexOf(fromFilter);
+    var toIdx = CATEGORY_ORDER.indexOf(toFilter);
+    if (fromIdx < 0 || toIdx < 0 || fromIdx === toIdx) return 1;
+    return toIdx > fromIdx ? 1 : -1;
+  }
+
+  function setActiveItem(index, direction, options) {
+    if (!visibleItems.length) return;
+
+    options = options || {};
+
+    if (changing) {
+      abortActiveAnimation();
+    }
 
     var previousIndex = currentIndex;
 
@@ -517,7 +643,7 @@
     var secondaryBtn = visibleItems.length > 1 ? visibleItems[wrapIndex(index + 1)] : null;
     var secondaryKey = secondaryBtn ? secondaryBtn.getAttribute("data-comm-template") : null;
 
-    if (hasLoadedPreview && primaryKey === currentTemplateKey) return;
+    if (hasLoadedPreview && primaryKey === currentTemplateKey && options.mode !== "category") return;
 
     var slideDirection = direction;
     if (slideDirection == null) {
@@ -543,7 +669,12 @@
     writePreviewPair(
       primaryKey,
       secondaryKey,
-      { direction: slideDirection, previousIndex: previousIndex, index: index },
+      {
+        direction: slideDirection,
+        previousIndex: previousIndex,
+        index: index,
+        mode: options.mode || "in-tab",
+      },
       function () {
         changing = false;
         resetTiming();
@@ -555,7 +686,16 @@
     }
   }
 
-  function applyFilter(filter, keepIndex) {
+  function applyFilter(filter, keepIndex, options) {
+    options = options || {};
+    var previousFilter = activeFilter;
+
+    if (filter === previousFilter && !keepIndex && hasLoadedPreview) return;
+
+    if (changing) {
+      abortActiveAnimation();
+    }
+
     activeFilter = filter;
 
     filters.forEach(function (btn) {
@@ -591,21 +731,26 @@
       rail.scrollTo({ left: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     }
 
-    if (keepIndex && currentIndex < visibleItems.length) {
-      setActiveItem(currentIndex);
-    } else {
-      setActiveItem(0, 1);
-    }
+    var switchDirection = options.categoryDirection != null
+      ? options.categoryDirection
+      : categoryDirection(previousFilter, filter);
+    var targetIndex = keepIndex && currentIndex < visibleItems.length ? currentIndex : 0;
+
+    setActiveItem(targetIndex, switchDirection, { mode: "category" });
   }
 
   function nextCategory() {
     var idx = CATEGORY_ORDER.indexOf(activeFilter);
     var next = idx < 0 || idx >= CATEGORY_ORDER.length - 1 ? CATEGORY_ORDER[0] : CATEGORY_ORDER[idx + 1];
-    applyFilter(next, false);
+    applyFilter(next, false, { categoryDirection: 1 });
   }
 
   function advance() {
     if (!visibleItems.length) return;
+
+    if (changing) {
+      abortActiveAnimation();
+    }
 
     if (currentIndex >= visibleItems.length - 1) {
       if (rotating) nextCategory();
@@ -665,14 +810,17 @@
     btn.addEventListener("click", function () {
       var idx = visibleItems.indexOf(btn);
       if (idx < 0) return;
-      setActiveItem(idx);
+      var direction = idx >= currentIndex ? 1 : -1;
+      setActiveItem(idx, direction);
       startRotation();
     });
   });
 
   filters.forEach(function (btn) {
     btn.addEventListener("click", function () {
-      applyFilter(btn.getAttribute("data-comm-filter") || "all", false);
+      var filter = btn.getAttribute("data-comm-filter") || "all";
+      if (filter === activeFilter) return;
+      applyFilter(filter, false);
       startRotation();
     });
   });
