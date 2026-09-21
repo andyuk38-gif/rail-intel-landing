@@ -57,7 +57,7 @@
   var HANDOFF_LIFT_MS = 450;
   var HANDOFF_TRAVEL_MS = 720;
   var HANDOFF_SETTLE_MS = 520;
-  var SECONDARY_IN_MS = 2800;
+  var SECONDARY_IN_MS = 4500;
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   root.style.setProperty("--comm-rotate-ms", ROTATE_MS + "ms");
@@ -253,7 +253,27 @@
     var secondaryPane = duo.querySelector(".comm-hub-mail__pane--secondary");
     if (!primaryPane || !secondaryPane) return;
 
-    var distance = primaryPane.offsetLeft - secondaryPane.offsetLeft;
+    var primaryStage = primaryPane.querySelector(".comm-hub-mail__stage");
+    var secondaryStage = secondaryPane.querySelector(".comm-hub-mail__stage");
+    var viewportEl = root.querySelector("[data-comm-viewport]");
+    var duoRect = duo.getBoundingClientRect();
+    var viewportRect = viewportEl ? viewportEl.getBoundingClientRect() : duoRect;
+    var primaryLeft = (primaryStage || primaryPane).getBoundingClientRect().left - duoRect.left;
+    var secondaryLeft = (secondaryStage || secondaryPane).getBoundingClientRect().left - duoRect.left;
+    var distance = primaryLeft - secondaryLeft;
+    var frameMargin = 14;
+    var projectedLeft = duoRect.left + secondaryLeft + distance;
+    var secondaryWidth = (secondaryStage || secondaryPane).getBoundingClientRect().width;
+    var projectedRight = projectedLeft + secondaryWidth;
+
+    if (projectedLeft < viewportRect.left + frameMargin) {
+      distance += viewportRect.left + frameMargin - projectedLeft;
+    }
+
+    if (projectedRight > viewportRect.right - frameMargin) {
+      distance -= projectedRight - (viewportRect.right - frameMargin);
+    }
+
     duo.style.setProperty("--comm-handoff-travel-x", distance + "px");
   }
 
@@ -331,6 +351,9 @@
     clearHandoffClasses();
     syncHandoffTravelDistance();
 
+    var viewport = root.querySelector("[data-comm-viewport]");
+    if (viewport) viewport.classList.add("is-handoff-active");
+
     after(40, function () {
       duo.classList.add("is-handoff-phase-lift");
 
@@ -358,6 +381,7 @@
 
                   waitPaneTransition(secondaryPane, SECONDARY_IN_MS + 150, function () {
                     clearHandoffClasses();
+                    if (viewport) viewport.classList.remove("is-handoff-active");
                     updateAllFrameOverflow();
                     finishFrameChange(done);
                   });
