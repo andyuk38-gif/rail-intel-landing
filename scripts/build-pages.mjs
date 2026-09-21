@@ -2222,14 +2222,6 @@ function cdpMonitoringPage(group) {
 
 ${renderCdpExperience(group, base)}
 
-${renderCta(base, {
-  ...(group.cta || {
-    heading: "Everything here is included",
-    body: "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
-  }),
-  showAppCta: group.showAppCta,
-})}
-${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
 ${renderFaqSection(pageSeo.faq, base)}
   </main>
 
