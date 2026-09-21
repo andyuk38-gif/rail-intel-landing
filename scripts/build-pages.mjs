@@ -969,12 +969,18 @@ function bulletsToTiles(bullets) {
 
 const SPEC_TILE_ACCENTS = ["#38bdf8", "#f59e0b", "#34d399", "#a78bfa"];
 
-function renderSpecTileList(items, indent = "          ", { stacked = false, inlineHead = false } = {}) {
+function renderSpecTileList(
+  items,
+  indent = "          ",
+  { stacked = false, inlineHead = false, hideIndex = false, tilesClass = "" } = {}
+) {
   if (!items.length) return "";
 
   const inner = `${indent}  `;
-  const tilesClass = stacked ? "spec-tiles spec-tiles--stack" : "spec-tiles";
-  return `${indent}<div class="${tilesClass}" role="list">\n${items
+  const tilesClasses = ["spec-tiles", stacked ? "spec-tiles--stack" : "", tilesClass]
+    .filter(Boolean)
+    .join(" ");
+  return `${indent}<div class="${tilesClasses}" role="list">\n${items
     .map((tile, index) => {
       const item = typeof tile === "string" ? { detail: tile } : tile;
       const accent = item.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
@@ -987,9 +993,13 @@ function renderSpecTileList(items, indent = "          ", { stacked = false, inl
 ${inner}    <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
 ${inner}    <h3 class="spec-tile__title">${esc(title)}</h3>
 ${inner}  </div>`
-          : `\n${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
+          : hideIndex
+            ? `\n${inner}  <h3 class="spec-tile__title">${esc(title)}</h3>`
+            : `\n${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
 ${inner}  <h3 class="spec-tile__title">${esc(title)}</h3>`
-        : `\n${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>`;
+        : hideIndex
+          ? ""
+          : `\n${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>`;
       return `${inner}<article class="spec-tile${bodyClass}" style="--spec-tile-accent: ${esc(accent)}" role="listitem">${headHtml}
 ${inner}  <p class="spec-tile__detail">${rich(item.detail || "")}</p>
 ${inner}</article>`;
@@ -1987,14 +1997,14 @@ ${panels}
   }
 
   if (chapter.roles?.length) {
-    const roles = chapter.roles
-      .map(
-        (role) => `                <article class="cdp-role" role="listitem">
-                  <h3 class="cdp-role__name">${esc(role.name)}</h3>
-                  <p class="cdp-role__detail">${esc(role.detail)}</p>
-                </article>`
-      )
-      .join("\n");
+    const roles = renderSpecTileList(
+      chapter.roles.map((role) => ({
+        title: role.name,
+        detail: role.detail,
+      })),
+      "                ",
+      { hideIndex: true, tilesClass: "spec-tiles--roles" }
+    );
     const shotBlock = chapter.shot
       ? `              <div class="cdp-chapter__shots cdp-chapter__shots--full">
 ${cdpShotFigure(chapter.shot, base, { fill: true })}
@@ -2005,10 +2015,8 @@ ${chapter.shots.map((shot) => cdpShotFigure(shot, base)).join("\n")}
               </div>`
         : "";
 
-    return `              <div class="cdp-roles-pane">
-                <div class="cdp-roles" role="list" aria-label="Role access">
+    return `              <div class="cdp-roles-pane" aria-label="Role access">
 ${roles}
-                </div>
               </div>
 ${shotBlock}`;
   }
