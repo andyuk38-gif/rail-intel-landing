@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=105808580" />
-  <link rel="stylesheet" href="../css/pages.css?v=105808580" />
+  <link rel="stylesheet" href="../css/style.css?v=222804408" />
+  <link rel="stylesheet" href="../css/pages.css?v=222804408" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -316,7 +316,7 @@
         </div>
         </div>
 
-        <div class="cdp-command" data-cdp-experience data-cdp-count="4">
+        <div class="cdp-command" data-cdp-experience data-cdp-count="5">
           <div class="cdp-command__intro reveal">
             <p class="cdp-command__eyebrow">Competence development lifecycle</p>
             <h2 class="cdp-command__title">From finding to closure, with nothing lost at the cycle boundary</h2>
@@ -366,10 +366,14 @@
             </a>
             <a class="cdp-rail__link" href="#cdp-chapter-2" data-cdp-rail="2">
               <span class="cdp-rail__num">03</span>
-              <span class="cdp-rail__title">Automatic carryover</span>
+              <span class="cdp-rail__title">Raising a new CDP</span>
             </a>
             <a class="cdp-rail__link" href="#cdp-chapter-3" data-cdp-rail="3">
               <span class="cdp-rail__num">04</span>
+              <span class="cdp-rail__title">Automatic carryover</span>
+            </a>
+            <a class="cdp-rail__link" href="#cdp-chapter-4" data-cdp-rail="4">
+              <span class="cdp-rail__num">05</span>
               <span class="cdp-rail__title">Permissions by role</span>
             </a>
               </nav>
@@ -424,7 +428,7 @@
               <div class="cdp-chapter__shots cdp-chapter__shots--full">
               <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1024px">
                 <div class="shot__frame">
-                  <img src="../images/screens/monitor-plans-incidents/cdp-plan-overview.png?v=105808580" alt="Competence development plan overview for the employee." width="1024" height="195" sizes="(min-width: 1100px) 1024px, 96vw" loading="lazy" decoding="async" />
+                  <img src="../images/screens/monitor-plans-incidents/cdp-plan-overview.png?v=222804408" alt="Competence development plan overview for the employee." width="1024" height="195" sizes="(min-width: 1100px) 1024px, 96vw" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Competence development plan overview for the employee.</figcaption>
               </figure>
@@ -448,9 +452,39 @@
               </div>
           </div>
         </article>
-        <article class="cdp-chapter reveal" data-cdp-chapter="2" id="cdp-chapter-2" data-cdp-chapter-id="carryover">
+        <article class="cdp-chapter reveal" data-cdp-chapter="2" id="cdp-chapter-2" data-cdp-chapter-id="create-cdp">
           <header class="cdp-chapter__head">
             <p class="cdp-chapter__num">03</p>
+            <div class="cdp-chapter__titles">
+              <p class="cdp-chapter__subtitle">Plan setup · Incident link · Validation</p>
+              <h2 class="cdp-chapter__title">Raising a new CDP</h2>
+            </div>
+          </header>
+          <div class="cdp-chapter__body">
+              <p>When a competence gap is identified, assessors raise a CDP from the Monitoring tab. Plan type, start date, duration and linked incident are captured in one form, and the end date is calculated automatically from the duration you set.</p>
+              <p>Rail Intel enforces one CDP per incident. If a plan is already linked to the selected incident, the system blocks creation and explains why, preventing duplicate development plans on the same finding.</p>
+
+          </div>
+          <div class="cdp-chapter__content">
+              <div class="cdp-chapter__shots cdp-chapter__shots--stack">
+              <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1024px">
+                <div class="shot__frame">
+                  <img src="../images/screens/monitor-plans-incidents/cdp-new-plan.png?v=222804408" alt="Create a new competence development plan from the Monitoring tab." width="1024" height="352" sizes="(min-width: 1100px) 1024px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">Create a new competence development plan from the Monitoring tab.</figcaption>
+              </figure>
+              <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1024px">
+                <div class="shot__frame">
+                  <img src="../images/screens/monitor-plans-incidents/cdp-duplicate-incident-plan.png?v=222804408" alt="The system blocks a second plan when one is already linked to the same incident." width="1024" height="404" sizes="(min-width: 1100px) 1024px, 96vw" loading="lazy" decoding="async" />
+                </div>
+                <figcaption class="shot__caption">The system blocks a second plan when one is already linked to the same incident.</figcaption>
+              </figure>
+              </div>
+          </div>
+        </article>
+        <article class="cdp-chapter reveal" data-cdp-chapter="3" id="cdp-chapter-3" data-cdp-chapter-id="carryover">
+          <header class="cdp-chapter__head">
+            <p class="cdp-chapter__num">04</p>
             <div class="cdp-chapter__titles">
               <p class="cdp-chapter__subtitle">Continuous cycles · No re-keying</p>
               <h2 class="cdp-chapter__title">Automatic carryover</h2>
@@ -469,16 +503,16 @@
               <div class="cdp-chapter__shots cdp-chapter__shots--center">
               <figure class="cdp-chapter__figure shot cdp-chapter__figure--compact" style="--shot-native-width: 356px">
                 <div class="shot__frame">
-                  <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=105808580" alt="CDP monitoring events carry over when a continuous cycle renews." width="356" height="330" sizes="(min-width: 1100px) 356px, 96vw" loading="lazy" decoding="async" />
+                  <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=222804408" alt="CDP monitoring events carry over when a continuous cycle renews." width="356" height="330" sizes="(min-width: 1100px) 356px, 96vw" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">CDP monitoring events carry over when a continuous cycle renews.</figcaption>
               </figure>
               </div>
           </div>
         </article>
-        <article class="cdp-chapter reveal" data-cdp-chapter="3" id="cdp-chapter-3" data-cdp-chapter-id="permissions">
+        <article class="cdp-chapter reveal" data-cdp-chapter="4" id="cdp-chapter-4" data-cdp-chapter-id="permissions">
           <header class="cdp-chapter__head">
-            <p class="cdp-chapter__num">04</p>
+            <p class="cdp-chapter__num">05</p>
             <div class="cdp-chapter__titles">
               <p class="cdp-chapter__subtitle">Organisation settings · Granular control</p>
               <h2 class="cdp-chapter__title">Permissions by role</h2>
@@ -511,7 +545,7 @@
               <div class="cdp-chapter__shots cdp-chapter__shots--full">
               <figure class="cdp-chapter__figure shot cdp-chapter__figure--fill" style="--shot-native-width: 1385px">
                 <div class="shot__frame">
-                  <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=105808580" alt="Configure permissions for each company job role." width="1385" height="1042" sizes="(min-width: 1100px) 1385px, 96vw" loading="lazy" decoding="async" />
+                  <img src="../images/screens/comp-config/configure-company-role-permissions.png?v=222804408" alt="Configure permissions for each company job role." width="1385" height="1042" sizes="(min-width: 1100px) 1385px, 96vw" loading="lazy" decoding="async" />
                 </div>
                 <figcaption class="shot__caption">Configure permissions for each company job role.</figcaption>
               </figure>
@@ -649,7 +683,7 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=105808580"></script>
-  <script src="../js/newsletter.js?v=105808580"></script>
+  <script src="../js/site.js?v=222804408"></script>
+  <script src="../js/newsletter.js?v=222804408"></script>
 </body>
 </html>

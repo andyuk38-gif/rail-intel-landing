@@ -6739,8 +6739,23 @@ body.lightbox-open {
   gap: 0.75rem;
 }
 
-.cdp-chapter__shots--full {
+.cdp-chapter__shots--full,
+.cdp-chapter__shots--stack {
   margin-top: 0.25rem;
+}
+
+.cdp-chapter__shots--stack {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.cdp-chapter__shots--stack .cdp-chapter__figure {
+  width: 100%;
+}
+
+.cdp-chapter__shots--stack .cdp-chapter__figure--fill .shot__frame {
+  width: 100%;
+  max-width: none;
 }
 
 .cdp-chapter__content > .spec-tiles {

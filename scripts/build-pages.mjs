@@ -2030,6 +2030,12 @@ ${cdpShotFigure(chapter.shot, base, { fill: chapter.shotLayout === "full" })}
               </div>`;
   }
 
+  if (chapter.shots?.length && chapter.shotLayout === "full-stack") {
+    return `              <div class="cdp-chapter__shots cdp-chapter__shots--stack">
+${chapter.shots.map((shot) => cdpShotFigure(shot, base, { fill: true })).join("\n")}
+              </div>`;
+  }
+
   return renderCdpChapterBullets(chapter.bullets);
 }
 

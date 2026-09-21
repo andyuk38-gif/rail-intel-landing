@@ -1492,8 +1492,29 @@ export const featureGroups = [
           shotLayout: "full-tiles",
         },
         {
-          id: "carryover",
+          id: "create-cdp",
           num: "03",
+          title: "Raising a new CDP",
+          subtitle: "Plan setup · Incident link · Validation",
+          body: [
+            "When a competence gap is identified, assessors raise a CDP from the Monitoring tab. Plan type, start date, duration and linked incident are captured in one form, and the end date is calculated automatically from the duration you set.",
+            "Rail Intel enforces one CDP per incident. If a plan is already linked to the selected incident, the system blocks creation and explains why, preventing duplicate development plans on the same finding.",
+          ],
+          shots: [
+            {
+              src: "images/screens/monitor-plans-incidents/cdp-new-plan.png",
+              caption: "Create a new competence development plan from the Monitoring tab.",
+            },
+            {
+              src: "images/screens/monitor-plans-incidents/cdp-duplicate-incident-plan.png",
+              caption: "The system blocks a second plan when one is already linked to the same incident.",
+            },
+          ],
+          shotLayout: "full-stack",
+        },
+        {
+          id: "carryover",
+          num: "04",
           title: "Automatic carryover",
           subtitle: "Continuous cycles · No re-keying",
           body: [
@@ -1515,7 +1536,7 @@ export const featureGroups = [
         },
         {
           id: "permissions",
-          num: "04",
+          num: "05",
           title: "Permissions by role",
           subtitle: "Organisation settings · Granular control",
           body: [

@@ -303,6 +303,14 @@
     "width": 1024,
     "height": 195
   },
+  "images/screens/monitor-plans-incidents/cdp-new-plan.png": {
+    "width": 1024,
+    "height": 352
+  },
+  "images/screens/monitor-plans-incidents/cdp-duplicate-incident-plan.png": {
+    "width": 1024,
+    "height": 404
+  },
   "images/screens/monitor-plans-incidents/incidents-allocated.png": {
     "width": 1516,
     "height": 245
