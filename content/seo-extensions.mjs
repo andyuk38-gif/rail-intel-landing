@@ -419,6 +419,12 @@ export const seoExtensions = {
         answer:
           "No. The team compliance and QA verification metrics on the reporting dashboard come from the QA Verifications add-on module, which is purchased separately from core Rail Intel.",
       },
+      {
+        question:
+          "What is the difference between Live compliance overview and Reporting and analytics?",
+        answer:
+          "Live compliance overview is the home screen managers see when they sign in to Rail Intel. The compliance counts at the top reflect company-wide data; the two panes below are scoped to the signed-in user, My progress for your own messages, tasks and reminders, and Your team's compliance for live QA results on employees in your assigned team only. Reporting and analytics is opened from the main navigation and goes deeper: incident trends, medical and competency breakdowns, charts and filters across the operation, not just the home-screen summary.",
+      },
     ],
     relatedLinks: [],
   },
