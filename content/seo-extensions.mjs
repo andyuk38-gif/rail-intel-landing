@@ -415,10 +415,7 @@ export const seoExtensions = {
           "Yes. Reporting and the administration configuration behind it are part of core Rail Intel, not a separate analytics product.",
       },
     ],
-    relatedLinks: [
-      { name: "QA Verifications add-on", href: "products/qa-verifications.html" },
-      { name: "Administration", href: "features/administration.html" },
-    ],
+    relatedLinks: [],
   },
 
   "digital-cab-passes": {
