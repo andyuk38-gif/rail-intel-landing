@@ -58,8 +58,8 @@
   var HANDOFF_TRAVEL_MS = 720;
   var HANDOFF_SETTLE_MS = 520;
   var SECONDARY_IN_MS = 4500;
-  var CATEGORY_SWITCH_OUT_MS = 420;
-  var CATEGORY_SWITCH_IN_MS = 560;
+  var CATEGORY_SWITCH_OUT_MS = 1100;
+  var CATEGORY_SWITCH_IN_MS = 1800;
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var animationGeneration = 0;
   var pendingTimeouts = [];
@@ -230,6 +230,7 @@
       viewport.classList.remove(
         "is-handoff-active",
         "is-category-switch-out",
+        "is-category-switch-hold",
         "is-category-switch-in",
         "is-category-switch-active",
         "is-category-switch-from-right",
@@ -397,24 +398,28 @@
     );
     viewport.classList.add("is-category-switch-out");
 
-    waitPaneTransition(viewport, CATEGORY_SWITCH_OUT_MS + 80, function () {
+    waitPaneTransition(viewport, CATEGORY_SWITCH_OUT_MS + 120, function () {
       if (generation !== animationGeneration) return;
+      viewport.classList.add("is-category-switch-hold");
       viewport.classList.remove("is-category-switch-out");
+      syncDuoLayout(currentIndex);
 
       loadPreviewPair(primaryKey, secondaryKey, function () {
         if (generation !== animationGeneration) return;
         viewport.classList.add("is-category-switch-in");
         viewport.classList.add(direction < 0 ? "is-category-switch-from-left" : "is-category-switch-from-right");
         void viewport.offsetWidth;
+        viewport.classList.remove("is-category-switch-hold");
         viewport.classList.add("is-category-switch-active");
 
-        waitPaneTransition(viewport, CATEGORY_SWITCH_IN_MS + 80, function () {
+        waitPaneTransition(viewport, CATEGORY_SWITCH_IN_MS + 160, function () {
           if (generation !== animationGeneration) return;
           viewport.classList.remove(
             "is-category-switch-in",
             "is-category-switch-active",
             "is-category-switch-from-right",
-            "is-category-switch-from-left"
+            "is-category-switch-from-left",
+            "is-category-switch-hold"
           );
           finish(done);
         });
@@ -479,9 +484,9 @@
               if (generation !== animationGeneration) return;
 
               if (!secondaryKey) {
+                syncDuoLayout(currentIndex);
                 clearHandoffClasses();
                 if (viewport) viewport.classList.remove("is-handoff-active");
-                syncDuoLayout(currentIndex);
                 updateAllFrameOverflow();
                 finish(done);
                 return;
@@ -632,8 +637,9 @@
   function syncDuoLayout(index) {
     if (!duo) return;
     if (typeof index !== "number") index = currentIndex;
-    var showSecondary = visibleItems.length > 1 && index < visibleItems.length - 1;
-    duo.classList.toggle("is-single", !showSecondary);
+    var atEnd = visibleItems.length < 2 || index >= visibleItems.length - 1;
+    duo.classList.toggle("is-end", atEnd);
+    duo.classList.remove("is-single");
   }
 
   function categoryDirection(fromFilter, toFilter) {
@@ -671,7 +677,16 @@
     }
 
     currentIndex = index;
-    syncDuoLayout(index);
+
+    var promotingIntoEnd = (options.mode || "in-tab") !== "category"
+      && slideDirection > 0
+      && canPromoteNext(previousIndex, index)
+      && !secondaryBtn;
+
+    if ((options.mode || "in-tab") !== "category") {
+      if (promotingIntoEnd) duo.classList.remove("is-end");
+      else syncDuoLayout(index);
+    }
 
     visibleItems.forEach(function (btn, i) {
       var active = i === currentIndex;
