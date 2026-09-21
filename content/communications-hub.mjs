@@ -232,8 +232,27 @@ ${filters}
               </div>
             </div>
             <div class="comm-hub-mail__viewport" data-comm-viewport>
-              <div class="comm-hub-mail__stage" data-comm-stage>
-                <iframe class="comm-hub-mail__frame" data-comm-frame title="Email template preview" sandbox="allow-same-origin" scrolling="no"></iframe>
+              <div class="comm-hub-mail__duo" data-comm-duo>
+                <article class="comm-hub-mail__pane comm-hub-mail__pane--primary">
+                  <header class="comm-hub-mail__pane-head">
+                    <span class="comm-hub-mail__pane-eyebrow">Now showing</span>
+                    <p class="comm-hub-mail__pane-title" data-comm-pane-title="primary">${esc(firstLabel)}</p>
+                  </header>
+                  <div class="comm-hub-mail__stage" data-comm-stage="primary">
+                    <iframe class="comm-hub-mail__frame" data-comm-frame="primary" title="Current email template preview" sandbox="allow-same-origin" scrolling="auto"></iframe>
+                    <p class="comm-hub-mail__scroll-hint" aria-hidden="true">Scroll to read the full email</p>
+                  </div>
+                </article>
+                <article class="comm-hub-mail__pane comm-hub-mail__pane--secondary">
+                  <header class="comm-hub-mail__pane-head">
+                    <span class="comm-hub-mail__pane-eyebrow">Up next</span>
+                    <p class="comm-hub-mail__pane-title" data-comm-pane-title="secondary"></p>
+                  </header>
+                  <div class="comm-hub-mail__stage" data-comm-stage="secondary">
+                    <iframe class="comm-hub-mail__frame" data-comm-frame="secondary" title="Next email template preview" sandbox="allow-same-origin" scrolling="auto"></iframe>
+                    <p class="comm-hub-mail__scroll-hint" aria-hidden="true">Scroll to read the full email</p>
+                  </div>
+                </article>
               </div>
             </div>
           </div>
@@ -249,6 +268,7 @@ ${railChips}
             <div class="comm-hub-progress" aria-hidden="true">
               <div class="comm-hub-progress__bar" data-comm-progress></div>
             </div>
+            <p class="comm-hub-console__hint">Hover over this preview to pause automatic rotation while you explore.</p>
             <div class="comm-hub-console__controls">
               <button type="button" class="comm-hub-console__btn" data-comm-prev aria-label="Previous template">
                 <span aria-hidden="true">←</span> Previous

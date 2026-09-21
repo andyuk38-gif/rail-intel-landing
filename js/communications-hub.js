@@ -1,4 +1,4 @@
-/* Communications Hub — animated category carousel with auto-sized email previews */
+/* Communications Hub — animated category carousel with dual email previews */
 
 (function () {
   "use strict";
@@ -11,9 +11,19 @@
   var templates = Array.prototype.slice.call(document.querySelectorAll("[data-comm-email]"));
   var filters = Array.prototype.slice.call(root.querySelectorAll("[data-comm-filter]"));
   var jumpButtons = Array.prototype.slice.call(document.querySelectorAll("[data-comm-jump]"));
-  var frame = root.querySelector("[data-comm-frame]");
-  var viewport = root.querySelector("[data-comm-viewport]");
-  var stage = root.querySelector("[data-comm-stage]");
+  var duo = root.querySelector("[data-comm-duo]");
+  var panes = [
+    {
+      frame: root.querySelector('[data-comm-frame="primary"]'),
+      stage: root.querySelector('[data-comm-stage="primary"]'),
+      titleEl: root.querySelector('[data-comm-pane-title="primary"]'),
+    },
+    {
+      frame: root.querySelector('[data-comm-frame="secondary"]'),
+      stage: root.querySelector('[data-comm-stage="secondary"]'),
+      titleEl: root.querySelector('[data-comm-pane-title="secondary"]'),
+    },
+  ];
   var titleEl = root.querySelector("[data-comm-title]");
   var subjectEl = root.querySelector("[data-comm-subject]");
   var tagEl = root.querySelector("[data-comm-tag]");
@@ -42,6 +52,7 @@
   var ROTATE_MS = 5500;
   var changing = false;
   var hasLoadedPreview = false;
+  var currentTemplateKey = null;
   var SLIDE_MS = 420;
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -67,6 +78,14 @@
     if (btn.getAttribute("data-comm-label")) return btn.getAttribute("data-comm-label");
     var label = btn.querySelector(".comm-hub-rail__chip-label");
     return label ? label.textContent : "";
+  }
+
+  function wrapIndex(index) {
+    var len = visibleItems.length;
+    if (!len) return 0;
+    index = index % len;
+    if (index < 0) index += len;
+    return index;
   }
 
   function isHubInView() {
@@ -96,18 +115,53 @@
     });
   }
 
-  function resizeFrame() {
-    if (!frame || !frame.contentDocument) return;
-    var doc = frame.contentDocument;
+  function updateFrameOverflow(frameEl, stageEl) {
+    if (!frameEl || !stageEl) return;
+
+    var doc = frameEl.contentDocument;
+    var win = frameEl.contentWindow;
+    if (!doc || !doc.documentElement || !win) {
+      stageEl.classList.remove("is-overflowing");
+      return;
+    }
+
     var body = doc.body;
-    var html = doc.documentElement;
-    if (!body) return;
+    var contentHeight = Math.max(
+      doc.documentElement.scrollHeight,
+      body ? body.scrollHeight : 0
+    );
+    var viewHeight = frameEl.clientHeight;
+    var overflowing = contentHeight > viewHeight + 8;
+    var scrolled = win.scrollY > 12;
 
-    var height = Math.ceil(body.getBoundingClientRect().height);
-    if (height < 120) height = 120;
+    stageEl.classList.toggle("is-overflowing", overflowing && !scrolled);
+  }
 
-    frame.style.height = height + "px";
-    if (viewport) viewport.style.height = height + "px";
+  function updateAllFrameOverflow() {
+    panes.forEach(function (pane) {
+      if (pane.frame && pane.stage && pane.frame.offsetParent) {
+        updateFrameOverflow(pane.frame, pane.stage);
+      }
+    });
+  }
+
+  function watchFrameScroll(frameEl, stageEl) {
+    var win = frameEl.contentWindow;
+    if (!win) return;
+
+    try {
+      win.scrollTo(0, 0);
+    } catch (err) {
+      /* ignore */
+    }
+
+    win.addEventListener(
+      "scroll",
+      function () {
+        updateFrameOverflow(frameEl, stageEl);
+      },
+      { passive: true }
+    );
   }
 
   function resetTiming() {
@@ -131,8 +185,8 @@
   }
 
   function clearSlideClasses() {
-    if (!stage) return;
-    stage.classList.remove(
+    if (!duo) return;
+    duo.classList.remove(
       "is-slide-out-left",
       "is-slide-out-right",
       "is-slide-in-from-right",
@@ -141,22 +195,59 @@
     );
   }
 
-  function loadFrameContent(html, done) {
-    var doc = frame.contentDocument;
+  function loadFrameContent(frameEl, stageEl, html, done) {
+    if (!frameEl) {
+      if (done) done();
+      return;
+    }
+
+    var finished = false;
+    function complete() {
+      if (finished) return;
+      finished = true;
+      if (stageEl) stageEl.classList.remove("is-overflowing");
+      if (done) done();
+    }
+
+    var doc = frameEl.contentDocument;
     if (doc) {
       doc.open();
       doc.write(html || "<p style='font-family:system-ui;padding:24px;color:#64748b'>Preview unavailable.</p>");
       doc.close();
     }
 
-    frame.onload = function () {
-      resizeFrame();
-      window.setTimeout(resizeFrame, 60);
-      window.setTimeout(resizeFrame, 240);
-      if (done) done();
+    frameEl.onload = function () {
+      watchFrameScroll(frameEl, stageEl);
+      window.setTimeout(function () {
+        updateFrameOverflow(frameEl, stageEl);
+        window.setTimeout(function () {
+          updateFrameOverflow(frameEl, stageEl);
+        }, 180);
+        complete();
+      }, 40);
     };
 
-    window.setTimeout(resizeFrame, 60);
+    window.setTimeout(complete, 700);
+  }
+
+  function loadPreviewPair(primaryKey, secondaryKey, done) {
+    var pending = 0;
+    var expected = secondaryKey ? 2 : 1;
+
+    function oneDone() {
+      pending += 1;
+      if (pending >= expected) {
+        updateAllFrameOverflow();
+        window.setTimeout(updateAllFrameOverflow, 180);
+        if (done) done();
+      }
+    }
+
+    loadFrameContent(panes[0].frame, panes[0].stage, templateHtml(primaryKey), oneDone);
+
+    if (secondaryKey) {
+      loadFrameContent(panes[1].frame, panes[1].stage, templateHtml(secondaryKey), oneDone);
+    }
   }
 
   function finishFrameChange(done) {
@@ -165,20 +256,20 @@
     if (done) done();
   }
 
-  function slideFrameIn(direction, done) {
+  function slideDuoIn(direction, done) {
     var inStartClass = direction > 0 ? "is-slide-in-from-right" : "is-slide-in-from-left";
 
-    stage.classList.add(inStartClass);
-    void stage.offsetWidth;
-    stage.classList.remove(inStartClass);
-    stage.classList.add("is-slide-in-active");
+    duo.classList.add(inStartClass);
+    void duo.offsetWidth;
+    duo.classList.remove(inStartClass);
+    duo.classList.add("is-slide-in-active");
 
     var finished = false;
     function complete() {
       if (finished) return;
       finished = true;
-      stage.removeEventListener("transitionend", onInEnd);
-      stage.classList.remove("is-slide-in-active");
+      duo.removeEventListener("transitionend", onInEnd);
+      duo.classList.remove("is-slide-in-active");
       finishFrameChange(done);
     }
 
@@ -187,29 +278,29 @@
       complete();
     }
 
-    stage.addEventListener("transitionend", onInEnd);
+    duo.addEventListener("transitionend", onInEnd);
     window.setTimeout(complete, SLIDE_MS + 80);
   }
 
-  function writeFrame(html, options, done) {
+  function writePreviewPair(primaryKey, secondaryKey, options, done) {
     if (typeof options === "function") {
       done = options;
       options = {};
     }
     options = options || {};
 
-    if (!frame) {
+    if (!panes[0].frame) {
       if (done) done();
       return;
     }
 
     var direction = options.direction || 1;
-    var animate = options.animate !== false && hasLoadedPreview && !prefersReducedMotion && stage;
+    var animate = options.animate !== false && hasLoadedPreview && !prefersReducedMotion && duo;
 
     if (!animate) {
       if (consoleEl) consoleEl.classList.add("is-changing");
       clearSlideClasses();
-      loadFrameContent(html, function () {
+      loadPreviewPair(primaryKey, secondaryKey, function () {
         finishFrameChange(done);
       });
       return;
@@ -218,17 +309,17 @@
     var outClass = direction > 0 ? "is-slide-out-left" : "is-slide-out-right";
     if (consoleEl) consoleEl.classList.add("is-changing");
     clearSlideClasses();
-    stage.classList.add(outClass);
+    duo.classList.add(outClass);
 
     var outFinished = false;
     function onOutComplete() {
       if (outFinished) return;
       outFinished = true;
-      stage.removeEventListener("transitionend", onOutEnd);
-      stage.classList.remove(outClass);
+      duo.removeEventListener("transitionend", onOutEnd);
+      duo.classList.remove(outClass);
 
-      loadFrameContent(html, function () {
-        slideFrameIn(direction, done);
+      loadPreviewPair(primaryKey, secondaryKey, function () {
+        slideDuoIn(direction, done);
       });
     }
 
@@ -237,15 +328,15 @@
       onOutComplete();
     }
 
-    stage.addEventListener("transitionend", onOutEnd);
+    duo.addEventListener("transitionend", onOutEnd);
     window.setTimeout(onOutComplete, SLIDE_MS + 80);
   }
 
-  function updateMeta(btn, key) {
-    var category = btn.getAttribute("data-comm-category") || activeFilter;
+  function updateMeta(primaryBtn, primaryKey) {
+    var category = primaryBtn.getAttribute("data-comm-category") || activeFilter;
 
-    if (titleEl) titleEl.textContent = templateLabel(btn);
-    if (subjectEl) subjectEl.textContent = templateSubject(key);
+    if (titleEl) titleEl.textContent = templateLabel(primaryBtn);
+    if (subjectEl) subjectEl.textContent = templateSubject(primaryKey);
 
     if (tagEl) {
       tagEl.textContent = CATEGORY_LABELS[category] || category;
@@ -254,10 +345,24 @@
 
     if (statusEl) {
       var overall = items.findIndex(function (item) {
-        return item.getAttribute("data-comm-template") === key;
+        return item.getAttribute("data-comm-template") === primaryKey;
       });
       statusEl.textContent = (overall + 1) + " / " + items.length;
     }
+  }
+
+  function updatePaneLabels(primaryBtn, secondaryBtn) {
+    if (panes[0].titleEl && primaryBtn) {
+      panes[0].titleEl.textContent = templateLabel(primaryBtn);
+    }
+    if (panes[1].titleEl) {
+      panes[1].titleEl.textContent = secondaryBtn ? templateLabel(secondaryBtn) : "";
+    }
+  }
+
+  function syncDuoLayout() {
+    if (!duo) return;
+    duo.classList.toggle("is-single", visibleItems.length < 2);
   }
 
   function setActiveItem(index, direction) {
@@ -265,9 +370,14 @@
 
     var previousIndex = currentIndex;
 
-    if (index < 0) index = visibleItems.length - 1;
-    if (index >= visibleItems.length) index = 0;
-    if (hasLoadedPreview && index === currentIndex) return;
+    index = wrapIndex(index);
+
+    var primaryBtn = visibleItems[index];
+    var primaryKey = primaryBtn.getAttribute("data-comm-template");
+    var secondaryBtn = visibleItems.length > 1 ? visibleItems[wrapIndex(index + 1)] : null;
+    var secondaryKey = secondaryBtn ? secondaryBtn.getAttribute("data-comm-template") : null;
+
+    if (hasLoadedPreview && primaryKey === currentTemplateKey) return;
 
     var slideDirection = direction;
     if (slideDirection == null) {
@@ -277,6 +387,7 @@
     }
 
     currentIndex = index;
+    syncDuoLayout();
 
     visibleItems.forEach(function (btn, i) {
       var active = i === currentIndex;
@@ -284,18 +395,18 @@
       btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
 
-    var activeBtn = visibleItems[currentIndex];
-    var key = activeBtn.getAttribute("data-comm-template");
+    updateMeta(primaryBtn, primaryKey);
+    updatePaneLabels(primaryBtn, secondaryBtn);
+    currentTemplateKey = primaryKey;
 
     changing = true;
-    writeFrame(templateHtml(key), { direction: slideDirection }, function () {
+    writePreviewPair(primaryKey, secondaryKey, { direction: slideDirection }, function () {
       changing = false;
-      updateMeta(activeBtn, key);
       resetTiming();
     });
 
-    if (activeBtn && isHubInView()) {
-      scrollChipIntoRail(activeBtn);
+    if (primaryBtn && isHubInView()) {
+      scrollChipIntoRail(primaryBtn);
     }
   }
 
@@ -321,10 +432,23 @@
 
     if (!visibleItems.length) return;
 
+    syncDuoLayout();
+
+    if (tagEl) {
+      tagEl.textContent = CATEGORY_LABELS[filter] || filter;
+      tagEl.className = "comm-hub-console__tag comm-hub-console__tag--" + filter;
+    }
+
+    changing = false;
+    clearSlideClasses();
+
+    if (rail && !keepIndex && typeof rail.scrollTo === "function") {
+      rail.scrollTo({ left: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+
     if (keepIndex && currentIndex < visibleItems.length) {
       setActiveItem(currentIndex);
     } else {
-      currentIndex = 0;
       setActiveItem(0, 1);
     }
   }
