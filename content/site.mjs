@@ -1747,6 +1747,9 @@ export const featureGroups = [
     sections: [
       {
         heading: "Reporting and analytics",
+        fullWidth: true,
+        bulletTiles: true,
+        crispShots: true,
         body: [
           "The reporting dashboard covers incidents, monitoring, medicals and competencies with totals, trends over time and breakdowns by type and role. Where add-on modules are active, safety-brief coverage and QA compliance rates appear alongside them.",
         ],
@@ -1754,16 +1757,16 @@ export const featureGroups = [
           "**Live counts** for on-track, off-track, overdue and due-soon.",
           "**Incident trends** over time and by type.",
           "**Medical and competency expiry** windows.",
-          "**Add-on aware**: safety-brief and QA verification metrics appear when those modules are active.",
+          "**Add-on aware**, safety-brief and QA verification metrics appear when those modules are active.",
         ],
         shots: [
           {
-            src: "images/screens/main-sys/reporting-analytics1.png",
-            caption: "Reporting and analytics with incident KPIs and compliance counts.",
-          },
-          {
-            src: "images/screens/main-sys/reporting-analytics2.png",
-            caption: "Trends and breakdowns across incidents and competence.",
+            src: "images/screens/main-sys/reporting-analytics-dashboard.png",
+            caption:
+              "Reporting and analytics with headline metrics, compliance health and incident trends.",
+            scale: 1,
+            full: true,
+            eager: true,
           },
         ],
       },
