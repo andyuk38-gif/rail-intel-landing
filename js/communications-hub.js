@@ -184,15 +184,53 @@
     });
   }
 
-  function clearSlideClasses() {
+  function clearHandoffClasses() {
     if (!duo) return;
     duo.classList.remove(
-      "is-slide-out-left",
-      "is-slide-out-right",
-      "is-slide-in-from-right",
-      "is-slide-in-from-left",
-      "is-slide-in-active"
+      "is-handoff-next",
+      "is-handoff-prev-exit",
+      "is-handoff-prev-enter",
+      "is-handoff-prev-active",
+      "is-swap-enter",
+      "is-swap-from-left",
+      "is-swap-active"
     );
+  }
+
+  function clearSlideClasses() {
+    clearHandoffClasses();
+  }
+
+  function waitPaneTransition(callback) {
+    var primaryPane = duo ? duo.querySelector(".comm-hub-mail__pane--primary") : null;
+    var secondaryPane = duo ? duo.querySelector(".comm-hub-mail__pane--secondary") : null;
+    var target = secondaryPane && duo.classList.contains("is-handoff-next") ? secondaryPane : primaryPane;
+    if (!target) {
+      callback();
+      return;
+    }
+
+    var finished = false;
+    function complete() {
+      if (finished) return;
+      finished = true;
+      target.removeEventListener("transitionend", onEnd);
+      callback();
+    }
+
+    function onEnd(event) {
+      if (event.target !== target || event.propertyName !== "transform") return;
+      complete();
+    }
+
+    target.addEventListener("transitionend", onEnd);
+    window.setTimeout(complete, SLIDE_MS + 80);
+  }
+
+  function canPromoteNext(previousIndex, index) {
+    if (visibleItems.length < 2) return false;
+    if (!window.matchMedia("(min-width: 961px)").matches) return false;
+    return index === wrapIndex(previousIndex + 1);
   }
 
   function loadFrameContent(frameEl, stageEl, html, done) {
@@ -256,30 +294,59 @@
     if (done) done();
   }
 
-  function slideDuoIn(direction, done) {
-    var inStartClass = direction > 0 ? "is-slide-in-from-right" : "is-slide-in-from-left";
+  function animatePromoteNext(primaryKey, secondaryKey, done) {
+    if (consoleEl) consoleEl.classList.add("is-changing");
+    clearHandoffClasses();
+    duo.classList.add("is-handoff-next");
 
-    duo.classList.add(inStartClass);
-    void duo.offsetWidth;
-    duo.classList.remove(inStartClass);
-    duo.classList.add("is-slide-in-active");
+    waitPaneTransition(function () {
+      clearHandoffClasses();
+      loadFrameContent(panes[0].frame, panes[0].stage, templateHtml(primaryKey), function () {
+        loadFrameContent(panes[1].frame, panes[1].stage, templateHtml(secondaryKey), function () {
+          updateAllFrameOverflow();
+          finishFrameChange(done);
+        });
+      });
+    });
+  }
 
-    var finished = false;
-    function complete() {
-      if (finished) return;
-      finished = true;
-      duo.removeEventListener("transitionend", onInEnd);
-      duo.classList.remove("is-slide-in-active");
-      finishFrameChange(done);
-    }
+  function animateInsertPrevious(primaryKey, secondaryKey, done) {
+    if (consoleEl) consoleEl.classList.add("is-changing");
+    clearHandoffClasses();
+    duo.classList.add("is-handoff-prev-exit");
 
-    function onInEnd(event) {
-      if (event.propertyName !== "transform") return;
-      complete();
-    }
+    waitPaneTransition(function () {
+      duo.classList.remove("is-handoff-prev-exit");
+      loadPreviewPair(primaryKey, secondaryKey, function () {
+        duo.classList.add("is-handoff-prev-enter");
+        void duo.offsetWidth;
+        duo.classList.remove("is-handoff-prev-enter");
+        duo.classList.add("is-handoff-prev-active");
 
-    duo.addEventListener("transitionend", onInEnd);
-    window.setTimeout(complete, SLIDE_MS + 80);
+        waitPaneTransition(function () {
+          clearHandoffClasses();
+          finishFrameChange(done);
+        });
+      });
+    });
+  }
+
+  function animatePrimarySwap(primaryKey, secondaryKey, direction, done) {
+    if (consoleEl) consoleEl.classList.add("is-changing");
+    clearHandoffClasses();
+
+    loadPreviewPair(primaryKey, secondaryKey, function () {
+      duo.classList.add("is-swap-enter");
+      if (direction < 0) duo.classList.add("is-swap-from-left");
+      void duo.offsetWidth;
+      duo.classList.remove("is-swap-enter", "is-swap-from-left");
+      duo.classList.add("is-swap-active");
+
+      waitPaneTransition(function () {
+        clearHandoffClasses();
+        finishFrameChange(done);
+      });
+    });
   }
 
   function writePreviewPair(primaryKey, secondaryKey, options, done) {
@@ -299,37 +366,24 @@
 
     if (!animate) {
       if (consoleEl) consoleEl.classList.add("is-changing");
-      clearSlideClasses();
+      clearHandoffClasses();
       loadPreviewPair(primaryKey, secondaryKey, function () {
         finishFrameChange(done);
       });
       return;
     }
 
-    var outClass = direction > 0 ? "is-slide-out-left" : "is-slide-out-right";
-    if (consoleEl) consoleEl.classList.add("is-changing");
-    clearSlideClasses();
-    duo.classList.add(outClass);
-
-    var outFinished = false;
-    function onOutComplete() {
-      if (outFinished) return;
-      outFinished = true;
-      duo.removeEventListener("transitionend", onOutEnd);
-      duo.classList.remove(outClass);
-
-      loadPreviewPair(primaryKey, secondaryKey, function () {
-        slideDuoIn(direction, done);
-      });
+    if (direction > 0 && canPromoteNext(options.previousIndex, options.index)) {
+      animatePromoteNext(primaryKey, secondaryKey, done);
+      return;
     }
 
-    function onOutEnd(event) {
-      if (event.propertyName !== "transform") return;
-      onOutComplete();
+    if (direction < 0) {
+      animateInsertPrevious(primaryKey, secondaryKey, done);
+      return;
     }
 
-    duo.addEventListener("transitionend", onOutEnd);
-    window.setTimeout(onOutComplete, SLIDE_MS + 80);
+    animatePrimarySwap(primaryKey, secondaryKey, direction, done);
   }
 
   function updateMeta(primaryBtn, primaryKey) {
@@ -400,10 +454,15 @@
     currentTemplateKey = primaryKey;
 
     changing = true;
-    writePreviewPair(primaryKey, secondaryKey, { direction: slideDirection }, function () {
-      changing = false;
-      resetTiming();
-    });
+    writePreviewPair(
+      primaryKey,
+      secondaryKey,
+      { direction: slideDirection, previousIndex: previousIndex, index: index },
+      function () {
+        changing = false;
+        resetTiming();
+      }
+    );
 
     if (primaryBtn && isHubInView()) {
       scrollChipIntoRail(primaryBtn);

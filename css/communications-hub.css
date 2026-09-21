@@ -382,8 +382,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   align-items: start;
-  will-change: transform;
-  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.42s ease;
+  position: relative;
 }
 
 .comm-hub-mail__duo.is-single {
@@ -394,37 +393,63 @@
   display: none;
 }
 
-.comm-hub-mail__duo.is-slide-out-left {
-  transform: translateX(-108%);
-  opacity: 0.55;
+.comm-hub-mail__pane {
+  min-width: 0;
+  transition:
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.42s ease;
 }
 
-.comm-hub-mail__duo.is-slide-out-right {
-  transform: translateX(108%);
-  opacity: 0.55;
+.comm-hub-mail__duo.is-handoff-next .comm-hub-mail__pane--primary {
+  opacity: 0;
+  transform: translateX(-14%);
+  pointer-events: none;
 }
 
-.comm-hub-mail__duo.is-slide-in-from-right,
-.comm-hub-mail__duo.is-slide-in-from-left {
+.comm-hub-mail__duo.is-handoff-next .comm-hub-mail__pane--secondary {
+  z-index: 2;
+  transform: translateX(calc(-100% - 1rem));
+}
+
+.comm-hub-mail__duo.is-handoff-next .comm-hub-mail__pane--secondary .comm-hub-mail__stage {
+  opacity: 1;
+  filter: none;
+}
+
+.comm-hub-mail__duo.is-handoff-next .comm-hub-mail__pane--secondary .comm-hub-mail__stage::before {
+  opacity: 0;
+}
+
+.comm-hub-mail__duo.is-handoff-prev-exit .comm-hub-mail__pane--primary {
+  opacity: 0;
+  transform: translateX(14%);
+  pointer-events: none;
+}
+
+.comm-hub-mail__duo.is-handoff-prev-enter .comm-hub-mail__pane--primary {
   transition: none;
-  opacity: 0.55;
+  transform: translateX(-22%);
+  opacity: 0.45;
 }
 
-.comm-hub-mail__duo.is-slide-in-from-right {
-  transform: translateX(108%);
-}
-
-.comm-hub-mail__duo.is-slide-in-from-left {
-  transform: translateX(-108%);
-}
-
-.comm-hub-mail__duo.is-slide-in-active {
+.comm-hub-mail__duo.is-handoff-prev-active .comm-hub-mail__pane--primary {
   transform: translateX(0);
   opacity: 1;
 }
 
-.comm-hub-mail__pane {
-  min-width: 0;
+.comm-hub-mail__duo.is-swap-enter .comm-hub-mail__pane--primary {
+  transition: none;
+  transform: translateX(18%);
+  opacity: 0.45;
+}
+
+.comm-hub-mail__duo.is-swap-enter.is-swap-from-left .comm-hub-mail__pane--primary {
+  transform: translateX(-18%);
+}
+
+.comm-hub-mail__duo.is-swap-active .comm-hub-mail__pane--primary {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .comm-hub-mail__pane-head {
@@ -1004,7 +1029,7 @@
     animation: none;
   }
 
-  .comm-hub-mail__duo,
+  .comm-hub-mail__pane,
   .comm-hub-mail__pane--secondary .comm-hub-mail__stage,
   .comm-hub-console__title,
   .comm-hub-console__subject,
