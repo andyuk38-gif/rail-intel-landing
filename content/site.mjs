@@ -1732,6 +1732,15 @@ export const featureGroups = [
     tagline: "The state of the railway's people, on demand",
     lead:
       "Reporting turns the record set into the answer to a board question: how many people are off track, how many medicals expire this quarter, where are incidents concentrated. Administration is where the organisation, roles, traction and routes behind those numbers are defined.",
+    heroShot: {
+      src: "images/product/reporting-analytics-hero.jpg",
+      alt: "Reporting and analytics dashboard visualisation.",
+      scale: 0.5,
+      bordered: true,
+      full: true,
+      hideCaption: true,
+      noExpand: true,
+    },
     sections: [
       {
         heading: "Reporting and analytics",

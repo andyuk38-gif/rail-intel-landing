@@ -518,5 +518,9 @@
   "images/product/brochure-headshot.png": {
     "width": 1024,
     "height": 1024
+  },
+  "images/product/reporting-analytics-hero.jpg": {
+    "width": 672,
+    "height": 563
   }
 }
