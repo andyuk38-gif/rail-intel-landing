@@ -2041,12 +2041,13 @@ ${tiles}`;
       const shotSize = manifest[chapter.shot.src];
       if (!shotSize) throw new Error(`Missing screenshot in manifest: ${chapter.shot.src}`);
       const shotRatio = `${shotSize.width} / ${shotSize.height}`;
+      const colSync = `${((0.95 / 1.05) * shotSize.width).toFixed(2)} / ${shotSize.height}`;
       return `              <div class="cdp-chapter__split-stack">
-                <div class="cdp-chapter__split cdp-chapter__split--tiles">
+                <div class="cdp-chapter__split cdp-chapter__split--tiles" style="--split-shot-ratio: ${shotRatio}; --split-col-sync: ${colSync}">
                   <div class="cdp-chapter__split-tiles">
 ${tiles}
                   </div>
-                  <div class="cdp-chapter__split-visual" style="--split-shot-ratio: ${shotRatio}">
+                  <div class="cdp-chapter__split-visual">
 ${cdpShotFigure(chapter.shot, base, { fill: true, imageOnly: true })}
                   </div>
                 </div>${caption}

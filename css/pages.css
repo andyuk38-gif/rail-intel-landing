@@ -6623,22 +6623,16 @@ body.lightbox-open {
 
 .cdp-chapter__split--tiles {
   grid-column: 1 / -1;
-  position: relative;
-}
-
-.cdp-chapter__split--tiles .cdp-chapter__split-visual {
-  margin-left: calc((100% - 1.25rem) * 0.475 + 1.25rem);
-  width: calc((100% - 1.25rem) * 0.525);
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.25rem;
+  align-items: start;
 }
 
 .cdp-chapter__split--tiles .cdp-chapter__split-tiles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc((100% - 1.25rem) * 0.475);
-  height: 100%;
   display: flex;
   min-height: 0;
+  aspect-ratio: var(--split-col-sync);
 }
 
 .cdp-chapter__split--tiles .spec-tiles--stack {
@@ -6693,15 +6687,12 @@ body.lightbox-open {
   max-width: none;
   width: 100%;
   aspect-ratio: var(--split-shot-ratio);
-  height: auto;
 }
 
 .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center top;
+  height: auto;
 }
 
 .cdp-chapter__split-caption {
@@ -6921,15 +6912,12 @@ body.lightbox-open {
     grid-column: 1;
   }
 
-  .cdp-chapter__split--tiles .cdp-chapter__split-visual {
-    margin-left: 0;
-    width: 100%;
+  .cdp-chapter__split--tiles {
+    grid-template-columns: 1fr;
   }
 
   .cdp-chapter__split--tiles .cdp-chapter__split-tiles {
-    position: static;
-    width: 100%;
-    height: auto;
+    aspect-ratio: auto;
     margin-bottom: 1rem;
   }
 
@@ -6949,11 +6937,6 @@ body.lightbox-open {
 
   .cdp-chapter__split--tiles .spec-tile__detail {
     font-size: 0.9rem;
-  }
-
-  .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame,
-  .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame img {
-    height: auto;
   }
 }
 
