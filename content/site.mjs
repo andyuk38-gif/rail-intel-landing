@@ -1743,6 +1743,7 @@ export const featureGroups = [
       hideCaption: true,
       noExpand: true,
     },
+    hideHeroActions: true,
     sections: [
       {
         heading: "Reporting and analytics",
