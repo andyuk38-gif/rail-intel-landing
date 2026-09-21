@@ -1776,6 +1776,7 @@ export const featureGroups = [
         heading: "Live compliance overview",
         fullWidth: true,
         bulletTiles: true,
+        crispShots: true,
         body: [
           "The reporting home screen combines company-wide compliance counts with personal action items and team-level QA results. Three panes answer different questions from the same live record data — without exporting to a spreadsheet.",
         ],
@@ -1797,6 +1798,16 @@ export const featureGroups = [
             detail:
               "Live QA verification results per employee with review and advisory breakdowns, so managers can see who needs follow-up and open a verification run directly.",
             accent: "#f59e0b",
+          },
+        ],
+        shots: [
+          {
+            src: "images/screens/main-sys/reporting-compliance-overview.png",
+            caption:
+              "Compliance overview counts, personal progress and team QA results on the reporting home screen.",
+            scale: 1,
+            full: true,
+            noExpand: true,
           },
         ],
       },
