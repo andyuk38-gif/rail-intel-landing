@@ -353,6 +353,21 @@ export const seoExtensions = {
         answer:
           "Access is controlled by company role permissions, assessors, line managers, drivers with own-record access and administrators each see what their role allows.",
       },
+      {
+        question: "Can more than one CDP be linked to the same incident?",
+        answer:
+          "No. Rail Intel enforces one competence development plan per incident. If a plan is already linked to the incident you select, creation is blocked and the system explains why, preventing duplicate development plans on the same finding.",
+      },
+      {
+        question: "How is a CDP raised in Rail Intel?",
+        answer:
+          "Assessors raise a CDP from the Monitoring tab when a competence gap is identified, typically after assessment criteria are flagged or following an incident or monitoring review. Plan type, start date, duration and linked incident are captured in one form, and the end date is calculated automatically from the duration you set.",
+      },
+      {
+        question: "Are closed CDPs retained on the employee record?",
+        answer:
+          "Yes. Closed plans remain on the Monitoring tab and previous cycle periods stay in history for audit. Carryover applies only to outstanding live work at renewal; completed or closed items are preserved on the record either way.",
+      },
     ],
     relatedLinks: [
       { name: "Competency & Cycles", href: "features/competency-cycles.html" },
