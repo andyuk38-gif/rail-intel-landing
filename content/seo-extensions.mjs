@@ -351,7 +351,7 @@ export const seoExtensions = {
       {
         question: "Who can view and edit CDPs?",
         answer:
-          "Access is controlled by company role permissions — assessors, line managers, drivers with own-record access and administrators each see what their role allows.",
+          "Access is controlled by company role permissions, assessors, line managers, drivers with own-record access and administrators each see what their role allows.",
       },
     ],
     relatedLinks: [
