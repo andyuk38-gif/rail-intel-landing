@@ -2043,15 +2043,14 @@ function renderCdpExperience(group, base) {
   if (!exp) return "";
 
   const accent = group.accent || "#38bdf8";
-  const stats = exp.stats
-    .map(
-      (stat) => `            <div class="cdp-stat reveal">
-              <p class="cdp-stat__value">${esc(stat.value)}</p>
-              <p class="cdp-stat__label">${esc(stat.label)}</p>
-              <p class="cdp-stat__detail">${esc(stat.detail)}</p>
-            </div>`
-    )
-    .join("\n");
+  const stats = renderSpecTileList(
+    exp.stats.map((stat) => ({
+      step: stat.value,
+      title: stat.label,
+      detail: stat.detail,
+    })),
+    "        "
+  );
 
   const lifecycle = exp.lifecycle
     .map(
@@ -2078,7 +2077,7 @@ function renderCdpExperience(group, base) {
 
   return `    <section class="page-section page-section--cdp" style="--cdp-accent: ${esc(accent)}">
       <div class="container container--cdp">
-        <div class="cdp-stats" aria-label="CDP monitoring highlights">
+        <div class="cdp-highlights reveal" aria-label="CDP monitoring highlights">
 ${stats}
         </div>
 
@@ -2116,11 +2115,7 @@ function cdpMonitoringPage(group) {
   )}</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${esc(group.tagline)}</h1>
-          <p class="page-lead">${esc(group.lead)}</p>
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
-          </div>`;
+          <p class="page-lead">${esc(group.lead)}</p>`;
 
   const pageSeo = featureSeo(group);
 
@@ -2128,38 +2123,10 @@ function cdpMonitoringPage(group) {
     renderHead(base, pageSeo) +
     `
   <main>
-    <section class="page-hero page-hero--cdp" style="--cdp-accent: ${esc(accent)}">
+    <section class="page-hero page-hero--cdp page-hero--full-lead" style="--cdp-accent: ${esc(accent)}">
       <div class="container">
-        <div class="page-hero__inner page-hero__inner--split">
-          <div class="page-hero__copy">
+        <div class="page-hero__inner">
 ${heroCopy}
-          </div>
-          <div class="cdp-hero-board reveal" aria-hidden="true">
-            <div class="cdp-hero-board__chrome">
-              <span class="cdp-hero-board__dot cdp-hero-board__dot--live"></span>
-              <span class="cdp-hero-board__label">Monitoring · Live record</span>
-            </div>
-            <div class="cdp-hero-board__grid">
-              <div class="cdp-hero-board__metric">
-                <span class="cdp-hero-board__metric-label">Open CDPs</span>
-                <strong>3</strong>
-                <span class="cdp-hero-board__metric-note">Active development points</span>
-              </div>
-              <div class="cdp-hero-board__metric">
-                <span class="cdp-hero-board__metric-label">Linked incidents</span>
-                <strong>1</strong>
-                <span class="cdp-hero-board__metric-note">Allocated to employee</span>
-              </div>
-              <div class="cdp-hero-board__metric cdp-hero-board__metric--accent">
-                <span class="cdp-hero-board__metric-label">Cycle carryover</span>
-                <strong>Auto</strong>
-                <span class="cdp-hero-board__metric-note">Open items preserved</span>
-              </div>
-            </div>
-            <div class="cdp-hero-board__footer">
-              <span>Employee record · Development tab</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

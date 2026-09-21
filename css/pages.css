@@ -6290,47 +6290,25 @@ body.lightbox-open {
 }
 
 .page-section--cdp {
-  padding-top: 0;
+  padding-top: 2.75rem;
 }
 
 .container--cdp {
   max-width: 1180px;
 }
 
-.cdp-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+.cdp-highlights {
+  margin-bottom: 2.5rem;
 }
 
-.cdp-stat {
-  padding: 1rem 1.05rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+.page-section--cdp .spec-tiles {
+  margin-top: 0;
 }
 
-.cdp-stat__value {
-  margin: 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--cdp-accent);
-}
-
-.cdp-stat__label {
-  margin: 0.35rem 0 0.15rem;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.cdp-stat__detail {
-  margin: 0;
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  color: var(--text-muted);
+.page-section--cdp .spec-tile__index {
+  min-width: 2.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .cdp-command__intro {
@@ -6748,7 +6726,6 @@ body.lightbox-open {
     grid-template-columns: 1fr;
   }
 
-  .cdp-stats,
   .cdp-lifecycle,
   .cdp-pillars,
   .cdp-roles,
