@@ -31,9 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=115973760" />
-  <link rel="stylesheet" href="../css/pages.css?v=115973760" />
-  <link rel="stylesheet" href="../css/communications-hub.css?v=115973760" />
+  <link rel="stylesheet" href="../css/style.css?v=142633913" />
+  <link rel="stylesheet" href="../css/pages.css?v=142633913" />
+  <link rel="stylesheet" href="../css/communications-hub.css?v=142633913" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -298,7 +298,7 @@
           <div class="comm-hub-showcase__intro-copy">
             <p class="product-eyebrow">31 CMS email templates</p>
             <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
-            <p class="comm-hub-showcase__lead">These are faithful replicas of the templates configured in Administration → Email templates. Select a template, or let the showcase rotate — sample data only; your operation can customise wording and branding per template.</p>
+            <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically — or pick a filter and template chip to explore. Sample data only.</p>
             <ul class="comm-hub-stats" aria-label="Communications hub at a glance">
               <li><strong>31</strong><span>Email templates</span></li>
               <li><strong>9</strong><span>Scheduled alerts</span></li>
@@ -309,261 +309,210 @@
         </div>
       </div>
 
-      <div class="container comm-hub-showcase__panel" data-comm-hub>
+      <div class="container comm-hub-showcase__shell" data-comm-hub>
         <div class="comm-hub-showcase__filters" role="tablist" aria-label="Filter email templates">
-          <button type="button" class="comm-hub-filter is-active" data-comm-filter="all" aria-pressed="true">All templates <span class="comm-hub-filter__count">31</span></button>
-          <button type="button" class="comm-hub-filter" data-comm-filter="instant" aria-pressed="false">Instant alerts <span class="comm-hub-filter__count">15</span></button>
-          <button type="button" class="comm-hub-filter" data-comm-filter="scheduled" aria-pressed="false">Scheduled alerts <span class="comm-hub-filter__count">9</span></button>
-          <button type="button" class="comm-hub-filter" data-comm-filter="account" aria-pressed="false">Account &amp; access <span class="comm-hub-filter__count">7</span></button>
+          <button type="button" class="comm-hub-filter comm-hub-filter--all" data-comm-filter="all" aria-pressed="false">
+            <span class="comm-hub-filter__label">All templates</span>
+            <span class="comm-hub-filter__count">31</span>
+            <span class="comm-hub-filter__progress" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="comm-hub-filter comm-hub-filter--instant is-active" data-comm-filter="instant" aria-pressed="true">
+            <span class="comm-hub-filter__label">Instant alerts</span>
+            <span class="comm-hub-filter__count">15</span>
+            <span class="comm-hub-filter__progress" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="comm-hub-filter comm-hub-filter--scheduled" data-comm-filter="scheduled" aria-pressed="false">
+            <span class="comm-hub-filter__label">Scheduled alerts</span>
+            <span class="comm-hub-filter__count">9</span>
+            <span class="comm-hub-filter__progress" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="comm-hub-filter comm-hub-filter--account" data-comm-filter="account" aria-pressed="false">
+            <span class="comm-hub-filter__label">Account &amp; access</span>
+            <span class="comm-hub-filter__count">7</span>
+            <span class="comm-hub-filter__progress" aria-hidden="true"></span>
+          </button>
         </div>
 
-        <div class="comm-hub-showcase__layout">
-          <aside class="comm-hub-picker" aria-label="Email template list">
-            <p class="comm-hub-picker__label">Templates</p>
-            <ol class="comm-hub-picker__list">
-            <li>
-              <button type="button" class="comm-hub-picker__item is-active" data-comm-template="welcome" data-comm-category="account" aria-pressed="true">
-                <span class="comm-hub-picker__item-label">Welcome email (new company)</span>
-                <span class="comm-hub-picker__item-subject">Welcome to Rail Intel – Your login details</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="company_admin_invite" data-comm-category="account" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Company administrator welcome</span>
-                <span class="comm-hub-picker__item-subject">Rail Intel — Example Rail Co: your company administrator account is ready</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="team_user_invite" data-comm-category="account" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Team user invitation</span>
-                <span class="comm-hub-picker__item-subject">Welcome to Rail Intel – Your login details for Northern Rail Example</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="password-reset" data-comm-category="account" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Password reset</span>
-                <span class="comm-hub-picker__item-subject">Reset your Rail Intel password</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="assessment-window-open" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Assessment window open</span>
-                <span class="comm-hub-picker__item-subject">Assessment Window Open – Route knowledge assessment for Sarah Mitchell</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="assessment-window-closing" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Assessment window closing soon</span>
-                <span class="comm-hub-picker__item-subject">Assessment Window Closing Soon – Route knowledge assessment for Sarah Mitchell</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="continuous-cycle-renewal-approaching" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Continuous cycle renewal approaching</span>
-                <span class="comm-hub-picker__item-subject">Continuous cycle renewal due soon – Annual competence cycle for Sarah Mitchell</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="continuous-cycle-renewal-blocked" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Continuous cycle renewal blocked</span>
-                <span class="comm-hub-picker__item-subject">Continuous cycle cannot renew – Annual competence cycle for Sarah Mitchell</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="storage-80-warning" data-comm-category="account" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Storage warning (80% usage)</span>
-                <span class="comm-hub-picker__item-subject">Storage usage warning for Example Rail Co (82.4% used)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="task_assigned" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Task assigned</span>
-                <span class="comm-hub-picker__item-subject">New task assigned: Complete route knowledge refresh</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="task_reopened" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Task reopened</span>
-                <span class="comm-hub-picker__item-subject">Task reopened: Complete route knowledge refresh</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="task_note_added" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Task update note</span>
-                <span class="comm-hub-picker__item-subject">Task update: Complete route knowledge refresh</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="fatality-anniversary-7d-reminder" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Fatality incident — 7 days before anniversary</span>
-                <span class="comm-hub-picker__item-subject">Support reminder: one-year anniversary approaching for Jamie Driver (fatality incident)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="licence-expiry-3m-reminder" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Licence expiry — 3 months</span>
-                <span class="comm-hub-picker__item-subject">Licence renewal reminder: Jamie Driver expires 15 November 2026</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="licence-expiry-6w-reminder" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Licence expiry — 6 weeks (urgent)</span>
-                <span class="comm-hub-picker__item-subject">Urgent: licence for Jamie Driver expires 20 September 2026</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="licence-expiry-expired" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Licence expired — take off track</span>
-                <span class="comm-hub-picker__item-subject">Action required: Jamie Driver licence expired — take off track</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="task_trial_ending_48h" data-comm-category="account" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Task module trial ending</span>
-                <span class="comm-hub-picker__item-subject">Task module trial ending for Northern Rail Example (30 Sep 2026)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_trainer_feedback" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Trainee — trainer feedback ready</span>
-                <span class="comm-hub-picker__item-subject">Your trainer has left feedback — Operational Rules — Example Rail Co</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_instructor_assigned" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Trainee — instructor assigned</span>
-                <span class="comm-hub-picker__item-subject">You have been assigned as driving instructor — Jamie Trainee — Example Rail Co</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_instructor_unassigned" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Trainee — instructor unassigned</span>
-                <span class="comm-hub-picker__item-subject">You are no longer assigned as driving instructor — Jamie Trainee — Example Rail Co</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_instructor_gap" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Trainee — instructor gap alert</span>
-                <span class="comm-hub-picker__item-subject">No driving instructor allocated — Jamie Trainee — Example Rail Co</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_feedback_reminder" data-comm-category="scheduled" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Trainee — feedback reminder (7 days)</span>
-                <span class="comm-hub-picker__item-subject">Reminder: please review trainer feedback — Operational Rules — Example Rail Co</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="support-ticket-update" data-comm-category="account" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Support ticket update</span>
-                <span class="comm-hub-picker__item-subject">Update on your support ticket RV-A1B2C3D4</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_welcome" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Trainee driver welcome</span>
-                <span class="comm-hub-picker__item-subject">Welcome to your driver training programme — Example Rail Co</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_submitted" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Leave request submitted</span>
-                <span class="comm-hub-picker__item-subject">Leave request awaiting decision — Jamie Driver (Annual leave)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_decision" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Leave request decision</span>
-                <span class="comm-hub-picker__item-subject">Leave request approved — Annual leave (2026-08-01 → 2026-08-05)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_awarded_back" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Holiday leave awarded back</span>
-                <span class="comm-hub-picker__item-subject">Holiday leave awarded back — Holiday leave (2026-08-01 → 2026-08-05)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_cancelled" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Leave request cancelled</span>
-                <span class="comm-hub-picker__item-subject">Leave request cancelled — Jamie Driver (Holiday leave)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="employee-note-message" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Employee messaging — new message</span>
-                <span class="comm-hub-picker__item-subject">New message on Sam Driver — Employee Messaging &amp; Notes</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="performance_support_plan_signature_required" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Support plan — signature required</span>
-                <span class="comm-hub-picker__item-subject">Signature required — Route knowledge support plan (Example Rail Co)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="comm-hub-picker__item" data-comm-template="digital_cab_pass_issued" data-comm-category="instant" aria-pressed="false">
-                <span class="comm-hub-picker__item-label">Digital cab pass issued</span>
-                <span class="comm-hub-picker__item-subject">Your digital driving cab pass — Green — Authorised to Assess (12345678)</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
-              </button>
-            </li>
-            </ol>
-          </aside>
+        <div class="comm-hub-console">
+          <div class="comm-hub-console__head">
+            <div class="comm-hub-console__live" aria-hidden="true">
+              <span class="comm-hub-console__live-dot"></span>
+              <span>Live preview</span>
+            </div>
+            <div class="comm-hub-console__meta">
+              <p class="comm-hub-console__title" data-comm-title>Task assigned</p>
+              <p class="comm-hub-console__subject" data-comm-subject>New task assigned: Complete route knowledge refresh</p>
+            </div>
+            <span class="comm-hub-console__tag comm-hub-console__tag--instant" data-comm-tag>Instant alerts</span>
+          </div>
 
-          <div class="comm-hub-stage">
-            <div class="comm-hub-mail" data-comm-mail>
+          <div class="comm-hub-mail" data-comm-mail>
+            <div class="comm-hub-mail__chrome">
               <div class="comm-hub-mail__toolbar">
                 <div class="comm-hub-mail__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-                <p class="comm-hub-mail__app">Mail</p>
+                <p class="comm-hub-mail__app">Outlook · Rail Intel notifications</p>
               </div>
-              <div class="comm-hub-mail__header">
-                <p class="comm-hub-mail__field"><span>From</span> <strong>Rail Intel &lt;notifications@railintel.co.uk&gt;</strong></p>
-                <p class="comm-hub-mail__field"><span>To</span> <strong>alex.manager@northernrail.example</strong></p>
-                <p class="comm-hub-mail__field comm-hub-mail__field--subject"><span>Subject</span> <strong data-comm-subject>Welcome to Rail Intel – Your login details</strong></p>
-              </div>
-              <div class="comm-hub-mail__viewport">
-                <iframe class="comm-hub-mail__frame" data-comm-frame title="Email template preview" sandbox="allow-same-origin"></iframe>
+              <div class="comm-hub-mail__envelope">
+                <span>From</span> Rail Intel &lt;notifications@railintel.co.uk&gt;
+                <span class="comm-hub-mail__envelope-sep">·</span>
+                <span>To</span> alex.manager@northernrail.example
               </div>
             </div>
+            <div class="comm-hub-mail__viewport" data-comm-viewport>
+              <div class="comm-hub-mail__stage" data-comm-stage>
+                <iframe class="comm-hub-mail__frame" data-comm-frame title="Email template preview" sandbox="allow-same-origin" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
 
-            <div class="comm-hub-stage__controls">
-              <button type="button" class="comm-hub-stage__btn" data-comm-prev aria-label="Previous template">Previous</button>
-              <div class="comm-hub-stage__status">
-                <button type="button" class="comm-hub-stage__play" data-comm-play aria-pressed="true" aria-label="Pause auto-rotate">Pause</button>
+          <div class="comm-hub-rail-wrap">
+            <p class="comm-hub-rail__label">Templates in this category</p>
+            <div class="comm-hub-rail" data-comm-rail tabindex="0" aria-label="Template selection">
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="welcome" data-comm-category="account" data-comm-label="Welcome email (new company)" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Welcome email (new company)</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="company_admin_invite" data-comm-category="account" data-comm-label="Company administrator welcome" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Company administrator welcome</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="team_user_invite" data-comm-category="account" data-comm-label="Team user invitation" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Team user invitation</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="password-reset" data-comm-category="account" data-comm-label="Password reset" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Password reset</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="assessment-window-open" data-comm-category="scheduled" data-comm-label="Assessment window open" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Assessment window open</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="assessment-window-closing" data-comm-category="scheduled" data-comm-label="Assessment window closing soon" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Assessment window closing soon</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="continuous-cycle-renewal-approaching" data-comm-category="scheduled" data-comm-label="Continuous cycle renewal approaching" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Continuous cycle renewal approaching</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="continuous-cycle-renewal-blocked" data-comm-category="scheduled" data-comm-label="Continuous cycle renewal blocked" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Continuous cycle renewal blocked</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="storage-80-warning" data-comm-category="account" data-comm-label="Storage warning (80% usage)" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Storage warning (80% usage)</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="task_assigned" data-comm-category="instant" data-comm-label="Task assigned" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Task assigned</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="task_reopened" data-comm-category="instant" data-comm-label="Task reopened" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Task reopened</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="task_note_added" data-comm-category="instant" data-comm-label="Task update note" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Task update note</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="fatality-anniversary-7d-reminder" data-comm-category="scheduled" data-comm-label="Fatality incident — 7 days before anniversary" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Fatality incident — 7 days before anniversary</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="licence-expiry-3m-reminder" data-comm-category="scheduled" data-comm-label="Licence expiry — 3 months" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Licence expiry — 3 months</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="licence-expiry-6w-reminder" data-comm-category="scheduled" data-comm-label="Licence expiry — 6 weeks (urgent)" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Licence expiry — 6 weeks (urgent)</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="licence-expiry-expired" data-comm-category="scheduled" data-comm-label="Licence expired — take off track" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Licence expired — take off track</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="task_trial_ending_48h" data-comm-category="account" data-comm-label="Task module trial ending" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Task module trial ending</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="trainee_driver_trainer_feedback" data-comm-category="instant" data-comm-label="Trainee — trainer feedback ready" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Trainee — trainer feedback ready</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="trainee_driver_instructor_assigned" data-comm-category="instant" data-comm-label="Trainee — instructor assigned" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Trainee — instructor assigned</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="trainee_driver_instructor_unassigned" data-comm-category="instant" data-comm-label="Trainee — instructor unassigned" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Trainee — instructor unassigned</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="trainee_driver_instructor_gap" data-comm-category="instant" data-comm-label="Trainee — instructor gap alert" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Trainee — instructor gap alert</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="trainee_driver_feedback_reminder" data-comm-category="scheduled" data-comm-label="Trainee — feedback reminder (7 days)" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Trainee — feedback reminder (7 days)</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="support-ticket-update" data-comm-category="account" data-comm-label="Support ticket update" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Support ticket update</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="trainee_driver_welcome" data-comm-category="instant" data-comm-label="Trainee driver welcome" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Trainee driver welcome</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="leave_request_submitted" data-comm-category="instant" data-comm-label="Leave request submitted" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Leave request submitted</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="leave_request_decision" data-comm-category="instant" data-comm-label="Leave request decision" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Leave request decision</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="leave_request_awarded_back" data-comm-category="instant" data-comm-label="Holiday leave awarded back" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Holiday leave awarded back</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="leave_request_cancelled" data-comm-category="instant" data-comm-label="Leave request cancelled" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Leave request cancelled</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="employee-note-message" data-comm-category="instant" data-comm-label="Employee messaging — new message" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Employee messaging — new message</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="performance_support_plan_signature_required" data-comm-category="instant" data-comm-label="Support plan — signature required" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Support plan — signature required</span>
+              </button>
+              <button type="button" class="comm-hub-rail__chip" data-comm-template="digital_cab_pass_issued" data-comm-category="instant" data-comm-label="Digital cab pass issued" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">Digital cab pass issued</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="comm-hub-console__footer">
+            <div class="comm-hub-progress" aria-hidden="true">
+              <div class="comm-hub-progress__bar" data-comm-progress></div>
+            </div>
+            <div class="comm-hub-console__controls">
+              <button type="button" class="comm-hub-console__btn" data-comm-prev aria-label="Previous template">
+                <span aria-hidden="true">←</span> Previous
+              </button>
+              <div class="comm-hub-console__status">
+                <button type="button" class="comm-hub-console__play" data-comm-play aria-pressed="true" aria-label="Pause auto-rotate">
+                  <span class="comm-hub-console__play-icon" aria-hidden="true"></span>
+                  <span class="comm-hub-console__play-label">Pause</span>
+                </button>
                 <p data-comm-status>1 / 31</p>
               </div>
-              <button type="button" class="comm-hub-stage__btn" data-comm-next aria-label="Next template">Next</button>
+              <button type="button" class="comm-hub-console__btn" data-comm-next aria-label="Next template">
+                Next <span aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         </div>
@@ -1606,8 +1555,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=115973760"></script>
-  <script src="../js/newsletter.js?v=115973760"></script>
-  <script src="../js/communications-hub.js?v=115973760"></script>
+  <script src="../js/site.js?v=142633913"></script>
+  <script src="../js/newsletter.js?v=142633913"></script>
+  <script src="../js/communications-hub.js?v=142633913"></script>
 </body>
 </html>

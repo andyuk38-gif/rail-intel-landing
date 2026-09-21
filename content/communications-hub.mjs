@@ -42,15 +42,11 @@ function prependEmailHeader(html, logoUrl) {
   return header + html;
 }
 
-function renderTemplateOption(template, index) {
-  const subject = fillTemplate(template.subject, template.previewVars);
-  return `            <li>
-              <button type="button" class="comm-hub-picker__item${index === 0 ? " is-active" : ""}" data-comm-template="${esc(template.key)}" data-comm-category="${esc(template.category)}" aria-pressed="${index === 0 ? "true" : "false"}">
-                <span class="comm-hub-picker__item-label">${esc(template.label)}</span>
-                <span class="comm-hub-picker__item-subject">${esc(subject)}</span>
-                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--${esc(template.category)}">${esc(CATEGORY_META[template.category]?.label || template.category)}</span>
-              </button>
-            </li>`;
+function renderTemplateChip(template) {
+  return `              <button type="button" class="comm-hub-rail__chip" data-comm-template="${esc(template.key)}" data-comm-category="${esc(template.category)}" data-comm-label="${esc(template.label)}" aria-pressed="false">
+                <span class="comm-hub-rail__chip-dot comm-hub-rail__chip-dot--${esc(template.category)}" aria-hidden="true"></span>
+                <span class="comm-hub-rail__chip-label">${esc(template.label)}</span>
+              </button>`;
 }
 
 function renderTemplateStore(template, logoUrl) {
@@ -143,12 +139,16 @@ const SYSTEM_NOTIFICATIONS = [
 
 export function renderCommunicationsHubPage(base) {
   const logoUrl = "https://railintel.co.uk/images/rail-intel-icon.png";
-  const pickerItems = emailTemplates.map(renderTemplateOption).join("\n");
+  const railChips = emailTemplates.map(renderTemplateChip).join("\n");
   const templateStore = emailTemplates.map((t) => renderTemplateStore(t, logoUrl)).join("\n");
   const filters = Object.entries(CATEGORY_META)
     .map(
       ([key, meta], index) =>
-        `          <button type="button" class="comm-hub-filter${index === 0 ? " is-active" : ""}" data-comm-filter="${esc(key)}" aria-pressed="${index === 0 ? "true" : "false"}">${esc(meta.label)} <span class="comm-hub-filter__count">${meta.count}</span></button>`
+        `          <button type="button" class="comm-hub-filter comm-hub-filter--${esc(key)}${index === 1 ? " is-active" : ""}" data-comm-filter="${esc(key)}" aria-pressed="${index === 1 ? "true" : "false"}">
+            <span class="comm-hub-filter__label">${esc(meta.label)}</span>
+            <span class="comm-hub-filter__count">${meta.count}</span>
+            <span class="comm-hub-filter__progress" aria-hidden="true"></span>
+          </button>`
     )
     .join("\n");
 
@@ -178,8 +178,10 @@ export function renderCommunicationsHubPage(base) {
             </article>`
   ).join("\n");
 
-  const first = emailTemplates[0];
-  const firstSubject = fillTemplate(first.subject, first.previewVars);
+  const firstInstant = emailTemplates.find((t) => t.category === "instant") || emailTemplates[0];
+  const firstSubject = fillTemplate(firstInstant.subject, firstInstant.previewVars);
+  const firstLabel = firstInstant.label;
+  const firstCategory = CATEGORY_META[firstInstant.category]?.label || firstInstant.category;
 
   return `
     <section class="comm-hub-showcase" aria-labelledby="comm-hub-showcase-heading">
@@ -188,7 +190,7 @@ export function renderCommunicationsHubPage(base) {
           <div class="comm-hub-showcase__intro-copy">
             <p class="product-eyebrow">31 CMS email templates</p>
             <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
-            <p class="comm-hub-showcase__lead">These are faithful replicas of the templates configured in Administration → Email templates. Select a template, or let the showcase rotate — sample data only; your operation can customise wording and branding per template.</p>
+            <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically — or pick a filter and template chip to explore. Sample data only.</p>
             <ul class="comm-hub-stats" aria-label="Communications hub at a glance">
               <li><strong>${emailTemplates.length}</strong><span>Email templates</span></li>
               <li><strong>${CATEGORY_META.scheduled.count}</strong><span>Scheduled alerts</span></li>
@@ -199,42 +201,68 @@ export function renderCommunicationsHubPage(base) {
         </div>
       </div>
 
-      <div class="container comm-hub-showcase__panel" data-comm-hub>
+      <div class="container comm-hub-showcase__shell" data-comm-hub>
         <div class="comm-hub-showcase__filters" role="tablist" aria-label="Filter email templates">
 ${filters}
         </div>
 
-        <div class="comm-hub-showcase__layout">
-          <aside class="comm-hub-picker" aria-label="Email template list">
-            <p class="comm-hub-picker__label">Templates</p>
-            <ol class="comm-hub-picker__list">
-${pickerItems}
-            </ol>
-          </aside>
+        <div class="comm-hub-console">
+          <div class="comm-hub-console__head">
+            <div class="comm-hub-console__live" aria-hidden="true">
+              <span class="comm-hub-console__live-dot"></span>
+              <span>Live preview</span>
+            </div>
+            <div class="comm-hub-console__meta">
+              <p class="comm-hub-console__title" data-comm-title>${esc(firstLabel)}</p>
+              <p class="comm-hub-console__subject" data-comm-subject>${esc(firstSubject)}</p>
+            </div>
+            <span class="comm-hub-console__tag comm-hub-console__tag--instant" data-comm-tag>${esc(firstCategory)}</span>
+          </div>
 
-          <div class="comm-hub-stage">
-            <div class="comm-hub-mail" data-comm-mail>
+          <div class="comm-hub-mail" data-comm-mail>
+            <div class="comm-hub-mail__chrome">
               <div class="comm-hub-mail__toolbar">
                 <div class="comm-hub-mail__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-                <p class="comm-hub-mail__app">Mail</p>
+                <p class="comm-hub-mail__app">Outlook · Rail Intel notifications</p>
               </div>
-              <div class="comm-hub-mail__header">
-                <p class="comm-hub-mail__field"><span>From</span> <strong>Rail Intel &lt;notifications@railintel.co.uk&gt;</strong></p>
-                <p class="comm-hub-mail__field"><span>To</span> <strong>alex.manager@northernrail.example</strong></p>
-                <p class="comm-hub-mail__field comm-hub-mail__field--subject"><span>Subject</span> <strong data-comm-subject>${esc(firstSubject)}</strong></p>
-              </div>
-              <div class="comm-hub-mail__viewport">
-                <iframe class="comm-hub-mail__frame" data-comm-frame title="Email template preview" sandbox="allow-same-origin"></iframe>
+              <div class="comm-hub-mail__envelope">
+                <span>From</span> Rail Intel &lt;notifications@railintel.co.uk&gt;
+                <span class="comm-hub-mail__envelope-sep">·</span>
+                <span>To</span> alex.manager@northernrail.example
               </div>
             </div>
+            <div class="comm-hub-mail__viewport" data-comm-viewport>
+              <div class="comm-hub-mail__stage" data-comm-stage>
+                <iframe class="comm-hub-mail__frame" data-comm-frame title="Email template preview" sandbox="allow-same-origin" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
 
-            <div class="comm-hub-stage__controls">
-              <button type="button" class="comm-hub-stage__btn" data-comm-prev aria-label="Previous template">Previous</button>
-              <div class="comm-hub-stage__status">
-                <button type="button" class="comm-hub-stage__play" data-comm-play aria-pressed="true" aria-label="Pause auto-rotate">Pause</button>
+          <div class="comm-hub-rail-wrap">
+            <p class="comm-hub-rail__label">Templates in this category</p>
+            <div class="comm-hub-rail" data-comm-rail tabindex="0" aria-label="Template selection">
+${railChips}
+            </div>
+          </div>
+
+          <div class="comm-hub-console__footer">
+            <div class="comm-hub-progress" aria-hidden="true">
+              <div class="comm-hub-progress__bar" data-comm-progress></div>
+            </div>
+            <div class="comm-hub-console__controls">
+              <button type="button" class="comm-hub-console__btn" data-comm-prev aria-label="Previous template">
+                <span aria-hidden="true">←</span> Previous
+              </button>
+              <div class="comm-hub-console__status">
+                <button type="button" class="comm-hub-console__play" data-comm-play aria-pressed="true" aria-label="Pause auto-rotate">
+                  <span class="comm-hub-console__play-icon" aria-hidden="true"></span>
+                  <span class="comm-hub-console__play-label">Pause</span>
+                </button>
                 <p data-comm-status>1 / ${emailTemplates.length}</p>
               </div>
-              <button type="button" class="comm-hub-stage__btn" data-comm-next aria-label="Next template">Next</button>
+              <button type="button" class="comm-hub-console__btn" data-comm-next aria-label="Next template">
+                Next <span aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         </div>
