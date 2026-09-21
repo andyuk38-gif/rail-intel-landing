@@ -1529,10 +1529,8 @@ export const featureGroups = [
           shot: {
             src: "images/screens/cycles/cont-cycle-cdp-carryover.png",
             caption: "CDP monitoring events carry over when a continuous cycle renews.",
-            scale: 0.68,
-            compact: true,
           },
-          shotLayout: "center",
+          shotLayout: "split-tiles",
         },
         {
           id: "permissions",

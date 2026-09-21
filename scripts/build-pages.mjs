@@ -969,11 +969,12 @@ function bulletsToTiles(bullets) {
 
 const SPEC_TILE_ACCENTS = ["#38bdf8", "#f59e0b", "#34d399", "#a78bfa"];
 
-function renderSpecTileList(items, indent = "          ") {
+function renderSpecTileList(items, indent = "          ", { stacked = false } = {}) {
   if (!items.length) return "";
 
   const inner = `${indent}  `;
-  return `${indent}<div class="spec-tiles" role="list">\n${items
+  const tilesClass = stacked ? "spec-tiles spec-tiles--stack" : "spec-tiles";
+  return `${indent}<div class="${tilesClass}" role="list">\n${items
     .map((tile, index) => {
       const item = typeof tile === "string" ? { detail: tile } : tile;
       const accent = item.accent || SPEC_TILE_ACCENTS[index % SPEC_TILE_ACCENTS.length];
@@ -2022,6 +2023,18 @@ ${cdpShotFigure(chapter.shot, base, { fill: true })}
 ${tiles}`;
     }
 
+    if (chapter.shotLayout === "split-tiles") {
+      const tiles = renderSpecTileList(bulletsToTiles(chapter.bullets), "                ", { stacked: true });
+      return `              <div class="cdp-chapter__split cdp-chapter__split--tiles">
+                <div class="cdp-chapter__split-tiles">
+${tiles}
+                </div>
+                <div class="cdp-chapter__split-visual">
+${cdpShotFigure(chapter.shot, base, { fill: true })}
+                </div>
+              </div>`;
+    }
+
     const layoutClass =
       chapter.shotLayout === "full" ? "cdp-chapter__shots--full" : "cdp-chapter__shots--center";
 
@@ -2041,7 +2054,10 @@ ${chapter.shots.map((shot) => cdpShotFigure(shot, base, { fill: true })).join("\
 
 function renderCdpChapter(chapter, base, index) {
   const bulletsInline =
-    chapter.shot && (chapter.shotLayout === "split" || chapter.shotLayout === "full-tiles")
+    chapter.shot &&
+    (chapter.shotLayout === "split" ||
+      chapter.shotLayout === "full-tiles" ||
+      chapter.shotLayout === "split-tiles")
       ? ""
       : renderCdpChapterBullets(chapter.bullets);
 
