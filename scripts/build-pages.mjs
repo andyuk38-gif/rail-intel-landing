@@ -1908,7 +1908,7 @@ ${renderFaqSection(pageSeo.faq, base)}
   );
 }
 
-function cdpShotFigure(shot, base, { fill = false, eager = false } = {}) {
+function cdpShotFigure(shot, base, { fill = false, eager = false, imageOnly = false } = {}) {
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
   const scale = typeof shot.scale === "number" ? shot.scale : 1;
@@ -1918,12 +1918,14 @@ function cdpShotFigure(shot, base, { fill = false, eager = false } = {}) {
   const compactClass = shot.compact ? " cdp-chapter__figure--compact" : "";
   const loading = eager ? "eager" : "lazy";
   const fetchPriority = eager ? ' fetchpriority="high"' : "";
+  const caption = imageOnly
+    ? ""
+    : `\n                <figcaption class="shot__caption">${esc(shot.caption || "")}</figcaption>`;
 
   return `              <figure class="cdp-chapter__figure shot${fillClass}${compactClass}" style="--shot-native-width: ${width}px">
                 <div class="shot__frame">
                   <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="${loading}" decoding="async"${fetchPriority} />
-                </div>
-                <figcaption class="shot__caption">${esc(shot.caption || "")}</figcaption>
+                </div>${caption}
               </figure>`;
 }
 
@@ -2025,13 +2027,21 @@ ${tiles}`;
 
     if (chapter.shotLayout === "split-tiles") {
       const tiles = renderSpecTileList(bulletsToTiles(chapter.bullets), "                ", { stacked: true });
-      return `              <div class="cdp-chapter__split cdp-chapter__split--tiles">
-                <div class="cdp-chapter__split-tiles">
+      const caption = chapter.shot?.caption
+        ? `\n                <p class="shot__caption cdp-chapter__split-caption">${esc(chapter.shot.caption)}</p>`
+        : "";
+      const shotSize = manifest[chapter.shot.src];
+      if (!shotSize) throw new Error(`Missing screenshot in manifest: ${chapter.shot.src}`);
+      const shotRatio = `${shotSize.width} / ${shotSize.height}`;
+      return `              <div class="cdp-chapter__split-stack">
+                <div class="cdp-chapter__split cdp-chapter__split--tiles">
+                  <div class="cdp-chapter__split-tiles">
 ${tiles}
-                </div>
-                <div class="cdp-chapter__split-visual">
-${cdpShotFigure(chapter.shot, base, { fill: true })}
-                </div>
+                  </div>
+                  <div class="cdp-chapter__split-visual" style="--split-shot-ratio: ${shotRatio}">
+${cdpShotFigure(chapter.shot, base, { fill: true, imageOnly: true })}
+                  </div>
+                </div>${caption}
               </div>`;
     }
 

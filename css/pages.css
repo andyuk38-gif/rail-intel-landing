@@ -6615,7 +6615,14 @@ body.lightbox-open {
   align-items: start;
 }
 
+.cdp-chapter__split-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  column-gap: 1.25rem;
+}
+
 .cdp-chapter__split--tiles {
+  grid-column: 1 / -1;
   align-items: stretch;
 }
 
@@ -6631,43 +6638,46 @@ body.lightbox-open {
   gap: 0.75rem;
   width: 100%;
   margin-top: 0;
-  flex: 1;
+  height: 100%;
 }
 
 .cdp-chapter__split--tiles .spec-tile {
   height: 100%;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .cdp-chapter__split--tiles .spec-tile__detail {
   flex: 1;
 }
 
-.cdp-chapter__split--tiles .cdp-chapter__split-visual {
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
 .cdp-chapter__split--tiles .cdp-chapter__split-visual .cdp-chapter__figure {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
+  margin: 0;
+  height: 100%;
 }
 
 .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
   max-width: none;
+  width: 100%;
+  aspect-ratio: var(--split-shot-ratio);
+  height: auto;
 }
 
 .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center top;
+}
+
+.cdp-chapter__split-caption {
+  grid-column: 2;
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 .cdp-chapter__figure {
@@ -6871,14 +6881,24 @@ body.lightbox-open {
     grid-template-columns: 1fr;
   }
 
+  .cdp-chapter__split-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .cdp-chapter__split-caption {
+    grid-column: 1;
+  }
+
   .cdp-chapter__split--tiles .spec-tiles--stack {
     grid-template-rows: auto;
+    height: auto;
   }
 
   .cdp-chapter__split--tiles .spec-tile {
     height: auto;
   }
 
+  .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame,
   .cdp-chapter__split--tiles .cdp-chapter__split-visual .shot__frame img {
     height: auto;
   }
