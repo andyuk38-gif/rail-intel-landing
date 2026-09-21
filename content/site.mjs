@@ -1438,6 +1438,8 @@ export const featureGroups = [
     name: "CDP Monitoring",
     summary: "Track competence development plans, carry findings across cycles and govern access by role.",
     tagline: "Open development points that stay visible until they are closed",
+    taglineHtml:
+      'Open <span class="hero-title__accent">development</span> points that stay <span class="hero-title__accent">visible</span> until they are closed',
     lead:
       "A competence development plan (CDP) is how Rail Intel records what still needs to improve after an assessment, incident or monitoring review, what was agreed, who owns it and whether it was completed. CDPs live on the Monitoring tab of the employee record, link back to the competence activity that raised them, and carry forward automatically when a continuous cycle renews.",
     accent: "#38bdf8",

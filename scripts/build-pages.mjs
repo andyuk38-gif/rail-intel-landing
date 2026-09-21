@@ -2125,7 +2125,7 @@ function cdpMonitoringPage(group) {
           <span class="page-badge page-badge--core">Included as standard</span>
           <div class="page-hero__title-row">
             <div class="page-hero__copy">
-              <h1 class="page-title">${esc(group.tagline)}</h1>
+              <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
             </div>
             <div class="cdp-hero-board reveal" aria-hidden="true">
               <div class="cdp-hero-board__chrome">
