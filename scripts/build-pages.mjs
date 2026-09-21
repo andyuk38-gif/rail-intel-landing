@@ -1913,7 +1913,7 @@ ${renderFaqSection(pageSeo.faq, base)}
   );
 }
 
-function cdpShotFigure(shot, base, { fill = false, eager = false, imageOnly = false } = {}) {
+function cdpShotFigure(shot, base, { fill = false, eager = false, imageOnly = false, framed = false } = {}) {
   const size = manifest[shot.src];
   if (!size) throw new Error(`Missing screenshot in manifest: ${shot.src}`);
   const scale = typeof shot.scale === "number" ? shot.scale : 1;
@@ -1921,6 +1921,7 @@ function cdpShotFigure(shot, base, { fill = false, eager = false, imageOnly = fa
   const height = Math.max(1, Math.round(size.height * scale));
   const fillClass = fill ? " cdp-chapter__figure--fill" : "";
   const compactClass = shot.compact ? " cdp-chapter__figure--compact" : "";
+  const frameClass = framed ? " shot__frame--licence" : "";
   const loading = eager ? "eager" : "lazy";
   const fetchPriority = eager ? ' fetchpriority="high"' : "";
   const caption = imageOnly
@@ -1928,7 +1929,7 @@ function cdpShotFigure(shot, base, { fill = false, eager = false, imageOnly = fa
     : `\n                <figcaption class="shot__caption">${esc(shot.caption || "")}</figcaption>`;
 
   return `              <figure class="cdp-chapter__figure shot${fillClass}${compactClass}" style="--shot-native-width: ${width}px">
-                <div class="shot__frame">
+                <div class="shot__frame${frameClass}">
                   <img src="${base}${shot.src}?v=${ASSET_VERSION}" alt="${esc(shot.caption || "")}" width="${width}" height="${height}" sizes="(min-width: 1100px) ${width}px, 96vw" loading="${loading}" decoding="async"${fetchPriority} />
                 </div>${caption}
               </figure>`;
@@ -2048,7 +2049,7 @@ ${tiles}`;
 ${tiles}
                   </div>
                   <div class="cdp-chapter__split-visual">
-${cdpShotFigure(chapter.shot, base, { fill: true, imageOnly: true })}
+${cdpShotFigure(chapter.shot, base, { fill: true, imageOnly: true, framed: true })}
                   </div>
                 </div>${caption}
               </div>`;
