@@ -6743,6 +6743,12 @@ body.lightbox-open {
   margin-top: 0.25rem;
 }
 
+.cdp-chapter__content > .spec-tiles {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .cdp-chapter__shots--full .cdp-chapter__figure {
   width: 100%;
 }

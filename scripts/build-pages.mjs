@@ -954,8 +954,17 @@ ${items}
 
 function parseBulletTile(item) {
   const match = String(item).match(/^\*\*(.+?)\*\*\s*(.*)$/);
-  if (match) return { title: match[1], detail: match[2] };
+  if (match) {
+    return {
+      title: match[1],
+      detail: match[2].replace(/^[—–-]\s*/, ""),
+    };
+  }
   return { title: String(item), detail: "" };
+}
+
+function bulletsToTiles(bullets) {
+  return (bullets || []).map(parseBulletTile);
 }
 
 const SPEC_TILE_ACCENTS = ["#38bdf8", "#f59e0b", "#34d399", "#a78bfa"];
@@ -2005,6 +2014,14 @@ ${cdpShotFigure(chapter.shot, base, { fill: true })}
               </div>`;
     }
 
+    if (chapter.shotLayout === "full-tiles") {
+      const tiles = renderSpecTileList(bulletsToTiles(chapter.bullets), "              ");
+      return `              <div class="cdp-chapter__shots cdp-chapter__shots--full">
+${cdpShotFigure(chapter.shot, base, { fill: true })}
+              </div>
+${tiles}`;
+    }
+
     const layoutClass =
       chapter.shotLayout === "full" ? "cdp-chapter__shots--full" : "cdp-chapter__shots--center";
 
@@ -2018,7 +2035,9 @@ ${cdpShotFigure(chapter.shot, base, { fill: chapter.shotLayout === "full" })}
 
 function renderCdpChapter(chapter, base, index) {
   const bulletsInline =
-    chapter.shot && chapter.shotLayout === "split" ? "" : renderCdpChapterBullets(chapter.bullets);
+    chapter.shot && (chapter.shotLayout === "split" || chapter.shotLayout === "full-tiles")
+      ? ""
+      : renderCdpChapterBullets(chapter.bullets);
 
   return `        <article class="cdp-chapter reveal" data-cdp-chapter="${index}" id="cdp-chapter-${index}" data-cdp-chapter-id="${esc(chapter.id)}">
           <header class="cdp-chapter__head">

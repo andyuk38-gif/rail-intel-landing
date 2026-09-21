@@ -1489,7 +1489,7 @@ export const featureGroups = [
             src: "images/screens/monitor-plans-incidents/cdp-plan-overview.png",
             caption: "Competence development plan overview for the employee.",
           },
-          shotLayout: "split",
+          shotLayout: "full-tiles",
         },
         {
           id: "carryover",
