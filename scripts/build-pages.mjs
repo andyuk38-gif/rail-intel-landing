@@ -2084,7 +2084,7 @@ ${stats}
         <div class="cdp-command" data-cdp-experience data-cdp-count="${exp.chapters.length}">
           <div class="cdp-command__intro reveal">
             <p class="cdp-command__eyebrow">Competence development lifecycle</p>
-            <h2 class="cdp-command__title">From finding to closure — with nothing lost at the cycle boundary</h2>
+            <h2 class="cdp-command__title">From finding to closure, with nothing lost at the cycle boundary</h2>
             <div class="cdp-lifecycle" data-cdp-lifecycle-bar role="list" aria-label="CDP lifecycle">
               <span class="cdp-lifecycle__track" aria-hidden="true"><span class="cdp-lifecycle__fill" data-cdp-lifecycle-progress style="width: 0%"></span></span>
 ${lifecycle}

@@ -6357,7 +6357,7 @@ body.lightbox-open {
 
 .cdp-command__title {
   margin: 0 0 1.35rem;
-  max-width: 42rem;
+  max-width: none;
   font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   line-height: 1.25;
 }
