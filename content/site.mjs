@@ -1777,21 +1777,22 @@ export const featureGroups = [
         fullWidth: true,
         bulletTiles: true,
         crispShots: true,
+        mod: "reporting-compliance",
         body: [
-          "The reporting home screen combines company-wide compliance counts with personal action items and team-level QA results. Three panes answer different questions from the same live record data — without exporting to a spreadsheet.",
+          "The reporting home screen combines company-wide compliance counts with personal action items and team-level QA results. Three panes answer different questions from the same live record data, without exporting to a spreadsheet.",
         ],
         tiles: [
-          {
-            title: "Compliance overview",
-            detail:
-              "Live counts from company records — on track, off track, overdue assessments, medical expiry, renewals due, medication follow-ups and open tasks in one view.",
-            accent: "#38bdf8",
-          },
           {
             title: "My progress",
             detail:
               "Your personal messages, tasks, approvals and reminders in one place — see what needs your action without opening each record.",
             accent: "#34d399",
+          },
+          {
+            title: "Compliance overview",
+            detail:
+              "Live counts from company records — on track, off track, overdue assessments, medical expiry, renewals due, medication follow-ups and open tasks in one view.",
+            accent: "#38bdf8",
           },
           {
             title: "Your team's compliance",

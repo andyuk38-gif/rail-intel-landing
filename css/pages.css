@@ -1893,6 +1893,27 @@
   width: 100%;
 }
 
+.page-section--reporting-compliance .spec-tiles {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: min(100%, 1024px);
+  margin-inline: auto;
+}
+
+.page-section--reporting-compliance .shot-grid--full {
+  max-width: min(100%, 1024px);
+  margin-inline: auto;
+}
+
+.page-section--reporting-compliance .shot-grid--full .shot__caption {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .page-section--reporting-compliance .spec-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
 .shot--full .shot__frame {
   width: fit-content;
   max-width: min(100%, var(--shot-native-width, none));
