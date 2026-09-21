@@ -477,6 +477,16 @@
 
             loadFrameContent(panes[0].frame, panes[0].stage, templateHtml(primaryKey), function () {
               if (generation !== animationGeneration) return;
+
+              if (!secondaryKey) {
+                clearHandoffClasses();
+                if (viewport) viewport.classList.remove("is-handoff-active");
+                syncDuoLayout(currentIndex);
+                updateAllFrameOverflow();
+                finish(done);
+                return;
+              }
+
               loadFrameContent(panes[1].frame, panes[1].stage, templateHtml(secondaryKey), function () {
                 if (generation !== animationGeneration) return;
                 requestAnimationFrame(function () {
@@ -613,9 +623,17 @@
     }
   }
 
-  function syncDuoLayout() {
+  function secondaryBtnForIndex(index) {
+    if (visibleItems.length < 2) return null;
+    if (index >= visibleItems.length - 1) return null;
+    return visibleItems[index + 1];
+  }
+
+  function syncDuoLayout(index) {
     if (!duo) return;
-    duo.classList.toggle("is-single", visibleItems.length < 2);
+    if (typeof index !== "number") index = currentIndex;
+    var showSecondary = visibleItems.length > 1 && index < visibleItems.length - 1;
+    duo.classList.toggle("is-single", !showSecondary);
   }
 
   function categoryDirection(fromFilter, toFilter) {
@@ -640,7 +658,7 @@
 
     var primaryBtn = visibleItems[index];
     var primaryKey = primaryBtn.getAttribute("data-comm-template");
-    var secondaryBtn = visibleItems.length > 1 ? visibleItems[wrapIndex(index + 1)] : null;
+    var secondaryBtn = secondaryBtnForIndex(index);
     var secondaryKey = secondaryBtn ? secondaryBtn.getAttribute("data-comm-template") : null;
 
     if (hasLoadedPreview && primaryKey === currentTemplateKey && options.mode !== "category") return;
@@ -653,7 +671,7 @@
     }
 
     currentIndex = index;
-    syncDuoLayout();
+    syncDuoLayout(index);
 
     visibleItems.forEach(function (btn, i) {
       var active = i === currentIndex;
