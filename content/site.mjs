@@ -1463,7 +1463,7 @@ export const featureGroups = [
           title: "The Monitoring tab",
           subtitle: "Employee record · Development view",
           body: [
-            "The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and — where the Trainee Driver module is active — performance and support plans.",
+            "The Monitoring tab is the operational view of competence follow-up for one person: allocated incidents, open and closed development plans, and, where the Trainee Driver module is active, performance and support plans.",
             "Managers and assessors with the right permissions see the full picture for people in their scope. Employees with own-record access see their own monitoring history without opening the company directory.",
           ],
           pillars: [
@@ -1478,7 +1478,7 @@ export const featureGroups = [
           title: "What a CDP contains",
           subtitle: "Structure · Evidence · Closure",
           body: [
-            "A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity — typically when assessment criteria are flagged — and stays on the record until formally closed.",
+            "A CDP captures the gap that was found, the improvement agreed and the evidence that it was done. It is raised from competence activity, typically when assessment criteria are flagged, and stays on the record until formally closed.",
           ],
           bullets: [
             "**Linked to the finding** — the plan relates to the assessment or incident that triggered it.",
