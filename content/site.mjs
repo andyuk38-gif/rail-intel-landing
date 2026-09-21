@@ -1958,55 +1958,7 @@ export const featureGroups = [
       { name: "Administration", href: "features/administration.html" },
       { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
     ],
-    sections: [
-      {
-        heading: "Rule-driven emails and system notifications",
-        body: [
-          "The communications hub sits behind the competency engine, not beside it. When a cycle lapses, a medical nears expiry or an incident enters a grace period, the right people are notified by email and in the application — managers see it on the dashboard feed, and the employee sees it on their record where permissions allow.",
-          "That is the difference between a record system and a compliance system: Rail Intel does not wait for someone to notice a gap. Conditional rules decide what matters, and the hub delivers it.",
-        ],
-        bullets: [
-          "**Competency and cycle expiry** alerts before someone reaches the railway out of date.",
-          "**Medical and licence renewal** reminders on the dashboard and by email.",
-          "**Incident and monitoring follow-up** when a rule requires action or welfare contact.",
-          "**In-app system notifications** alongside email, so nothing depends on an inbox alone.",
-        ],
-        shots: [
-          {
-            src: "images/screens/messaging-employee/email-notify-new-message.png",
-            caption: "Automated email when a new on-record message is raised.",
-          },
-        ],
-      },
-      {
-        heading: "On-record messaging with email alerts",
-        body: [
-          "Conversations about competence, medicals or incidents stay on the employee record — not in a personal Outlook thread with no audit trail. When someone raises a note or message, the communications hub notifies the right recipients by email so the exchange is seen without anyone living in the CMS.",
-        ],
-        shots: [
-          {
-            src: "images/screens/messaging-employee/employee-messaging.png",
-            caption: "Messaging threads held against the employee record.",
-          },
-          {
-            src: "images/screens/messaging-employee/email-notify-new-message.png",
-            caption: "Email notification when a new message is raised.",
-          },
-        ],
-      },
-      {
-        heading: "Transactional messages your operation controls",
-        body: [
-          "Automated does not mean generic. Email templates for cab passes, assessments, incidents and operational events are configured in Administration, so your operation owns the wording while Rail Intel owns the timing and the rules that trigger each send.",
-        ],
-        shots: [
-          {
-            src: "images/screens/cab-passes/issue-digital-pass-email-dark.png",
-            caption: "A cab pass issued by email — one example of a rule-triggered transactional message.",
-          },
-        ],
-      },
-    ],
+    sections: [],
   },
 
   {

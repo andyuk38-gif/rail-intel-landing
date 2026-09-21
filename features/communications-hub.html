@@ -31,8 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=221738548" />
-  <link rel="stylesheet" href="../css/pages.css?v=221738548" />
+  <link rel="stylesheet" href="../css/style.css?v=115973760" />
+  <link rel="stylesheet" href="../css/pages.css?v=115973760" />
+  <link rel="stylesheet" href="../css/communications-hub.css?v=115973760" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -248,9 +249,10 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--communications-hub">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--split">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Communications Hub</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">Everything communicated — automatically</h1>
@@ -259,82 +261,1225 @@
             <a href="https://cms.railintel.co.uk" class="btn btn-lg btn-primary">Open Rail Intel</a>
             <a href="../features/" class="btn btn-lg btn-ghost">All features</a>
           </div>
+          </div>
+          <div class="page-hero__media">
+        <div class="comm-hub-hero-card" aria-label="Sample system notifications">
+          <div class="comm-hub-hero-card__row">
+            <span class="comm-hub-hero-card__dot"></span>
+            <div>
+              <strong>Assessment window closing soon</strong>
+              <span>Route knowledge · Sarah Mitchell · email + in-app</span>
+            </div>
+          </div>
+          <div class="comm-hub-hero-card__row">
+            <span class="comm-hub-hero-card__dot"></span>
+            <div>
+              <strong>Licence renewal reminder</strong>
+              <span>3 months before expiry · assessing manager</span>
+            </div>
+          </div>
+          <div class="comm-hub-hero-card__row">
+            <span class="comm-hub-hero-card__dot"></span>
+            <div>
+              <strong>New on-record message</strong>
+              <span>Employee Messaging & Notes · instant alert</span>
+            </div>
+          </div>
+        </div>
+          </div>
         </div>
       </div>
     </section>
 
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Rule-driven emails and system notifications</h2>
-          <p>The communications hub sits behind the competency engine, not beside it. When a cycle lapses, a medical nears expiry or an incident enters a grace period, the right people are notified by email and in the application — managers see it on the dashboard feed, and the employee sees it on their record where permissions allow.</p>
-          <p>That is the difference between a record system and a compliance system: Rail Intel does not wait for someone to notice a gap. Conditional rules decide what matters, and the hub delivers it.</p>
+    <section class="comm-hub-showcase" aria-labelledby="comm-hub-showcase-heading">
+      <div class="comm-hub-showcase__intro">
+        <div class="container comm-hub-showcase__intro-inner">
+          <div class="comm-hub-showcase__intro-copy">
+            <p class="product-eyebrow">31 CMS email templates</p>
+            <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
+            <p class="comm-hub-showcase__lead">These are faithful replicas of the templates configured in Administration → Email templates. Select a template, or let the showcase rotate — sample data only; your operation can customise wording and branding per template.</p>
+            <ul class="comm-hub-stats" aria-label="Communications hub at a glance">
+              <li><strong>31</strong><span>Email templates</span></li>
+              <li><strong>9</strong><span>Scheduled alerts</span></li>
+              <li><strong>15</strong><span>Instant notifications</span></li>
+              <li><strong>Dual channel</strong><span>Email + in-app</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container comm-hub-showcase__panel" data-comm-hub>
+        <div class="comm-hub-showcase__filters" role="tablist" aria-label="Filter email templates">
+          <button type="button" class="comm-hub-filter is-active" data-comm-filter="all" aria-pressed="true">All templates <span class="comm-hub-filter__count">31</span></button>
+          <button type="button" class="comm-hub-filter" data-comm-filter="instant" aria-pressed="false">Instant alerts <span class="comm-hub-filter__count">15</span></button>
+          <button type="button" class="comm-hub-filter" data-comm-filter="scheduled" aria-pressed="false">Scheduled alerts <span class="comm-hub-filter__count">9</span></button>
+          <button type="button" class="comm-hub-filter" data-comm-filter="account" aria-pressed="false">Account &amp; access <span class="comm-hub-filter__count">7</span></button>
+        </div>
+
+        <div class="comm-hub-showcase__layout">
+          <aside class="comm-hub-picker" aria-label="Email template list">
+            <p class="comm-hub-picker__label">Templates</p>
+            <ol class="comm-hub-picker__list">
+            <li>
+              <button type="button" class="comm-hub-picker__item is-active" data-comm-template="welcome" data-comm-category="account" aria-pressed="true">
+                <span class="comm-hub-picker__item-label">Welcome email (new company)</span>
+                <span class="comm-hub-picker__item-subject">Welcome to Rail Intel – Your login details</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="company_admin_invite" data-comm-category="account" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Company administrator welcome</span>
+                <span class="comm-hub-picker__item-subject">Rail Intel — Example Rail Co: your company administrator account is ready</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="team_user_invite" data-comm-category="account" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Team user invitation</span>
+                <span class="comm-hub-picker__item-subject">Welcome to Rail Intel – Your login details for Northern Rail Example</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="password-reset" data-comm-category="account" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Password reset</span>
+                <span class="comm-hub-picker__item-subject">Reset your Rail Intel password</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="assessment-window-open" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Assessment window open</span>
+                <span class="comm-hub-picker__item-subject">Assessment Window Open – Route knowledge assessment for Sarah Mitchell</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="assessment-window-closing" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Assessment window closing soon</span>
+                <span class="comm-hub-picker__item-subject">Assessment Window Closing Soon – Route knowledge assessment for Sarah Mitchell</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="continuous-cycle-renewal-approaching" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Continuous cycle renewal approaching</span>
+                <span class="comm-hub-picker__item-subject">Continuous cycle renewal due soon – Annual competence cycle for Sarah Mitchell</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="continuous-cycle-renewal-blocked" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Continuous cycle renewal blocked</span>
+                <span class="comm-hub-picker__item-subject">Continuous cycle cannot renew – Annual competence cycle for Sarah Mitchell</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="storage-80-warning" data-comm-category="account" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Storage warning (80% usage)</span>
+                <span class="comm-hub-picker__item-subject">Storage usage warning for Example Rail Co (82.4% used)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="task_assigned" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Task assigned</span>
+                <span class="comm-hub-picker__item-subject">New task assigned: Complete route knowledge refresh</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="task_reopened" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Task reopened</span>
+                <span class="comm-hub-picker__item-subject">Task reopened: Complete route knowledge refresh</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="task_note_added" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Task update note</span>
+                <span class="comm-hub-picker__item-subject">Task update: Complete route knowledge refresh</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="fatality-anniversary-7d-reminder" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Fatality incident — 7 days before anniversary</span>
+                <span class="comm-hub-picker__item-subject">Support reminder: one-year anniversary approaching for Jamie Driver (fatality incident)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="licence-expiry-3m-reminder" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Licence expiry — 3 months</span>
+                <span class="comm-hub-picker__item-subject">Licence renewal reminder: Jamie Driver expires 15 November 2026</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="licence-expiry-6w-reminder" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Licence expiry — 6 weeks (urgent)</span>
+                <span class="comm-hub-picker__item-subject">Urgent: licence for Jamie Driver expires 20 September 2026</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="licence-expiry-expired" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Licence expired — take off track</span>
+                <span class="comm-hub-picker__item-subject">Action required: Jamie Driver licence expired — take off track</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="task_trial_ending_48h" data-comm-category="account" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Task module trial ending</span>
+                <span class="comm-hub-picker__item-subject">Task module trial ending for Northern Rail Example (30 Sep 2026)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_trainer_feedback" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Trainee — trainer feedback ready</span>
+                <span class="comm-hub-picker__item-subject">Your trainer has left feedback — Operational Rules — Example Rail Co</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_instructor_assigned" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Trainee — instructor assigned</span>
+                <span class="comm-hub-picker__item-subject">You have been assigned as driving instructor — Jamie Trainee — Example Rail Co</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_instructor_unassigned" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Trainee — instructor unassigned</span>
+                <span class="comm-hub-picker__item-subject">You are no longer assigned as driving instructor — Jamie Trainee — Example Rail Co</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_instructor_gap" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Trainee — instructor gap alert</span>
+                <span class="comm-hub-picker__item-subject">No driving instructor allocated — Jamie Trainee — Example Rail Co</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_feedback_reminder" data-comm-category="scheduled" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Trainee — feedback reminder (7 days)</span>
+                <span class="comm-hub-picker__item-subject">Reminder: please review trainer feedback — Operational Rules — Example Rail Co</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--scheduled">Scheduled alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="support-ticket-update" data-comm-category="account" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Support ticket update</span>
+                <span class="comm-hub-picker__item-subject">Update on your support ticket RV-A1B2C3D4</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--account">Account &amp; access</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="trainee_driver_welcome" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Trainee driver welcome</span>
+                <span class="comm-hub-picker__item-subject">Welcome to your driver training programme — Example Rail Co</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_submitted" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Leave request submitted</span>
+                <span class="comm-hub-picker__item-subject">Leave request awaiting decision — Jamie Driver (Annual leave)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_decision" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Leave request decision</span>
+                <span class="comm-hub-picker__item-subject">Leave request approved — Annual leave (2026-08-01 → 2026-08-05)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_awarded_back" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Holiday leave awarded back</span>
+                <span class="comm-hub-picker__item-subject">Holiday leave awarded back — Holiday leave (2026-08-01 → 2026-08-05)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="leave_request_cancelled" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Leave request cancelled</span>
+                <span class="comm-hub-picker__item-subject">Leave request cancelled — Jamie Driver (Holiday leave)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="employee-note-message" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Employee messaging — new message</span>
+                <span class="comm-hub-picker__item-subject">New message on Sam Driver — Employee Messaging &amp; Notes</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="performance_support_plan_signature_required" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Support plan — signature required</span>
+                <span class="comm-hub-picker__item-subject">Signature required — Route knowledge support plan (Example Rail Co)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="comm-hub-picker__item" data-comm-template="digital_cab_pass_issued" data-comm-category="instant" aria-pressed="false">
+                <span class="comm-hub-picker__item-label">Digital cab pass issued</span>
+                <span class="comm-hub-picker__item-subject">Your digital driving cab pass — Green — Authorised to Assess (12345678)</span>
+                <span class="comm-hub-picker__item-tag comm-hub-picker__item-tag--instant">Instant alerts</span>
+              </button>
+            </li>
+            </ol>
+          </aside>
+
+          <div class="comm-hub-stage">
+            <div class="comm-hub-mail" data-comm-mail>
+              <div class="comm-hub-mail__toolbar">
+                <div class="comm-hub-mail__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <p class="comm-hub-mail__app">Mail</p>
+              </div>
+              <div class="comm-hub-mail__header">
+                <p class="comm-hub-mail__field"><span>From</span> <strong>Rail Intel &lt;notifications@railintel.co.uk&gt;</strong></p>
+                <p class="comm-hub-mail__field"><span>To</span> <strong>alex.manager@northernrail.example</strong></p>
+                <p class="comm-hub-mail__field comm-hub-mail__field--subject"><span>Subject</span> <strong data-comm-subject>Welcome to Rail Intel – Your login details</strong></p>
+              </div>
+              <div class="comm-hub-mail__viewport">
+                <iframe class="comm-hub-mail__frame" data-comm-frame title="Email template preview" sandbox="allow-same-origin"></iframe>
+              </div>
+            </div>
+
+            <div class="comm-hub-stage__controls">
+              <button type="button" class="comm-hub-stage__btn" data-comm-prev aria-label="Previous template">Previous</button>
+              <div class="comm-hub-stage__status">
+                <button type="button" class="comm-hub-stage__play" data-comm-play aria-pressed="true" aria-label="Pause auto-rotate">Pause</button>
+                <p data-comm-status>1 / 31</p>
+              </div>
+              <button type="button" class="comm-hub-stage__btn" data-comm-next aria-label="Next template">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <template data-comm-email="welcome" data-comm-subject="Welcome to Rail Intel – Your login details"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Welcome to Rail Intel</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jane Smith,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Welcome to Rail Intel! We are delighted to have <strong>Example Rail Co</strong> on board. You're almost ready to depart on your competence management journey but before being dispatched, please complete your onboarding which is an ultimate suite of tools to define your company.</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Your company has been set up and is ready for you to sign in. Use the details below to get started.</p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; display: inline-block;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Company code</p>
+    <p style="margin: 0; font-size: 20px; font-weight: 700; font-family: monospace;">12345</p>
+    <p style="margin: 16px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Temporary password</p>
+    <p style="margin: 0; font-size: 18px; font-weight: 600; font-family: monospace;">TempPass123</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Sign in here: <a href="" style="color: #4f46e5;"></a></p>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">If you experience any issues or need assistance, our dedicated support team is here to help. Simply reply to this email or contact us at <a href="mailto:support@railvault.com" style="color: #4f46e5;">support@railvault.com</a> and we will be happy to assist you.</p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0; color: #64748b;">Thank you for choosing the most advanced rail competency management system available.</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="company_admin_invite" data-comm-subject="Rail Intel — Example Rail Co: your company administrator account is ready"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Company administrator account</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Admin,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    <strong>Example Rail Co</strong> has now been activated on Rail Intel and you have been set up as the <strong>company administrator</strong>
+    for this organisation (your role on record: <strong>Head of Competence</strong>).
+    This message was initiated when onboarding completed.
+  </p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Sign in with your work email (<strong>alex.admin@example.com</strong>), the company code below, and the <strong>temporary password</strong>.
+    Rail Intel will require you to choose a new password on first sign-in before you continue.
+  </p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Company code</p>
+    <p style="margin: 0; font-size: 20px; font-weight: 700; font-family: monospace;">12345</p>
+    <p style="margin: 16px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Temporary password</p>
+    <p style="margin: 0; font-size: 18px; font-weight: 600; font-family: monospace;">AbCdEfGh1234jk</p>
+  </div>
+  <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px 18px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; color: #991b1b;">Security</p>
+    <p style="margin: 0; font-size: 14px; color: #7f1d1d;">
+      This password is for first-time access only. After you sign in you <strong>must</strong> set a new password.
+      Do not forward this email; delete it once you have signed in and changed your password.
+    </p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel and sign in</a></p>
+  <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 16px 18px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; color: #92400e;">After you set your password</p>
+    <p style="margin: 0; font-size: 14px; color: #78350f;">
+      Use <strong>Administration</strong> in the app to complete or confirm company configuration (competency frameworks, grading scale, standards, and related settings)
+      before operational teams rely on assessments and records.
+    </p>
+  </div>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 20px 0;">
+    Nominated during onboarding by <strong>Jamie Onboarding</strong>.
+    Contact: <a href="mailto:jamie.onboarding@example.com" style="color: #4f46e5;">jamie.onboarding@example.com</a>
+  </p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="team_user_invite" data-comm-subject="Welcome to Rail Intel – Your login details for Northern Rail Example"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Your Rail Intel account</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    You have been added as a team user for <strong>Northern Rail Example</strong> on Rail Intel
+    (role title: <strong>Assessing Manager</strong>, access: <strong>Manager</strong>).
+  </p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Sign in with your email (<strong>alex.manager@northernrail.example</strong>), the company code below, and the temporary password.
+    Change your password after first sign-in.
+  </p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; display: inline-block;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Company code</p>
+    <p style="margin: 0; font-size: 20px; font-weight: 700; font-family: monospace;">NR001</p>
+    <p style="margin: 16px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Temporary password</p>
+    <p style="margin: 0; font-size: 18px; font-weight: 600; font-family: monospace;">TempPass123</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="https://cms.railintel.co.uk" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel and sign in</a></p>
+  <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px 18px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; color: #991b1b;">Security</p>
+    <p style="margin: 0; font-size: 14px; color: #7f1d1d;">
+      This password is for first-time access only. Do not forward this email; delete it once you have signed in and changed your password.
+    </p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="password-reset" data-comm-subject="Reset your Rail Intel password"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Reset your password</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jane Smith,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">You requested a password reset for your Rail Intel account. Click the link below to set a new password:</p>
+  <p style="margin: 8px 0 20px 0;">
+    <a href="https://example.com/reset?token=sample" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Reset password</a>
+  </p>
+  <p style="font-size: 15px; margin: 0 0 20px 0; color: #64748b;">If you did not request this, you can ignore this email. The link will expire in 1 hour.</p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="assessment-window-open" data-comm-subject="Assessment Window Open – Route knowledge assessment for Sarah Mitchell"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Assessment Window Open</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">This is a reminder that the assessment window for <strong>Route knowledge assessment</strong> is now open for <strong>Sarah Mitchell</strong> as part of their <strong>Annual competence cycle</strong> cycle.</p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; display: inline-block;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Window open</p>
+    <p style="margin: 0 0 12px; font-size: 16px; font-weight: 600;">1 Sep 2026</p>
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Window close</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 600;">30 Sep 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Please sign in to Rail Intel and complete this assessment before the window closes.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="https://cms.railintel.co.uk" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="assessment-window-closing" data-comm-subject="Assessment Window Closing Soon – Route knowledge assessment for Sarah Mitchell"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Assessment Window Closing Soon</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">This is a reminder that the assessment window for <strong>Route knowledge assessment</strong> for <strong>Sarah Mitchell</strong> (<strong>Annual competence cycle</strong>) is closing in less than 2 weeks.</p>
+  <div style="background: #fef3c7; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; display: inline-block;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #92400e;">Window closing on</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700; color: #92400e;">30 Sep 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Please ensure this assessment is completed before the window closes. Any outstanding criteria will need to be addressed during the Summary Rules event.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="https://cms.railintel.co.uk" style="display: inline-block; padding: 12px 24px; background: #f59e0b; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="continuous-cycle-renewal-approaching" data-comm-subject="Continuous cycle renewal due soon – Annual competence cycle for Sarah Mitchell"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Continuous cycle renewal approaching</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">The continuous competency cycle <strong>Annual competence cycle</strong> for <strong>Sarah Mitchell</strong> expires on <strong>15 Oct 2026</strong> (within 14 days).</p>
+  <div style="background: #eff6ff; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #1e40af;">Checklist before auto-renewal</p>
+    <ul style="margin: 0; padding-left: 20px;"><li>Complete in-cab assessment</li><li>Confirm medical certificate on file</li></ul>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">An open competence development plan will carry forward on renewal.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="https://cms.railintel.co.uk" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+</body>
+</html></template>
+    <template data-comm-email="continuous-cycle-renewal-blocked" data-comm-subject="Continuous cycle cannot renew – Annual competence cycle for Sarah Mitchell"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Continuous cycle renewal blocked</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">The continuous cycle <strong>Annual competence cycle</strong> for <strong>Sarah Mitchell</strong> expired on <strong>15 Oct 2026</strong> and cannot auto-renew.</p>
+  <div style="background: #fef2f2; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #991b1b;">Reasons</p>
+    <ul style="margin: 0; padding-left: 20px;"><li>Missed assessment event</li><li>Medical certificate expired</li></ul>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Please close this cycle and assign a new period when ready. Continuous renewal will not proceed until every assessment event is completed (none missed) and a live medical certificate is in place.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="https://cms.railintel.co.uk" style="display: inline-block; padding: 12px 24px; background: #dc2626; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+</body>
+</html></template>
+    <template data-comm-email="storage-80-warning" data-comm-subject="Storage usage warning for Example Rail Co (82.4% used)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Storage usage warning</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jane Smith,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Your company <strong>Example Rail Co</strong> has reached <strong>82.4%</strong> of its available storage.</p>
+  <div style="background: #fef3c7; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; display: inline-block;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #92400e;">Storage used</p>
+    <p style="margin: 0 0 12px; font-size: 16px; font-weight: 700; color: #92400e;">824 GB</p>
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #92400e;">Storage available</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700; color: #92400e;">1 TB</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">To avoid service interruption, please increase your storage plan from the company dashboard.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open dashboard</a></p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="task_assigned" data-comm-subject="New task assigned: Complete route knowledge refresh"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Task assigned</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Driver,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Alex Manager assigned you a new task in Example Rail Co.</p>
+  <div style="background: #f5f3ff; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #ddd6fe;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6d28d9;">Task</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700;">Complete route knowledge refresh</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Company</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">Example Rail Co <span style="color:#64748b">(12345)</span></p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Due</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">15 Aug 2026</p>
+    <p style="margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">From</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1e293b;">Alex Manager</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #7c3aed; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Open the <strong>Tasks</strong> page from the sidebar after signing in.</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="task_reopened" data-comm-subject="Task reopened: Complete route knowledge refresh"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Task reopened</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Driver,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Alex Manager reopened this task in Example Rail Co. It is open again.</p>
+  <div style="background: #fff7ed; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #fed7aa;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #c2410c;">Task</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700;">Complete route knowledge refresh</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Company</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">Example Rail Co <span style="color:#64748b">(12345)</span></p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Due</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">15 Aug 2026</p>
+    <p style="margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Reopened by</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1e293b;">Alex Manager</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #ea580c; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Open the <strong>Tasks</strong> page from the sidebar after signing in.</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="task_note_added" data-comm-subject="Task update: Complete route knowledge refresh"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Task update</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    <strong>Jamie Driver</strong> added an update to the task <strong>Complete route knowledge refresh</strong> at <strong>Example Rail Co</strong>.
+  </p>
+  <div style="background: #f0f9ff; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #bae6fd;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #0369a1;">Task</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700;">Complete route knowledge refresh</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Updated</p>
+    <p style="margin: 0 0 12px; font-size: 15px; font-weight: 600;">11 Aug 2026, 14:32</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Update from Jamie Driver</p>
+    <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">Completed section A of the workbook. Remaining sections scheduled for tomorrow.</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #0284c7; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Open the <strong>Tasks</strong> page from the sidebar after signing in.</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="fatality-anniversary-7d-reminder" data-comm-subject="Support reminder: one-year anniversary approaching for Jamie Driver (fatality incident)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Fatality incident anniversary reminder</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">This is an advance notice that <strong>Jamie Driver</strong> is <strong>7 day(s)</strong> from the <strong>one-year anniversary</strong> of a recorded <strong>fatality</strong> incident (incident date <strong>15 March 2025</strong>; anniversary <strong>15 March 2026</strong>).</p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; display: inline-block; border-left: 4px solid #64748b;">
+    <p style="margin: 0 0 12px; font-size: 15px;">Anniversaries of this nature can be difficult for drivers. The employee may need additional support around this time.</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Please check in with the driver and ensure appropriate support is in place.</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">If you need to review the incident record or employee profile, sign in to Rail Intel.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Example Rail Co</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="licence-expiry-3m-reminder" data-comm-subject="Licence renewal reminder: Jamie Driver expires 15 November 2026"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Licence expiry — 3 months</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    This is a reminder that the train driving licence for <strong>Jamie Driver</strong> expires on
+    <strong>15 November 2026</strong> (in <strong>75 day(s)</strong>).
+  </p>
+  <div style="background: #fffbeb; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border-left: 4px solid #f59e0b;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #b45309;">Licence details</p>
+    <p style="margin: 0; font-size: 15px;"><strong>Licence number:</strong> TDL-123456</p>
+    <p style="margin: 8px 0 0; font-size: 15px;"><strong>Expiry:</strong> 15 November 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">
+    Please arrange renewal in good time and update the licence details in Rail Intel once the new licence is issued.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0;">Example Rail Co</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="licence-expiry-6w-reminder" data-comm-subject="Urgent: licence for Jamie Driver expires 20 September 2026"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Licence expiry — 6 weeks</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    <strong>Urgent:</strong> the train driving licence for <strong>Jamie Driver</strong> expires on
+    <strong>20 September 2026</strong> (in <strong>28 day(s)</strong>).
+  </p>
+  <div style="background: #fef2f2; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border-left: 4px solid #ef4444;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #b91c1c;">Licence details</p>
+    <p style="margin: 0; font-size: 15px;"><strong>Licence number:</strong> TDL-123456</p>
+    <p style="margin: 8px 0 0; font-size: 15px;"><strong>Expiry:</strong> 20 September 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">
+    Please prioritise renewal and update the licence details in Rail Intel as soon as the renewed licence is available.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0;">Example Rail Co</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="licence-expiry-expired" data-comm-subject="Action required: Jamie Driver licence expired — take off track"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Licence expired</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    The train driving licence for <strong>Jamie Driver</strong> expired on <strong>1 August 2026</strong>
+    and has not been renewed or updated in Rail Intel.
+  </p>
+  <div style="background: #fef2f2; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border-left: 4px solid #dc2626;">
+    <p style="margin: 0 0 12px; font-size: 15px; font-weight: 700; color: #991b1b;">
+      The driver must be taken off track until a valid licence is recorded.
+    </p>
+    <p style="margin: 0; font-size: 15px;"><strong>Licence number:</strong> TDL-123456</p>
+    <p style="margin: 8px 0 0; font-size: 15px;"><strong>Expired:</strong> 1 August 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">
+    Please confirm the driver is not operating and update the licence details in Rail Intel once a valid licence is held.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0;">Example Rail Co</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="task_trial_ending_48h" data-comm-subject="Task module trial ending for Northern Rail Example (30 Sep 2026)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Task trial ending</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    This is a reminder that the <strong>Task assignment</strong> module free trial for <strong>Northern Rail Example</strong>
+    ends on <strong>30 Sep 2026</strong>.
+  </p>
+  <div style="background: #f5f3ff; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #ddd6fe;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6d28d9;">Trial end</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700; color: #1e293b;">30 Sep 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">
+    If you want to keep task assignment access after the trial, subscribe from the
+    <a href="https://cms.railintel.co.uk" style="color: #7c3aed; font-weight: 600;">Addons</a> page.
+  </p>
+  <p style="font-size: 14px; color: #64748b; margin: 0; margin-top: -8px;">
+    If you have already subscribed or the module was changed by your system administrator, you can ignore this email.
+  </p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Rail Intel</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="trainee_driver_trainer_feedback" data-comm-subject="Your trainer has left feedback — Operational Rules — Example Rail Co"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Trainer feedback ready for review</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Trainee,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    <strong>Sam Instructor</strong> has left feedback for you on the training module
+    <strong>Operational Rules</strong> as part of your programme at <strong>Example Rail Co</strong>.
+  </p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Training module</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700;">Operational Rules</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Trainer</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Sam Instructor</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Please sign in to Rail Intel to <strong>review the feedback</strong>, indicate whether you agree,
+    add any comments of your own, and sign off the module.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Review trainer feedback</a></p>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">If you have any questions, please speak to your driving instructor or training manager.</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="trainee_driver_instructor_assigned" data-comm-subject="You have been assigned as driving instructor — Jamie Trainee — Example Rail Co"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Driving instructor assignment</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Sam Instructor,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    You have been assigned as the <strong>driving instructor</strong> for trainee
+    <strong>Jamie Trainee</strong> at <strong>Example Rail Co</strong>.
+  </p>
+  <div style="background: #eef2ff; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #c7d2fe;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #4338ca;">Trainee</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700;">Jamie Trainee</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Training programme</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Train Driver Training Programme</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Assigned by</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Alex Manager</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Please sign in to Rail Intel to review their training record, support their practical driving hours,
+    and leave module feedback when required.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">If you have any questions, please speak to your training manager.</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="trainee_driver_instructor_unassigned" data-comm-subject="You are no longer assigned as driving instructor — Jamie Trainee — Example Rail Co"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Driving instructor assignment ended</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Sam Instructor,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    You are <strong>no longer assigned</strong> as the driving instructor for trainee
+    <strong>Jamie Trainee</strong> at <strong>Example Rail Co</strong>.
+  </p>
+  <div style="background: #fff7ed; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #fed7aa;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #c2410c;">Trainee</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700;">Jamie Trainee</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Now allocated to</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Pat Senior Instructor</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Updated by</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Alex Manager</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Please hand over any <strong>important information or concerns</strong> about this trainee that may be
+    beneficial for continued safe operation — for example progress notes, route or traction issues,
+    behavioural observations, or outstanding actions — to the newly allocated instructor or the training team.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #ea580c; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="trainee_driver_instructor_gap" data-comm-subject="No driving instructor allocated — Jamie Trainee — Example Rail Co"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Instructor allocation gap</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Trainee <strong>Jamie Trainee</strong> at <strong>Example Rail Co</strong> currently has
+    <strong>no driving instructor allocated</strong>.
+  </p>
+  <div style="background: #fef2f2; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #fecaca;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #991b1b;">Unallocated from</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700; color: #991b1b;">15 Aug 2026, 08:55</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Previous instructor</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Sam Instructor</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Cleared by</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Alex Manager</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    As their assessing manager, please check what the trainee was doing during this unallocated period
+    and arrange a driving instructor allocation as soon as practicable.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #dc2626; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="trainee_driver_feedback_reminder" data-comm-subject="Reminder: please review trainer feedback — Operational Rules — Example Rail Co"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Reminder — trainer feedback awaiting your response</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Trainee,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    This is a friendly reminder that <strong>Sam Instructor</strong> left feedback for you on
+    <strong>Operational Rules</strong> at <strong>Example Rail Co</strong>, and we have not yet received your response.
+  </p>
+  <div style="background: #fef3c7; border-radius: 12px; padding: 16px 20px; margin: 8px 0 20px 0; border: 1px solid #fcd34d;">
+    <p style="margin: 0; font-size: 14px; color: #92400e;">
+      Your trainer's feedback has been waiting for <strong>7 days</strong>. Please review and sign off when you can.
+    </p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Sign in to Rail Intel to review the feedback, share your own comments, and complete your sign-off.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Review trainer feedback now</a></p>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">If you need help accessing your training record, please contact your driving instructor or training manager.</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="support-ticket-update" data-comm-subject="Update on your support ticket RV-A1B2C3D4"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Support ticket update</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jane,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    There is an update on your Rail Intel support ticket <strong>RV-A1B2C3D4</strong>
+    (<strong>Unable to upload assessment evidence</strong>).
+  </p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Current status</p>
+    <p style="margin: 0 0 12px; font-size: 16px; font-weight: 600;">closed</p>
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Update</p>
+    <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">Your support ticket has been closed.</p>
+  </div>
+  <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:20px;margin:8px 0 20px 0;"><p style="margin:0;font-size:15px;color:#78350f;">Review links appear here when a ticket is closed.</p></div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Sign in to Rail Intel and open Help &amp; Support to view the full ticket history or reply.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel</a></p>
+  <p style="font-size: 15px; margin: 0 0 0 0;">Best regards,<br/>Rail Intel Support</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="trainee_driver_welcome" data-comm-subject="Welcome to your driver training programme — Example Rail Co"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Welcome to your driver training programme</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Trainee,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Welcome aboard! You have been set up as a <strong>trainee driver</strong> at <strong>Example Rail Co</strong> and
+    your driver training programme is now live on Rail Intel.
+  </p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Your training schedule is <strong>Train Driver Training Programme</strong>. You will progress through your training modules
+    (typically Personal Track Safety, Operational Rules, Traction and Principles of Route Learning), build up your
+    minimum trainee driving hours with your allocated driving instructor, and complete assessments along the way.
+  </p>
+  <div style="background: #f1f5f9; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Your training programme</p>
+    <p style="margin: 0; font-size: 16px; font-weight: 700;">Train Driver Training Programme</p>
+    <p style="margin: 12px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Driving instructor</p>
+    <p style="margin: 0; font-size: 15px; font-weight: 600;">Sam Instructor</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Throughout your training you will be asked to <strong>review and sign off trainer feedback</strong> at the end of
+    each module and add any feedback of your own. Please sign in regularly to keep on top of your development.
+  </p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel and sign in</a></p>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">If you have any questions, please speak to your training manager or driving instructor.</p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="leave_request_submitted" data-comm-subject="Leave request awaiting decision — Jamie Driver (Annual leave)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Leave request submitted</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    <strong>Jamie Driver</strong> has submitted a <strong>Annual leave</strong> request that requires your decision.
+  </p>
+  <div style="background: #fffbeb; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #fcd34d;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #b45309;">Request</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700;">Annual leave</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Dates</p>
+    <p style="margin: 0 0 12px; font-size: 15px; font-weight: 600;">2026-08-01 → 2026-08-05</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Duration</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">5 days</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Reason / notes</p>
+    <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">Family holiday</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Sign in to Rail Intel and open <strong>Leave &amp; Absence</strong> to approve or reject this request.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #d97706; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Review leave request</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Example Rail Co</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="leave_request_decision" data-comm-subject="Leave request approved — Annual leave (2026-08-01 → 2026-08-05)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Leave request decision</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Driver,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Your <strong>Annual leave</strong> request for <strong>2026-08-01 → 2026-08-05</strong> has been
+    <strong>approved</strong> by Alex Manager.
+  </p>
+  <div style="background: #ecfdf5; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #a7f3d0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #047857;">Decision</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700; color: #047857;">approved</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Duration</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">5 days</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Manager notes</p>
+    <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">Approved — enjoy your break.</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Leave &amp; Absence</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Example Rail Co</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="leave_request_awarded_back" data-comm-subject="Holiday leave awarded back — Holiday leave (2026-08-01 → 2026-08-05)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Leave awarded back</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Driver,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    Your manager has awarded back your <strong>Holiday leave</strong> for <strong>2026-08-01 → 2026-08-05</strong>.
+    These days have been returned to your remaining holiday balance.
+  </p>
+  <div style="background: #ecfdf5; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #a7f3d0;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #047857;">Awarded back</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700; color: #047857;">5 days</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Actioned by</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">Alex Manager</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Notes</p>
+    <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">Cover no longer required — days returned to balance.</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Leave &amp; Absence</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Example Rail Co</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="leave_request_cancelled" data-comm-subject="Leave request cancelled — Jamie Driver (Holiday leave)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Leave request cancelled</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    <strong>Jamie Driver</strong> has cancelled their <strong>Holiday leave</strong> request.
+  </p>
+  <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #cbd5e1;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Cancelled request</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700;">Holiday leave</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Dates</p>
+    <p style="margin: 0 0 12px; font-size: 15px; font-weight: 600;">2026-08-01 → 2026-08-05</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Duration</p>
+    <p style="margin: 0 0 12px; font-size: 15px;">5 days</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Previous status</p>
+    <p style="margin: 0; font-size: 15px;">pending</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">No further action is required unless you need to update cover arrangements.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #d97706; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Leave &amp; Absence</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">Example Rail Co</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="employee-note-message" data-comm-subject="New message on Sam Driver — Employee Messaging &amp; Notes"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>New employee message</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Alex Manager,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Sam Driver posted a message on Sam Driver's Employee Messaging & Notes.</p>
+  <div style="background: #f8fafc; border-left: 4px solid #4f46e5; border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 8px 0 20px 0;">
+    <p style="margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Message preview</p>
+    <p style="margin: 0; font-size: 14px; white-space: pre-wrap; color: #334155;">Thanks for the update — I'll complete the assessment this week.</p>
+  </div>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open conversation</a></p>
+  <p style="font-size: 13px; color: #64748b; margin: 0 0 12px 0;">Sign in to Rail Intel and open this employee's Employee Messaging &amp; Notes tab to reply.</p>
+  <p style="font-size: 14px; color: #64748b; margin: 0;">Example Rail Co</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="performance_support_plan_signature_required" data-comm-subject="Signature required — Route knowledge support plan (Example Rail Co)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Support plan signature required</title></head>
+<body style="font-family: system-ui, sans-serif; margin: 0; padding: 24px 32px; color: #1e293b; line-height: 1.6;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 20px 0;">Hello Jamie Trainee,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    A <strong>Performance &amp; Support plan</strong> has been raised for <strong>Jamie Trainee</strong> at
+    <strong>Example Rail Co</strong> and requires your <strong>trainee</strong> signature.
+  </p>
+  <div style="background: #eef2ff; border-radius: 12px; padding: 20px; margin: 8px 0 20px 0; border: 1px solid #c7d2fe;">
+    <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #4338ca;">Plan</p>
+    <p style="margin: 0 0 12px; font-size: 18px; font-weight: 700;">Route knowledge support plan</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Raised by</p>
+    <p style="margin: 0 0 12px; font-size: 15px; font-weight: 600;">Sam Instructor</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Reason</p>
+    <p style="margin: 0 0 12px; font-size: 15px; white-space: pre-wrap;">Behind on route learning hours</p>
+    <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b;">Review date</p>
+    <p style="margin: 0; font-size: 15px;">27 Aug 2026</p>
+  </div>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Please sign in to Rail Intel to review this plan, add any comments, and provide your trainee acknowledgement signature.</p>
+  <p style="margin: 8px 0 20px 0;"><a href="" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Open Rail Intel and sign</a></p>
+  <p style="font-size: 14px; color: #64748b; margin: 0 0 0 0;">
+    Open the trainee's profile, then the <strong>Monitoring</strong> tab, and complete your signature on this plan.
+  </p>
+  <p style="font-size: 15px; margin: 20px 0 0 0;">Best regards,<br/>Example Rail Co Training Team</p>
+  <div style="background: #4f46e5; margin: 32px -32px 0 -32px; padding: 20px 32px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    <template data-comm-email="digital_cab_pass_issued" data-comm-subject="Your digital driving cab pass — Green — Authorised to Assess (12345678)"><!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Digital cab pass</title></head>
+<body style="font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 24px 20px; color: #1e293b; line-height: 1.6; background: #f8fafc;"><table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;"><tr><td style="vertical-align: top; padding-right: 20px;"><img src="https://railintel.co.uk/images/rail-intel-icon.png" alt="Rail Intel" width="72" height="72" style="height: 72px; width: 72px; display: block; object-fit: contain; border: 0;" /></td><td style="vertical-align: top;"><p style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0 0 2px 0; line-height: 1.3;">Rail Intel Competency Management System</p><p style="font-size: 11px; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">BY RAILINTEL.CO.UK</p></td></tr></table>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">Hello Jamie Driver,</p>
+  <p style="font-size: 15px; margin: 0 0 16px 0;">
+    A <strong>digital driving cab pass</strong> has been issued to you by <strong>Example Rail Co</strong>.
+    Your pass is shown below (front and reverse). Keep this email for your records.
+  </p>
+  <div style="margin:8px 0 20px 0;">
+  <p style="margin:0 0 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;">Front of pass</p>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:360px;border-collapse:collapse;background:#15803d;border:1px solid rgba(0,0,0,.25);border-radius:6px;">
+    <tr><td style="padding:14px;color:#fff;font-weight:800;font-size:14px;">DRIVING CAB PASS<br/><span style="font-size:11px;font-weight:700;">{"Authorised to Assess"}</span></td></tr>
+    <tr><td style="padding:0 10px 12px;"><div style="background:#fff;border:1px solid #cbd5e1;padding:12px;font-size:12px;color:#0f172a;">
+      <div><strong>Name:</strong> Jamie Driver</div>
+      <div><strong>Pass no:</strong> 12345678</div>
+      <div><strong>Routes:</strong> All mainline routes</div>
+      <div style="margin-top:8px;color:#64748b;font-size:11px;">[Photo + QR appear here in the real email]</div>
+    </div></td></tr>
+  </table>
+  <p style="margin:16px 0 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;">Reverse of pass</p>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:360px;border-collapse:collapse;background:#ffffff;border:1px solid rgba(0,0,0,.25);border-radius:6px;">
+    <tr><td style="padding:12px 14px;font-size:12px;color:#0f172a;">
+      <div style="text-align:center;font-weight:700;text-transform:uppercase;color:#475569;margin-bottom:8px;">Conditions of use</div>
+      <ul style="margin:0;padding-left:18px;line-height:1.45;">
+        <li style="margin-bottom:6px;">Show this pass to the driver before entering the cab.</li>
+        <li>Use only when necessary for duties; remains property of the issuer.</li>
+      </ul>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid #e2e8f0;font-weight:600;color:#475569;">ID NO: <span style="color:#000;">DRV001</span></div>
+    </td></tr>
+  </table>
+</div>
+  <p style="font-size: 14px; margin: 0 0 12px 0; color: #475569;">You can also open the interactive digital pass online (no sign-in required):</p>
+  <p style="margin: 0 0 20px 0;"><a href="https://example.com/api/public/cab-pass-verify?s=sample" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600;">Open digital cab pass</a></p>
+  <p style="font-size: 13px; color: #64748b; margin: 0 0 16px 0; word-break: break-all;">https://example.com/api/public/cab-pass-verify?s=sample</p>
+  <p style="font-size: 14px; color: #64748b; margin: 0;">Example Rail Co</p>
+  <div style="background: #4f46e5; margin: 32px -20px 0 -20px; padding: 20px; text-align: center;">
+    <p style="font-size: 13px; color: #ffffff; margin: 0; font-style: italic;">The ultimate rail competency management system — designed by a safety-critical rail professional.</p>
+  </div>
+</body>
+</html></template>
+    </section>
+
+    <section class="page-section comm-hub-section comm-hub-section--notify">
+      <div class="container comm-hub-section__grid">
+        <div class="comm-hub-section__copy">
+          <p class="product-eyebrow">Email and system notifications</p>
+          <h2>The same event reaches the inbox and the dashboard</h2>
+          <p>Conditional rules across competency, medicals, licensing, incidents, monitoring and messaging drive both email alerts and in-app system notifications. Managers see items on the dashboard feed; employees see them on their record where permissions allow — nothing depends on an inbox alone.</p>
           <ul class="spec-list">
-            <li><strong>Competency and cycle expiry</strong> alerts before someone reaches the railway out of date.</li>
+            <li><strong>Competency and cycle expiry</strong> before someone reaches the railway out of date.</li>
             <li><strong>Medical and licence renewal</strong> reminders on the dashboard and by email.</li>
-            <li><strong>Incident and monitoring follow-up</strong> when a rule requires action or welfare contact.</li>
-            <li><strong>In-app system notifications</strong> alongside email, so nothing depends on an inbox alone.</li>
+            <li><strong>Incident and monitoring follow-up</strong> when welfare contact or action is required.</li>
+            <li><strong>Tasks, leave, cab passes and messaging</strong> with matching in-app alerts.</li>
           </ul>
         </div>
-
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 490px">
-          <div class="shot__frame">
-            <img src="../images/screens/messaging-employee/email-notify-new-message.png?v=221738548" alt="Automated email when a new on-record message is raised." width="490" height="253" loading="lazy" decoding="async" />
+        <div class="comm-hub-notify-feed" aria-label="Sample in-app notification feed">
+          <div class="comm-hub-notify-feed__chrome">
+            <span class="comm-hub-notify-feed__bell" aria-hidden="true"></span>
+            <span>System notifications</span>
+            <span class="comm-hub-notify-feed__badge">5</span>
           </div>
-          <figcaption class="shot__caption">Automated email when a new on-record message is raised.</figcaption>
-        </figure>
-      </div>
-
+          <div class="comm-hub-notify-feed__list">
+            <article class="comm-hub-notify comm-hub-notify--violet">
+              <div class="comm-hub-notify__icon" aria-hidden="true"></div>
+              <div class="comm-hub-notify__copy">
+                <h3>Task assigned to you</h3>
+                <p>Complete route knowledge refresh — due 15 Oct 2026</p>
+                <p class="comm-hub-notify__meta">Task assignment · Just now</p>
+              </div>
+            </article>
+            <article class="comm-hub-notify comm-hub-notify--amber">
+              <div class="comm-hub-notify__icon" aria-hidden="true"></div>
+              <div class="comm-hub-notify__copy">
+                <h3>Leave request awaiting decision</h3>
+                <p>Sarah Mitchell — annual leave 1–5 Aug 2026</p>
+                <p class="comm-hub-notify__meta">Leave &amp; Absence · 2 min ago</p>
+              </div>
+            </article>
+            <article class="comm-hub-notify comm-hub-notify--sky">
+              <div class="comm-hub-notify__icon" aria-hidden="true"></div>
+              <div class="comm-hub-notify__copy">
+                <h3>Assessment window closing soon</h3>
+                <p>Route knowledge for Sarah Mitchell closes 30 Sep 2026</p>
+                <p class="comm-hub-notify__meta">Competency cycle · 1 hour ago</p>
+              </div>
+            </article>
+            <article class="comm-hub-notify comm-hub-notify--rose">
+              <div class="comm-hub-notify__icon" aria-hidden="true"></div>
+              <div class="comm-hub-notify__copy">
+                <h3>Licence expired — action required</h3>
+                <p>Sarah Mitchell must be taken off track until licence renewed</p>
+                <p class="comm-hub-notify__meta">Medicals &amp; licensing · Today</p>
+              </div>
+            </article>
+            <article class="comm-hub-notify comm-hub-notify--indigo">
+              <div class="comm-hub-notify__icon" aria-hidden="true"></div>
+              <div class="comm-hub-notify__copy">
+                <h3>New on-record message</h3>
+                <p>Sarah Mitchell posted on Employee Messaging &amp; Notes</p>
+                <p class="comm-hub-notify__meta">Messaging · Yesterday</p>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section comm-hub-section comm-hub-section--schedule">
       <div class="container">
         <div class="page-section__head">
-          <h2>On-record messaging with email alerts</h2>
-          <p>Conversations about competence, medicals or incidents stay on the employee record — not in a personal Outlook thread with no audit trail. When someone raises a note or message, the communications hub notifies the right recipients by email so the exchange is seen without anyone living in the CMS.</p>
-
+          <p class="product-eyebrow">Scheduled alerts</p>
+          <h2>Time-based rules that run without anyone watching a calendar</h2>
+          <p>Rail Intel's scheduler evaluates competence cycles, licence dates, continuous renewals and welfare milestones daily. When criteria match, the communications hub sends the right template — by email and as a system notification.</p>
         </div>
-
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 781px">
-          <div class="shot__frame">
-            <img src="../images/screens/messaging-employee/employee-messaging.png?v=221738548" alt="Messaging threads held against the employee record." width="781" height="490" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Messaging threads held against the employee record.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 490px">
-          <div class="shot__frame">
-            <img src="../images/screens/messaging-employee/email-notify-new-message.png?v=221738548" alt="Email notification when a new message is raised." width="490" height="253" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Email notification when a new message is raised.</figcaption>
-        </figure>
-      </div>
-
+        <div class="comm-hub-schedule-grid">
+          <article class="comm-hub-schedule-card">
+            <h3>Assessment windows</h3>
+            <p>Open and closing reminders for scheduled cycle events — emailed to assessing managers with window dates.</p>
+            <ul class="comm-hub-schedule-card__templates"><li><button type="button" data-comm-jump="assessment-window-open">Assessment window open</button></li><li><button type="button" data-comm-jump="assessment-window-closing">Assessment window closing soon</button></li></ul>
+          </article>
+          <article class="comm-hub-schedule-card">
+            <h3>Continuous cycle renewal</h3>
+            <p>14-day approaching notice with checklist, or blocked renewal when events are missed or medicals lapse.</p>
+            <ul class="comm-hub-schedule-card__templates"><li><button type="button" data-comm-jump="continuous-cycle-renewal-approaching">Continuous cycle renewal approaching</button></li><li><button type="button" data-comm-jump="continuous-cycle-renewal-blocked">Continuous cycle renewal blocked</button></li></ul>
+          </article>
+          <article class="comm-hub-schedule-card">
+            <h3>Train driving licence</h3>
+            <p>3-month and 6-week renewal reminders, plus expired licence action when someone must come off track.</p>
+            <ul class="comm-hub-schedule-card__templates"><li><button type="button" data-comm-jump="licence-expiry-3m-reminder">Licence expiry — 3 months</button></li><li><button type="button" data-comm-jump="licence-expiry-6w-reminder">Licence expiry — 6 weeks (urgent)</button></li><li><button type="button" data-comm-jump="licence-expiry-expired">Licence expired — take off track</button></li></ul>
+          </article>
+          <article class="comm-hub-schedule-card">
+            <h3>Welfare &amp; monitoring</h3>
+            <p>Fatality anniversary support reminder seven days ahead, and trainee feedback chasers after seven days.</p>
+            <ul class="comm-hub-schedule-card__templates"><li><button type="button" data-comm-jump="fatality-anniversary-7d-reminder">Fatality incident — 7 days before anniversary</button></li><li><button type="button" data-comm-jump="trainee_driver_feedback_reminder">Trainee — feedback reminder (7 days)</button></li></ul>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Transactional messages your operation controls</h2>
-          <p>Automated does not mean generic. Email templates for cab passes, assessments, incidents and operational events are configured in Administration, so your operation owns the wording while Rail Intel owns the timing and the rules that trigger each send.</p>
-
+    <section class="page-section comm-hub-section comm-hub-section--messaging">
+      <div class="container comm-hub-section__grid comm-hub-section__grid--reverse">
+        <div class="comm-hub-section__copy">
+          <p class="product-eyebrow">On-record messaging</p>
+          <h2>Conversations stay on the employee record — with email alerts</h2>
+          <p>Notes about competence, medicals or incidents remain auditable on the profile, not buried in personal Outlook threads. When someone raises a message, the hub notifies the right recipients by email so the exchange is seen without anyone living in the CMS.</p>
         </div>
-
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 217px">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png?v=221738548" alt="A cab pass issued by email — one example of a rule-triggered transactional message." width="217" height="145" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">A cab pass issued by email — one example of a rule-triggered transactional message.</figcaption>
-        </figure>
-      </div>
-
+        <div class="comm-hub-shots">
+          <figure class="shot reveal">
+            <div class="shot__frame">
+              <img src="../images/screens/messaging-employee/employee-messaging.png" alt="Messaging threads held against the employee record." width="781" height="490" loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="shot__caption">Messaging threads on the employee record.</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
+
+    <section class="page-section comm-hub-section comm-hub-section--admin">
+      <div class="container comm-hub-section__grid">
+        <div class="comm-hub-section__copy">
+          <p class="product-eyebrow">Your operation controls the wording</p>
+          <h2>Automated does not mean generic</h2>
+          <p>Company administrators configure email templates in Administration — cab passes, assessments, incidents, leave, tasks and operational events. Rail Intel owns the timing and the rules; you own the voice and branding.</p>
+          <p class="comm-hub-admin-note">System templates cover scheduled compliance alerts; company-overridable templates include welcome messages, cab pass delivery, leave workflows, trainee communications and on-record messaging.</p>
+        </div>
+        <figure class="shot reveal">
+          <div class="shot__frame">
+            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Digital cab pass issued by email — one example of a configurable transactional template." width="433" height="289" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="shot__caption">Cab pass issued by email — configurable per company.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+
 
     <section class="page-section">
       <div class="container">
@@ -461,7 +1606,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=221738548"></script>
-  <script src="../js/newsletter.js?v=221738548"></script>
+  <script src="../js/site.js?v=115973760"></script>
+  <script src="../js/newsletter.js?v=115973760"></script>
+  <script src="../js/communications-hub.js?v=115973760"></script>
 </body>
 </html>

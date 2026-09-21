@@ -28,6 +28,7 @@ import {
 import { mergeItemSeo } from "../content/seo-extensions.mjs";
 import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
+import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../content/communications-hub.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -46,6 +47,9 @@ const ASSET_INPUTS = [
   "js/invoice.js",
   "css/profile-flipbook.css",
   "js/profile-flipbook.js",
+  "css/communications-hub.css",
+  "js/communications-hub.js",
+  "content/email-templates.generated.mjs",
 ];
 
 function computeAssetVersion() {
@@ -2448,7 +2452,9 @@ function featurePage(group) {
       ? `\n${tunnelDemo(base, { link: false })}\n`
       : group.slug === "printable-profile"
         ? `\n${renderProfileFlipbookSection(base)}\n`
-        : "\n";
+        : group.slug === "communications-hub"
+          ? `\n${renderCommunicationsHubPage(base)}\n`
+          : "\n";
 
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
     group.name
@@ -2463,8 +2469,10 @@ ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
     group.heroGraphic === "medicals-licensing" ? renderMedicalsLicensingHeroGraphic(base) : "";
   const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
-    : heroGraphic || heroRegulators;
-  const hasHeroMedia = Boolean(group.heroShot || group.heroGraphic || group.heroRegulators);
+    : group.slug === "communications-hub"
+      ? renderCommunicationsHubHero()
+      : heroGraphic || heroRegulators;
+  const hasHeroMedia = Boolean(group.heroShot || group.heroGraphic || group.heroRegulators || group.slug === "communications-hub");
 
   const tunnelHero = group.slug === "tunnel-mode";
   const medicalsLicensingHero = group.heroGraphic === "medicals-licensing";
@@ -2483,20 +2491,33 @@ ${heroCopy}
 
   const pageSeo = featureSeo(group);
   const flipbookPage = group.slug === "printable-profile";
-  const headOptions = flipbookPage ? { extraStylesheets: ["css/profile-flipbook.css"] } : {};
-  const footerOptions = flipbookPage ? { extraScripts: ["js/profile-flipbook.js"] } : {};
+  const commHubPage = group.slug === "communications-hub";
+  const headOptions = flipbookPage
+    ? { extraStylesheets: ["css/profile-flipbook.css"] }
+    : commHubPage
+      ? { extraStylesheets: ["css/communications-hub.css"] }
+      : {};
+  const footerOptions = flipbookPage
+    ? { extraScripts: ["js/profile-flipbook.js"] }
+    : commHubPage
+      ? { extraScripts: ["js/communications-hub.js"] }
+      : {};
 
   return (
     renderHead(base, pageSeo, headOptions) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}">
       <div class="container">
 ${heroInner}
       </div>
     </section>
 ${demo}
-${group.sections.map((section) => renderSection(section, base)).join("\n\n")}
+${
+  commHubPage
+    ? ""
+    : group.sections.map((section) => renderSection(section, base)).join("\n\n")
+}
 
 ${
   group.hideCta
