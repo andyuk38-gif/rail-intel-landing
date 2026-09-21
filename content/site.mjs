@@ -1538,8 +1538,8 @@ export const featureGroups = [
           title: "Permissions by role",
           subtitle: "Organisation settings · Granular control",
           body: [
-            "Monitoring and CDPs are core Rail Intel — not an add-on — but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.",
-            "Administrators configure roles in Organisation settings. Each role gets exactly the access your operation requires — no more, no less.",
+            "Monitoring and CDPs are core Rail Intel, not an add-on, but who can view or change them is controlled by company role permissions, the same model used across the rest of CMS.",
+            "Administrators configure roles in Organisation settings. Each role gets exactly the access your operation requires, no more, no less.",
           ],
           roles: [
             { name: "Assessor", detail: "Raise and update plans for people they assess." },

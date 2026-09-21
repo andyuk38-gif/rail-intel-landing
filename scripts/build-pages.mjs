@@ -2005,8 +2005,10 @@ ${chapter.shots.map((shot) => cdpShotFigure(shot, base)).join("\n")}
               </div>`
         : "";
 
-    return `              <div class="cdp-roles" data-cdp-roles role="list" aria-label="Role access">
+    return `              <div class="cdp-roles-pane">
+                <div class="cdp-roles" data-cdp-roles role="list" aria-label="Role access">
 ${roles}
+                </div>
               </div>
 ${shotBlock}`;
   }

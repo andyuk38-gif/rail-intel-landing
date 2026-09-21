@@ -6814,11 +6814,29 @@ body.lightbox-open {
   padding: 0.5rem;
 }
 
+.cdp-roles-pane {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    rgba(0, 0, 0, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 14px 36px rgba(0, 0, 0, 0.32);
+}
+
+.cdp-roles-pane + .cdp-chapter__shots--full,
+.cdp-roles-pane + .cdp-chapter__shots--pair,
+.cdp-roles-pane + .cdp-chapter__shots--stack {
+  margin-top: 0.5rem;
+}
+
 .cdp-roles {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.65rem;
-  margin-bottom: 1rem;
 }
 
 .cdp-role {
