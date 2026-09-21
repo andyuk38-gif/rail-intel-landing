@@ -1989,10 +1989,10 @@ ${panels}
   if (chapter.roles?.length) {
     const roles = chapter.roles
       .map(
-        (role, roleIndex) => `                <button type="button" class="cdp-role" data-cdp-role="${roleIndex}" aria-pressed="${roleIndex === 0 ? "true" : "false"}">
-                  <span class="cdp-role__name">${esc(role.name)}</span>
-                  <span class="cdp-role__detail">${esc(role.detail)}</span>
-                </button>`
+        (role) => `                <article class="cdp-role" role="listitem">
+                  <h3 class="cdp-role__name">${esc(role.name)}</h3>
+                  <p class="cdp-role__detail">${esc(role.detail)}</p>
+                </article>`
       )
       .join("\n");
     const shotBlock = chapter.shot
@@ -2006,7 +2006,7 @@ ${chapter.shots.map((shot) => cdpShotFigure(shot, base)).join("\n")}
         : "";
 
     return `              <div class="cdp-roles-pane">
-                <div class="cdp-roles" data-cdp-roles role="list" aria-label="Role access">
+                <div class="cdp-roles" role="list" aria-label="Role access">
 ${roles}
                 </div>
               </div>

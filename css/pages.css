@@ -6848,30 +6848,20 @@ body.lightbox-open {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(0, 0, 0, 0.22);
   text-align: left;
-  cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
 }
 
 .cdp-role__name {
+  margin: 0;
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--text);
 }
 
 .cdp-role__detail {
+  margin: 0;
   font-size: 0.8125rem;
   line-height: 1.4;
   color: var(--text-muted);
-}
-
-.cdp-role.is-active,
-.cdp-role[aria-pressed="true"] {
-  border-color: color-mix(in srgb, var(--cdp-accent) 45%, transparent);
-  background: color-mix(in srgb, var(--cdp-accent) 10%, rgba(0, 0, 0, 0.22));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cdp-accent) 18%, transparent);
 }
 
 .cdp-chapter__shots--pair {

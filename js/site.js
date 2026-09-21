@@ -2935,20 +2935,6 @@
       });
     });
 
-    Array.prototype.forEach.call(command.querySelectorAll("[data-cdp-roles]"), function (roles) {
-      var buttons = Array.prototype.slice.call(roles.querySelectorAll("[data-cdp-role]"));
-      buttons.forEach(function (button) {
-        button.addEventListener("click", function () {
-          buttons.forEach(function (item) {
-            item.classList.remove("is-active");
-            item.setAttribute("aria-pressed", "false");
-          });
-          button.classList.add("is-active");
-          button.setAttribute("aria-pressed", "true");
-        });
-      });
-    });
-
     sync(0);
   });
 })();
