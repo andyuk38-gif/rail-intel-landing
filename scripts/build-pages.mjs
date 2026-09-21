@@ -969,7 +969,7 @@ function bulletsToTiles(bullets) {
 
 const SPEC_TILE_ACCENTS = ["#38bdf8", "#f59e0b", "#34d399", "#a78bfa"];
 
-function renderSpecTileList(items, indent = "          ", { stacked = false } = {}) {
+function renderSpecTileList(items, indent = "          ", { stacked = false, inlineHead = false } = {}) {
   if (!items.length) return "";
 
   const inner = `${indent}  `;
@@ -981,11 +981,16 @@ function renderSpecTileList(items, indent = "          ", { stacked = false } = 
       const step = item.step || String(index + 1).padStart(2, "0");
       const title = item.title || "";
       const bodyClass = title ? "" : " spec-tile--body";
-      const titleHtml = title
-        ? `\n${inner}  <h3 class="spec-tile__title">${esc(title)}</h3>`
-        : "";
-      return `${inner}<article class="spec-tile${bodyClass}" style="--spec-tile-accent: ${esc(accent)}" role="listitem">
-${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>${titleHtml}
+      const headHtml = title
+        ? inlineHead
+          ? `\n${inner}  <div class="spec-tile__head">
+${inner}    <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
+${inner}    <h3 class="spec-tile__title">${esc(title)}</h3>
+${inner}  </div>`
+          : `\n${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>
+${inner}  <h3 class="spec-tile__title">${esc(title)}</h3>`
+        : `\n${inner}  <span class="spec-tile__index" aria-hidden="true">${esc(step)}</span>`;
+      return `${inner}<article class="spec-tile${bodyClass}" style="--spec-tile-accent: ${esc(accent)}" role="listitem">${headHtml}
 ${inner}  <p class="spec-tile__detail">${rich(item.detail || "")}</p>
 ${inner}</article>`;
     })
@@ -2026,7 +2031,10 @@ ${tiles}`;
     }
 
     if (chapter.shotLayout === "split-tiles") {
-      const tiles = renderSpecTileList(bulletsToTiles(chapter.bullets), "                ", { stacked: true });
+      const tiles = renderSpecTileList(bulletsToTiles(chapter.bullets), "                ", {
+        stacked: true,
+        inlineHead: true,
+      });
       const caption = chapter.shot?.caption
         ? `\n                <p class="shot__caption cdp-chapter__split-caption">${esc(chapter.shot.caption)}</p>`
         : "";
