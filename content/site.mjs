@@ -1755,10 +1755,10 @@ export const featureGroups = [
           "The reporting dashboard covers incidents, monitoring, medicals and competencies with totals, trends over time and breakdowns by type and role. Where add-on modules are active, safety-brief coverage and QA compliance rates appear alongside them.",
         ],
         bullets: [
-          "**Live counts** for on-track, off-track, overdue and due-soon.",
-          "**Incident trends** over time and by type.",
-          "**Medical and competency expiry** windows.",
-          "**Add-on aware**, safety-brief and QA verification metrics appear when those modules are active.",
+          "**Live counts** for on-track, off-track, overdue and due-soon — updated from live record data, not a spreadsheet export.",
+          "**Incident trends** charted over time and broken down by type, so clusters and repeats stand out in safety reviews.",
+          "**Medical and competency expiry** windows surface renewals before they lapse — by period, role and status.",
+          "**Add-on aware** Safety-brief and QA verification metrics appear when those modules are active.",
         ],
         shots: [
           {
@@ -1768,6 +1768,7 @@ export const featureGroups = [
             scale: 1,
             full: true,
             eager: true,
+            noExpand: true,
           },
         ],
       },
