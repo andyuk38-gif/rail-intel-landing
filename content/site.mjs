@@ -1772,6 +1772,34 @@ export const featureGroups = [
           },
         ],
       },
+      {
+        heading: "Live compliance overview",
+        fullWidth: true,
+        bulletTiles: true,
+        body: [
+          "The reporting home screen combines company-wide compliance counts with personal action items and team-level QA results. Three panes answer different questions from the same live record data — without exporting to a spreadsheet.",
+        ],
+        tiles: [
+          {
+            title: "Compliance overview",
+            detail:
+              "Live counts from company records — on track, off track, overdue assessments, medical expiry, renewals due, medication follow-ups and open tasks in one view.",
+            accent: "#38bdf8",
+          },
+          {
+            title: "My progress",
+            detail:
+              "Your personal messages, tasks, approvals and reminders in one place — see what needs your action without opening each record.",
+            accent: "#34d399",
+          },
+          {
+            title: "Your team's compliance",
+            detail:
+              "Live QA verification results per employee with review and advisory breakdowns, so managers can see who needs follow-up and open a verification run directly.",
+            accent: "#f59e0b",
+          },
+        ],
+      },
     ],
   },
 
