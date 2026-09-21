@@ -460,6 +460,20 @@
   color: #64748b;
 }
 
+.comm-hub-mail__pane--primary .comm-hub-mail__stage {
+  opacity: 1;
+  filter: none;
+}
+
+.comm-hub-mail__pane--secondary .comm-hub-mail__stage {
+  opacity: 0.82;
+  filter: saturate(0.88) brightness(0.97);
+  transition: opacity 0.42s ease, filter 0.42s ease, box-shadow 0.42s ease;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 0 0 1px rgba(148, 163, 184, 0.12);
+}
+
 .comm-hub-mail__stage {
   position: relative;
   min-width: 0;
@@ -989,6 +1003,7 @@
   }
 
   .comm-hub-mail__duo,
+  .comm-hub-mail__pane--secondary .comm-hub-mail__stage,
   .comm-hub-console__title,
   .comm-hub-console__subject,
   .comm-hub-mail__viewport,
