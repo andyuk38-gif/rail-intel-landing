@@ -54,10 +54,10 @@
   var hasLoadedPreview = false;
   var currentTemplateKey = null;
   var SLIDE_MS = 420;
-  var HANDOFF_LIFT_MS = 480;
-  var HANDOFF_TRAVEL_MS = 780;
-  var HANDOFF_SETTLE_MS = 560;
-  var SECONDARY_IN_MS = 1600;
+  var HANDOFF_LIFT_MS = 450;
+  var HANDOFF_TRAVEL_MS = 720;
+  var HANDOFF_SETTLE_MS = 520;
+  var SECONDARY_IN_MS = 2800;
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   root.style.setProperty("--comm-rotate-ms", ROTATE_MS + "ms");
@@ -247,6 +247,16 @@
     return index === wrapIndex(previousIndex + 1);
   }
 
+  function syncHandoffTravelDistance() {
+    if (!duo) return;
+    var primaryPane = duo.querySelector(".comm-hub-mail__pane--primary");
+    var secondaryPane = duo.querySelector(".comm-hub-mail__pane--secondary");
+    if (!primaryPane || !secondaryPane) return;
+
+    var distance = primaryPane.offsetLeft - secondaryPane.offsetLeft;
+    duo.style.setProperty("--comm-handoff-travel-x", distance + "px");
+  }
+
   function loadFrameContent(frameEl, stageEl, html, done) {
     if (!frameEl) {
       if (done) done();
@@ -319,6 +329,7 @@
 
     if (consoleEl) consoleEl.classList.add("is-changing");
     clearHandoffClasses();
+    syncHandoffTravelDistance();
 
     after(40, function () {
       duo.classList.add("is-handoff-phase-lift");
@@ -345,7 +356,7 @@
                   void duo.offsetWidth;
                   duo.classList.add("is-handoff-secondary-enter-active");
 
-                  waitPaneTransition(secondaryPane, SECONDARY_IN_MS + 120, function () {
+                  waitPaneTransition(secondaryPane, SECONDARY_IN_MS + 150, function () {
                     clearHandoffClasses();
                     updateAllFrameOverflow();
                     finishFrameChange(done);
