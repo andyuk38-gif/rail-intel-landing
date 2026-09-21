@@ -414,6 +414,11 @@ export const seoExtensions = {
         answer:
           "Yes. Reporting and the administration configuration behind it are part of core Rail Intel, not a separate analytics product.",
       },
+      {
+        question: "Is QA verification reporting included in core CMS?",
+        answer:
+          "No. The team compliance and QA verification metrics on the reporting dashboard come from the QA Verifications add-on module, which is purchased separately from core Rail Intel.",
+      },
     ],
     relatedLinks: [],
   },
