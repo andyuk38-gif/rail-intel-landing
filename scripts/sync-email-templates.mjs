@@ -79,7 +79,6 @@ const CATEGORY_BY_KEY = {
   company_admin_invite: "account",
   team_user_invite: "account",
   "password-reset": "account",
-  "storage-80-warning": "account",
   "support-ticket-update": "account",
   "task_trial_ending_48h": "account",
   "employee-note-message": "instant",
@@ -111,7 +110,6 @@ const CATEGORY_BY_KEY = {
 const LABELS = {
   welcome: "Welcome email (new company)",
   "password-reset": "Password reset",
-  "storage-80-warning": "Storage warning (80% usage)",
   "fatality-anniversary-7d-reminder": "Fatality incident — 7 days before anniversary",
   "licence-expiry-3m-reminder": "Licence expiry — 3 months",
   "licence-expiry-6w-reminder": "Licence expiry — 6 weeks (urgent)",
@@ -141,6 +139,9 @@ const LABELS = {
   "continuous-cycle-renewal-blocked": "Continuous cycle renewal blocked",
   "task_trial_ending_48h": "Task module trial ending",
 };
+
+/** Templates synced from CMS but omitted from the landing-page showcase. */
+const EXCLUDED_TEMPLATE_KEYS = new Set(["storage-80-warning"]);
 
 const DEFAULT_PREVIEW = {
   loginUrl: "https://cms.railintel.co.uk",
@@ -187,10 +188,42 @@ const DEFAULT_PREVIEW = {
   nominatedByEmail: "jamie.onboarding@northernrail.example",
 };
 
+/** Faithful cab pass embed for the showcase — front matches the Digital Cab Passes page hero. */
+function buildShowcaseCabPassCardHtml() {
+  const frontPassSrc = "../images/screens/cab-passes/green-pass-issued-dark.png";
+  const coReturn = "Example Rail Co, Manchester";
+  const idno = "DRV001";
+
+  return `<div style="margin:8px 0 20px 0;">
+  <p style="margin:0 0 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;">Front of pass</p>
+  <img src="${frontPassSrc}" alt="Green driving cab pass with photo and QR code" width="559" style="display:block;max-width:100%;height:auto;border:1px solid rgba(0,0,0,.15);border-radius:6px;" />
+  <p style="margin:14px 0 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;">Reverse of pass</p>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="420" style="width:420px;max-width:100%;min-height:265px;border-collapse:collapse;background:#ffffff;border:1px solid rgba(0,0,0,.25);border-radius:6px;overflow:hidden;">
+    <tr>
+      <td style="padding:12px 14px;vertical-align:top;">
+        <div style="text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:#475569;margin-bottom:8px;">Conditions of use</div>
+        <ul style="margin:0;padding-left:16px;font-size:11px;line-height:1.4;color:#0f172a;">
+          <li style="margin-bottom:5px;">The number of staff in the leading cab must not exceed limits set by company policy, unless specially authorised by a GREEN CAB PASS holder.</li>
+          <li style="margin-bottom:5px;">This pass must be shown to the driver before entering the cab and at any other time as required.</li>
+          <li style="margin-bottom:5px;">This pass must only be used by the person to whom it was issued. The holder must not interfere with any part of the cab, nor obstruct or distract the driver or guard.</li>
+          <li>The holder may use it only when necessary for the proper performance of their duties. It remains the property of the issuing organisation and may be withdrawn without notice.</li>
+        </ul>
+        <p style="margin:10px 0 0;font-size:10px;color:#64748b;">If found please return to: ${coReturn}.</p>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:11px;font-weight:600;color:#475569;">
+          ID NO: <span style="font-weight:700;color:#000000;">${idno}</span>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>`;
+}
+
 const templates = extractTemplatesObject(readFileSync(vaultServer, "utf8"));
 const previewVars = extractPreviewVars(readFileSync(vaultEmailPage, "utf8"));
 
-const entries = Object.entries(templates).map(([key, tpl]) => ({
+const entries = Object.entries(templates)
+  .filter(([key]) => !EXCLUDED_TEMPLATE_KEYS.has(key))
+  .map(([key, tpl]) => ({
   key,
   label: LABELS[key] || key.replace(/-/g, " ").replace(/_/g, " "),
   category: CATEGORY_BY_KEY[key] || "instant",
@@ -198,6 +231,14 @@ const entries = Object.entries(templates).map(([key, tpl]) => ({
   html: tpl.html,
   previewVars: { ...DEFAULT_PREVIEW, ...(previewVars[key] || {}) },
 }));
+
+for (const entry of entries) {
+  if (entry.key === "digital_cab_pass_issued") {
+    entry.previewVars.passCardHtml = buildShowcaseCabPassCardHtml();
+    entry.previewVars.validFrom = "1st August 2026";
+    entry.previewVars.validTo = "1st August 2027";
+  }
+}
 
 writeFileSync(
   outFile,

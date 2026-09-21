@@ -188,7 +188,7 @@ export function renderCommunicationsHubPage(base) {
       <div class="comm-hub-showcase__intro">
         <div class="container comm-hub-showcase__intro-inner">
           <div class="comm-hub-showcase__intro-copy">
-            <p class="product-eyebrow">31 CMS email templates</p>
+            <p class="product-eyebrow">${emailTemplates.length} CMS email templates</p>
             <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
             <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically — or pick a filter and template chip to explore. Sample data only.</p>
             <ul class="comm-hub-stats" aria-label="Communications hub at a glance">

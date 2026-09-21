@@ -24,6 +24,7 @@
   var nextBtn = root.querySelector("[data-comm-next]");
   var playBtn = root.querySelector("[data-comm-play]");
   var playLabel = root.querySelector(".comm-hub-console__play-label");
+  var rail = root.querySelector("[data-comm-rail]");
 
   var CATEGORY_ORDER = ["instant", "scheduled", "account", "all"];
   var CATEGORY_LABELS = {
@@ -40,6 +41,9 @@
   var rotating = true;
   var ROTATE_MS = 5500;
   var changing = false;
+  var hasLoadedPreview = false;
+  var SLIDE_MS = 420;
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   root.style.setProperty("--comm-rotate-ms", ROTATE_MS + "ms");
 
@@ -63,6 +67,33 @@
     if (btn.getAttribute("data-comm-label")) return btn.getAttribute("data-comm-label");
     var label = btn.querySelector(".comm-hub-rail__chip-label");
     return label ? label.textContent : "";
+  }
+
+  function isHubInView() {
+    var rect = root.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  }
+
+  function scrollChipIntoRail(btn) {
+    if (!btn || !rail || typeof rail.scrollTo !== "function") return;
+
+    var maxScroll = rail.scrollWidth - rail.clientWidth;
+    if (maxScroll <= 0) return;
+
+    var btnLeft = btn.offsetLeft;
+    var btnRight = btnLeft + btn.offsetWidth;
+    var viewLeft = rail.scrollLeft;
+    var viewRight = viewLeft + rail.clientWidth;
+
+    if (btnLeft >= viewLeft && btnRight <= viewRight) return;
+
+    var target = btnLeft - (rail.clientWidth - btn.offsetWidth) / 2;
+    target = Math.max(0, Math.min(target, maxScroll));
+
+    rail.scrollTo({
+      left: target,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
   }
 
   function resizeFrame() {
@@ -99,35 +130,115 @@
     });
   }
 
-  function writeFrame(html, done) {
+  function clearSlideClasses() {
+    if (!stage) return;
+    stage.classList.remove(
+      "is-slide-out-left",
+      "is-slide-out-right",
+      "is-slide-in-from-right",
+      "is-slide-in-from-left",
+      "is-slide-in-active"
+    );
+  }
+
+  function loadFrameContent(html, done) {
+    var doc = frame.contentDocument;
+    if (doc) {
+      doc.open();
+      doc.write(html || "<p style='font-family:system-ui;padding:24px;color:#64748b'>Preview unavailable.</p>");
+      doc.close();
+    }
+
+    frame.onload = function () {
+      resizeFrame();
+      window.setTimeout(resizeFrame, 60);
+      window.setTimeout(resizeFrame, 240);
+      if (done) done();
+    };
+
+    window.setTimeout(resizeFrame, 60);
+  }
+
+  function finishFrameChange(done) {
+    if (consoleEl) consoleEl.classList.remove("is-changing");
+    hasLoadedPreview = true;
+    if (done) done();
+  }
+
+  function slideFrameIn(direction, done) {
+    var inStartClass = direction > 0 ? "is-slide-in-from-right" : "is-slide-in-from-left";
+
+    stage.classList.add(inStartClass);
+    void stage.offsetWidth;
+    stage.classList.remove(inStartClass);
+    stage.classList.add("is-slide-in-active");
+
+    var finished = false;
+    function complete() {
+      if (finished) return;
+      finished = true;
+      stage.removeEventListener("transitionend", onInEnd);
+      stage.classList.remove("is-slide-in-active");
+      finishFrameChange(done);
+    }
+
+    function onInEnd(event) {
+      if (event.propertyName !== "transform") return;
+      complete();
+    }
+
+    stage.addEventListener("transitionend", onInEnd);
+    window.setTimeout(complete, SLIDE_MS + 80);
+  }
+
+  function writeFrame(html, options, done) {
+    if (typeof options === "function") {
+      done = options;
+      options = {};
+    }
+    options = options || {};
+
     if (!frame) {
       if (done) done();
       return;
     }
 
-    if (stage) stage.classList.add("is-changing");
+    var direction = options.direction || 1;
+    var animate = options.animate !== false && hasLoadedPreview && !prefersReducedMotion && stage;
+
+    if (!animate) {
+      if (consoleEl) consoleEl.classList.add("is-changing");
+      clearSlideClasses();
+      loadFrameContent(html, function () {
+        finishFrameChange(done);
+      });
+      return;
+    }
+
+    var outClass = direction > 0 ? "is-slide-out-left" : "is-slide-out-right";
     if (consoleEl) consoleEl.classList.add("is-changing");
+    clearSlideClasses();
+    stage.classList.add(outClass);
 
-    window.setTimeout(function () {
-      var doc = frame.contentDocument;
-      if (doc) {
-        doc.open();
-        doc.write(html || "<p style='font-family:system-ui;padding:24px;color:#64748b'>Preview unavailable.</p>");
-        doc.close();
-      }
+    var outFinished = false;
+    function onOutComplete() {
+      if (outFinished) return;
+      outFinished = true;
+      stage.removeEventListener("transitionend", onOutEnd);
+      stage.classList.remove(outClass);
 
-      frame.onload = function () {
-        resizeFrame();
-        window.setTimeout(function () {
-          if (stage) stage.classList.remove("is-changing");
-          if (consoleEl) consoleEl.classList.remove("is-changing");
-          if (done) done();
-        }, 40);
-      };
+      loadFrameContent(html, function () {
+        slideFrameIn(direction, done);
+      });
+    }
 
-      window.setTimeout(resizeFrame, 60);
-      window.setTimeout(resizeFrame, 240);
-    }, 120);
+    function onOutEnd(event) {
+      if (event.propertyName !== "transform") return;
+      onOutComplete();
+    }
+
+    stage.addEventListener("transitionend", onOutEnd);
+    window.setTimeout(onOutComplete, SLIDE_MS + 80);
   }
 
   function updateMeta(btn, key) {
@@ -149,11 +260,22 @@
     }
   }
 
-  function setActiveItem(index, animate) {
+  function setActiveItem(index, direction) {
     if (!visibleItems.length || changing) return;
+
+    var previousIndex = currentIndex;
 
     if (index < 0) index = visibleItems.length - 1;
     if (index >= visibleItems.length) index = 0;
+    if (hasLoadedPreview && index === currentIndex) return;
+
+    var slideDirection = direction;
+    if (slideDirection == null) {
+      if (index === 0 && previousIndex === visibleItems.length - 1) slideDirection = 1;
+      else if (index === visibleItems.length - 1 && previousIndex === 0) slideDirection = -1;
+      else slideDirection = index >= previousIndex ? 1 : -1;
+    }
+
     currentIndex = index;
 
     visibleItems.forEach(function (btn, i) {
@@ -166,14 +288,14 @@
     var key = activeBtn.getAttribute("data-comm-template");
 
     changing = true;
-    writeFrame(templateHtml(key), function () {
+    writeFrame(templateHtml(key), { direction: slideDirection }, function () {
       changing = false;
       updateMeta(activeBtn, key);
       resetTiming();
     });
 
-    if (activeBtn && typeof activeBtn.scrollIntoView === "function") {
-      activeBtn.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    if (activeBtn && isHubInView()) {
+      scrollChipIntoRail(activeBtn);
     }
   }
 
@@ -200,10 +322,10 @@
     if (!visibleItems.length) return;
 
     if (keepIndex && currentIndex < visibleItems.length) {
-      setActiveItem(currentIndex, true);
+      setActiveItem(currentIndex);
     } else {
       currentIndex = 0;
-      setActiveItem(0, true);
+      setActiveItem(0, 1);
     }
   }
 
@@ -218,11 +340,11 @@
 
     if (currentIndex >= visibleItems.length - 1) {
       if (rotating) nextCategory();
-      else setActiveItem(0, true);
+      else setActiveItem(0, 1);
       return;
     }
 
-    setActiveItem(currentIndex + 1, true);
+    setActiveItem(currentIndex + 1, 1);
   }
 
   function showByKey(key) {
@@ -230,7 +352,7 @@
     var idx = visibleItems.findIndex(function (btn) {
       return btn.getAttribute("data-comm-template") === key;
     });
-    if (idx >= 0) setActiveItem(idx, true);
+    if (idx >= 0) setActiveItem(idx, 1);
 
     var showcase = document.querySelector(".comm-hub-showcase");
     if (showcase && typeof showcase.scrollIntoView === "function") {
@@ -274,7 +396,7 @@
     btn.addEventListener("click", function () {
       var idx = visibleItems.indexOf(btn);
       if (idx < 0) return;
-      setActiveItem(idx, true);
+      setActiveItem(idx);
       startRotation();
     });
   });
@@ -295,7 +417,7 @@
 
   if (prevBtn) {
     prevBtn.addEventListener("click", function () {
-      setActiveItem(currentIndex - 1, true);
+      setActiveItem(currentIndex - 1, -1);
       startRotation();
     });
   }

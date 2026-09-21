@@ -377,12 +377,37 @@
 }
 
 .comm-hub-mail__stage {
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.42s ease;
 }
 
-.comm-hub-mail__stage.is-changing {
-  opacity: 0.35;
-  transform: translateY(8px) scale(0.995);
+.comm-hub-mail__stage.is-slide-out-left {
+  transform: translateX(-108%);
+  opacity: 0.55;
+}
+
+.comm-hub-mail__stage.is-slide-out-right {
+  transform: translateX(108%);
+  opacity: 0.55;
+}
+
+.comm-hub-mail__stage.is-slide-in-from-right,
+.comm-hub-mail__stage.is-slide-in-from-left {
+  transition: none;
+  opacity: 0.55;
+}
+
+.comm-hub-mail__stage.is-slide-in-from-right {
+  transform: translateX(108%);
+}
+
+.comm-hub-mail__stage.is-slide-in-from-left {
+  transform: translateX(-108%);
+}
+
+.comm-hub-mail__stage.is-slide-in-active {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .comm-hub-mail__frame {
