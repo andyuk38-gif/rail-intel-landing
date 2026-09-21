@@ -1729,7 +1729,9 @@ export const featureGroups = [
     slug: "reporting-administration",
     name: "Reporting & Administration",
     summary: "Analytics across the operation, plus the configuration that makes it yours.",
-    tagline: "The state of the railway's people, on demand",
+    tagline: "Operational reporting, on demand and live feeds",
+    taglineHtml:
+      'Operational <span class="hero-title__accent">reporting</span>, on demand and <span class="hero-title__accent">live</span> feeds',
     lead:
       "Reporting turns the record set into the answer to a board question: how many people are off track, how many medicals expire this quarter, where are incidents concentrated. Administration is where the organisation, roles, traction and routes behind those numbers are defined.",
     heroShot: {
