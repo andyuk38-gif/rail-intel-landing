@@ -239,7 +239,7 @@ ${filters}
                     <p class="comm-hub-mail__pane-title" data-comm-pane-title="primary">${esc(firstLabel)}</p>
                   </header>
                   <div class="comm-hub-mail__stage" data-comm-stage="primary">
-                    <iframe class="comm-hub-mail__frame" data-comm-frame="primary" title="Current email template preview" sandbox="allow-same-origin" scrolling="auto"></iframe>
+                    <iframe class="comm-hub-mail__frame" data-comm-frame="primary" title="Current email template preview" sandbox="allow-same-origin" scrolling="no"></iframe>
                     <p class="comm-hub-mail__scroll-hint" aria-hidden="true">Scroll to read the full email</p>
                   </div>
                 </article>
@@ -249,7 +249,7 @@ ${filters}
                     <p class="comm-hub-mail__pane-title" data-comm-pane-title="secondary"></p>
                   </header>
                   <div class="comm-hub-mail__stage" data-comm-stage="secondary">
-                    <iframe class="comm-hub-mail__frame" data-comm-frame="secondary" title="Next email template preview" sandbox="allow-same-origin" scrolling="auto"></iframe>
+                    <iframe class="comm-hub-mail__frame" data-comm-frame="secondary" title="Next email template preview" sandbox="allow-same-origin" scrolling="no"></iframe>
                     <p class="comm-hub-mail__scroll-hint" aria-hidden="true">Scroll to read the full email</p>
                   </div>
                 </article>

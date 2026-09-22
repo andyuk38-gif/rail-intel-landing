@@ -129,53 +129,103 @@
     });
   }
 
-  function updateFrameOverflow(frameEl, stageEl) {
-    if (!frameEl || !stageEl) return;
+  var gbrBgUrl = new URL("../images/gbr-bg.png", window.location.href).href;
+  var previewFitCss = [
+    "html,body{margin:0;padding:0;background:#fff;overflow:hidden;}",
+    "body::before{content:'';position:fixed;inset:0;background:url('" + gbrBgUrl + "') center / cover no-repeat;opacity:0.18;pointer-events:none;z-index:0;}",
+    "#preview-sheet{position:relative;z-index:1;box-sizing:border-box;padding:16px 18px;background:transparent;transform-origin:top left;}",
+    "#preview-sheet p{margin:0 0 8px !important;line-height:1.45 !important;}",
+    "#preview-sheet table{margin-bottom:10px !important;}",
+    "#preview-sheet img{width:56px !important;height:56px !important;}",
+    "#preview-sheet div[style*='border-radius']{padding:12px 14px !important;margin:6px 0 8px !important;}",
+    "#preview-sheet a[style*='inline-block']{padding:8px 14px !important;font-size:14px !important;}",
+  ].join("");
 
-    var doc = frameEl.contentDocument;
-    var win = frameEl.contentWindow;
-    if (!doc || !doc.documentElement || !win) {
-      stageEl.classList.remove("is-overflowing");
-      return;
+  function stripPreviewFooter(doc) {
+    if (!doc || !doc.body) return;
+    var blocks = doc.body.querySelectorAll("div");
+    for (var i = 0; i < blocks.length; i++) {
+      var style = blocks[i].getAttribute("style") || "";
+      if (style.indexOf("#4f46e5") !== -1 && /text-align:\s*center/.test(style)) {
+        blocks[i].parentNode.removeChild(blocks[i]);
+      }
+    }
+  }
+
+  function preparePreviewSheet(doc) {
+    if (!doc || !doc.body) return null;
+    stripPreviewFooter(doc);
+    if (doc.documentElement) {
+      doc.documentElement.style.background = "#fff";
+      doc.documentElement.style.overflow = "hidden";
+    }
+    doc.body.style.margin = "0";
+    doc.body.style.padding = "0";
+    doc.body.style.overflow = "hidden";
+    doc.body.style.background = "#fff";
+    doc.body.style.color = "#1e293b";
+    doc.body.style.fontFamily = "system-ui, sans-serif";
+
+    if (!doc.getElementById("preview-fit-style")) {
+      var style = doc.createElement("style");
+      style.id = "preview-fit-style";
+      style.appendChild(doc.createTextNode(previewFitCss));
+      (doc.head || doc.documentElement).appendChild(style);
     }
 
-    var body = doc.body;
-    var contentHeight = Math.max(
-      doc.documentElement.scrollHeight,
-      body ? body.scrollHeight : 0
-    );
-    var viewHeight = frameEl.clientHeight;
-    var overflowing = contentHeight > viewHeight + 8;
-    var scrolled = win.scrollY > 12;
+    var sheet = doc.getElementById("preview-sheet");
+    if (!sheet) {
+      sheet = doc.createElement("div");
+      sheet.id = "preview-sheet";
+      while (doc.body.firstChild) sheet.appendChild(doc.body.firstChild);
+      doc.body.appendChild(sheet);
+    }
+    return sheet;
+  }
 
-    stageEl.classList.toggle("is-overflowing", overflowing && !scrolled);
+  function fitEmailPreview(frameEl) {
+    if (!frameEl) return;
+    var doc = frameEl.contentDocument;
+    var sheet = preparePreviewSheet(doc);
+    if (!sheet) return;
+
+    var viewW = frameEl.clientWidth;
+    var viewH = frameEl.clientHeight;
+    if (!viewW || !viewH) return;
+
+    var scale = 1;
+    var layoutW = viewW;
+    for (var n = 0; n < 6; n++) {
+      sheet.style.width = layoutW + "px";
+      sheet.style.transform = "none";
+      var contentH = sheet.offsetHeight;
+      var next = contentH > viewH - 1 ? (viewH - 1) / contentH : 1;
+      var nextW = viewW / next;
+      if (Math.abs(next - scale) < 0.008 && Math.abs(nextW - layoutW) < 1) {
+        scale = next;
+        layoutW = nextW;
+        break;
+      }
+      scale = next;
+      layoutW = nextW;
+    }
+
+    sheet.style.width = layoutW + "px";
+    sheet.style.transformOrigin = "top left";
+    sheet.style.transform = scale < 0.995 ? "scale(" + scale + ")" : "none";
+  }
+
+  function updateFrameOverflow(frameEl, stageEl) {
+    if (stageEl) stageEl.classList.remove("is-overflowing");
+    fitEmailPreview(frameEl);
   }
 
   function updateAllFrameOverflow() {
     panes.forEach(function (pane) {
-      if (pane.frame && pane.stage && pane.frame.offsetParent) {
-        updateFrameOverflow(pane.frame, pane.stage);
+      if (pane.frame && pane.frame.offsetParent) {
+        fitEmailPreview(pane.frame);
       }
     });
-  }
-
-  function watchFrameScroll(frameEl, stageEl) {
-    var win = frameEl.contentWindow;
-    if (!win) return;
-
-    try {
-      win.scrollTo(0, 0);
-    } catch (err) {
-      /* ignore */
-    }
-
-    win.addEventListener(
-      "scroll",
-      function () {
-        updateFrameOverflow(frameEl, stageEl);
-      },
-      { passive: true }
-    );
   }
 
   function resetTiming() {
@@ -330,14 +380,15 @@
       doc.open();
       doc.write(html || "<p style='font-family:system-ui;padding:24px;color:#64748b'>Preview unavailable.</p>");
       doc.close();
+      fitEmailPreview(frameEl);
     }
 
     frameEl.onload = function () {
-      watchFrameScroll(frameEl, stageEl);
+      fitEmailPreview(frameEl);
       window.setTimeout(function () {
-        updateFrameOverflow(frameEl, stageEl);
+        fitEmailPreview(frameEl);
         window.setTimeout(function () {
-          updateFrameOverflow(frameEl, stageEl);
+          fitEmailPreview(frameEl);
         }, 180);
         complete();
       }, 40);
@@ -887,6 +938,10 @@
   root.addEventListener("mouseleave", startRotation);
   root.addEventListener("focusin", stopRotation);
   root.addEventListener("focusout", startRotation);
+
+  window.addEventListener("resize", function () {
+    updateAllFrameOverflow();
+  });
 
   applyFilter("instant", false);
   startRotation();
