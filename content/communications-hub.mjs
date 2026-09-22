@@ -101,6 +101,13 @@ export function renderCommunicationsHubHero() {
               <span>Employee Messaging & Notes · instant alert</span>
             </div>
           </div>
+          <div class="comm-hub-hero-card__row">
+            <span class="comm-hub-hero-card__dot"></span>
+            <div>
+              <strong>Fatality welfare check reminder</strong>
+              <span>7 days before anniversary · welfare contact due</span>
+            </div>
+          </div>
         </div>`;
 }
 
@@ -190,14 +197,14 @@ export function renderCommunicationsHubPage(base) {
           <div class="comm-hub-showcase__intro-copy">
             <p class="product-eyebrow">${emailTemplates.length} CMS email templates</p>
             <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
-            <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically — or pick a filter and template chip to explore. Sample data only.</p>
+          </div>
+            <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically, or pick a filter and template chip to explore. Sample data only.</p>
             <ul class="comm-hub-stats" aria-label="Communications hub at a glance">
               <li><strong>${emailTemplates.length}</strong><span>Email templates</span></li>
               <li><strong>${CATEGORY_META.scheduled.count}</strong><span>Scheduled alerts</span></li>
               <li><strong>${CATEGORY_META.instant.count}</strong><span>Instant notifications</span></li>
               <li><strong>Dual channel</strong><span>Email + in-app</span></li>
             </ul>
-          </div>
         </div>
       </div>
 

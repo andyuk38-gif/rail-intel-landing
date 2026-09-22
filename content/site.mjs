@@ -1939,9 +1939,12 @@ export const featureGroups = [
     seoKeywords:
       "rail competency notifications, automated compliance alerts, workforce email notifications, system notifications rail software",
     summary: "Automated emails and system notifications driven by conditional rules.",
-    tagline: "Everything communicated — automatically",
+    tagline: "Powerful communications hub - your personal assistant",
+    taglineHtml:
+      'Powerful <span class="hero-title__accent">communications</span> hub - your personal <span class="hero-title__accent">assistant</span>',
     lead:
-      "Rail Intel includes a built-in communications hub that turns conditional rules into action. Alert emails and in-app system notifications fire when competence lapses, medicals approach expiry, incidents are recorded, messages are raised or welfare follow-up is due — without anyone chasing a spreadsheet or inbox.",
+      "Rail Intel includes a built-in communications hub that turns conditional rules into action. Alert emails and in-app system notifications fire when competence lapses, medicals approach expiry, incidents are recorded, messages are raised or welfare follow-up is due, without anyone chasing a spreadsheet or inbox.",
+    hideHeroActions: true,
     faq: [
       {
         question: "What triggers automated communications in Rail Intel?",

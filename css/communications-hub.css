@@ -52,8 +52,21 @@
   padding: 2.5rem 0 1.5rem;
 }
 
+.comm-hub-showcase__intro-inner.container,
+.comm-hub-showcase__shell.container {
+  max-width: none;
+  width: 100%;
+  padding-inline: clamp(1.25rem, 4vw, 2.75rem);
+}
+
 .comm-hub-showcase__intro-copy {
-  max-width: 46rem;
+  max-width: none;
+}
+
+.comm-hub-showcase__intro-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .comm-hub-showcase__intro h2 {
@@ -64,6 +77,8 @@
 
 .comm-hub-showcase__lead {
   margin: 0;
+  width: 100%;
+  max-width: none;
   color: rgba(226, 232, 240, 0.82);
   font-size: 1.05rem;
   line-height: 1.65;
@@ -1081,14 +1096,15 @@
 
 .comm-hub-hero-card strong {
   display: block;
-  font-size: 0.88rem;
+  font-size: 0.96rem;
 }
 
 .comm-hub-hero-card span {
   display: block;
-  margin-top: 0.15rem;
-  font-size: 0.78rem;
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
   color: rgba(148, 163, 184, 0.95);
+  line-height: 1.45;
 }
 
 @media (max-width: 960px) {
