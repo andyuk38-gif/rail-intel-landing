@@ -52,21 +52,8 @@
   padding: 2.5rem 0 1.5rem;
 }
 
-.comm-hub-showcase__intro-inner.container,
-.comm-hub-showcase__shell.container {
-  max-width: none;
-  width: 100%;
-  padding-inline: clamp(1.25rem, 4vw, 2.75rem);
-}
-
 .comm-hub-showcase__intro-copy {
-  max-width: none;
-}
-
-.comm-hub-showcase__intro-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  max-width: 46rem;
 }
 
 .comm-hub-showcase__intro h2 {
@@ -77,8 +64,6 @@
 
 .comm-hub-showcase__lead {
   margin: 0;
-  width: 100%;
-  max-width: none;
   color: rgba(226, 232, 240, 0.82);
   font-size: 1.05rem;
   line-height: 1.65;
