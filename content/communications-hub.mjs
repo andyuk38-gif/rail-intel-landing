@@ -194,17 +194,17 @@ export function renderCommunicationsHubPage(base) {
     <section class="comm-hub-showcase" aria-labelledby="comm-hub-showcase-heading">
       <div class="comm-hub-showcase__intro">
         <div class="container comm-hub-showcase__intro-inner">
-          <div class="comm-hub-showcase__intro-copy">
+          <div class="comm-hub-showcase__intro-head">
             <p class="product-eyebrow">${emailTemplates.length} CMS email templates</p>
             <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
             <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically, or pick a filter and template chip to explore. Sample data only.</p>
+          </div>
             <ul class="comm-hub-stats" aria-label="Communications hub at a glance">
               <li><strong>${emailTemplates.length}</strong><span>Email templates</span></li>
               <li><strong>${CATEGORY_META.scheduled.count}</strong><span>Scheduled alerts</span></li>
               <li><strong>${CATEGORY_META.instant.count}</strong><span>Instant notifications</span></li>
               <li><strong>Dual channel</strong><span>Email + in-app</span></li>
             </ul>
-          </div>
         </div>
       </div>
 

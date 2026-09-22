@@ -52,8 +52,9 @@
   padding: 2.5rem 0 1.5rem;
 }
 
-.comm-hub-showcase__intro-copy {
-  max-width: 46rem;
+.comm-hub-showcase__intro-head {
+  max-width: none;
+  width: 100%;
 }
 
 .comm-hub-showcase__intro h2 {
@@ -64,6 +65,8 @@
 
 .comm-hub-showcase__lead {
   margin: 0;
+  max-width: none;
+  width: 100%;
   color: rgba(226, 232, 240, 0.82);
   font-size: 1.05rem;
   line-height: 1.65;
