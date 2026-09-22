@@ -192,6 +192,21 @@
     return sheet;
   }
 
+  function measureSheetHeight(sheet) {
+    var win = sheet.ownerDocument.defaultView;
+    var top = sheet.getBoundingClientRect().top;
+    var bottom = top;
+    var children = sheet.children;
+    for (var i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
+      var marginBottom = parseFloat(win.getComputedStyle(children[i]).marginBottom) || 0;
+      var edge = rect.bottom + marginBottom;
+      if (edge > bottom) bottom = edge;
+    }
+    var padBottom = parseFloat(win.getComputedStyle(sheet).paddingBottom) || 0;
+    return Math.ceil(bottom - top + padBottom);
+  }
+
   function fitEmailPreview(frameEl) {
     if (!frameEl) return;
     var doc = frameEl.contentDocument;
@@ -202,15 +217,17 @@
     var viewH = frameEl.clientHeight;
     if (!viewW || !viewH) return;
 
+    var slack = 16;
+    var fitH = Math.max(1, viewH - slack);
     var scale = 1;
     var layoutW = viewW;
-    for (var n = 0; n < 6; n++) {
-      sheet.style.width = layoutW + "px";
+    for (var n = 0; n < 8; n++) {
       sheet.style.transform = "none";
-      var contentH = sheet.offsetHeight;
-      var next = contentH > viewH - 1 ? (viewH - 1) / contentH : 1;
+      sheet.style.width = layoutW + "px";
+      var contentH = measureSheetHeight(sheet);
+      var next = contentH > fitH ? fitH / contentH : 1;
       var nextW = viewW / next;
-      if (Math.abs(next - scale) < 0.008 && Math.abs(nextW - layoutW) < 1) {
+      if (Math.abs(next - scale) < 0.002 && Math.abs(nextW - layoutW) < 0.5) {
         scale = next;
         layoutW = nextW;
         break;
@@ -219,9 +236,13 @@
       layoutW = nextW;
     }
 
+    sheet.style.transform = "none";
+    sheet.style.width = layoutW + "px";
+    var fittedH = measureSheetHeight(sheet);
+    scale = fittedH > fitH ? fitH / fittedH : 1;
     sheet.style.width = layoutW + "px";
     sheet.style.transformOrigin = "top left";
-    sheet.style.transform = scale < 0.995 ? "scale(" + scale + ")" : "none";
+    sheet.style.transform = scale < 0.999 ? "scale(" + scale + ")" : "none";
 
     var pics = sheet.querySelectorAll("img");
     for (var p = 0; p < pics.length; p++) {
