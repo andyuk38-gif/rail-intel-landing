@@ -136,7 +136,8 @@
     "#preview-sheet{position:relative;z-index:1;box-sizing:border-box;padding:16px 18px;background:transparent;transform-origin:top left;}",
     "#preview-sheet p{margin:0 0 8px !important;line-height:1.45 !important;}",
     "#preview-sheet table{margin-bottom:10px !important;}",
-    "#preview-sheet img{width:56px !important;height:56px !important;}",
+    "#preview-sheet img{max-width:100%;height:auto;}",
+    "#preview-sheet img[src*='rail-intel-icon']{width:56px !important;height:56px !important;max-width:56px;}",
     "#preview-sheet div[style*='border-radius']{padding:12px 14px !important;margin:6px 0 8px !important;}",
     "#preview-sheet a[style*='inline-block']{padding:8px 14px !important;font-size:14px !important;}",
   ].join("");
@@ -171,6 +172,14 @@
       style.id = "preview-fit-style";
       style.appendChild(doc.createTextNode(previewFitCss));
       (doc.head || doc.documentElement).appendChild(style);
+    }
+
+    var images = doc.querySelectorAll("img");
+    for (var i = 0; i < images.length; i++) {
+      var src = images[i].getAttribute("src") || "";
+      if (src.indexOf("../") === 0 || src.indexOf("./") === 0) {
+        images[i].src = new URL(src, window.location.href).href;
+      }
     }
 
     var sheet = doc.getElementById("preview-sheet");
@@ -213,6 +222,15 @@
     sheet.style.width = layoutW + "px";
     sheet.style.transformOrigin = "top left";
     sheet.style.transform = scale < 0.995 ? "scale(" + scale + ")" : "none";
+
+    var pics = sheet.querySelectorAll("img");
+    for (var p = 0; p < pics.length; p++) {
+      if (pics[p].complete || pics[p].getAttribute("data-preview-fit")) continue;
+      pics[p].setAttribute("data-preview-fit", "1");
+      pics[p].addEventListener("load", function () {
+        fitEmailPreview(frameEl);
+      });
+    }
   }
 
   function updateFrameOverflow(frameEl, stageEl) {
