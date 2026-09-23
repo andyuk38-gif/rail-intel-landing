@@ -631,7 +631,7 @@ export function renderCompetencyEngineHero(base = "../") {
           <p class="sr-only" data-engine-announce aria-live="polite"></p>
           <div class="engine__bar">
             <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span><span data-engine-status-label>Socket open</span></span>
-            <span class="engine__device" data-engine-device>Awaiting engine</span>
+            <span class="engine__device" data-engine-device>Awaiting Rail Intel Technologies</span>
             <span class="engine__outputs" data-engine-outputs>Drag the chip to seat</span>
           </div>
           <div class="engine__viewport">
@@ -687,7 +687,7 @@ ${list}
           </div>
           <div class="engine-bezel">
             <div class="engine-readout" id="competency-engine-readout">
-              <p class="engine-readout__standby" data-engine-standby>The socket is open. Drag the competency engine in to power the branches.</p>
+              <p class="engine-readout__standby" data-engine-standby>The socket is open. Drag the processor chip into the socket to power the branches.</p>
               <div class="engine-readout__grid">
               <p class="engine-readout__item">
                 <span class="engine-readout__kicker">Feeds</span>

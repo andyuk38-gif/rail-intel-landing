@@ -116,7 +116,7 @@
 
   function setCopy(on) {
     if (statusLabel) statusLabel.textContent = on ? "Live feeds" : "Socket open";
-    if (deviceLabel) deviceLabel.textContent = on ? "Operational Compliance" : "Awaiting engine";
+    if (deviceLabel) deviceLabel.textContent = on ? "Operational Compliance" : "Awaiting Rail Intel Technologies";
     if (outputsLabel) outputsLabel.textContent = on ? "Drives assessment and compliance" : "Drag the chip to seat";
     if (kicker) kicker.textContent = on ? "Engine online" : "Ready to seat";
     if (hint) hint.textContent = coarse ? "Drag or tap into the socket" : "Drag into the socket";
