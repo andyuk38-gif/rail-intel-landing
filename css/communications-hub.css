@@ -72,36 +72,6 @@
   line-height: 1.65;
 }
 
-.comm-hub-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.85rem;
-  margin: 1.5rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.comm-hub-stats li {
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--comm-border);
-  border-radius: 14px;
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(8px);
-}
-
-.comm-hub-stats strong {
-  display: block;
-  font-size: 1.35rem;
-  line-height: 1.1;
-}
-
-.comm-hub-stats span {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.78rem;
-  color: rgba(148, 163, 184, 0.95);
-}
-
 .comm-hub-showcase__shell {
   position: relative;
   z-index: 1;
@@ -109,7 +79,7 @@
 
 .comm-hub-showcase__filters {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.65rem;
   margin-bottom: 1rem;
 }
@@ -1110,10 +1080,6 @@
 
   .comm-hub-console__tag {
     justify-self: start;
-  }
-
-  .comm-hub-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .comm-hub-section__grid,

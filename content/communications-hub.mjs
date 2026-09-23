@@ -8,7 +8,6 @@ const esc = (value) =>
   String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const CATEGORY_META = {
-  all: { label: "All templates", count: emailTemplates.length },
   instant: {
     label: "Instant alerts",
     count: emailTemplates.filter((t) => t.category === "instant").length,
@@ -148,14 +147,17 @@ export function renderCommunicationsHubPage(base) {
   const logoUrl = "https://railintel.co.uk/images/rail-intel-icon.png";
   const railChips = emailTemplates.map(renderTemplateChip).join("\n");
   const templateStore = emailTemplates.map((t) => renderTemplateStore(t, logoUrl)).join("\n");
-  const filters = Object.entries(CATEGORY_META)
+  const filterCategories = ["instant", "scheduled", "account"];
+  const filters = filterCategories
     .map(
-      ([key, meta], index) =>
-        `          <button type="button" class="comm-hub-filter comm-hub-filter--${esc(key)}${index === 1 ? " is-active" : ""}" data-comm-filter="${esc(key)}" aria-pressed="${index === 1 ? "true" : "false"}">
+      (key, index) => {
+        const meta = CATEGORY_META[key];
+        return `          <button type="button" class="comm-hub-filter comm-hub-filter--${esc(key)}${index === 0 ? " is-active" : ""}" data-comm-filter="${esc(key)}" aria-pressed="${index === 0 ? "true" : "false"}">
             <span class="comm-hub-filter__label">${esc(meta.label)}</span>
             <span class="comm-hub-filter__count">${meta.count}</span>
             <span class="comm-hub-filter__progress" aria-hidden="true"></span>
-          </button>`
+          </button>`;
+      }
     )
     .join("\n");
 
@@ -196,15 +198,9 @@ export function renderCommunicationsHubPage(base) {
         <div class="container comm-hub-showcase__intro-inner">
           <div class="comm-hub-showcase__intro-head">
             <p class="product-eyebrow">${emailTemplates.length} CMS email templates</p>
-            <h2 id="comm-hub-showcase-heading">Browse every automated email Rail Intel sends</h2>
+            <h2 id="comm-hub-showcase-heading">Browse a few of our automated emails Rail Intel sends</h2>
             <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically, or pick a filter and template chip to explore. Sample data only.</p>
           </div>
-            <ul class="comm-hub-stats" aria-label="Communications hub at a glance">
-              <li><strong>${emailTemplates.length}</strong><span>Email templates</span></li>
-              <li><strong>${CATEGORY_META.scheduled.count}</strong><span>Scheduled alerts</span></li>
-              <li><strong>${CATEGORY_META.instant.count}</strong><span>Instant notifications</span></li>
-              <li><strong>Dual channel</strong><span>Email + in-app</span></li>
-            </ul>
         </div>
       </div>
 

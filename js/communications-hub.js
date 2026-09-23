@@ -36,12 +36,11 @@
   var playLabel = root.querySelector(".comm-hub-console__play-label");
   var rail = root.querySelector("[data-comm-rail]");
 
-  var CATEGORY_ORDER = ["instant", "scheduled", "account", "all"];
+  var CATEGORY_ORDER = ["instant", "scheduled", "account"];
   var CATEGORY_LABELS = {
     instant: "Instant alerts",
     scheduled: "Scheduled alerts",
     account: "Account & access",
-    all: "All templates",
   };
 
   var activeFilter = "instant";
@@ -830,7 +829,7 @@
 
     items.forEach(function (btn) {
       var category = btn.getAttribute("data-comm-category");
-      var show = filter === "all" || category === filter;
+      var show = category === filter;
       btn.classList.toggle("is-hidden", !show);
     });
 
@@ -885,7 +884,13 @@
   }
 
   function showByKey(key) {
-    applyFilter("all", false);
+    var chip = items.find(function (btn) {
+      return btn.getAttribute("data-comm-template") === key;
+    });
+    if (chip) {
+      var category = chip.getAttribute("data-comm-category") || "instant";
+      applyFilter(category, false);
+    }
     var idx = visibleItems.findIndex(function (btn) {
       return btn.getAttribute("data-comm-template") === key;
     });
@@ -941,7 +946,7 @@
 
   filters.forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var filter = btn.getAttribute("data-comm-filter") || "all";
+      var filter = btn.getAttribute("data-comm-filter") || "instant";
       if (filter === activeFilter) return;
       applyFilter(filter, false);
       startRotation();
