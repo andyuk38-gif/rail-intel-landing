@@ -209,7 +209,7 @@ export const seoExtensions = {
       {
         question: "Can we control the emails that are sent?",
         answer:
-          "Yes. Company administrators configure email templates in Administration, so the wording and branding match your operation while the triggers stay rule-governed.",
+          "You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel — companies do not create or override templates in Administration.",
       },
     ],
     relatedLinks: [

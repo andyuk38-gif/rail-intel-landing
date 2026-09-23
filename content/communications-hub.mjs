@@ -199,7 +199,7 @@ export function renderCommunicationsHubPage(base) {
           <div class="comm-hub-showcase__intro-head">
             <p class="product-eyebrow">${emailTemplates.length} CMS email templates</p>
             <h2 id="comm-hub-showcase-heading">Browse a few of our automated emails Rail Intel sends</h2>
-            <p class="comm-hub-showcase__lead">Faithful replicas of the templates in Administration → Email templates. Categories rotate automatically, or pick a filter and template chip to explore. Sample data only.</p>
+            <p class="comm-hub-showcase__lead">Faithful replicas of the emails Rail Intel sends from the communications hub. Categories rotate automatically, or pick a filter and template chip to explore. Sample data only.</p>
           </div>
         </div>
       </div>
@@ -353,16 +353,16 @@ ${scheduledCards}
     <section class="page-section comm-hub-section comm-hub-section--admin">
       <div class="container comm-hub-section__grid">
         <div class="comm-hub-section__copy">
-          <p class="product-eyebrow">Your operation controls the wording</p>
+          <p class="product-eyebrow">Maintained by Rail Intel</p>
           <h2>Automated does not mean generic</h2>
-          <p>Company administrators configure email templates in Administration — cab passes, assessments, incidents, leave, tasks and operational events. Rail Intel owns the timing and the rules; you own the voice and branding.</p>
-          <p class="comm-hub-admin-note">System templates cover scheduled compliance alerts; company-overridable templates include welcome messages, cab pass delivery, leave workflows, trainee communications and on-record messaging.</p>
+          <p>Every transactional email is written and maintained by Rail Intel — cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
+          <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
         </div>
         <figure class="shot reveal">
           <div class="shot__frame">
             <img src="${base}images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Digital cab pass issued by email — one example of a configurable transactional template." width="433" height="289" loading="lazy" decoding="async" />
           </div>
-          <figcaption class="shot__caption">Cab pass issued by email — configurable per company.</figcaption>
+          <figcaption class="shot__caption">Cab pass issued by email — maintained by Rail Intel.</figcaption>
         </figure>
       </div>
     </section>`;
