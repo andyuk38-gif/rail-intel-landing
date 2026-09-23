@@ -989,12 +989,12 @@ export const featureGroups = [
       "Build rail competency cycles, schedule assessments, record in-cab evidence and flag lapsed mandatory competencies before anyone reaches the railway.",
     seoKeywords: "rail competency cycles, driver assessments, competence management, in-cab assessment software",
     summary: "Build assessment cycles, run assessments in the field and carry findings forward.",
-    tagline: "Plug in our technology to your operations.",
+    tagline: "Are you ready to plug in our technology to your operations?",
     taglineHtml:
-      'Plug in our <span class="hero-title__accent">technology</span> to your <span class="hero-title__accent">operations</span>.',
+      'Are you ready to plug in our <span class="hero-title__accent">technology</span> to your <span class="hero-title__accent">operations</span>?',
     heroGraphic: "competency-engine",
     lead:
-      "Our competency engine is the most powerful and complex CMS built for rail, with inbuilt strict conditional rules, communications, and powerful add-ons to cater for your needs, ensuring everything stays in one system rather than spread across different platforms, all powered by Rail Intel, a company with operational experience in rail.",
+      "Our competency engine is the most powerful and complex CMS built for rail, with inbuilt strict conditional rules, communications, and powerful add-ons to cater for your needs, ensuring everything stays in one system rather than spread across different platforms, all powered by Rail Intel, a company with extensive operational experience in rail.",
     faq: [
       {
         question: "What is a competency cycle in Rail Intel?",
