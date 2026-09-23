@@ -994,7 +994,7 @@ export const featureGroups = [
       'Plug in our <span class="hero-title__accent">technology</span> to your <span class="hero-title__accent">operations</span>.',
     heroGraphic: "competency-engine",
     lead:
-      "Competence is a live cycle with a start date, an expiry and evidence — not a document store. Rail Intel's cycle engine builds the standard, schedules the assessments, records them in the field and flags the moment a mandatory competency lapses.",
+      "Our competency engine is the most powerful and complex CMS built for rail, with inbuilt strict conditional rules, communications, and powerful add-ons to cater for your needs, ensuring everything stays in one system rather than spread across different platforms, all powered by Rail Intel, a company with operational experience in rail.",
     faq: [
       {
         question: "What is a competency cycle in Rail Intel?",
