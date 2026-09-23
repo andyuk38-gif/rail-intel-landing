@@ -1945,6 +1945,7 @@ export const featureGroups = [
     lead:
       "Rail Intel includes a built-in communications hub that turns conditional rules into action. Alert emails and in-app system notifications fire when competence lapses, medicals approach expiry, incidents are recorded, messages are raised or welfare follow-up is due, without anyone chasing a spreadsheet or inbox.",
     hideHeroActions: true,
+    hideCta: true,
     faq: [
       {
         question: "What triggers automated communications in Rail Intel?",
@@ -1956,10 +1957,6 @@ export const featureGroups = [
         answer:
           "Yes. Company administrators configure email templates in Administration, so the wording and branding match your operation while the triggers stay rule-governed.",
       },
-    ],
-    relatedLinks: [
-      { name: "Administration", href: "features/administration.html" },
-      { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
     ],
     sections: [],
   },
