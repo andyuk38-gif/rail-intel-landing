@@ -990,6 +990,7 @@ export const featureGroups = [
     seoKeywords: "rail competency cycles, driver assessments, competence management, in-cab assessment software",
     summary: "Build assessment cycles, run assessments in the field and carry findings forward.",
     tagline: "The competency engine",
+    heroGraphic: "competency-engine",
     lead:
       "Competence is a live cycle with a start date, an expiry and evidence — not a document store. Rail Intel's cycle engine builds the standard, schedules the assessments, records them in the field and flags the moment a mandatory competency lapses.",
     faq: [

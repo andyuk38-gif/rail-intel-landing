@@ -31,8 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=193694699" />
-  <link rel="stylesheet" href="../css/pages.css?v=193694699" />
+  <link rel="stylesheet" href="../css/style.css?v=66829597" />
+  <link rel="stylesheet" href="../css/pages.css?v=66829597" />
+  <link rel="stylesheet" href="../css/competency-engine.css?v=66829597" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -248,9 +249,10 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--competency-engine">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--engine">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Competency &amp; Cycles</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">The competency engine</h1>
@@ -258,6 +260,379 @@
           <div class="page-actions">
             <a href="https://cms.railintel.co.uk" class="btn btn-lg btn-primary">Open Rail Intel</a>
             <a href="../features/" class="btn btn-lg btn-ghost">All features</a>
+          </div>
+          </div>
+          <div class="page-hero__media page-hero__media--engine">
+        <div class="engine" data-competency-engine data-active="assessments">
+          <p class="sr-only">The competency engine sits at the centre. Branches leave it for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed.</p>
+          <div class="engine__bar">
+            <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span>Live feeds</span>
+            <span class="engine__device">Competency engine</span>
+            <span class="engine__outputs">Drives assessment and compliance</span>
+          </div>
+          <div class="engine__viewport">
+            <div class="engine__scene" data-engine-scene>
+              <svg class="engine__svg" viewBox="0 0 1400 880" role="presentation" aria-hidden="true">
+                <defs>
+                  <linearGradient id="engine-board" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#1a2433" />
+                    <stop offset="0.55" stop-color="#121a26" />
+                    <stop offset="1" stop-color="#0d141e" />
+                  </linearGradient>
+                  <linearGradient id="engine-board-side" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#1c2838" />
+                    <stop offset="1" stop-color="#090e15" />
+                  </linearGradient>
+                  <linearGradient id="engine-pkg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#314158" />
+                    <stop offset="0.48" stop-color="#1c2838" />
+                    <stop offset="1" stop-color="#121a26" />
+                  </linearGradient>
+                  <linearGradient id="engine-pkg-side" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#243246" />
+                    <stop offset="1" stop-color="#101720" />
+                  </linearGradient>
+                  <radialGradient id="engine-core" cx="50%" cy="46%" r="52%">
+                    <stop offset="0" stop-color="#fff4d6" />
+                    <stop offset="28%" stop-color="#fbbf24" />
+                    <stop offset="62%" stop-color="#f59e0b" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+                  </radialGradient>
+                  <linearGradient id="engine-scan-grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#fbbf24" stop-opacity="0" />
+                    <stop offset="50%" stop-color="#fff7e8" stop-opacity="0.7" />
+                    <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+                  </linearGradient>
+                  <filter id="engine-glow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur stdDeviation="6" />
+                  </filter>
+                  <clipPath id="engine-board-clip">
+                    <polygon points="544.1,98.8 1273.7,520 855.9,761.2 126.3,340" />
+                  </clipPath>
+                  <clipPath id="engine-die-clip">
+                    <polygon points="700,315.7 834.1,393.1 700,470.5 565.9,393.1" />
+                  </clipPath>
+                </defs>
+                <ellipse class="engine-floor" cx="700" cy="466" rx="430" ry="78" />
+                <polygon class="engine-board__side" points="126.3,340 855.9,761.2 855.9,779.2 126.3,358" fill="url(#engine-board-side)" />
+                <polygon class="engine-board__side engine-board__side--right" points="1273.7,520 855.9,761.2 855.9,779.2 1273.7,538" fill="url(#engine-board-side)" />
+                <polygon class="engine-board__top" points="544.1,98.8 1273.7,520 855.9,761.2 126.3,340" fill="url(#engine-board)" />
+                <g clip-path="url(#engine-board-clip)">
+                  <path class="engine-grid" d="M572.2 115 L154.4 356.2 M600.2 131.2 L182.5 372.4 M628.3 147.4 L210.5 388.6 M656.4 163.6 L238.6 404.8 M684.4 179.8 L266.6 421 M712.5 196 L294.7 437.2 M740.5 212.2 L322.8 453.4 M768.6 228.4 L350.8 469.6 M796.6 244.6 L378.9 485.8 M824.7 260.8 L406.9 502 M852.8 277 L435 518.2 M880.8 293.2 L463.1 534.4 M908.9 309.4 L491.1 550.6 M936.9 325.6 L519.2 566.8 M965 341.8 L547.2 583 M993.1 358 L575.3 599.2 M1021.1 374.2 L603.4 615.4 M1049.2 390.4 L631.4 631.6 M1077.2 406.6 L659.5 647.8 M1105.3 422.8 L687.5 664 M1133.4 439 L715.6 680.2 M1161.4 455.2 L743.6 696.4 M1189.5 471.4 L771.7 712.6 M1217.5 487.6 L799.8 728.8 M1245.6 503.8 L827.8 745 M516.1 115 L1245.6 536.2 M488 131.2 L1217.5 552.4 M459.9 147.4 L1189.5 568.6 M431.9 163.6 L1161.4 584.8 M403.8 179.8 L1133.4 601 M375.8 196 L1105.3 617.2 M347.7 212.2 L1077.2 633.4 M319.6 228.4 L1049.2 649.6 M291.6 244.6 L1021.1 665.8 M263.5 260.8 L993.1 682 M235.5 277 L965 698.2 M207.4 293.2 L936.9 714.4 M179.3 309.4 L908.9 730.6 M151.3 325.6 L880.8 746.8" />
+                </g>
+        <ellipse class="engine-hole" cx="544.1" cy="136.2" rx="8.6" ry="5" />
+        <ellipse class="engine-hole" cx="1208.2" cy="519.6" rx="8.6" ry="5" />
+        <ellipse class="engine-hole" cx="855.9" cy="723" rx="8.6" ry="5" />
+        <ellipse class="engine-hole" cx="191.8" cy="339.6" rx="8.6" ry="5" />
+        <path class="engine-trace" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd" />
+        <path class="engine-packet" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd; animation-duration: 3.10s; animation-delay: 0.00s" />
+        <g class="engine-gate" data-branch="cycles">
+          <rect x="715.7" y="290.2" width="68.8" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="750.1" y="302.7" fill="#93c5fd">ONE LIVE</text>
+        </g>
+        <path class="engine-trace" data-branch="criteria" d="M834.3 387.4 L862.4 371.2 L924.7 335.2 L968.1 360.3" pathLength="100" style="color: #93c5fd" />
+        <path class="engine-packet" data-branch="criteria" d="M834.3 387.4 L862.4 371.2 L924.7 335.2 L968.1 360.3" pathLength="100" style="color: #93c5fd; animation-duration: 3.45s; animation-delay: -0.37s" />
+        <g class="engine-gate" data-branch="criteria">
+          <rect x="854.6" y="342.8" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="883.6" y="355.3" fill="#93c5fd">LINKED</text>
+        </g>
+        <path class="engine-trace" data-branch="standards" d="M854.6 458.2 L882.7 474.4 L999.6 541.9 L1071 500.7" pathLength="100" style="color: #93c5fd" />
+        <path class="engine-packet" data-branch="standards" d="M854.6 458.2 L882.7 474.4 L999.6 541.9 L1071 500.7" pathLength="100" style="color: #93c5fd; animation-duration: 3.80s; animation-delay: -0.74s" />
+        <g class="engine-gate" data-branch="standards">
+          <rect x="891.3" y="481.1" width="62.2" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="922.4" y="493.6" fill="#93c5fd">APPLIED</text>
+        </g>
+        <path class="engine-trace" data-branch="timing" d="M791.1 494.9 L819.2 511.1 L993.7 611.9 L977.5 621.3" pathLength="100" style="color: #93c5fd" />
+        <path class="engine-packet" data-branch="timing" d="M791.1 494.9 L819.2 511.1 L993.7 611.9 L977.5 621.3" pathLength="100" style="color: #93c5fd; animation-duration: 3.10s; animation-delay: -1.11s" />
+        <g class="engine-gate" data-branch="timing">
+          <rect x="849.5" y="529.1" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="878.5" y="541.6" fill="#93c5fd">HOURS</text>
+        </g>
+        <path class="engine-trace engine-trace--primary" data-branch="compliance" d="M746.8 520.4 L774.9 536.6 L647 610.5 L700 641.1" pathLength="100" style="color: #34d399" />
+        <path class="engine-packet" data-branch="compliance" d="M746.8 520.4 L774.9 536.6 L647 610.5 L700 641.1" pathLength="100" style="color: #34d399; animation-duration: 2.40s; animation-delay: -1.48s" />
+        <g class="engine-gate" data-branch="compliance">
+          <rect x="700.3" y="545.5" width="62.2" height="18" rx="9" fill="#0c121b" stroke="#34d399" />
+          <text x="731.4" y="558" fill="#34d399">IN DATE</text>
+        </g>
+        <path class="engine-trace" data-branch="evidence" d="M594.5 486.5 L566.4 502.7 L480.7 552.2 L477.1 550.2" pathLength="100" style="color: #93c5fd" />
+        <path class="engine-packet" data-branch="evidence" d="M594.5 486.5 L566.4 502.7 L480.7 552.2 L477.1 550.2" pathLength="100" style="color: #93c5fd; animation-duration: 3.80s; animation-delay: -1.85s" />
+        <g class="engine-gate" data-branch="evidence">
+          <rect x="508.3" y="503.4" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="537.3" y="515.9" fill="#93c5fd">SIGNED</text>
+        </g>
+        <path class="engine-trace engine-trace--primary is-on" data-branch="assessments" d="M541.1 401.6 L513 385.4 L416.3 441.3 L338.3 396.3" pathLength="100" style="color: #f59e0b" />
+        <path class="engine-packet is-on" data-branch="assessments" d="M541.1 401.6 L513 385.4 L416.3 441.3 L338.3 396.3" pathLength="100" style="color: #f59e0b; animation-duration: 2.40s; animation-delay: -2.22s" />
+        <g class="engine-gate is-on" data-branch="assessments">
+          <rect x="451.1" y="388.2" width="58" height="18" rx="9" fill="#0c121b" stroke="#f59e0b" />
+          <text x="480.1" y="400.7" fill="#f59e0b">FLAG</text>
+        </g>
+        <path class="engine-trace" data-branch="development" d="M594.5 370.8 L566.4 354.6 L382.5 248.4 L378.9 250.5" pathLength="100" style="color: #93c5fd" />
+        <path class="engine-packet" data-branch="development" d="M594.5 370.8 L566.4 354.6 L382.5 248.4 L378.9 250.5" pathLength="100" style="color: #93c5fd; animation-duration: 3.45s; animation-delay: -2.59s" />
+        <g class="engine-gate" data-branch="development">
+          <rect x="474.9" y="302.3" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="503.9" y="314.8" fill="#93c5fd">CARRY</text>
+        </g>
+        <polygon class="engine-pin" points="704.9,319.5 711.5,323.2 725.5,315.1 719,311.4" />
+        <polygon class="engine-pin" points="721.4,328.9 727.9,332.7 742,324.6 735.4,320.8" />
+        <polygon class="engine-pin" points="737.8,338.4 744.4,342.2 758.4,334.1 751.9,330.3" />
+        <polygon class="engine-pin" points="754.3,347.9 760.8,351.7 774.8,343.6 768.3,339.8" />
+        <polygon class="engine-pin" points="770.7,357.4 777.2,361.2 791.3,353.1 784.7,349.3" />
+        <polygon class="engine-pin" points="787.1,366.9 793.7,370.7 807.7,362.6 801.2,358.8" />
+        <polygon class="engine-pin" points="803.6,376.4 810.1,380.2 824.2,372.1 817.6,368.3" />
+        <polygon class="engine-pin" points="820,385.9 826.6,389.7 840.6,381.6 834,377.8" />
+        <polygon class="engine-pin" points="836.5,395.4 843,399.2 857,391.1 850.5,387.3" />
+        <polygon class="engine-pin" points="852.9,404.9 859.4,408.7 873.5,400.6 866.9,396.8" />
+        <polygon class="engine-pin" points="869.3,414.4 875.9,418.1 889.9,410 883.4,406.3" />
+        <polygon class="engine-pin" points="875.9,423.9 869.3,427.6 883.4,435.7 889.9,432" />
+        <polygon class="engine-pin" points="859.4,433.3 852.9,437.1 866.9,445.2 873.5,441.4" />
+        <polygon class="engine-pin" points="843,442.8 836.5,446.6 850.5,454.7 857,450.9" />
+        <polygon class="engine-pin" points="826.6,452.3 820,456.1 834,464.2 840.6,460.4" />
+        <polygon class="engine-pin" points="810.1,461.8 803.6,465.6 817.6,473.7 824.2,469.9" />
+        <polygon class="engine-pin" points="793.7,471.3 787.1,475.1 801.2,483.2 807.7,479.4" />
+        <polygon class="engine-pin" points="777.2,480.8 770.7,484.6 784.7,492.7 791.3,488.9" />
+        <polygon class="engine-pin" points="760.8,490.3 754.3,494.1 768.3,502.2 774.8,498.4" />
+        <polygon class="engine-pin" points="744.4,499.8 737.8,503.6 751.9,511.7 758.4,507.9" />
+        <polygon class="engine-pin" points="727.9,509.3 721.4,513.1 735.4,521.2 742,517.4" />
+        <polygon class="engine-pin" points="711.5,518.8 704.9,522.5 719,530.6 725.5,526.9" />
+        <polygon class="engine-pin" points="695.1,522.5 688.5,518.8 674.5,526.9 681,530.6" />
+        <polygon class="engine-pin" points="678.6,513.1 672.1,509.3 658,517.4 664.6,521.2" />
+        <polygon class="engine-pin" points="662.2,503.6 655.6,499.8 641.6,507.9 648.1,511.7" />
+        <polygon class="engine-pin" points="645.7,494.1 639.2,490.3 625.2,498.4 631.7,502.2" />
+        <polygon class="engine-pin" points="629.3,484.6 622.8,480.8 608.7,488.9 615.3,492.7" />
+        <polygon class="engine-pin" points="612.9,475.1 606.3,471.3 592.3,479.4 598.8,483.2" />
+        <polygon class="engine-pin" points="596.4,465.6 589.9,461.8 575.8,469.9 582.4,473.7" />
+        <polygon class="engine-pin" points="580,456.1 573.4,452.3 559.4,460.4 566,464.2" />
+        <polygon class="engine-pin" points="563.5,446.6 557,442.8 543,450.9 549.5,454.7" />
+        <polygon class="engine-pin" points="547.1,437.1 540.6,433.3 526.5,441.4 533.1,445.2" />
+        <polygon class="engine-pin" points="530.7,427.6 524.1,423.9 510.1,432 516.6,435.7" />
+        <polygon class="engine-pin" points="524.1,418.1 530.7,414.4 516.6,406.3 510.1,410" />
+        <polygon class="engine-pin" points="540.6,408.7 547.1,404.9 533.1,396.8 526.5,400.6" />
+        <polygon class="engine-pin" points="557,399.2 563.5,395.4 549.5,387.3 543,391.1" />
+        <polygon class="engine-pin" points="573.4,389.7 580,385.9 566,377.8 559.4,381.6" />
+        <polygon class="engine-pin" points="589.9,380.2 596.4,376.4 582.4,368.3 575.8,372.1" />
+        <polygon class="engine-pin" points="606.3,370.7 612.9,366.9 598.8,358.8 592.3,362.6" />
+        <polygon class="engine-pin" points="622.8,361.2 629.3,357.4 615.3,349.3 608.7,353.1" />
+        <polygon class="engine-pin" points="639.2,351.7 645.7,347.9 631.7,339.8 625.2,343.6" />
+        <polygon class="engine-pin" points="655.6,342.2 662.2,338.4 648.1,330.3 641.6,334.1" />
+        <polygon class="engine-pin" points="672.1,332.7 678.6,328.9 664.6,320.8 658,324.6" />
+        <polygon class="engine-pin" points="688.5,323.2 695.1,319.5 681,311.4 674.5,315.1" />
+                <polygon class="engine-chip__side" points="519.2,394 700,498.4 700,534.4 519.2,430" />
+                <polygon class="engine-chip__side engine-chip__side--right" points="880.8,394 700,498.4 700,534.4 880.8,430" />
+                <polygon class="engine-chip__top" points="700,289.6 880.8,394 700,498.4 519.2,394" />
+                <polygon class="engine-die" points="700,315.7 834.1,393.1 700,470.5 565.9,393.1" />
+                <g clip-path="url(#engine-die-clip)">
+                  <path class="engine-die__grid" d="M726.8 331 L592.8 408.4 M673.2 331 L807.2 408.4 M753.6 346.5 L619.6 423.9 M646.4 346.5 L780.4 423.9 M780.4 362 L646.4 439.4 M619.6 362 L753.6 439.4 M807.2 377.4 L673.2 454.8 M592.8 377.4 L726.8 454.8" />
+                  <rect class="engine-scan" x="565.9" y="315.7" width="26" height="154.8" fill="url(#engine-scan-grad)" style="--scan: 268.1px" />
+                </g>
+                <ellipse class="engine-core" cx="700" cy="392.2" rx="20.3" ry="11.7" filter="url(#engine-glow)" />
+                <ellipse class="engine-core__hot" cx="700" cy="392.2" rx="8.5" ry="4.9" />
+                <ellipse class="engine-ring" cx="700" cy="392.2" rx="26.5" ry="15.3" />
+                <ellipse class="engine-ring engine-ring--compliance" cx="700" cy="392.2" rx="35.9" ry="20.7" />
+              </svg>
+              <p class="engine-core-label" style="left: 50.000%; top: 44.568%;">
+                <span class="engine-core-label__mark">Core</span>
+                <span class="engine-core-label__live"><span class="engine-core-label__dot" aria-hidden="true"></span>Live</span>
+              </p>
+            <button type="button" class="engine-node engine-node--top engine-node--board" data-branch="cycles" data-feeds="Start, expiry and events" data-rule="One live cycle of each type" data-live="Driver · 18 months" data-tone="steel" style="--node: #93c5fd; left: 54.454%; top: 27.437%;" aria-pressed="false" aria-label="Cycles. Feeds Start, expiry and events. Rule: One live cycle of each type. Live feed: Driver · 18 months.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">01</span>
+                <span class="engine-node__label">Cycles</span>
+              </span>
+              <span class="engine-node__feeds">Start, expiry and events</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Driver · 18 months</span>
+            </button>
+            <button type="button" class="engine-node engine-node--right engine-node--board" data-branch="criteria" data-feeds="The framework on each cycle" data-rule="Criteria linked before the cycle runs" data-live="36 criteria attached" data-tone="steel" style="--node: #93c5fd; left: 69.152%; top: 40.938%;" aria-pressed="false" aria-label="Criteria. Feeds The framework on each cycle. Rule: Criteria linked before the cycle runs. Live feed: 36 criteria attached.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">02</span>
+                <span class="engine-node__label">Criteria</span>
+              </span>
+              <span class="engine-node__feeds">The framework on each cycle</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>36 criteria attached</span>
+            </button>
+            <button type="button" class="engine-node engine-node--right engine-node--board" data-branch="standards" data-feeds="Grade scales and timing rules" data-rule="Company standard applied once" data-live="Grade scale A–E" data-tone="steel" style="--node: #93c5fd; left: 76.500%; top: 56.892%;" aria-pressed="false" aria-label="Standards. Feeds Grade scales and timing rules. Rule: Company standard applied once. Live feed: Grade scale A–E.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">03</span>
+                <span class="engine-node__label">Standards</span>
+              </span>
+              <span class="engine-node__feeds">Grade scales and timing rules</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Grade scale A–E</span>
+            </button>
+            <button type="button" class="engine-node engine-node--right engine-node--board" data-branch="timing" data-feeds="Daylight and darkness hours" data-rule="Trainee hours checked against the standard" data-live="Darkness · 120h" data-tone="steel" style="--node: #93c5fd; left: 69.820%; top: 70.597%;" aria-pressed="false" aria-label="Timing. Feeds Daylight and darkness hours. Rule: Trainee hours checked against the standard. Live feed: Darkness · 120h.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">04</span>
+                <span class="engine-node__label">Timing</span>
+              </span>
+              <span class="engine-node__feeds">Daylight and darkness hours</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Darkness · 120h</span>
+            </button>
+            <button type="button" class="engine-node engine-node--bottom engine-node--primary engine-node--board" data-branch="compliance" data-feeds="Protecting your operations" data-rule="A lapsed mandatory competency is flagged" data-live="PTS clear · 0 lapsed" data-tone="green" style="--node: #34d399; left: 50.000%; top: 72.847%;" aria-pressed="false" aria-label="Compliance. Feeds Protecting your operations. Rule: A lapsed mandatory competency is flagged. Live feed: PTS clear · 0 lapsed.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">05</span>
+                <span class="engine-node__label">Compliance</span>
+              </span>
+              <span class="engine-node__feeds">Protecting your operations</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>PTS clear · 0 lapsed</span>
+            </button>
+            <button type="button" class="engine-node engine-node--left engine-node--board" data-branch="evidence" data-feeds="The signed observation record" data-rule="A pass needs a recorded observation" data-live="Signed · 09:14" data-tone="steel" style="--node: #93c5fd; left: 34.078%; top: 62.517%;" aria-pressed="false" aria-label="Evidence. Feeds The signed observation record. Rule: A pass needs a recorded observation. Live feed: Signed · 09:14.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">06</span>
+                <span class="engine-node__label">Evidence</span>
+              </span>
+              <span class="engine-node__feeds">The signed observation record</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Signed · 09:14</span>
+            </button>
+            <button type="button" class="engine-node engine-node--left engine-node--primary engine-node--board is-on" data-branch="assessments" data-feeds="In-cab Demonstrate and Explain" data-rule="Flag a criterion that falls short" data-live="Cab assessment · unit 4" data-tone="amber" style="--node: #f59e0b; left: 24.168%; top: 45.028%;" aria-pressed="true" aria-label="Assessments. Feeds In-cab Demonstrate and Explain. Rule: Flag a criterion that falls short. Live feed: Cab assessment · unit 4.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">07</span>
+                <span class="engine-node__label">Assessments</span>
+              </span>
+              <span class="engine-node__feeds">In-cab Demonstrate and Explain</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Cab assessment · unit 4</span>
+            </button>
+            <button type="button" class="engine-node engine-node--left engine-node--board" data-branch="development" data-feeds="Open points into the next cycle" data-rule="Unresolved development points carry over" data-live="2 points open" data-tone="steel" style="--node: #93c5fd; left: 27.063%; top: 28.460%;" aria-pressed="false" aria-label="Development. Feeds Open points into the next cycle. Rule: Unresolved development points carry over. Live feed: 2 points open.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">08</span>
+                <span class="engine-node__label">Development</span>
+              </span>
+              <span class="engine-node__feeds">Open points into the next cycle</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>2 points open</span>
+            </button>
+            </div>
+          </div>
+          <div class="engine-list">
+            <button type="button" class="engine-list__item" data-branch="cycles" data-feeds="Start, expiry and events" data-rule="One live cycle of each type" data-live="Driver · 18 months" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" aria-label="Cycles. Feeds Start, expiry and events. Rule: One live cycle of each type. Live feed: Driver · 18 months.">
+              <span class="engine-list__index">01</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Cycles</span>
+                <span class="engine-list__feeds">Start, expiry and events</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">ONE LIVE</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Driver · 18 months</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="criteria" data-feeds="The framework on each cycle" data-rule="Criteria linked before the cycle runs" data-live="36 criteria attached" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" aria-label="Criteria. Feeds The framework on each cycle. Rule: Criteria linked before the cycle runs. Live feed: 36 criteria attached.">
+              <span class="engine-list__index">02</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Criteria</span>
+                <span class="engine-list__feeds">The framework on each cycle</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">LINKED</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>36 criteria attached</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="standards" data-feeds="Grade scales and timing rules" data-rule="Company standard applied once" data-live="Grade scale A–E" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" aria-label="Standards. Feeds Grade scales and timing rules. Rule: Company standard applied once. Live feed: Grade scale A–E.">
+              <span class="engine-list__index">03</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Standards</span>
+                <span class="engine-list__feeds">Grade scales and timing rules</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">APPLIED</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Grade scale A–E</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="timing" data-feeds="Daylight and darkness hours" data-rule="Trainee hours checked against the standard" data-live="Darkness · 120h" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" aria-label="Timing. Feeds Daylight and darkness hours. Rule: Trainee hours checked against the standard. Live feed: Darkness · 120h.">
+              <span class="engine-list__index">04</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Timing</span>
+                <span class="engine-list__feeds">Daylight and darkness hours</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">HOURS</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Darkness · 120h</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item engine-list__item--primary" data-branch="compliance" data-feeds="Protecting your operations" data-rule="A lapsed mandatory competency is flagged" data-live="PTS clear · 0 lapsed" data-tone="green" style="--node: #34d399" aria-pressed="false" aria-label="Compliance. Feeds Protecting your operations. Rule: A lapsed mandatory competency is flagged. Live feed: PTS clear · 0 lapsed.">
+              <span class="engine-list__index">05</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Compliance</span>
+                <span class="engine-list__feeds">Protecting your operations</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">IN DATE</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>PTS clear · 0 lapsed</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="evidence" data-feeds="The signed observation record" data-rule="A pass needs a recorded observation" data-live="Signed · 09:14" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" aria-label="Evidence. Feeds The signed observation record. Rule: A pass needs a recorded observation. Live feed: Signed · 09:14.">
+              <span class="engine-list__index">06</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Evidence</span>
+                <span class="engine-list__feeds">The signed observation record</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">SIGNED</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Signed · 09:14</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item engine-list__item--primary is-on" data-branch="assessments" data-feeds="In-cab Demonstrate and Explain" data-rule="Flag a criterion that falls short" data-live="Cab assessment · unit 4" data-tone="amber" style="--node: #f59e0b" aria-pressed="true" aria-label="Assessments. Feeds In-cab Demonstrate and Explain. Rule: Flag a criterion that falls short. Live feed: Cab assessment · unit 4.">
+              <span class="engine-list__index">07</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Assessments</span>
+                <span class="engine-list__feeds">In-cab Demonstrate and Explain</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">FLAG</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Cab assessment · unit 4</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="development" data-feeds="Open points into the next cycle" data-rule="Unresolved development points carry over" data-live="2 points open" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" aria-label="Development. Feeds Open points into the next cycle. Rule: Unresolved development points carry over. Live feed: 2 points open.">
+              <span class="engine-list__index">08</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Development</span>
+                <span class="engine-list__feeds">Open points into the next cycle</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">CARRY</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>2 points open</span>
+              </span>
+            </button>
+          </div>
+          <div class="engine-bezel">
+            <div class="engine-readout" id="competency-engine-readout">
+              <p class="engine-readout__item">
+                <span class="engine-readout__kicker">Feeds</span>
+                <strong data-engine-feeds>In-cab Demonstrate and Explain</strong>
+              </p>
+              <p class="engine-readout__item">
+                <span class="engine-readout__kicker">Rule</span>
+                <strong data-engine-rule>Flag a criterion that falls short</strong>
+              </p>
+              <p class="engine-readout__item">
+                <span class="engine-readout__kicker">Live feed</span>
+                <strong data-engine-live>Cab assessment · unit 4</strong>
+              </p>
+            </div>
+            <div class="engine-bezel__foot">
+              <button type="button" class="engine-toggle" data-engine-toggle aria-pressed="false">Pause</button>
+              <div class="engine-ticker" aria-hidden="true">
+                <div class="engine-ticker__track">
+                <span class="engine-ticker__item">Check · early assessment window</span>
+                <span class="engine-ticker__item">Rule · one live cycle of each type</span>
+                <span class="engine-ticker__item">Feed · darkness hours minimum</span>
+                <span class="engine-ticker__item">Check · template or custom cycle</span>
+                <span class="engine-ticker__item">Rule · open development points carry over</span>
+                <span class="engine-ticker__item">Feed · two-year driver cycle</span>
+                <span class="engine-ticker__item">Check · one-year PTS cycle</span>
+                <span class="engine-ticker__item">Rule · a short observation is flagged, not passed</span>
+                <span class="engine-ticker__item">Feed · continuous cycle renewal</span>
+                <span class="engine-ticker__item">Check · company timing standard</span>
+                <span class="engine-ticker__item">Check · early assessment window</span>
+                <span class="engine-ticker__item">Rule · one live cycle of each type</span>
+                <span class="engine-ticker__item">Feed · darkness hours minimum</span>
+                <span class="engine-ticker__item">Check · template or custom cycle</span>
+                <span class="engine-ticker__item">Rule · open development points carry over</span>
+                <span class="engine-ticker__item">Feed · two-year driver cycle</span>
+                <span class="engine-ticker__item">Check · one-year PTS cycle</span>
+                <span class="engine-ticker__item">Rule · a short observation is flagged, not passed</span>
+                <span class="engine-ticker__item">Feed · continuous cycle renewal</span>
+                <span class="engine-ticker__item">Check · company timing standard</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>
@@ -280,25 +655,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1410px">
-            <img src="../images/screens/cycle-builder/cycle-builder-overview.png?v=193694699" alt="Cycle Builder: choose a template or build a custom competency cycle." width="1410" height="739" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/cycle-builder-overview.png?v=66829597" alt="Cycle Builder: choose a template or build a custom competency cycle." width="1410" height="739" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Cycle Builder: choose a template or build a custom competency cycle.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 690px">
           <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/use-template-cb.png?v=193694699" alt="Starting from a ready-made template." width="690" height="115" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/use-template-cb.png?v=66829597" alt="Starting from a ready-made template." width="690" height="115" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Starting from a ready-made template.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 693px">
           <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/add-competency-criteria.png?v=193694699" alt="Attaching competency criteria to the cycle." width="693" height="322" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/add-competency-criteria.png?v=66829597" alt="Attaching competency criteria to the cycle." width="693" height="322" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Attaching competency criteria to the cycle.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 697px">
           <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/schedule-events-assessment.png?v=193694699" alt="Scheduling the assessment events that make up the cycle." width="697" height="241" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/schedule-events-assessment.png?v=66829597" alt="Scheduling the assessment events that make up the cycle." width="697" height="241" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Scheduling the assessment events that make up the cycle.</figcaption>
         </figure>
@@ -319,25 +694,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1399px">
-            <img src="../images/screens/cycles/current-cycles.png?v=193694699" alt="Live cycles on an employee record with start and expiry dates." width="1399" height="914" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/current-cycles.png?v=66829597" alt="Live cycles on an employee record with start and expiry dates." width="1399" height="914" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Live cycles on an employee record with start and expiry dates.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 697px">
           <div class="shot__frame">
-            <img src="../images/screens/cycles/individual-cycle-view.png?v=193694699" alt="An individual cycle with its scheduled events and progress." width="697" height="455" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/individual-cycle-view.png?v=66829597" alt="An individual cycle with its scheduled events and progress." width="697" height="455" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">An individual cycle with its scheduled events and progress.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 779px">
           <div class="shot__frame">
-            <img src="../images/screens/cycles/continuous-cycles.png?v=193694699" alt="Continuous cycles for competencies that renew rather than expire." width="779" height="422" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/continuous-cycles.png?v=66829597" alt="Continuous cycles for competencies that renew rather than expire." width="779" height="422" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Continuous cycles for competencies that renew rather than expire.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 262px">
           <div class="shot__frame">
-            <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=193694699" alt="A development point carried over into the next cycle." width="262" height="243" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=66829597" alt="A development point carried over into the next cycle." width="262" height="243" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">A development point carried over into the next cycle.</figcaption>
         </figure>
@@ -357,19 +732,19 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1251px">
-            <img src="../images/screens/cycles/active-assessment.png?v=193694699" alt="Active competency assessment — choose a unit and assess Demonstrate or Explain criteria." width="1251" height="974" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/active-assessment.png?v=66829597" alt="Active competency assessment — choose a unit and assess Demonstrate or Explain criteria." width="1251" height="974" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Active competency assessment — choose a unit and assess Demonstrate or Explain criteria.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 430px">
           <div class="shot__frame">
-            <img src="../images/screens/assessing/in-cab-safety.png?v=193694699" alt="In-cab safety: dark mode for windscreen glare and flagging criteria to finish later." width="430" height="665" loading="lazy" decoding="async" />
+            <img src="../images/screens/assessing/in-cab-safety.png?v=66829597" alt="In-cab safety: dark mode for windscreen glare and flagging criteria to finish later." width="430" height="665" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">In-cab safety: dark mode for windscreen glare and flagging criteria to finish later.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 624px">
           <div class="shot__frame">
-            <img src="../images/screens/assessing/flagged-based-on-observations.png?v=193694699" alt="Criteria flagged on the basis of recorded observations." width="624" height="504" loading="lazy" decoding="async" />
+            <img src="../images/screens/assessing/flagged-based-on-observations.png?v=66829597" alt="Criteria flagged on the basis of recorded observations." width="624" height="504" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Criteria flagged on the basis of recorded observations.</figcaption>
         </figure>
@@ -389,25 +764,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 705px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=193694699" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=66829597" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Applying a competency framework across cycles.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 703px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/grade-scale.png?v=193694699" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/grade-scale.png?v=66829597" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The grading scale used by assessors.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 699px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/set-company-standards.png?v=193694699" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/set-company-standards.png?v=66829597" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company standards for assessment and competence.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 786px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/timings-standards.png?v=193694699" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/timings-standards.png?v=66829597" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Timing standards including trainee daylight and darkness minimums.</figcaption>
         </figure>
@@ -541,7 +916,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=193694699"></script>
-  <script src="../js/newsletter.js?v=193694699"></script>
+  <script src="../js/site.js?v=66829597"></script>
+  <script src="../js/newsletter.js?v=66829597"></script>
+  <script src="../js/competency-engine.js?v=66829597"></script>
 </body>
 </html>

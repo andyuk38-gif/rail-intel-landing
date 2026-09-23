@@ -29,6 +29,7 @@ import { mergeItemSeo } from "../content/seo-extensions.mjs";
 import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
 import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../content/communications-hub.mjs";
+import { renderCompetencyEngineHero } from "../content/competency-engine.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -49,6 +50,8 @@ const ASSET_INPUTS = [
   "js/profile-flipbook.js",
   "css/communications-hub.css",
   "js/communications-hub.js",
+  "css/competency-engine.css",
+  "js/competency-engine.js",
   "content/email-templates.generated.mjs",
 ];
 
@@ -2465,8 +2468,13 @@ ${renderHeroLead(group.lead)}
 ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
+  const competencyEngineHero = group.heroGraphic === "competency-engine";
   const heroGraphic =
-    group.heroGraphic === "medicals-licensing" ? renderMedicalsLicensingHeroGraphic(base) : "";
+    group.heroGraphic === "medicals-licensing"
+      ? renderMedicalsLicensingHeroGraphic(base)
+      : competencyEngineHero
+        ? renderCompetencyEngineHero()
+        : "";
   const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
     : group.slug === "communications-hub"
@@ -2476,7 +2484,16 @@ ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const tunnelHero = group.slug === "tunnel-mode";
   const medicalsLicensingHero = group.heroGraphic === "medicals-licensing";
-  const heroInner = hasHeroMedia
+  const heroInner = competencyEngineHero
+    ? `        <div class="page-hero__inner page-hero__inner--engine">
+          <div class="page-hero__copy">
+${heroCopy}
+          </div>
+          <div class="page-hero__media page-hero__media--engine">
+${heroMedia}
+          </div>
+        </div>`
+    : hasHeroMedia
     ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
@@ -2496,18 +2513,22 @@ ${heroCopy}
     ? { extraStylesheets: ["css/profile-flipbook.css"] }
     : commHubPage
       ? { extraStylesheets: ["css/communications-hub.css"] }
-      : {};
+      : competencyEngineHero
+        ? { extraStylesheets: ["css/competency-engine.css"] }
+        : {};
   const footerOptions = flipbookPage
     ? { extraScripts: ["js/profile-flipbook.js"] }
     : commHubPage
       ? { extraScripts: ["js/communications-hub.js"] }
-      : {};
+      : competencyEngineHero
+        ? { extraScripts: ["js/competency-engine.js"] }
+        : {};
 
   return (
     renderHead(base, pageSeo, headOptions) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}">
       <div class="container">
 ${heroInner}
       </div>
