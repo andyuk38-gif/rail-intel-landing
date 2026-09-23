@@ -826,11 +826,32 @@
 }
 
 .comm-hub-console__play-icon {
-  width: 0.55rem;
-  height: 0.55rem;
+  flex-shrink: 0;
+  position: relative;
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.65rem;
+  background: transparent;
+  box-shadow: none;
+}
+
+.comm-hub-console__play[aria-pressed="true"] .comm-hub-console__play-icon::before,
+.comm-hub-console__play[aria-pressed="true"] .comm-hub-console__play-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0.28rem;
   border-radius: 1px;
   background: currentColor;
-  box-shadow: 0.55rem 0 0 currentColor;
+}
+
+.comm-hub-console__play[aria-pressed="true"] .comm-hub-console__play-icon::before {
+  left: 0;
+}
+
+.comm-hub-console__play[aria-pressed="true"] .comm-hub-console__play-icon::after {
+  right: 0;
 }
 
 .comm-hub-console__play[aria-pressed="false"] .comm-hub-console__play-icon {
@@ -840,7 +861,12 @@
   border-bottom: 5px solid transparent;
   border-left: 8px solid currentColor;
   border-radius: 0;
-  box-shadow: none;
+  background: transparent;
+}
+
+.comm-hub-console__play[aria-pressed="false"] .comm-hub-console__play-icon::before,
+.comm-hub-console__play[aria-pressed="false"] .comm-hub-console__play-icon::after {
+  content: none;
 }
 
 .comm-hub-section__grid {
