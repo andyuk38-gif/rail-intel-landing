@@ -719,7 +719,8 @@ export function renderCompetencyEngineBay(base = "../") {
   const seat = chipBox();
   return `          <aside class="engine-bay" data-engine-bay style="--token-ratio: ${fmt(seat.w)} / ${fmt(seat.h)}">
             <p class="engine-bay__kicker" data-engine-kicker>Ready to seat</p>
-            <div class="engine-bay__slot" data-engine-home>
+            <div class="engine-bay__slot">
+              <div class="engine-bay__home" data-engine-home>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
                 <svg class="engine-token__svg" viewBox="${fmt(seat.x)} ${fmt(seat.y)} ${fmt(seat.w)} ${fmt(seat.h)}" role="presentation" aria-hidden="true">
                   <defs>
@@ -729,6 +730,7 @@ ${chipBody(base, "token")}
                 </svg>
                 <span class="sr-only">Competency engine chip. Drag it onto the socket, or press to seat it.</span>
               </button>
+              </div>
             </div>
             <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag into the socket</span></p>
             <button type="button" class="engine-lift" data-engine-lift hidden>Lift chip</button>
