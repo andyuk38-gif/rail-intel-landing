@@ -419,8 +419,9 @@ ${scheduledCards}
       <div class="container comm-hub-section__grid comm-hub-section__grid--reverse">
         <div class="comm-hub-section__copy">
           <p class="product-eyebrow">On-record messaging</p>
-          <h2>Conversations stay on the employee record — with email alerts</h2>
-          <p>Notes about competence, medicals or incidents remain auditable on the profile, not buried in personal Outlook threads. When someone raises a message, the hub notifies the right recipients by email so the exchange is seen without anyone living in the CMS.</p>
+          <h2>Conversations stay on the employee record, with email alerts</h2>
+          <p>Notes about competence, medicals or incidents remain auditable on the profile, not buried in personal Outlook threads. Each thread belongs to the employee you are discussing, so audits, handovers and investigations can pull the full exchange history from one place instead of hunting through inboxes.</p>
+          <p>When someone posts a message, the communications hub emails the people who need to see it and keeps the thread in Rail Intel. Read receipts show who opened a note and when, without managers camping in the CMS for a reply. Switch between the current conversation and archived threads for earlier periods, so past context stays available while new notes stay on the active thread.</p>
         </div>
         <div class="comm-hub-shots">
           <figure class="shot reveal">
