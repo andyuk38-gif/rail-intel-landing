@@ -31,9 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=66829597" />
-  <link rel="stylesheet" href="../css/pages.css?v=66829597" />
-  <link rel="stylesheet" href="../css/competency-engine.css?v=66829597" />
+  <link rel="stylesheet" href="../css/style.css?v=242614264" />
+  <link rel="stylesheet" href="../css/pages.css?v=242614264" />
+  <link rel="stylesheet" href="../css/competency-engine.css?v=242614264" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -264,7 +264,7 @@
           </div>
           <div class="page-hero__media page-hero__media--engine">
         <div class="engine" data-competency-engine data-active="assessments">
-          <p class="sr-only">The competency engine sits at the centre. Branches leave it for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed.</p>
+          <p class="sr-only">The competency engine sits at the centre. Branches leave it for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces, labelled QA, Tasks, Briefs, Trainee, Reports, Leave and Medication.</p>
           <div class="engine__bar">
             <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span>Live feeds</span>
             <span class="engine__device">Competency engine</span>
@@ -292,25 +292,16 @@
                     <stop offset="0" stop-color="#243246" />
                     <stop offset="1" stop-color="#101720" />
                   </linearGradient>
-                  <radialGradient id="engine-core" cx="50%" cy="46%" r="52%">
-                    <stop offset="0" stop-color="#fff4d6" />
-                    <stop offset="28%" stop-color="#fbbf24" />
-                    <stop offset="62%" stop-color="#f59e0b" stop-opacity="0.35" />
-                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
-                  </radialGradient>
-                  <linearGradient id="engine-scan-grad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#fbbf24" stop-opacity="0" />
-                    <stop offset="50%" stop-color="#fff7e8" stop-opacity="0.7" />
-                    <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+                  <linearGradient id="engine-die-matte" gradientUnits="userSpaceOnUse" x1="700" y1="303.1" x2="700" y2="483.1">
+                    <stop offset="0" stop-color="#4a5160" />
+                    <stop offset="0.42" stop-color="#3a414c" />
+                    <stop offset="1" stop-color="#2a3038" />
                   </linearGradient>
-                  <filter id="engine-glow" x="-40%" y="-40%" width="180%" height="180%">
-                    <feGaussianBlur stdDeviation="6" />
-                  </filter>
                   <clipPath id="engine-board-clip">
                     <polygon points="544.1,98.8 1273.7,520 855.9,761.2 126.3,340" />
                   </clipPath>
                   <clipPath id="engine-die-clip">
-                    <polygon points="700,315.7 834.1,393.1 700,470.5 565.9,393.1" />
+                    <polygon points="700,303.1 855.9,393.1 700,483.1 544.1,393.1" />
                   </clipPath>
                 </defs>
                 <ellipse class="engine-floor" cx="700" cy="466" rx="430" ry="78" />
@@ -324,6 +315,20 @@
         <ellipse class="engine-hole" cx="1208.2" cy="519.6" rx="8.6" ry="5" />
         <ellipse class="engine-hole" cx="855.9" cy="723" rx="8.6" ry="5" />
         <ellipse class="engine-hole" cx="191.8" cy="339.6" rx="8.6" ry="5" />
+        <path class="engine-trace engine-trace--addon" d="M696.9 308 L631.4 270.3" pathLength="100" style="color: #c084fc" />
+        <path class="engine-packet engine-packet--addon" d="M696.9 308 L631.4 270.3" pathLength="100" style="color: #c084fc; animation-duration: 3.6s; animation-delay: 0.00s" />
+        <path class="engine-trace engine-trace--addon" d="M531.6 452.1 L439.7 505.2 L380.4 471" pathLength="100" style="color: #22d3ee" />
+        <path class="engine-packet engine-packet--addon" d="M531.6 452.1 L439.7 505.2 L380.4 471" pathLength="100" style="color: #22d3ee; animation-duration: 3.6s; animation-delay: -0.42s" />
+        <path class="engine-trace engine-trace--addon" d="M646.2 340.9 L618.2 324.7 L437.3 220.3 L505.1 181.1" pathLength="100" style="color: #fb7185" />
+        <path class="engine-packet engine-packet--addon" d="M646.2 340.9 L618.2 324.7 L437.3 220.3 L505.1 181.1" pathLength="100" style="color: #fb7185; animation-duration: 3.6s; animation-delay: -0.84s" />
+        <path class="engine-trace engine-trace--addon" d="M788.2 360.7 L816.2 344.5 L860.6 318.9 L840.3 307.2" pathLength="100" style="color: #818cf8" />
+        <path class="engine-packet engine-packet--addon" d="M788.2 360.7 L816.2 344.5 L860.6 318.9 L840.3 307.2" pathLength="100" style="color: #818cf8; animation-duration: 3.6s; animation-delay: -1.26s" />
+        <path class="engine-trace engine-trace--addon" d="M888.6 417 L922.9 397.2" pathLength="100" style="color: #f472b6" />
+        <path class="engine-packet engine-packet--addon" d="M888.6 417 L922.9 397.2" pathLength="100" style="color: #f472b6; animation-duration: 3.6s; animation-delay: -1.68s" />
+        <path class="engine-trace engine-trace--addon" d="M561.1 390 L533 373.8 L461.3 332.4 L411.6 361.2" pathLength="100" style="color: #2dd4bf" />
+        <path class="engine-packet engine-packet--addon" d="M561.1 390 L533 373.8 L461.3 332.4 L411.6 361.2" pathLength="100" style="color: #2dd4bf; animation-duration: 3.6s; animation-delay: -2.10s" />
+        <path class="engine-trace engine-trace--addon" d="M753.8 516.4 L781.8 532.6 L962.7 637 L894.9 676.2" pathLength="100" style="color: #fb923c" />
+        <path class="engine-packet engine-packet--addon" d="M753.8 516.4 L781.8 532.6 L962.7 637 L894.9 676.2" pathLength="100" style="color: #fb923c; animation-duration: 3.6s; animation-delay: -2.52s" />
         <path class="engine-trace" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd" />
         <path class="engine-packet" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd; animation-duration: 3.10s; animation-delay: 0.00s" />
         <g class="engine-gate" data-branch="cycles">
@@ -419,20 +424,43 @@
                 <polygon class="engine-chip__side" points="519.2,394 700,498.4 700,534.4 519.2,430" />
                 <polygon class="engine-chip__side engine-chip__side--right" points="880.8,394 700,498.4 700,534.4 880.8,430" />
                 <polygon class="engine-chip__top" points="700,289.6 880.8,394 700,498.4 519.2,394" />
-                <polygon class="engine-die" points="700,315.7 834.1,393.1 700,470.5 565.9,393.1" />
+                <polygon class="engine-die" points="700,303.1 855.9,393.1 700,483.1 544.1,393.1" />
                 <g clip-path="url(#engine-die-clip)">
-                  <path class="engine-die__grid" d="M726.8 331 L592.8 408.4 M673.2 331 L807.2 408.4 M753.6 346.5 L619.6 423.9 M646.4 346.5 L780.4 423.9 M780.4 362 L646.4 439.4 M619.6 362 L753.6 439.4 M807.2 377.4 L673.2 454.8 M592.8 377.4 L726.8 454.8" />
-                  <rect class="engine-scan" x="565.9" y="315.7" width="26" height="154.8" fill="url(#engine-scan-grad)" style="--scan: 268.1px" />
+                  <g class="engine-brand" transform="matrix(0.8 0.5 -0.8 0.5 700 392)">
+                    <image href="../images/rail-intel-icon.png" x="-38" y="-74" width="76" height="76" />
+                    <text class="engine-brand__by" x="0" y="40" text-anchor="middle">powered by</text>
+                    <text class="engine-brand__name" x="0" y="76" text-anchor="middle">Rail Intel</text>
+                  </g>
                 </g>
-                <ellipse class="engine-core" cx="700" cy="392.2" rx="20.3" ry="11.7" filter="url(#engine-glow)" />
-                <ellipse class="engine-core__hot" cx="700" cy="392.2" rx="8.5" ry="4.9" />
-                <ellipse class="engine-ring" cx="700" cy="392.2" rx="26.5" ry="15.3" />
-                <ellipse class="engine-ring engine-ring--compliance" cx="700" cy="392.2" rx="35.9" ry="20.7" />
+        <g class="engine-pill">
+          <rect x="605.4" y="252" width="52" height="22" rx="11" fill="#0c121b" stroke="#c084fc" />
+          <text x="631.4" y="267" fill="#c084fc">QA</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="350.9" y="452.8" width="59" height="22" rx="11" fill="#0c121b" stroke="#22d3ee" />
+          <text x="380.4" y="467.8" fill="#22d3ee">Tasks</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="471.9" y="163" width="66.4" height="22" rx="11" fill="#0c121b" stroke="#fb7185" />
+          <text x="505.1" y="178" fill="#fb7185">Briefs</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="803.4" y="289" width="73.8" height="22" rx="11" fill="#0c121b" stroke="#818cf8" />
+          <text x="840.3" y="304" fill="#818cf8">Trainee</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="886" y="379" width="73.8" height="22" rx="11" fill="#0c121b" stroke="#f472b6" />
+          <text x="922.9" y="394" fill="#f472b6">Reports</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="382.1" y="343" width="59" height="22" rx="11" fill="#0c121b" stroke="#2dd4bf" />
+          <text x="411.6" y="358" fill="#2dd4bf">Leave</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="846.9" y="658" width="96" height="22" rx="11" fill="#0c121b" stroke="#fb923c" />
+          <text x="894.9" y="673" fill="#fb923c">Medication</text>
+        </g>
               </svg>
-              <p class="engine-core-label" style="left: 50.000%; top: 44.568%;">
-                <span class="engine-core-label__mark">Core</span>
-                <span class="engine-core-label__live"><span class="engine-core-label__dot" aria-hidden="true"></span>Live</span>
-              </p>
             <button type="button" class="engine-node engine-node--top engine-node--board" data-branch="cycles" data-feeds="Start, expiry and events" data-rule="One live cycle of each type" data-live="Driver · 18 months" data-tone="steel" style="--node: #93c5fd; left: 54.454%; top: 27.437%;" aria-pressed="false" aria-label="Cycles. Feeds Start, expiry and events. Rule: One live cycle of each type. Live feed: Driver · 18 months.">
               <span class="engine-node__top">
                 <span class="engine-node__index">01</span>
@@ -655,25 +683,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1410px">
-            <img src="../images/screens/cycle-builder/cycle-builder-overview.png?v=66829597" alt="Cycle Builder: choose a template or build a custom competency cycle." width="1410" height="739" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/cycle-builder-overview.png?v=242614264" alt="Cycle Builder: choose a template or build a custom competency cycle." width="1410" height="739" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Cycle Builder: choose a template or build a custom competency cycle.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 690px">
           <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/use-template-cb.png?v=66829597" alt="Starting from a ready-made template." width="690" height="115" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/use-template-cb.png?v=242614264" alt="Starting from a ready-made template." width="690" height="115" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Starting from a ready-made template.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 693px">
           <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/add-competency-criteria.png?v=66829597" alt="Attaching competency criteria to the cycle." width="693" height="322" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/add-competency-criteria.png?v=242614264" alt="Attaching competency criteria to the cycle." width="693" height="322" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Attaching competency criteria to the cycle.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 697px">
           <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/schedule-events-assessment.png?v=66829597" alt="Scheduling the assessment events that make up the cycle." width="697" height="241" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycle-builder/schedule-events-assessment.png?v=242614264" alt="Scheduling the assessment events that make up the cycle." width="697" height="241" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Scheduling the assessment events that make up the cycle.</figcaption>
         </figure>
@@ -694,25 +722,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1399px">
-            <img src="../images/screens/cycles/current-cycles.png?v=66829597" alt="Live cycles on an employee record with start and expiry dates." width="1399" height="914" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/current-cycles.png?v=242614264" alt="Live cycles on an employee record with start and expiry dates." width="1399" height="914" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Live cycles on an employee record with start and expiry dates.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 697px">
           <div class="shot__frame">
-            <img src="../images/screens/cycles/individual-cycle-view.png?v=66829597" alt="An individual cycle with its scheduled events and progress." width="697" height="455" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/individual-cycle-view.png?v=242614264" alt="An individual cycle with its scheduled events and progress." width="697" height="455" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">An individual cycle with its scheduled events and progress.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 779px">
           <div class="shot__frame">
-            <img src="../images/screens/cycles/continuous-cycles.png?v=66829597" alt="Continuous cycles for competencies that renew rather than expire." width="779" height="422" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/continuous-cycles.png?v=242614264" alt="Continuous cycles for competencies that renew rather than expire." width="779" height="422" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Continuous cycles for competencies that renew rather than expire.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 262px">
           <div class="shot__frame">
-            <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=66829597" alt="A development point carried over into the next cycle." width="262" height="243" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=242614264" alt="A development point carried over into the next cycle." width="262" height="243" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">A development point carried over into the next cycle.</figcaption>
         </figure>
@@ -732,19 +760,19 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot shot--full reveal">
           <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1251px">
-            <img src="../images/screens/cycles/active-assessment.png?v=66829597" alt="Active competency assessment — choose a unit and assess Demonstrate or Explain criteria." width="1251" height="974" loading="lazy" decoding="async" />
+            <img src="../images/screens/cycles/active-assessment.png?v=242614264" alt="Active competency assessment — choose a unit and assess Demonstrate or Explain criteria." width="1251" height="974" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Active competency assessment — choose a unit and assess Demonstrate or Explain criteria.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 430px">
           <div class="shot__frame">
-            <img src="../images/screens/assessing/in-cab-safety.png?v=66829597" alt="In-cab safety: dark mode for windscreen glare and flagging criteria to finish later." width="430" height="665" loading="lazy" decoding="async" />
+            <img src="../images/screens/assessing/in-cab-safety.png?v=242614264" alt="In-cab safety: dark mode for windscreen glare and flagging criteria to finish later." width="430" height="665" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">In-cab safety: dark mode for windscreen glare and flagging criteria to finish later.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 624px">
           <div class="shot__frame">
-            <img src="../images/screens/assessing/flagged-based-on-observations.png?v=66829597" alt="Criteria flagged on the basis of recorded observations." width="624" height="504" loading="lazy" decoding="async" />
+            <img src="../images/screens/assessing/flagged-based-on-observations.png?v=242614264" alt="Criteria flagged on the basis of recorded observations." width="624" height="504" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Criteria flagged on the basis of recorded observations.</figcaption>
         </figure>
@@ -764,25 +792,25 @@
       <div class="shot-grid shot-grid--two">
         <figure class="shot reveal" style="max-width: 705px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=66829597" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=242614264" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Applying a competency framework across cycles.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 703px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/grade-scale.png?v=66829597" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/grade-scale.png?v=242614264" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">The grading scale used by assessors.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 699px">
           <div class="shot__frame">
-            <img src="../images/screens/comp-config/set-company-standards.png?v=66829597" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
+            <img src="../images/screens/comp-config/set-company-standards.png?v=242614264" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Company standards for assessment and competence.</figcaption>
         </figure>
         <figure class="shot reveal" style="max-width: 786px">
           <div class="shot__frame">
-            <img src="../images/screens/main-sys/timings-standards.png?v=66829597" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
+            <img src="../images/screens/main-sys/timings-standards.png?v=242614264" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
           </div>
           <figcaption class="shot__caption">Timing standards including trainee daylight and darkness minimums.</figcaption>
         </figure>
@@ -916,8 +944,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=66829597"></script>
-  <script src="../js/newsletter.js?v=66829597"></script>
-  <script src="../js/competency-engine.js?v=66829597"></script>
+  <script src="../js/site.js?v=242614264"></script>
+  <script src="../js/newsletter.js?v=242614264"></script>
+  <script src="../js/competency-engine.js?v=242614264"></script>
 </body>
 </html>

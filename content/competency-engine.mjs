@@ -132,6 +132,47 @@ const BRANCHES = [
   },
 ];
 
+const ADDONS = [
+  {
+    id: "qa",
+    label: "QA",
+    color: "#c084fc",
+    x: -220,
+    y: -132,
+    points: [
+      { x: -136, y: -132 },
+      { x: -220, y: -132 },
+    ],
+  },
+  {
+    id: "tasks",
+    label: "Tasks",
+    color: "#22d3ee",
+    x: -158,
+    y: 252,
+    points: [
+      { x: -82, y: 134 },
+      { x: -82, y: 252 },
+      { x: -158, y: 252 },
+    ],
+  },
+  { id: "briefs", label: "Briefs", color: "#fb7185", x: -400, y: -150 },
+  { id: "trainee", label: "Trainee", color: "#818cf8", x: -45, y: -225 },
+  {
+    id: "reports",
+    label: "Reports",
+    color: "#f472b6",
+    x: 108,
+    y: -178,
+    points: [
+      { x: 108, y: -134 },
+      { x: 108, y: -178 },
+    ],
+  },
+  { id: "leave", label: "Leave", color: "#2dd4bf", x: -260, y: 110 },
+  { id: "medication", label: "Medication", color: "#fb923c", x: 400, y: 150 },
+];
+
 const TICKER = [
   "Check · early assessment window",
   "Rule · one live cycle of each type",
@@ -296,7 +337,12 @@ function nodeButton(branch, side, left, top, extraClass) {
             </button>`;
 }
 
-export function renderCompetencyEngineHero() {
+function brandPlane(z) {
+  const origin = screen(0, 0, z);
+  return `matrix(${fmt(COS * SCALE)} ${fmt(SIN * SCALE)} ${fmt(-COS * SCALE)} ${fmt(SIN * SCALE)} ${fmt(origin.x)} ${fmt(origin.y)})`;
+}
+
+export function renderCompetencyEngineHero(base = "../") {
   const traceZ = BOARD_Z + 1.5;
   const topZ = BOARD_Z + CHIP_H;
   const routes = BRANCHES.map((branch) => ({ branch, path: route(branch) }));
@@ -345,27 +391,33 @@ export function renderCompetencyEngineHero() {
     screen(CHIP, CHIP, topZ),
     screen(-CHIP, CHIP, topZ),
   ];
-  const dieInset = 30;
+  const dieInset = 16;
   const die = [
     screen(-CHIP + dieInset, -CHIP + dieInset, topZ + 1),
     screen(CHIP - dieInset, -CHIP + dieInset, topZ + 1),
     screen(CHIP - dieInset, CHIP - dieInset, topZ + 1),
     screen(-CHIP + dieInset, CHIP - dieInset, topZ + 1),
   ];
-  const dieMinX = Math.min(...die.map((p) => p.x));
-  const dieMaxX = Math.max(...die.map((p) => p.x));
-  const dieMinY = Math.min(...die.map((p) => p.y));
-  const dieMaxY = Math.max(...die.map((p) => p.y));
-  const core = boardCircle(0, 0, topZ + 2, 26);
-  const ringA = boardCircle(0, 0, topZ + 2, 34);
-  const ringB = boardCircle(0, 0, topZ + 2, 46);
+  const dieBack = die[0];
+  const dieFront = die[2];
 
-  const dieGrid = [];
-  for (let i = 1; i < 5; i += 1) {
-    const t = dieInset + ((CHIP * 2 - dieInset * 2) * i) / 5;
-    dieGrid.push(toPath([{ x: -CHIP + t, y: -CHIP + dieInset }, { x: -CHIP + t, y: CHIP - dieInset }], topZ + 1.2));
-    dieGrid.push(toPath([{ x: -CHIP + dieInset, y: -CHIP + t }, { x: CHIP - dieInset, y: -CHIP + t }], topZ + 1.2));
-  }
+  const addonTraceMarkup = ADDONS.map((addon, index) => {
+    const d = toPath(addon.points || route(addon), traceZ);
+    const delay = (-index * 0.42).toFixed(2);
+    return `        <path class="engine-trace engine-trace--addon" d="${d}" pathLength="100" style="color: ${addon.color}" />
+        <path class="engine-packet engine-packet--addon" d="${d}" pathLength="100" style="color: ${addon.color}; animation-duration: 3.6s; animation-delay: ${delay}s" />`;
+  }).join("\n");
+
+  const addonPillMarkup = ADDONS.map((addon) => {
+    const end = addon.points ? addon.points[addon.points.length - 1] : addon;
+    const point = screen(end.x, end.y, traceZ + 8);
+    const width = Math.max(52, addon.label.length * 7.4 + 22);
+    const height = 22;
+    return `        <g class="engine-pill">
+          <rect x="${fmt(point.x - width / 2)}" y="${fmt(point.y - height / 2)}" width="${fmt(width)}" height="${height}" rx="11" fill="#0c121b" stroke="${addon.color}" />
+          <text x="${fmt(point.x)}" y="${fmt(point.y + 4)}" fill="${addon.color}">${esc(addon.label)}</text>
+        </g>`;
+  }).join("\n");
 
   const branchMarkup = routes
     .map(({ branch, path }, index) => {
@@ -422,9 +474,6 @@ export function renderCompetencyEngineHero() {
             </button>`;
   }).join("\n");
 
-  const coreLabel = screen(0, 0, topZ + 2);
-  const coreLeft = ((coreLabel.x / VB_W) * 100).toFixed(3);
-  const coreTop = ((coreLabel.y / VB_H) * 100).toFixed(3);
   const tickerItems = [...TICKER, ...TICKER]
     .map((item) => `                <span class="engine-ticker__item">${esc(item)}</span>`)
     .join("\n");
@@ -432,7 +481,7 @@ export function renderCompetencyEngineHero() {
   const defaultBranch = BRANCHES.find((branch) => branch.id === "assessments");
 
   return `        <div class="engine" data-competency-engine data-active="assessments">
-          <p class="sr-only">The competency engine sits at the centre. Branches leave it for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed.</p>
+          <p class="sr-only">The competency engine sits at the centre. Branches leave it for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces, labelled QA, Tasks, Briefs, Trainee, Reports, Leave and Medication.</p>
           <div class="engine__bar">
             <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span>Live feeds</span>
             <span class="engine__device">Competency engine</span>
@@ -460,20 +509,11 @@ export function renderCompetencyEngineHero() {
                     <stop offset="0" stop-color="#243246" />
                     <stop offset="1" stop-color="#101720" />
                   </linearGradient>
-                  <radialGradient id="engine-core" cx="50%" cy="46%" r="52%">
-                    <stop offset="0" stop-color="#fff4d6" />
-                    <stop offset="28%" stop-color="#fbbf24" />
-                    <stop offset="62%" stop-color="#f59e0b" stop-opacity="0.35" />
-                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
-                  </radialGradient>
-                  <linearGradient id="engine-scan-grad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#fbbf24" stop-opacity="0" />
-                    <stop offset="50%" stop-color="#fff7e8" stop-opacity="0.7" />
-                    <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+                  <linearGradient id="engine-die-matte" gradientUnits="userSpaceOnUse" x1="${fmt(dieBack.x)}" y1="${fmt(dieBack.y)}" x2="${fmt(dieFront.x)}" y2="${fmt(dieFront.y)}">
+                    <stop offset="0" stop-color="#4a5160" />
+                    <stop offset="0.42" stop-color="#3a414c" />
+                    <stop offset="1" stop-color="#2a3038" />
                   </linearGradient>
-                  <filter id="engine-glow" x="-40%" y="-40%" width="180%" height="180%">
-                    <feGaussianBlur stdDeviation="6" />
-                  </filter>
                   <clipPath id="engine-board-clip">
                     <polygon points="${boardTop}" />
                   </clipPath>
@@ -489,6 +529,7 @@ export function renderCompetencyEngineHero() {
                   <path class="engine-grid" d="${grid.join(" ")}" />
                 </g>
 ${holeMarkup}
+${addonTraceMarkup}
 ${branchMarkup}
 ${pinMarkup}
                 <polygon class="engine-chip__side" points="${poly([
@@ -506,18 +547,14 @@ ${pinMarkup}
                 <polygon class="engine-chip__top" points="${poly(chipTop)}" />
                 <polygon class="engine-die" points="${poly(die)}" />
                 <g clip-path="url(#engine-die-clip)">
-                  <path class="engine-die__grid" d="${dieGrid.join(" ")}" />
-                  <rect class="engine-scan" x="${fmt(dieMinX)}" y="${fmt(dieMinY)}" width="26" height="${fmt(dieMaxY - dieMinY)}" fill="url(#engine-scan-grad)" style="--scan: ${fmt(dieMaxX - dieMinX)}px" />
+                  <g class="engine-brand" transform="${brandPlane(topZ + 2.2)}">
+                    <image href="${esc(base)}images/rail-intel-icon.png" x="-38" y="-74" width="76" height="76" />
+                    <text class="engine-brand__by" x="0" y="40" text-anchor="middle">powered by</text>
+                    <text class="engine-brand__name" x="0" y="76" text-anchor="middle">Rail Intel</text>
+                  </g>
                 </g>
-                <ellipse class="engine-core" cx="${fmt(core.c.x)}" cy="${fmt(core.c.y)}" rx="${fmt(core.rx)}" ry="${fmt(core.ry)}" filter="url(#engine-glow)" />
-                <ellipse class="engine-core__hot" cx="${fmt(core.c.x)}" cy="${fmt(core.c.y)}" rx="${fmt(core.rx * 0.42)}" ry="${fmt(core.ry * 0.42)}" />
-                <ellipse class="engine-ring" cx="${fmt(ringA.c.x)}" cy="${fmt(ringA.c.y)}" rx="${fmt(ringA.rx)}" ry="${fmt(ringA.ry)}" />
-                <ellipse class="engine-ring engine-ring--compliance" cx="${fmt(ringB.c.x)}" cy="${fmt(ringB.c.y)}" rx="${fmt(ringB.rx)}" ry="${fmt(ringB.ry)}" />
+${addonPillMarkup}
               </svg>
-              <p class="engine-core-label" style="left: ${coreLeft}%; top: ${coreTop}%;">
-                <span class="engine-core-label__mark">Core</span>
-                <span class="engine-core-label__live"><span class="engine-core-label__dot" aria-hidden="true"></span>Live</span>
-              </p>
 ${nodes}
             </div>
           </div>

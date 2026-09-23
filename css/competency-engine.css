@@ -60,8 +60,7 @@
 }
 
 .engine__status-dot,
-.engine-node__dot,
-.engine-core-label__dot {
+.engine-node__dot {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
@@ -145,6 +144,16 @@
   stroke-width: 3.35;
 }
 
+.engine-trace--addon {
+  stroke-width: 2;
+  opacity: 0.8;
+}
+
+.engine-packet--addon {
+  stroke-width: 2.6;
+  opacity: 0.72;
+}
+
 .engine-trace.is-on {
   opacity: 1;
   filter: drop-shadow(0 0 5px currentColor);
@@ -179,6 +188,22 @@
   text-anchor: middle;
 }
 
+.engine-pill {
+  pointer-events: none;
+}
+
+.engine-pill rect {
+  stroke-width: 1.25;
+}
+
+.engine-pill text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-anchor: middle;
+}
+
 .engine-pin {
   fill: #c5d0de;
   stroke: rgba(15, 23, 36, 0.45);
@@ -202,81 +227,29 @@
 }
 
 .engine-die {
-  fill: #070c12;
-  stroke: rgba(245, 158, 11, 0.45);
+  fill: url(#engine-die-matte);
+  stroke: rgba(226, 232, 240, 0.16);
   stroke-width: 1.15;
 }
 
-.engine-die__grid {
-  fill: none;
-  stroke: rgba(245, 158, 11, 0.16);
-  stroke-width: 1;
-}
-
-.engine-scan {
-  animation: engine-scan 3.8s ease-in-out infinite;
-}
-
-.engine-core {
-  fill: url(#engine-core);
-  opacity: 0.95;
-}
-
-.engine-core__hot {
-  fill: #fff8e8;
-  animation: engine-hot 2.4s ease-in-out infinite;
-}
-
-.engine-ring {
-  fill: none;
-  stroke: #f59e0b;
-  stroke-width: 1.4;
-  stroke-dasharray: 7 11;
-  opacity: 0.85;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: engine-spin 16s linear infinite;
-}
-
-.engine-ring--compliance {
-  stroke: #34d399;
-  stroke-dasharray: 4 13;
-  animation-duration: 24s;
-  animation-direction: reverse;
-  opacity: 0.75;
-}
-
-.engine-core-label {
-  position: absolute;
-  z-index: 2;
-  transform: translate(-50%, -58%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.12rem;
-  margin: 0;
+.engine-brand {
   pointer-events: none;
-  text-align: center;
 }
 
-.engine-core-label__mark {
-  font-size: 0.68rem;
-  font-weight: 650;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #fff8ec;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
+.engine-brand__by {
+  fill: #c5ccd6;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
-.engine-core-label__live {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.28rem;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #d1fae5;
+.engine-brand__name {
+  fill: #f7f8fa;
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .engine-node {
@@ -552,33 +525,13 @@
 
 .engine.is-paused .engine-packet,
 .engine.is-paused .engine-ticker__track,
-.engine.is-paused .engine-scan,
-.engine.is-paused .engine-ring,
-.engine.is-paused .engine-core__hot,
 .engine.is-paused .engine__status-dot,
-.engine.is-paused .engine-node__dot,
-.engine.is-paused .engine-core-label__dot {
+.engine.is-paused .engine-node__dot {
   animation-play-state: paused;
 }
 
 @keyframes engine-packet {
   to { stroke-dashoffset: -100; }
-}
-
-@keyframes engine-scan {
-  0% { transform: translateX(-18px); opacity: 0; }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { transform: translateX(var(--scan, 180px)); opacity: 0; }
-}
-
-@keyframes engine-spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes engine-hot {
-  0%, 100% { opacity: 0.75; }
-  50% { opacity: 1; }
 }
 
 @keyframes engine-pulse {
@@ -632,12 +585,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .engine-packet,
-  .engine-scan,
-  .engine-ring,
-  .engine-core__hot,
   .engine__status-dot,
   .engine-node__dot,
-  .engine-core-label__dot,
   .engine-ticker__track,
   .engine__scene {
     animation: none;
@@ -647,9 +596,5 @@
   .engine-packet {
     stroke-dasharray: none;
     opacity: 0.2;
-  }
-
-  .engine-scan {
-    opacity: 0;
   }
 }

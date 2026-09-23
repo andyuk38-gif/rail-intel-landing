@@ -2473,7 +2473,7 @@ ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
     group.heroGraphic === "medicals-licensing"
       ? renderMedicalsLicensingHeroGraphic(base)
       : competencyEngineHero
-        ? renderCompetencyEngineHero()
+        ? renderCompetencyEngineHero(base)
         : "";
   const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
