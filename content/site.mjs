@@ -1943,7 +1943,7 @@ export const featureGroups = [
     taglineHtml:
       'Powerful <span class="hero-title__accent">communications</span> hub - your personal <span class="hero-title__accent">assistant</span>',
     lead:
-      "Rail Intel includes a built-in communications hub that turns conditional rules into action. Alert emails and in-app system notifications fire when competence lapses, medicals approach expiry, incidents are recorded, messages are raised or welfare follow-up is due, without anyone chasing a spreadsheet or inbox.",
+      "Rail Intel includes a built-in communications hub that turns conditional rules into action. Alert emails and in-app system notifications fire when competence lapses, medicals approach expiry, incidents are recorded, messages are raised or welfare follow-up is due, without anyone chasing a spreadsheet, email inbox or only seen when you log in to dashboard.",
     hideHeroActions: true,
     hideCta: true,
     faq: [
