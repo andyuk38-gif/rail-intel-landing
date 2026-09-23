@@ -973,6 +973,15 @@
   color: rgba(148, 163, 184, 0.9) !important;
 }
 
+.comm-hub-section--schedule .page-section__head {
+  max-width: none;
+  width: 100%;
+}
+
+.comm-hub-section--schedule .page-section__head > p {
+  max-width: none;
+}
+
 .comm-hub-schedule-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

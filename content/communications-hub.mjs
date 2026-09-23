@@ -298,7 +298,7 @@ ${templateStore}
         <div class="comm-hub-section__copy">
           <p class="product-eyebrow">Email and system notifications</p>
           <h2>The same event reaches the inbox and the dashboard</h2>
-          <p>Conditional rules across competency, medicals, licensing, incidents, monitoring and messaging drive both email alerts and in-app system notifications. Managers see items on the dashboard feed; employees see them on their record where permissions allow — nothing depends on an inbox alone.</p>
+          <p>Conditional rules across competency, medicals, licensing, incidents, monitoring and messaging drive both email alerts and in-app system notifications. Managers see items on the dashboard feed; employees see them on their record where permissions allow, nothing depends on an inbox alone.</p>
           <ul class="spec-list">
             <li><strong>Competency and cycle expiry</strong> before someone reaches the railway out of date.</li>
             <li><strong>Medical and licence renewal</strong> reminders on the dashboard and by email.</li>
