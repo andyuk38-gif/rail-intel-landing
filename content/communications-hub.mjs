@@ -425,7 +425,7 @@ ${scheduledCards}
         <div class="comm-hub-shots">
           <figure class="shot reveal">
             <div class="shot__frame">
-              <img src="${base}images/screens/messaging-employee/employee-messaging.png" alt="Messaging threads held against the employee record." width="781" height="490" loading="lazy" decoding="async" />
+              <img src="${base}images/screens/messaging-employee/employee-messaging.png" alt="Messaging threads held against the employee record." width="1024" height="485" loading="lazy" decoding="async" />
             </div>
             <figcaption class="shot__caption">Messaging threads on the employee record.</figcaption>
           </figure>
