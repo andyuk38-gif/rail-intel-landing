@@ -33,7 +33,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css?v=193694699" />
   <link rel="stylesheet" href="../css/pages.css?v=193694699" />
-  <link rel="stylesheet" href="../css/communications-hub.css?v=193694714" />
+  <link rel="stylesheet" href="../css/communications-hub.css?v=193694715" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -1407,71 +1407,41 @@
           <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
         </div>
         <div class="comm-hub-section__media">
-        <div class="comm-hub-template-registry reveal" data-comm-template-registry aria-label="Rail Intel maintained email templates in Administration">
-          <div class="comm-hub-template-registry__chrome">
-            <div class="comm-hub-template-registry__chrome-left">
-              <span class="comm-hub-template-registry__dots" aria-hidden="true"><span></span><span></span><span></span></span>
-              <span class="comm-hub-template-registry__path">Administration · Email templates</span>
-            </div>
-            <span class="comm-hub-template-registry__badge">Rail Intel maintained</span>
+        <div class="comm-hub-signal-panel reveal" data-comm-signal-panel aria-label="How the communications hub routes one rule to email and in-app alerts">
+          <div class="comm-hub-signal-panel__chrome">
+            <span class="comm-hub-signal-panel__brand">Communications hub</span>
+            <span class="comm-hub-signal-panel__live"><span class="comm-hub-signal-panel__live-dot" aria-hidden="true"></span> Conditional rule matched</span>
           </div>
-          <div class="comm-hub-template-registry__preview">
-            <p class="comm-hub-template-registry__cat comm-hub-template-registry__cat--instant" data-comm-registry-category>Instant alerts</p>
-            <p class="comm-hub-template-registry__title" data-comm-registry-title>Task assigned</p>
-            <p class="comm-hub-template-registry__subject" data-comm-registry-subject>New task assigned: Complete route knowledge refresh</p>
-            <div class="comm-hub-template-registry__preview-lines" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
+          <div class="comm-hub-signal-panel__trigger" data-comm-signal-trigger>
+            <p class="comm-hub-signal-panel__rule" data-comm-signal-rule>Competency cycle</p>
+            <p class="comm-hub-signal-panel__event" data-comm-signal-event>Assessment window closing soon</p>
           </div>
-          <ul class="comm-hub-template-registry__list">
-              <li class="comm-hub-template-registry__row is-active" data-comm-registry-row data-comm-registry-cat="instant">
-                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--instant" aria-hidden="true"></span>
-                <span class="comm-hub-template-registry__row-copy">
-                  <span class="comm-hub-template-registry__row-name">Task assigned</span>
-                  <span class="comm-hub-template-registry__row-meta">Instant alerts</span>
-                </span>
-                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
-              </li>
-              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="scheduled">
-                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--scheduled" aria-hidden="true"></span>
-                <span class="comm-hub-template-registry__row-copy">
-                  <span class="comm-hub-template-registry__row-name">Assessment window closing soon</span>
-                  <span class="comm-hub-template-registry__row-meta">Scheduled alerts</span>
-                </span>
-                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
-              </li>
-              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="instant">
-                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--instant" aria-hidden="true"></span>
-                <span class="comm-hub-template-registry__row-copy">
-                  <span class="comm-hub-template-registry__row-name">Digital cab pass issued</span>
-                  <span class="comm-hub-template-registry__row-meta">Instant alerts</span>
-                </span>
-                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
-              </li>
-              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="account">
-                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--account" aria-hidden="true"></span>
-                <span class="comm-hub-template-registry__row-copy">
-                  <span class="comm-hub-template-registry__row-name">Welcome to Rail Intel</span>
-                  <span class="comm-hub-template-registry__row-meta">Account &amp; access</span>
-                </span>
-                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
-              </li>
-              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="scheduled">
-                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--scheduled" aria-hidden="true"></span>
-                <span class="comm-hub-template-registry__row-copy">
-                  <span class="comm-hub-template-registry__row-name">Licence expiry — 3 months</span>
-                  <span class="comm-hub-template-registry__row-meta">Scheduled alerts</span>
-                </span>
-                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
-              </li>
-          </ul>
-          <div class="comm-hub-template-registry__footer">
-            <span><strong>30</strong> templates</span>
-            <span class="comm-hub-template-registry__footer-note">View only · wording locked for companies</span>
+          <div class="comm-hub-signal-panel__hub" aria-hidden="true">
+            <span class="comm-hub-signal-panel__hub-core"></span>
+            <span class="comm-hub-signal-panel__hub-beam comm-hub-signal-panel__hub-beam--email"></span>
+            <span class="comm-hub-signal-panel__hub-beam comm-hub-signal-panel__hub-beam--app"></span>
           </div>
-          <div class="comm-hub-template-registry__progress" aria-hidden="true"><span data-comm-registry-progress></span></div>
+          <div class="comm-hub-signal-panel__channels">
+            <article class="comm-hub-signal-panel__channel comm-hub-signal-panel__channel--email">
+              <header class="comm-hub-signal-panel__channel-head">
+                <span class="comm-hub-signal-panel__channel-icon comm-hub-signal-panel__channel-icon--email" aria-hidden="true"></span>
+                <span>Email alert</span>
+              </header>
+              <p class="comm-hub-signal-panel__channel-line" data-comm-signal-email>Assessment window closes soon for Sarah Mitchell</p>
+            </article>
+            <article class="comm-hub-signal-panel__channel comm-hub-signal-panel__channel--app comm-hub-signal-panel__channel--sky" data-comm-signal-notify>
+              <header class="comm-hub-signal-panel__channel-head">
+                <span class="comm-hub-signal-panel__channel-icon comm-hub-signal-panel__channel-icon--app" aria-hidden="true"></span>
+                <span>System notification</span>
+              </header>
+              <p class="comm-hub-signal-panel__channel-title" data-comm-signal-notify-title>Assessment window closing soon</p>
+              <p class="comm-hub-signal-panel__channel-meta" data-comm-signal-notify-body>Route knowledge · closes 30 Sep 2026</p>
+            </article>
+          </div>
+          <p class="comm-hub-signal-panel__tagline" data-comm-signal-tagline>Same event · inbox and dashboard · no manual chasing</p>
+          <div class="comm-hub-signal-panel__progress" aria-hidden="true"><span data-comm-signal-progress></span></div>
         </div>
-        <p class="comm-hub-template-registry__caption">Central template registry — versioned and updated by Rail Intel.</p>
+        <p class="comm-hub-signal-panel__caption">Rules across competency, medicals, incidents and messaging — delivered on two channels automatically.</p>
         </div>
       </div>
     </section>
@@ -1586,6 +1556,6 @@
 
   <script src="../js/site.js?v=193694699"></script>
   <script src="../js/newsletter.js?v=193694699"></script>
-  <script src="../js/communications-hub.js?v=193694714"></script>
+  <script src="../js/communications-hub.js?v=193694715"></script>
 </body>
 </html>

@@ -77,79 +77,87 @@ const SCHEDULED_ALERTS = [
   },
 ];
 
-export const COMM_HUB_REGISTRY_TEMPLATES = [
+export const COMM_HUB_SIGNALS = [
   {
-    cat: "instant",
-    catLabel: "Instant alerts",
-    name: "Task assigned",
-    subject: "New task assigned: Complete route knowledge refresh",
+    rule: "Competency cycle",
+    event: "Assessment window closing soon",
+    emailSubject: "Assessment window closes soon for Sarah Mitchell",
+    notifyTitle: "Assessment window closing soon",
+    notifyBody: "Route knowledge · closes 30 Sep 2026",
+    tone: "sky",
   },
   {
-    cat: "scheduled",
-    catLabel: "Scheduled alerts",
-    name: "Assessment window closing soon",
-    subject: "Assessment window closes soon for Sarah Mitchell",
+    rule: "Medicals & licensing",
+    event: "Licence renewal reminder",
+    emailSubject: "Train driving licence renewal due in 3 months",
+    notifyTitle: "Licence renewal reminder",
+    notifyBody: "Sarah Mitchell · 3 months before expiry",
+    tone: "amber",
   },
   {
-    cat: "instant",
-    catLabel: "Instant alerts",
-    name: "Digital cab pass issued",
-    subject: "Your digital cab pass is ready to view",
+    rule: "Employee messaging",
+    event: "New on-record message",
+    emailSubject: "New message on Employee Messaging & Notes",
+    notifyTitle: "New on-record message",
+    notifyBody: "Sarah Mitchell · Employee Messaging & Notes",
+    tone: "indigo",
   },
   {
-    cat: "account",
-    catLabel: "Account & access",
-    name: "Welcome to Rail Intel",
-    subject: "Welcome to Rail Intel – Your login details",
+    rule: "Task assignment",
+    event: "Task assigned to you",
+    emailSubject: "New task assigned: Complete route knowledge refresh",
+    notifyTitle: "Task assigned to you",
+    notifyBody: "Due 15 Oct 2026 · Route knowledge",
+    tone: "violet",
   },
   {
-    cat: "scheduled",
-    catLabel: "Scheduled alerts",
-    name: "Licence expiry — 3 months",
-    subject: "Train driving licence renewal due in 3 months",
+    rule: "Welfare follow-up",
+    event: "Fatality welfare check reminder",
+    emailSubject: "Fatality incident — welfare check due in 7 days",
+    notifyTitle: "Welfare check reminder",
+    notifyBody: "7 days before anniversary · contact due",
+    tone: "rose",
   },
 ];
 
-export function renderCommHubTemplateRegistry() {
-  const rows = COMM_HUB_REGISTRY_TEMPLATES.map(
-    (item, index) => `              <li class="comm-hub-template-registry__row${index === 0 ? " is-active" : ""}" data-comm-registry-row data-comm-registry-cat="${esc(item.cat)}">
-                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--${esc(item.cat)}" aria-hidden="true"></span>
-                <span class="comm-hub-template-registry__row-copy">
-                  <span class="comm-hub-template-registry__row-name">${esc(item.name)}</span>
-                  <span class="comm-hub-template-registry__row-meta">${esc(item.catLabel)}</span>
-                </span>
-                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
-              </li>`
-  ).join("\n");
+export function renderCommHubSignalPanel() {
+  const first = COMM_HUB_SIGNALS[0];
 
-  const first = COMM_HUB_REGISTRY_TEMPLATES[0];
-
-  return `        <div class="comm-hub-template-registry reveal" data-comm-template-registry aria-label="Rail Intel maintained email templates in Administration">
-          <div class="comm-hub-template-registry__chrome">
-            <div class="comm-hub-template-registry__chrome-left">
-              <span class="comm-hub-template-registry__dots" aria-hidden="true"><span></span><span></span><span></span></span>
-              <span class="comm-hub-template-registry__path">Administration · Email templates</span>
-            </div>
-            <span class="comm-hub-template-registry__badge">Rail Intel maintained</span>
+  return `        <div class="comm-hub-signal-panel reveal" data-comm-signal-panel aria-label="How the communications hub routes one rule to email and in-app alerts">
+          <div class="comm-hub-signal-panel__chrome">
+            <span class="comm-hub-signal-panel__brand">Communications hub</span>
+            <span class="comm-hub-signal-panel__live"><span class="comm-hub-signal-panel__live-dot" aria-hidden="true"></span> Conditional rule matched</span>
           </div>
-          <div class="comm-hub-template-registry__preview">
-            <p class="comm-hub-template-registry__cat comm-hub-template-registry__cat--${esc(first.cat)}" data-comm-registry-category>${esc(first.catLabel)}</p>
-            <p class="comm-hub-template-registry__title" data-comm-registry-title>${esc(first.name)}</p>
-            <p class="comm-hub-template-registry__subject" data-comm-registry-subject>${esc(first.subject)}</p>
-            <div class="comm-hub-template-registry__preview-lines" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
+          <div class="comm-hub-signal-panel__trigger" data-comm-signal-trigger>
+            <p class="comm-hub-signal-panel__rule" data-comm-signal-rule>${esc(first.rule)}</p>
+            <p class="comm-hub-signal-panel__event" data-comm-signal-event>${esc(first.event)}</p>
           </div>
-          <ul class="comm-hub-template-registry__list">
-${rows}
-          </ul>
-          <div class="comm-hub-template-registry__footer">
-            <span><strong>30</strong> templates</span>
-            <span class="comm-hub-template-registry__footer-note">View only · wording locked for companies</span>
+          <div class="comm-hub-signal-panel__hub" aria-hidden="true">
+            <span class="comm-hub-signal-panel__hub-core"></span>
+            <span class="comm-hub-signal-panel__hub-beam comm-hub-signal-panel__hub-beam--email"></span>
+            <span class="comm-hub-signal-panel__hub-beam comm-hub-signal-panel__hub-beam--app"></span>
           </div>
-          <div class="comm-hub-template-registry__progress" aria-hidden="true"><span data-comm-registry-progress></span></div>
+          <div class="comm-hub-signal-panel__channels">
+            <article class="comm-hub-signal-panel__channel comm-hub-signal-panel__channel--email">
+              <header class="comm-hub-signal-panel__channel-head">
+                <span class="comm-hub-signal-panel__channel-icon comm-hub-signal-panel__channel-icon--email" aria-hidden="true"></span>
+                <span>Email alert</span>
+              </header>
+              <p class="comm-hub-signal-panel__channel-line" data-comm-signal-email>${esc(first.emailSubject)}</p>
+            </article>
+            <article class="comm-hub-signal-panel__channel comm-hub-signal-panel__channel--app comm-hub-signal-panel__channel--${esc(first.tone)}" data-comm-signal-notify>
+              <header class="comm-hub-signal-panel__channel-head">
+                <span class="comm-hub-signal-panel__channel-icon comm-hub-signal-panel__channel-icon--app" aria-hidden="true"></span>
+                <span>System notification</span>
+              </header>
+              <p class="comm-hub-signal-panel__channel-title" data-comm-signal-notify-title>${esc(first.notifyTitle)}</p>
+              <p class="comm-hub-signal-panel__channel-meta" data-comm-signal-notify-body>${esc(first.notifyBody)}</p>
+            </article>
+          </div>
+          <p class="comm-hub-signal-panel__tagline" data-comm-signal-tagline>Same event · inbox and dashboard · no manual chasing</p>
+          <div class="comm-hub-signal-panel__progress" aria-hidden="true"><span data-comm-signal-progress></span></div>
         </div>
-        <p class="comm-hub-template-registry__caption">Central template registry — versioned and updated by Rail Intel.</p>`;
+        <p class="comm-hub-signal-panel__caption">Rules across competency, medicals, incidents and messaging — delivered on two channels automatically.</p>`;
 }
 
 export function renderCommunicationsHubHero() {
@@ -434,7 +442,7 @@ ${scheduledCards}
           <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
         </div>
         <div class="comm-hub-section__media">
-${renderCommHubTemplateRegistry()}
+${renderCommHubSignalPanel()}
         </div>
       </div>
     </section>`;

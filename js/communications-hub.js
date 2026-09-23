@@ -3,7 +3,7 @@
 (function () {
   "use strict";
 
-  initTemplateRegistry();
+  initSignalPanel();
 
   var root = document.querySelector("[data-comm-hub]");
   if (!root) return;
@@ -992,52 +992,73 @@
   applyFilter("instant", false);
   startRotation();
 
-  function initTemplateRegistry() {
-    var panel = document.querySelector("[data-comm-template-registry]");
+  function initSignalPanel() {
+    var panel = document.querySelector("[data-comm-signal-panel]");
     if (!panel) return;
 
-    var templates = [
+    var signals = [
       {
-        cat: "instant",
-        catLabel: "Instant alerts",
-        name: "Task assigned",
-        subject: "New task assigned: Complete route knowledge refresh",
+        rule: "Competency cycle",
+        event: "Assessment window closing soon",
+        emailSubject: "Assessment window closes soon for Sarah Mitchell",
+        notifyTitle: "Assessment window closing soon",
+        notifyBody: "Route knowledge · closes 30 Sep 2026",
+        tone: "sky",
       },
       {
-        cat: "scheduled",
-        catLabel: "Scheduled alerts",
-        name: "Assessment window closing soon",
-        subject: "Assessment window closes soon for Sarah Mitchell",
+        rule: "Medicals & licensing",
+        event: "Licence renewal reminder",
+        emailSubject: "Train driving licence renewal due in 3 months",
+        notifyTitle: "Licence renewal reminder",
+        notifyBody: "Sarah Mitchell · 3 months before expiry",
+        tone: "amber",
       },
       {
-        cat: "instant",
-        catLabel: "Instant alerts",
-        name: "Digital cab pass issued",
-        subject: "Your digital cab pass is ready to view",
+        rule: "Employee messaging",
+        event: "New on-record message",
+        emailSubject: "New message on Employee Messaging & Notes",
+        notifyTitle: "New on-record message",
+        notifyBody: "Sarah Mitchell · Employee Messaging & Notes",
+        tone: "indigo",
       },
       {
-        cat: "account",
-        catLabel: "Account & access",
-        name: "Welcome to Rail Intel",
-        subject: "Welcome to Rail Intel – Your login details",
+        rule: "Task assignment",
+        event: "Task assigned to you",
+        emailSubject: "New task assigned: Complete route knowledge refresh",
+        notifyTitle: "Task assigned to you",
+        notifyBody: "Due 15 Oct 2026 · Route knowledge",
+        tone: "violet",
       },
       {
-        cat: "scheduled",
-        catLabel: "Scheduled alerts",
-        name: "Licence expiry — 3 months",
-        subject: "Train driving licence renewal due in 3 months",
+        rule: "Welfare follow-up",
+        event: "Fatality welfare check reminder",
+        emailSubject: "Fatality incident — welfare check due in 7 days",
+        notifyTitle: "Welfare check reminder",
+        notifyBody: "7 days before anniversary · contact due",
+        tone: "rose",
       },
     ];
 
-    var catEl = panel.querySelector("[data-comm-registry-category]");
-    var titleEl = panel.querySelector("[data-comm-registry-title]");
-    var subjectEl = panel.querySelector("[data-comm-registry-subject]");
-    var progressEl = panel.querySelector("[data-comm-registry-progress]");
-    var rows = Array.prototype.slice.call(panel.querySelectorAll("[data-comm-registry-row]"));
+    var ruleEl = panel.querySelector("[data-comm-signal-rule]");
+    var eventEl = panel.querySelector("[data-comm-signal-event]");
+    var emailEl = panel.querySelector("[data-comm-signal-email]");
+    var notifyEl = panel.querySelector("[data-comm-signal-notify]");
+    var notifyTitleEl = panel.querySelector("[data-comm-signal-notify-title]");
+    var notifyBodyEl = panel.querySelector("[data-comm-signal-notify-body]");
+    var progressEl = panel.querySelector("[data-comm-signal-progress]");
     var index = 0;
     var timer = null;
-    var REGISTRY_MS = 4200;
+    var SIGNAL_MS = 4500;
     var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function pulseRoute() {
+      panel.classList.remove("is-route-active");
+      void panel.offsetWidth;
+      panel.classList.add("is-route-active");
+      window.setTimeout(function () {
+        panel.classList.remove("is-route-active");
+      }, prefersReducedMotion ? 0 : 900);
+    }
 
     function resetProgress() {
       panel.classList.remove("is-timing");
@@ -1050,23 +1071,25 @@
     }
 
     function render(i) {
-      var t = templates[i];
-      if (catEl) {
-        catEl.textContent = t.catLabel;
-        catEl.className = "comm-hub-template-registry__cat comm-hub-template-registry__cat--" + t.cat;
+      var s = signals[i];
+      if (ruleEl) ruleEl.textContent = s.rule;
+      if (eventEl) eventEl.textContent = s.event;
+      if (emailEl) emailEl.textContent = s.emailSubject;
+      if (notifyTitleEl) notifyTitleEl.textContent = s.notifyTitle;
+      if (notifyBodyEl) notifyBodyEl.textContent = s.notifyBody;
+      if (notifyEl) {
+        notifyEl.className =
+          "comm-hub-signal-panel__channel comm-hub-signal-panel__channel--app comm-hub-signal-panel__channel--" +
+          s.tone;
       }
-      if (titleEl) titleEl.textContent = t.name;
-      if (subjectEl) subjectEl.textContent = t.subject;
-      rows.forEach(function (row, ri) {
-        row.classList.toggle("is-active", ri === i);
-      });
       resetProgress();
+      pulseRoute();
     }
 
     function advance() {
       panel.classList.add("is-changing");
       window.setTimeout(function () {
-        index = (index + 1) % templates.length;
+        index = (index + 1) % signals.length;
         render(index);
         panel.classList.remove("is-changing");
       }, prefersReducedMotion ? 0 : 280);
@@ -1075,7 +1098,7 @@
     function start() {
       stop();
       if (prefersReducedMotion) return;
-      timer = window.setInterval(advance, REGISTRY_MS);
+      timer = window.setInterval(advance, SIGNAL_MS);
     }
 
     function stop() {
