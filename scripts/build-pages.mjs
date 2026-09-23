@@ -29,7 +29,7 @@ import { mergeItemSeo } from "../content/seo-extensions.mjs";
 import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
 import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../content/communications-hub.mjs";
-import { renderCompetencyEngineHero } from "../content/competency-engine.mjs";
+import { renderCompetencyEngineBay, renderCompetencyEngineHero } from "../content/competency-engine.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -2459,16 +2459,18 @@ function featurePage(group) {
           ? `\n${renderCommunicationsHubPage(base)}\n`
           : "\n";
 
+  const competencyEngineHero = group.heroGraphic === "competency-engine";
+  const heroLeadMarkup = renderHeroLead(group.lead);
+
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
     group.name
   )}</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
-${renderHeroLead(group.lead)}
+${heroLeadMarkup}
 ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
-  const competencyEngineHero = group.heroGraphic === "competency-engine";
   const heroGraphic =
     group.heroGraphic === "medicals-licensing"
       ? renderMedicalsLicensingHeroGraphic(base)
@@ -2489,6 +2491,7 @@ ${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
+${renderCompetencyEngineBay(base)}
           <div class="page-hero__media page-hero__media--engine">
 ${heroMedia}
           </div>
