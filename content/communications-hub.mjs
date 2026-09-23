@@ -422,6 +422,8 @@ ${scheduledCards}
           <h2>Conversations stay on the employee record, with email alerts</h2>
           <p>Notes about competence, medicals or incidents remain auditable on the profile, not buried in personal Outlook threads. Each thread belongs to the employee you are discussing, so audits, handovers and investigations can pull the full exchange history from one place instead of hunting through inboxes.</p>
           <p>When someone posts a message, the communications hub emails the people who need to see it and keeps the thread in Rail Intel. Read receipts show who opened a note and when, without managers camping in the CMS for a reply. Switch between the current conversation and archived threads for earlier periods, so past context stays available while new notes stay on the active thread.</p>
+          <h3 class="page-section__subheading comm-hub-messaging-sub">Locking conversations and retention</h3>
+          <p>When a conversation is locked, that thread closes as read only and keeps its date range on the employee record. Every message and read receipt stays in Rail Intel for audits and investigations, nothing is removed because the discussion moved on. A new current conversation opens for ongoing notes, and people with permission can open archived threads from the conversation picker to review what was said without posting into a closed period.</p>
         </div>
         <div class="comm-hub-shots">
           <figure class="shot reveal">

@@ -1049,6 +1049,10 @@
   line-height: 1.55;
 }
 
+.comm-hub-section--messaging .comm-hub-messaging-sub {
+  margin-top: 1.75rem;
+}
+
 .comm-hub-section__media {
   min-width: 0;
 }
