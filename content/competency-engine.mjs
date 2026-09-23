@@ -484,7 +484,7 @@ export function renderCompetencyEngineHero(base = "../") {
           <p class="sr-only">The competency engine sits at the centre. Branches leave it for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces, labelled QA, Tasks, Briefs, Trainee, Reports, Leave and Medication.</p>
           <div class="engine__bar">
             <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span>Live feeds</span>
-            <span class="engine__device">Competency engine</span>
+            <span class="engine__device">Operational Compliance</span>
             <span class="engine__outputs">Drives assessment and compliance</span>
           </div>
           <div class="engine__viewport">
