@@ -33,7 +33,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css?v=193694699" />
   <link rel="stylesheet" href="../css/pages.css?v=193694699" />
-  <link rel="stylesheet" href="../css/communications-hub.css?v=193694713" />
+  <link rel="stylesheet" href="../css/communications-hub.css?v=193694714" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -1406,12 +1406,73 @@
           <p>Every transactional email is written and maintained by Rail Intel — cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
           <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
         </div>
-        <figure class="shot reveal">
-          <div class="shot__frame">
-            <img src="../images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Digital cab pass issued by email — one example of a configurable transactional template." width="433" height="289" loading="lazy" decoding="async" />
+        <div class="comm-hub-section__media">
+        <div class="comm-hub-template-registry reveal" data-comm-template-registry aria-label="Rail Intel maintained email templates in Administration">
+          <div class="comm-hub-template-registry__chrome">
+            <div class="comm-hub-template-registry__chrome-left">
+              <span class="comm-hub-template-registry__dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="comm-hub-template-registry__path">Administration · Email templates</span>
+            </div>
+            <span class="comm-hub-template-registry__badge">Rail Intel maintained</span>
           </div>
-          <figcaption class="shot__caption">Cab pass issued by email — maintained by Rail Intel.</figcaption>
-        </figure>
+          <div class="comm-hub-template-registry__preview">
+            <p class="comm-hub-template-registry__cat comm-hub-template-registry__cat--instant" data-comm-registry-category>Instant alerts</p>
+            <p class="comm-hub-template-registry__title" data-comm-registry-title>Task assigned</p>
+            <p class="comm-hub-template-registry__subject" data-comm-registry-subject>New task assigned: Complete route knowledge refresh</p>
+            <div class="comm-hub-template-registry__preview-lines" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <ul class="comm-hub-template-registry__list">
+              <li class="comm-hub-template-registry__row is-active" data-comm-registry-row data-comm-registry-cat="instant">
+                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-template-registry__row-copy">
+                  <span class="comm-hub-template-registry__row-name">Task assigned</span>
+                  <span class="comm-hub-template-registry__row-meta">Instant alerts</span>
+                </span>
+                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
+              </li>
+              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="scheduled">
+                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-template-registry__row-copy">
+                  <span class="comm-hub-template-registry__row-name">Assessment window closing soon</span>
+                  <span class="comm-hub-template-registry__row-meta">Scheduled alerts</span>
+                </span>
+                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
+              </li>
+              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="instant">
+                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--instant" aria-hidden="true"></span>
+                <span class="comm-hub-template-registry__row-copy">
+                  <span class="comm-hub-template-registry__row-name">Digital cab pass issued</span>
+                  <span class="comm-hub-template-registry__row-meta">Instant alerts</span>
+                </span>
+                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
+              </li>
+              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="account">
+                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--account" aria-hidden="true"></span>
+                <span class="comm-hub-template-registry__row-copy">
+                  <span class="comm-hub-template-registry__row-name">Welcome to Rail Intel</span>
+                  <span class="comm-hub-template-registry__row-meta">Account &amp; access</span>
+                </span>
+                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
+              </li>
+              <li class="comm-hub-template-registry__row" data-comm-registry-row data-comm-registry-cat="scheduled">
+                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--scheduled" aria-hidden="true"></span>
+                <span class="comm-hub-template-registry__row-copy">
+                  <span class="comm-hub-template-registry__row-name">Licence expiry — 3 months</span>
+                  <span class="comm-hub-template-registry__row-meta">Scheduled alerts</span>
+                </span>
+                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
+              </li>
+          </ul>
+          <div class="comm-hub-template-registry__footer">
+            <span><strong>30</strong> templates</span>
+            <span class="comm-hub-template-registry__footer-note">View only · wording locked for companies</span>
+          </div>
+          <div class="comm-hub-template-registry__progress" aria-hidden="true"><span data-comm-registry-progress></span></div>
+        </div>
+        <p class="comm-hub-template-registry__caption">Central template registry — versioned and updated by Rail Intel.</p>
+        </div>
       </div>
     </section>
 
@@ -1525,6 +1586,6 @@
 
   <script src="../js/site.js?v=193694699"></script>
   <script src="../js/newsletter.js?v=193694699"></script>
-  <script src="../js/communications-hub.js?v=193694711"></script>
+  <script src="../js/communications-hub.js?v=193694714"></script>
 </body>
 </html>

@@ -77,6 +77,81 @@ const SCHEDULED_ALERTS = [
   },
 ];
 
+export const COMM_HUB_REGISTRY_TEMPLATES = [
+  {
+    cat: "instant",
+    catLabel: "Instant alerts",
+    name: "Task assigned",
+    subject: "New task assigned: Complete route knowledge refresh",
+  },
+  {
+    cat: "scheduled",
+    catLabel: "Scheduled alerts",
+    name: "Assessment window closing soon",
+    subject: "Assessment window closes soon for Sarah Mitchell",
+  },
+  {
+    cat: "instant",
+    catLabel: "Instant alerts",
+    name: "Digital cab pass issued",
+    subject: "Your digital cab pass is ready to view",
+  },
+  {
+    cat: "account",
+    catLabel: "Account & access",
+    name: "Welcome to Rail Intel",
+    subject: "Welcome to Rail Intel – Your login details",
+  },
+  {
+    cat: "scheduled",
+    catLabel: "Scheduled alerts",
+    name: "Licence expiry — 3 months",
+    subject: "Train driving licence renewal due in 3 months",
+  },
+];
+
+export function renderCommHubTemplateRegistry() {
+  const rows = COMM_HUB_REGISTRY_TEMPLATES.map(
+    (item, index) => `              <li class="comm-hub-template-registry__row${index === 0 ? " is-active" : ""}" data-comm-registry-row data-comm-registry-cat="${esc(item.cat)}">
+                <span class="comm-hub-template-registry__row-dot comm-hub-template-registry__row-dot--${esc(item.cat)}" aria-hidden="true"></span>
+                <span class="comm-hub-template-registry__row-copy">
+                  <span class="comm-hub-template-registry__row-name">${esc(item.name)}</span>
+                  <span class="comm-hub-template-registry__row-meta">${esc(item.catLabel)}</span>
+                </span>
+                <span class="comm-hub-template-registry__row-lock" aria-hidden="true">Locked</span>
+              </li>`
+  ).join("\n");
+
+  const first = COMM_HUB_REGISTRY_TEMPLATES[0];
+
+  return `        <div class="comm-hub-template-registry reveal" data-comm-template-registry aria-label="Rail Intel maintained email templates in Administration">
+          <div class="comm-hub-template-registry__chrome">
+            <div class="comm-hub-template-registry__chrome-left">
+              <span class="comm-hub-template-registry__dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="comm-hub-template-registry__path">Administration · Email templates</span>
+            </div>
+            <span class="comm-hub-template-registry__badge">Rail Intel maintained</span>
+          </div>
+          <div class="comm-hub-template-registry__preview">
+            <p class="comm-hub-template-registry__cat comm-hub-template-registry__cat--${esc(first.cat)}" data-comm-registry-category>${esc(first.catLabel)}</p>
+            <p class="comm-hub-template-registry__title" data-comm-registry-title>${esc(first.name)}</p>
+            <p class="comm-hub-template-registry__subject" data-comm-registry-subject>${esc(first.subject)}</p>
+            <div class="comm-hub-template-registry__preview-lines" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <ul class="comm-hub-template-registry__list">
+${rows}
+          </ul>
+          <div class="comm-hub-template-registry__footer">
+            <span><strong>30</strong> templates</span>
+            <span class="comm-hub-template-registry__footer-note">View only · wording locked for companies</span>
+          </div>
+          <div class="comm-hub-template-registry__progress" aria-hidden="true"><span data-comm-registry-progress></span></div>
+        </div>
+        <p class="comm-hub-template-registry__caption">Central template registry — versioned and updated by Rail Intel.</p>`;
+}
+
 export function renderCommunicationsHubHero() {
   return `        <div class="comm-hub-hero-card" aria-label="Sample system notifications">
           <div class="comm-hub-hero-card__row">
@@ -358,12 +433,9 @@ ${scheduledCards}
           <p>Every transactional email is written and maintained by Rail Intel — cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
           <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
         </div>
-        <figure class="shot reveal">
-          <div class="shot__frame">
-            <img src="${base}images/screens/cab-passes/issue-digital-pass-email-dark.png" alt="Digital cab pass issued by email — one example of a configurable transactional template." width="433" height="289" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Cab pass issued by email — maintained by Rail Intel.</figcaption>
-        </figure>
+        <div class="comm-hub-section__media">
+${renderCommHubTemplateRegistry()}
+        </div>
       </div>
     </section>`;
 }

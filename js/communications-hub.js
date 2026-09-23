@@ -3,6 +3,8 @@
 (function () {
   "use strict";
 
+  initTemplateRegistry();
+
   var root = document.querySelector("[data-comm-hub]");
   if (!root) return;
 
@@ -989,4 +991,106 @@
 
   applyFilter("instant", false);
   startRotation();
+
+  function initTemplateRegistry() {
+    var panel = document.querySelector("[data-comm-template-registry]");
+    if (!panel) return;
+
+    var templates = [
+      {
+        cat: "instant",
+        catLabel: "Instant alerts",
+        name: "Task assigned",
+        subject: "New task assigned: Complete route knowledge refresh",
+      },
+      {
+        cat: "scheduled",
+        catLabel: "Scheduled alerts",
+        name: "Assessment window closing soon",
+        subject: "Assessment window closes soon for Sarah Mitchell",
+      },
+      {
+        cat: "instant",
+        catLabel: "Instant alerts",
+        name: "Digital cab pass issued",
+        subject: "Your digital cab pass is ready to view",
+      },
+      {
+        cat: "account",
+        catLabel: "Account & access",
+        name: "Welcome to Rail Intel",
+        subject: "Welcome to Rail Intel – Your login details",
+      },
+      {
+        cat: "scheduled",
+        catLabel: "Scheduled alerts",
+        name: "Licence expiry — 3 months",
+        subject: "Train driving licence renewal due in 3 months",
+      },
+    ];
+
+    var catEl = panel.querySelector("[data-comm-registry-category]");
+    var titleEl = panel.querySelector("[data-comm-registry-title]");
+    var subjectEl = panel.querySelector("[data-comm-registry-subject]");
+    var progressEl = panel.querySelector("[data-comm-registry-progress]");
+    var rows = Array.prototype.slice.call(panel.querySelectorAll("[data-comm-registry-row]"));
+    var index = 0;
+    var timer = null;
+    var REGISTRY_MS = 4200;
+    var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function resetProgress() {
+      panel.classList.remove("is-timing");
+      if (progressEl) {
+        progressEl.style.animation = "none";
+        void progressEl.offsetWidth;
+        progressEl.style.animation = "";
+      }
+      if (!prefersReducedMotion) panel.classList.add("is-timing");
+    }
+
+    function render(i) {
+      var t = templates[i];
+      if (catEl) {
+        catEl.textContent = t.catLabel;
+        catEl.className = "comm-hub-template-registry__cat comm-hub-template-registry__cat--" + t.cat;
+      }
+      if (titleEl) titleEl.textContent = t.name;
+      if (subjectEl) subjectEl.textContent = t.subject;
+      rows.forEach(function (row, ri) {
+        row.classList.toggle("is-active", ri === i);
+      });
+      resetProgress();
+    }
+
+    function advance() {
+      panel.classList.add("is-changing");
+      window.setTimeout(function () {
+        index = (index + 1) % templates.length;
+        render(index);
+        panel.classList.remove("is-changing");
+      }, prefersReducedMotion ? 0 : 280);
+    }
+
+    function start() {
+      stop();
+      if (prefersReducedMotion) return;
+      timer = window.setInterval(advance, REGISTRY_MS);
+    }
+
+    function stop() {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+      panel.classList.remove("is-timing");
+    }
+
+    render(0);
+    start();
+    panel.addEventListener("mouseenter", stop);
+    panel.addEventListener("mouseleave", start);
+    panel.addEventListener("focusin", stop);
+    panel.addEventListener("focusout", start);
+  }
 })();
