@@ -1450,7 +1450,8 @@
     opacity: 0.35;
   }
 
-  body:has([data-engine-token]) .header .nav,
+  body:has([data-engine-token]) .header .nav-menu,
+  body:has([data-engine-token]) .header .nav-toggle,
   body.is-engine-open .hero ~ *,
   body.is-engine-open .page-hero--competency-engine ~ *,
   body.is-engine-open .page-section--faq-accordion,
@@ -1460,15 +1461,18 @@
   }
 }
 
-/* Keep the first view on the chip and socket. The menu and the page under the board appear once the chip is seated. */
-body:has([data-engine-token]) .header .nav {
+/* Keep the first view on the chip and socket. The menu appears once the chip is seated. Share stays in the header. */
+body:has([data-engine-token]) .header .nav-menu,
+body:has([data-engine-token]) .header .nav-toggle {
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
-body:has([data-engine-token]):not(.is-engine-open) .header .nav {
+body:has([data-engine-token]):not(.is-engine-open) .header .nav-menu,
+body:has([data-engine-token]):not(.is-engine-open) .header .nav-toggle {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  position: absolute;
 }
 
 /* One yellow trace across the menu the first time the chip seats. It does not repeat. */
@@ -1581,10 +1585,12 @@ body.is-engine-open .cta {
 }
 
 @media (scripting: none) {
-  body:has([data-engine-token]) .header .nav {
+  body:has([data-engine-token]) .header .nav-menu,
+  body:has([data-engine-token]) .header .nav-toggle {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    position: revert;
   }
 
   body:has([data-engine-token]) [data-engine-gate],

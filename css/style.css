@@ -229,36 +229,39 @@ body::before {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Share — miniature chip seated in its socket */
+/* Share — LinkedIn and WhatsApp marks beside the label */
 .share {
   position: relative;
   flex: none;
+  margin-inline-end: 0.45rem;
 }
 
 .share__toggle {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.15rem;
-  height: 42px;
-  padding: 0 0.7rem 0 0.15rem;
-  border: 1px solid var(--border);
+  gap: 0.5rem;
+  height: 44px;
+  padding: 0 0.95rem 0 0.4rem;
+  border: 1px solid rgba(245, 158, 11, 0.7);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text);
+  background: rgba(245, 158, 11, 0.16);
+  color: #fff;
   font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 700;
   line-height: 1;
   cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.18), 0 0 22px rgba(245, 158, 11, 0.28);
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .share__toggle:hover,
 .share__toggle:focus-visible,
 .share[data-open="true"] .share__toggle {
-  border-color: rgba(245, 158, 11, 0.45);
-  background: rgba(245, 158, 11, 0.08);
+  border-color: #fbbf24;
+  background: rgba(245, 158, 11, 0.26);
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.35), 0 0 28px rgba(245, 158, 11, 0.45);
 }
 
 .share__toggle:focus-visible {
@@ -266,85 +269,38 @@ body::before {
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.45);
 }
 
-.share__mark {
-  display: block;
-  width: 42px;
-  height: 36px;
+.share__brands {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
   flex: none;
 }
 
-.share__svg {
+.share__brand {
+  display: grid;
+  place-items: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 7px;
+  color: #fff;
+}
+
+.share__brand svg {
   display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
-.share__socket-housing {
-  fill: #141c2a;
-  stroke: rgba(226, 196, 120, 0.42);
-  stroke-width: 1.2;
-  transition: stroke 0.25s ease, filter 0.25s ease;
+.share__brand--linkedin {
+  background: #0a66c2;
 }
 
-.share__socket-well {
-  fill: #0b111a;
-  stroke: rgba(0, 0, 0, 0.55);
-  stroke-width: 0.8;
-}
-
-.share__socket-cross {
-  fill: none;
-  stroke: rgba(245, 158, 11, 0.45);
-  stroke-width: 1.1;
-  stroke-linecap: round;
-}
-
-.share__pin {
-  fill: #c5d0de;
-  stroke: rgba(15, 23, 36, 0.45);
-  stroke-width: 0.4;
-  transition: fill 0.25s ease;
-}
-
-.share__chip-side {
-  fill: url(#share-pkg-side);
-}
-
-.share__chip-top {
-  fill: url(#share-pkg);
-}
-
-.share__die {
-  fill: url(#share-die);
-}
-
-.share__chip {
-  transform: translateY(-6px);
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.share__toggle:hover .share__chip,
-.share__toggle:focus-visible .share__chip,
-.share[data-open="true"] .share__chip {
-  transform: translateY(0);
-}
-
-.share__toggle:hover .share__socket-housing,
-.share__toggle:focus-visible .share__socket-housing,
-.share[data-open="true"] .share__socket-housing {
-  stroke: #fbbf24;
-  filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.85));
-}
-
-.share__toggle:hover .share__pin,
-.share__toggle:focus-visible .share__pin,
-.share[data-open="true"] .share__pin {
-  fill: #ffe7a3;
+.share__brand--whatsapp {
+  background: #25d366;
 }
 
 .share__label {
-  padding-right: 0.15rem;
+  padding-right: 0.1rem;
 }
 
 .share__panel {
@@ -434,23 +390,10 @@ body::before {
   color: #6ee7b7;
 }
 
-@media (max-width: 1180px) {
-  .share__label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
+@media (max-width: 420px) {
   .share__toggle {
-    width: 42px;
-    padding: 0;
-    justify-content: center;
+    padding-right: 0.7rem;
+    font-size: 0.875rem;
   }
 }
 
@@ -465,9 +408,6 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .share__chip,
-  .share__socket-housing,
-  .share__pin,
   .share__toggle,
   .share__action {
     transition: none;
