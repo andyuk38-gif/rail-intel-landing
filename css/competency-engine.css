@@ -1502,6 +1502,20 @@ body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine
   content-visibility: hidden;
 }
 
+/* until-found keeps each section's padding, which stacks into a tall empty gap above the footer. */
+@media not (scripting: none) {
+  body:has([data-engine-token]):not(.is-engine-open) [data-engine-gate],
+  body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine ~ section {
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    contain-intrinsic-size: 0px;
+  }
+}
+
 body.is-engine-open .hero ~ *,
 body.is-engine-open .page-hero--competency-engine ~ *,
 body.is-engine-open .page-section--faq-accordion,
