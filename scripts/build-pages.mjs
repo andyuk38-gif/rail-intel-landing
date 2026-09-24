@@ -288,6 +288,9 @@ ${keywords}  <link rel="canonical" href="${esc(canonical)}" />
   <meta property="og:description" content="${esc(pageSeo.description)}" />
   <meta property="og:url" content="${esc(canonical)}" />
   <meta property="og:image" content="${esc(ogImage)}" />
+  <meta property="og:image:width" content="1150" />
+  <meta property="og:image:height" content="723" />
+  <meta property="og:image:alt" content="Rail Intel competency engine with the chip seated" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${esc(pageSeo.title)}" />
