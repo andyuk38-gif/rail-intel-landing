@@ -17,7 +17,12 @@
   if (!toggle || !panel) return;
 
   function pageUrl() {
-    return window.location.href;
+    var url = new URL(window.location.href);
+    url.hash = "";
+    // WhatsApp keeps the first preview it fetched for a link. A new query
+    // makes the next share a link it has not cached yet.
+    url.searchParams.set("v", "2");
+    return url.toString();
   }
 
   function pageTitle() {
