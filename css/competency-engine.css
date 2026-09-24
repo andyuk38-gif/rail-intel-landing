@@ -1539,14 +1539,18 @@ body.is-engine-open [data-engine-prompt] {
 }
 
 /* Collapsed with hidden=until-found so the copy stays in the HTML and can be found, without display:none. */
-body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine ~ * {
+body:has([data-engine-token]):not(.is-engine-open) .hero ~ *,
+body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine ~ *,
+body:has([data-engine-token]):not(.is-engine-open) .page-section--faq-accordion {
   content-visibility: hidden;
 }
 
 /* until-found keeps each section's padding, which stacks into a tall empty gap above the footer. */
 @media not (scripting: none) {
+  body:has([data-engine-token]):not(.is-engine-open) .hero ~ *,
   body:has([data-engine-token]):not(.is-engine-open) [data-engine-gate],
-  body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine ~ section {
+  body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine ~ section,
+  body:has([data-engine-token]):not(.is-engine-open) .page-section--faq-accordion {
     height: 0;
     min-height: 0;
     padding: 0;
@@ -1554,6 +1558,13 @@ body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine
     border: 0;
     overflow: hidden;
     contain-intrinsic-size: 0px;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  body:has([data-engine-token]):not(.is-engine-open) .hero,
+  body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine {
+    padding-bottom: 0;
   }
 }
 
