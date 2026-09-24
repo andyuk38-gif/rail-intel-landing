@@ -38,11 +38,10 @@
         "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(message);
     }
     if (linkedin) {
-      // LinkedIn caches the first preview for a URL, and a page can only
-      // advertise one image. This address is only used by the LinkedIn
-      // button so its card can be the portrait hero.
-      var linkedinPage = new URL("/linkedin.html", window.location.origin);
-      linkedinPage.searchParams.set("v", "1");
+      // LinkedIn keeps the first preview it stored for a URL, and it will
+      // follow a canonical link back to the homepage. This path is only
+      // used by the LinkedIn button and only advertises the portrait card.
+      var linkedinPage = new URL("/share/li.html", window.location.origin);
       linkedin.href =
         "https://www.linkedin.com/sharing/share-offsite/?url=" +
         encodeURIComponent(linkedinPage.toString());
