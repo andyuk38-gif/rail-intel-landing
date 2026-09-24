@@ -376,7 +376,7 @@
       <div class="container hero-engine" aria-label="Competency engine">
         <!-- home-engine-board:start -->
         <div class="engine" data-competency-engine data-active="assessments">
-          <p class="sr-only">The competency engine starts in the tray beside this introduction. Drag it into the empty socket on the board, or press the chip to seat it. Once it connects, branches leave the engine for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces, labelled QA, Tasks, Briefs, Trainee, Reports, Leave and Medication.</p>
+          <p class="sr-only">The competency engine starts in the tray beside this introduction. Drag it into the empty socket on the board, or press the chip to seat it. Once it connects, branches leave the engine for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces to tiles around the board. Each tile links to that add-on: Safety Briefs, QA Verifications, Trainee Driver, Driver Reports, Leave and Absence, Task assignment and Medication Checks. Lifting the chip clears the branches and the add-on tiles.</p>
           <p class="sr-only" data-engine-announce aria-live="polite"></p>
           <div class="engine__bar">
             <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span><span data-engine-status-label>Socket open</span></span>
@@ -489,20 +489,27 @@
           </g>
         </g>
                 <g class="engine-live-layer">
-        <path class="engine-trace engine-trace--addon" d="M696.9 308 L631.4 270.3" pathLength="100" style="color: #c084fc; --draw: 0.20s" />
-        <path class="engine-packet engine-packet--addon" d="M696.9 308 L631.4 270.3" pathLength="100" style="color: #c084fc; animation-duration: 3.6s; animation-delay: 0.00s" />
-        <path class="engine-trace engine-trace--addon" d="M531.6 452.1 L439.7 505.2 L380.4 471" pathLength="100" style="color: #22d3ee; --draw: 0.25s" />
-        <path class="engine-packet engine-packet--addon" d="M531.6 452.1 L439.7 505.2 L380.4 471" pathLength="100" style="color: #22d3ee; animation-duration: 3.6s; animation-delay: -0.42s" />
-        <path class="engine-trace engine-trace--addon" d="M646.2 340.9 L618.2 324.7 L437.3 220.3 L505.1 181.1" pathLength="100" style="color: #fb7185; --draw: 0.30s" />
-        <path class="engine-packet engine-packet--addon" d="M646.2 340.9 L618.2 324.7 L437.3 220.3 L505.1 181.1" pathLength="100" style="color: #fb7185; animation-duration: 3.6s; animation-delay: -0.84s" />
-        <path class="engine-trace engine-trace--addon" d="M788.2 360.7 L816.2 344.5 L860.6 318.9 L840.3 307.2" pathLength="100" style="color: #818cf8; --draw: 0.35s" />
-        <path class="engine-packet engine-packet--addon" d="M788.2 360.7 L816.2 344.5 L860.6 318.9 L840.3 307.2" pathLength="100" style="color: #818cf8; animation-duration: 3.6s; animation-delay: -1.26s" />
-        <path class="engine-trace engine-trace--addon" d="M888.6 417 L922.9 397.2" pathLength="100" style="color: #f472b6; --draw: 0.40s" />
-        <path class="engine-packet engine-packet--addon" d="M888.6 417 L922.9 397.2" pathLength="100" style="color: #f472b6; animation-duration: 3.6s; animation-delay: -1.68s" />
-        <path class="engine-trace engine-trace--addon" d="M561.1 390 L533 373.8 L461.3 332.4 L411.6 361.2" pathLength="100" style="color: #2dd4bf; --draw: 0.45s" />
-        <path class="engine-packet engine-packet--addon" d="M561.1 390 L533 373.8 L461.3 332.4 L411.6 361.2" pathLength="100" style="color: #2dd4bf; animation-duration: 3.6s; animation-delay: -2.10s" />
-        <path class="engine-trace engine-trace--addon" d="M753.8 516.4 L781.8 532.6 L962.7 637 L894.9 676.2" pathLength="100" style="color: #fb923c; --draw: 0.50s" />
-        <path class="engine-packet engine-packet--addon" d="M753.8 516.4 L781.8 532.6 L962.7 637 L894.9 676.2" pathLength="100" style="color: #fb923c; animation-duration: 3.6s; animation-delay: -2.52s" />
+        <path class="engine-trace engine-trace--addon" data-addon="briefs" d="M637.6 345.9 L209.3 98.6" pathLength="100" style="color: #fb7185; --draw: 0.20s" />
+        <path class="engine-packet engine-packet--addon" data-addon="briefs" d="M637.6 345.9 L209.3 98.6" pathLength="100" style="color: #fb7185; animation-duration: 3.6s; animation-delay: 0.00s" />
+        <circle class="engine-dock" data-addon="briefs" cx="209.3" cy="98.6" r="3.4" fill="#fb7185" />
+        <path class="engine-trace engine-trace--addon" data-addon="qa" d="M700 324.3 L425.6 165.8 L407.6 98.6" pathLength="100" style="color: #c084fc; --draw: 0.25s" />
+        <path class="engine-packet engine-packet--addon" data-addon="qa" d="M700 324.3 L425.6 165.8 L407.6 98.6" pathLength="100" style="color: #c084fc; animation-duration: 3.6s; animation-delay: -0.42s" />
+        <circle class="engine-dock" data-addon="qa" cx="407.6" cy="98.6" r="3.4" fill="#c084fc" />
+        <path class="engine-trace engine-trace--addon" data-addon="trainee" d="M791.1 362.4 L1036 221.1 L1036 107.4" pathLength="100" style="color: #818cf8; --draw: 0.30s" />
+        <path class="engine-packet engine-packet--addon" data-addon="trainee" d="M791.1 362.4 L1036 221.1 L1036 107.4" pathLength="100" style="color: #818cf8; animation-duration: 3.6s; animation-delay: -0.84s" />
+        <circle class="engine-dock" data-addon="trainee" cx="1036" cy="107.4" r="3.4" fill="#818cf8" />
+        <path class="engine-trace engine-trace--addon" data-addon="reports" d="M882.4 442.2 L962.7 488.5 L1064 430 L1219 430 L1219 248" pathLength="100" style="color: #f472b6; --draw: 0.35s" />
+        <path class="engine-packet engine-packet--addon" data-addon="reports" d="M882.4 442.2 L962.7 488.5 L1064 430 L1219 430 L1219 248" pathLength="100" style="color: #f472b6; animation-duration: 3.6s; animation-delay: -1.26s" />
+        <circle class="engine-dock" data-addon="reports" cx="1219" cy="248" r="3.4" fill="#f472b6" />
+        <path class="engine-trace engine-trace--addon" data-addon="leave" d="M497.4 444.9 L446.9 474 L176.2 474 L176.2 660.6" pathLength="100" style="color: #2dd4bf; --draw: 0.40s" />
+        <path class="engine-packet engine-packet--addon" data-addon="leave" d="M497.4 444.9 L446.9 474 L176.2 474 L176.2 660.6" pathLength="100" style="color: #2dd4bf; animation-duration: 3.6s; animation-delay: -1.68s" />
+        <circle class="engine-dock" data-addon="leave" cx="176.2" cy="660.6" r="3.4" fill="#2dd4bf" />
+        <path class="engine-trace engine-trace--addon" data-addon="tasks" d="M647 531.3 L565.9 578.1 L594 594.3 L280 783.2" pathLength="100" style="color: #22d3ee; --draw: 0.45s" />
+        <path class="engine-packet engine-packet--addon" data-addon="tasks" d="M647 531.3 L565.9 578.1 L594 594.3 L280 783.2" pathLength="100" style="color: #22d3ee; animation-duration: 3.6s; animation-delay: -2.10s" />
+        <circle class="engine-dock" data-addon="tasks" cx="280" cy="783.2" r="3.4" fill="#22d3ee" />
+        <path class="engine-trace engine-trace--addon" data-addon="medication" d="M773.3 517.8 L893.3 587.1 L848.1 613.2 L1092 783.2" pathLength="100" style="color: #fb923c; --draw: 0.50s" />
+        <path class="engine-packet engine-packet--addon" data-addon="medication" d="M773.3 517.8 L893.3 587.1 L848.1 613.2 L1092 783.2" pathLength="100" style="color: #fb923c; animation-duration: 3.6s; animation-delay: -2.52s" />
+        <circle class="engine-dock" data-addon="medication" cx="1092" cy="783.2" r="3.4" fill="#fb923c" />
         <path class="engine-trace" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd; --draw: 0.00s" />
         <path class="engine-packet" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd; animation-duration: 3.10s; animation-delay: 0.00s" />
         <g class="engine-gate" data-branch="cycles">
@@ -550,34 +557,6 @@
         <g class="engine-gate" data-branch="development">
           <rect x="474.9" y="302.3" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
           <text x="503.9" y="314.8" fill="#93c5fd">CARRY</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="605.4" y="252" width="52" height="22" rx="11" fill="#0c121b" stroke="#c084fc" />
-          <text x="631.4" y="267" fill="#c084fc">QA</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="350.9" y="452.8" width="59" height="22" rx="11" fill="#0c121b" stroke="#22d3ee" />
-          <text x="380.4" y="467.8" fill="#22d3ee">Tasks</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="471.9" y="163" width="66.4" height="22" rx="11" fill="#0c121b" stroke="#fb7185" />
-          <text x="505.1" y="178" fill="#fb7185">Briefs</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="803.4" y="289" width="73.8" height="22" rx="11" fill="#0c121b" stroke="#818cf8" />
-          <text x="840.3" y="304" fill="#818cf8">Trainee</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="886" y="379" width="73.8" height="22" rx="11" fill="#0c121b" stroke="#f472b6" />
-          <text x="922.9" y="394" fill="#f472b6">Reports</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="382.1" y="343" width="59" height="22" rx="11" fill="#0c121b" stroke="#2dd4bf" />
-          <text x="411.6" y="358" fill="#2dd4bf">Leave</text>
-        </g>
-        <g class="engine-pill">
-          <rect x="846.9" y="658" width="96" height="22" rx="11" fill="#0c121b" stroke="#fb923c" />
-          <text x="894.9" y="673" fill="#fb923c">Medication</text>
         </g>
                 </g>
                 <g class="engine-chip">
@@ -638,6 +617,64 @@
                 </g>
                 </g>
               </svg>
+              <div class="engine-addons">
+            <a class="engine-addon engine-addon--top" data-addon="briefs" href="products/safety-briefs.html" style="--addon: #fb7185; --in: 0; left: 14.952%; top: 11.2%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">Safety Briefs</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+            <a class="engine-addon engine-addon--top" data-addon="qa" href="products/qa-verifications.html" style="--addon: #c084fc; --in: 1; left: 29.115%; top: 11.2%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">QA Verifications</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+            <a class="engine-addon engine-addon--top" data-addon="trainee" href="products/trainee-driver.html" style="--addon: #818cf8; --in: 2; left: 74%; top: 12.2%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">Trainee Driver</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+            <a class="engine-addon engine-addon--top" data-addon="reports" href="products/driver-reports.html" style="--addon: #f472b6; --in: 3; left: 87.071%; top: 28.182%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">Driver Reports</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+            <a class="engine-addon engine-addon--bottom" data-addon="leave" href="products/leave-absence.html" style="--addon: #2dd4bf; --in: 4; left: 12.58571%; top: 75.0711%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">Leave &amp; Absence</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+            <a class="engine-addon engine-addon--bottom" data-addon="tasks" href="products/task-assignment.html" style="--addon: #22d3ee; --in: 5; left: 20%; top: 89%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">Task assignment</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+            <a class="engine-addon engine-addon--bottom" data-addon="medication" href="products/medication-checks.html" style="--addon: #fb923c; --in: 6; left: 78%; top: 89%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">Medication Checks</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>
+              </div>
               <div class="engine-socket-hit" data-engine-socket style="left:35.864%;top:32.000%;width:28.273%;height:29.636%">
                 <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop here</span>
                 <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release</span>
@@ -798,6 +835,15 @@
               </span>
             </button>
           </div>
+          <nav class="engine-addon-rail" aria-label="Add-on modules">
+            <a class="engine-addon-rail__link" href="products/safety-briefs.html" style="--addon: #fb7185">Safety Briefs</a>
+            <a class="engine-addon-rail__link" href="products/qa-verifications.html" style="--addon: #c084fc">QA Verifications</a>
+            <a class="engine-addon-rail__link" href="products/trainee-driver.html" style="--addon: #818cf8">Trainee Driver</a>
+            <a class="engine-addon-rail__link" href="products/driver-reports.html" style="--addon: #f472b6">Driver Reports</a>
+            <a class="engine-addon-rail__link" href="products/leave-absence.html" style="--addon: #2dd4bf">Leave &amp; Absence</a>
+            <a class="engine-addon-rail__link" href="products/task-assignment.html" style="--addon: #22d3ee">Task assignment</a>
+            <a class="engine-addon-rail__link" href="products/medication-checks.html" style="--addon: #fb923c">Medication Checks</a>
+          </nav>
           <div class="engine-bezel">
             <div class="engine-readout" id="competency-engine-readout">
               <p class="engine-readout__standby" data-engine-standby>The socket is open. Drag the processor chip into the socket to power the branches.</p>

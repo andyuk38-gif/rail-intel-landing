@@ -213,6 +213,237 @@
   text-anchor: middle;
 }
 
+.engine-dock {
+  opacity: 0;
+}
+
+.engine.is-live .engine-dock {
+  opacity: 1;
+  transition: opacity 0.35s ease 0.85s;
+}
+
+.engine-packet--board {
+  display: none;
+}
+
+.engine-addons {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.engine-addon {
+  --ax: -50%;
+  --ay: calc(-100% - 10px);
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: max-content;
+  max-width: 11.6rem;
+  margin: 0;
+  padding: 0.42rem 0.62rem 0.42rem 0.5rem;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--addon) 58%, transparent);
+  background:
+    linear-gradient(165deg, rgba(22, 28, 40, 0.94), rgba(8, 12, 18, 0.9));
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 22px color-mix(in srgb, var(--addon) 22%, transparent);
+  color: #f4f7fb;
+  text-decoration: none;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(var(--ax), var(--ay)) translateY(8px) scale(0.94);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    visibility 0s linear 0.28s,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.engine-addon--bottom {
+  --ax: -50%;
+  --ay: 10px;
+}
+
+.engine-addon--left {
+  --ax: calc(-100% - 10px);
+  --ay: -50%;
+}
+
+.engine-addon--right {
+  --ax: 10px;
+  --ay: -50%;
+}
+
+.engine.is-live .engine-addon {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(var(--ax), var(--ay));
+  transition:
+    opacity 0.5s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  transition-delay: calc(0.48s + var(--in, 0) * 0.07s), calc(0.48s + var(--in, 0) * 0.07s), 0s, 0s, 0s;
+}
+
+.engine-addon::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--addon);
+  box-shadow: 0 0 12px var(--addon);
+}
+
+.engine-addon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    color-mix(in srgb, var(--addon) 42%, transparent) 50%,
+    transparent 68%
+  );
+  transform: translateX(-130%);
+  pointer-events: none;
+}
+
+.engine.is-live .engine-addon::after {
+  animation: engine-addon-sheen 4.6s ease-in-out infinite;
+  animation-delay: calc(1.1s + var(--in, 0) * 0.35s);
+}
+
+.engine-addon:hover,
+.engine-addon:focus-visible {
+  border-color: color-mix(in srgb, var(--addon) 85%, white 8%);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.38),
+    0 0 0 1px color-mix(in srgb, var(--addon) 40%, transparent),
+    0 0 28px color-mix(in srgb, var(--addon) 38%, transparent);
+}
+
+.engine-addon:focus-visible {
+  outline: 2px solid var(--addon);
+  outline-offset: 3px;
+}
+
+.engine-addon__mark {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: var(--addon);
+  box-shadow: 0 0 10px var(--addon);
+}
+
+.engine.is-live .engine-addon__mark {
+  animation: engine-addon-pulse 2.4s ease-out infinite;
+  animation-delay: calc(var(--in, 0) * 0.18s);
+}
+
+.engine-addon__copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.engine-addon__kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--addon);
+}
+
+.engine-addon__name {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: #f7f9fc;
+  white-space: nowrap;
+}
+
+.engine-addon__arrow {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-left: 0.15rem;
+  background: var(--addon);
+  clip-path: polygon(28% 16%, 62% 50%, 28% 84%, 40% 84%, 76% 50%, 40% 16%);
+  transition: transform 0.25s ease;
+}
+
+.engine-addon:hover .engine-addon__arrow,
+.engine-addon:focus-visible .engine-addon__arrow {
+  transform: translateX(3px);
+}
+
+.engine-trace--addon.is-hot,
+.engine-packet--addon.is-hot,
+.engine-leader:has(.is-hot) .engine-dock {
+  opacity: 1;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.engine-dock.is-hot {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.engine-addon-rail {
+  display: none;
+}
+
+.engine-addon-rail__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.62rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--addon) 45%, transparent);
+  background: rgba(8, 12, 18, 0.55);
+  color: #f4f7fb;
+  font-size: 0.84rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.engine-addon-rail__link::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--addon);
+  box-shadow: 0 0 8px var(--addon);
+  flex: 0 0 auto;
+}
+
+.engine-addon-rail__link::after {
+  content: "→";
+  margin-left: auto;
+  color: var(--addon);
+}
+
 .engine-pin {
   fill: #c5d0de;
   stroke: rgba(15, 23, 36, 0.45);
@@ -535,7 +766,9 @@
 .engine.is-paused .engine-packet,
 .engine.is-paused .engine-ticker__track,
 .engine.is-paused .engine__status-dot,
-.engine.is-paused .engine-node__dot {
+.engine.is-paused .engine-node__dot,
+.engine.is-paused .engine-addon::after,
+.engine.is-paused .engine-addon__mark {
   animation-play-state: paused;
 }
 
@@ -555,12 +788,26 @@
 }
 
 @media (max-width: 1040px) {
-  .engine-node--board {
+  .engine-node--board,
+  .engine-addons,
+  .engine-leader,
+  .engine-packet--span {
     display: none;
+  }
+
+  .engine-packet--board {
+    display: inline;
   }
 
   .engine-list {
     display: grid;
+  }
+
+  .engine.is-live .engine-addon-rail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0 0.75rem 0.85rem;
   }
 
   .engine__outputs {
@@ -1057,6 +1304,17 @@
   50% { transform: translateY(-4px); }
 }
 
+@keyframes engine-addon-sheen {
+  0%, 58% { transform: translateX(-130%); }
+  82%, 100% { transform: translateX(130%); }
+}
+
+@keyframes engine-addon-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--addon) 55%, transparent); }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
 .hero-media--engine {
   align-items: center;
 }
@@ -1113,7 +1371,10 @@
   .engine-socket__pulse,
   .engine-token,
   .engine-socket-hit__label,
-  .engine-trace {
+  .engine-trace,
+  .engine-addon,
+  .engine-addon::after,
+  .engine-addon__mark {
     animation: none;
     transition: none;
   }
@@ -1121,6 +1382,12 @@
   .engine.is-live .engine-trace {
     stroke-dashoffset: 0;
     opacity: 1;
+  }
+
+  .engine.is-live .engine-addon {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(var(--ax), var(--ay));
   }
 
   .engine:not(.is-live) .engine-packet,

@@ -48,6 +48,29 @@
     return matches[0] || null;
   }
 
+  var addonLinks = Array.prototype.slice.call(root.querySelectorAll("a.engine-addon"));
+
+  function heatAddon(id) {
+    root.querySelectorAll("[data-addon]").forEach(function (el) {
+      el.classList.toggle("is-hot", Boolean(id) && el.getAttribute("data-addon") === id);
+    });
+  }
+
+  addonLinks.forEach(function (link) {
+    link.addEventListener("mouseenter", function () {
+      heatAddon(link.getAttribute("data-addon"));
+    });
+    link.addEventListener("mouseleave", function () {
+      heatAddon("");
+    });
+    link.addEventListener("focus", function () {
+      heatAddon(link.getAttribute("data-addon"));
+    });
+    link.addEventListener("blur", function () {
+      heatAddon("");
+    });
+  });
+
   buttons.forEach(function (button) {
     button.addEventListener("mouseenter", function () {
       select(button.getAttribute("data-branch"));

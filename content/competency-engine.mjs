@@ -133,45 +133,86 @@ const BRANCHES = [
   },
 ];
 
+// Add-on tracks sit on the circuit first. `board` points are orthogonal in
+// board space, so they project to the same 30° and 150° traces as the core.
+// `lift` points are screen-space: the last run leaves the board and turns to the tile.
+const ADDON_ROUTES = {
+  briefs: { board: [[-132, -52]], lift: [] },
+  qa: { board: [[-116, -116], [-468, -116]], lift: [] },
+  trainee: { board: [[-15.12, -132], [-15.12, -446.21]], lift: [] },
+  reports: {
+    board: [[132, -102], [235.006, -102], [235.006, -232.006]],
+    lift: [[1219, 430]],
+  },
+  leave: { board: [[-112, 148], [-112, 212.778]], lift: [[176.2, 474]] },
+  tasks: { board: [[80, 148], [80, 252], [116, 252]], lift: [] },
+  medication: { board: [[146, 52], [300, 52], [300, 110]], lift: [] },
+};
+
 const ADDONS = [
+  {
+    id: "briefs",
+    label: "Briefs",
+    name: "Safety Briefs",
+    href: "products/safety-briefs.html",
+    color: "#fb7185",
+    side: "top",
+    dock: { x: 14.952, y: 11.2 },
+  },
   {
     id: "qa",
     label: "QA",
+    name: "QA Verifications",
+    href: "products/qa-verifications.html",
     color: "#c084fc",
-    x: -220,
-    y: -132,
-    points: [
-      { x: -136, y: -132 },
-      { x: -220, y: -132 },
-    ],
+    side: "top",
+    dock: { x: 29.115, y: 11.2 },
+  },
+  {
+    id: "trainee",
+    label: "Trainee",
+    name: "Trainee Driver",
+    href: "products/trainee-driver.html",
+    color: "#818cf8",
+    side: "top",
+    dock: { x: 74, y: 12.2 },
+  },
+  {
+    id: "reports",
+    label: "Reports",
+    name: "Driver Reports",
+    href: "products/driver-reports.html",
+    color: "#f472b6",
+    side: "top",
+    dock: { x: 87.071, y: 28.182 },
+  },
+  {
+    id: "leave",
+    label: "Leave",
+    name: "Leave & Absence",
+    href: "products/leave-absence.html",
+    color: "#2dd4bf",
+    side: "bottom",
+    dock: { x: 12.58571, y: 75.0711 },
   },
   {
     id: "tasks",
     label: "Tasks",
+    name: "Task assignment",
+    href: "products/task-assignment.html",
     color: "#22d3ee",
-    x: -158,
-    y: 252,
-    points: [
-      { x: -82, y: 134 },
-      { x: -82, y: 252 },
-      { x: -158, y: 252 },
-    ],
+    side: "bottom",
+    dock: { x: 20, y: 89 },
   },
-  { id: "briefs", label: "Briefs", color: "#fb7185", x: -400, y: -150 },
-  { id: "trainee", label: "Trainee", color: "#818cf8", x: -45, y: -225 },
   {
-    id: "reports",
-    label: "Reports",
-    color: "#f472b6",
-    x: 108,
-    y: -178,
-    points: [
-      { x: 108, y: -134 },
-      { x: 108, y: -178 },
-    ],
+    id: "medication",
+    label: "Medication",
+    name: "Medication Checks",
+    href: "products/medication-checks.html",
+    color: "#fb923c",
+    side: "bottom",
+    dock: { x: 78, y: 89 },
   },
-  { id: "leave", label: "Leave", color: "#2dd4bf", x: -260, y: 110 },
-  { id: "medication", label: "Medication", color: "#fb923c", x: 400, y: 150 },
 ];
 
 const TICKER = [
@@ -549,23 +590,43 @@ export function renderCompetencyEngineHero(base = "../") {
   const seat = chipBox();
   const seatStyle = `left:${((seat.x / VB_W) * 100).toFixed(3)}%;top:${((seat.y / VB_H) * 100).toFixed(3)}%;width:${((seat.w / VB_W) * 100).toFixed(3)}%;height:${((seat.h / VB_H) * 100).toFixed(3)}%`;
 
-  const addonTraceMarkup = ADDONS.map((addon, index) => {
-    const d = toPath(addon.points || route(addon), traceZ);
-    const delay = (-index * 0.42).toFixed(2);
-    const draw = (0.2 + index * 0.05).toFixed(2);
-    return `        <path class="engine-trace engine-trace--addon" d="${d}" pathLength="100" style="color: ${addon.color}; --draw: ${draw}s" />
-        <path class="engine-packet engine-packet--addon" d="${d}" pathLength="100" style="color: ${addon.color}; animation-duration: 3.6s; animation-delay: ${delay}s" />`;
+  const addonRoutes = ADDONS.map((addon) => {
+    const route = ADDON_ROUTES[addon.id];
+    const points = [
+      ...route.board.map(([x, y]) => screen(x, y, traceZ)),
+      ...route.lift.map(([x, y]) => ({ x, y })),
+      { x: (addon.dock.x / 100) * VB_W, y: (addon.dock.y / 100) * VB_H },
+    ];
+    const d = points
+      .map((point, index) => `${index === 0 ? "M" : "L"}${fmt(point.x)} ${fmt(point.y)}`)
+      .join(" ");
+    const dock = points[points.length - 1];
+    return { addon, d, dock };
+  });
+
+  const addonTraceMarkup = addonRoutes
+    .map(({ addon, d, dock }, index) => {
+      const delay = (-index * 0.42).toFixed(2);
+      const draw = (0.2 + index * 0.05).toFixed(2);
+      return `        <path class="engine-trace engine-trace--addon" data-addon="${esc(addon.id)}" d="${d}" pathLength="100" style="color: ${addon.color}; --draw: ${draw}s" />
+        <path class="engine-packet engine-packet--addon" data-addon="${esc(addon.id)}" d="${d}" pathLength="100" style="color: ${addon.color}; animation-duration: 3.6s; animation-delay: ${delay}s" />
+        <circle class="engine-dock" data-addon="${esc(addon.id)}" cx="${fmt(dock.x)}" cy="${fmt(dock.y)}" r="3.4" fill="${addon.color}" />`;
+    })
+    .join("\n");
+
+  const addonTileMarkup = ADDONS.map((addon, index) => {
+    return `            <a class="engine-addon engine-addon--${addon.side}" data-addon="${esc(addon.id)}" href="${esc(base)}${esc(addon.href)}" style="--addon: ${addon.color}; --in: ${index}; left: ${addon.dock.x}%; top: ${addon.dock.y}%;">
+              <span class="engine-addon__mark" aria-hidden="true"></span>
+              <span class="engine-addon__copy">
+                <span class="engine-addon__kicker">Add-on</span>
+                <span class="engine-addon__name">${esc(addon.name)}</span>
+              </span>
+              <span class="engine-addon__arrow" aria-hidden="true"></span>
+            </a>`;
   }).join("\n");
 
-  const addonPillMarkup = ADDONS.map((addon) => {
-    const end = addon.points ? addon.points[addon.points.length - 1] : addon;
-    const point = screen(end.x, end.y, traceZ + 8);
-    const width = Math.max(52, addon.label.length * 7.4 + 22);
-    const height = 22;
-    return `        <g class="engine-pill">
-          <rect x="${fmt(point.x - width / 2)}" y="${fmt(point.y - height / 2)}" width="${fmt(width)}" height="${height}" rx="11" fill="#0c121b" stroke="${addon.color}" />
-          <text x="${fmt(point.x)}" y="${fmt(point.y + 4)}" fill="${addon.color}">${esc(addon.label)}</text>
-        </g>`;
+  const addonRailMarkup = ADDONS.map((addon) => {
+    return `            <a class="engine-addon-rail__link" href="${esc(base)}${esc(addon.href)}" style="--addon: ${addon.color}">${esc(addon.name)}</a>`;
   }).join("\n");
 
   const branchMarkup = routes
@@ -627,7 +688,7 @@ export function renderCompetencyEngineHero(base = "../") {
   const defaultBranch = BRANCHES.find((branch) => branch.id === "assessments");
 
   return `        <div class="engine" data-competency-engine data-active="assessments">
-          <p class="sr-only">The competency engine starts in the tray beside this introduction. Drag it into the empty socket on the board, or press the chip to seat it. Once it connects, branches leave the engine for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces, labelled QA, Tasks, Briefs, Trainee, Reports, Leave and Medication.</p>
+          <p class="sr-only">The competency engine starts in the tray beside this introduction. Drag it into the empty socket on the board, or press the chip to seat it. Once it connects, branches leave the engine for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces to tiles around the board. Each tile links to that add-on: Safety Briefs, QA Verifications, Trainee Driver, Driver Reports, Leave and Absence, Task assignment and Medication Checks. Lifting the chip clears the branches and the add-on tiles.</p>
           <p class="sr-only" data-engine-announce aria-live="polite"></p>
           <div class="engine__bar">
             <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span><span data-engine-status-label>Socket open</span></span>
@@ -669,12 +730,14 @@ ${socketMarkup()}
                 <g class="engine-live-layer">
 ${addonTraceMarkup}
 ${branchMarkup}
-${addonPillMarkup}
                 </g>
                 <g class="engine-chip">
 ${chipBody(base, "engine")}
                 </g>
               </svg>
+              <div class="engine-addons">
+${addonTileMarkup}
+              </div>
               <div class="engine-socket-hit" data-engine-socket style="${seatStyle}">
                 <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop here</span>
                 <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release</span>
@@ -685,6 +748,9 @@ ${nodes}
           <div class="engine-list">
 ${list}
           </div>
+          <nav class="engine-addon-rail" aria-label="Add-on modules">
+${addonRailMarkup}
+          </nav>
           <div class="engine-bezel">
             <div class="engine-readout" id="competency-engine-readout">
               <p class="engine-readout__standby" data-engine-standby>The socket is open. Drag the processor chip into the socket to power the branches.</p>
