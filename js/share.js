@@ -38,10 +38,10 @@
         "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(message);
     }
     if (linkedin) {
-      // LinkedIn keeps the first preview it stored for a URL, and it will
-      // follow a canonical link back to the homepage. This path is only
-      // used by the LinkedIn button and only advertises the portrait card.
-      var linkedinPage = new URL("/share/li.html", window.location.origin);
+      // LinkedIn stores the first preview for a URL for about a week, and its
+      // link card is 1200×627. This path has never been scraped and only
+      // advertises that wide image.
+      var linkedinPage = new URL("/share/card.html", window.location.origin);
       linkedin.href =
         "https://www.linkedin.com/sharing/share-offsite/?url=" +
         encodeURIComponent(linkedinPage.toString());
