@@ -137,6 +137,10 @@
     if (announce) announce.textContent = message;
   }
 
+  function setSiteOpen(on) {
+    document.body.classList.toggle("is-engine-open", on);
+  }
+
   function setCopy(on) {
     if (statusLabel) statusLabel.textContent = on ? "Live feeds" : "Socket open";
     if (deviceLabel) deviceLabel.textContent = on ? "Operational Compliance" : "Awaiting Rail Intel Technologies";
@@ -238,6 +242,7 @@
     if (lift) lift.hidden = false;
     if (toggle && !reduced) toggle.hidden = false;
     say("Engine seated. The branches are live.");
+    setSiteOpen(true);
     window.setTimeout(function () {
       bay.classList.add("is-spent");
       clearToken();
@@ -303,6 +308,7 @@
       bay.classList.remove("is-spent");
       placeToken(from);
       live = false;
+      setSiteOpen(false);
       root.classList.add("is-cooling");
       root.classList.remove("is-live", "is-surging");
       setCopy(false);
