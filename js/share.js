@@ -38,8 +38,14 @@
         "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(message);
     }
     if (linkedin) {
+      // LinkedIn caches the first preview for a URL, and a page can only
+      // advertise one image. This address is only used by the LinkedIn
+      // button so its card can be the portrait hero.
+      var linkedinPage = new URL("/linkedin.html", window.location.origin);
+      linkedinPage.searchParams.set("v", "1");
       linkedin.href =
-        "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url);
+        "https://www.linkedin.com/sharing/share-offsite/?url=" +
+        encodeURIComponent(linkedinPage.toString());
     }
     if (whatsapp) {
       whatsapp.href = "https://wa.me/?text=" + encodeURIComponent(title + " " + url);
