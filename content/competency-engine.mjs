@@ -805,6 +805,6 @@ ${chipBody(base, "token")}
               </div>
             </div>
             <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag into the socket</span></p>
-            <button type="button" class="engine-lift" data-engine-lift hidden>Lift chip</button>
+            <button type="button" class="engine-lift" data-engine-lift hidden>Unplug chip</button>
           </aside>`;
 }

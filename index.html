@@ -36,9 +36,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=49627134" />
+  <link rel="stylesheet" href="css/style.css?v=49627139" />
   <link rel="stylesheet" href="css/pages.css?v=49627134" />
-  <link rel="stylesheet" href="css/competency-engine.css?v=49627137" />
+  <link rel="stylesheet" href="css/competency-engine.css?v=49627140" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -268,12 +268,10 @@
             <span class="hero-badge__pulse" aria-hidden="true"></span>
             Secure competency management for rail
           </p>
-          <h1 class="hero-title">
-            <span class="hero-title__locked">Unlock the <span class="hero-title__accent">power</span> by plugging in our <span class="hero-title__accent">technology</span>.</span>
-            <span class="hero-title__open">Protect your operations with the most powerful
+          <p class="hero-title hero-title--prompt" data-engine-prompt aria-hidden="true">Unlock the <span class="hero-title__accent">power</span> by plugging in our <span class="hero-title__accent">technology</span>.</p>
+          <h1 class="hero-title" data-engine-headline>Protect your operations with the most powerful
             <span class="hero-title__accent"><span class="hero-title__keep">competency management</span> compliance engine</span>
-            ever built for Rail.</span>
-          </h1>
+            ever built for Rail.</h1>
           <p class="hero-desc">Built by an experienced rail professional, Rail Intel minimises human error with a real-time verification engine and robust, behind-the-scenes conditional rules. Give your driver managers instant team compliance scores, automated gap detection, and the ironclad certainty that a compliance mistake is virtually impossible.</p>
           <ul class="hero-points">
             <li>Live expiry alerts</li>
@@ -375,7 +373,7 @@
               </div>
             </div>
             <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag into the socket</span></p>
-            <button type="button" class="engine-lift" data-engine-lift hidden>Lift chip</button>
+            <button type="button" class="engine-lift" data-engine-lift hidden>Unplug chip</button>
           </aside>
           <!-- home-engine-bay:end -->
         </div>
@@ -903,7 +901,7 @@
     </section>
 
     <!-- home-gallery:start -->
-    <section class="product-section product-section--elevated" id="product" aria-labelledby="command-heading">
+    <section class="product-section product-section--elevated" id="product" aria-labelledby="command-heading" data-engine-gate hidden="until-found">
       <div class="container product-section__inner">
         <div class="product-section__copy" data-gallery-copy>
           <p class="product-eyebrow" data-copy-eyebrow>Dashboard</p>
@@ -963,7 +961,7 @@
     </section>
 <!-- home-gallery:end -->
 
-    <section class="product-section product-section--reverse" aria-labelledby="cycles-heading">
+    <section class="product-section product-section--reverse" aria-labelledby="cycles-heading" data-engine-gate hidden="until-found">
       <div class="container product-section__inner">
         <div class="product-section__copy">
           <p class="product-eyebrow">Competency engine</p>
@@ -997,7 +995,7 @@
       </div>
     </section>
 
-    <section class="product-section product-section--elevated" aria-labelledby="workforce-heading">
+    <section class="product-section product-section--elevated" aria-labelledby="workforce-heading" data-engine-gate hidden="until-found">
       <div class="container product-section__inner">
         <div class="product-section__copy">
           <p class="product-eyebrow">Workforce records</p>
@@ -1094,7 +1092,7 @@
       </div>
     </section>
 
-    <section class="product-section product-section--reverse" aria-labelledby="safety-heading">
+    <section class="product-section product-section--reverse" aria-labelledby="safety-heading" data-engine-gate hidden="until-found">
       <div class="container product-section__inner">
         <div class="product-section__copy product-section__copy--safety">
           <span class="hero-chip hero-chip--alert hero-chip--landscape safety-chip--top" data-gallery-chip="alert" aria-hidden="true">
@@ -1152,7 +1150,7 @@
       </div>
     </section>
 
-    <section class="product-section product-section--elevated product-section--routes has-routes-train has-routes-train-mask" aria-labelledby="routes-heading">
+    <section class="product-section product-section--elevated product-section--routes has-routes-train has-routes-train-mask" aria-labelledby="routes-heading" data-engine-gate hidden="until-found">
       <div class="container product-section__inner">
         <div class="product-section__copy product-section__copy--routes">
           <span class="hero-chip hero-chip--alert hero-chip--landscape routes-chip--top" data-gallery-chip="alert" aria-hidden="true">
@@ -1223,7 +1221,7 @@
       </div>
     </section>
 
-    <section class="product-section product-section--reverse" aria-labelledby="qa-heading">
+    <section class="product-section product-section--reverse" aria-labelledby="qa-heading" data-engine-gate hidden="until-found">
       <div class="container product-section__inner">
         <div class="product-section__copy">
           <p class="product-eyebrow">Assurance</p>
@@ -1255,7 +1253,7 @@
       </div>
     </section>
 
-    <section class="how-it-works" id="how" aria-labelledby="how-heading">
+    <section class="how-it-works" id="how" aria-labelledby="how-heading" data-engine-gate hidden="until-found">
       <div class="container">
         <h2 id="how-heading" class="section-title">How it works</h2>
         <p class="section-desc">Stand up the platform once. Then run the railway with live compliance.</p>
@@ -1324,7 +1322,7 @@
       </div>
     </section>
 
-    <section class="features" id="features" aria-labelledby="features-heading">
+    <section class="features" id="features" aria-labelledby="features-heading" data-engine-gate hidden="until-found">
       <div class="container">
         <div class="features__head reveal">
           <h2 id="features-heading" class="section-title">Why Rail Intel?</h2>
@@ -1539,7 +1537,7 @@
   </main>
 
   <!-- seo-faq:start -->
-    <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
+    <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions" data-engine-gate hidden="until-found">
       <div class="container">
         <div class="page-section__head">
           <h2>Frequently asked questions</h2>
@@ -1626,7 +1624,7 @@
       </div>
     </section><!-- seo-faq:end -->
 
-    <section class="cta">
+    <section class="cta" data-engine-gate hidden="until-found">
       <div class="container">
         <h2 class="cta-title">Ready to onboard?</h2>
         <p class="cta-desc">You've seen what makes Rail Intel different — the only global platform built for rail competence, with automation and add-on modules no other vendor offers. Start onboarding ahead of launch to qualify for early onboarding discounts and free add-on modules, choose what your operation needs and move from application to a live tenant with guided setup.</p>
@@ -1805,7 +1803,7 @@
   <script src="js/site.js?v=49627134"></script>
   <script src="js/newsletter.js?v=49627134"></script>
   <script src="js/eoi.js?v=49627134"></script>
-  <script src="js/competency-engine.js?v=49627134"></script>
+  <script src="js/competency-engine.js?v=49627140"></script>
   <script src="js/main.js?v=49627134"></script>
 </body>
 </html>

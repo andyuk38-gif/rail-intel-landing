@@ -139,7 +139,16 @@
 
   function setSiteOpen(on) {
     document.body.classList.toggle("is-engine-open", on);
+    var gates = document.querySelectorAll("[data-engine-gate], .page-hero--competency-engine ~ section");
+    gates.forEach(function (el) {
+      if (on) el.removeAttribute("hidden");
+      else el.setAttribute("hidden", "until-found");
+    });
+    var headline = document.querySelector("[data-engine-headline]");
+    if (headline && on) headline.removeAttribute("hidden");
   }
+
+  setSiteOpen(false);
 
   function setCopy(on) {
     if (statusLabel) statusLabel.textContent = on ? "Live feeds" : "Socket open";
