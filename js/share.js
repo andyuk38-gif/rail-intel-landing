@@ -21,7 +21,7 @@
     url.hash = "";
     // WhatsApp keeps the first preview it fetched for a link. A new query
     // makes the next share a link it has not cached yet.
-    url.searchParams.set("v", "2");
+    url.searchParams.set("v", "3");
     return url.toString();
   }
 

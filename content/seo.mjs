@@ -6,7 +6,7 @@
 import { guides } from "./guides.mjs";
 
 export const SITE_URL = "https://railintel.co.uk";
-export const DEFAULT_OG_IMAGE = "/images/share/chip-seated.jpg";
+export const DEFAULT_OG_IMAGE = "/images/share/hero-share.jpg";
 export const SITE_NAME = "Rail Intel";
 
 export function pageUrl(path) {

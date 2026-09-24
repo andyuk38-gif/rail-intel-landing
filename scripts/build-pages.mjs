@@ -290,7 +290,7 @@ ${keywords}  <link rel="canonical" href="${esc(canonical)}" />
   <meta property="og:image" content="${esc(ogImage)}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rail Intel competency engine with the chip seated" />
+  <meta property="og:image:alt" content="First, unlock the power by plugging in our technology. The Rail Intel chip, ready to plug in." />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${esc(pageSeo.title)}" />
