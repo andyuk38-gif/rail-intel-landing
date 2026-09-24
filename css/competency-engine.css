@@ -1403,7 +1403,8 @@
   body:has([data-engine-token]) .header .nav,
   body.is-engine-open .hero ~ *,
   body.is-engine-open .page-hero--competency-engine ~ *,
-  body.is-engine-open .footer {
+  body.is-engine-open .page-section--faq-accordion,
+  body.is-engine-open .cta {
     animation: none;
     transition: none;
   }
@@ -1422,13 +1423,15 @@ body:has([data-engine-token]):not(.is-engine-open) .header .nav {
 
 body:has([data-engine-token]):not(.is-engine-open) .hero ~ *,
 body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine ~ *,
-body:has([data-engine-token]):not(.is-engine-open) .footer {
+body:has([data-engine-token]):not(.is-engine-open) .page-section--faq-accordion,
+body:has([data-engine-token]):not(.is-engine-open) .cta {
   display: none;
 }
 
 body.is-engine-open .hero ~ *,
 body.is-engine-open .page-hero--competency-engine ~ *,
-body.is-engine-open .footer {
+body.is-engine-open .page-section--faq-accordion,
+body.is-engine-open .cta {
   animation: engine-site-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -1446,7 +1449,8 @@ body.is-engine-open .footer {
 
   body:has([data-engine-token]) .hero ~ *,
   body:has([data-engine-token]) .page-hero--competency-engine ~ *,
-  body:has([data-engine-token]) .footer {
+  body:has([data-engine-token]) .page-section--faq-accordion,
+  body:has([data-engine-token]) .cta {
     display: block;
   }
 }
