@@ -40,6 +40,7 @@ const ASSET_INPUTS = [
   "css/pages.css",
   "js/site.js",
   "js/newsletter.js",
+  "js/share.js",
   "js/eoi.js",
   "js/phone-country-codes.js",
   "js/signup.js",
@@ -98,6 +99,86 @@ function renderNavItems(base, items) {
                 </a>`
     )
     .join("\n");
+}
+
+function renderShare(base) {
+  const icon = `${base}images/rail-intel-icon.png`;
+  return `<div class="share" data-share>
+          <button type="button" class="share__toggle" data-share-toggle aria-expanded="false" aria-controls="share-panel">
+            <span class="share__mark" aria-hidden="true">
+              <svg class="share__svg" viewBox="0 0 80 72">
+                <defs>
+                  <linearGradient id="share-pkg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#314158" />
+                    <stop offset="0.48" stop-color="#1c2838" />
+                    <stop offset="1" stop-color="#121a26" />
+                  </linearGradient>
+                  <linearGradient id="share-pkg-side" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#243246" />
+                    <stop offset="1" stop-color="#101720" />
+                  </linearGradient>
+                  <linearGradient id="share-die" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#4a5160" />
+                    <stop offset="0.42" stop-color="#3a414c" />
+                    <stop offset="1" stop-color="#2a3038" />
+                  </linearGradient>
+                  <clipPath id="share-die-clip">
+                    <polygon points="40,16 56,25 40,34 24,25" />
+                  </clipPath>
+                </defs>
+                <g class="share__socket">
+                  <polygon class="share__socket-housing" points="40,36 70,52 40,68 10,52" />
+                  <polygon class="share__socket-well" points="40,40 64,53 40,66 16,53" />
+                  <path class="share__socket-cross" d="M40 47.5v9M35.5 52h9" />
+                </g>
+                <g class="share__chip">
+                  <polygon class="share__pin" points="45.7,13.3 49.2,15.3 50.9,12.4 47.4,10.4" />
+                  <polygon class="share__pin" points="52.5,17.2 56,19.2 57.7,16.3 54.2,14.3" />
+                  <polygon class="share__pin" points="59.2,21.1 62.7,23.1 64.4,20.2 60.9,18.2" />
+                  <polygon class="share__pin" points="34.3,13.3 30.8,15.3 29.1,12.4 32.6,10.4" />
+                  <polygon class="share__pin" points="27.5,17.2 24,19.2 22.3,16.3 25.8,14.3" />
+                  <polygon class="share__pin" points="20.8,21.1 17.3,23.1 15.6,20.2 19.1,18.2" />
+                  <polygon class="share__chip-side" points="14,25 40,40 40,50 14,35" />
+                  <polygon class="share__chip-side share__chip-side--right" points="66,25 40,40 40,50 66,35" />
+                  <polygon class="share__chip-top" points="40,10 66,25 40,40 14,25" />
+                  <polygon class="share__die" points="40,16 56,25 40,34 24,25" />
+                  <g clip-path="url(#share-die-clip)">
+                    <g transform="matrix(0.36 0.2 -0.36 0.2 40 25)">
+                      <image href="${icon}" x="-16" y="-26" width="32" height="32" />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+            <span class="share__label">Share</span>
+          </button>
+          <div class="share__panel" id="share-panel" data-share-panel hidden>
+            <p class="share__heading" id="share-panel-title">Share this page</p>
+            <div class="share__actions" role="group" aria-labelledby="share-panel-title">
+              <button type="button" class="share__action" data-share-copy>
+                <svg class="share__action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l1.41-1.41a5 5 0 0 0-7.07-7.07L10 5.93"/><path d="M14 11a5 5 0 0 0-7.07 0L5.52 12.4a5 5 0 0 0 7.07 7.07L14 18.07"/></svg>
+                <span data-share-copy-label>Copy link</span>
+              </button>
+              <a class="share__action" data-share-email>
+                <svg class="share__action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>
+                <span>Email</span>
+              </a>
+              <a class="share__action" data-share-linkedin target="_blank" rel="noopener noreferrer">
+                <svg class="share__action-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 9H4V20h2.5V9zM5.2 4.2A1.6 1.6 0 1 0 5.2 7.4 1.6 1.6 0 0 0 5.2 4.2zM20 20h-2.5v-5.6c0-1.6-.6-2.6-2-2.6-1 0-1.6.7-1.9 1.3-.1.2-.1.6-.1.9V20H11V9h2.4v1.5c.4-.7 1.3-1.8 3.2-1.8 2.3 0 4 1.5 4 4.8V20z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+              <a class="share__action" data-share-whatsapp target="_blank" rel="noopener noreferrer">
+                <svg class="share__action-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 4C7.6 4 4 7.5 4 11.84c0 1.38.37 2.72 1.08 3.9L4 20l4.4-1.14a8.1 8.1 0 0 0 3.64.86h.01c4.44 0 8.05-3.5 8.05-7.84C20.1 7.5 16.48 4 12.04 4zm4.7 11.1c-.2.56-1.16 1.03-1.6 1.08-.42.05-.94.08-1.52-.1-.35-.1-.8-.26-1.38-.51-2.43-1.05-4.01-3.5-4.13-3.66-.12-.16-1-1.33-1-2.54s.63-1.8.86-2.05c.22-.24.49-.3.65-.3h.47c.15 0 .35-.06.55.42.2.5.68 1.72.74 1.84.06.12.1.27.02.43-.08.16-.12.26-.24.4-.12.14-.25.31-.36.42-.12.12-.24.24-.1.47.14.24.62 1.02 1.33 1.65.92.82 1.69 1.07 1.93 1.19.24.12.38.1.52-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.14 1.14z"/></svg>
+                <span>WhatsApp</span>
+              </a>
+              <button type="button" class="share__action" data-share-native hidden>
+                <svg class="share__action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="2"/><circle cx="16" cy="7" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8 12l6-4M8 12l6 4"/></svg>
+                <span>Share…</span>
+              </button>
+            </div>
+          </div>
+          <p class="sr-only" data-share-status aria-live="polite"></p>
+        </div>`;
 }
 
 function renderNav(base) {
@@ -167,6 +248,7 @@ ${renderNavItems(base, addonItems)}
         <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
+        ${renderShare(base)}
         <div class="nav-menu" data-nav-menu data-open="false">${productPanel}${featureGroup(
           "features",
           "Features",
@@ -370,7 +452,14 @@ ${extraStylesheetBlock}  <style>
   </style>
 </head>
 <body>
-  <div class="site-chrome">
+${options.rememberEngine ? `  <script>
+    try {
+      if (sessionStorage.getItem("rail-intel-engine-open") === "1") {
+        document.body.classList.add("is-engine-open");
+      }
+    } catch (err) {}
+  </script>
+` : ""}  <div class="site-chrome">
     <div class="dev-banner" role="status">
       ${renderDevBanner()}
     </div>
@@ -468,6 +557,7 @@ function renderFooter(base, options = {}) {
 
   <script src="${base}js/site.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/newsletter.js?v=${ASSET_VERSION}"></script>
+  <script src="${base}js/share.js?v=${ASSET_VERSION}"></script>
 ${extraScriptBlock}</body>
 </html>
 `;
@@ -2495,7 +2585,19 @@ ${renderCompetencyEngineBay(base)}
           <div class="page-hero__media page-hero__media--engine">
 ${heroMedia}
           </div>
-        </div>`
+        </div>
+        <script>
+          try {
+            if (sessionStorage.getItem("rail-intel-engine-open") === "1") {
+              var seatedEngine = document.querySelector("[data-competency-engine]");
+              var seatedBay = document.querySelector("[data-engine-bay]");
+              var seatedLift = document.querySelector("[data-engine-lift]");
+              if (seatedEngine) seatedEngine.classList.add("is-live");
+              if (seatedBay) seatedBay.classList.add("is-spent");
+              if (seatedLift) seatedLift.hidden = false;
+            }
+          } catch (err) {}
+        </script>`
     : hasHeroMedia
     ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}">
           <div class="page-hero__copy">
@@ -2517,7 +2619,7 @@ ${heroCopy}
     : commHubPage
       ? { extraStylesheets: ["css/communications-hub.css"] }
       : competencyEngineHero
-        ? { extraStylesheets: ["css/competency-engine.css"] }
+        ? { extraStylesheets: ["css/competency-engine.css"], rememberEngine: true }
         : {};
   const footerOptions = flipbookPage
     ? { extraScripts: ["js/profile-flipbook.js"] }
@@ -3947,6 +4049,11 @@ function syncIndex() {
     .replace(/js\/main\.js\?v=\d+/, `js/main.js?v=${ASSET_VERSION}`)
     .replace(/js\/site\.js\?v=\d+/, `js/site.js?v=${ASSET_VERSION}`)
     .replace(/js\/newsletter\.js\?v=\d+/, `js/newsletter.js?v=${ASSET_VERSION}`)
+    .replace(/\n\s*<script src="js\/share\.js\?v=\d+"><\/script>/g, "")
+    .replace(
+      /(<script src="js\/newsletter\.js\?v=)\d+("><\/script>)/,
+      `$1${ASSET_VERSION}$2\n  <script src="js/share.js?v=${ASSET_VERSION}"></script>`
+    )
     .replace(/js\/eoi\.js\?v=\d+/, `js/eoi.js?v=${ASSET_VERSION}`)
     .replace(/js\/contact\.js\?v=\d+/, `js/contact.js?v=${ASSET_VERSION}`)
     .replace(/(\?v=)\d+/g, `$1${ASSET_VERSION}`)
