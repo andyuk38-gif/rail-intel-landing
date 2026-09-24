@@ -718,7 +718,7 @@ ${tickerItems}
 export function renderCompetencyEngineBay(base = "../") {
   const seat = chipBox();
   return `          <aside class="engine-bay" data-engine-bay style="--token-ratio: ${fmt(seat.w)} / ${fmt(seat.h)}">
-            <p class="engine-bay__kicker" data-engine-kicker>Ready to seat</p>
+            <p class="engine-bay__kicker" data-engine-kicker>Ready to plug-in</p>
             <div class="engine-bay__slot">
               <div class="engine-bay__home" data-engine-home>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
