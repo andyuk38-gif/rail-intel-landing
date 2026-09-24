@@ -1179,6 +1179,54 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
+.engine-bay__unlock {
+  display: none;
+}
+
+.engine-bay.is-spent .engine-bay__unlock {
+  position: absolute;
+  inset: 14% 12% 18%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0.35rem 0.4rem 0;
+  text-align: center;
+  animation: engine-site-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.engine-bay__unlock-mark {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 999px;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.38);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.16);
+}
+
+.engine-bay__unlock-copy {
+  margin: 0;
+  max-width: 16rem;
+  font-size: 0.98rem;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: #f4f6fa;
+}
+
+.engine-bay__unlock-copy span {
+  background: linear-gradient(100deg, #fbbf24 0%, #f59e0b 45%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .engine-token {
   position: absolute;
   inset: 0;
@@ -1374,7 +1422,8 @@
   .engine-trace,
   .engine-addon,
   .engine-addon::after,
-  .engine-addon__mark {
+  .engine-addon__mark,
+  .engine-bay.is-spent .engine-bay__unlock {
     animation: none;
     transition: none;
   }
@@ -1419,6 +1468,16 @@ body:has([data-engine-token]):not(.is-engine-open) .header .nav {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+body:has([data-engine-token]) .hero-title__locked,
+body:has([data-engine-token]) .hero-title__open {
+  display: block;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .hero-title__open,
+body.is-engine-open .hero-title__locked {
+  display: none;
 }
 
 body:has([data-engine-token]):not(.is-engine-open) .hero ~ *,

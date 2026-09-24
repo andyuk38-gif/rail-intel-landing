@@ -786,6 +786,12 @@ export function renderCompetencyEngineBay(base = "../") {
   return `          <aside class="engine-bay" data-engine-bay style="--token-ratio: ${fmt(seat.w)} / ${fmt(seat.h)}">
             <p class="engine-bay__kicker" data-engine-kicker>Ready to plug-in</p>
             <div class="engine-bay__slot">
+              <div class="engine-bay__unlock">
+                <span class="engine-bay__unlock-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/></svg>
+                </span>
+                <p class="engine-bay__unlock-copy">You have now unlocked the <span>technologies</span> for your operations.</p>
+              </div>
               <div class="engine-bay__home" data-engine-home>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
                 <svg class="engine-token__svg" viewBox="${fmt(seat.x)} ${fmt(seat.y)} ${fmt(seat.w)} ${fmt(seat.h)}" role="presentation" aria-hidden="true">
