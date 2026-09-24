@@ -29,15 +29,16 @@
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
-  <!-- site-asset-version:126038100 -->
+  <!-- site-asset-version:38275943 -->
   <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="images/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=126038100" />
-  <link rel="stylesheet" href="css/pages.css?v=126038100" />
+  <link rel="stylesheet" href="css/style.css?v=38275943" />
+  <link rel="stylesheet" href="css/pages.css?v=38275943" />
+  <link rel="stylesheet" href="css/competency-engine.css?v=38275943" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -279,194 +280,572 @@
             <li>14-day module trials</li>
           </ul>
         </div>
-        <div class="hero-media">
-          <div class="hero-media__perspective">
-            <div class="hero-media__float">
-              <div class="hero-media__tilt">
-                <div class="browser-mockup browser-mockup--primary">
-                  <div class="browser-mockup__chrome">
-                    <span class="browser-mockup__dots"></span>
-                    <span class="browser-mockup__url">cms.railintel.co.uk</span>
-                  </div>
-                  <div class="browser-mockup__content">
-                    <div class="login-scene" role="img" aria-label="The Rail Intel sign-in screen, over the animated aerial railway backdrop used by the live app">
-                      <video class="login-scene__video" autoplay loop muted playsinline preload="auto" poster="video/login-poster.jpg" aria-hidden="true">
-                        <source src="video/login-background.mp4" type="video/mp4" />
-                      </video>
-                      <span class="login-scene__scrim" aria-hidden="true"></span>
-                      <div class="login-card" aria-hidden="true">
-                        <div class="login-card__brand">
-                          <img src="images/rail-intel-icon.png" alt="" class="login-card__logo" width="512" height="512" decoding="async" fetchpriority="high" />
-                          <p class="login-card__title">Rail Intel</p>
-                          <p class="login-card__tagline">Secure Competency Management</p>
-                        </div>
-                        <div class="login-card__form">
-                          <div class="login-card__row">
-                            <p class="login-card__label">Company Code</p>
-                            <p class="login-card__input">e.g. RI-123</p>
-                          </div>
-                          <div class="login-card__row">
-                            <p class="login-card__label">Email Address</p>
-                            <p class="login-card__input">email@railintel.co.uk</p>
-                          </div>
-                          <div class="login-card__row">
-                            <p class="login-card__label">Password</p>
-                            <p class="login-card__input login-card__input--dots">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</p>
-                          </div>
-                          <p class="login-card__submit">Sign In</p>
-                          <p class="login-card__forgot">Forgot password?</p>
-                          <p class="login-card__note">Authorised Personnel Only. All access is logged.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        <div class="hero-media hero-media--engine">
+          <!-- home-engine-bay:start -->
+          <aside class="engine-bay" data-engine-bay style="--token-ratio: 395.8 / 260.8">
+            <p class="engine-bay__kicker" data-engine-kicker>Ready to seat</p>
+            <div class="engine-bay__slot">
+              <div class="engine-bay__home" data-engine-home>
+              <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
+                <svg class="engine-token__svg" viewBox="502.1 281.6 395.8 260.8" role="presentation" aria-hidden="true">
+                  <defs>
+                  <linearGradient id="token-pkg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#314158" />
+                    <stop offset="0.48" stop-color="#1c2838" />
+                    <stop offset="1" stop-color="#121a26" />
+                  </linearGradient>
+                  <linearGradient id="token-pkg-side" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#243246" />
+                    <stop offset="1" stop-color="#101720" />
+                  </linearGradient>
+                  <linearGradient id="token-die" gradientUnits="userSpaceOnUse" x1="700" y1="303.1" x2="700" y2="483.1">
+                    <stop offset="0" stop-color="#4a5160" />
+                    <stop offset="0.42" stop-color="#3a414c" />
+                    <stop offset="1" stop-color="#2a3038" />
+                  </linearGradient>
+                  <clipPath id="token-die-clip">
+                    <polygon points="700,303.1 855.9,393.1 700,483.1 544.1,393.1" />
+                  </clipPath>
+                  </defs>
+        <polygon class="engine-pin" points="704.9,319.5 711.5,323.2 725.5,315.1 719,311.4" />
+        <polygon class="engine-pin" points="721.4,328.9 727.9,332.7 742,324.6 735.4,320.8" />
+        <polygon class="engine-pin" points="737.8,338.4 744.4,342.2 758.4,334.1 751.9,330.3" />
+        <polygon class="engine-pin" points="754.3,347.9 760.8,351.7 774.8,343.6 768.3,339.8" />
+        <polygon class="engine-pin" points="770.7,357.4 777.2,361.2 791.3,353.1 784.7,349.3" />
+        <polygon class="engine-pin" points="787.1,366.9 793.7,370.7 807.7,362.6 801.2,358.8" />
+        <polygon class="engine-pin" points="803.6,376.4 810.1,380.2 824.2,372.1 817.6,368.3" />
+        <polygon class="engine-pin" points="820,385.9 826.6,389.7 840.6,381.6 834,377.8" />
+        <polygon class="engine-pin" points="836.5,395.4 843,399.2 857,391.1 850.5,387.3" />
+        <polygon class="engine-pin" points="852.9,404.9 859.4,408.7 873.5,400.6 866.9,396.8" />
+        <polygon class="engine-pin" points="869.3,414.4 875.9,418.1 889.9,410 883.4,406.3" />
+        <polygon class="engine-pin" points="875.9,423.9 869.3,427.6 883.4,435.7 889.9,432" />
+        <polygon class="engine-pin" points="859.4,433.3 852.9,437.1 866.9,445.2 873.5,441.4" />
+        <polygon class="engine-pin" points="843,442.8 836.5,446.6 850.5,454.7 857,450.9" />
+        <polygon class="engine-pin" points="826.6,452.3 820,456.1 834,464.2 840.6,460.4" />
+        <polygon class="engine-pin" points="810.1,461.8 803.6,465.6 817.6,473.7 824.2,469.9" />
+        <polygon class="engine-pin" points="793.7,471.3 787.1,475.1 801.2,483.2 807.7,479.4" />
+        <polygon class="engine-pin" points="777.2,480.8 770.7,484.6 784.7,492.7 791.3,488.9" />
+        <polygon class="engine-pin" points="760.8,490.3 754.3,494.1 768.3,502.2 774.8,498.4" />
+        <polygon class="engine-pin" points="744.4,499.8 737.8,503.6 751.9,511.7 758.4,507.9" />
+        <polygon class="engine-pin" points="727.9,509.3 721.4,513.1 735.4,521.2 742,517.4" />
+        <polygon class="engine-pin" points="711.5,518.8 704.9,522.5 719,530.6 725.5,526.9" />
+        <polygon class="engine-pin" points="695.1,522.5 688.5,518.8 674.5,526.9 681,530.6" />
+        <polygon class="engine-pin" points="678.6,513.1 672.1,509.3 658,517.4 664.6,521.2" />
+        <polygon class="engine-pin" points="662.2,503.6 655.6,499.8 641.6,507.9 648.1,511.7" />
+        <polygon class="engine-pin" points="645.7,494.1 639.2,490.3 625.2,498.4 631.7,502.2" />
+        <polygon class="engine-pin" points="629.3,484.6 622.8,480.8 608.7,488.9 615.3,492.7" />
+        <polygon class="engine-pin" points="612.9,475.1 606.3,471.3 592.3,479.4 598.8,483.2" />
+        <polygon class="engine-pin" points="596.4,465.6 589.9,461.8 575.8,469.9 582.4,473.7" />
+        <polygon class="engine-pin" points="580,456.1 573.4,452.3 559.4,460.4 566,464.2" />
+        <polygon class="engine-pin" points="563.5,446.6 557,442.8 543,450.9 549.5,454.7" />
+        <polygon class="engine-pin" points="547.1,437.1 540.6,433.3 526.5,441.4 533.1,445.2" />
+        <polygon class="engine-pin" points="530.7,427.6 524.1,423.9 510.1,432 516.6,435.7" />
+        <polygon class="engine-pin" points="524.1,418.1 530.7,414.4 516.6,406.3 510.1,410" />
+        <polygon class="engine-pin" points="540.6,408.7 547.1,404.9 533.1,396.8 526.5,400.6" />
+        <polygon class="engine-pin" points="557,399.2 563.5,395.4 549.5,387.3 543,391.1" />
+        <polygon class="engine-pin" points="573.4,389.7 580,385.9 566,377.8 559.4,381.6" />
+        <polygon class="engine-pin" points="589.9,380.2 596.4,376.4 582.4,368.3 575.8,372.1" />
+        <polygon class="engine-pin" points="606.3,370.7 612.9,366.9 598.8,358.8 592.3,362.6" />
+        <polygon class="engine-pin" points="622.8,361.2 629.3,357.4 615.3,349.3 608.7,353.1" />
+        <polygon class="engine-pin" points="639.2,351.7 645.7,347.9 631.7,339.8 625.2,343.6" />
+        <polygon class="engine-pin" points="655.6,342.2 662.2,338.4 648.1,330.3 641.6,334.1" />
+        <polygon class="engine-pin" points="672.1,332.7 678.6,328.9 664.6,320.8 658,324.6" />
+        <polygon class="engine-pin" points="688.5,323.2 695.1,319.5 681,311.4 674.5,315.1" />
+                <polygon class="engine-chip__side" points="519.2,394 700,498.4 700,534.4 519.2,430" fill="url(#token-pkg-side)" />
+                <polygon class="engine-chip__side engine-chip__side--right" points="880.8,394 700,498.4 700,534.4 880.8,430" fill="url(#token-pkg-side)" />
+                <polygon class="engine-chip__top" points="700,289.6 880.8,394 700,498.4 519.2,394" fill="url(#token-pkg)" />
+                <polygon class="engine-die" points="700,303.1 855.9,393.1 700,483.1 544.1,393.1" fill="url(#token-die)" />
+                <g clip-path="url(#token-die-clip)">
+                  <g class="engine-brand" transform="matrix(0.8 0.5 -0.8 0.5 700 392)">
+                    <image href="images/rail-intel-icon.png" x="-38" y="-74" width="76" height="76" />
+                    <text class="engine-brand__by" x="0" y="40" text-anchor="middle">powered by</text>
+                    <text class="engine-brand__name" x="0" y="76" text-anchor="middle">Rail Intel</text>
+                  </g>
+                </g>
+                </svg>
+                <span class="sr-only">Competency engine chip. Drag it onto the socket, or press to seat it.</span>
+              </button>
+              </div>
+            </div>
+            <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag into the socket</span></p>
+            <button type="button" class="engine-lift" data-engine-lift hidden>Lift chip</button>
+          </aside>
+          <!-- home-engine-bay:end -->
+        </div>
+      </div>
+      <div class="container hero-engine" aria-label="Competency engine">
+        <!-- home-engine-board:start -->
+        <div class="engine" data-competency-engine data-active="assessments">
+          <p class="sr-only">The competency engine starts in the tray beside this introduction. Drag it into the empty socket on the board, or press the chip to seat it. Once it connects, branches leave the engine for cycles, criteria, standards, timing, compliance, evidence, assessments and development. Each branch shows what the engine feeds, the rule checked along that trace, and a live feed. Optional add-ons leave on separate coloured traces, labelled QA, Tasks, Briefs, Trainee, Reports, Leave and Medication.</p>
+          <p class="sr-only" data-engine-announce aria-live="polite"></p>
+          <div class="engine__bar">
+            <span class="engine__status"><span class="engine__status-dot" aria-hidden="true"></span><span data-engine-status-label>Socket open</span></span>
+            <span class="engine__device" data-engine-device>Awaiting Rail Intel Technologies</span>
+            <span class="engine__outputs" data-engine-outputs>Drag the chip to seat</span>
+          </div>
+          <div class="engine__viewport">
+            <div class="engine-surge" aria-hidden="true"></div>
+            <div class="engine__scene" data-engine-scene>
+              <svg class="engine__svg" viewBox="0 0 1400 880" role="presentation" aria-hidden="true">
+                <defs>
+                  <linearGradient id="engine-board" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#1a2433" />
+                    <stop offset="0.55" stop-color="#121a26" />
+                    <stop offset="1" stop-color="#0d141e" />
+                  </linearGradient>
+                  <linearGradient id="engine-board-side" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#1c2838" />
+                    <stop offset="1" stop-color="#090e15" />
+                  </linearGradient>
+                  <linearGradient id="engine-socket-well" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#05080d" />
+                    <stop offset="1" stop-color="#121a26" />
+                  </linearGradient>
+                  <linearGradient id="engine-pkg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#314158" />
+                    <stop offset="0.48" stop-color="#1c2838" />
+                    <stop offset="1" stop-color="#121a26" />
+                  </linearGradient>
+                  <linearGradient id="engine-pkg-side" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#243246" />
+                    <stop offset="1" stop-color="#101720" />
+                  </linearGradient>
+                  <linearGradient id="engine-die-matte" gradientUnits="userSpaceOnUse" x1="700" y1="303.1" x2="700" y2="483.1">
+                    <stop offset="0" stop-color="#4a5160" />
+                    <stop offset="0.42" stop-color="#3a414c" />
+                    <stop offset="1" stop-color="#2a3038" />
+                  </linearGradient>
+                  <clipPath id="engine-die-clip">
+                    <polygon points="700,303.1 855.9,393.1 700,483.1 544.1,393.1" />
+                  </clipPath>
+                  <clipPath id="engine-board-clip">
+                    <polygon points="544.1,98.8 1273.7,520 855.9,761.2 126.3,340" />
+                  </clipPath>
+                </defs>
+                <ellipse class="engine-floor" cx="700" cy="466" rx="430" ry="78" />
+                <polygon class="engine-board__side" points="126.3,340 855.9,761.2 855.9,779.2 126.3,358" fill="url(#engine-board-side)" />
+                <polygon class="engine-board__side engine-board__side--right" points="1273.7,520 855.9,761.2 855.9,779.2 1273.7,538" fill="url(#engine-board-side)" />
+                <polygon class="engine-board__top" points="544.1,98.8 1273.7,520 855.9,761.2 126.3,340" fill="url(#engine-board)" />
+                <g clip-path="url(#engine-board-clip)">
+                  <path class="engine-grid" d="M572.2 115 L154.4 356.2 M600.2 131.2 L182.5 372.4 M628.3 147.4 L210.5 388.6 M656.4 163.6 L238.6 404.8 M684.4 179.8 L266.6 421 M712.5 196 L294.7 437.2 M740.5 212.2 L322.8 453.4 M768.6 228.4 L350.8 469.6 M796.6 244.6 L378.9 485.8 M824.7 260.8 L406.9 502 M852.8 277 L435 518.2 M880.8 293.2 L463.1 534.4 M908.9 309.4 L491.1 550.6 M936.9 325.6 L519.2 566.8 M965 341.8 L547.2 583 M993.1 358 L575.3 599.2 M1021.1 374.2 L603.4 615.4 M1049.2 390.4 L631.4 631.6 M1077.2 406.6 L659.5 647.8 M1105.3 422.8 L687.5 664 M1133.4 439 L715.6 680.2 M1161.4 455.2 L743.6 696.4 M1189.5 471.4 L771.7 712.6 M1217.5 487.6 L799.8 728.8 M1245.6 503.8 L827.8 745 M516.1 115 L1245.6 536.2 M488 131.2 L1217.5 552.4 M459.9 147.4 L1189.5 568.6 M431.9 163.6 L1161.4 584.8 M403.8 179.8 L1133.4 601 M375.8 196 L1105.3 617.2 M347.7 212.2 L1077.2 633.4 M319.6 228.4 L1049.2 649.6 M291.6 244.6 L1021.1 665.8 M263.5 260.8 L993.1 682 M235.5 277 L965 698.2 M207.4 293.2 L936.9 714.4 M179.3 309.4 L908.9 730.6 M151.3 325.6 L880.8 746.8" />
+                </g>
+        <ellipse class="engine-hole" cx="544.1" cy="136.2" rx="8.6" ry="5" />
+        <ellipse class="engine-hole" cx="1208.2" cy="519.6" rx="8.6" ry="5" />
+        <ellipse class="engine-hole" cx="855.9" cy="723" rx="8.6" ry="5" />
+        <ellipse class="engine-hole" cx="191.8" cy="339.6" rx="8.6" ry="5" />
+        <g class="engine-socket">
+          <ellipse class="engine-socket__pulse" cx="700" cy="428.2" rx="236.9" ry="136.8" />
+          <polygon class="engine-socket__housing" points="700,311.7 902.6,428.7 700,545.7 497.4,428.7" />
+          <polygon class="engine-socket__pad" points="707.4,325.8 712.2,328.6 722.3,322.7 717.5,320" />
+          <polygon class="engine-socket__pad" points="723.8,335.3 728.6,338.1 738.7,332.2 734,329.5" />
+          <polygon class="engine-socket__pad" points="740.3,344.8 745,347.5 755.2,341.7 750.4,339" />
+          <polygon class="engine-socket__pad" points="756.7,354.3 761.5,357 771.6,351.2 766.8,348.4" />
+          <polygon class="engine-socket__pad" points="773.2,363.8 777.9,366.5 788,360.7 783.3,357.9" />
+          <polygon class="engine-socket__pad" points="789.6,373.3 794.3,376 804.5,370.2 799.7,367.4" />
+          <polygon class="engine-socket__pad" points="806,382.8 810.8,385.5 820.9,379.7 816.2,376.9" />
+          <polygon class="engine-socket__pad" points="822.5,392.3 827.2,395 837.4,389.2 832.6,386.4" />
+          <polygon class="engine-socket__pad" points="838.9,401.8 843.7,404.5 853.8,398.6 849,395.9" />
+          <polygon class="engine-socket__pad" points="855.3,411.2 860.1,414 870.2,408.1 865.5,405.4" />
+          <polygon class="engine-socket__pad" points="871.8,420.7 876.5,423.5 886.7,417.6 881.9,414.9" />
+          <polygon class="engine-socket__pad" points="876.5,432 871.8,434.8 881.9,440.6 886.7,437.9" />
+          <polygon class="engine-socket__pad" points="860.1,441.5 855.3,444.3 865.5,450.1 870.2,447.4" />
+          <polygon class="engine-socket__pad" points="843.7,451 838.9,453.7 849,459.6 853.8,456.9" />
+          <polygon class="engine-socket__pad" points="827.2,460.5 822.5,463.2 832.6,469.1 837.4,466.3" />
+          <polygon class="engine-socket__pad" points="810.8,470 806,472.7 816.2,478.6 820.9,475.8" />
+          <polygon class="engine-socket__pad" points="794.3,479.5 789.6,482.2 799.7,488.1 804.5,485.3" />
+          <polygon class="engine-socket__pad" points="777.9,489 773.2,491.7 783.3,497.6 788,494.8" />
+          <polygon class="engine-socket__pad" points="761.5,498.5 756.7,501.2 766.8,507.1 771.6,504.3" />
+          <polygon class="engine-socket__pad" points="745,508 740.3,510.7 750.4,516.5 755.2,513.8" />
+          <polygon class="engine-socket__pad" points="728.6,517.4 723.8,520.2 734,526 738.7,523.3" />
+          <polygon class="engine-socket__pad" points="712.2,526.9 707.4,529.7 717.5,535.5 722.3,532.8" />
+          <polygon class="engine-socket__pad" points="692.6,529.7 687.8,526.9 677.7,532.8 682.5,535.5" />
+          <polygon class="engine-socket__pad" points="676.2,520.2 671.4,517.4 661.3,523.3 666,526" />
+          <polygon class="engine-socket__pad" points="659.7,510.7 655,508 644.8,513.8 649.6,516.5" />
+          <polygon class="engine-socket__pad" points="643.3,501.2 638.5,498.5 628.4,504.3 633.2,507.1" />
+          <polygon class="engine-socket__pad" points="626.8,491.7 622.1,489 612,494.8 616.7,497.6" />
+          <polygon class="engine-socket__pad" points="610.4,482.2 605.7,479.5 595.5,485.3 600.3,488.1" />
+          <polygon class="engine-socket__pad" points="594,472.7 589.2,470 579.1,475.8 583.8,478.6" />
+          <polygon class="engine-socket__pad" points="577.5,463.2 572.8,460.5 562.6,466.3 567.4,469.1" />
+          <polygon class="engine-socket__pad" points="561.1,453.7 556.3,451 546.2,456.9 551,459.6" />
+          <polygon class="engine-socket__pad" points="544.7,444.3 539.9,441.5 529.8,447.4 534.5,450.1" />
+          <polygon class="engine-socket__pad" points="528.2,434.8 523.5,432 513.3,437.9 518.1,440.6" />
+          <polygon class="engine-socket__pad" points="523.5,423.5 528.2,420.7 518.1,414.9 513.3,417.6" />
+          <polygon class="engine-socket__pad" points="539.9,414 544.7,411.2 534.5,405.4 529.8,408.1" />
+          <polygon class="engine-socket__pad" points="556.3,404.5 561.1,401.8 551,395.9 546.2,398.6" />
+          <polygon class="engine-socket__pad" points="572.8,395 577.5,392.3 567.4,386.4 562.6,389.2" />
+          <polygon class="engine-socket__pad" points="589.2,385.5 594,382.8 583.8,376.9 579.1,379.7" />
+          <polygon class="engine-socket__pad" points="605.7,376 610.4,373.3 600.3,367.4 595.5,370.2" />
+          <polygon class="engine-socket__pad" points="622.1,366.5 626.8,363.8 616.7,357.9 612,360.7" />
+          <polygon class="engine-socket__pad" points="638.5,357 643.3,354.3 633.2,348.4 628.4,351.2" />
+          <polygon class="engine-socket__pad" points="655,347.5 659.7,344.8 649.6,339 644.8,341.7" />
+          <polygon class="engine-socket__pad" points="671.4,338.1 676.2,335.3 666,329.5 661.3,332.2" />
+          <polygon class="engine-socket__pad" points="687.8,328.6 692.6,325.8 682.5,320 677.7,322.7" />
+          <polygon class="engine-socket__cavity" points="700,326.7 877.7,429.3 700,531.9 522.3,429.3" />
+          <polygon class="engine-socket__floor" points="700,348.7 840.3,429.7 700,510.7 559.7,429.7" />
+          <polygon class="engine-socket__key" points="686,340 714,340 700,331.9" />
+          <path class="engine-socket__brackets" d="M700 317.3 L721.8 329.9 M700 317.3 L678.2 329.9 M890.2 427.1 L868.4 414.5 M890.2 427.1 L868.4 439.7 M700 536.9 L678.2 524.3 M700 536.9 L721.8 524.3 M509.8 427.1 L531.6 439.7 M509.8 427.1 L531.6 414.5" />
+          <g class="engine-socket__cross" transform="matrix(0.8 0.5 -0.8 0.5 700 428)">
+            <path d="M-16 0 H16 M0 -16 V16" />
+          </g>
+        </g>
+                <g class="engine-live-layer">
+        <path class="engine-trace engine-trace--addon" d="M696.9 308 L631.4 270.3" pathLength="100" style="color: #c084fc; --draw: 0.20s" />
+        <path class="engine-packet engine-packet--addon" d="M696.9 308 L631.4 270.3" pathLength="100" style="color: #c084fc; animation-duration: 3.6s; animation-delay: 0.00s" />
+        <path class="engine-trace engine-trace--addon" d="M531.6 452.1 L439.7 505.2 L380.4 471" pathLength="100" style="color: #22d3ee; --draw: 0.25s" />
+        <path class="engine-packet engine-packet--addon" d="M531.6 452.1 L439.7 505.2 L380.4 471" pathLength="100" style="color: #22d3ee; animation-duration: 3.6s; animation-delay: -0.42s" />
+        <path class="engine-trace engine-trace--addon" d="M646.2 340.9 L618.2 324.7 L437.3 220.3 L505.1 181.1" pathLength="100" style="color: #fb7185; --draw: 0.30s" />
+        <path class="engine-packet engine-packet--addon" d="M646.2 340.9 L618.2 324.7 L437.3 220.3 L505.1 181.1" pathLength="100" style="color: #fb7185; animation-duration: 3.6s; animation-delay: -0.84s" />
+        <path class="engine-trace engine-trace--addon" d="M788.2 360.7 L816.2 344.5 L860.6 318.9 L840.3 307.2" pathLength="100" style="color: #818cf8; --draw: 0.35s" />
+        <path class="engine-packet engine-packet--addon" d="M788.2 360.7 L816.2 344.5 L860.6 318.9 L840.3 307.2" pathLength="100" style="color: #818cf8; animation-duration: 3.6s; animation-delay: -1.26s" />
+        <path class="engine-trace engine-trace--addon" d="M888.6 417 L922.9 397.2" pathLength="100" style="color: #f472b6; --draw: 0.40s" />
+        <path class="engine-packet engine-packet--addon" d="M888.6 417 L922.9 397.2" pathLength="100" style="color: #f472b6; animation-duration: 3.6s; animation-delay: -1.68s" />
+        <path class="engine-trace engine-trace--addon" d="M561.1 390 L533 373.8 L461.3 332.4 L411.6 361.2" pathLength="100" style="color: #2dd4bf; --draw: 0.45s" />
+        <path class="engine-packet engine-packet--addon" d="M561.1 390 L533 373.8 L461.3 332.4 L411.6 361.2" pathLength="100" style="color: #2dd4bf; animation-duration: 3.6s; animation-delay: -2.10s" />
+        <path class="engine-trace engine-trace--addon" d="M753.8 516.4 L781.8 532.6 L962.7 637 L894.9 676.2" pathLength="100" style="color: #fb923c; --draw: 0.50s" />
+        <path class="engine-packet engine-packet--addon" d="M753.8 516.4 L781.8 532.6 L962.7 637 L894.9 676.2" pathLength="100" style="color: #fb923c; animation-duration: 3.6s; animation-delay: -2.52s" />
+        <path class="engine-trace" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd; --draw: 0.00s" />
+        <path class="engine-packet" data-branch="cycles" d="M747.9 337.5 L775.9 321.3 L700 277.5 L762.4 241.5" pathLength="100" style="color: #93c5fd; animation-duration: 3.10s; animation-delay: 0.00s" />
+        <g class="engine-gate" data-branch="cycles">
+          <rect x="715.7" y="290.2" width="68.8" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="750.1" y="302.7" fill="#93c5fd">ONE LIVE</text>
+        </g>
+        <path class="engine-trace" data-branch="criteria" d="M834.3 387.4 L862.4 371.2 L924.7 335.2 L968.1 360.3" pathLength="100" style="color: #93c5fd; --draw: 0.06s" />
+        <path class="engine-packet" data-branch="criteria" d="M834.3 387.4 L862.4 371.2 L924.7 335.2 L968.1 360.3" pathLength="100" style="color: #93c5fd; animation-duration: 3.45s; animation-delay: -0.37s" />
+        <g class="engine-gate" data-branch="criteria">
+          <rect x="854.6" y="342.8" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="883.6" y="355.3" fill="#93c5fd">LINKED</text>
+        </g>
+        <path class="engine-trace" data-branch="standards" d="M854.6 458.2 L882.7 474.4 L999.6 541.9 L1071 500.7" pathLength="100" style="color: #93c5fd; --draw: 0.12s" />
+        <path class="engine-packet" data-branch="standards" d="M854.6 458.2 L882.7 474.4 L999.6 541.9 L1071 500.7" pathLength="100" style="color: #93c5fd; animation-duration: 3.80s; animation-delay: -0.74s" />
+        <g class="engine-gate" data-branch="standards">
+          <rect x="891.3" y="481.1" width="62.2" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="922.4" y="493.6" fill="#93c5fd">APPLIED</text>
+        </g>
+        <path class="engine-trace" data-branch="timing" d="M791.1 494.9 L819.2 511.1 L993.7 611.9 L977.5 621.3" pathLength="100" style="color: #93c5fd; --draw: 0.18s" />
+        <path class="engine-packet" data-branch="timing" d="M791.1 494.9 L819.2 511.1 L993.7 611.9 L977.5 621.3" pathLength="100" style="color: #93c5fd; animation-duration: 3.10s; animation-delay: -1.11s" />
+        <g class="engine-gate" data-branch="timing">
+          <rect x="849.5" y="529.1" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="878.5" y="541.6" fill="#93c5fd">HOURS</text>
+        </g>
+        <path class="engine-trace engine-trace--primary" data-branch="compliance" d="M746.8 520.4 L774.9 536.6 L647 610.5 L700 641.1" pathLength="100" style="color: #34d399; --draw: 0.24s" />
+        <path class="engine-packet" data-branch="compliance" d="M746.8 520.4 L774.9 536.6 L647 610.5 L700 641.1" pathLength="100" style="color: #34d399; animation-duration: 2.40s; animation-delay: -1.48s" />
+        <g class="engine-gate" data-branch="compliance">
+          <rect x="700.3" y="545.5" width="62.2" height="18" rx="9" fill="#0c121b" stroke="#34d399" />
+          <text x="731.4" y="558" fill="#34d399">IN DATE</text>
+        </g>
+        <path class="engine-trace" data-branch="evidence" d="M594.5 486.5 L566.4 502.7 L480.7 552.2 L477.1 550.2" pathLength="100" style="color: #93c5fd; --draw: 0.30s" />
+        <path class="engine-packet" data-branch="evidence" d="M594.5 486.5 L566.4 502.7 L480.7 552.2 L477.1 550.2" pathLength="100" style="color: #93c5fd; animation-duration: 3.80s; animation-delay: -1.85s" />
+        <g class="engine-gate" data-branch="evidence">
+          <rect x="508.3" y="503.4" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="537.3" y="515.9" fill="#93c5fd">SIGNED</text>
+        </g>
+        <path class="engine-trace engine-trace--primary is-on" data-branch="assessments" d="M541.1 401.6 L513 385.4 L416.3 441.3 L338.3 396.3" pathLength="100" style="color: #f59e0b; --draw: 0.36s" />
+        <path class="engine-packet is-on" data-branch="assessments" d="M541.1 401.6 L513 385.4 L416.3 441.3 L338.3 396.3" pathLength="100" style="color: #f59e0b; animation-duration: 2.40s; animation-delay: -2.22s" />
+        <g class="engine-gate is-on" data-branch="assessments">
+          <rect x="451.1" y="388.2" width="58" height="18" rx="9" fill="#0c121b" stroke="#f59e0b" />
+          <text x="480.1" y="400.7" fill="#f59e0b">FLAG</text>
+        </g>
+        <path class="engine-trace" data-branch="development" d="M594.5 370.8 L566.4 354.6 L382.5 248.4 L378.9 250.5" pathLength="100" style="color: #93c5fd; --draw: 0.42s" />
+        <path class="engine-packet" data-branch="development" d="M594.5 370.8 L566.4 354.6 L382.5 248.4 L378.9 250.5" pathLength="100" style="color: #93c5fd; animation-duration: 3.45s; animation-delay: -2.59s" />
+        <g class="engine-gate" data-branch="development">
+          <rect x="474.9" y="302.3" width="58" height="18" rx="9" fill="#0c121b" stroke="#93c5fd" />
+          <text x="503.9" y="314.8" fill="#93c5fd">CARRY</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="605.4" y="252" width="52" height="22" rx="11" fill="#0c121b" stroke="#c084fc" />
+          <text x="631.4" y="267" fill="#c084fc">QA</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="350.9" y="452.8" width="59" height="22" rx="11" fill="#0c121b" stroke="#22d3ee" />
+          <text x="380.4" y="467.8" fill="#22d3ee">Tasks</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="471.9" y="163" width="66.4" height="22" rx="11" fill="#0c121b" stroke="#fb7185" />
+          <text x="505.1" y="178" fill="#fb7185">Briefs</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="803.4" y="289" width="73.8" height="22" rx="11" fill="#0c121b" stroke="#818cf8" />
+          <text x="840.3" y="304" fill="#818cf8">Trainee</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="886" y="379" width="73.8" height="22" rx="11" fill="#0c121b" stroke="#f472b6" />
+          <text x="922.9" y="394" fill="#f472b6">Reports</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="382.1" y="343" width="59" height="22" rx="11" fill="#0c121b" stroke="#2dd4bf" />
+          <text x="411.6" y="358" fill="#2dd4bf">Leave</text>
+        </g>
+        <g class="engine-pill">
+          <rect x="846.9" y="658" width="96" height="22" rx="11" fill="#0c121b" stroke="#fb923c" />
+          <text x="894.9" y="673" fill="#fb923c">Medication</text>
+        </g>
+                </g>
+                <g class="engine-chip">
+        <polygon class="engine-pin" points="704.9,319.5 711.5,323.2 725.5,315.1 719,311.4" />
+        <polygon class="engine-pin" points="721.4,328.9 727.9,332.7 742,324.6 735.4,320.8" />
+        <polygon class="engine-pin" points="737.8,338.4 744.4,342.2 758.4,334.1 751.9,330.3" />
+        <polygon class="engine-pin" points="754.3,347.9 760.8,351.7 774.8,343.6 768.3,339.8" />
+        <polygon class="engine-pin" points="770.7,357.4 777.2,361.2 791.3,353.1 784.7,349.3" />
+        <polygon class="engine-pin" points="787.1,366.9 793.7,370.7 807.7,362.6 801.2,358.8" />
+        <polygon class="engine-pin" points="803.6,376.4 810.1,380.2 824.2,372.1 817.6,368.3" />
+        <polygon class="engine-pin" points="820,385.9 826.6,389.7 840.6,381.6 834,377.8" />
+        <polygon class="engine-pin" points="836.5,395.4 843,399.2 857,391.1 850.5,387.3" />
+        <polygon class="engine-pin" points="852.9,404.9 859.4,408.7 873.5,400.6 866.9,396.8" />
+        <polygon class="engine-pin" points="869.3,414.4 875.9,418.1 889.9,410 883.4,406.3" />
+        <polygon class="engine-pin" points="875.9,423.9 869.3,427.6 883.4,435.7 889.9,432" />
+        <polygon class="engine-pin" points="859.4,433.3 852.9,437.1 866.9,445.2 873.5,441.4" />
+        <polygon class="engine-pin" points="843,442.8 836.5,446.6 850.5,454.7 857,450.9" />
+        <polygon class="engine-pin" points="826.6,452.3 820,456.1 834,464.2 840.6,460.4" />
+        <polygon class="engine-pin" points="810.1,461.8 803.6,465.6 817.6,473.7 824.2,469.9" />
+        <polygon class="engine-pin" points="793.7,471.3 787.1,475.1 801.2,483.2 807.7,479.4" />
+        <polygon class="engine-pin" points="777.2,480.8 770.7,484.6 784.7,492.7 791.3,488.9" />
+        <polygon class="engine-pin" points="760.8,490.3 754.3,494.1 768.3,502.2 774.8,498.4" />
+        <polygon class="engine-pin" points="744.4,499.8 737.8,503.6 751.9,511.7 758.4,507.9" />
+        <polygon class="engine-pin" points="727.9,509.3 721.4,513.1 735.4,521.2 742,517.4" />
+        <polygon class="engine-pin" points="711.5,518.8 704.9,522.5 719,530.6 725.5,526.9" />
+        <polygon class="engine-pin" points="695.1,522.5 688.5,518.8 674.5,526.9 681,530.6" />
+        <polygon class="engine-pin" points="678.6,513.1 672.1,509.3 658,517.4 664.6,521.2" />
+        <polygon class="engine-pin" points="662.2,503.6 655.6,499.8 641.6,507.9 648.1,511.7" />
+        <polygon class="engine-pin" points="645.7,494.1 639.2,490.3 625.2,498.4 631.7,502.2" />
+        <polygon class="engine-pin" points="629.3,484.6 622.8,480.8 608.7,488.9 615.3,492.7" />
+        <polygon class="engine-pin" points="612.9,475.1 606.3,471.3 592.3,479.4 598.8,483.2" />
+        <polygon class="engine-pin" points="596.4,465.6 589.9,461.8 575.8,469.9 582.4,473.7" />
+        <polygon class="engine-pin" points="580,456.1 573.4,452.3 559.4,460.4 566,464.2" />
+        <polygon class="engine-pin" points="563.5,446.6 557,442.8 543,450.9 549.5,454.7" />
+        <polygon class="engine-pin" points="547.1,437.1 540.6,433.3 526.5,441.4 533.1,445.2" />
+        <polygon class="engine-pin" points="530.7,427.6 524.1,423.9 510.1,432 516.6,435.7" />
+        <polygon class="engine-pin" points="524.1,418.1 530.7,414.4 516.6,406.3 510.1,410" />
+        <polygon class="engine-pin" points="540.6,408.7 547.1,404.9 533.1,396.8 526.5,400.6" />
+        <polygon class="engine-pin" points="557,399.2 563.5,395.4 549.5,387.3 543,391.1" />
+        <polygon class="engine-pin" points="573.4,389.7 580,385.9 566,377.8 559.4,381.6" />
+        <polygon class="engine-pin" points="589.9,380.2 596.4,376.4 582.4,368.3 575.8,372.1" />
+        <polygon class="engine-pin" points="606.3,370.7 612.9,366.9 598.8,358.8 592.3,362.6" />
+        <polygon class="engine-pin" points="622.8,361.2 629.3,357.4 615.3,349.3 608.7,353.1" />
+        <polygon class="engine-pin" points="639.2,351.7 645.7,347.9 631.7,339.8 625.2,343.6" />
+        <polygon class="engine-pin" points="655.6,342.2 662.2,338.4 648.1,330.3 641.6,334.1" />
+        <polygon class="engine-pin" points="672.1,332.7 678.6,328.9 664.6,320.8 658,324.6" />
+        <polygon class="engine-pin" points="688.5,323.2 695.1,319.5 681,311.4 674.5,315.1" />
+                <polygon class="engine-chip__side" points="519.2,394 700,498.4 700,534.4 519.2,430" fill="url(#engine-pkg-side)" />
+                <polygon class="engine-chip__side engine-chip__side--right" points="880.8,394 700,498.4 700,534.4 880.8,430" fill="url(#engine-pkg-side)" />
+                <polygon class="engine-chip__top" points="700,289.6 880.8,394 700,498.4 519.2,394" fill="url(#engine-pkg)" />
+                <polygon class="engine-die" points="700,303.1 855.9,393.1 700,483.1 544.1,393.1" fill="url(#engine-die-matte)" />
+                <g clip-path="url(#engine-die-clip)">
+                  <g class="engine-brand" transform="matrix(0.8 0.5 -0.8 0.5 700 392)">
+                    <image href="images/rail-intel-icon.png" x="-38" y="-74" width="76" height="76" />
+                    <text class="engine-brand__by" x="0" y="40" text-anchor="middle">powered by</text>
+                    <text class="engine-brand__name" x="0" y="76" text-anchor="middle">Rail Intel</text>
+                  </g>
+                </g>
+                </g>
+              </svg>
+              <div class="engine-socket-hit" data-engine-socket style="left:35.864%;top:32.000%;width:28.273%;height:29.636%">
+                <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop here</span>
+                <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release</span>
+              </div>
+            <button type="button" class="engine-node engine-node--top engine-node--board" data-branch="cycles" data-feeds="Start, expiry and events" data-rule="One live cycle of each type" data-live="Driver · 18 months" data-tone="steel" style="--node: #93c5fd; --in: 0; left: 54.454%; top: 27.437%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Cycles. Feeds Start, expiry and events. Rule: One live cycle of each type. Live feed: Driver · 18 months.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">01</span>
+                <span class="engine-node__label">Cycles</span>
+              </span>
+              <span class="engine-node__feeds">Start, expiry and events</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Driver · 18 months</span>
+            </button>
+            <button type="button" class="engine-node engine-node--right engine-node--board" data-branch="criteria" data-feeds="The framework on each cycle" data-rule="Criteria linked before the cycle runs" data-live="36 criteria attached" data-tone="steel" style="--node: #93c5fd; --in: 1; left: 69.152%; top: 40.938%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Criteria. Feeds The framework on each cycle. Rule: Criteria linked before the cycle runs. Live feed: 36 criteria attached.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">02</span>
+                <span class="engine-node__label">Criteria</span>
+              </span>
+              <span class="engine-node__feeds">The framework on each cycle</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>36 criteria attached</span>
+            </button>
+            <button type="button" class="engine-node engine-node--right engine-node--board" data-branch="standards" data-feeds="Grade scales and timing rules" data-rule="Company standard applied once" data-live="Grade scale A–E" data-tone="steel" style="--node: #93c5fd; --in: 2; left: 76.500%; top: 56.892%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Standards. Feeds Grade scales and timing rules. Rule: Company standard applied once. Live feed: Grade scale A–E.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">03</span>
+                <span class="engine-node__label">Standards</span>
+              </span>
+              <span class="engine-node__feeds">Grade scales and timing rules</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Grade scale A–E</span>
+            </button>
+            <button type="button" class="engine-node engine-node--right engine-node--board" data-branch="timing" data-feeds="Daylight and darkness hours" data-rule="Trainee hours checked against the standard" data-live="Darkness · 120h" data-tone="steel" style="--node: #93c5fd; --in: 3; left: 69.820%; top: 70.597%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Timing. Feeds Daylight and darkness hours. Rule: Trainee hours checked against the standard. Live feed: Darkness · 120h.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">04</span>
+                <span class="engine-node__label">Timing</span>
+              </span>
+              <span class="engine-node__feeds">Daylight and darkness hours</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Darkness · 120h</span>
+            </button>
+            <button type="button" class="engine-node engine-node--bottom engine-node--primary engine-node--board" data-branch="compliance" data-feeds="Protecting your operations" data-rule="A lapsed mandatory competency is flagged" data-live="PTS clear · 0 lapsed" data-tone="green" style="--node: #34d399; --in: 4; left: 50.000%; top: 72.847%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Compliance. Feeds Protecting your operations. Rule: A lapsed mandatory competency is flagged. Live feed: PTS clear · 0 lapsed.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">05</span>
+                <span class="engine-node__label">Compliance</span>
+              </span>
+              <span class="engine-node__feeds">Protecting your operations</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>PTS clear · 0 lapsed</span>
+            </button>
+            <button type="button" class="engine-node engine-node--left engine-node--board" data-branch="evidence" data-feeds="The signed observation record" data-rule="A pass needs a recorded observation" data-live="Signed · 09:14" data-tone="steel" style="--node: #93c5fd; --in: 5; left: 34.078%; top: 62.517%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Evidence. Feeds The signed observation record. Rule: A pass needs a recorded observation. Live feed: Signed · 09:14.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">06</span>
+                <span class="engine-node__label">Evidence</span>
+              </span>
+              <span class="engine-node__feeds">The signed observation record</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Signed · 09:14</span>
+            </button>
+            <button type="button" class="engine-node engine-node--left engine-node--primary engine-node--board is-on" data-branch="assessments" data-feeds="In-cab Demonstrate and Explain" data-rule="Flag a criterion that falls short" data-live="Cab assessment · unit 4" data-tone="amber" style="--node: #f59e0b; --in: 6; left: 24.168%; top: 45.028%;" aria-pressed="true" tabindex="-1" aria-hidden="true" aria-label="Assessments. Feeds In-cab Demonstrate and Explain. Rule: Flag a criterion that falls short. Live feed: Cab assessment · unit 4.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">07</span>
+                <span class="engine-node__label">Assessments</span>
+              </span>
+              <span class="engine-node__feeds">In-cab Demonstrate and Explain</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>Cab assessment · unit 4</span>
+            </button>
+            <button type="button" class="engine-node engine-node--left engine-node--board" data-branch="development" data-feeds="Open points into the next cycle" data-rule="Unresolved development points carry over" data-live="2 points open" data-tone="steel" style="--node: #93c5fd; --in: 7; left: 27.063%; top: 28.460%;" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Development. Feeds Open points into the next cycle. Rule: Unresolved development points carry over. Live feed: 2 points open.">
+              <span class="engine-node__top">
+                <span class="engine-node__index">08</span>
+                <span class="engine-node__label">Development</span>
+              </span>
+              <span class="engine-node__feeds">Open points into the next cycle</span>
+              <span class="engine-node__live"><span class="engine-node__dot" aria-hidden="true"></span>2 points open</span>
+            </button>
+            </div>
+          </div>
+          <div class="engine-list">
+            <button type="button" class="engine-list__item" data-branch="cycles" data-feeds="Start, expiry and events" data-rule="One live cycle of each type" data-live="Driver · 18 months" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Cycles. Feeds Start, expiry and events. Rule: One live cycle of each type. Live feed: Driver · 18 months.">
+              <span class="engine-list__index">01</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Cycles</span>
+                <span class="engine-list__feeds">Start, expiry and events</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">ONE LIVE</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Driver · 18 months</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="criteria" data-feeds="The framework on each cycle" data-rule="Criteria linked before the cycle runs" data-live="36 criteria attached" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Criteria. Feeds The framework on each cycle. Rule: Criteria linked before the cycle runs. Live feed: 36 criteria attached.">
+              <span class="engine-list__index">02</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Criteria</span>
+                <span class="engine-list__feeds">The framework on each cycle</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">LINKED</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>36 criteria attached</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="standards" data-feeds="Grade scales and timing rules" data-rule="Company standard applied once" data-live="Grade scale A–E" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Standards. Feeds Grade scales and timing rules. Rule: Company standard applied once. Live feed: Grade scale A–E.">
+              <span class="engine-list__index">03</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Standards</span>
+                <span class="engine-list__feeds">Grade scales and timing rules</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">APPLIED</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Grade scale A–E</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="timing" data-feeds="Daylight and darkness hours" data-rule="Trainee hours checked against the standard" data-live="Darkness · 120h" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Timing. Feeds Daylight and darkness hours. Rule: Trainee hours checked against the standard. Live feed: Darkness · 120h.">
+              <span class="engine-list__index">04</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Timing</span>
+                <span class="engine-list__feeds">Daylight and darkness hours</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">HOURS</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Darkness · 120h</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item engine-list__item--primary" data-branch="compliance" data-feeds="Protecting your operations" data-rule="A lapsed mandatory competency is flagged" data-live="PTS clear · 0 lapsed" data-tone="green" style="--node: #34d399" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Compliance. Feeds Protecting your operations. Rule: A lapsed mandatory competency is flagged. Live feed: PTS clear · 0 lapsed.">
+              <span class="engine-list__index">05</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Compliance</span>
+                <span class="engine-list__feeds">Protecting your operations</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">IN DATE</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>PTS clear · 0 lapsed</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="evidence" data-feeds="The signed observation record" data-rule="A pass needs a recorded observation" data-live="Signed · 09:14" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Evidence. Feeds The signed observation record. Rule: A pass needs a recorded observation. Live feed: Signed · 09:14.">
+              <span class="engine-list__index">06</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Evidence</span>
+                <span class="engine-list__feeds">The signed observation record</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">SIGNED</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Signed · 09:14</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item engine-list__item--primary is-on" data-branch="assessments" data-feeds="In-cab Demonstrate and Explain" data-rule="Flag a criterion that falls short" data-live="Cab assessment · unit 4" data-tone="amber" style="--node: #f59e0b" aria-pressed="true" tabindex="-1" aria-hidden="true" aria-label="Assessments. Feeds In-cab Demonstrate and Explain. Rule: Flag a criterion that falls short. Live feed: Cab assessment · unit 4.">
+              <span class="engine-list__index">07</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Assessments</span>
+                <span class="engine-list__feeds">In-cab Demonstrate and Explain</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">FLAG</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>Cab assessment · unit 4</span>
+              </span>
+            </button>
+            <button type="button" class="engine-list__item" data-branch="development" data-feeds="Open points into the next cycle" data-rule="Unresolved development points carry over" data-live="2 points open" data-tone="steel" style="--node: #93c5fd" aria-pressed="false" tabindex="-1" aria-hidden="true" aria-label="Development. Feeds Open points into the next cycle. Rule: Unresolved development points carry over. Live feed: 2 points open.">
+              <span class="engine-list__index">08</span>
+              <span class="engine-list__copy">
+                <span class="engine-list__label">Development</span>
+                <span class="engine-list__feeds">Open points into the next cycle</span>
+              </span>
+              <span class="engine-list__meta">
+                <span class="engine-list__rule">CARRY</span>
+                <span class="engine-list__live"><span class="engine-node__dot" aria-hidden="true"></span>2 points open</span>
+              </span>
+            </button>
+          </div>
+          <div class="engine-bezel">
+            <div class="engine-readout" id="competency-engine-readout">
+              <p class="engine-readout__standby" data-engine-standby>The socket is open. Drag the processor chip into the socket to power the branches.</p>
+              <div class="engine-readout__grid">
+              <p class="engine-readout__item">
+                <span class="engine-readout__kicker">Feeds</span>
+                <strong data-engine-feeds>In-cab Demonstrate and Explain</strong>
+              </p>
+              <p class="engine-readout__item">
+                <span class="engine-readout__kicker">Rule</span>
+                <strong data-engine-rule>Flag a criterion that falls short</strong>
+              </p>
+              <p class="engine-readout__item">
+                <span class="engine-readout__kicker">Live feed</span>
+                <strong data-engine-live>Cab assessment · unit 4</strong>
+              </p>
+              </div>
+            </div>
+            <div class="engine-bezel__foot">
+              <button type="button" class="engine-toggle" data-engine-toggle aria-pressed="false" hidden>Pause</button>
+              <div class="engine-ticker" aria-hidden="true">
+                <div class="engine-ticker__track">
+                <span class="engine-ticker__item">Check · early assessment window</span>
+                <span class="engine-ticker__item">Rule · one live cycle of each type</span>
+                <span class="engine-ticker__item">Feed · darkness hours minimum</span>
+                <span class="engine-ticker__item">Check · template or custom cycle</span>
+                <span class="engine-ticker__item">Rule · open development points carry over</span>
+                <span class="engine-ticker__item">Feed · two-year driver cycle</span>
+                <span class="engine-ticker__item">Check · one-year PTS cycle</span>
+                <span class="engine-ticker__item">Rule · a short observation is flagged, not passed</span>
+                <span class="engine-ticker__item">Feed · continuous cycle renewal</span>
+                <span class="engine-ticker__item">Check · company timing standard</span>
+                <span class="engine-ticker__item">Check · early assessment window</span>
+                <span class="engine-ticker__item">Rule · one live cycle of each type</span>
+                <span class="engine-ticker__item">Feed · darkness hours minimum</span>
+                <span class="engine-ticker__item">Check · template or custom cycle</span>
+                <span class="engine-ticker__item">Rule · open development points carry over</span>
+                <span class="engine-ticker__item">Feed · two-year driver cycle</span>
+                <span class="engine-ticker__item">Check · one-year PTS cycle</span>
+                <span class="engine-ticker__item">Rule · a short observation is flagged, not passed</span>
+                <span class="engine-ticker__item">Feed · continuous cycle renewal</span>
+                <span class="engine-ticker__item">Check · company timing standard</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="proof" aria-label="Why operators choose Rail Intel">
-      <div class="container">
-        <div class="proof-carousel reveal" data-proof-carousel aria-roledescription="carousel">
-          <div class="proof-carousel__stage" data-proof-stage tabindex="0" aria-label="Feature highlights carousel. Auto-rotates every few seconds. Hover to pause.">
-            <ul class="proof-carousel__ring" data-proof-ring>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="#product" class="proof-card" data-proof-tilt style="--proof-accent: #34d399; --proof-glow: rgba(52, 211, 153, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 3v18h18" />
-                  <path d="M7 16l4-5 4 3 5-7" />
-                </svg>
-              </span>
-              <span class="proof-label">Live compliance</span>
-              <p>Automated live feed to your dashboard to check compliance of your assigned team members.</p>
-              <span class="proof-card__cta" aria-hidden="true">View dashboard</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="features/digital-cab-passes.html" class="proof-card" data-proof-tilt style="--proof-accent: #f59e0b; --proof-glow: rgba(245, 158, 11, 0.24);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="7" rx="1" />
-                  <rect x="14" y="3" width="7" height="7" rx="1" />
-                  <rect x="3" y="14" width="7" height="7" rx="1" />
-                  <path d="M14 17h7M17.5 14v7" />
-                </svg>
-              </span>
-              <span class="proof-label">Digital cab passes</span>
-              <p>Issue digital cab passes with QR code verification anyone can scan to validate.</p>
-              <span class="proof-card__cta" aria-hidden="true">See cab passes</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="products/qa-verifications.html" class="proof-card" data-proof-tilt style="--proof-accent: #38bdf8; --proof-glow: rgba(56, 189, 248, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <path d="M9 12l2 2 4-4" />
-                </svg>
-              </span>
-              <span class="proof-label">QA verification</span>
-              <p>Company wide checks across every module either by percentage, individual or team at the touch of a button.</p>
-              <span class="proof-card__cta" aria-hidden="true">Explore QA</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="features/competency-cycles.html" class="proof-card" data-proof-tilt style="--proof-accent: #a78bfa; --proof-glow: rgba(167, 139, 250, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="13" width="7" height="7" rx="1.25" />
-                  <rect x="14" y="13" width="7" height="7" rx="1.25" />
-                  <rect x="8.5" y="4" width="7" height="7" rx="1.25" />
-                </svg>
-              </span>
-              <span class="proof-label">Cycle builder</span>
-              <p>Flexible, custom competency cycles — start from a template or build your own with criteria and scheduled events.</p>
-              <span class="proof-card__cta" aria-hidden="true">See cycle builder</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="products/safety-briefs.html" class="proof-card" data-proof-tilt style="--proof-accent: #f472b6; --proof-glow: rgba(244, 114, 182, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 11h3l5-8v18l-5-8H3z" />
-                  <path d="M15.5 8.5a5 5 0 0 1 0 7" />
-                  <path d="M19 6v12" />
-                </svg>
-              </span>
-              <span class="proof-label">Safety briefs</span>
-              <p>Record who received which brief, in person or remotely — with delivery method and provider on every employee record.</p>
-              <span class="proof-card__cta" aria-hidden="true">See safety briefs</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="features/medicals-licensing.html" class="proof-card" data-proof-tilt style="--proof-accent: #2dd4bf; --proof-glow: rgba(45, 212, 191, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <path d="M14 2v6h6" />
-                  <path d="M16 13H8" />
-                  <path d="M16 17H8" />
-                  <path d="M10 9H8" />
-                </svg>
-              </span>
-              <span class="proof-label">Medicals &amp; licences</span>
-              <p>Medical fitness, ORR medicals, driving licences and complementary certificates — expiry monitored so lapsed fitness never reaches sign-on.</p>
-              <span class="proof-card__cta" aria-hidden="true">See medicals &amp; licences</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="features/tunnel-mode.html" class="proof-card" data-proof-tilt style="--proof-accent: #818cf8; --proof-glow: rgba(129, 140, 248, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" />
-                </svg>
-              </span>
-              <span class="proof-label">Tunnel mode</span>
-              <p>Dark, dimmable assessing for the cab — one-tap dark mode and manual brightness so the screen does not glare against the windscreen.</p>
-              <span class="proof-card__cta" aria-hidden="true">See tunnel mode</span>
-            </a>
-              </li>
-              <li class="proof-carousel__item" data-proof-item>
-            <a href="features/reporting-administration.html" class="proof-card" data-proof-tilt style="--proof-accent: #fb7185; --proof-glow: rgba(251, 113, 133, 0.22);">
-              <span class="proof-card__glow" aria-hidden="true"></span>
-              <span class="proof-card__shine" aria-hidden="true"></span>
-              <span class="proof-card__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 20V10" />
-                  <path d="M12 20V4" />
-                  <path d="M6 20v-6" />
-                </svg>
-              </span>
-              <span class="proof-label">Reporting</span>
-              <p>Incident KPIs, compliance counts and trends across medicals and competencies — live data you can take into a review without rebuilding from spreadsheets.</p>
-              <span class="proof-card__cta" aria-hidden="true">See reporting</span>
-            </a>
-              </li>
-            </ul>
-          </div>
-          <div class="proof-carousel__footer">
-            <div class="proof-carousel__dots" data-proof-dots role="tablist" aria-label="Feature highlights"></div>
-            <p class="proof-carousel__pill" data-proof-pill aria-live="polite">Digital cab passes</p>
-          </div>
-        </div>
+        <!-- home-engine-board:end -->
       </div>
     </section>
 
@@ -493,7 +872,7 @@
                 </div>
                 <div class="browser-mockup__content">
                   <img
-                    src="images/product/hero-dashboard.png?v=126038100"
+                    src="images/product/hero-dashboard.png?v=38275943"
                     alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance"
                     width="512"
                     height="357"
@@ -520,10 +899,10 @@
               </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Command centre screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png?v=126038100" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357" data-chip-safe-title="Live verification" data-chip-safe-detail="All checks current" data-chip-alert-title="Medical expiring" data-chip-alert-detail="Flagged before sign-on" data-copy-eyebrow="Dashboard" data-copy-heading="One dashboard for the whole operation." data-copy-lead="Stop chasing spreadsheets. See the state of your team the moment you log in." data-copy-bullets="Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.|Open any person and drill into team compliance, incidents and QA in a click.|Personal progress and team status in one place, ready for any internal or external audit.">Dashboard</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/team-compliance.png?v=126038100" data-alt="Your team's compliance panel with live issue counts and employees needing review" data-url="cms.railintel.co.uk/compliance" data-width="512" data-height="357" data-chip-safe-title="69 compliant" data-chip-safe-detail="Live company records" data-chip-alert-title="43 live issues" data-chip-alert-detail="Review and advisory" data-copy-eyebrow="Compliance" data-copy-heading="Know who needs attention — Realtime verification." data-copy-lead="Team compliance reads live company records and surfaces review and advisory items, so gaps are visible while there is still time to act." data-copy-bullets="Issue counts for review, advisory and compliant statuses, updated from the live record.|Open any person with outstanding checks and move straight into QA Verifications.|Live realtime data — not a weekly export or the last report someone remembered to run.">Compliance</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-headline-metrics.png?v=126038100" data-alt="Reporting and analytics with headline metrics and licensing readiness" data-url="cms.railintel.co.uk/reporting" data-width="1024" data-height="545" data-chip-safe-title="QA compliance rate" data-chip-safe-detail="54% from live data" data-chip-alert-title="Licence renewals" data-chip-alert-detail="2 due within 6 weeks" data-copy-eyebrow="Reporting" data-copy-heading="Audit-ready reports from live data." data-copy-lead="Turn incidents, safety briefs and compliance activity into clear reports you can take into a review without rebuilding the story from spreadsheets." data-copy-bullets="Incident KPIs and operational trends ready for safety and management meetings.|Safety briefing coverage tracked per employee, not against a distribution list.|Evidence that is current, filterable and ready to hand over for audit." data-wide="true">Reporting</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-incident-statistics.png?v=126038100" data-alt="Incident data statistics with period and week filters, trends and breakdowns by type" data-url="cms.railintel.co.uk/reporting" data-width="1024" data-height="547" data-chip-safe-title="Incident trends" data-chip-safe-detail="Filter by period and week" data-chip-alert-title="Incidents by type" data-chip-alert-detail="Collision and SPAD split" data-copy-eyebrow="Analytics" data-copy-heading="Incident statistics sliced by period and type." data-copy-lead="Filter incidents by financial year, period and week, then read trends over time and a breakdown by type — ready for safety reviews without rebuilding charts in a spreadsheet." data-copy-bullets="Year, period and week filters aligned to your financial calendar.|Incidents over time across reporting periods so clusters stand out quickly.|Type breakdown with counts and share — Collision, SPAD and other categories in one view." data-wide="true">Analytics</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/hero-dashboard.png?v=38275943" data-alt="Rail Intel dashboard showing live compliance overview, personal progress and team compliance" data-url="cms.railintel.co.uk/dashboard" data-width="512" data-height="357" data-chip-safe-title="Live verification" data-chip-safe-detail="All checks current" data-chip-alert-title="Medical expiring" data-chip-alert-detail="Flagged before sign-on" data-copy-eyebrow="Dashboard" data-copy-heading="One dashboard for the whole operation." data-copy-lead="Stop chasing spreadsheets. See the state of your team the moment you log in." data-copy-bullets="Live counts for on-track, off-track, overdue assessments and medicals — from your company data, not a weekly export.|Open any person and drill into team compliance, incidents and QA in a click.|Personal progress and team status in one place, ready for any internal or external audit.">Dashboard</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/team-compliance.png?v=38275943" data-alt="Your team's compliance panel with live issue counts and employees needing review" data-url="cms.railintel.co.uk/compliance" data-width="512" data-height="357" data-chip-safe-title="69 compliant" data-chip-safe-detail="Live company records" data-chip-alert-title="43 live issues" data-chip-alert-detail="Review and advisory" data-copy-eyebrow="Compliance" data-copy-heading="Know who needs attention — Realtime verification." data-copy-lead="Team compliance reads live company records and surfaces review and advisory items, so gaps are visible while there is still time to act." data-copy-bullets="Issue counts for review, advisory and compliant statuses, updated from the live record.|Open any person with outstanding checks and move straight into QA Verifications.|Live realtime data — not a weekly export or the last report someone remembered to run.">Compliance</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-headline-metrics.png?v=38275943" data-alt="Reporting and analytics with headline metrics and licensing readiness" data-url="cms.railintel.co.uk/reporting" data-width="1024" data-height="545" data-chip-safe-title="QA compliance rate" data-chip-safe-detail="54% from live data" data-chip-alert-title="Licence renewals" data-chip-alert-detail="2 due within 6 weeks" data-copy-eyebrow="Reporting" data-copy-heading="Audit-ready reports from live data." data-copy-lead="Turn incidents, safety briefs and compliance activity into clear reports you can take into a review without rebuilding the story from spreadsheets." data-copy-bullets="Incident KPIs and operational trends ready for safety and management meetings.|Safety briefing coverage tracked per employee, not against a distribution list.|Evidence that is current, filterable and ready to hand over for audit." data-wide="true">Reporting</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/reporting-incident-statistics.png?v=38275943" data-alt="Incident data statistics with period and week filters, trends and breakdowns by type" data-url="cms.railintel.co.uk/reporting" data-width="1024" data-height="547" data-chip-safe-title="Incident trends" data-chip-safe-detail="Filter by period and week" data-chip-alert-title="Incidents by type" data-chip-alert-detail="Collision and SPAD split" data-copy-eyebrow="Analytics" data-copy-heading="Incident statistics sliced by period and type." data-copy-lead="Filter incidents by financial year, period and week, then read trends over time and a breakdown by type — ready for safety reviews without rebuilding charts in a spreadsheet." data-copy-bullets="Year, period and week filters aligned to your financial calendar.|Incidents over time across reporting periods so clusters stand out quickly.|Type breakdown with counts and share — Collision, SPAD and other categories in one view." data-wide="true">Analytics</button>
             </div>
           </div>
         </div>
@@ -551,14 +930,14 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/cycle-builder</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/cycle-builder.png?v=126038100" alt="Cycle Builder step one: choose a template or build a custom competency cycle" width="705" height="266" data-gallery-main loading="lazy" decoding="async" />
+                <img src="images/product/cycle-builder.png?v=38275943" alt="Cycle Builder step one: choose a template or build a custom competency cycle" width="705" height="266" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Competency cycle screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/cycle-builder.png?v=126038100" data-alt="Cycle Builder step one: choose a template or build a custom competency cycle" data-url="cms.railintel.co.uk/cycle-builder" data-width="705" data-height="266">Cycle builder</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/current-cycles.png?v=126038100" data-alt="Live cycles on an employee record with a not safe to work alert" data-url="cms.railintel.co.uk/cycles" data-width="700" data-height="438">Live cycles</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/active-assessment.png?v=126038100" data-alt="Active competency assessment in progress" data-url="cms.railintel.co.uk/assessing" data-width="626" data-height="537">Assessing</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/in-cab-safety.png?v=126038100" data-alt="In-cab safety guidance for dark mode and flagging criteria during assessment" data-url="cms.railintel.co.uk/assessing" data-width="430" data-height="665">In-cab Safety</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/cycle-builder.png?v=38275943" data-alt="Cycle Builder step one: choose a template or build a custom competency cycle" data-url="cms.railintel.co.uk/cycle-builder" data-width="705" data-height="266">Cycle builder</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/current-cycles.png?v=38275943" data-alt="Live cycles on an employee record with a not safe to work alert" data-url="cms.railintel.co.uk/cycles" data-width="700" data-height="438">Live cycles</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/active-assessment.png?v=38275943" data-alt="Active competency assessment in progress" data-url="cms.railintel.co.uk/assessing" data-width="626" data-height="537">Assessing</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/in-cab-safety.png?v=38275943" data-alt="In-cab safety guidance for dark mode and flagging criteria during assessment" data-url="cms.railintel.co.uk/assessing" data-width="430" data-height="665">In-cab Safety</button>
             </div>
           </div>
         </div>
@@ -586,7 +965,7 @@
                   <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/licensing</span>
                 </div>
                 <div class="browser-mockup__content">
-                  <img src="images/product/licence.png?v=126038100" alt="Train driving licence record with front and back photos, expiry fields and category selection" width="1024" height="611" data-gallery-main loading="lazy" decoding="async" />
+                  <img src="images/product/licence.png?v=38275943" alt="Train driving licence record with front and back photos, expiry fields and category selection" width="1024" height="611" data-gallery-main loading="lazy" decoding="async" />
                 </div>
               </div>
               <span class="hero-chip hero-chip--alert hero-chip--landscape" data-gallery-chip="alert" aria-hidden="true">
@@ -612,9 +991,9 @@
               </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Workforce record screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png?v=126038100" data-alt="Train driving licence record with front and back photos, expiry fields and category selection" data-url="cms.railintel.co.uk/licensing" data-width="1024" data-height="611" data-wide="true" data-chip-scan="true" data-chip-safe-title="Digital Scanning & Recognition Technology*" data-chip-scan-bullets="Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories, language and restrictions for you to review, eliminating manual input errors.|If the front or back of the licence is placed into the wrong field, the system detects this and places each side in the correct holder — eliminating upload errors.|Rail Intel automatically alerts you if a licence is due for renewal or has expired." data-chip-alert-title="Automation" data-chip-alert-detail="Fields populated from your licence" data-chip-extra-left-title="Front &amp; back photos" data-chip-extra-left-detail="Stored securely on record" data-chip-extra-right-title="Expiry monitoring" data-chip-extra-right-detail="Renewal warnings on dashboard">Licensing</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/medical-record.png?v=126038100" data-alt="Record new medical form for occupational health and ORR medicals" data-url="cms.railintel.co.uk/medicals" data-width="1024" data-height="561" data-wide="true" data-chip-safe-title="ORR registered clinicians" data-chip-safe-detail="Doctors and psychologists on our system" data-chip-alert-title="Fitness status" data-chip-alert-detail="Unfit or expired flags not safe to work" data-chip-extra-left-title="Renewal reminders" data-chip-extra-left-detail="Dashboard feed and email alerts" data-chip-extra-right-title="ORR medical types" data-chip-extra-right-detail="Periodic and return-to-work">Medicals</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/training-quals.png?v=126038100" data-alt="Training records and qualifications overview on an employee record" data-url="cms.railintel.co.uk/training" data-width="1024" data-height="519" data-wide="true" data-chip-safe-title="QA Verifications link" data-chip-safe-detail="Training evidence checked on record" data-chip-alert-title="Certificates attached" data-chip-alert-detail="Upload proof to every entry" data-chip-extra-left-title="Competence records" data-chip-extra-left-detail="Courses and qualifications held" data-chip-extra-right-title="Evidence on record" data-chip-extra-right-detail="Certificates linked to entries">Training</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/licence.png?v=38275943" data-alt="Train driving licence record with front and back photos, expiry fields and category selection" data-url="cms.railintel.co.uk/licensing" data-width="1024" data-height="611" data-wide="true" data-chip-scan="true" data-chip-safe-title="Digital Scanning & Recognition Technology*" data-chip-scan-bullets="Upload a train driving licence and Rail Intel reads the images — populating number, expiry, categories, language and restrictions for you to review, eliminating manual input errors.|If the front or back of the licence is placed into the wrong field, the system detects this and places each side in the correct holder — eliminating upload errors.|Rail Intel automatically alerts you if a licence is due for renewal or has expired." data-chip-alert-title="Automation" data-chip-alert-detail="Fields populated from your licence" data-chip-extra-left-title="Front &amp; back photos" data-chip-extra-left-detail="Stored securely on record" data-chip-extra-right-title="Expiry monitoring" data-chip-extra-right-detail="Renewal warnings on dashboard">Licensing</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/medical-record.png?v=38275943" data-alt="Record new medical form for occupational health and ORR medicals" data-url="cms.railintel.co.uk/medicals" data-width="1024" data-height="561" data-wide="true" data-chip-safe-title="ORR registered clinicians" data-chip-safe-detail="Doctors and psychologists on our system" data-chip-alert-title="Fitness status" data-chip-alert-detail="Unfit or expired flags not safe to work" data-chip-extra-left-title="Renewal reminders" data-chip-extra-left-detail="Dashboard feed and email alerts" data-chip-extra-right-title="ORR medical types" data-chip-extra-right-detail="Periodic and return-to-work">Medicals</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/training-quals.png?v=38275943" data-alt="Training records and qualifications overview on an employee record" data-url="cms.railintel.co.uk/training" data-width="1024" data-height="519" data-wide="true" data-chip-safe-title="QA Verifications link" data-chip-safe-detail="Training evidence checked on record" data-chip-alert-title="Certificates attached" data-chip-alert-detail="Upload proof to every entry" data-chip-extra-left-title="Competence records" data-chip-extra-left-detail="Courses and qualifications held" data-chip-extra-right-title="Evidence on record" data-chip-extra-right-detail="Certificates linked to entries">Training</button>
             </div>
           </div>
         </div>
@@ -706,14 +1085,14 @@
                   <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/incidents</span>
                 </div>
                 <div class="browser-mockup__content">
-                  <img src="images/product/incidents-cdp.png?v=126038100" alt="Monitoring and incidents view with allocated incidents and competence development plans" width="1024" height="759" data-gallery-main loading="lazy" decoding="async" />
+                  <img src="images/product/incidents-cdp.png?v=38275943" alt="Monitoring and incidents view with allocated incidents and competence development plans" width="1024" height="759" data-gallery-main loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Safety operations screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/incidents-cdp.png?v=126038100" data-alt="Monitoring and incidents view with allocated incidents and competence development plans" data-url="cms.railintel.co.uk/incidents" data-width="1024" data-height="759" data-chip-alert-title="Incident allocated" data-chip-alert-detail="Linked to the employee record" data-chip-extra-left-title="CDP Events" data-chip-extra-left-detail="Automatically detects events needed to be carried over into new cycle" data-chip-extra-right-title="Severity tracking" data-chip-extra-right-detail="Type and action taken">Incidents &amp; CDP</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/safety-briefs.png?v=126038100" data-alt="Safety brief records with in-person and remote attendance" data-url="cms.railintel.co.uk/safety-briefs" data-width="1024" data-height="565" data-chip-alert-title="Attendance tracked" data-chip-alert-detail="In-person and remote sign-in" data-chip-extra-left-title="Signed on record" data-chip-extra-left-detail="Ready when you need to prove it" data-chip-extra-right-title="Brief history" data-chip-extra-right-detail="Attached to the person">Safety briefs</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/cab-passes.png?v=126038100" data-alt="Digital cab passes with QR verification and pass colour guide" data-url="cms.railintel.co.uk/cab-passes" data-width="1024" data-height="629" data-chip-alert-title="Colour status" data-chip-alert-detail="Clear pass validity at a glance" data-chip-extra-left-title="QR verification" data-chip-extra-left-detail="Digital cab pass scan" data-chip-extra-right-title="Issue &amp; track" data-chip-extra-right-detail="Passes managed on record">Cab passes</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/incidents-cdp.png?v=38275943" data-alt="Monitoring and incidents view with allocated incidents and competence development plans" data-url="cms.railintel.co.uk/incidents" data-width="1024" data-height="759" data-chip-alert-title="Incident allocated" data-chip-alert-detail="Linked to the employee record" data-chip-extra-left-title="CDP Events" data-chip-extra-left-detail="Automatically detects events needed to be carried over into new cycle" data-chip-extra-right-title="Severity tracking" data-chip-extra-right-detail="Type and action taken">Incidents &amp; CDP</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/safety-briefs.png?v=38275943" data-alt="Safety brief records with in-person and remote attendance" data-url="cms.railintel.co.uk/safety-briefs" data-width="1024" data-height="565" data-chip-alert-title="Attendance tracked" data-chip-alert-detail="In-person and remote sign-in" data-chip-extra-left-title="Signed on record" data-chip-extra-left-detail="Ready when you need to prove it" data-chip-extra-right-title="Brief history" data-chip-extra-right-detail="Attached to the person">Safety briefs</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/cab-passes.png?v=38275943" data-alt="Digital cab passes with QR verification and pass colour guide" data-url="cms.railintel.co.uk/cab-passes" data-width="1024" data-height="629" data-chip-alert-title="Colour status" data-chip-alert-detail="Clear pass validity at a glance" data-chip-extra-left-title="QR verification" data-chip-extra-left-detail="Digital cab pass scan" data-chip-extra-right-title="Issue &amp; track" data-chip-extra-right-detail="Passes managed on record">Cab passes</button>
             </div>
           </div>
         </div>
@@ -747,7 +1126,7 @@
                   <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/routes</span>
                 </div>
                 <div class="browser-mockup__content traction-routes-scene">
-                  <img src="images/product/traction-routes.png?v=126038100" alt="Traction and route overview for company configuration" width="1024" height="414" data-gallery-main loading="lazy" decoding="async" />
+                  <img src="images/product/traction-routes.png?v=38275943" alt="Traction and route overview for company configuration" width="1024" height="414" data-gallery-main loading="lazy" decoding="async" />
                   <div class="gallery-carousel" data-gallery-carousel hidden>
                     <div class="gallery-carousel__viewport">
                       <div class="gallery-carousel__track" data-gallery-carousel-track></div>
@@ -765,8 +1144,8 @@
               </span>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Traction and routes screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png?v=126038100" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes" data-width="1024" data-height="414" data-routes-train="true" data-chip-alert-title="Competence status" data-chip-alert-detail="Non-compliance flagged on record" data-chip-extra-left-title="Validating evidence" data-chip-extra-left-detail="Instant system checks made to see if evidence is uploaded.">Traction &amp; routes</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/trainee-hours.png?v=126038100" data-alt="Trainee hours progress against the company standard" data-url="cms.railintel.co.uk/trainee-hours" data-width="1024" data-height="489" data-carousel data-carousel-interval="5000" data-carousel-slides="images/product/trainee-hours.png?v=126038100|images/product/trainee-hours-entry.png?v=126038100" data-carousel-alts="Trainee hours progress against the company standard|Adding a driving experience entry with darktime and encounters" data-carousel-widths="1024|1024" data-carousel-heights="489|489" data-chip-alert-title="Hours progress" data-chip-alert-detail="Against company standards" data-chip-extra-left-title="Encounters" data-chip-extra-left-detail="Passing signal at danger - capture the experience.">Trainee hours</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/traction-routes.png?v=38275943" data-alt="Traction and route overview for company configuration" data-url="cms.railintel.co.uk/routes" data-width="1024" data-height="414" data-routes-train="true" data-chip-alert-title="Competence status" data-chip-alert-detail="Non-compliance flagged on record" data-chip-extra-left-title="Validating evidence" data-chip-extra-left-detail="Instant system checks made to see if evidence is uploaded.">Traction &amp; routes</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/trainee-hours.png?v=38275943" data-alt="Trainee hours progress against the company standard" data-url="cms.railintel.co.uk/trainee-hours" data-width="1024" data-height="489" data-carousel data-carousel-interval="5000" data-carousel-slides="images/product/trainee-hours.png?v=38275943|images/product/trainee-hours-entry.png?v=38275943" data-carousel-alts="Trainee hours progress against the company standard|Adding a driving experience entry with darktime and encounters" data-carousel-widths="1024|1024" data-carousel-heights="489|489" data-chip-alert-title="Hours progress" data-chip-alert-detail="Against company standards" data-chip-extra-left-title="Encounters" data-chip-extra-left-detail="Passing signal at danger - capture the experience.">Trainee hours</button>
             </div>
           </div>
         </div>
@@ -811,12 +1190,12 @@
                 <span class="browser-mockup__url" data-gallery-url>cms.railintel.co.uk/verifications</span>
               </div>
               <div class="browser-mockup__content">
-                <img src="images/product/qa-verifications.png?v=126038100" alt="QA verifications run history with compliance rates and section breakdown" width="691" height="506" data-gallery-main loading="lazy" decoding="async" />
+                <img src="images/product/qa-verifications.png?v=38275943" alt="QA verifications run history with compliance rates and section breakdown" width="691" height="506" data-gallery-main loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="gallery-tabs" role="tablist" aria-label="Assurance screens">
-              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/qa-verifications.png?v=126038100" data-alt="QA verifications run history with compliance rates and section breakdown" data-url="cms.railintel.co.uk/verifications" data-width="691" data-height="506">QA verifications</button>
-              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/org-structure.png?v=126038100" data-alt="Organisation structure configuration" data-url="cms.railintel.co.uk/admin/org" data-width="1024" data-height="706">Org structure</button>
+              <button type="button" class="gallery-tab is-active" role="tab" aria-selected="true" data-src="images/product/qa-verifications.png?v=38275943" data-alt="QA verifications run history with compliance rates and section breakdown" data-url="cms.railintel.co.uk/verifications" data-width="691" data-height="506">QA verifications</button>
+              <button type="button" class="gallery-tab" role="tab" aria-selected="false" data-src="images/product/org-structure.png?v=38275943" data-alt="Organisation structure configuration" data-url="cms.railintel.co.uk/admin/org" data-width="1024" data-height="706">Org structure</button>
             </div>
           </div>
         </div>
@@ -1370,9 +1749,10 @@
   </div>
   <!-- eoi:end -->
 
-  <script src="js/site.js?v=126038100"></script>
-  <script src="js/newsletter.js?v=126038100"></script>
-  <script src="js/eoi.js?v=126038100"></script>
-  <script src="js/main.js?v=126038100"></script>
+  <script src="js/site.js?v=38275943"></script>
+  <script src="js/newsletter.js?v=38275943"></script>
+  <script src="js/eoi.js?v=38275943"></script>
+  <script src="js/competency-engine.js?v=38275943"></script>
+  <script src="js/main.js?v=38275943"></script>
 </body>
 </html>

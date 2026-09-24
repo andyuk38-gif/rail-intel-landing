@@ -1057,6 +1057,27 @@
   50% { transform: translateY(-4px); }
 }
 
+.hero-media--engine {
+  align-items: center;
+}
+
+.hero-media--engine .engine-bay {
+  grid-column: auto;
+  grid-row: auto;
+  width: min(100%, 28rem);
+  margin-inline: auto;
+  justify-self: center;
+}
+
+.hero:has(.hero-engine) {
+  padding-bottom: 3.5rem;
+}
+
+.hero-engine {
+  position: relative;
+  margin-top: 1.75rem;
+}
+
 @media (max-width: 860px) {
   .page-hero__inner--engine {
     grid-template-columns: 1fr;
@@ -1075,6 +1096,11 @@
     width: min(100%, 16.5rem);
   }
   .page-hero__media--engine { grid-row: 3; }
+
+  .hero-media--engine .engine-bay {
+    width: min(100%, 18rem);
+    grid-row: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

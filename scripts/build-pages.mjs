@@ -3925,6 +3925,20 @@ function syncIndex() {
     renderHomeGallery()
   );
 
+  html = replaceBetween(
+    html,
+    "<!-- home-engine-bay:start -->",
+    "<!-- home-engine-bay:end -->",
+    `\n          ${renderCompetencyEngineBay("").trim()}\n          `
+  );
+
+  html = replaceBetween(
+    html,
+    "<!-- home-engine-board:start -->",
+    "<!-- home-engine-board:end -->",
+    `\n        ${renderCompetencyEngineHero("").trim()}\n        `
+  );
+
   html = replaceBetween(html, "<!-- footer:start -->", "<!-- footer:end -->", renderFooterMarkup(""));
 
   html = html
