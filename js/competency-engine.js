@@ -137,9 +137,26 @@
     if (announce) announce.textContent = message;
   }
 
-  function setSiteOpen(on) {
+  var seatKey = "rail-intel-engine-open";
+
+  function seatRemembered() {
+    try {
+      return sessionStorage.getItem(seatKey) === "1";
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function rememberSeat(on) {
+    try {
+      if (on) sessionStorage.setItem(seatKey, "1");
+      else sessionStorage.removeItem(seatKey);
+    } catch (err) {}
+  }
+
+  function setSiteOpen(on, trace) {
     document.body.classList.toggle("is-engine-open", on);
-    if (on && !reduced && !document.body.classList.contains("is-nav-traced")) {
+    if (trace && on && !reduced && !document.body.classList.contains("is-nav-traced")) {
       document.body.classList.add("is-nav-traced");
     }
     var gates = document.querySelectorAll("[data-engine-gate], .page-hero--competency-engine ~ section");
@@ -151,7 +168,40 @@
     if (headline && on) headline.removeAttribute("hidden");
   }
 
-  setSiteOpen(false);
+  function restoreSeat() {
+    live = true;
+    busy = false;
+    drag = null;
+    root.classList.add("is-live");
+    root.classList.remove("is-armed", "is-seating", "is-cooling", "is-surging");
+    if (bay) bay.classList.add("is-spent");
+    setCopy(true);
+    setBranchesEnabled(true);
+    if (lift) lift.hidden = false;
+    if (toggle && !reduced) toggle.hidden = false;
+    setSiteOpen(true, false);
+  }
+
+  function quietUnseat() {
+    live = false;
+    busy = false;
+    drag = null;
+    root.classList.remove("is-live", "is-armed", "is-seating", "is-cooling", "is-surging", "is-paused");
+    if (bay) bay.classList.remove("is-spent");
+    if (token) {
+      token.classList.remove("is-lifted", "is-dragging", "is-armed");
+      token.style.cssText = "";
+    }
+    setCopy(false);
+    setBranchesEnabled(false);
+    if (lift) lift.hidden = true;
+    if (toggle) {
+      toggle.hidden = true;
+      toggle.setAttribute("aria-pressed", "false");
+      toggle.textContent = "Pause";
+    }
+    setSiteOpen(false, false);
+  }
 
   function setCopy(on) {
     if (statusLabel) statusLabel.textContent = on ? "Live feeds" : "Socket open";
@@ -162,10 +212,8 @@
   }
 
   var coarse = window.matchMedia("(pointer: coarse)").matches;
-  setCopy(false);
 
   if (toggle) {
-    toggle.hidden = true;
     toggle.addEventListener("click", function () {
       if (!live) return;
       paused = !paused;
@@ -173,6 +221,13 @@
       toggle.setAttribute("aria-pressed", paused ? "true" : "false");
       toggle.textContent = paused ? "Play" : "Pause";
     });
+  }
+
+  if (seatRemembered()) restoreSeat();
+  else {
+    setCopy(false);
+    if (toggle) toggle.hidden = true;
+    setSiteOpen(false, false);
   }
 
   function resetTilt() {
@@ -193,6 +248,15 @@
       resetTilt();
     });
   }
+
+  window.addEventListener("pageshow", function (event) {
+    if (!event.persisted) return;
+    if (seatRemembered()) {
+      if (!live) restoreSeat();
+    } else if (live) {
+      quietUnseat();
+    }
+  });
 
   if (!token || !home || !socket) return;
 
@@ -254,7 +318,8 @@
     if (lift) lift.hidden = false;
     if (toggle && !reduced) toggle.hidden = false;
     say("Engine seated. The branches are live.");
-    setSiteOpen(true);
+    rememberSeat(true);
+    setSiteOpen(true, true);
     window.setTimeout(function () {
       bay.classList.add("is-spent");
       clearToken();
@@ -306,6 +371,7 @@
 
   function liftChip() {
     if (!live || busy) return;
+    rememberSeat(false);
     busy = true;
     paused = false;
     root.classList.remove("is-paused");
@@ -320,7 +386,7 @@
       bay.classList.remove("is-spent");
       placeToken(from);
       live = false;
-      setSiteOpen(false);
+      setSiteOpen(false, false);
       root.classList.add("is-cooling");
       root.classList.remove("is-live", "is-surging");
       setCopy(false);

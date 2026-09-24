@@ -1507,6 +1507,10 @@ body:has([data-engine-token]):not(.is-engine-open) .header .nav {
   100% { opacity: 0; background-position: 140% 0; }
 }
 
+body.is-engine-open [hidden="until-found"] {
+  content-visibility: visible !important;
+}
+
 /* The keyword headline stays in the document for search and assistive tech. Sighted visitors see the prompt until the chip is seated. */
 body:has([data-engine-token]):not(.is-engine-open) [data-engine-headline] {
   position: absolute;

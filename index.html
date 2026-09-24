@@ -38,7 +38,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=49627139" />
   <link rel="stylesheet" href="css/pages.css?v=49627134" />
-  <link rel="stylesheet" href="css/competency-engine.css?v=49627143" />
+  <link rel="stylesheet" href="css/competency-engine.css?v=49627144" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -49,6 +49,13 @@
   </style>
 </head>
 <body>
+  <script>
+    try {
+      if (sessionStorage.getItem("rail-intel-engine-open") === "1") {
+        document.body.classList.add("is-engine-open");
+      }
+    } catch (err) {}
+  </script>
   <div class="site-chrome">
     <div class="dev-banner" role="status">
       <div class="dev-banner__inner">
@@ -897,6 +904,18 @@
           </div>
         </div>
         <!-- home-engine-board:end -->
+        <script>
+          try {
+            if (sessionStorage.getItem("rail-intel-engine-open") === "1") {
+              var seatedEngine = document.querySelector("[data-competency-engine]");
+              var seatedBay = document.querySelector("[data-engine-bay]");
+              var seatedLift = document.querySelector("[data-engine-lift]");
+              if (seatedEngine) seatedEngine.classList.add("is-live");
+              if (seatedBay) seatedBay.classList.add("is-spent");
+              if (seatedLift) seatedLift.hidden = false;
+            }
+          } catch (err) {}
+        </script>
       </div>
     </section>
 
@@ -1803,7 +1822,7 @@
   <script src="js/site.js?v=49627134"></script>
   <script src="js/newsletter.js?v=49627134"></script>
   <script src="js/eoi.js?v=49627134"></script>
-  <script src="js/competency-engine.js?v=49627142"></script>
+  <script src="js/competency-engine.js?v=49627144"></script>
   <script src="js/main.js?v=49627134"></script>
 </body>
 </html>
