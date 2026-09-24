@@ -139,6 +139,9 @@
 
   function setSiteOpen(on) {
     document.body.classList.toggle("is-engine-open", on);
+    if (on && !reduced && !document.body.classList.contains("is-nav-traced")) {
+      document.body.classList.add("is-nav-traced");
+    }
     var gates = document.querySelectorAll("[data-engine-gate], .page-hero--competency-engine ~ section");
     gates.forEach(function (el) {
       if (on) el.removeAttribute("hidden");
