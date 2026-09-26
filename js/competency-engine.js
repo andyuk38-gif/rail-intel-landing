@@ -104,7 +104,12 @@
   var bay = document.querySelector("[data-engine-bay]");
   var token = bay && bay.querySelector("[data-engine-token]");
   var home = bay && bay.querySelector("[data-engine-home]");
-  var socket = root.querySelector("[data-engine-socket]");
+  var traySocket = bay && bay.querySelector("[data-engine-socket]");
+  var boardSocket = root.querySelector("[data-engine-socket]");
+
+  function socketEl() {
+    return live && boardSocket ? boardSocket : traySocket || boardSocket;
+  }
   var lift = bay && bay.querySelector("[data-engine-lift]");
   var kicker = bay && bay.querySelector("[data-engine-kicker]");
   var hint = bay && bay.querySelector("[data-engine-hint]");
@@ -208,7 +213,7 @@
     if (deviceLabel) deviceLabel.textContent = on ? "Operational Compliance" : "Awaiting Rail Intel Technologies";
     if (outputsLabel) outputsLabel.textContent = on ? "Drives assessment and compliance" : "Drag the chip to seat";
     if (kicker) kicker.textContent = on ? "Engine online" : "Ready to plug-in";
-    if (hint) hint.textContent = coarse ? "Drag or tap into the socket" : "Drag into the socket";
+    if (hint) hint.textContent = coarse ? "Drag or tap onto the socket" : "Drag onto the socket";
   }
 
   var coarse = window.matchMedia("(pointer: coarse)").matches;
@@ -255,113 +260,19 @@
       if (!live) restoreSeat();
     } else if (live) {
       quietUnseat();
-      queueFit();
     }
   });
 
-  if (!token || !home || !socket) return;
-
-  var board = root.querySelector(".engine__viewport");
-  var boardRatio = 880 / 1400;
-  var socketBand = 0.296;
-  var fitMin = coarse ? 132 : 156;
-  var baySmallest = coarse ? 10.5 * 16 : 12 * 16;
-  var fitPending = 0;
-
-  function viewHeight() {
-    return (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-  }
-
-  function roomForBoard() {
-    if (!board) return 0;
-    var box = board.getBoundingClientRect();
-    return viewHeight() - box.top - 12;
-  }
-
-  function clearFit() {
-    root.classList.remove("is-fitted");
-    root.style.removeProperty("--engine-fit");
-    root.style.removeProperty("--engine-span");
-    if (bay) bay.style.removeProperty("--bay-size");
-    document.body.classList.remove("is-engine-squeezed", "is-engine-tight");
-  }
-
-  function applyBoardFit(height) {
-    var crop = Math.max(height, 120);
-    var span = Math.max((crop * 0.78) / (socketBand * boardRatio), 280);
-    root.classList.add("is-fitted");
-    root.style.setProperty("--engine-span", Math.round(span) + "px");
-    root.style.setProperty("--engine-fit", Math.round(crop) + "px");
-  }
-
-  function fitFirstView() {
-    if (!scene || !board) return;
-    if (live || document.body.classList.contains("is-engine-open")) return;
-    if (busy || drag) return;
-
-    document.body.classList.remove("is-engine-squeezed", "is-engine-tight");
-    if (bay) bay.style.removeProperty("--bay-size");
-
-    var height = roomForBoard();
-    if (height < fitMin && bay) {
-      var chip = bay.getBoundingClientRect().width;
-      var cut = Math.min(chip - baySmallest, fitMin - height + 24);
-      if (cut > 8) bay.style.setProperty("--bay-size", Math.round(chip - cut) + "px");
-      height = roomForBoard();
-    }
-
-    if (height < fitMin) {
-      document.body.classList.add("is-engine-squeezed");
-      height = roomForBoard();
-    }
-
-    if (height < fitMin) {
-      document.body.classList.add("is-engine-tight");
-      height = roomForBoard();
-    }
-
-    if (height < fitMin && bay) {
-      bay.style.setProperty("--bay-size", Math.round(baySmallest) + "px");
-      height = roomForBoard();
-    }
-
-    applyBoardFit(height);
-  }
-
-  /* Grow the board back to full size as it powers up, rather than snapping. */
-  function releaseFit() {
-    if (!root.classList.contains("is-fitted")) {
-      clearFit();
-      return;
-    }
-    document.body.classList.remove("is-engine-squeezed", "is-engine-tight");
-    root.style.setProperty("--engine-span", board.clientWidth + "px");
-    root.style.setProperty("--engine-fit", Math.round(board.clientWidth * boardRatio) + "px");
-    window.setTimeout(clearFit, reduced ? 0 : 430);
-  }
-
-  function queueFit() {
-    if (fitPending) return;
-    fitPending = requestAnimationFrame(function () {
-      fitPending = 0;
-      fitFirstView();
-    });
-  }
-
-  window.addEventListener("resize", queueFit);
-  window.addEventListener("orientationchange", queueFit);
-  if (window.visualViewport) window.visualViewport.addEventListener("resize", queueFit);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueFit);
-  fitFirstView();
+  if (!token || !home || !socketEl()) return;
 
   function socketMostlyVisible() {
-    var rect = socket.getBoundingClientRect();
+    var rect = socketEl().getBoundingClientRect();
     return rect.top >= 80 && rect.bottom <= window.innerHeight - 16 && rect.height > 20;
   }
 
   function revealSocket() {
     if (socketMostlyVisible()) return;
-    var rect = socket.getBoundingClientRect();
+    var rect = socketEl().getBoundingClientRect();
     var delta = rect.top + rect.height / 2 - window.innerHeight * 0.58;
     window.scrollBy(0, delta);
   }
@@ -382,7 +293,7 @@
   }
 
   function overSocket(x, y) {
-    var rect = socket.getBoundingClientRect();
+    var rect = socketEl().getBoundingClientRect();
     var cx = rect.left + rect.width / 2;
     var cy = rect.top + rect.height / 2;
     var padX = Math.max(72, rect.width * 0.22);
@@ -395,6 +306,7 @@
 
   function setArmed(on) {
     root.classList.toggle("is-armed", on);
+    if (bay) bay.classList.toggle("is-armed", on);
     token.classList.toggle("is-armed", on);
   }
 
@@ -414,7 +326,6 @@
     say("Engine seated. The branches are live.");
     rememberSeat(true);
     setSiteOpen(true, true);
-    releaseFit();
     window.setTimeout(function () {
       bay.classList.add("is-spent");
       clearToken();
@@ -448,7 +359,7 @@
     placeToken(rect || token.getBoundingClientRect());
     revealSocket();
     root.classList.add("is-seating");
-    var target = socket.getBoundingClientRect();
+    var target = socketEl().getBoundingClientRect();
     setArmed(true);
     flyToken(target, finishSeat);
   }
@@ -477,7 +388,7 @@
     }
     resetTilt();
     requestAnimationFrame(function () {
-      var from = socket.getBoundingClientRect();
+      var from = socketEl().getBoundingClientRect();
       bay.classList.remove("is-spent");
       placeToken(from);
       live = false;
@@ -493,7 +404,6 @@
         busy = false;
         root.classList.remove("is-cooling");
         clearToken();
-        queueFit();
       });
     });
   }
@@ -531,7 +441,7 @@
     var y = event.clientY - drag.dy;
     var near = overSocket(event.clientX, event.clientY);
     if (near) {
-      var seatRect = socket.getBoundingClientRect();
+      var seatRect = socketEl().getBoundingClientRect();
       var cx = seatRect.left + seatRect.width / 2;
       var cy = seatRect.top + seatRect.height / 2;
       var tcx = x + width / 2;
@@ -562,7 +472,7 @@
       busy = true;
       root.classList.add("is-seating");
       setArmed(true);
-      flyToken(socket.getBoundingClientRect(), finishSeat);
+      flyToken(socketEl().getBoundingClientRect(), finishSeat);
       return;
     }
     busy = true;

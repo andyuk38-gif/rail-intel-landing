@@ -496,6 +496,32 @@ function brandPlane(z) {
   return `matrix(${fmt(COS * SCALE)} ${fmt(SIN * SCALE)} ${fmt(-COS * SCALE)} ${fmt(SIN * SCALE)} ${fmt(origin.x)} ${fmt(origin.y)})`;
 }
 
+function socketBox() {
+  const housing = diamond(CHIP + 14, BOARD_Z + 1.5);
+  const pulse = [
+    screen(-(CHIP + 36), -(CHIP + 36), BOARD_Z + 2),
+    screen(CHIP + 36, CHIP + 36, BOARD_Z + 2),
+  ];
+  return boundsOf([...housing, ...pulse], 18);
+}
+
+function traySocketMarkup() {
+  const box = socketBox();
+  return `              <div class="engine-bay__well" data-engine-socket>
+                <svg class="engine-bay__well-svg" viewBox="${fmt(box.x)} ${fmt(box.y)} ${fmt(box.w)} ${fmt(box.h)}" role="presentation" aria-hidden="true">
+                  <defs>
+                  <linearGradient id="tray-socket-well" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#05080d" />
+                    <stop offset="1" stop-color="#121a26" />
+                  </linearGradient>
+                  </defs>
+${socketMarkup()}
+                </svg>
+                <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop here</span>
+                <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release</span>
+              </div>`;
+}
+
 function socketMarkup() {
   const housing = diamond(CHIP + 14, BOARD_Z + 1.5);
   const cavity = diamond(CHIP - 2, BOARD_Z + 0.8);
@@ -803,8 +829,9 @@ ${chipBody(base, "token")}
                 <span class="sr-only">Competency engine chip. Drag it onto the socket, or press to seat it.</span>
               </button>
               </div>
+${traySocketMarkup()}
             </div>
-            <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag into the socket</span></p>
+            <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag onto the socket</span></p>
             <button type="button" class="engine-lift" data-engine-lift hidden>Unplug chip</button>
           </aside>`;
 }
