@@ -2522,8 +2522,14 @@ function featurePage(group) {
   )}</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
+${
+  competencyEngineHero
+    ? `          <div class="engine-unplug-row">
+          ${renderEngineUnplug()}
 ${heroLeadMarkup}
-${competencyEngineHero ? `          ${renderEngineUnplug()}\n` : ""}${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
+          </div>\n`
+    : `${heroLeadMarkup}\n`
+}${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
   const heroGraphic =
