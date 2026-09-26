@@ -1566,6 +1566,13 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
   .hero-media--engine .engine-bay {
     width: min(100%, 16.5rem);
   }
+
+  .engine-bay__well .engine-socket-hit__label {
+    white-space: nowrap;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    padding: 0.28rem 0.55rem;
+  }
 }
 
 @media (max-width: 860px) {
