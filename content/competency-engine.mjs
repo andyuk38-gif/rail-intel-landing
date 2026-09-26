@@ -723,6 +723,15 @@ export function renderCompetencyEngineHero(base = "../") {
           </div>
           <div class="engine__viewport">
             <div class="engine-surge" aria-hidden="true"></div>
+            <div class="engine-spark" aria-hidden="true">
+              <span class="engine-spark__flash"></span>
+              <svg class="engine-spark__bolts" viewBox="-60 -48 120 96">
+                <path d="M-2 -36 L10 -4 L-12 4 L16 34" />
+                <path d="M20 -20 L30 2 L18 10 L34 28" />
+                <path d="M-24 -14 L-32 8 L-18 14 L-36 30" />
+                <path d="M6 6 L-4 22" />
+              </svg>
+            </div>
             <div class="engine__scene" data-engine-scene>
               <svg class="engine__svg" viewBox="0 0 ${VB_W} ${VB_H}" role="presentation" aria-hidden="true">
                 <defs>

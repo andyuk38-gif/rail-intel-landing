@@ -863,6 +863,57 @@
   animation: engine-surge 0.72s ease-out;
 }
 
+.engine-spark {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  z-index: 6;
+  width: 15rem;
+  height: 10rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.engine-spark__flash {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 252, 235, 0.95), rgba(251, 191, 36, 0.42) 38%, transparent 70%);
+}
+
+.engine-spark__bolts {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.engine-spark__bolts path {
+  fill: none;
+  stroke: #fff8dc;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px #fbbf24) drop-shadow(0 0 12px rgba(245, 158, 11, 0.85));
+}
+
+.engine.is-sparking .engine-spark {
+  animation: engine-spark-pop 0.42s ease-out;
+}
+
+.engine.is-sparking .engine-spark__bolts path {
+  animation: engine-spark-bolt 0.42s steps(3, end);
+}
+
+.engine.is-sparking .engine-socket__housing {
+  stroke: #fff3c4;
+  filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.95));
+}
+
+.engine.is-sparking .engine-socket__pad {
+  fill: #fff6d0;
+}
+
 .engine-socket__pulse {
   fill: none;
   stroke: rgba(245, 158, 11, 0.38);
@@ -1003,11 +1054,18 @@
 
 .engine-chip {
   opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 50% 38%;
   transition: opacity 0.2s ease;
+}
+
+.engine.is-connecting .engine-chip {
+  animation: engine-chip-seat 0.54s cubic-bezier(0.18, 0.86, 0.28, 1) both;
 }
 
 .engine.is-live .engine-chip {
   opacity: 1;
+  transform: none;
   transition: opacity 0.12s linear;
 }
 
@@ -1389,6 +1447,39 @@
   100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); }
 }
 
+@keyframes engine-chip-seat {
+  0% {
+    opacity: 0.2;
+    transform: translate(-22px, -58px) scale(1.08);
+    filter: drop-shadow(0 28px 18px rgba(0, 0, 0, 0.45));
+  }
+  72% {
+    opacity: 1;
+    transform: translate(1px, 3px) scale(1.01);
+    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.28));
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes engine-spark-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+  18% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes engine-spark-bolt {
+  0%, 100% { opacity: 0; }
+  12% { opacity: 1; }
+  28% { opacity: 0.15; }
+  40% { opacity: 1; }
+  58% { opacity: 0.2; }
+  70% { opacity: 0.9; }
+}
+
 @keyframes engine-pin-flash {
   0% { fill: #fff6d0; }
   100% { fill: #c5d0de; }
@@ -1496,6 +1587,8 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
 
 @media (prefers-reduced-motion: reduce) {
   .engine-surge,
+  .engine-spark,
+  .engine-chip,
   .engine-packet,
   .engine__status-dot,
   .engine-node__dot,
@@ -1512,6 +1605,14 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
   .engine-bay.is-spent .engine-bay__unlock {
     animation: none;
     transition: none;
+  }
+
+  .engine.is-connecting .engine-chip,
+  .engine.is-live .engine-chip {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 
   .engine.is-live .engine-trace {

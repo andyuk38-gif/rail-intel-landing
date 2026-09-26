@@ -178,7 +178,7 @@
     busy = false;
     drag = null;
     root.classList.add("is-live");
-    root.classList.remove("is-armed", "is-seating", "is-cooling", "is-surging");
+    root.classList.remove("is-armed", "is-seating", "is-cooling", "is-surging", "is-connecting", "is-sparking");
     if (bay) bay.classList.add("is-spent");
     setCopy(true);
     setBranchesEnabled(true);
@@ -191,7 +191,7 @@
     live = false;
     busy = false;
     drag = null;
-    root.classList.remove("is-live", "is-armed", "is-seating", "is-cooling", "is-surging", "is-paused");
+    root.classList.remove("is-live", "is-armed", "is-seating", "is-cooling", "is-surging", "is-paused", "is-connecting", "is-sparking");
     if (bay) bay.classList.remove("is-spent");
     if (token) {
       token.classList.remove("is-lifted", "is-dragging", "is-armed");
@@ -312,26 +312,41 @@
 
   function finishSeat() {
     window.clearTimeout(seatTimer);
-    live = true;
-    busy = false;
     drag = null;
     resetTilt();
-    root.classList.add("is-live", "is-surging");
-    root.classList.remove("is-armed", "is-seating", "is-cooling");
     setArmed(false);
+    bay.classList.add("is-spent");
+    clearToken();
+    rememberSeat(true);
+    setSiteOpen(true, true);
+    if (reduced) {
+      goLive();
+      return;
+    }
+    busy = true;
+    root.classList.remove("is-armed", "is-seating", "is-cooling");
+    root.scrollIntoView({ block: "center", behavior: "auto" });
+    requestAnimationFrame(function () {
+      root.classList.add("is-connecting");
+    });
+    window.setTimeout(function () {
+      root.classList.add("is-sparking");
+    }, 380);
+    window.setTimeout(goLive, 560);
+  }
+
+  function goLive() {
+    live = true;
+    busy = false;
+    root.classList.add("is-live", "is-surging");
+    root.classList.remove("is-armed", "is-seating", "is-cooling", "is-connecting");
     setCopy(true);
     setBranchesEnabled(true);
     if (lift) lift.hidden = false;
     if (toggle && !reduced) toggle.hidden = false;
     say("Engine seated. The branches are live.");
-    rememberSeat(true);
-    setSiteOpen(true, true);
     window.setTimeout(function () {
-      bay.classList.add("is-spent");
-      clearToken();
-    }, reduced ? 0 : 160);
-    window.setTimeout(function () {
-      root.classList.remove("is-surging");
+      root.classList.remove("is-surging", "is-sparking");
     }, 720);
   }
 
@@ -394,7 +409,7 @@
       live = false;
       setSiteOpen(false, false);
       root.classList.add("is-cooling");
-      root.classList.remove("is-live", "is-surging");
+      root.classList.remove("is-live", "is-surging", "is-connecting", "is-sparking");
       setCopy(false);
       setBranchesEnabled(false);
       if (lift) lift.hidden = true;
