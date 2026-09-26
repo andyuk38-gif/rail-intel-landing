@@ -331,8 +331,8 @@
     });
     window.setTimeout(function () {
       root.classList.add("is-sparking");
-    }, 1550);
-    window.setTimeout(goLive, 2480);
+    }, 1620);
+    window.setTimeout(goLive, 2760);
   }
 
   function goLive() {

@@ -868,8 +868,8 @@
   left: 50%;
   top: 46%;
   z-index: 6;
-  width: 15rem;
-  height: 10rem;
+  width: 13rem;
+  height: 8.5rem;
   pointer-events: none;
   opacity: 0;
   transform: translate(-50%, -50%);
@@ -877,41 +877,34 @@
 
 .engine-spark__flash {
   position: absolute;
-  inset: 12%;
+  inset: 8%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 252, 235, 0.95), rgba(251, 191, 36, 0.42) 38%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 248, 220, 0.55), rgba(251, 191, 36, 0.22) 42%, transparent 72%);
 }
 
 .engine-spark__bolts {
-  position: absolute;
-  inset: 0;
-  overflow: visible;
-}
-
-.engine-spark__bolts path {
-  fill: none;
-  stroke: #fff8dc;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 5px #fbbf24) drop-shadow(0 0 12px rgba(245, 158, 11, 0.85));
+  display: none;
 }
 
 .engine.is-sparking .engine-spark {
-  animation: engine-spark-pop 0.95s ease-out;
+  animation: engine-contact-halo 1.15s ease-out;
 }
 
-.engine.is-sparking .engine-spark__bolts path {
-  animation: engine-spark-bolt 0.95s ease-out;
+.engine.is-sparking .engine-chip .engine-pin {
+  animation: engine-contact-glow 1.15s ease-in-out both;
+}
+
+.engine.is-sparking .engine-chip .engine-pin:nth-child(4n + 1) { animation-delay: 0s; }
+.engine.is-sparking .engine-chip .engine-pin:nth-child(4n + 2) { animation-delay: 0.08s; }
+.engine.is-sparking .engine-chip .engine-pin:nth-child(4n + 3) { animation-delay: 0.16s; }
+.engine.is-sparking .engine-chip .engine-pin:nth-child(4n) { animation-delay: 0.24s; }
+
+.engine.is-sparking .engine-socket__pad {
+  animation: engine-pad-glow 1.15s ease-in-out 0.06s both;
 }
 
 .engine.is-sparking .engine-socket__housing {
-  stroke: #fff3c4;
-  filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.95));
-}
-
-.engine.is-sparking .engine-socket__pad {
-  fill: #fff6d0;
+  animation: engine-contact-ring 1.15s ease-out;
 }
 
 .engine-socket__pulse {
@@ -1054,19 +1047,19 @@
 
 .engine-chip {
   opacity: 0;
-  transform-box: fill-box;
-  transform-origin: 50% 38%;
-  transition: opacity 0.2s ease;
+  transform-box: view-box;
+  transform-origin: 700px 400px;
+  will-change: transform;
 }
 
 .engine.is-connecting .engine-chip {
-  animation: engine-chip-seat 1.55s cubic-bezier(0.22, 0.62, 0.18, 1) both;
+  opacity: 1;
+  animation: engine-chip-seat 1.6s cubic-bezier(0.45, 0.02, 0.2, 1) both;
 }
 
 .engine.is-live .engine-chip {
   opacity: 1;
   transform: none;
-  transition: opacity 0.12s linear;
 }
 
 .engine-node--board {
@@ -1448,44 +1441,38 @@
 }
 
 @keyframes engine-chip-seat {
-  0% {
-    opacity: 0.15;
-    transform: translate(-40px, -110px) scale(1.16);
-    filter: drop-shadow(0 40px 24px rgba(0, 0, 0, 0.5));
+  from {
+    transform: translate3d(-28px, -84px, 0);
   }
-  42% {
-    opacity: 1;
-    transform: translate(-18px, -48px) scale(1.08);
-    filter: drop-shadow(0 26px 16px rgba(0, 0, 0, 0.4));
-  }
-  78% {
-    opacity: 1;
-    transform: translate(-2px, -6px) scale(1.02);
-    filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.3));
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-    filter: none;
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes engine-spark-pop {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  12% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
-  38% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.1); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.22); }
+@keyframes engine-contact-halo {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.82); }
+  22% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.12); }
 }
 
-@keyframes engine-spark-bolt {
-  0% { opacity: 0; }
-  8% { opacity: 1; }
-  22% { opacity: 0.2; }
-  34% { opacity: 1; }
-  50% { opacity: 0.25; }
-  64% { opacity: 0.95; }
-  80% { opacity: 0.35; }
-  100% { opacity: 0; }
+@keyframes engine-contact-glow {
+  0% { fill: #c5d0de; }
+  35% { fill: #fff6c8; }
+  58% { fill: #ffffff; }
+  100% { fill: #c5d0de; }
+}
+
+@keyframes engine-pad-glow {
+  0% { fill: #c6a15a; }
+  35% { fill: #fff6c8; }
+  58% { fill: #ffffff; }
+  100% { fill: #c6a15a; }
+}
+
+@keyframes engine-contact-ring {
+  0% { stroke: rgba(226, 196, 120, 0.42); }
+  28% { stroke: #fff3c4; }
+  100% { stroke: rgba(226, 196, 120, 0.42); }
 }
 
 @keyframes engine-pin-flash {
