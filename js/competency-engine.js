@@ -122,10 +122,39 @@
   var drag = null;
   var seatTimer = 0;
   var returnScrollTimer = 0;
+  var returnScrollFrame = 0;
 
   function clearReturnScroll() {
     window.clearTimeout(returnScrollTimer);
     returnScrollTimer = 0;
+    if (returnScrollFrame) {
+      window.cancelAnimationFrame(returnScrollFrame);
+      returnScrollFrame = 0;
+    }
+  }
+
+  function scrollToTopSlow(durationMs) {
+    var startY = window.scrollY || window.pageYOffset || 0;
+    if (startY <= 0) return;
+    var start = 0;
+    var duration = durationMs || 2200;
+
+    function easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    function step(now) {
+      if (!start) start = now;
+      var t = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, Math.round(startY * (1 - easeInOut(t))));
+      if (t < 1) {
+        returnScrollFrame = window.requestAnimationFrame(step);
+      } else {
+        returnScrollFrame = 0;
+      }
+    }
+
+    returnScrollFrame = window.requestAnimationFrame(step);
   }
 
   buttons.forEach(function (button) {
@@ -343,8 +372,8 @@
     window.setTimeout(goLive, 2760);
     clearReturnScroll();
     returnScrollTimer = window.setTimeout(function () {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    }, 2200);
+      scrollToTopSlow(2200);
+    }, 4500);
   }
 
   function goLive() {
