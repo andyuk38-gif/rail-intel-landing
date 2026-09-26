@@ -1563,6 +1563,10 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
     margin-bottom: 0.7rem;
   }
 
+  body:has([data-engine-token]) .hero-badge {
+    margin-top: 0.85rem;
+  }
+
   .hero-media--engine .engine-bay {
     width: min(100%, 16.5rem);
   }
