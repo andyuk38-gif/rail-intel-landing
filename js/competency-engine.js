@@ -331,8 +331,8 @@
     });
     window.setTimeout(function () {
       root.classList.add("is-sparking");
-    }, 380);
-    window.setTimeout(goLive, 560);
+    }, 1550);
+    window.setTimeout(goLive, 2480);
   }
 
   function goLive() {
@@ -347,7 +347,7 @@
     say("Engine seated. The branches are live.");
     window.setTimeout(function () {
       root.classList.remove("is-surging", "is-sparking");
-    }, 720);
+    }, 900);
   }
 
   function flyToken(to, done) {

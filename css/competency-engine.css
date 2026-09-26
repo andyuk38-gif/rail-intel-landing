@@ -898,11 +898,11 @@
 }
 
 .engine.is-sparking .engine-spark {
-  animation: engine-spark-pop 0.42s ease-out;
+  animation: engine-spark-pop 0.95s ease-out;
 }
 
 .engine.is-sparking .engine-spark__bolts path {
-  animation: engine-spark-bolt 0.42s steps(3, end);
+  animation: engine-spark-bolt 0.95s ease-out;
 }
 
 .engine.is-sparking .engine-socket__housing {
@@ -1060,7 +1060,7 @@
 }
 
 .engine.is-connecting .engine-chip {
-  animation: engine-chip-seat 0.54s cubic-bezier(0.18, 0.86, 0.28, 1) both;
+  animation: engine-chip-seat 1.55s cubic-bezier(0.22, 0.62, 0.18, 1) both;
 }
 
 .engine.is-live .engine-chip {
@@ -1449,14 +1449,19 @@
 
 @keyframes engine-chip-seat {
   0% {
-    opacity: 0.2;
-    transform: translate(-22px, -58px) scale(1.08);
-    filter: drop-shadow(0 28px 18px rgba(0, 0, 0, 0.45));
+    opacity: 0.15;
+    transform: translate(-40px, -110px) scale(1.16);
+    filter: drop-shadow(0 40px 24px rgba(0, 0, 0, 0.5));
   }
-  72% {
+  42% {
     opacity: 1;
-    transform: translate(1px, 3px) scale(1.01);
-    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.28));
+    transform: translate(-18px, -48px) scale(1.08);
+    filter: drop-shadow(0 26px 16px rgba(0, 0, 0, 0.4));
+  }
+  78% {
+    opacity: 1;
+    transform: translate(-2px, -6px) scale(1.02);
+    filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.3));
   }
   100% {
     opacity: 1;
@@ -1466,18 +1471,21 @@
 }
 
 @keyframes engine-spark-pop {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
-  18% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  12% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+  38% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.22); }
 }
 
 @keyframes engine-spark-bolt {
-  0%, 100% { opacity: 0; }
-  12% { opacity: 1; }
-  28% { opacity: 0.15; }
-  40% { opacity: 1; }
-  58% { opacity: 0.2; }
-  70% { opacity: 0.9; }
+  0% { opacity: 0; }
+  8% { opacity: 1; }
+  22% { opacity: 0.2; }
+  34% { opacity: 1; }
+  50% { opacity: 0.25; }
+  64% { opacity: 0.95; }
+  80% { opacity: 0.35; }
+  100% { opacity: 0; }
 }
 
 @keyframes engine-pin-flash {
