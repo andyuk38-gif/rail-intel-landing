@@ -1745,6 +1745,16 @@ body.is-engine-open .page-hero--competency-engine .page-lead {
   max-width: none;
 }
 
+body.is-engine-open .hero-title {
+  font-size: clamp(1.45rem, 2.45vw, 2.15rem);
+  margin-bottom: 0.85rem;
+}
+
+body.is-engine-open .hero-title .hero-title__accent {
+  display: inline;
+  padding-bottom: 0.08em;
+}
+
 body.is-engine-open .page-hero__inner--engine {
   grid-template-columns: 1fr;
 }
