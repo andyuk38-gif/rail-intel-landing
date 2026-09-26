@@ -121,6 +121,12 @@
   var busy = false;
   var drag = null;
   var seatTimer = 0;
+  var returnScrollTimer = 0;
+
+  function clearReturnScroll() {
+    window.clearTimeout(returnScrollTimer);
+    returnScrollTimer = 0;
+  }
 
   buttons.forEach(function (button) {
     button.setAttribute("tabindex", "-1");
@@ -188,6 +194,7 @@
   }
 
   function quietUnseat() {
+    clearReturnScroll();
     live = false;
     busy = false;
     paused = false;
@@ -334,6 +341,10 @@
       root.classList.add("is-sparking");
     }, 1620);
     window.setTimeout(goLive, 2760);
+    clearReturnScroll();
+    returnScrollTimer = window.setTimeout(function () {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }, 2200);
   }
 
   function goLive() {

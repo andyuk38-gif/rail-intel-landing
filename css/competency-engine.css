@@ -1765,16 +1765,16 @@ body.is-engine-open .page-hero__inner--engine {
 
 .engine-unplug-row .engine-lift {
   float: right;
-  margin: 0.1rem 0 0.55rem 1rem;
+  margin: 0.2rem 0 0.55rem 1rem;
 }
 
-body.is-engine-open .engine-unplug-row .hero-desc,
-body.is-engine-open .engine-unplug-row .page-lead {
+body.is-engine-open .engine-unplug-row .hero-title,
+body.is-engine-open .engine-unplug-row .page-title {
   margin-bottom: 0;
 }
 
 body.is-engine-open .engine-unplug-row {
-  margin-bottom: 1.35rem;
+  margin-bottom: 0.85rem;
 }
 
 .hero-title .hero-title__accent {
