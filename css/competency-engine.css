@@ -1113,7 +1113,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: min(100%, 18rem);
+  width: min(100%, var(--bay-size, 18rem));
   gap: 0.15rem;
   padding: 0.9rem 0.85rem 0.85rem;
   border-radius: 22px;
@@ -1370,7 +1370,7 @@
 .hero-media--engine .engine-bay {
   grid-column: auto;
   grid-row: auto;
-  width: min(100%, 28rem);
+  width: min(100%, var(--bay-size, 28rem));
   margin-inline: auto;
   justify-self: center;
 }
@@ -1382,6 +1382,141 @@
 .hero-engine {
   position: relative;
   margin-top: 1.75rem;
+}
+
+/* First view: crop the empty board to the socket so it shares the screen with
+   the chip. This is the default before the chip is seated, not a JS-only state,
+   so a late script or a short laptop still shows where to drop. */
+body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
+  padding-bottom: 0.7rem;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .hero-engine {
+  margin-top: 0.7rem;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .page-hero--competency-engine {
+  padding-bottom: 0.7rem;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .hero-media--engine .engine-bay {
+  width: min(100%, var(--bay-size, clamp(12.5rem, 30vmin, 18.5rem)));
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .eoi-widget {
+  display: none;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .engine:not(.is-live) .engine-bezel {
+  display: none;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .engine__viewport,
+.engine.is-fitted .engine__viewport {
+  height: var(--engine-fit, clamp(11.5rem, 30dvh, 19rem));
+  overflow: hidden;
+  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .engine__scene,
+.engine.is-fitted .engine__scene {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--engine-span, 36rem);
+  transform: translate(-50%, -50%);
+}
+
+/* Keep copy and chip side by side on laptops so the socket still has a row. */
+@media (min-width: 780px) {
+  body:has([data-engine-token]):not(.is-engine-open) .hero-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-height: 860px) {
+  body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
+    padding-top: calc(4.85rem + var(--dev-banner-height));
+  }
+
+  body:has([data-engine-token]):not(.is-engine-open) .hero-points {
+    display: none;
+  }
+
+  body:has([data-engine-token]):not(.is-engine-open) .hero-desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 779px) {
+  body:has([data-engine-token]):not(.is-engine-open) .hero-desc,
+  body:has([data-engine-token]):not(.is-engine-open) .hero-points {
+    display: none;
+  }
+
+  body:has([data-engine-token]):not(.is-engine-open) .hero-badge {
+    margin-bottom: 0.75rem;
+  }
+
+  body:has([data-engine-token]):not(.is-engine-open) .hero-title--prompt {
+    font-size: clamp(1.45rem, 6.4vw, 2rem);
+    margin-bottom: 0.65rem;
+  }
+
+  body:has([data-engine-token]):not(.is-engine-open) .hero-media--engine .engine-bay {
+    width: min(100%, var(--bay-size, clamp(11rem, 42vw, 15rem)));
+  }
+}
+
+/* Reclaimed in steps by the fitting pass, shortest screens last. */
+body.is-engine-squeezed:not(.is-engine-open) .hero-points {
+  display: none;
+}
+
+body.is-engine-squeezed:not(.is-engine-open) .hero-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+body.is-engine-squeezed:not(.is-engine-open) .hero-badge {
+  margin-bottom: 1rem;
+}
+
+body.is-engine-tight:not(.is-engine-open) .hero-desc {
+  display: none;
+}
+
+body.is-engine-tight:not(.is-engine-open) .hero-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  margin-bottom: 0.7rem;
+}
+
+body.is-engine-tight:not(.is-engine-open) .hero-badge {
+  margin-bottom: 0.65rem;
+}
+
+body.is-engine-tight:not(.is-engine-open) .hero-grid {
+  gap: 1.1rem;
+}
+
+body.is-engine-tight:not(.is-engine-open) .hero-engine {
+  margin-top: 0.55rem;
+}
+
+body.is-engine-tight:not(.is-engine-open) .engine-bay {
+  padding: 0.55rem 0.55rem 0.5rem;
+}
+
+body.is-engine-tight:not(.is-engine-open) .engine__bar {
+  padding-block: 0.45rem 0.4rem;
 }
 
 @media (max-width: 860px) {
@@ -1399,12 +1534,12 @@
   .engine-bay {
     grid-row: 2;
     justify-self: center;
-    width: min(100%, 16.5rem);
+    width: min(100%, var(--bay-size, 16.5rem));
   }
   .page-hero__media--engine { grid-row: 3; }
 
   .hero-media--engine .engine-bay {
-    width: min(100%, 18rem);
+    width: min(100%, var(--bay-size, 18rem));
     grid-row: auto;
   }
 }
