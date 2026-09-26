@@ -110,7 +110,7 @@
   function socketEl() {
     return live && boardSocket ? boardSocket : traySocket || boardSocket;
   }
-  var lift = bay && bay.querySelector("[data-engine-lift]");
+  var lift = document.querySelector("[data-engine-lift]");
   var kicker = bay && bay.querySelector("[data-engine-kicker]");
   var hint = bay && bay.querySelector("[data-engine-hint]");
   var announce = root.querySelector("[data-engine-announce]");
@@ -190,6 +190,7 @@
   function quietUnseat() {
     live = false;
     busy = false;
+    paused = false;
     drag = null;
     root.classList.remove("is-live", "is-armed", "is-seating", "is-cooling", "is-surging", "is-paused", "is-connecting", "is-sparking");
     if (bay) bay.classList.remove("is-spent");
@@ -393,34 +394,9 @@
   function liftChip() {
     if (!live || busy) return;
     rememberSeat(false);
-    busy = true;
-    paused = false;
-    root.classList.remove("is-paused");
-    if (toggle) {
-      toggle.hidden = true;
-      toggle.setAttribute("aria-pressed", "false");
-      toggle.textContent = "Pause";
-    }
-    resetTilt();
-    requestAnimationFrame(function () {
-      var from = socketEl().getBoundingClientRect();
-      bay.classList.remove("is-spent");
-      placeToken(from);
-      live = false;
-      setSiteOpen(false, false);
-      root.classList.add("is-cooling");
-      root.classList.remove("is-live", "is-surging", "is-connecting", "is-sparking");
-      setCopy(false);
-      setBranchesEnabled(false);
-      if (lift) lift.hidden = true;
-      say("Chip lifted. The socket is open.");
-      var slot = home.getBoundingClientRect();
-      flyToken(slot, function () {
-        busy = false;
-        root.classList.remove("is-cooling");
-        clearToken();
-      });
-    });
+    quietUnseat();
+    say("Chip unplugged. Drag it onto the socket.");
+    window.scrollTo({ top: 0, left: 0, behavior: reduced ? "auto" : "smooth" });
   }
 
   token.addEventListener("pointerdown", function (event) {

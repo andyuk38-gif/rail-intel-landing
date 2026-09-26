@@ -1400,17 +1400,24 @@
 }
 
 .engine-lift {
-  margin-top: 0.45rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1.75rem;
   border: 1px solid rgba(245, 158, 11, 0.45);
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.12);
   color: #fde68a;
   border-radius: 999px;
-  padding: 0.38rem 0.85rem;
+  padding: 0.7rem 1.2rem;
   font: inherit;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 650;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   cursor: pointer;
+}
+
+.engine-lift[hidden] {
+  display: none;
 }
 
 .engine-lift:hover {
@@ -1712,6 +1719,36 @@ body:has([data-engine-token]):not(.is-engine-open) [data-engine-headline] {
 
 body.is-engine-open [data-engine-prompt] {
   display: none;
+}
+
+/* After seating, drop the engine-online tray so the title and paragraph can
+   run full width. Unplug lives with that copy and restores the first view. */
+body.is-engine-open .hero-media--engine,
+body.is-engine-open .engine-bay {
+  display: none;
+}
+
+body.is-engine-open .hero-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+body.is-engine-open .hero-title,
+body.is-engine-open .hero-desc {
+  max-width: none;
+}
+
+body.is-engine-open .hero-copy .hero-desc {
+  margin-bottom: 1.15rem;
+}
+
+body.is-engine-open .page-hero__inner--engine {
+  grid-template-columns: 1fr;
+}
+
+body.is-engine-open .page-hero--competency-engine .page-lead {
+  max-width: none;
+  margin-bottom: 1.15rem;
 }
 
 .hero-title .hero-title__accent {

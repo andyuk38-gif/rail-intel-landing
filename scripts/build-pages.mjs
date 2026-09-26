@@ -29,7 +29,7 @@ import { mergeItemSeo } from "../content/seo-extensions.mjs";
 import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
 import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../content/communications-hub.mjs";
-import { renderCompetencyEngineBay, renderCompetencyEngineHero } from "../content/competency-engine.mjs";
+import { renderCompetencyEngineBay, renderCompetencyEngineHero, renderEngineUnplug } from "../content/competency-engine.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -2523,7 +2523,7 @@ function featurePage(group) {
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
 ${heroLeadMarkup}
-${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
+${competencyEngineHero ? `          ${renderEngineUnplug()}\n` : ""}${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
   const heroGraphic =
@@ -3990,6 +3990,13 @@ function syncIndex() {
     "<!-- home-gallery:start -->",
     "<!-- home-gallery:end -->",
     renderHomeGallery()
+  );
+
+  html = replaceBetween(
+    html,
+    "<!-- home-engine-unplug:start -->",
+    "<!-- home-engine-unplug:end -->",
+    `\n          ${renderEngineUnplug()}\n          `
   );
 
   html = replaceBetween(
