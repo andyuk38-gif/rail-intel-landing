@@ -131,6 +131,7 @@
       window.cancelAnimationFrame(returnScrollFrame);
       returnScrollFrame = 0;
     }
+    document.documentElement.style.scrollBehavior = "";
   }
 
   function scrollToTopSlow(durationMs) {
@@ -138,19 +139,34 @@
     if (startY <= 0) return;
     var start = 0;
     var duration = durationMs || 2200;
+    var rootEl = document.documentElement;
+    var bodyEl = document.body;
+    var prevBehavior = rootEl.style.scrollBehavior;
+    rootEl.style.scrollBehavior = "auto";
 
     function easeInOut(t) {
       return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
     }
 
+    function setY(y) {
+      rootEl.scrollTop = y;
+      bodyEl.scrollTop = y;
+    }
+
+    function finish() {
+      returnScrollFrame = 0;
+      rootEl.style.scrollBehavior = prevBehavior;
+      setY(0);
+    }
+
     function step(now) {
       if (!start) start = now;
       var t = Math.min(1, (now - start) / duration);
-      window.scrollTo(0, Math.round(startY * (1 - easeInOut(t))));
+      setY(Math.round(startY * (1 - easeInOut(t))));
       if (t < 1) {
         returnScrollFrame = window.requestAnimationFrame(step);
       } else {
-        returnScrollFrame = 0;
+        finish();
       }
     }
 
