@@ -34,8 +34,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=76842247" />
-  <link rel="stylesheet" href="../css/pages.css?v=76842247" />
+  <link rel="stylesheet" href="../css/style.css?v=30564599" />
+  <link rel="stylesheet" href="../css/pages.css?v=30564599" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -303,24 +303,7 @@
             <h2 class="page-hero__intro-title">The Administration menu</h2>
             <p>Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.</p>
             <p>The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.</p>
-            <div class="admin-intro-tiles" data-admin-intro-tiles>
-              <article class="admin-intro-tile is-active" data-admin-intro-tile data-admin-intro-group="team" tabindex="0">
-                <h3 class="admin-intro-tile__title">Team Management</h3>
-                <p>Administrator seats, users and access.</p>
-              </article>
-              <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="modules" tabindex="0">
-                <h3 class="admin-intro-tile__title">Module shortcuts</h3>
-                <p>QA Verifications, Trainee and Leave &amp; Absence when those add-ons are active.</p>
-              </article>
-              <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="storage" tabindex="0">
-                <h3 class="admin-intro-tile__title">Storage</h3>
-                <p>Document storage administration.</p>
-              </article>
-              <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="config" tabindex="0">
-                <h3 class="admin-intro-tile__title">Company configuration</h3>
-                <p>Roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.</p>
-              </article>
-            </div>
+
           </div>
           </div>
           <div class="page-hero__media page-hero__media--admin-menu">
@@ -484,6 +467,24 @@
         </figure>
           </div>
         </div>
+        <div class="admin-intro-tiles admin-intro-tiles--row" data-admin-intro-tiles>
+          <article class="admin-intro-tile is-active" data-admin-intro-tile data-admin-intro-group="team" tabindex="0">
+            <h3 class="admin-intro-tile__title">Team Management</h3>
+            <p>Administrator seats, users and access.</p>
+          </article>
+          <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="modules" tabindex="0">
+            <h3 class="admin-intro-tile__title">Module shortcuts</h3>
+            <p>QA Verifications, Trainee and Leave &amp; Absence when those add-ons are active.</p>
+          </article>
+          <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="storage" tabindex="0">
+            <h3 class="admin-intro-tile__title">Storage</h3>
+            <p>Document storage administration.</p>
+          </article>
+          <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="config" tabindex="0">
+            <h3 class="admin-intro-tile__title">Company configuration</h3>
+            <p>Roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -496,6 +497,7 @@
             <div class="page-section__copy-tiles-copy">
           <p>Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular, an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.</p>
           <p>The same permission model gates every core capability: the employee directory, monitoring, assessing, medicals, incidents, reporting and optional modules. Nothing is all-or-nothing unless you configure it that way.</p>
+          <p>Employees can be limited to their own record when that is all they need, while line managers see only their reportees rather than the whole company. That keeps sensitive competence and medical detail in the right hands without slowing day-to-day assessing.</p>
             </div>
             <div class="page-section__copy-tiles-grid">
           <div class="spec-tiles" role="list">
@@ -583,7 +585,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/org-structure.png?v=76842247"
+              src="../images/screens/comp-config/org-structure.png?v=30564599"
               alt="Organisation structure configuration."
               width="700"
               height="464"
@@ -601,7 +603,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/configure-company-role-permissions.png?v=76842247"
+              src="../images/screens/comp-config/configure-company-role-permissions.png?v=30564599"
               alt="Configuring permissions for a company job role."
               width="693"
               height="521"
@@ -619,7 +621,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/main-sys/role-permissions-configure.png?v=76842247"
+              src="../images/screens/main-sys/role-permissions-configure.png?v=30564599"
               alt="Granular permission assignment across the platform."
               width="704"
               height="558"
@@ -643,6 +645,7 @@
             <div class="page-section__copy-tiles-copy">
           <p>Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run, so assessors in every depot work to the same bar.</p>
           <p>When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification, not after someone re-keys a spreadsheet.</p>
+          <p>Grading scales sit with assessors in the field, company standards set the outcomes you expect, and timing rules, including trainee daylight and darkness minimums, keep session requirements consistent across every role that references them.</p>
             </div>
             <div class="page-section__copy-tiles-grid">
           <div class="spec-tiles" role="list">
@@ -742,7 +745,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/framework-apply-cycles.png?v=76842247"
+              src="../images/screens/comp-config/framework-apply-cycles.png?v=30564599"
               alt="Applying a competency framework across cycles."
               width="705"
               height="388"
@@ -760,7 +763,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/grade-scale.png?v=76842247"
+              src="../images/screens/comp-config/grade-scale.png?v=30564599"
               alt="The grading scale used by assessors."
               width="703"
               height="290"
@@ -778,7 +781,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/set-company-standards.png?v=76842247"
+              src="../images/screens/comp-config/set-company-standards.png?v=30564599"
               alt="Company standards for assessment and competence."
               width="699"
               height="489"
@@ -796,7 +799,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/main-sys/timings-standards.png?v=76842247"
+              src="../images/screens/main-sys/timings-standards.png?v=30564599"
               alt="Timing standards including trainee daylight and darkness minimums."
               width="786"
               height="462"
@@ -812,11 +815,11 @@
       </div>
     </section>
 
-    <section class="page-section page-section--viewer">
+    <section class="page-section page-section--wide page-section--viewer">
       <div class="container container--showcase">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--wide">
           <h2>Traction, routes and depots</h2>
-          <p>Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears — on the record, in the cab and in a verification report.</p>
+          <p>Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears, on the record, in the cab and in a verification report.</p>
           <p>Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.</p>
 
         </div>
@@ -892,7 +895,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/train-routes/traction-route-overview.png?v=76842247"
+              src="../images/screens/train-routes/traction-route-overview.png?v=30564599"
               alt="Traction and route overview for the company."
               width="699"
               height="353"
@@ -910,7 +913,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/train-routes/add-traction.png?v=76842247"
+              src="../images/screens/train-routes/add-traction.png?v=30564599"
               alt="Adding a traction type."
               width="776"
               height="259"
@@ -928,7 +931,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/train-routes/add-route.png?v=76842247"
+              src="../images/screens/train-routes/add-route.png?v=30564599"
               alt="Adding a route."
               width="692"
               height="261"
@@ -946,7 +949,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/set-traction-routes-depots.png?v=76842247"
+              src="../images/screens/comp-config/set-traction-routes-depots.png?v=30564599"
               alt="Traction, routes and depots configuration."
               width="696"
               height="323"
@@ -970,6 +973,7 @@
             <div class="page-section__copy-tiles-copy">
           <p>Optional modules are activated from the Add-ons library inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator enables it for the company directly.</p>
           <p>Every company includes two administrator seats; additional Company Admin licences are purchased by quantity and managed in Team Management. Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval.</p>
+          <p>There is no separate procurement workflow for add-ons: trial what you need, subscribe when you are ready, and keep workforce context available on a live Investigations case through the connector your administrators control.</p>
             </div>
             <div class="page-section__copy-tiles-grid">
           <div class="spec-tiles" role="list">
@@ -1057,7 +1061,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/main-sys/addons-page.png?v=76842247"
+              src="../images/screens/main-sys/addons-page.png?v=30564599"
               alt="The Add-ons page where optional modules are activated."
               width="791"
               height="528"
@@ -1075,7 +1079,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/addons-library.png?v=76842247"
+              src="../images/screens/comp-config/addons-library.png?v=30564599"
               alt="The add-ons library with available modules."
               width="690"
               height="562"
@@ -1093,7 +1097,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/investigation-apimanagement.png?v=76842247"
+              src="../images/screens/comp-config/investigation-apimanagement.png?v=30564599"
               alt="Investigations API connector management."
               width="699"
               height="444"
@@ -1251,8 +1255,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=76842247"></script>
-  <script src="../js/newsletter.js?v=76842247"></script>
-  <script src="../js/share.js?v=76842247"></script>
+  <script src="../js/site.js?v=30564599"></script>
+  <script src="../js/newsletter.js?v=30564599"></script>
+  <script src="../js/share.js?v=30564599"></script>
 </body>
 </html>

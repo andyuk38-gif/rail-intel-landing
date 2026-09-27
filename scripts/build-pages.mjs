@@ -2517,25 +2517,32 @@ ${items}
           </div>`;
 }
 
-function renderHeroIntro(intro) {
-  if (!intro) return "";
-
-  const body = (intro.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
-  const tiles = intro.tiles
-    ? `            <div class="admin-intro-tiles" data-admin-intro-tiles>\n${intro.tiles
-        .map((tile, index) => {
-          const groupAttr = tile.group ? ` data-admin-intro-group="${esc(tile.group)}"` : "";
-          return `              <article class="admin-intro-tile${index === 0 ? " is-active" : ""}" data-admin-intro-tile${groupAttr} tabindex="0">
+function renderHeroIntroTiles(tiles) {
+  if (!tiles?.length) return "";
+  return `            <div class="admin-intro-tiles" data-admin-intro-tiles>\n${tiles
+    .map((tile, index) => {
+      const groupAttr = tile.group ? ` data-admin-intro-group="${esc(tile.group)}"` : "";
+      return `              <article class="admin-intro-tile${index === 0 ? " is-active" : ""}" data-admin-intro-tile${groupAttr} tabindex="0">
                 <h3 class="admin-intro-tile__title">${esc(tile.title)}</h3>
                 <p>${esc(tile.detail)}</p>
               </article>`;
-        })
-        .join("\n")}\n            </div>`
-    : intro.bullets
-      ? `            <ul class="spec-list">\n${intro.bullets
-          .map((item) => `              <li>${rich(item)}</li>`)
-          .join("\n")}\n            </ul>`
-      : "";
+    })
+    .join("\n")}\n            </div>`;
+}
+
+function renderHeroIntro(intro, { omitTiles = false } = {}) {
+  if (!intro) return "";
+
+  const body = (intro.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
+  const tiles = omitTiles
+    ? ""
+    : intro.tiles
+      ? renderHeroIntroTiles(intro.tiles)
+      : intro.bullets
+        ? `            <ul class="spec-list">\n${intro.bullets
+            .map((item) => `              <li>${rich(item)}</li>`)
+            .join("\n")}\n            </ul>`
+        : "";
 
   return `
           <div class="page-hero__intro">
@@ -2559,6 +2566,7 @@ function featurePage(group) {
           : "\n";
 
   const competencyEngineHero = group.heroGraphic === "competency-engine";
+  const adminMenuHero = group.heroGraphic === "admin-menu";
   const heroLeadMarkup = renderHeroLead(group.lead);
 
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
@@ -2574,10 +2582,9 @@ ${
 ${heroLeadMarkup}\n`
     : `          <h1 class="page-title">${group.taglineHtml || esc(group.tagline)}</h1>
 ${heroLeadMarkup}\n`
-}${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
+}${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro, { omitTiles: adminMenuHero })}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
-  const adminMenuHero = group.heroGraphic === "admin-menu";
   const heroGraphic =
     group.heroGraphic === "medicals-licensing"
       ? renderMedicalsLicensingHeroGraphic(base)
@@ -2596,6 +2603,18 @@ ${heroLeadMarkup}\n`
   const tunnelHero = group.slug === "tunnel-mode";
   const medicalsLicensingHero = group.heroGraphic === "medicals-licensing";
   const incidentsHero = group.slug === "incidents-monitoring" && Boolean(group.heroShot);
+  const adminIntroTilesRow =
+    adminMenuHero && group.heroIntro?.tiles?.length
+      ? `\n        <div class="admin-intro-tiles admin-intro-tiles--row" data-admin-intro-tiles>\n${group.heroIntro.tiles
+          .map((tile, index) => {
+            const groupAttr = tile.group ? ` data-admin-intro-group="${esc(tile.group)}"` : "";
+            return `          <article class="admin-intro-tile${index === 0 ? " is-active" : ""}" data-admin-intro-tile${groupAttr} tabindex="0">
+            <h3 class="admin-intro-tile__title">${esc(tile.title)}</h3>
+            <p>${esc(tile.detail)}</p>
+          </article>`;
+          })
+          .join("\n")}\n        </div>`
+      : "";
   const heroInner = competencyEngineHero
     ? `        <div class="page-hero__inner page-hero__inner--engine">
           <div class="page-hero__copy">
@@ -2626,7 +2645,7 @@ ${heroCopy}
           <div class="page-hero__media${incidentsHero ? " page-hero__media--incidents" : ""}${adminMenuHero ? " page-hero__media--admin-menu" : ""}">
 ${heroMedia}
           </div>
-        </div>`
+        </div>${adminIntroTilesRow}`
     : `        <div class="page-hero__inner">
 ${heroCopy}
         </div>`;

@@ -1600,6 +1600,7 @@ export const featureGroups = [
         body: [
           "Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular, an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.",
           "The same permission model gates every core capability: the employee directory, monitoring, assessing, medicals, incidents, reporting and optional modules. Nothing is all-or-nothing unless you configure it that way.",
+          "Employees can be limited to their own record when that is all they need, while line managers see only their reportees rather than the whole company. That keeps sensitive competence and medical detail in the right hands without slowing day-to-day assessing.",
         ],
         bullets: [
           "**Custom job roles** for assessors, managers, instructors and administrators.",
@@ -1631,6 +1632,7 @@ export const featureGroups = [
         body: [
           "Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run, so assessors in every depot work to the same bar.",
           "When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification, not after someone re-keys a spreadsheet.",
+          "Grading scales sit with assessors in the field, company standards set the outcomes you expect, and timing rules, including trainee daylight and darkness minimums, keep session requirements consistent across every role that references them.",
         ],
         bullets: [
           "**Competency frameworks** applied across cycles and roles.",
@@ -1664,9 +1666,10 @@ export const featureGroups = [
       {
         heading: "Traction, routes and depots",
         body: [
-          "Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears — on the record, in the cab and in a verification report.",
+          "Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears, on the record, in the cab and in a verification report.",
           "Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.",
         ],
+        fullWidth: true,
         shotGrid: "viewer",
         viewerAuto: false,
         shots: [
@@ -1693,6 +1696,7 @@ export const featureGroups = [
         body: [
           "Optional modules are activated from the Add-ons library inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator enables it for the company directly.",
           "Every company includes two administrator seats; additional Company Admin licences are purchased by quantity and managed in Team Management. Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval.",
+          "There is no separate procurement workflow for add-ons: trial what you need, subscribe when you are ready, and keep workforce context available on a live Investigations case through the connector your administrators control.",
         ],
         bullets: [
           "**Add-on activation** from the in-app library, no separate procurement workflow.",
