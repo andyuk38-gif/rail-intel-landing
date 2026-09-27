@@ -1937,7 +1937,7 @@ export const languages = {
     heading: "Coverage across your network",
     lead:
       "Explore where each Rail Intel interface language is used. Select a language — markers light up across the regions that speak it.",
-    hint: "Select a language · Drag to orbit",
+    hint: "Click a city · Drag to orbit",
   },
   items: [
     {
