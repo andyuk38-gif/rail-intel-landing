@@ -1933,12 +1933,21 @@ export const languages = {
   heading: "Supported languages",
   lead:
     "The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.",
+  globe: {
+    heading: "Coverage across your network",
+    lead:
+      "Explore the languages available in Rail Intel. Select a marker or a language below — the globe focuses on where that interface language is typically used.",
+    hint: "Drag to orbit · Click a marker to focus",
+  },
   items: [
     {
       code: "en",
       flag: "gb",
       name: "English",
       nativeName: "English",
+      region: "United Kingdom",
+      lat: 51.5074,
+      lng: -0.1278,
       summary:
         "Default language for Rail Intel — full UI coverage across assessing, records and administration.",
     },
@@ -1947,6 +1956,9 @@ export const languages = {
       flag: "es",
       name: "Spanish",
       nativeName: "Español",
+      region: "Spain",
+      lat: 40.4168,
+      lng: -3.7038,
       summary:
         "Interfaz completa en español para evaluadores y administradores que trabajan junto a equipos de habla inglesa.",
     },
@@ -1955,6 +1967,9 @@ export const languages = {
       flag: "fr",
       name: "French",
       nativeName: "Français",
+      region: "France",
+      lat: 48.8566,
+      lng: 2.3522,
       summary:
         "Interface en français pour les évaluations en cabine, les revues de conformité et l’administration.",
     },
@@ -1963,6 +1978,9 @@ export const languages = {
       flag: "cy",
       name: "Welsh",
       nativeName: "Cymraeg",
+      region: "Wales",
+      lat: 51.4816,
+      lng: -3.1791,
       summary:
         "Cymorth rhyngwyneb Cymraeg ar gyfer timau rheilffordd dwyieithog yng Nghymru.",
     },
@@ -1971,6 +1989,9 @@ export const languages = {
       flag: "it",
       name: "Italian",
       nativeName: "Italiano",
+      region: "Italy",
+      lat: 41.9028,
+      lng: 12.4964,
       summary:
         "Interfaccia in italiano per valutazione, anagrafiche e amministrazione sulla piattaforma Rail Intel.",
     },
@@ -1979,6 +2000,9 @@ export const languages = {
       flag: "de",
       name: "German",
       nativeName: "Deutsch",
+      region: "Germany",
+      lat: 52.52,
+      lng: 13.405,
       summary:
         "Deutsche Benutzeroberfläche für Kompetenzmanagement und Sicherheitsabläufe.",
     },
@@ -1987,6 +2011,9 @@ export const languages = {
       flag: "ar",
       name: "Arabic",
       nativeName: "العربية",
+      region: "Middle East & North Africa",
+      lat: 30.0444,
+      lng: 31.2357,
       summary:
         "ترجمات واجهة بالعربية مع واجهة منتج ثابتة من اليسار إلى اليمين للفرق متعددة اللغات.",
     },

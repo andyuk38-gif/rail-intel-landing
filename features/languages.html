@@ -34,8 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=260321174" />
-  <link rel="stylesheet" href="../css/pages.css?v=260321174" />
+  <link rel="stylesheet" href="../css/style.css?v=183397622" />
+  <link rel="stylesheet" href="../css/pages.css?v=183397622" />
+  <link rel="stylesheet" href="../css/languages-globe.css?v=183397622" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -305,6 +306,99 @@
       </div>
     </section>
 
+    <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
+      <div class="container lang-globe__inner">
+        <div class="lang-globe__copy">
+          <p class="lang-globe__eyebrow">Global interface coverage</p>
+          <h2>Coverage across your network</h2>
+          <p>Explore the languages available in Rail Intel. Select a marker or a language below — the globe focuses on where that interface language is typically used.</p>
+          <ul class="lang-globe__list">
+              <li>
+                <button type="button" class="lang-globe__item is-active" data-lang-globe-select="en" data-lang-name="English" data-lang-native="English" data-lang-region="United Kingdom" data-lang-lat="51.5074" data-lang-lng="-0.1278" aria-pressed="true">
+                  <img class="lang-globe__flag" src="../images/flags/gb.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">English</span>
+                    <span class="lang-globe__native" lang="en">English</span>
+                  </span>
+                  <span class="lang-globe__code">EN</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="lang-globe__item" data-lang-globe-select="es" data-lang-name="Spanish" data-lang-native="Español" data-lang-region="Spain" data-lang-lat="40.4168" data-lang-lng="-3.7038" aria-pressed="false">
+                  <img class="lang-globe__flag" src="../images/flags/es.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">Spanish</span>
+                    <span class="lang-globe__native" lang="es">Español</span>
+                  </span>
+                  <span class="lang-globe__code">ES</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="lang-globe__item" data-lang-globe-select="fr" data-lang-name="French" data-lang-native="Français" data-lang-region="France" data-lang-lat="48.8566" data-lang-lng="2.3522" aria-pressed="false">
+                  <img class="lang-globe__flag" src="../images/flags/fr.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">French</span>
+                    <span class="lang-globe__native" lang="fr">Français</span>
+                  </span>
+                  <span class="lang-globe__code">FR</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="lang-globe__item" data-lang-globe-select="cy" data-lang-name="Welsh" data-lang-native="Cymraeg" data-lang-region="Wales" data-lang-lat="51.4816" data-lang-lng="-3.1791" aria-pressed="false">
+                  <img class="lang-globe__flag" src="../images/flags/cy.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">Welsh</span>
+                    <span class="lang-globe__native" lang="cy">Cymraeg</span>
+                  </span>
+                  <span class="lang-globe__code">CY</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="lang-globe__item" data-lang-globe-select="it" data-lang-name="Italian" data-lang-native="Italiano" data-lang-region="Italy" data-lang-lat="41.9028" data-lang-lng="12.4964" aria-pressed="false">
+                  <img class="lang-globe__flag" src="../images/flags/it.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">Italian</span>
+                    <span class="lang-globe__native" lang="it">Italiano</span>
+                  </span>
+                  <span class="lang-globe__code">IT</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="lang-globe__item" data-lang-globe-select="de" data-lang-name="German" data-lang-native="Deutsch" data-lang-region="Germany" data-lang-lat="52.52" data-lang-lng="13.405" aria-pressed="false">
+                  <img class="lang-globe__flag" src="../images/flags/de.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">German</span>
+                    <span class="lang-globe__native" lang="de">Deutsch</span>
+                  </span>
+                  <span class="lang-globe__code">DE</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="lang-globe__item" data-lang-globe-select="ar" data-lang-name="Arabic" data-lang-native="العربية" data-lang-region="Middle East &amp; North Africa" data-lang-lat="30.0444" data-lang-lng="31.2357" aria-pressed="false">
+                  <img class="lang-globe__flag" src="../images/flags/ar.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">Arabic</span>
+                    <span class="lang-globe__native" lang="ar">العربية</span>
+                  </span>
+                  <span class="lang-globe__code">AR</span>
+                </button>
+              </li>
+          </ul>
+          <p class="lang-globe__status" data-lang-globe-status></p>
+        </div>
+        <div class="lang-globe__stage" data-lang-globe-stage>
+          <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
+          <div class="lang-globe__overlay" aria-hidden="true"></div>
+          <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
+          <div class="lang-globe__hud" aria-hidden="true">
+            <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>7 languages live</span>
+          </div>
+          <p class="lang-globe__hint">Drag to orbit · Click a marker to focus</p>
+          <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
+        </div>
+      </div>
+    </section>
+
     <section class="page-section">
       <div class="container">
         <div class="page-section__head">
@@ -312,43 +406,43 @@
           <p>The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.</p>
         </div>
         <div class="card-grid card-grid--languages">
-        <article class="card card--language card--language--en" style="--lang-flag: url('../images/flags/gb.svg')">
+        <article class="card card--language card--language--en" data-lang="en" style="--lang-flag: url('../images/flags/gb.svg')">
           <span class="card__kicker">EN</span>
           <h3>English</h3>
           <p class="card__native" lang="en">English</p>
           <p lang="en">Default language for Rail Intel — full UI coverage across assessing, records and administration.</p>
         </article>
-        <article class="card card--language card--language--es" style="--lang-flag: url('../images/flags/es.svg')">
+        <article class="card card--language card--language--es" data-lang="es" style="--lang-flag: url('../images/flags/es.svg')">
           <span class="card__kicker">ES</span>
           <h3>Spanish</h3>
           <p class="card__native" lang="es">Español</p>
           <p lang="es">Interfaz completa en español para evaluadores y administradores que trabajan junto a equipos de habla inglesa.</p>
         </article>
-        <article class="card card--language card--language--fr" style="--lang-flag: url('../images/flags/fr.svg')">
+        <article class="card card--language card--language--fr" data-lang="fr" style="--lang-flag: url('../images/flags/fr.svg')">
           <span class="card__kicker">FR</span>
           <h3>French</h3>
           <p class="card__native" lang="fr">Français</p>
           <p lang="fr">Interface en français pour les évaluations en cabine, les revues de conformité et l’administration.</p>
         </article>
-        <article class="card card--language card--language--cy" style="--lang-flag: url('../images/flags/cy.svg')">
+        <article class="card card--language card--language--cy" data-lang="cy" style="--lang-flag: url('../images/flags/cy.svg')">
           <span class="card__kicker">CY</span>
           <h3>Welsh</h3>
           <p class="card__native" lang="cy">Cymraeg</p>
           <p lang="cy">Cymorth rhyngwyneb Cymraeg ar gyfer timau rheilffordd dwyieithog yng Nghymru.</p>
         </article>
-        <article class="card card--language card--language--it" style="--lang-flag: url('../images/flags/it.svg')">
+        <article class="card card--language card--language--it" data-lang="it" style="--lang-flag: url('../images/flags/it.svg')">
           <span class="card__kicker">IT</span>
           <h3>Italian</h3>
           <p class="card__native" lang="it">Italiano</p>
           <p lang="it">Interfaccia in italiano per valutazione, anagrafiche e amministrazione sulla piattaforma Rail Intel.</p>
         </article>
-        <article class="card card--language card--language--de" style="--lang-flag: url('../images/flags/de.svg')">
+        <article class="card card--language card--language--de" data-lang="de" style="--lang-flag: url('../images/flags/de.svg')">
           <span class="card__kicker">DE</span>
           <h3>German</h3>
           <p class="card__native" lang="de">Deutsch</p>
           <p lang="de">Deutsche Benutzeroberfläche für Kompetenzmanagement und Sicherheitsabläufe.</p>
         </article>
-        <article class="card card--language card--language--ar" style="--lang-flag: url('../images/flags/ar.svg')">
+        <article class="card card--language card--language--ar" data-lang="ar" style="--lang-flag: url('../images/flags/ar.svg')">
           <span class="card__kicker">AR</span>
           <h3>Arabic</h3>
           <p class="card__native" lang="ar">العربية</p>
@@ -483,8 +577,9 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=260321174"></script>
-  <script src="../js/newsletter.js?v=260321174"></script>
-  <script src="../js/share.js?v=260321174"></script>
+  <script src="../js/site.js?v=183397622"></script>
+  <script src="../js/newsletter.js?v=183397622"></script>
+  <script src="../js/share.js?v=183397622"></script>
+  <script type="module" src="../js/languages-globe.js?v=183397622"></script>
 </body>
 </html>

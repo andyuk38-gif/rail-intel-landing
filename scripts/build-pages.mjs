@@ -68,6 +68,8 @@ const ASSET_INPUTS = [
   "js/incidents-monitoring-demo.js",
   "css/cms-feature-demos.css",
   "js/cms-feature-demos.js",
+  "css/languages-globe.css",
+  "js/languages-globe.js",
   "content/email-templates.generated.mjs",
 ];
 
@@ -532,13 +534,17 @@ function renderFooter(base, options = {}) {
   const extraScripts = (options.extraScripts || [])
     .map((src) => `  <script src="${base}${src}?v=${ASSET_VERSION}"></script>`)
     .join("\n");
-  const extraScriptBlock = extraScripts ? `${extraScripts}\n` : "";
+  const extraModuleScripts = (options.extraModuleScripts || [])
+    .map((src) => `  <script type="module" src="${base}${src}?v=${ASSET_VERSION}"></script>`)
+    .join("\n");
+  const extraScriptBlock = [extraScripts, extraModuleScripts].filter(Boolean).join("\n");
+  const extraScriptSuffix = extraScriptBlock ? `${extraScriptBlock}\n` : "";
   return `${renderFooterMarkup(base)}
 
   <script src="${base}js/site.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/newsletter.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/share.js?v=${ASSET_VERSION}"></script>
-${extraScriptBlock}</body>
+${extraScriptSuffix}</body>
 </html>
 `;
 }
@@ -2757,7 +2763,7 @@ function languagesHubPage() {
   const group = featureGroups.find((item) => item.slug === "languages");
   const cards = languages.items
     .map(
-      (lang) => `        <article class="card card--language card--language--${esc(lang.code)}" style="--lang-flag: url('${base}images/flags/${esc(lang.flag)}.svg')">
+      (lang) => `        <article class="card card--language card--language--${esc(lang.code)}" data-lang="${esc(lang.code)}" style="--lang-flag: url('${base}images/flags/${esc(lang.flag)}.svg')">
           <span class="card__kicker">${esc(lang.code.toUpperCase())}</span>
           <h3>${esc(lang.name)}</h3>
           <p class="card__native" lang="${esc(lang.code)}">${esc(lang.nativeName)}</p>
@@ -2766,10 +2772,25 @@ function languagesHubPage() {
     )
     .join("\n");
 
+  const globeItems = languages.items
+    .map(
+      (lang, index) => `              <li>
+                <button type="button" class="lang-globe__item${index === 0 ? " is-active" : ""}" data-lang-globe-select="${esc(lang.code)}" data-lang-name="${esc(lang.name)}" data-lang-native="${esc(lang.nativeName)}" data-lang-region="${esc(lang.region || "")}" data-lang-lat="${esc(lang.lat)}" data-lang-lng="${esc(lang.lng)}" aria-pressed="${index === 0 ? "true" : "false"}">
+                  <img class="lang-globe__flag" src="${base}images/flags/${esc(lang.flag)}.svg" alt="" width="28" height="20" loading="lazy" />
+                  <span class="lang-globe__meta">
+                    <span class="lang-globe__name">${esc(lang.name)}</span>
+                    <span class="lang-globe__native" lang="${esc(lang.code)}">${esc(lang.nativeName)}</span>
+                  </span>
+                  <span class="lang-globe__code">${esc(lang.code.toUpperCase())}</span>
+                </button>
+              </li>`
+    )
+    .join("\n");
+
   const pageSeo = featureSeo(group);
 
   return (
-    renderHead(base, pageSeo) +
+    renderHead(base, pageSeo, { extraStylesheets: ["css/languages-globe.css"] }) +
     `
   <main>
     <section class="page-hero">
@@ -2783,6 +2804,30 @@ function languagesHubPage() {
             <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
             <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
+      <div class="container lang-globe__inner">
+        <div class="lang-globe__copy">
+          <p class="lang-globe__eyebrow">Global interface coverage</p>
+          <h2>${esc(languages.globe?.heading || "Coverage across your network")}</h2>
+          <p>${esc(languages.globe?.lead || languages.lead)}</p>
+          <ul class="lang-globe__list">
+${globeItems}
+          </ul>
+          <p class="lang-globe__status" data-lang-globe-status></p>
+        </div>
+        <div class="lang-globe__stage" data-lang-globe-stage>
+          <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
+          <div class="lang-globe__overlay" aria-hidden="true"></div>
+          <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
+          <div class="lang-globe__hud" aria-hidden="true">
+            <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>${languages.items.length} languages live</span>
+          </div>
+          <p class="lang-globe__hint">${esc(languages.globe?.hint || "Drag to orbit · Click a marker to focus")}</p>
+          <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
         </div>
       </div>
     </section>
@@ -2808,7 +2853,7 @@ ${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
-    renderFooter(base)
+    renderFooter(base, { extraModuleScripts: ["js/languages-globe.js"] })
   );
 }
 
