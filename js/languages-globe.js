@@ -550,13 +550,36 @@ function boot(root) {
     }
 
     function makeArcCurve(fromPlace, toPlace) {
-      const start = latLngToVector3(fromPlace.lat, fromPlace.lng, GLOBE_RADIUS + 0.018);
-      const end = latLngToVector3(toPlace.lat, toPlace.lng, GLOBE_RADIUS + 0.018);
-      const chord = start.distanceTo(end);
-      const mid = start.clone().add(end).multiplyScalar(0.5);
-      const lift = GLOBE_RADIUS + 0.12 + chord * 0.32;
-      mid.normalize().multiplyScalar(lift);
-      return new THREE.QuadraticBezierCurve3(start, mid, end);
+      const startDir = latLngToVector3(fromPlace.lat, fromPlace.lng, 1).normalize();
+      const endDir = latLngToVector3(toPlace.lat, toPlace.lng, 1).normalize();
+      const angle = Math.acos(Math.min(1, Math.max(-1, startDir.dot(endDir))));
+      // Higher arcs for longer hauls so they clear the globe and stay readable
+      const peakAlt = 0.08 + Math.min(0.55, angle * 0.35);
+
+      function pointAt(t) {
+        let dir;
+        if (angle < 1e-4) {
+          dir = startDir.clone().lerp(endDir, t).normalize();
+        } else {
+          const sinA = Math.sin(angle);
+          const a = Math.sin((1 - t) * angle) / sinA;
+          const b = Math.sin(t * angle) / sinA;
+          dir = startDir.clone().multiplyScalar(a).add(endDir.clone().multiplyScalar(b)).normalize();
+        }
+        const alt = GLOBE_RADIUS + 0.02 + Math.sin(Math.PI * t) * peakAlt;
+        return dir.multiplyScalar(alt);
+      }
+
+      return {
+        getPoints(divisions) {
+          const pts = [];
+          for (let i = 0; i <= divisions; i += 1) pts.push(pointAt(i / divisions));
+          return pts;
+        },
+        getPoint(t) {
+          return pointAt(Math.min(1, Math.max(0, t)));
+        },
+      };
     }
 
     function buildLanguageArcs(lang, animateArcs) {
@@ -576,7 +599,7 @@ function boot(root) {
 
       destinations.forEach((dest, index) => {
         const curve = makeArcCurve(origin, dest);
-        const pointCount = 72;
+        const pointCount = 96;
         const points = curve.getPoints(pointCount);
         const positions = new Float32Array(points.length * 3);
         points.forEach((p, i) => {
