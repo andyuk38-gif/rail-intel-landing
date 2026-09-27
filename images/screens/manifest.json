@@ -211,10 +211,6 @@
     "width": 1384,
     "height": 735
   },
-  "images/screens/main-sys/incidebt-management-list.png": {
-    "width": 1395,
-    "height": 217
-  },
   "images/screens/main-sys/lock-employee-profile.png": {
     "width": 484,
     "height": 410
@@ -226,10 +222,6 @@
   "images/screens/main-sys/login-screen.png": {
     "width": 1627,
     "height": 911
-  },
-  "images/screens/main-sys/record-new-incident.png": {
-    "width": 1391,
-    "height": 786
   },
   "images/screens/main-sys/reporting-analytics-dashboard.png": {
     "width": 1024,
@@ -303,10 +295,6 @@
     "width": 519,
     "height": 621
   },
-  "images/screens/monitor-plans-incidents/add-performance-support-plans.png": {
-    "width": 1516,
-    "height": 873
-  },
   "images/screens/monitor-plans-incidents/cdp-plan-overview.png": {
     "width": 1024,
     "height": 195
@@ -318,22 +306,6 @@
   "images/screens/monitor-plans-incidents/cdp-duplicate-incident-plan.png": {
     "width": 1024,
     "height": 404
-  },
-  "images/screens/monitor-plans-incidents/incidents-allocated.png": {
-    "width": 1516,
-    "height": 245
-  },
-  "images/screens/monitor-plans-incidents/monitor-incident-overview.png": {
-    "width": 1576,
-    "height": 1124
-  },
-  "images/screens/monitor-plans-incidents/plan-page.png": {
-    "width": 1460,
-    "height": 528
-  },
-  "images/screens/monitor-plans-incidents/submitted-plan.png": {
-    "width": 1517,
-    "height": 534
   },
   "images/screens/safety-briefs/safety-brief-records-dark.png": {
     "width": 1024,

@@ -30,6 +30,7 @@ import { guides, competitors, comparisonCriteria } from "../content/guides.mjs";
 import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
 import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../content/communications-hub.mjs";
 import { renderCompetencyEngineBay, renderCompetencyEngineHero, renderEngineUnplug } from "../content/competency-engine.mjs";
+import { renderIncidentsInteractiveDemo } from "../content/incidents-monitoring-demos.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -53,6 +54,8 @@ const ASSET_INPUTS = [
   "js/communications-hub.js",
   "css/competency-engine.css",
   "js/competency-engine.js",
+  "css/incidents-monitoring-demo.css",
+  "js/incidents-monitoring-demo.js",
   "content/email-templates.generated.mjs",
 ];
 
@@ -1275,7 +1278,9 @@ function renderSection(section, base) {
       .join("\n");
 
   let shots = "";
-  if (section.shots) {
+  if (section.interactiveDemo) {
+    shots = renderIncidentsInteractiveDemo(section.interactiveDemo);
+  } else if (section.shots) {
     if (viewer) {
       shots = renderViewerGallery(section, base);
     } else if (spotlight) {
@@ -2610,20 +2615,25 @@ ${heroCopy}
   const pageSeo = featureSeo(group);
   const flipbookPage = group.slug === "printable-profile";
   const commHubPage = group.slug === "communications-hub";
+  const incidentsDemoPage = Boolean(group.interactiveDemos);
   const headOptions = flipbookPage
     ? { extraStylesheets: ["css/profile-flipbook.css"] }
     : commHubPage
       ? { extraStylesheets: ["css/communications-hub.css"] }
       : competencyEngineHero
         ? { extraStylesheets: ["css/competency-engine.css"], rememberEngine: true }
-        : {};
+        : incidentsDemoPage
+          ? { extraStylesheets: ["css/incidents-monitoring-demo.css"] }
+          : {};
   const footerOptions = flipbookPage
     ? { extraScripts: ["js/profile-flipbook.js"] }
     : commHubPage
       ? { extraScripts: ["js/communications-hub.js"] }
       : competencyEngineHero
         ? { extraScripts: ["js/competency-engine.js"] }
-        : {};
+        : incidentsDemoPage
+          ? { extraScripts: ["js/incidents-monitoring-demo.js"] }
+          : {};
 
   return (
     renderHead(base, pageSeo, headOptions) +

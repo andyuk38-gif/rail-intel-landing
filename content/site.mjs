@@ -1389,62 +1389,28 @@ export const featureGroups = [
     tagline: "From incident to competence, in one thread",
     lead:
       "An incident is only closed when the competence question behind it has been answered. Rail Intel links incidents to the people involved and to the development plans raised as a result, so the thread from event to resolution stays intact.",
+    interactiveDemos: true,
     sections: [
       {
         heading: "Recording and managing incidents",
         body: [
           "Incidents are recorded company-wide with type, severity, date and the action taken, then allocated to the employees involved. The management list gives the operational picture; the employee record shows what is allocated to that individual.",
         ],
-        shots: [
-          {
-            src: "images/screens/main-sys/record-new-incident.png",
-            caption: "Recording a new incident with type, severity and action taken.",
-          },
-          {
-            src: "images/screens/main-sys/incidebt-management-list.png",
-            caption: "The company-wide incident management list.",
-          },
-          {
-            src: "images/screens/monitor-plans-incidents/incidents-allocated.png",
-            caption: "Incidents allocated to a specific employee.",
-          },
-        ],
+        interactiveDemo: "incidents-record",
       },
       {
         heading: "Monitoring and competence development plans",
         body: [
           "The Monitoring tab holds performance monitoring and the competence development plans raised against an employee. A CDP records what needs to improve, what was agreed and whether it was completed — and can carry over into the next cycle if it is still open.",
         ],
-        shots: [
-          {
-            src: "images/screens/monitor-plans-incidents/monitor-incident-overview.png",
-            caption: "Monitoring overview with allocated incidents and development plans.",
-          },
-          {
-            src: "images/screens/monitor-plans-incidents/cdp-plan-overview.png",
-            caption: "Competence development plan overview for the employee.",
-          },
-        ],
+        interactiveDemo: "incidents-monitoring",
       },
       {
         heading: "Performance and support plans",
         body: [
           "Where a person needs additional support, a performance and support plan is raised, signed by both trainer and trainee, and tracked to completion. Plans are available on the Monitoring tab when the Trainee Driver module is active.",
         ],
-        shots: [
-          {
-            src: "images/screens/monitor-plans-incidents/add-performance-support-plans.png",
-            caption: "Raising a performance and support plan.",
-          },
-          {
-            src: "images/screens/monitor-plans-incidents/plan-page.png",
-            caption: "The plan detail with agreed actions.",
-          },
-          {
-            src: "images/screens/monitor-plans-incidents/submitted-plan.png",
-            caption: "A submitted plan retained against the record.",
-          },
-        ],
+        interactiveDemo: "incidents-support",
       },
     ],
   },
