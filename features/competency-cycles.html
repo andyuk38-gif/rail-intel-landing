@@ -306,10 +306,7 @@
           <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Competency &amp; Cycles</p>
           <span class="page-badge page-badge--core">Included as standard</span>
-          <div class="engine-unplug-row">
-          <button type="button" class="engine-lift" data-engine-lift hidden>Unplug chip</button>
-          <h1 class="page-title">Are you ready to plug in our <span class="hero-title__accent">technology</span> to your <span class="hero-title__accent">operations</span>?</h1>
-          </div>
+          <h1 class="page-title">Competency <span class="hero-title__accent">cycles</span> that drive assessment and keep competence <span class="hero-title__accent">current</span></h1>
           <p class="page-lead">Our competency engine is the most powerful and complex CMS built for rail, with inbuilt strict conditional rules, communications, and powerful add-ons to cater for your needs, ensuring everything stays in one system rather than spread across different platforms, all powered by Rail Intel, a company with extensive operational experience in rail.</p>
           <div class="page-actions">
             <a href="https://cms.railintel.co.uk" class="btn btn-lg btn-primary">Open Rail Intel</a>
@@ -1009,10 +1006,8 @@
             if (sessionStorage.getItem("rail-intel-engine-open") === "1") {
               var seatedEngine = document.querySelector("[data-competency-engine]");
               var seatedBay = document.querySelector("[data-engine-bay]");
-              var seatedLift = document.querySelector("[data-engine-lift]");
               if (seatedEngine) seatedEngine.classList.add("is-live");
               if (seatedBay) seatedBay.classList.add("is-spent");
-              if (seatedLift) seatedLift.hidden = false;
             }
           } catch (err) {}
         </script>
