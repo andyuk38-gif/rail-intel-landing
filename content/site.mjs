@@ -1214,7 +1214,7 @@ export const featureGroups = [
     hideHeroActions: true,
     hideCta: true,
     lead:
-      "When an employee record may become material to an external regulatory investigation, an industry safety inquiry, or an internal investigation, the record must not change underneath the reviewers. Profile lock freezes the employee record at a point in time — only a company administrator can apply or release the lock.",
+      "When an employee record may become material to an external regulatory investigation, an industry safety inquiry, or an internal investigation, the record must not change underneath the reviewers. Profile lock freezes the employee record at a point in time, only a company administrator can apply or release the lock.",
     heroRegulators: [
       {
         src: "images/regulators/orr.png",
@@ -1237,7 +1237,7 @@ export const featureGroups = [
         bulletTiles: true,
         body: [
           "Before the lock is applied, the administrator must record a reason. Every section of the record then becomes read-only for all users until an administrator unlocks the profile. The record remains readable for review and export, but amendments that would alter the evidential snapshot are blocked.",
-          "That gives investigators and your assurance team a stable artefact to work from — whether the inquiry is external, from an industry safety body, or internal to your operation.",
+          "That gives investigators and your assurance team a stable artefact to work from, whether the inquiry is external, from an industry safety body, or internal to your operation.",
         ],
         bullets: [
           "**Company administrator only** Lock and unlock are not available to general users.",
@@ -1257,6 +1257,19 @@ export const featureGroups = [
           heading: "Everything here is included",
           body:
             "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
+        },
+      },
+      {
+        heading: "RAIB requests and the SPOC",
+        body: [
+          "When the Rail Accident Investigation Branch (RAIB) opens an inquiry, your organisation nominates a Single Person of Contact (SPOC). The SPOC is the person investigators liaise with on evidence, access and the employee records they need to review.",
+          "In normal practice that role sits with the company administrator. In Rail Intel CMS, only a company administrator can apply or release a profile lock, so the SPOC can freeze the relevant record when it becomes material and keep it stable for the duration of the inquiry.",
+        ],
+        headLogo: {
+          src: "images/regulators/raib.png",
+          alt: "Rail Accident Investigation Branch (RAIB)",
+          width: 250,
+          height: 86,
         },
       },
     ],
