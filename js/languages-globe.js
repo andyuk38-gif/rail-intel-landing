@@ -532,6 +532,112 @@ function boot(root) {
     const markers = [];
     const labelEls = [];
     const hitScale = mobileLike ? 5.5 : 4.2;
+    const arcsGroup = new THREE.Group();
+    globeGroup.add(arcsGroup);
+    const activeArcs = [];
+
+    function clearArcs() {
+      while (arcsGroup.children.length) {
+        const child = arcsGroup.children[0];
+        arcsGroup.remove(child);
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          if (Array.isArray(child.material)) child.material.forEach((m) => m.dispose());
+          else child.material.dispose();
+        }
+      }
+      activeArcs.length = 0;
+    }
+
+    function makeArcCurve(fromPlace, toPlace) {
+      const start = latLngToVector3(fromPlace.lat, fromPlace.lng, GLOBE_RADIUS + 0.018);
+      const end = latLngToVector3(toPlace.lat, toPlace.lng, GLOBE_RADIUS + 0.018);
+      const chord = start.distanceTo(end);
+      const mid = start.clone().add(end).multiplyScalar(0.5);
+      const lift = GLOBE_RADIUS + 0.12 + chord * 0.32;
+      mid.normalize().multiplyScalar(lift);
+      return new THREE.QuadraticBezierCurve3(start, mid, end);
+    }
+
+    function buildLanguageArcs(lang, animateArcs) {
+      clearArcs();
+      if (!lang || lang.places.length < 2) return;
+
+      const origin = lang.places.find((p) => p.primary) || lang.places[0];
+      const seen = new Set([origin.country || origin.name]);
+      const destinations = [];
+      lang.places.forEach((place) => {
+        if (place.id === origin.id) return;
+        const key = place.country || place.name;
+        if (seen.has(key)) return;
+        seen.add(key);
+        destinations.push(place);
+      });
+
+      destinations.forEach((dest, index) => {
+        const curve = makeArcCurve(origin, dest);
+        const pointCount = 72;
+        const points = curve.getPoints(pointCount);
+        const positions = new Float32Array(points.length * 3);
+        points.forEach((p, i) => {
+          positions[i * 3] = p.x;
+          positions[i * 3 + 1] = p.y;
+          positions[i * 3 + 2] = p.z;
+        });
+
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        geo.setDrawRange(0, animateArcs && !reducedMotion ? 2 : points.length);
+
+        const mat = new THREE.LineBasicMaterial({
+          color: 0xf59e0b,
+          transparent: true,
+          opacity: 0.0,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        });
+        const line = new THREE.Line(geo, mat);
+        line.renderOrder = 2;
+        arcsGroup.add(line);
+
+        // Soft outer glow twin
+        const glowMat = new THREE.LineBasicMaterial({
+          color: 0xffc857,
+          transparent: true,
+          opacity: 0.0,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        });
+        const glow = new THREE.Line(geo.clone(), glowMat);
+        glow.renderOrder = 1;
+        arcsGroup.add(glow);
+
+        // Traveling pulse bead
+        const bead = new THREE.Mesh(
+          new THREE.SphereGeometry(MARKER_R * 0.55, 10, 10),
+          new THREE.MeshBasicMaterial({
+            color: 0xffe08a,
+            transparent: true,
+            opacity: 0,
+            depthWrite: false,
+          })
+        );
+        bead.visible = false;
+        arcsGroup.add(bead);
+
+        activeArcs.push({
+          line,
+          glow,
+          bead,
+          curve,
+          pointCount: points.length,
+          startTime: performance.now() + index * 90,
+          duration: 900,
+          progress: animateArcs && !reducedMotion ? 0 : 1,
+          phase: index * 0.37,
+        });
+      });
+    }
 
     languages.forEach((lang) => {
       lang.places.forEach((place) => {
@@ -635,22 +741,27 @@ function boot(root) {
     let pointerDown = false;
     let disposed = false;
     let animFrame = 0;
+    let activeLangCode = "";
     const clock = new THREE.Clock();
 
     function syncMarkers(code, placeId) {
       markers.forEach((marker) => {
         const onLang = marker.userData.code === code;
         const onPlace = marker.userData.placeId === placeId;
+        const isOrigin = onLang && marker.userData.primary;
         marker.visible = onLang;
-        marker.scale.setScalar(onPlace ? 1.45 : 1);
+        marker.scale.setScalar(onPlace || isOrigin ? 1.45 : 1);
         if (marker.userData.head) {
-          marker.userData.head.material.emissiveIntensity = onPlace ? 1.7 : 0.7;
-          marker.userData.head.material.color.set(onPlace ? 0xffe8a8 : 0xffc857);
+          marker.userData.head.material.emissiveIntensity =
+            onPlace || isOrigin ? 1.7 : 0.7;
+          marker.userData.head.material.color.set(
+            onPlace || isOrigin ? 0xffe8a8 : 0xffc857
+          );
         }
         if (marker.userData.halo) {
-          marker.userData.halo.material.opacity = onPlace ? 0.6 : 0.28;
+          marker.userData.halo.material.opacity = onPlace || isOrigin ? 0.6 : 0.28;
         }
-        if (marker.userData.ring) marker.userData.ring.visible = onPlace;
+        if (marker.userData.ring) marker.userData.ring.visible = onPlace || isOrigin;
       });
       labelEls.forEach(({ el }) => {
         const onLang = el.getAttribute("data-lang") === code;
@@ -666,6 +777,12 @@ function boot(root) {
       if (!lang) return;
       const place = getPlace(lang, placeId);
       syncMarkers(code, place.id);
+
+      const langChanged = code !== activeLangCode;
+      activeLangCode = code;
+      if (langChanged || !activeArcs.length) {
+        buildLanguageArcs(lang, animate !== false);
+      }
 
       const target = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS);
       const dist = Math.min(
@@ -693,6 +810,33 @@ function boot(root) {
     }
 
     focusHandler = (code, placeId, animate) => focusPlace(code, placeId, animate);
+
+    function updateArcs(now, elapsed) {
+      activeArcs.forEach((arc) => {
+        if (arc.progress < 1) {
+          const t = Math.min(1, Math.max(0, (now - arc.startTime) / arc.duration));
+          const eased = 1 - Math.pow(1 - t, 3);
+          arc.progress = eased;
+          const count = Math.max(2, Math.floor(arc.pointCount * eased));
+          arc.line.geometry.setDrawRange(0, count);
+          arc.glow.geometry.setDrawRange(0, count);
+          arc.line.material.opacity = 0.2 + eased * 0.65;
+          arc.glow.material.opacity = 0.05 + eased * 0.22;
+          if (eased >= 1) {
+            arc.bead.visible = true;
+            arc.bead.material.opacity = 0.95;
+          }
+        } else {
+          arc.line.material.opacity = 0.55 + Math.sin(elapsed * 2 + arc.phase) * 0.12;
+          arc.glow.material.opacity = 0.16 + Math.sin(elapsed * 2 + arc.phase) * 0.05;
+          const beadT = (elapsed * 0.22 + arc.phase) % 1;
+          const pos = arc.curve.getPoint(beadT);
+          arc.bead.position.copy(pos);
+          arc.bead.visible = true;
+          arc.bead.material.opacity = 0.55 + Math.sin(beadT * Math.PI) * 0.4;
+        }
+      });
+    }
 
     function projectLabels() {
       const w = stage.clientWidth;
@@ -760,6 +904,8 @@ function boot(root) {
         marker.userData.ring.material.opacity = 0.85 - pulse * 0.35;
       });
 
+      updateArcs(now, elapsed);
+
       controls.update();
       renderer.render(scene, camera);
       projectLabels();
@@ -813,6 +959,7 @@ function boot(root) {
       disposed = true;
       window.cancelAnimationFrame(animFrame);
       window.clearTimeout(resizeTimer);
+      clearArcs();
       renderer.dispose();
     });
 
