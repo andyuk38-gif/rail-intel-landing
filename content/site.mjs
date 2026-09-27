@@ -1393,7 +1393,7 @@ export const featureGroups = [
     hideCta: true,
     heroShot: {
       src: "images/product/incidents-spad-hero.png",
-      alt: "Photorealistic graphic of a modern passenger train on the rightmost track, red taillights visible, mid-pass at a red railway signal.",
+      alt: "Photorealistic graphic of a Class 810-style train on the rightmost track, red taillights visible, mid-pass at a red railway signal.",
       scale: 1,
       bordered: true,
       eager: true,
