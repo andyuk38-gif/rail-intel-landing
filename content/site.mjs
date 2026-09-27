@@ -1560,7 +1560,7 @@ export const featureGroups = [
     taglineHtml:
       '<span class="hero-title__accent">Configure</span> Rail Intel to match how your <span class="hero-title__accent">operation</span> runs',
     lead:
-      "Administration is where Rail Intel becomes yours. System and company administrators define who can see and do what, set the competency standards assessors work to, configure traction and routes once for the whole company, activate optional modules and govern sign-in policy — without a vendor change request.",
+      "Administration is where Rail Intel becomes yours. System and company administrators define who can see and do what, set the competency standards assessors work to, configure traction and routes once for the whole company, activate optional modules and govern sign-in policy, without a vendor change request.",
     heroGraphic: "admin-menu",
     hideHeroActions: true,
     heroIntro: {
