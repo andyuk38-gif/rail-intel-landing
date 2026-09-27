@@ -2820,6 +2820,12 @@
   background: #0b1220;
 }
 
+.cms-cab-shot--native {
+  width: auto;
+  max-width: min(100%, 28rem);
+  margin-inline: auto;
+}
+
 .cms-cab-hero .cms-cab-shot {
   border-radius: 12px;
 }

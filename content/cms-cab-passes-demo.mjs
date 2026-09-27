@@ -14,8 +14,9 @@ const COLOURS = [
   { key: "black", label: "Black", detail: "Typically used for route learning" },
 ];
 
-function shotImg(base, src, alt, width, height) {
-  return `<img class="cms-cab-shot" src="${base}${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" decoding="async" />`;
+function shotImg(base, src, alt, width, height, { native = false } = {}) {
+  const cls = native ? "cms-cab-shot cms-cab-shot--native" : "cms-cab-shot";
+  return `<img class="${cls}" src="${base}${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" decoding="async" />`;
 }
 
 function qrSvg(size = 96) {
@@ -305,7 +306,8 @@ export function renderCmsCabPassesDemo(base = "../") {
                       "images/screens/cab-passes/green-pass-issued-dark.png",
                       "Issued green driving cab pass with SCAN TO VERIFY",
                       559,
-                      277
+                      277,
+                      { native: true }
                     )}
                   </div>
                 </div>
@@ -329,7 +331,8 @@ export function renderCmsCabPassesDemo(base = "../") {
                       "images/screens/cab-passes/expired-pass-issued-dark.png",
                       "Expired blue driving cab pass with SCAN TO VERIFY still available for audit",
                       554,
-                      280
+                      280,
+                      { native: true }
                     )}
                   </div>
                 </div>
