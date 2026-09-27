@@ -1392,8 +1392,8 @@ export const featureGroups = [
     interactiveDemos: true,
     hideCta: true,
     heroShot: {
-      src: "images/product/incidents-train-spad-passed-hero.png",
-      alt: "Photorealistic graphic of a modern passenger train on the right-hand track that has gone past a red railway signal.",
+      src: "images/product/incidents-spad-hero.png",
+      alt: "Photorealistic graphic of a modern passenger train travelling away on the right-hand track, red taillights visible, mid-pass at a red railway signal.",
       scale: 1,
       bordered: true,
       eager: true,
