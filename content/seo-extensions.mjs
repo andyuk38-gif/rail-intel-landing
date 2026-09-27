@@ -335,11 +335,28 @@ export const seoExtensions = {
         answer:
           "No. Monitoring and CDPs are core Rail Intel. See the CDP Monitoring feature page for carryover and permissions detail.",
       },
+      {
+        question: "What details are captured when recording an incident?",
+        answer:
+          "Each incident records type, severity, date, a summary of what happened and the action taken, then can be allocated to the employees involved so it appears on their Monitoring tab.",
+      },
+      {
+        question: "Where do I see incidents for the whole company versus one person?",
+        answer:
+          "The Incident Management list gives the company-wide operational picture. Allocated incidents also appear on the employee record under Monitoring & Incidents, so managers can work from either view.",
+      },
+      {
+        question: "What are performance and support plans?",
+        answer:
+          "Where a trainee needs additional support or has not met a competence standard, a performance and support plan captures the reason, agreed actions and review date. Plans must be signed by both trainer and trainee, and are available on the Monitoring tab when the Trainee Driver module is active.",
+      },
+      {
+        question: "Can an open CDP carry into the next competency cycle?",
+        answer:
+          "Yes. If a competence development plan is still open when a continuous cycle renews, it can carry over so the development point is not lost at the cycle boundary. Closed plans stay on the record for audit.",
+      },
     ],
-    relatedLinks: [
-      { name: "CDP Monitoring", href: "features/cdp-monitoring.html" },
-      { name: "Rail Intel Investigations", href: "products/investigations.html" },
-    ],
+    relatedLinks: [],
   },
 
   "cdp-monitoring": {

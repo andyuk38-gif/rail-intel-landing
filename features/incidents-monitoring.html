@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://railintel.co.uk/images/share/hero-share.jpg" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Rail Incidents & Monitoring | CDPs Linked to Competence","description":"Record rail incidents, allocate them to people, raise competence development plans and performance support — one thread from event to close-out.","url":"https://railintel.co.uk/features/incidents-monitoring.html","isPartOf":{"@type":"WebSite","name":"Rail Intel","url":"https://railintel.co.uk"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Rail Intel","item":"https://railintel.co.uk/"},{"@type":"ListItem","position":2,"name":"Features","item":"https://railintel.co.uk/features/index.html"},{"@type":"ListItem","position":3,"name":"Incidents & Monitoring","item":"https://railintel.co.uk/features/incidents-monitoring.html"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do incidents connect to competence?","acceptedAnswer":{"@type":"Answer","text":"Incidents allocate to employees and can raise competence development plans on the Monitoring tab, keeping the thread from event to improvement visible."}},{"@type":"Question","name":"Is CDP monitoring a separate add-on?","acceptedAnswer":{"@type":"Answer","text":"No. Monitoring and CDPs are core Rail Intel. See the CDP Monitoring feature page for carryover and permissions detail."}}],"url":"https://railintel.co.uk/features/incidents-monitoring.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do incidents connect to competence?","acceptedAnswer":{"@type":"Answer","text":"Incidents allocate to employees and can raise competence development plans on the Monitoring tab, keeping the thread from event to improvement visible."}},{"@type":"Question","name":"Is CDP monitoring a separate add-on?","acceptedAnswer":{"@type":"Answer","text":"No. Monitoring and CDPs are core Rail Intel. See the CDP Monitoring feature page for carryover and permissions detail."}},{"@type":"Question","name":"What details are captured when recording an incident?","acceptedAnswer":{"@type":"Answer","text":"Each incident records type, severity, date, a summary of what happened and the action taken, then can be allocated to the employees involved so it appears on their Monitoring tab."}},{"@type":"Question","name":"Where do I see incidents for the whole company versus one person?","acceptedAnswer":{"@type":"Answer","text":"The Incident Management list gives the company-wide operational picture. Allocated incidents also appear on the employee record under Monitoring & Incidents, so managers can work from either view."}},{"@type":"Question","name":"What are performance and support plans?","acceptedAnswer":{"@type":"Answer","text":"Where a trainee needs additional support or has not met a competence standard, a performance and support plan captures the reason, agreed actions and review date. Plans must be signed by both trainer and trainee, and are available on the Monitoring tab when the Trainee Driver module is active."}},{"@type":"Question","name":"Can an open CDP carry into the next competency cycle?","acceptedAnswer":{"@type":"Answer","text":"Yes. If a competence development plan is still open when a continuous cycle renews, it can carry over so the development point is not lost at the cycle boundary. Closed plans stay on the record for audit."}}],"url":"https://railintel.co.uk/features/incidents-monitoring.html"}</script>
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
@@ -34,9 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=127616747" />
-  <link rel="stylesheet" href="../css/pages.css?v=127616747" />
-  <link rel="stylesheet" href="../css/incidents-monitoring-demo.css?v=127616747" />
+  <link rel="stylesheet" href="../css/style.css?v=154822429" />
+  <link rel="stylesheet" href="../css/pages.css?v=154822429" />
+  <link rel="stylesheet" href="../css/incidents-monitoring-demo.css?v=154822429" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -291,9 +291,10 @@
   </div>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--incidents">
       <div class="container">
-        <div class="page-hero__inner">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--incidents">
+          <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Incidents &amp; Monitoring</p>
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">From incident to competence, in one thread</h1>
@@ -301,6 +302,14 @@
           <div class="page-actions">
             <a href="https://cms.railintel.co.uk" class="btn btn-lg btn-primary">Open Rail Intel</a>
             <a href="../features/" class="btn btn-lg btn-ghost">All features</a>
+          </div>
+          </div>
+          <div class="page-hero__media page-hero__media--incidents">
+        <figure class="shot shot--bordered reveal">
+          <div class="shot__frame" style="--shot-native-width: 1280px" data-no-expand="">
+            <img src="../images/product/incidents-train-spad-hero.png?v=154822429" alt="Photorealistic graphic of a modern passenger train that has passed a red railway signal at dusk." width="1280" height="720" loading="eager" decoding="sync" />
+          </div>
+        </figure>
           </div>
         </div>
       </div>
@@ -519,7 +528,7 @@
             <button type="button" class="im-demo__tab" data-im-tab="1" aria-pressed="false">Management list</button>
             <button type="button" class="im-demo__tab" data-im-tab="2" aria-pressed="false">Allocated</button>
             </div>
-            <p class="im-demo__note"><strong>Interactive preview — choose type and severity, or jump between views.</strong></p>
+            <p class="im-demo__note"><strong>Interactive preview — choose a tab to take control; autoplay stops.</strong></p>
           </div>
         </div>
       </div>
@@ -702,7 +711,7 @@
             <button type="button" class="im-demo__tab is-active" data-im-tab="0" aria-pressed="true">Monitoring overview</button>
             <button type="button" class="im-demo__tab" data-im-tab="1" aria-pressed="false">CDP plan page</button>
             </div>
-            <p class="im-demo__note"><strong>Interactive preview — toggle live/closed plans, hover to pause.</strong></p>
+            <p class="im-demo__note"><strong>Interactive preview — choose a tab to take control; autoplay stops.</strong></p>
           </div>
         </div>
       </div>
@@ -864,7 +873,7 @@
             <button type="button" class="im-demo__tab" data-im-tab="1" aria-pressed="false">Plan detail</button>
             <button type="button" class="im-demo__tab" data-im-tab="2" aria-pressed="false">Submitted</button>
             </div>
-            <p class="im-demo__note"><strong>Interactive preview — create a plan, tick actions, or sign as trainer.</strong></p>
+            <p class="im-demo__note"><strong>Interactive preview — choose a tab to take control; autoplay stops.</strong></p>
           </div>
         </div>
       </div>
@@ -872,24 +881,8 @@
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Everything here is included</h2>
-          <p>These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.</p>
-        </div>
-        <div class="page-actions">
-          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-          <a href="../products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
-        </div>
-      </div>
-    </section>
 
-    <section class="page-section page-section--tight">
-      <div class="container">
-        <p class="page-lead">Related: <a href="../features/cdp-monitoring.html">CDP Monitoring</a>, <a href="../products/investigations.html">Rail Intel Investigations</a></p>
-      </div>
-    </section>
+
 
     <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
@@ -916,6 +909,50 @@
             <div class="faq-accordion__panel">
             <div class="faq-accordion__panel-inner">
               <p>No. Monitoring and CDPs are core Rail Intel. See the CDP Monitoring feature page for carryover and permissions detail.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">What details are captured when recording an incident?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>Each incident records type, severity, date, a summary of what happened and the action taken, then can be allocated to the employees involved so it appears on their Monitoring tab.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Where do I see incidents for the whole company versus one person?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>The Incident Management list gives the company-wide operational picture. Allocated incidents also appear on the employee record under Monitoring &amp; Incidents, so managers can work from either view.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">What are performance and support plans?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>Where a trainee needs additional support or has not met a competence standard, a performance and support plan captures the reason, agreed actions and review date. Plans must be signed by both trainer and trainee, and are available on the Monitoring tab when the Trainee Driver module is active.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Can an open CDP carry into the next competency cycle?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>Yes. If a competence development plan is still open when a continuous cycle renews, it can carry over so the development point is not lost at the cycle boundary. Closed plans stay on the record for audit.</p>
             </div>
             </div>
           </details>
@@ -997,9 +1034,9 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=127616747"></script>
-  <script src="../js/newsletter.js?v=127616747"></script>
-  <script src="../js/share.js?v=127616747"></script>
-  <script src="../js/incidents-monitoring-demo.js?v=127616747"></script>
+  <script src="../js/site.js?v=154822429"></script>
+  <script src="../js/newsletter.js?v=154822429"></script>
+  <script src="../js/share.js?v=154822429"></script>
+  <script src="../js/incidents-monitoring-demo.js?v=154822429"></script>
 </body>
 </html>

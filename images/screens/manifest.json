@@ -502,5 +502,9 @@
   "images/product/reporting-analytics-hero.jpg": {
     "width": 672,
     "height": 563
+  },
+  "images/product/incidents-train-spad-hero.png": {
+    "width": 1280,
+    "height": 720
   }
 }

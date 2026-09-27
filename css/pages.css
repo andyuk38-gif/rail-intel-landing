@@ -289,6 +289,88 @@
   border-radius: 15px;
 }
 
+.page-hero--incidents .page-hero__inner--incidents {
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 1.05fr);
+  gap: 2rem 2.5rem;
+  align-items: center;
+}
+
+.page-hero__media--incidents .shot--bordered .shot__frame {
+  border-radius: 18px;
+  border-color: rgba(248, 113, 113, 0.28);
+  background:
+    radial-gradient(55% 75% at 72% 42%, rgba(248, 113, 113, 0.2), transparent 70%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.45),
+    0 28px 60px rgba(0, 0, 0, 0.5),
+    0 0 48px rgba(220, 38, 38, 0.16);
+}
+
+.page-hero__media--incidents .shot--bordered .shot__frame img {
+  width: 100%;
+  height: auto;
+  mask-image: radial-gradient(120% 100% at 50% 50%, #000 62%, transparent 100%);
+  animation: incidents-hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-hero__media--incidents .shot {
+  position: relative;
+}
+
+.page-hero__media--incidents .shot::after {
+  content: "";
+  position: absolute;
+  inset: 18% 8% 22% 48%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248, 113, 113, 0.28), transparent 70%);
+  pointer-events: none;
+  filter: blur(18px);
+  animation: incidents-hero-glow 3.6s ease-in-out infinite;
+}
+
+@keyframes incidents-hero-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04) translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+@keyframes incidents-hero-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 900px) {
+  .page-hero--incidents .page-hero__inner--incidents {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero__media--incidents {
+    order: -1;
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__media--incidents .shot--bordered .shot__frame img,
+  .page-hero__media--incidents .shot::after {
+    animation: none;
+  }
+}
+
 .page-hero__inner--split.page-hero__inner--tunnel {
   align-items: start;
 }

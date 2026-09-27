@@ -2577,6 +2577,7 @@ ${heroLeadMarkup}\n`
 
   const tunnelHero = group.slug === "tunnel-mode";
   const medicalsLicensingHero = group.heroGraphic === "medicals-licensing";
+  const incidentsHero = group.slug === "incidents-monitoring" && Boolean(group.heroShot);
   const heroInner = competencyEngineHero
     ? `        <div class="page-hero__inner page-hero__inner--engine">
           <div class="page-hero__copy">
@@ -2600,11 +2601,11 @@ ${heroMedia}
           } catch (err) {}
         </script>`
     : hasHeroMedia
-    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}">
+    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}${incidentsHero ? " page-hero__inner--incidents" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
-          <div class="page-hero__media">
+          <div class="page-hero__media${incidentsHero ? " page-hero__media--incidents" : ""}">
 ${heroMedia}
           </div>
         </div>`
@@ -2639,7 +2640,7 @@ ${heroCopy}
     renderHead(base, pageSeo, headOptions) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}${incidentsHero ? " page-hero--incidents" : ""}">
       <div class="container">
 ${heroInner}
       </div>

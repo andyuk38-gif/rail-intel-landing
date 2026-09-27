@@ -508,7 +508,7 @@ export function renderIncidentsRecordDemo() {
 ${listPanel()}
 ${allocatedPanel()}`,
     aria: "Incidents interactive preview",
-    note: "Interactive preview — choose type and severity, or jump between views.",
+    note: "Interactive preview — choose a tab to take control; autoplay stops.",
   });
 }
 
@@ -523,7 +523,7 @@ export function renderIncidentsMonitoringDemo() {
     panels: `${monitoringOverviewPanel()}
 ${cdpDetailPanel()}`,
     aria: "Monitoring interactive preview",
-    note: "Interactive preview — toggle live/closed plans, hover to pause.",
+    note: "Interactive preview — choose a tab to take control; autoplay stops.",
   });
 }
 
@@ -539,7 +539,7 @@ export function renderIncidentsSupportDemo() {
 ${supportDetailPanel()}
 ${supportSubmittedPanel()}`,
     aria: "Performance support interactive preview",
-    note: "Interactive preview — create a plan, tick actions, or sign as trainer.",
+    note: "Interactive preview — choose a tab to take control; autoplay stops.",
   });
 }
 

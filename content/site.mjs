@@ -1390,6 +1390,16 @@ export const featureGroups = [
     lead:
       "An incident is only closed when the competence question behind it has been answered. Rail Intel links incidents to the people involved and to the development plans raised as a result, so the thread from event to resolution stays intact.",
     interactiveDemos: true,
+    hideCta: true,
+    heroShot: {
+      src: "images/product/incidents-train-spad-hero.png",
+      alt: "Photorealistic graphic of a modern passenger train that has passed a red railway signal at dusk.",
+      scale: 1,
+      bordered: true,
+      eager: true,
+      hideCaption: true,
+      noExpand: true,
+    },
     sections: [
       {
         heading: "Recording and managing incidents",
