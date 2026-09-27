@@ -361,25 +361,9 @@ async function employeeTab(page, group, cardTitle) {
 }
 
 async function captureAdministrationScreens(page) {
+  // Organisation, traction, add-ons and Investigations UIs are now HTML demos on the landing site.
+  // Keep capturing standards screens used by Competency & Cycles until those are migrated.
   const shots = [
-    {
-      path: "images/screens/comp-config/org-structure.png",
-      nav: () => clickAdmin(page, "Organisation Structure"),
-    },
-    {
-      path: "images/screens/comp-config/configure-company-role-permissions.png",
-      nav: () => clickAdmin(page, "Role Permissions"),
-    },
-    {
-      path: "images/screens/main-sys/role-permissions-configure.png",
-      nav: async () => {
-        await clickAdmin(page, "Role Permissions");
-        await page.locator(".rv-main-content").first().evaluate((el) => {
-          el.scrollTop = 720;
-        });
-        await settle(page, 900);
-      },
-    },
     {
       path: "images/screens/comp-config/framework-apply-cycles.png",
       nav: async () => {
@@ -413,64 +397,6 @@ async function captureAdministrationScreens(page) {
           }, box.y);
           await settle(page, 900);
         }
-      },
-    },
-    {
-      path: "images/screens/comp-config/set-traction-routes-depots.png",
-      nav: () => clickAdmin(page, "Traction, Routes & Depots"),
-    },
-    {
-      path: "images/screens/main-sys/addons-page.png",
-      nav: () => clickSidebar(page, "Addons"),
-    },
-    {
-      path: "images/screens/comp-config/addons-library.png",
-      nav: () => clickSidebar(page, "Addons"),
-    },
-    {
-      path: "images/screens/comp-config/investigation-apimanagement.png",
-      nav: async () => {
-        await openAdminFlyout(page);
-        const labels = ["Investigations module link", "API management"];
-        for (const label of labels) {
-          const btn = page.getByRole("button", { name: exact(label) }).first();
-          if (await btn.isVisible().catch(() => false)) {
-            await btn.click();
-            await settle(page, 2600);
-            return;
-          }
-        }
-        throw new Error("Investigations admin entry not found.");
-      },
-    },
-    {
-      path: "images/screens/train-routes/traction-route-overview.png",
-      nav: async () => {
-        await openFirstEmployee(page);
-        await employeeTab(page, "Operations", "Trains & Routes");
-      },
-    },
-    {
-      path: "images/screens/train-routes/add-traction.png",
-      mode: "viewport",
-      nav: async () => {
-        await openFirstEmployee(page);
-        await employeeTab(page, "Operations", "Trains & Routes");
-        await page.getByRole("button", { name: /Add Traction/i }).first().click({ timeout: 10000 });
-        await page.getByRole("heading", { name: exact("Add Traction") }).first().waitFor({ timeout: 10000 });
-        await settle(page, 1000);
-      },
-    },
-    {
-      path: "images/screens/train-routes/add-route.png",
-      mode: "viewport",
-      nav: async () => {
-        await dismissOverlays(page);
-        await page.keyboard.press("Escape").catch(() => {});
-        await settle(page, 600);
-        await page.getByRole("button", { name: /Add Route/i }).first().click({ timeout: 10000 });
-        await page.getByRole("heading", { name: exact("Add Route") }).first().waitFor({ timeout: 10000 });
-        await settle(page, 1000);
       },
     },
   ];

@@ -33,6 +33,9 @@ import { renderCompetencyEngineBay, renderCompetencyEngineHero, renderEngineUnpl
 import { renderIncidentsInteractiveDemo } from "../content/incidents-monitoring-demos.mjs";
 import { renderAdminMenuHero } from "../content/admin-menu-hero.mjs";
 import { renderCmsStandardsDemo } from "../content/cms-standards-demo.mjs";
+import { renderCmsAdminOrgDemo } from "../content/cms-admin-org-demo.mjs";
+import { renderCmsAdminTractionDemo } from "../content/cms-admin-traction-demo.mjs";
+import { renderCmsAdminAddonsDemo } from "../content/cms-admin-addons-demo.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -1285,6 +1288,12 @@ function renderSection(section, base) {
   let shots = "";
   if (section.interactiveDemo === "cms-standards") {
     shots = renderCmsStandardsDemo();
+  } else if (section.interactiveDemo === "cms-admin-org") {
+    shots = renderCmsAdminOrgDemo();
+  } else if (section.interactiveDemo === "cms-admin-traction") {
+    shots = renderCmsAdminTractionDemo();
+  } else if (section.interactiveDemo === "cms-admin-addons") {
+    shots = renderCmsAdminAddonsDemo();
   } else if (section.interactiveDemo) {
     shots = renderIncidentsInteractiveDemo(section.interactiveDemo);
   } else if (section.shots) {
@@ -2661,7 +2670,11 @@ ${heroCopy}
   const incidentsDemoPage = Boolean(group.interactiveDemos);
   const cmsDemoPage =
     group.slug === "administration" ||
-    group.sections?.some((section) => section.interactiveDemo === "cms-standards");
+    group.sections?.some((section) =>
+      ["cms-standards", "cms-admin-org", "cms-admin-traction", "cms-admin-addons"].includes(
+        section.interactiveDemo
+      )
+    );
   const headOptions = flipbookPage
     ? { extraStylesheets: ["css/profile-flipbook.css"] }
     : commHubPage

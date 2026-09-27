@@ -25,20 +25,10 @@ const MANIFEST_PATH = join(ROOT, "images/screens/manifest.json");
 const DARK_FILTER = "invert(1) hue-rotate(180deg) brightness(0.94) contrast(0.96) saturate(0.9)";
 
 const TARGETS = [
-  "images/screens/comp-config/org-structure.png",
-  "images/screens/comp-config/configure-company-role-permissions.png",
-  "images/screens/main-sys/role-permissions-configure.png",
   "images/screens/comp-config/framework-apply-cycles.png",
   "images/screens/comp-config/grade-scale.png",
   "images/screens/comp-config/set-company-standards.png",
   "images/screens/main-sys/timings-standards.png",
-  "images/screens/train-routes/traction-route-overview.png",
-  "images/screens/train-routes/add-traction.png",
-  "images/screens/train-routes/add-route.png",
-  "images/screens/comp-config/set-traction-routes-depots.png",
-  "images/screens/main-sys/addons-page.png",
-  "images/screens/comp-config/addons-library.png",
-  "images/screens/comp-config/investigation-apimanagement.png",
 ];
 
 function pngSize(file) {

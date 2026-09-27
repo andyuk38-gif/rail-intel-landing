@@ -1542,10 +1542,6 @@ export const featureGroups = [
             { name: "Driver", detail: "Own-record Monitoring tab — no company directory." },
             { name: "Company Admin", detail: "Configure roles and permissions for the operation." },
           ],
-          shot: {
-            src: "images/screens/comp-config/configure-company-role-permissions.png",
-            caption: "Configure permissions for each company job role.",
-          },
         },
       ],
     },
@@ -1610,22 +1606,7 @@ export const featureGroups = [
         ],
         bulletTiles: true,
         copyTiles: true,
-        shotGrid: "viewer",
-        viewerAuto: false,
-        shots: [
-          {
-            src: "images/screens/comp-config/org-structure.png",
-            caption: "Organisation structure configuration.",
-          },
-          {
-            src: "images/screens/comp-config/configure-company-role-permissions.png",
-            caption: "Configuring permissions for a company job role.",
-          },
-          {
-            src: "images/screens/main-sys/role-permissions-configure.png",
-            caption: "Granular permission assignment across the platform.",
-          },
-        ],
+        interactiveDemo: "cms-admin-org",
       },
       {
         heading: "Competency standards and frameworks",
@@ -1651,26 +1632,7 @@ export const featureGroups = [
           "Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.",
         ],
         fullWidth: true,
-        shotGrid: "viewer",
-        viewerAuto: false,
-        shots: [
-          {
-            src: "images/screens/train-routes/traction-route-overview.png",
-            caption: "Traction and route overview for the company.",
-          },
-          {
-            src: "images/screens/train-routes/add-traction.png",
-            caption: "Adding a traction type.",
-          },
-          {
-            src: "images/screens/train-routes/add-route.png",
-            caption: "Adding a route.",
-          },
-          {
-            src: "images/screens/comp-config/set-traction-routes-depots.png",
-            caption: "Traction, routes and depots configuration.",
-          },
-        ],
+        interactiveDemo: "cms-admin-traction",
       },
       {
         heading: "Modules, licences and integrations",
@@ -1687,22 +1649,7 @@ export const featureGroups = [
         ],
         bulletTiles: true,
         copyTiles: true,
-        shotGrid: "viewer",
-        viewerAuto: false,
-        shots: [
-          {
-            src: "images/screens/main-sys/addons-page.png",
-            caption: "The Add-ons page where optional modules are activated.",
-          },
-          {
-            src: "images/screens/comp-config/addons-library.png",
-            caption: "The add-ons library with available modules.",
-          },
-          {
-            src: "images/screens/comp-config/investigation-apimanagement.png",
-            caption: "Investigations API connector management.",
-          },
-        ],
+        interactiveDemo: "cms-admin-addons",
       },
     ],
     hideCta: true,

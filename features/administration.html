@@ -34,9 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=107452167" />
-  <link rel="stylesheet" href="../css/pages.css?v=107452167" />
-  <link rel="stylesheet" href="../css/cms-feature-demos.css?v=107452167" />
+  <link rel="stylesheet" href="../css/style.css?v=261933524" />
+  <link rel="stylesheet" href="../css/pages.css?v=261933524" />
+  <link rel="stylesheet" href="../css/cms-feature-demos.css?v=261933524" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -490,8 +490,8 @@
     </section>
 
 
-    <section class="page-section page-section--viewer">
-      <div class="container container--showcase">
+    <section class="page-section">
+      <div class="container">
         <div class="page-section__head page-section__head--copy-tiles">
           <h2>Organisation structure, roles and permissions</h2>
           <div class="page-section__copy-tiles">
@@ -527,111 +527,353 @@
           </div>
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="3" tabindex="0">
-        <div class="shot-viewer__rail">
-          <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
-            <span aria-hidden="true">←</span>
-          </button>
-          <div class="shot-viewer__tiles" data-shot-viewer-tiles role="tablist" aria-label="Screenshots">
-            <button
-              type="button"
-              class="shot-viewer__tile is-active"
-              data-shot-viewer-tile="0"
-              role="tab"
-              aria-label="Organisation structure configuration."
-              aria-selected="true"
-            >
-              <span class="shot-viewer__tile-step">01</span>
-              <span class="shot-viewer__tile-label">Organisation structure configuration.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="1"
-              role="tab"
-              aria-label="Configuring permissions for a company job role."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">02</span>
-              <span class="shot-viewer__tile-label">Configuring permissions for a company job role.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="2"
-              role="tab"
-              aria-label="Granular permission assignment across the platform."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">03</span>
-              <span class="shot-viewer__tile-label">Granular permission assignment across the platform.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
+
+      <div class="cms-demo reveal" data-cms-demo data-cms-labels="Organisation structure · seniority tiers and job roles.|Role permissions · baseline access per company job role.|Granular permissions · overrides and custom user access.">
+        <div class="cms-demo__stage">
+          <div class="browser-mockup browser-mockup--primary">
+            <div class="browser-mockup__chrome">
+              <span class="browser-mockup__dots"></span>
+              <span class="browser-mockup__url">cms.railintel.co.uk/settings/organisation</span>
+            </div>
+            <div class="browser-mockup__content">
+              <div class="cms-app" role="region" aria-label="Organisation and permissions interactive preview">
+                <div class="cms-app__bar">
+                  <div>
+                    <h3 class="cms-app__title">Organisation &amp; permissions</h3>
+                    <p class="cms-app__sub" data-cms-subtitle>Organisation structure · seniority tiers and job roles.</p>
+                  </div>
+                  <span class="cms-app__badge"><span class="cms-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                </div>
+
+                <div class="cms-panel is-active" data-cms-panel="0">
+                  <div class="cms-org__title-row">
+                    <div class="cms-org__title-row-left">
+                      <span class="cms-org__icon" aria-hidden="true">👥</span>
+                      <div>
+                        <h3 style="margin:0;font-size:1rem">Organisation Structure</h3>
+                        <p style="margin:0.25rem 0 0;font-size:0.74rem;color:var(--cms-muted)">Visually map your management and reporting flow. Drag job roles from the palette into seniority tiers — the top tier is the most senior.</p>
+                      </div>
+                    </div>
+                    <div class="cms-org__actions">
+                      <button type="button" class="cms-btn cms-btn--ghost">Clear roles</button>
+                      <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Saved" data-cms-done="Saved ✓">Saved</button>
+                    </div>
+                  </div>
+                  <div class="cms-org">
+                    <aside class="cms-org__palette">
+                      <div class="cms-org__palette-head">
+                        <strong>Available roles</strong>
+                        <span class="cms-org__count">11</span>
+                      </div>
+                      <p class="cms-org__hint">Drag a role into a tier, or use the + menu on each role. Drop a role back here to unassign it.</p>
+                      <ul class="cms-org__roles">
+                            <li class="cms-org__role"><span>Competence Assessor / Internal Quality Assurer</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Depot Driver</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Driver Assessor</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Driver Instructor / Driver Trainer</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Driver Manager</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Human Resources</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Internal Quality Assurance (IQA)</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Operations Standards Manager</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Train Driver</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Trainee Train Driver</span><span aria-hidden="true">+</span></li>
+                            <li class="cms-org__role"><span>Train Manager / Guard</span><span aria-hidden="true">+</span></li>
+                      </ul>
+                      <p class="cms-org__placed">0 of 11 roles placed</p>
+                    </aside>
+                    <div class="cms-org__tiers">
+                      <div class="cms-org__tier cms-org__tier--senior">
+                        <div class="cms-org__tier-head">
+                          <span class="cms-org__tier-num">1</span>
+                          <strong>Executive / Director</strong>
+                          <span class="cms-org__tier-badge">Most senior</span>
+                        </div>
+                        <div class="cms-org__drop">Drop roles here or use the + menu in the palette.</div>
+                      </div>
+                      <div class="cms-org__tier">
+                        <div class="cms-org__tier-head">
+                          <span class="cms-org__tier-num">2</span>
+                          <strong>Senior Management</strong>
+                          <span class="cms-org__tier-badge">Tier 2</span>
+                        </div>
+                        <div class="cms-org__drop">Drop roles here or use the + menu in the palette.</div>
+                      </div>
+                      <div class="cms-org__tier">
+                        <div class="cms-org__tier-head">
+                          <span class="cms-org__tier-num">3</span>
+                          <strong>Management</strong>
+                          <span class="cms-org__tier-badge">Tier 3</span>
+                        </div>
+                        <div class="cms-org__drop">Drop roles here or use the + menu in the palette.</div>
+                      </div>
+                      <div class="cms-org__tier">
+                        <div class="cms-org__tier-head">
+                          <span class="cms-org__tier-num">4</span>
+                          <strong>Supervisors / Team Leaders</strong>
+                          <span class="cms-org__tier-badge">Most junior</span>
+                        </div>
+                        <div class="cms-org__drop">Drop roles here or use the + menu in the palette.</div>
+                      </div>
+                      <div class="cms-org__add-tier">+ Add seniority tier</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cms-panel" data-cms-panel="1" hidden>
+                  <div class="cms-org__title-row">
+                    <div class="cms-org__title-row-left">
+                      <span class="cms-org__icon" aria-hidden="true">🛡</span>
+                      <div>
+                        <h3 style="margin:0;font-size:1rem">Company role permissions</h3>
+                        <p style="margin:0.25rem 0 0;font-size:0.74rem;color:var(--cms-muted)">Configure what each company job role can do. Admin-equivalent permissions remain reserved for company administrators.</p>
+                      </div>
+                    </div>
+                    <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Save changes" data-cms-done="Saved">Save changes</button>
+                  </div>
+                  <div class="cms-warn-banner">
+                    <span aria-hidden="true">⚠</span>
+                    Company admins can configure role permissions, but this page cannot grant admin-level access (team/user administration, permission administration, or equivalent powers).
+                  </div>
+                  <div class="cms-role-grid">
+                      <div class="cms-role-card is-focus">
+                        <div class="cms-role-card__top">
+                          <strong>Competence Assessor / Internal Quality Assurer</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Depot Driver</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Driver Assessor</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Driver Instructor / Driver Trainer</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Driver Manager</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Human Resources</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Internal Quality Assurance (IQA)</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Operations Standards Manager</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Train Driver</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Trainee Train Driver</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Train Manager / Guard</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="cms-panel" data-cms-panel="2" hidden>
+                  <div class="cms-org__title-row">
+                    <div class="cms-org__title-row-left">
+                      <span class="cms-org__icon" aria-hidden="true">🛡</span>
+                      <div>
+                        <h3 style="margin:0;font-size:1rem">Company role permissions</h3>
+                        <p style="margin:0.25rem 0 0;font-size:0.74rem;color:var(--cms-muted)">Configure what each company job role can do. Admin-equivalent permissions remain reserved for company administrators.</p>
+                      </div>
+                    </div>
+                    <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Save changes" data-cms-done="Saved">Save changes</button>
+                  </div>
+                  <div class="cms-warn-banner">
+                    <span aria-hidden="true">⚠</span>
+                    Company admins can configure role permissions, but this page cannot grant admin-level access (team/user administration, permission administration, or equivalent powers).
+                  </div>
+                  <div class="cms-role-grid">
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Competence Assessor / Internal Quality Assurer</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Depot Driver</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Driver Assessor</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Driver Instructor / Driver Trainer</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Driver Manager</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">Extra permissions assigned for this role.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <span class="cms-role-pill">Activate continuous cycles</span>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Human Resources</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Internal Quality Assurance (IQA)</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Operations Standards Manager</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Train Driver</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Trainee Train Driver</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                      <div class="cms-role-card">
+                        <div class="cms-role-card__top">
+                          <strong>Train Manager / Guard</strong>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.35rem 0.55rem;font-size:0.7rem">Configure permissions</button>
+                        </div>
+                        <p class="cms-role-card__status">No extra permissions assigned. This role has baseline access only.</p>
+                        <p class="cms-role-card__granted-label">Granted permissions</p>
+                        <p class="cms-role-card__granted">None granted</p>
+                      </div>
+                  </div>
+                  <div class="cms-custom-perms">
+                    <h4>Custom team member permissions</h4>
+                    <p>Search for a specific user or employee, then configure custom permissions that override role defaults.</p>
+                    <div class="cms-field">
+                      <label for="cms-custom-user-search">Search users</label>
+                      <input id="cms-custom-user-search" type="search" placeholder="Search by name, email, or title..." />
+                    </div>
+                    <p style="margin:0.55rem 0 0;font-size:0.72rem;color:var(--cms-faint)">Search and select a user to configure custom permissions.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
-            <span aria-hidden="true">→</span>
-          </button>
         </div>
-        <div class="shot-viewer__shell">
-          <div class="shot-viewer__glow" aria-hidden="true"></div>
-          <div class="shot-viewer__stage" data-shot-viewer-stage>
-        <figure
-          class="shot-viewer__frame is-active"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Organisation structure configuration."
-          aria-hidden="false"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/comp-config/org-structure.png?v=107452167"
-              alt="Organisation structure configuration."
-              width="700"
-              height="464"
-              loading="eager"
-              decoding="async"
-            />
+        <div class="cms-demo__nav">
+          <div class="cms-demo__tabs" role="group" aria-label="Organisation views">
+            <button type="button" class="cms-demo__tab is-active" data-cms-tab="0" aria-pressed="true">Organisation structure</button>
+            <button type="button" class="cms-demo__tab" data-cms-tab="1" aria-pressed="false">Role permissions</button>
+            <button type="button" class="cms-demo__tab" data-cms-tab="2" aria-pressed="false">Granular permissions</button>
           </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Configuring permissions for a company job role."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/comp-config/configure-company-role-permissions.png?v=107452167"
-              alt="Configuring permissions for a company job role."
-              width="693"
-              height="521"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Granular permission assignment across the platform."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/main-sys/role-permissions-configure.png?v=107452167"
-              alt="Granular permission assignment across the platform."
-              width="704"
-              height="558"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-          </div>
+          <p class="cms-demo__note"><strong>Interactive preview</strong> — switch views of how roles and permissions are configured.</p>
         </div>
       </div>
 
@@ -920,8 +1162,8 @@
       </div>
     </section>
 
-    <section class="page-section page-section--wide page-section--viewer">
-      <div class="container container--showcase">
+    <section class="page-section page-section--wide">
+      <div class="container">
         <div class="page-section__head page-section__head--wide">
           <h2>Traction, routes and depots</h2>
           <p>Traction types, routes and depots are configured once and then used across route competence, complementary certificates and assessment records. The vocabulary is consistent everywhere it appears, on the record, in the cab and in a verification report.</p>
@@ -929,149 +1171,262 @@
 
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="4" tabindex="0">
-        <div class="shot-viewer__rail">
-          <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
-            <span aria-hidden="true">←</span>
-          </button>
-          <div class="shot-viewer__tiles" data-shot-viewer-tiles role="tablist" aria-label="Screenshots">
-            <button
-              type="button"
-              class="shot-viewer__tile is-active"
-              data-shot-viewer-tile="0"
-              role="tab"
-              aria-label="Traction and route overview for the company."
-              aria-selected="true"
-            >
-              <span class="shot-viewer__tile-step">01</span>
-              <span class="shot-viewer__tile-label">Traction and route overview for the company.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="1"
-              role="tab"
-              aria-label="Adding a traction type."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">02</span>
-              <span class="shot-viewer__tile-label">Adding a traction type.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="2"
-              role="tab"
-              aria-label="Adding a route."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">03</span>
-              <span class="shot-viewer__tile-label">Adding a route.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="3"
-              role="tab"
-              aria-label="Traction, routes and depots configuration."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">04</span>
-              <span class="shot-viewer__tile-label">Traction, routes and depots configuration.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
+
+      <div class="cms-demo reveal" data-cms-demo data-cms-labels="Company lookups · traction types, routes and depots.|On the record · employee traction and route competence.|Add forms · recording competence against company lookups.">
+        <div class="cms-demo__stage">
+          <div class="browser-mockup browser-mockup--primary">
+            <div class="browser-mockup__chrome">
+              <span class="browser-mockup__dots"></span>
+              <span class="browser-mockup__url">cms.railintel.co.uk/settings/traction-routes</span>
+            </div>
+            <div class="browser-mockup__content">
+              <div class="cms-app" role="region" aria-label="Traction routes and depots interactive preview">
+                <div class="cms-app__bar">
+                  <div>
+                    <h3 class="cms-app__title">Traction, routes &amp; depots</h3>
+                    <p class="cms-app__sub" data-cms-subtitle>Company lookups · traction types, routes and depots.</p>
+                  </div>
+                  <span class="cms-app__badge"><span class="cms-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                </div>
+
+                <div class="cms-panel is-active" data-cms-panel="0">
+                  <div class="cms-card__head" style="margin-bottom:0.75rem">
+                    <div>
+                      <h3>Traction, Routes &amp; Depots</h3>
+                      <p>Define company lookup values used in traction, route, and depot lookup forms.</p>
+                    </div>
+                  </div>
+                  <div class="cms-warn-banner">
+                    <span aria-hidden="true">⚠</span>
+                    Values configured here are available for users to select the traction you operate, the routes you cover, and the depots you use.
+                  </div>
+                  <div class="cms-lookup-grid">
+                    <div class="cms-lookup cms-lookup--traction">
+                      <div class="cms-lookup__head">
+                        <span class="cms-lookup__icon" aria-hidden="true">🚆</span>
+                        <strong>Traction types</strong>
+                      </div>
+                      <div class="cms-lookup__add">
+                        <input type="text" placeholder="e.g. Class 800" aria-label="New traction type" />
+                        <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Add" data-cms-done="Added">Add</button>
+                      </div>
+                      <div class="cms-lookup__cols"><span>Added traction types</span><span>Actions</span></div>
+                      <div class="cms-lookup__row">
+                        <span>Class 810</span>
+                        <div class="cms-lookup__meta">
+                          <span class="cms-lookup__badge">0 employees assigned</span>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.25rem 0.4rem" aria-label="Edit">✎</button>
+                          <button type="button" class="cms-btn cms-btn--danger" aria-label="Delete">🗑</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cms-lookup cms-lookup--routes">
+                      <div class="cms-lookup__head">
+                        <span class="cms-lookup__icon" aria-hidden="true">🗺</span>
+                        <strong>Routes</strong>
+                      </div>
+                      <div class="cms-lookup__add">
+                        <input type="text" placeholder="e.g. London to Newcastle" aria-label="New route" />
+                        <button type="button" class="cms-btn cms-btn--green" data-cms-flash="Add" data-cms-done="Added">Add</button>
+                      </div>
+                      <div class="cms-lookup__cols"><span>Added routes</span><span>Actions</span></div>
+                      <div class="cms-lookup__row">
+                        <span>London to Newcastle</span>
+                        <div class="cms-lookup__meta">
+                          <span class="cms-lookup__badge">0 employees assigned</span>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.25rem 0.4rem" aria-label="Edit">✎</button>
+                          <button type="button" class="cms-btn cms-btn--danger" aria-label="Delete">🗑</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cms-lookup cms-lookup--depots cms-lookup--full">
+                      <div class="cms-lookup__head">
+                        <span class="cms-lookup__icon" aria-hidden="true">🏢</span>
+                        <strong>Depots</strong>
+                      </div>
+                      <p style="margin:0 0 0.55rem;font-size:0.72rem;color:var(--cms-muted)">Employees can only be assigned to depots defined here.</p>
+                      <div class="cms-lookup__add">
+                        <input type="text" placeholder="e.g. London Euston" aria-label="New depot" />
+                        <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Add" data-cms-done="Added">Add</button>
+                      </div>
+                      <div class="cms-lookup__cols"><span>Added depots</span><span>Actions</span></div>
+                      <div class="cms-lookup__row">
+                        <span>London</span>
+                        <div class="cms-lookup__meta">
+                          <span class="cms-lookup__badge">2 employees assigned</span>
+                          <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.25rem 0.4rem" aria-label="Edit">✎</button>
+                          <button type="button" class="cms-btn cms-btn--danger" aria-label="Delete">🗑</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cms-panel" data-cms-panel="1" hidden>
+                  <div class="cms-ops__tabs" aria-label="Employee record tabs">
+                    <span class="cms-ops__tab">Overview</span>
+                    <span class="cms-ops__tab">Medical</span>
+                    <span class="cms-ops__tab">Licensing</span>
+                    <span class="cms-ops__tab is-on">Operations</span>
+                    <span class="cms-ops__tab">Development</span>
+                    <span class="cms-ops__tab">Workspace</span>
+                    <span class="cms-ops__viewing">Now viewing: Trains &amp; Routes</span>
+                  </div>
+                  <div class="cms-alert" style="margin-bottom:0.85rem">
+                    <span class="cms-alert__icon" aria-hidden="true">!</span>
+                    <span><strong>Not safe to work</strong> — Mandatory competency expired.</span>
+                  </div>
+                  <div class="cms-card" style="margin-bottom:0.75rem">
+                    <div class="cms-ops__section-head">
+                      <h4><span aria-hidden="true">🚆</span> Traction</h4>
+                      <button type="button" class="cms-ops__link">+ Add Traction</button>
+                    </div>
+                    <table class="cms-table">
+                      <thead>
+                        <tr>
+                          <th>Traction</th>
+                          <th>Date found competent</th>
+                          <th>Expiry</th>
+                          <th>Assessed by</th>
+                          <th>Notes</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Class 810</td>
+                          <td>08-08-2026</td>
+                          <td><em style="color:var(--cms-faint)">Expiry not set</em></td>
+                          <td>Ash Hill</td>
+                          <td>Test Entry</td>
+                          <td>
+                            <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.25rem 0.4rem" aria-label="Edit">✎</button>
+                            <button type="button" class="cms-btn cms-btn--danger" aria-label="Delete">✕</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="cms-card">
+                    <div class="cms-ops__section-head">
+                      <h4><span aria-hidden="true">🗺</span> Routes</h4>
+                      <button type="button" class="cms-ops__link cms-ops__link--green">+ Add Route</button>
+                    </div>
+                    <table class="cms-table">
+                      <thead>
+                        <tr>
+                          <th>Route</th>
+                          <th>Date found competent</th>
+                          <th>Expiry</th>
+                          <th>Assessed by</th>
+                          <th>Notes</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>London to Newcastle</td>
+                          <td>08-08-2026</td>
+                          <td><em style="color:var(--cms-faint)">Expiry not set</em></td>
+                          <td>Ash Hill</td>
+                          <td>Up &amp; Down Direction including yards and diversionary</td>
+                          <td>
+                            <button type="button" class="cms-btn cms-btn--ghost" style="padding:0.25rem 0.4rem" aria-label="Edit">✎</button>
+                            <button type="button" class="cms-btn cms-btn--danger" aria-label="Delete">✕</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="cms-panel" data-cms-panel="2" hidden>
+                  <div class="cms-form-pair">
+                    <div class="cms-form-modal">
+                      <div class="cms-form-modal__head">
+                        <h4>Add Traction</h4>
+                        <span aria-hidden="true" style="color:var(--cms-faint)">✕</span>
+                      </div>
+                      <div class="cms-field">
+                        <label for="cms-add-traction">Traction</label>
+                        <select id="cms-add-traction"><option>Select traction</option><option selected>Class 810</option></select>
+                      </div>
+                      <div class="cms-form-modal__grid">
+                        <div class="cms-field">
+                          <label for="cms-trac-date">Date found competent</label>
+                          <input id="cms-trac-date" type="text" value="08/08/2026" />
+                        </div>
+                        <div class="cms-field">
+                          <label for="cms-trac-expiry">Expiry (if applicable)</label>
+                          <input id="cms-trac-expiry" type="text" placeholder="dd/mm/yyyy" />
+                        </div>
+                      </div>
+                      <div class="cms-field">
+                        <label for="cms-trac-assessor">Assessed by</label>
+                        <select id="cms-trac-assessor"><option>Select Assessor...</option><option selected>Ash Hill</option></select>
+                      </div>
+                      <div class="cms-field" style="margin-top:0.55rem">
+                        <label for="cms-trac-notes">Notes</label>
+                        <textarea id="cms-trac-notes" rows="3" placeholder="Add notes for this traction entry.">Test Entry</textarea>
+                      </div>
+                      <div class="cms-form-modal__actions">
+                        <button type="button" class="cms-btn cms-btn--ghost">Cancel</button>
+                        <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Save traction" data-cms-done="Saved">Save traction</button>
+                      </div>
+                    </div>
+                    <div class="cms-form-modal">
+                      <div class="cms-form-modal__head">
+                        <h4>Add Route</h4>
+                        <span aria-hidden="true" style="color:var(--cms-faint)">✕</span>
+                      </div>
+                      <div class="cms-field">
+                        <label for="cms-add-route">Route</label>
+                        <select id="cms-add-route"><option>Select route</option><option selected>London to Newcastle</option></select>
+                      </div>
+                      <div class="cms-form-modal__grid">
+                        <div class="cms-field">
+                          <label for="cms-route-date">Date found competent</label>
+                          <input id="cms-route-date" type="text" value="08/08/2026" />
+                        </div>
+                        <div class="cms-field">
+                          <label for="cms-route-expiry">Expiry (if applicable)</label>
+                          <input id="cms-route-expiry" type="text" placeholder="dd/mm/yyyy" />
+                        </div>
+                      </div>
+                      <div class="cms-field">
+                        <label for="cms-route-assessor">Assessed by</label>
+                        <select id="cms-route-assessor"><option>Select Assessor...</option><option selected>Ash Hill</option></select>
+                      </div>
+                      <div class="cms-field" style="margin-top:0.55rem">
+                        <label for="cms-route-notes">Notes</label>
+                        <textarea id="cms-route-notes" rows="3" placeholder="Add notes for this route entry.">Up &amp; Down Direction including yards and diversionary</textarea>
+                      </div>
+                      <div class="cms-form-modal__actions">
+                        <button type="button" class="cms-btn cms-btn--ghost">Cancel</button>
+                        <button type="button" class="cms-btn cms-btn--green" data-cms-flash="Save route" data-cms-done="Saved">Save route</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
-            <span aria-hidden="true">→</span>
-          </button>
         </div>
-        <div class="shot-viewer__shell">
-          <div class="shot-viewer__glow" aria-hidden="true"></div>
-          <div class="shot-viewer__stage" data-shot-viewer-stage>
-        <figure
-          class="shot-viewer__frame is-active"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Traction and route overview for the company."
-          aria-hidden="false"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/train-routes/traction-route-overview.png?v=107452167"
-              alt="Traction and route overview for the company."
-              width="699"
-              height="353"
-              loading="eager"
-              decoding="async"
-            />
+        <div class="cms-demo__nav">
+          <div class="cms-demo__tabs" role="group" aria-label="Traction views">
+            <button type="button" class="cms-demo__tab is-active" data-cms-tab="0" aria-pressed="true">Company lookups</button>
+            <button type="button" class="cms-demo__tab" data-cms-tab="1" aria-pressed="false">On the record</button>
+            <button type="button" class="cms-demo__tab" data-cms-tab="2" aria-pressed="false">Add forms</button>
           </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Adding a traction type."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/train-routes/add-traction.png?v=107452167"
-              alt="Adding a traction type."
-              width="776"
-              height="259"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Adding a route."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/train-routes/add-route.png?v=107452167"
-              alt="Adding a route."
-              width="692"
-              height="261"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Traction, routes and depots configuration."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/comp-config/set-traction-routes-depots.png?v=107452167"
-              alt="Traction, routes and depots configuration."
-              width="696"
-              height="323"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-          </div>
+          <p class="cms-demo__note"><strong>Interactive preview</strong> — company lookups feed the traction and route entries on each record.</p>
         </div>
       </div>
 
       </div>
     </section>
 
-    <section class="page-section page-section--viewer">
-      <div class="container container--showcase">
+    <section class="page-section">
+      <div class="container">
         <div class="page-section__head page-section__head--copy-tiles">
           <h2>Modules, licences and integrations</h2>
           <div class="page-section__copy-tiles">
@@ -1107,111 +1462,264 @@
           </div>
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="3" tabindex="0">
-        <div class="shot-viewer__rail">
-          <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
-            <span aria-hidden="true">←</span>
-          </button>
-          <div class="shot-viewer__tiles" data-shot-viewer-tiles role="tablist" aria-label="Screenshots">
-            <button
-              type="button"
-              class="shot-viewer__tile is-active"
-              data-shot-viewer-tile="0"
-              role="tab"
-              aria-label="The Add-ons page where optional modules are activated."
-              aria-selected="true"
-            >
-              <span class="shot-viewer__tile-step">01</span>
-              <span class="shot-viewer__tile-label">The Add-ons page where optional modules are activated.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="1"
-              role="tab"
-              aria-label="The add-ons library with available modules."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">02</span>
-              <span class="shot-viewer__tile-label">The add-ons library with available modules.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
-            <button
-              type="button"
-              class="shot-viewer__tile"
-              data-shot-viewer-tile="2"
-              role="tab"
-              aria-label="Investigations API connector management."
-              aria-selected="false"
-            >
-              <span class="shot-viewer__tile-step">03</span>
-              <span class="shot-viewer__tile-label">Investigations API connector management.</span>
-              <span class="shot-viewer__tile-progress" data-shot-viewer-tile-progress aria-hidden="true"></span>
-            </button>
+
+      <div class="cms-demo reveal" data-cms-demo data-cms-labels="Add-ons page · activated modules and admin seats.|Add-ons library · trials and activation.|Investigations API · pair CMS with Investigations.">
+        <div class="cms-demo__stage">
+          <div class="browser-mockup browser-mockup--primary">
+            <div class="browser-mockup__chrome">
+              <span class="browser-mockup__dots"></span>
+              <span class="browser-mockup__url">cms.railintel.co.uk/settings/addons</span>
+            </div>
+            <div class="browser-mockup__content">
+              <div class="cms-app" role="region" aria-label="Modules and integrations interactive preview">
+                <div class="cms-app__bar">
+                  <div>
+                    <h3 class="cms-app__title">Modules &amp; integrations</h3>
+                    <p class="cms-app__sub" data-cms-subtitle>Add-ons page · activated modules and admin seats.</p>
+                  </div>
+                  <span class="cms-app__badge"><span class="cms-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                </div>
+
+                <div class="cms-panel is-active" data-cms-panel="0">
+                  <div class="cms-card__head" style="margin-bottom:0.75rem">
+                    <div>
+                      <h3>Addons</h3>
+                      <p>Bolt-on modules for your company. Storage capacity upgrades are managed from the Dashboard.</p>
+                    </div>
+                  </div>
+                  <div class="cms-addon-grid">
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--purple" aria-hidden="true">📄</span>
+                        <h4>QA Verifications Module</h4>
+                      </div>
+                      <p>Periodic verification runs against the live competence record.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete QA Verifications Module settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--purple" aria-hidden="true">📋</span>
+                        <h4>Task assignment</h4>
+                      </div>
+                      <p>Assign and track operational tasks against employee records.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Task assignment settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--green" aria-hidden="true">🛡</span>
+                        <h4>Safety Briefs</h4>
+                      </div>
+                      <p>Issue and acknowledge safety briefs across the workforce.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Safety Briefs settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated is-green">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--purple" aria-hidden="true">🎓</span>
+                        <h4>Trainee Driver Module</h4>
+                      </div>
+                      <p>Pathway, schedules and portfolio for trainee drivers.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Trainee Driver Module settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--teal" aria-hidden="true">📑</span>
+                        <h4>Driver Reports</h4>
+                      </div>
+                      <p>Structured driver reports from the cab and back office.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Driver Reports settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated is-green">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--orange" aria-hidden="true">📅</span>
+                        <h4>Leave & Absence</h4>
+                      </div>
+                      <p>Entitlements, requests and absence reporting.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Leave & Absence settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated is-green">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--green" aria-hidden="true">🩺</span>
+                        <h4>Medication Checks</h4>
+                      </div>
+                      <p>Medication fitness checks tied to fitness for duty.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Medication Checks settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated is-green">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--orange" aria-hidden="true">👥</span>
+                        <h4>Company Admin Licences</h4>
+                      </div>
+                      <p>Each company includes 2 company administrator seats. Purchase additional seats when you need more administrators in Team Management.</p>
+                      <p class="cms-addon__seats">1 of 2 administrator seats in use.</p>
+                      <div class="cms-field">
+                        <label>Additional seats to purchase</label>
+                        <input type="number" value="1" min="1" aria-label="Additional seats to purchase" />
+                      </div>
+                      <button type="button" class="cms-btn cms-btn--orange" data-cms-flash="Purchase 1 additional seat (yearly)" data-cms-done="Queued">Purchase 1 additional seat (yearly)</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cms-panel" data-cms-panel="1" hidden>
+                  <div class="cms-card__head" style="margin-bottom:0.75rem">
+                    <div>
+                      <h3>Addons</h3>
+                      <p>Bolt-on modules for your company — trial for 14 days or activate on subscription.</p>
+                    </div>
+                  </div>
+                  <div class="cms-addon-grid">
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--purple" aria-hidden="true">📄</span>
+                        <h4>QA Verifications Module</h4>
+                      </div>
+                      <p>Periodic verification runs against the live competence record.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete QA Verifications Module settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--purple" aria-hidden="true">📋</span>
+                        <h4>Task assignment</h4>
+                      </div>
+                      <p>Assign and track operational tasks against employee records.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Task assignment settings.</p>
+                      <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Start 14-day trial" data-cms-done="Trial started">Start 14-day trial</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--green" aria-hidden="true">🛡</span>
+                        <h4>Safety Briefs</h4>
+                      </div>
+                      <p>Issue and acknowledge safety briefs across the workforce.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Safety Briefs settings.</p>
+                      <button type="button" class="cms-btn cms-btn--green" data-cms-flash="Start 14-day trial" data-cms-done="Trial started">Start 14-day trial</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--purple" aria-hidden="true">🎓</span>
+                        <h4>Trainee Driver Module</h4>
+                      </div>
+                      <p>Pathway, schedules and portfolio for trainee drivers.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Trainee Driver Module settings.</p>
+                      <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Start 14-day trial" data-cms-done="Trial started">Start 14-day trial</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--teal" aria-hidden="true">📑</span>
+                        <h4>Driver Reports</h4>
+                      </div>
+                      <p>Structured driver reports from the cab and back office.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Driver Reports settings.</p>
+                      <button type="button" class="cms-btn cms-btn--teal" data-cms-flash="Start 14-day trial" data-cms-done="Trial started">Start 14-day trial</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--orange" aria-hidden="true">📅</span>
+                        <h4>Leave & Absence</h4>
+                      </div>
+                      <p>Entitlements, requests and absence reporting.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Leave & Absence settings.</p>
+                      <button type="button" class="cms-btn cms-btn--activated is-green">✓ Activated</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--green" aria-hidden="true">🩺</span>
+                        <h4>Medication Checks</h4>
+                      </div>
+                      <p>Medication fitness checks tied to fitness for duty.</p>
+                      <p class="cms-addon__warn">Stripe is not fully configured yet; ask your system administrator to complete Medication Checks settings.</p>
+                      <button type="button" class="cms-btn cms-btn--green" data-cms-flash="Start 14-day trial" data-cms-done="Trial started">Start 14-day trial</button>
+                    </div>
+                    <div class="cms-addon">
+                      <div class="cms-addon__top">
+                        <span class="cms-addon__icon cms-addon__icon--orange" aria-hidden="true">👥</span>
+                        <h4>Company Admin Licences</h4>
+                      </div>
+                      <p>Each company includes 2 company administrator seats. Purchase additional seats when you need more administrators in Team Management.</p>
+                      <p class="cms-addon__seats">1 of 2 administrator seats in use.</p>
+                      <div class="cms-field">
+                        <label>Additional seats to purchase</label>
+                        <input type="number" value="1" min="1" aria-label="Additional seats to purchase" />
+                      </div>
+                      <button type="button" class="cms-btn cms-btn--orange" data-cms-flash="Purchase 1 additional seat (yearly)" data-cms-done="Queued">Purchase 1 additional seat (yearly)</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cms-panel" data-cms-panel="2" hidden>
+                  <div class="cms-org__title-row">
+                    <div class="cms-org__title-row-left">
+                      <span class="cms-org__icon" aria-hidden="true">🔑</span>
+                      <div>
+                        <h3 style="margin:0;font-size:1rem">Investigations API Management</h3>
+                        <p style="margin:0.25rem 0 0;font-size:0.74rem;color:var(--cms-muted)">Pair Rail Intel CMS with the Investigations module. Tokens are created in Investigations admin and pasted here. You are linking Investigations for CMS company code <strong>56233</strong> only.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cms-api-steps">
+                    <div class="cms-card">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>Step 1 — Paste the token from Investigations</h3>
+                          <p>The token starts with <code>rvinv_</code>. The server calls the <code>/verify</code> endpoint to confirm pairing.</p>
+                        </div>
+                      </div>
+                      <div class="cms-field">
+                        <label for="cms-inv-url">Investigations base URL</label>
+                        <input id="cms-inv-url" type="url" value="https://investigations.railintel.co.uk" />
+                      </div>
+                      <div class="cms-field" style="margin-top:0.55rem">
+                        <label for="cms-inv-token">Pairing token</label>
+                        <input id="cms-inv-token" type="text" placeholder="rvinv_5473_..." />
+                      </div>
+                      <div style="margin-top:0.75rem">
+                        <button type="button" class="cms-btn cms-btn--lilac" data-cms-flash="Verify with Investigations" data-cms-done="Verified">Verify with Investigations</button>
+                      </div>
+                    </div>
+                    <div class="cms-card">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>Bound peers</h3>
+                          <p>No Investigations tokens have been paired with this CMS yet. Paste a token above to start.</p>
+                        </div>
+                        <button type="button" class="cms-btn cms-btn--ghost" data-cms-flash="Refresh" data-cms-done="Up to date">Refresh</button>
+                      </div>
+                    </div>
+                    <div class="cms-card">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>How the multi-tenant pairing stays safe</h3>
+                        </div>
+                      </div>
+                      <ul>
+                        <li>Tokens are bound server-side to a single company code.</li>
+                        <li>Approvals are rejected when tenant codes do not match.</li>
+                        <li>The <code>/verify</code> challenge expires after 15 minutes.</li>
+                        <li>API calls require <code>Authorization: Bearer</code> and <code>X-Investigations-Company</code>.</li>
+                        <li>Revoking from either side breaks the link immediately.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="button" class="shot-viewer__nav" data-shot-viewer-next aria-label="Next screenshot">
-            <span aria-hidden="true">→</span>
-          </button>
         </div>
-        <div class="shot-viewer__shell">
-          <div class="shot-viewer__glow" aria-hidden="true"></div>
-          <div class="shot-viewer__stage" data-shot-viewer-stage>
-        <figure
-          class="shot-viewer__frame is-active"
-          data-shot-viewer-frame
-          data-shot-viewer-label="The Add-ons page where optional modules are activated."
-          aria-hidden="false"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/main-sys/addons-page.png?v=107452167"
-              alt="The Add-ons page where optional modules are activated."
-              width="791"
-              height="528"
-              loading="eager"
-              decoding="async"
-            />
+        <div class="cms-demo__nav">
+          <div class="cms-demo__tabs" role="group" aria-label="Modules views">
+            <button type="button" class="cms-demo__tab is-active" data-cms-tab="0" aria-pressed="true">Add-ons page</button>
+            <button type="button" class="cms-demo__tab" data-cms-tab="1" aria-pressed="false">Add-ons library</button>
+            <button type="button" class="cms-demo__tab" data-cms-tab="2" aria-pressed="false">Investigations API</button>
           </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="The add-ons library with available modules."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/comp-config/addons-library.png?v=107452167"
-              alt="The add-ons library with available modules."
-              width="690"
-              height="562"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-        <figure
-          class="shot-viewer__frame"
-          data-shot-viewer-frame
-          data-shot-viewer-label="Investigations API connector management."
-          aria-hidden="true"
-        >
-          <div class="shot-viewer__frame-inner">
-            <img
-              class="shot-viewer__image"
-              src="../images/screens/comp-config/investigation-apimanagement.png?v=107452167"
-              alt="Investigations API connector management."
-              width="699"
-              height="444"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </figure>
-          </div>
+          <p class="cms-demo__note"><strong>Interactive preview</strong> — activate modules, trial add-ons, and pair Investigations.</p>
         </div>
       </div>
 
@@ -1360,9 +1868,9 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=107452167"></script>
-  <script src="../js/newsletter.js?v=107452167"></script>
-  <script src="../js/share.js?v=107452167"></script>
-  <script src="../js/cms-feature-demos.js?v=107452167"></script>
+  <script src="../js/site.js?v=261933524"></script>
+  <script src="../js/newsletter.js?v=261933524"></script>
+  <script src="../js/share.js?v=261933524"></script>
+  <script src="../js/cms-feature-demos.js?v=261933524"></script>
 </body>
 </html>

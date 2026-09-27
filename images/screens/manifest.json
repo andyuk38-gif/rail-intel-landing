@@ -55,14 +55,6 @@
     "width": 1024,
     "height": 850
   },
-  "images/screens/comp-config/addons-library.png": {
-    "width": 1379,
-    "height": 1123
-  },
-  "images/screens/comp-config/configure-company-role-permissions.png": {
-    "width": 1385,
-    "height": 1042
-  },
   "images/screens/comp-config/framework-apply-cycles.png": {
     "width": 1410,
     "height": 775
@@ -71,21 +63,9 @@
     "width": 1405,
     "height": 580
   },
-  "images/screens/comp-config/investigation-apimanagement.png": {
-    "width": 1398,
-    "height": 887
-  },
-  "images/screens/comp-config/org-structure.png": {
-    "width": 1400,
-    "height": 928
-  },
   "images/screens/comp-config/set-company-standards.png": {
     "width": 1397,
     "height": 977
-  },
-  "images/screens/comp-config/set-traction-routes-depots.png": {
-    "width": 1392,
-    "height": 645
   },
   "images/screens/cycle-builder/add-competency-criteria.png": {
     "width": 1385,
@@ -199,10 +179,6 @@
     "width": 1386,
     "height": 797
   },
-  "images/screens/main-sys/addons-page.png": {
-    "width": 1581,
-    "height": 1055
-  },
   "images/screens/main-sys/adminmenu.png": {
     "width": 489,
     "height": 1024
@@ -238,10 +214,6 @@
   "images/screens/main-sys/reporting-analytics2.png": {
     "width": 1373,
     "height": 1073
-  },
-  "images/screens/main-sys/role-permissions-configure.png": {
-    "width": 1408,
-    "height": 1116
   },
   "images/screens/main-sys/timings-standards.png": {
     "width": 1572,
@@ -338,18 +310,6 @@
   "images/screens/tasks/workspace-tasks-addon.png": {
     "width": 1024,
     "height": 173
-  },
-  "images/screens/train-routes/add-route.png": {
-    "width": 1384,
-    "height": 522
-  },
-  "images/screens/train-routes/add-traction.png": {
-    "width": 1552,
-    "height": 517
-  },
-  "images/screens/train-routes/traction-route-overview.png": {
-    "width": 1397,
-    "height": 706
   },
   "images/screens/trainee-addon/01-trainee-module-pathway.png": {
     "width": 1024,
