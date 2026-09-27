@@ -2787,6 +2787,26 @@ function languagesHubPage() {
     )
     .join("\n");
 
+  const globePlaces = languages.items.map((lang) => {
+    const places =
+      Array.isArray(lang.places) && lang.places.length
+        ? lang.places
+        : [{ name: lang.region || lang.name, country: lang.region || "", lat: lang.lat, lng: lang.lng, primary: true }];
+    return {
+      code: lang.code,
+      name: lang.name,
+      nativeName: lang.nativeName,
+      region: lang.region || "",
+      places: places.map((place) => ({
+        name: place.name,
+        country: place.country || "",
+        lat: place.lat,
+        lng: place.lng,
+        primary: Boolean(place.primary),
+      })),
+    };
+  });
+
   const pageSeo = featureSeo(group);
 
   return (
@@ -2809,6 +2829,7 @@ function languagesHubPage() {
     </section>
 
     <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
+      <script type="application/json" data-lang-globe-data>${JSON.stringify(globePlaces).replace(/</g, "\\u003c")}</script>
       <div class="container lang-globe__inner">
         <div class="lang-globe__copy">
           <p class="lang-globe__eyebrow">Global interface coverage</p>

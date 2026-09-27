@@ -34,9 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=183397622" />
-  <link rel="stylesheet" href="../css/pages.css?v=183397622" />
-  <link rel="stylesheet" href="../css/languages-globe.css?v=183397622" />
+  <link rel="stylesheet" href="../css/style.css?v=242379224" />
+  <link rel="stylesheet" href="../css/pages.css?v=242379224" />
+  <link rel="stylesheet" href="../css/languages-globe.css?v=242379224" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -307,14 +307,15 @@
     </section>
 
     <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
+      <script type="application/json" data-lang-globe-data>[{"code":"en","name":"English","nativeName":"English","region":"UK, Ireland, North America, Australia & more","places":[{"name":"London","country":"United Kingdom","lat":51.5074,"lng":-0.1278,"primary":true},{"name":"Dublin","country":"Ireland","lat":53.3498,"lng":-6.2603,"primary":false},{"name":"New York","country":"United States","lat":40.7128,"lng":-74.006,"primary":false},{"name":"Toronto","country":"Canada","lat":43.6532,"lng":-79.3832,"primary":false},{"name":"Sydney","country":"Australia","lat":-33.8688,"lng":151.2093,"primary":false},{"name":"Auckland","country":"New Zealand","lat":-36.8509,"lng":174.7645,"primary":false},{"name":"Cape Town","country":"South Africa","lat":-33.9249,"lng":18.4241,"primary":false},{"name":"Singapore","country":"Singapore","lat":1.3521,"lng":103.8198,"primary":false}]},{"code":"es","name":"Spanish","nativeName":"Español","region":"Spain & Latin America","places":[{"name":"Madrid","country":"Spain","lat":40.4168,"lng":-3.7038,"primary":true},{"name":"Barcelona","country":"Spain","lat":41.3874,"lng":2.1686,"primary":false},{"name":"Mexico City","country":"Mexico","lat":19.4326,"lng":-99.1332,"primary":false},{"name":"Buenos Aires","country":"Argentina","lat":-34.6037,"lng":-58.3816,"primary":false},{"name":"Bogotá","country":"Colombia","lat":4.711,"lng":-74.0721,"primary":false},{"name":"Santiago","country":"Chile","lat":-33.4489,"lng":-70.6693,"primary":false},{"name":"Lima","country":"Peru","lat":-12.0464,"lng":-77.0428,"primary":false},{"name":"Miami","country":"United States","lat":25.7617,"lng":-80.1918,"primary":false}]},{"code":"fr","name":"French","nativeName":"Français","region":"France, Belgium, Canada & Francophone Africa","places":[{"name":"Paris","country":"France","lat":48.8566,"lng":2.3522,"primary":true},{"name":"Lyon","country":"France","lat":45.764,"lng":4.8357,"primary":false},{"name":"Brussels","country":"Belgium","lat":50.8503,"lng":4.3517,"primary":false},{"name":"Geneva","country":"Switzerland","lat":46.2044,"lng":6.1432,"primary":false},{"name":"Montreal","country":"Canada","lat":45.5017,"lng":-73.5673,"primary":false},{"name":"Dakar","country":"Senegal","lat":14.7167,"lng":-17.4677,"primary":false},{"name":"Abidjan","country":"Côte d'Ivoire","lat":5.36,"lng":-4.0083,"primary":false}]},{"code":"cy","name":"Welsh","nativeName":"Cymraeg","region":"Wales","places":[{"name":"Cardiff","country":"Wales","lat":51.4816,"lng":-3.1791,"primary":true},{"name":"Swansea","country":"Wales","lat":51.6214,"lng":-3.9436,"primary":false},{"name":"Bangor","country":"Wales","lat":53.2274,"lng":-4.1293,"primary":false},{"name":"Aberystwyth","country":"Wales","lat":52.4153,"lng":-4.0829,"primary":false}]},{"code":"it","name":"Italian","nativeName":"Italiano","region":"Italy & Italian-speaking Switzerland","places":[{"name":"Rome","country":"Italy","lat":41.9028,"lng":12.4964,"primary":true},{"name":"Milan","country":"Italy","lat":45.4642,"lng":9.19,"primary":false},{"name":"Naples","country":"Italy","lat":40.8518,"lng":14.2681,"primary":false},{"name":"Turin","country":"Italy","lat":45.0703,"lng":7.6869,"primary":false},{"name":"Lugano","country":"Switzerland","lat":46.0037,"lng":8.9511,"primary":false}]},{"code":"de","name":"German","nativeName":"Deutsch","region":"Germany, Austria & Switzerland","places":[{"name":"Berlin","country":"Germany","lat":52.52,"lng":13.405,"primary":true},{"name":"Munich","country":"Germany","lat":48.1351,"lng":11.582,"primary":false},{"name":"Frankfurt","country":"Germany","lat":50.1109,"lng":8.6821,"primary":false},{"name":"Vienna","country":"Austria","lat":48.2082,"lng":16.3738,"primary":false},{"name":"Zurich","country":"Switzerland","lat":47.3769,"lng":8.5417,"primary":false},{"name":"Bern","country":"Switzerland","lat":46.948,"lng":7.4474,"primary":false}]},{"code":"ar","name":"Arabic","nativeName":"العربية","region":"Middle East & North Africa","places":[{"name":"Cairo","country":"Egypt","lat":30.0444,"lng":31.2357,"primary":true},{"name":"Riyadh","country":"Saudi Arabia","lat":24.7136,"lng":46.6753,"primary":false},{"name":"Dubai","country":"United Arab Emirates","lat":25.2048,"lng":55.2708,"primary":false},{"name":"Casablanca","country":"Morocco","lat":33.5731,"lng":-7.5898,"primary":false},{"name":"Amman","country":"Jordan","lat":31.9454,"lng":35.9284,"primary":false},{"name":"Doha","country":"Qatar","lat":25.2854,"lng":51.531,"primary":false},{"name":"Tunis","country":"Tunisia","lat":36.8065,"lng":10.1815,"primary":false}]}]</script>
       <div class="container lang-globe__inner">
         <div class="lang-globe__copy">
           <p class="lang-globe__eyebrow">Global interface coverage</p>
           <h2>Coverage across your network</h2>
-          <p>Explore the languages available in Rail Intel. Select a marker or a language below — the globe focuses on where that interface language is typically used.</p>
+          <p>Explore where each Rail Intel interface language is used. Select a language — markers light up across the regions that speak it.</p>
           <ul class="lang-globe__list">
               <li>
-                <button type="button" class="lang-globe__item is-active" data-lang-globe-select="en" data-lang-name="English" data-lang-native="English" data-lang-region="United Kingdom" data-lang-lat="51.5074" data-lang-lng="-0.1278" aria-pressed="true">
+                <button type="button" class="lang-globe__item is-active" data-lang-globe-select="en" data-lang-name="English" data-lang-native="English" data-lang-region="UK, Ireland, North America, Australia &amp; more" data-lang-lat="51.5074" data-lang-lng="-0.1278" aria-pressed="true">
                   <img class="lang-globe__flag" src="../images/flags/gb.svg" alt="" width="28" height="20" loading="lazy" />
                   <span class="lang-globe__meta">
                     <span class="lang-globe__name">English</span>
@@ -324,7 +325,7 @@
                 </button>
               </li>
               <li>
-                <button type="button" class="lang-globe__item" data-lang-globe-select="es" data-lang-name="Spanish" data-lang-native="Español" data-lang-region="Spain" data-lang-lat="40.4168" data-lang-lng="-3.7038" aria-pressed="false">
+                <button type="button" class="lang-globe__item" data-lang-globe-select="es" data-lang-name="Spanish" data-lang-native="Español" data-lang-region="Spain &amp; Latin America" data-lang-lat="40.4168" data-lang-lng="-3.7038" aria-pressed="false">
                   <img class="lang-globe__flag" src="../images/flags/es.svg" alt="" width="28" height="20" loading="lazy" />
                   <span class="lang-globe__meta">
                     <span class="lang-globe__name">Spanish</span>
@@ -334,7 +335,7 @@
                 </button>
               </li>
               <li>
-                <button type="button" class="lang-globe__item" data-lang-globe-select="fr" data-lang-name="French" data-lang-native="Français" data-lang-region="France" data-lang-lat="48.8566" data-lang-lng="2.3522" aria-pressed="false">
+                <button type="button" class="lang-globe__item" data-lang-globe-select="fr" data-lang-name="French" data-lang-native="Français" data-lang-region="France, Belgium, Canada &amp; Francophone Africa" data-lang-lat="48.8566" data-lang-lng="2.3522" aria-pressed="false">
                   <img class="lang-globe__flag" src="../images/flags/fr.svg" alt="" width="28" height="20" loading="lazy" />
                   <span class="lang-globe__meta">
                     <span class="lang-globe__name">French</span>
@@ -354,7 +355,7 @@
                 </button>
               </li>
               <li>
-                <button type="button" class="lang-globe__item" data-lang-globe-select="it" data-lang-name="Italian" data-lang-native="Italiano" data-lang-region="Italy" data-lang-lat="41.9028" data-lang-lng="12.4964" aria-pressed="false">
+                <button type="button" class="lang-globe__item" data-lang-globe-select="it" data-lang-name="Italian" data-lang-native="Italiano" data-lang-region="Italy &amp; Italian-speaking Switzerland" data-lang-lat="41.9028" data-lang-lng="12.4964" aria-pressed="false">
                   <img class="lang-globe__flag" src="../images/flags/it.svg" alt="" width="28" height="20" loading="lazy" />
                   <span class="lang-globe__meta">
                     <span class="lang-globe__name">Italian</span>
@@ -364,7 +365,7 @@
                 </button>
               </li>
               <li>
-                <button type="button" class="lang-globe__item" data-lang-globe-select="de" data-lang-name="German" data-lang-native="Deutsch" data-lang-region="Germany" data-lang-lat="52.52" data-lang-lng="13.405" aria-pressed="false">
+                <button type="button" class="lang-globe__item" data-lang-globe-select="de" data-lang-name="German" data-lang-native="Deutsch" data-lang-region="Germany, Austria &amp; Switzerland" data-lang-lat="52.52" data-lang-lng="13.405" aria-pressed="false">
                   <img class="lang-globe__flag" src="../images/flags/de.svg" alt="" width="28" height="20" loading="lazy" />
                   <span class="lang-globe__meta">
                     <span class="lang-globe__name">German</span>
@@ -577,9 +578,9 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=183397622"></script>
-  <script src="../js/newsletter.js?v=183397622"></script>
-  <script src="../js/share.js?v=183397622"></script>
-  <script type="module" src="../js/languages-globe.js?v=183397622"></script>
+  <script src="../js/site.js?v=242379224"></script>
+  <script src="../js/newsletter.js?v=242379224"></script>
+  <script src="../js/share.js?v=242379224"></script>
+  <script type="module" src="../js/languages-globe.js?v=242379224"></script>
 </body>
 </html>
