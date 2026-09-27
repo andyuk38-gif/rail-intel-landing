@@ -49,12 +49,16 @@
 
 .im-app {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   color: var(--im-text);
   font-family: var(--font-sans);
   min-height: 0;
 }
 
 .im-app__bar {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -153,18 +157,28 @@
   background: var(--im-teal);
 }
 
+/* Stack panels in one grid cell so tab changes do not resize the page. */
 .im-panel {
-  display: none;
+  grid-column: 1;
+  grid-row: 2;
+  display: block;
   padding: 1rem 1.25rem 1.15rem 1.65rem;
-  animation: im-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .im-panel.is-active {
-  display: block;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1;
+  animation: im-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .im-panel[hidden] {
-  display: none !important;
+  display: block !important;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .im-demo__nav {

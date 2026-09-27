@@ -508,7 +508,7 @@ export function renderIncidentsRecordDemo() {
 ${listPanel()}
 ${allocatedPanel()}`,
     aria: "Incidents interactive preview",
-    note: "Interactive preview — choose a tab to take control; autoplay stops.",
+    note: "Interactive preview — choose a tab to switch views.",
   });
 }
 
@@ -523,7 +523,7 @@ export function renderIncidentsMonitoringDemo() {
     panels: `${monitoringOverviewPanel()}
 ${cdpDetailPanel()}`,
     aria: "Monitoring interactive preview",
-    note: "Interactive preview — choose a tab to take control; autoplay stops.",
+    note: "Interactive preview — choose a tab to switch views.",
   });
 }
 
@@ -539,7 +539,7 @@ export function renderIncidentsSupportDemo() {
 ${supportDetailPanel()}
 ${supportSubmittedPanel()}`,
     aria: "Performance support interactive preview",
-    note: "Interactive preview — choose a tab to take control; autoplay stops.",
+    note: "Interactive preview — choose a tab to switch views.",
   });
 }
 

@@ -1386,11 +1386,12 @@ export const featureGroups = [
     slug: "incidents-monitoring",
     name: "Incidents & Monitoring",
     summary: "Record incidents, allocate them to people and manage development plans.",
-    tagline: "From incident to competence, in one thread",
+    tagline: "Incidents linked to people and development plans",
     lead:
-      "An incident is only closed when the competence question behind it has been answered. Rail Intel links incidents to the people involved and to the development plans raised as a result, so the thread from event to resolution stays intact.",
+      "Recording an incident is only the start. Rail Intel links it to the people involved and to any development plans raised as a result, so you can follow the thread from what happened through to how competence was addressed.",
     interactiveDemos: true,
     hideCta: true,
+    hideHeroActions: true,
     heroShot: {
       src: "images/product/incidents-spad-hero.png",
       alt: "Photorealistic graphic of a Class 810-style train on the rightmost track, red taillights visible, mid-pass at a red railway signal.",
@@ -1403,6 +1404,7 @@ export const featureGroups = [
     sections: [
       {
         heading: "Recording and managing incidents",
+        fullWidth: true,
         body: [
           "Incidents are recorded company-wide with type, severity, date and the action taken, then allocated to the employees involved. The management list gives the operational picture; the employee record shows what is allocated to that individual.",
         ],
@@ -1417,6 +1419,7 @@ export const featureGroups = [
       },
       {
         heading: "Performance and support plans",
+        fullWidth: true,
         body: [
           "Where a person needs additional support, a performance and support plan is raised, signed by both trainer and trainee, and tracked to completion. Plans are available on the Monitoring tab when the Trainee Driver module is active.",
         ],
