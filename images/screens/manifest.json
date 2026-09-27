@@ -63,6 +63,18 @@
     "width": 559,
     "height": 277
   },
+  "images/screens/cab-passes/cab-pass-print-front.png": {
+    "width": 1588,
+    "height": 2246
+  },
+  "images/screens/cab-passes/cab-pass-print-layout-panel.png": {
+    "width": 1840,
+    "height": 964
+  },
+  "images/screens/cab-passes/cab-pass-print-reverse.png": {
+    "width": 1588,
+    "height": 2248
+  },
   "images/screens/cab-passes/verification-report-cab-passes.png": {
     "width": 1024,
     "height": 850

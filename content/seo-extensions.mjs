@@ -494,6 +494,11 @@ export const seoExtensions = {
         answer:
           "Expired passes stay on the employee record with status clear at a glance, and the QR remains available for audit. From the pass preview you can renew, revoke, edit or delete without leaving the Cab Passes tab.",
       },
+      {
+        question: "Can I print a physical credit-card cab pass?",
+        answer:
+          "Yes. From Pass layout & print on the Cab Passes tab, Print credit-card size opens a two-page A4 preview (front and reverse) at ISO ID-1 size with cut guides. Print double-sided with flip on long edge, then cut along the dotted line.",
+      },
     ],
     relatedLinks: [],
   },

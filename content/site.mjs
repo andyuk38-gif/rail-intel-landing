@@ -1761,7 +1761,7 @@ export const featureGroups = [
         body: [
           "From colour choice to QR verification, the flow stays on the employee record. No separate system, no login for the person scanning the pass.",
           "You pick the pass colour first, green, yellow, blue, red or black, then fill the same fields as a standard driving cab pass: validity dates, routes, endorsements and issuer signature. Nothing is created until you confirm.",
-          "Once issued, a QR sits beside the photo for public verification in a browser. Email a copy to the employee with a view link, and manage renew, revoke, edit or delete from the pass preview without leaving the Cab Passes tab.",
+          "Once issued, a QR sits beside the photo for public verification in a browser. Email a copy to the employee with a view link, manage renew, revoke, edit or delete from the pass preview, and print a credit-card layout from Pass layout & print without leaving the Cab Passes tab.",
         ],
         bulletTiles: true,
         copyTiles: true,
@@ -1788,6 +1788,61 @@ export const featureGroups = [
           },
         ],
         interactiveDemo: "cms-cab-passes",
+      },
+      {
+        heading: "Print a credit-card cab pass",
+        body: [
+          "From Pass layout & print on the Cab Passes tab, the issued pass sits in a landscape ISO ID-1 preview (85.6 × 53.98 mm). Tap the card to flip between the front and the conditions of use on the reverse.",
+          "Print credit-card size opens a two-page A4 print preview — page 1 is the front of the pass, page 2 is the reverse rotated for duplex alignment. Both pages share cut guides, scissors marks and step-by-step instructions so the physical card lines up when you print double-sided with flip on long edge.",
+          "Cut along the dotted line after printing. Optional laminating keeps a durable pocket pass that still matches the live digital record and QR.",
+        ],
+        bulletTiles: true,
+        copyTiles: true,
+        tiles: [
+          {
+            title: "ISO ID-1 layout",
+            detail: "85.6 × 53.98 mm landscape — standard credit-card size.",
+            accent: "#38bdf8",
+          },
+          {
+            title: "Tap to flip",
+            detail: "front with photo and QR; reverse with conditions of use.",
+            accent: "#f59e0b",
+          },
+          {
+            title: "A4 print preview",
+            detail: "two pages with cut guides for duplex, flip on long edge.",
+            accent: "#34d399",
+          },
+          {
+            title: "Print & cut",
+            detail: "optional laminate for a durable pocket pass.",
+            accent: "#a78bfa",
+          },
+        ],
+        shots: [
+          {
+            src: "images/screens/cab-passes/cab-pass-print-layout-panel.png",
+            alt: "Pass layout and print panel with ISO ID-1 cab pass preview and Print credit-card size button",
+            caption:
+              "Pass layout & print — ISO ID-1 preview on the Cab Passes tab, with Print credit-card size.",
+            scale: 1,
+          },
+          {
+            src: "images/screens/cab-passes/cab-pass-print-front.png",
+            alt: "A4 print preview page 1 showing the front of the driving cab pass with cut guides",
+            caption:
+              "Print preview — page 1 (front) with cut guides, scissors marks and duplex instructions.",
+            scale: 1,
+          },
+          {
+            src: "images/screens/cab-passes/cab-pass-print-reverse.png",
+            alt: "A4 print preview page 2 showing the reverse conditions of use rotated for flip on long edge",
+            caption:
+              "Print preview — page 2 (reverse) rotated for flip on long edge so the back aligns when cut.",
+            scale: 1,
+          },
+        ],
       },
       {
         heading: "On QA verification reports",
