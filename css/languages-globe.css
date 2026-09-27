@@ -297,19 +297,29 @@
   color: color-mix(in srgb, var(--lang-globe-accent) 75%, var(--text-muted));
 }
 
+.lang-globe__stage-wrap {
+  width: 100%;
+  padding-inline: clamp(1rem, 3vw, 1.75rem);
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+}
+
 .lang-globe__stage {
   position: relative;
-  width: 100%;
-  height: min(78vh, 46rem);
-  min-height: 30rem;
-  border-radius: 0;
+  width: min(100%, 52rem);
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-height: 0;
+  margin-inline: auto;
+  border-radius: 1.25rem;
   overflow: hidden;
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
     radial-gradient(circle at 50% 48%, rgba(25, 45, 90, 0.35), transparent 52%),
     linear-gradient(180deg, #02050a 0%, #070b14 55%, #04070d 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 48px rgba(0, 0, 0, 0.35);
 }
 
 .lang-globe__canvas-wrap {
@@ -337,7 +347,7 @@
 
 .lang-globe__flat {
   position: relative;
-  width: min(100%, 100%);
+  width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
@@ -346,9 +356,9 @@
 
 .lang-globe__flat-glow {
   position: absolute;
-  width: min(92%, 36rem);
+  width: min(90%, 34rem);
   aspect-ratio: 1;
-  max-height: 94%;
+  max-height: 90%;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(70, 120, 220, 0.28), transparent 68%);
   filter: blur(22px);
@@ -357,9 +367,9 @@
 
 .lang-globe__flat-sphere {
   position: relative;
-  width: min(92%, 36rem);
+  width: min(90%, 34rem);
   aspect-ratio: 1;
-  max-height: 94%;
+  max-height: 90%;
   border-radius: 50%;
   overflow: hidden;
   transform: rotateX(6deg) rotateY(-10deg);
@@ -394,9 +404,9 @@
 
 .lang-globe__flat-ring {
   position: absolute;
-  width: min(96%, 37.5rem);
+  width: min(94%, 35.5rem);
   aspect-ratio: 1;
-  max-height: 98%;
+  max-height: 94%;
   border-radius: 50%;
   border: 1px solid rgba(245, 158, 11, 0.18);
   pointer-events: none;
@@ -405,9 +415,9 @@
 
 .lang-globe__flat-markers {
   position: absolute;
-  width: min(92%, 36rem);
+  width: min(90%, 34rem);
   aspect-ratio: 1;
-  max-height: 94%;
+  max-height: 90%;
   border-radius: 50%;
 }
 
@@ -503,6 +513,63 @@
   left: 1.15rem;
   bottom: 1.15rem;
   z-index: 3;
+  pointer-events: none;
+}
+
+.lang-globe__zoom {
+  position: absolute;
+  right: 1.15rem;
+  top: 1.15rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.lang-globe__zoom-btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.65rem;
+  background: rgba(8, 12, 18, 0.82);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-globe__zoom-btn:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(14, 18, 26, 0.94);
+  color: var(--lang-globe-accent);
+}
+
+.lang-globe__zoom-btn:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--lang-globe-accent) 70%, transparent);
+  outline-offset: 2px;
+}
+
+.lang-globe__zoom-btn:active {
+  transform: translateY(1px);
+}
+
+.lang-globe__zoom-btn[disabled] {
+  opacity: 0.4;
+  cursor: default;
   pointer-events: none;
 }
 
@@ -683,9 +750,12 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .lang-globe__stage-wrap {
+    padding-bottom: 1.75rem;
+  }
+
   .lang-globe__stage {
-    height: min(64vh, 36rem);
-    min-height: 22rem;
+    width: min(100%, 40rem);
   }
 
   .lang-globe__hint {
@@ -722,13 +792,28 @@
     min-width: min(68vw, 12.5rem);
   }
 
+  .lang-globe__stage-wrap {
+    padding-inline: 0.85rem;
+    padding-bottom: 1.5rem;
+  }
+
   .lang-globe__stage {
-    height: min(56vh, 26rem);
-    min-height: 18rem;
+    width: 100%;
+    border-radius: 1rem;
   }
 
   .lang-globe__hint {
     display: none;
+  }
+
+  .lang-globe__zoom {
+    right: 0.75rem;
+    top: 0.75rem;
+  }
+
+  .lang-globe__zoom-btn {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .lang-globe__place-chip {

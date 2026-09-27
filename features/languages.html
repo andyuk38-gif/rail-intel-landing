@@ -34,9 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=29745704" />
-  <link rel="stylesheet" href="../css/pages.css?v=29745704" />
-  <link rel="stylesheet" href="../css/languages-globe.css?v=29745704" />
+  <link rel="stylesheet" href="../css/style.css?v=189795366" />
+  <link rel="stylesheet" href="../css/pages.css?v=189795366" />
+  <link rel="stylesheet" href="../css/languages-globe.css?v=189795366" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -397,15 +397,25 @@
             <div class="lang-globe__places" data-lang-globe-places></div>
           </div>
         </div>
-        <div class="lang-globe__stage" data-lang-globe-stage>
-          <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
-          <div class="lang-globe__overlay" aria-hidden="true"></div>
-          <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
-          <div class="lang-globe__hud" aria-hidden="true">
-            <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>7 languages live</span>
+        <div class="lang-globe__stage-wrap">
+          <div class="lang-globe__stage" data-lang-globe-stage>
+            <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
+            <div class="lang-globe__overlay" aria-hidden="true"></div>
+            <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
+            <div class="lang-globe__hud" aria-hidden="true">
+              <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>7 languages live</span>
+            </div>
+            <div class="lang-globe__zoom" data-lang-globe-zoom>
+              <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-in aria-label="Zoom in">
+                <span aria-hidden="true">+</span>
+              </button>
+              <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-out aria-label="Zoom out">
+                <span aria-hidden="true">−</span>
+              </button>
+            </div>
+            <p class="lang-globe__hint">Click a city · Drag to explore · Use +/− to zoom</p>
+            <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
           </div>
-          <p class="lang-globe__hint">Click a city · Drag to explore</p>
-          <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
         </div>
       </div>
     </section>
@@ -588,9 +598,9 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=29745704"></script>
-  <script src="../js/newsletter.js?v=29745704"></script>
-  <script src="../js/share.js?v=29745704"></script>
-  <script type="module" src="../js/languages-globe.js?v=29745704"></script>
+  <script src="../js/site.js?v=189795366"></script>
+  <script src="../js/newsletter.js?v=189795366"></script>
+  <script src="../js/share.js?v=189795366"></script>
+  <script type="module" src="../js/languages-globe.js?v=189795366"></script>
 </body>
 </html>

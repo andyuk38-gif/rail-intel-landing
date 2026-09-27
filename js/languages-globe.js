@@ -289,6 +289,36 @@ function boot(root) {
 
     const hint = root.querySelector(".lang-globe__hint");
     if (hint) hint.textContent = "Choose a language, then a city";
+
+    // Flat zoom: scale the disc within the square frame
+    const zoomRoot = stage.querySelector("[data-lang-globe-zoom]");
+    let flatScale = 1;
+    const FLAT_MIN = 0.85;
+    const FLAT_MAX = 1.55;
+    function applyFlatZoom() {
+      disc.style.transform = "scale(" + flatScale + ")";
+      const zoomInBtn = stage.querySelector("[data-lang-globe-zoom-in]");
+      const zoomOutBtn = stage.querySelector("[data-lang-globe-zoom-out]");
+      if (zoomInBtn) zoomInBtn.disabled = flatScale >= FLAT_MAX - 0.01;
+      if (zoomOutBtn) zoomOutBtn.disabled = flatScale <= FLAT_MIN + 0.01;
+    }
+    if (zoomRoot) {
+      disc.style.transformOrigin = "center center";
+      disc.style.transition = reducedMotion ? "none" : "transform 0.28s ease";
+      zoomRoot.addEventListener("click", (event) => {
+        const btn = event.target.closest("[data-lang-globe-zoom-in], [data-lang-globe-zoom-out]");
+        if (!btn) return;
+        event.preventDefault();
+        if (btn.hasAttribute("data-lang-globe-zoom-in")) {
+          flatScale = Math.min(FLAT_MAX, flatScale * 1.18);
+        } else {
+          flatScale = Math.max(FLAT_MIN, flatScale / 1.18);
+        }
+        applyFlatZoom();
+      });
+      applyFlatZoom();
+    }
+
     selectPlace(activeCode, activePlaceId, false);
   }
 
@@ -310,8 +340,8 @@ function boot(root) {
     const GLOBE_RADIUS = 1.8;
     const MARKER_R = 0.032;
     const FOV = 36;
-    // Keep the full sphere (plus atmosphere) inside the stage on load
-    const FILL = 0.74;
+    // Slight padding between globe edge and square frame
+    const FILL = 0.88;
     const NIGHT_TEX =
       "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-night.jpg";
     const BUMP_TEX =
@@ -323,11 +353,14 @@ function boot(root) {
 
     function cameraDistance() {
       const halfFov = (FOV * Math.PI) / 360;
-      // Include atmosphere shell so nothing is cropped
-      return (GLOBE_RADIUS * 1.08) / (Math.tan(halfFov) * FILL);
+      // Include atmosphere shell so nothing is cropped at default zoom
+      return (GLOBE_RADIUS * 1.06) / (Math.tan(halfFov) * FILL);
     }
 
     const CAM_DIST = cameraDistance();
+    const ZOOM_MIN = CAM_DIST * 0.55;
+    const ZOOM_MAX = CAM_DIST * 1.55;
+    const ZOOM_STEP = 0.82;
 
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     const isNarrow = window.matchMedia("(max-width: 960px)").matches;
@@ -355,15 +388,16 @@ function boot(root) {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(FOV, width / height, 0.1, 100);
-    camera.position.set(0.15, 0.25, CAM_DIST);
+    camera.position.set(0.12, 0.2, CAM_DIST);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.enablePan = false;
-    controls.minDistance = CAM_DIST * 0.92;
-    controls.maxDistance = CAM_DIST * 1.2;
-    controls.enableZoom = !mobileLike;
+    controls.minDistance = ZOOM_MIN;
+    controls.maxDistance = ZOOM_MAX;
+    controls.enableZoom = true;
+    controls.zoomSpeed = mobileLike ? 0.7 : 0.9;
     controls.rotateSpeed = mobileLike ? 0.55 : 0.7;
     controls.autoRotate = false;
     controls.target.set(0, 0, 0);
@@ -634,9 +668,12 @@ function boot(root) {
       syncMarkers(code, place.id);
 
       const target = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS);
-      const dist = cameraDistance();
+      const dist = Math.min(
+        Math.max(camera.position.length() || CAM_DIST, ZOOM_MIN),
+        ZOOM_MAX
+      );
       const desired = target.clone().normalize().multiplyScalar(dist);
-      desired.y += 0.08;
+      desired.y += 0.06;
       desired.setLength(dist);
 
       if (!animate || reducedMotion) {
@@ -709,7 +746,10 @@ function boot(root) {
         camera.position.lerpVectors(focusTween.start, focusTween.end, eased);
         controls.target.set(0, 0, 0);
         controls.update();
-        if (t >= 1) focusTween = null;
+        if (t >= 1) {
+          focusTween = null;
+          syncZoomButtons();
+        }
       }
 
       markers.forEach((marker) => {
@@ -776,8 +816,57 @@ function boot(root) {
       renderer.dispose();
     });
 
+    function currentZoomDistance() {
+      return camera.position.distanceTo(controls.target);
+    }
+
+    function setZoomDistance(nextDist, animateZoom) {
+      const dist = Math.min(Math.max(nextDist, ZOOM_MIN), ZOOM_MAX);
+      const offset = camera.position.clone().sub(controls.target).normalize().multiplyScalar(dist);
+      const end = controls.target.clone().add(offset);
+      if (!animateZoom || reducedMotion) {
+        camera.position.copy(end);
+        controls.update();
+        syncZoomButtons();
+        return;
+      }
+      focusTween = {
+        start: camera.position.clone(),
+        end,
+        startTime: performance.now(),
+        duration: 280,
+      };
+      syncZoomButtons();
+    }
+
+    function zoomBy(factor) {
+      setZoomDistance(currentZoomDistance() * factor, true);
+    }
+
+    function syncZoomButtons() {
+      const dist = currentZoomDistance();
+      const zoomInBtn = stage.querySelector("[data-lang-globe-zoom-in]");
+      const zoomOutBtn = stage.querySelector("[data-lang-globe-zoom-out]");
+      if (zoomInBtn) zoomInBtn.disabled = dist <= ZOOM_MIN + 0.02;
+      if (zoomOutBtn) zoomOutBtn.disabled = dist >= ZOOM_MAX - 0.02;
+    }
+
+    const zoomRoot = stage.querySelector("[data-lang-globe-zoom]");
+    if (zoomRoot) {
+      zoomRoot.addEventListener("click", (event) => {
+        const btn = event.target.closest("[data-lang-globe-zoom-in], [data-lang-globe-zoom-out]");
+        if (!btn) return;
+        event.preventDefault();
+        if (btn.hasAttribute("data-lang-globe-zoom-in")) zoomBy(ZOOM_STEP);
+        else zoomBy(1 / ZOOM_STEP);
+      });
+    }
+
+    controls.addEventListener("change", syncZoomButtons);
+    syncZoomButtons();
+
     const hint = root.querySelector(".lang-globe__hint");
-    if (hint) hint.textContent = "Click a city · Drag to explore";
+    if (hint) hint.textContent = "Click a city · Drag to explore · Use +/− to zoom";
 
     selectPlace(activeCode, activePlaceId, false);
     animate();

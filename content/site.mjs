@@ -1937,7 +1937,7 @@ export const languages = {
     heading: "Coverage across your network",
     lead:
       "Choose a language, then jump to any city or country it covers. The night globe shows where the interface reaches.",
-    hint: "Click a city · Drag to explore",
+    hint: "Click a city · Drag to explore · Use +/− to zoom",
   },
   items: [
     {

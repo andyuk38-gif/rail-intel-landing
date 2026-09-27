@@ -2850,15 +2850,25 @@ ${globeItems}
             <div class="lang-globe__places" data-lang-globe-places></div>
           </div>
         </div>
-        <div class="lang-globe__stage" data-lang-globe-stage>
-          <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
-          <div class="lang-globe__overlay" aria-hidden="true"></div>
-          <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
-          <div class="lang-globe__hud" aria-hidden="true">
-            <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>${languages.items.length} languages live</span>
+        <div class="lang-globe__stage-wrap">
+          <div class="lang-globe__stage" data-lang-globe-stage>
+            <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
+            <div class="lang-globe__overlay" aria-hidden="true"></div>
+            <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
+            <div class="lang-globe__hud" aria-hidden="true">
+              <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>${languages.items.length} languages live</span>
+            </div>
+            <div class="lang-globe__zoom" data-lang-globe-zoom>
+              <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-in aria-label="Zoom in">
+                <span aria-hidden="true">+</span>
+              </button>
+              <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-out aria-label="Zoom out">
+                <span aria-hidden="true">−</span>
+              </button>
+            </div>
+            <p class="lang-globe__hint">${esc(languages.globe?.hint || "Drag to orbit · Click a marker to focus")}</p>
+            <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
           </div>
-          <p class="lang-globe__hint">${esc(languages.globe?.hint || "Drag to orbit · Click a marker to focus")}</p>
-          <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
         </div>
       </div>
     </section>
