@@ -1549,10 +1549,46 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
+/* Light-on-dark regulator marks (e.g. RAIB wordmark) need a dark plate — the
+   default white badge washes out white wordmarks. */
+.page-section__head-logo--dark {
+  background: #07090d;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 2px 14px rgba(0, 0, 0, 0.45);
+}
+
 .page-section__regulator-logo {
   display: block;
   width: auto;
   max-width: 10rem;
+  height: auto;
+}
+
+.page-section__regulator-logo--raib {
+  max-width: 11.5rem;
+}
+
+.page-section__head-photo {
+  margin: 0;
+  flex-shrink: 0;
+  width: min(100%, 22rem);
+  justify-self: end;
+}
+
+.page-section__head-photo-frame {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 18px 40px rgba(0, 0, 0, 0.42);
+}
+
+.page-section__head-photo-frame img {
+  display: block;
+  width: 100%;
   height: auto;
 }
 
@@ -1563,6 +1599,11 @@
 
   .page-section__head-logo {
     justify-self: start;
+  }
+
+  .page-section__head-photo {
+    justify-self: start;
+    width: min(100%, 26rem);
   }
 }
 

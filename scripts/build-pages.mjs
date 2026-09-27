@@ -1315,8 +1315,20 @@ ${renderShotList(section.shots)}
       )
     : "";
   const headLogoHtml = renderSectionHeadLogo(section.headLogo, base);
+  const headPhotoHtml = renderSectionHeadPhoto(section.headPhoto, base);
   const sectionHeadingMarkup = renderSectionHeadingMarkup(section, base);
-  const headBlock = section.headLogo
+  const headLogoPlateClass =
+    section.headLogo?.class === "raib"
+      ? "page-section__head-logo page-section__head-logo--dark"
+      : "page-section__head-logo";
+  const headMediaHtml = headPhotoHtml
+    ? headPhotoHtml
+    : section.headLogo
+      ? `            <div class="${headLogoPlateClass}">
+${headLogoHtml}
+            </div>`
+      : "";
+  const headBlock = headMediaHtml
     ? `        <div class="page-section__head page-section__head--with-logo">
 ${sectionHeadingMarkup}
           <div class="page-section__head-row">
@@ -1324,9 +1336,7 @@ ${sectionHeadingMarkup}
 ${body}
 ${bullets}
             </div>
-            <div class="page-section__head-logo">
-${headLogoHtml}
-            </div>
+${headMediaHtml}
           </div>
         </div>`
     : section.headShot
@@ -2307,8 +2317,22 @@ function renderSectionHeadLogo(logo, base) {
 
   const width = logo.width ? ` width="${logo.width}"` : "";
   const height = logo.height ? ` height="${logo.height}"` : "";
+  const modifier = logo.class ? ` page-section__regulator-logo--${esc(logo.class)}` : "";
 
-  return `            <img class="page-section__regulator-logo" src="${base}${esc(logo.src)}" alt="${esc(logo.alt)}"${width}${height} loading="lazy" decoding="async" />`;
+  return `            <img class="page-section__regulator-logo${modifier}" src="${base}${esc(logo.src)}" alt="${esc(logo.alt)}"${width}${height} loading="lazy" decoding="async" />`;
+}
+
+function renderSectionHeadPhoto(photo, base) {
+  if (!photo) return "";
+
+  const width = photo.width ? ` width="${photo.width}"` : "";
+  const height = photo.height ? ` height="${photo.height}"` : "";
+
+  return `            <figure class="page-section__head-photo">
+              <div class="page-section__head-photo-frame">
+                <img src="${base}${esc(photo.src)}" alt="${esc(photo.alt)}"${width}${height} loading="lazy" decoding="async" />
+              </div>
+            </figure>`;
 }
 
 function renderSectionHeading(section, base) {

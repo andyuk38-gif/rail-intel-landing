@@ -1232,6 +1232,19 @@ export const featureGroups = [
     ],
     sections: [
       {
+        heading: "RAIB requests and the SPOC",
+        body: [
+          "When the Rail Accident Investigation Branch (RAIB) opens an inquiry, your organisation nominates a Single Point of Contact (SPOC). The SPOC is the person investigators liaise with on evidence, access and the employee records they need to review.",
+          "In normal practice that role sits with the company administrator. In Rail Intel CMS, only a company administrator can apply or release a profile lock, so the SPOC can freeze the relevant record when it becomes material and keep it stable for the duration of the inquiry.",
+        ],
+        headPhoto: {
+          src: "images/regulators/raib-signage.jpg",
+          alt: "Rail Accident Investigation Branch (RAIB) building signage",
+          width: 485,
+          height: 300,
+        },
+      },
+      {
         heading: "Evidence preservation for investigations",
         layout: "aside",
         bulletTiles: true,
@@ -1257,19 +1270,6 @@ export const featureGroups = [
           heading: "Everything here is included",
           body:
             "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
-        },
-      },
-      {
-        heading: "RAIB requests and the SPOC",
-        body: [
-          "When the Rail Accident Investigation Branch (RAIB) opens an inquiry, your organisation nominates a Single Point of Contact (SPOC). The SPOC is the person investigators liaise with on evidence, access and the employee records they need to review.",
-          "In normal practice that role sits with the company administrator. In Rail Intel CMS, only a company administrator can apply or release a profile lock, so the SPOC can freeze the relevant record when it becomes material and keep it stable for the duration of the inquiry.",
-        ],
-        headLogo: {
-          src: "images/regulators/raib.png",
-          alt: "Rail Accident Investigation Branch (RAIB)",
-          width: 250,
-          height: 86,
         },
       },
     ],
