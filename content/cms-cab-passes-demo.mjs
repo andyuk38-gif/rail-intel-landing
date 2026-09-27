@@ -161,10 +161,13 @@ function colourOptions({ selected = "green" } = {}) {
 
 export function renderCmsCabPassesHero(base = "../") {
   return `            <figure class="cms-cab-hero reveal" aria-label="Issued green driving cab pass with SCAN TO VERIFY QR">
-              <div class="cms-cab-hero__stage">
-                ${passCard({ colour: "green", logoBase: base })}
-                ${scanPanel()}
-              </div>
+              ${shotImg(
+                base,
+                "images/screens/cab-passes/green-pass-issued-dark.png",
+                "Issued green driving cab pass with SCAN TO VERIFY QR",
+                559,
+                277
+              )}
               <figcaption class="cms-cab-hero__caption">Issued pass with QR, scan to verify without a login.</figcaption>
             </figure>`;
 }
@@ -296,73 +299,50 @@ export function renderCmsCabPassesDemo(base = "../") {
                 </div>
 
                 <div class="cms-panel" data-cms-panel="3" hidden>
-                  ${issuedRow({
-                    colour: "green",
-                    subtitle: "AUTHORISED TO ASSESS",
-                    passNo: "35753718",
-                    from: "From 25th August 2026",
-                    to: "To 26th August 2026",
-                    logoBase: base,
-                  })}
+                  <div class="cms-cab-shot-wrap">
+                    ${shotImg(
+                      base,
+                      "images/screens/cab-passes/green-pass-issued-dark.png",
+                      "Issued green driving cab pass with SCAN TO VERIFY",
+                      559,
+                      277
+                    )}
+                  </div>
                 </div>
 
                 <div class="cms-panel" data-cms-panel="4" hidden>
-                  ${issuedRow({
-                    colour: "green",
-                    subtitle: "AUTHORISED TO ASSESS",
-                    passNo: "35753718",
-                    from: "From 25th August 2026",
-                    to: "To 26th August 2026",
-                    expandLabel: "Expand",
-                    logoBase: base,
-                  })}
+                  <div class="cms-cab-shot-wrap">
+                    ${shotImg(
+                      base,
+                      "images/screens/cab-passes/pass-preview-actions-dark.png",
+                      "Pass preview actions: edit, view, renew, revoke or delete",
+                      1024,
+                      221
+                    )}
+                  </div>
                 </div>
 
                 <div class="cms-panel" data-cms-panel="5" hidden>
-                  ${issuedRow({
-                    colour: "blue",
-                    subtitle: "OPERATIONAL RULES COMPETENT",
-                    passNo: "10843529",
-                    from: "From 12th January 2020",
-                    to: "To 11th January 2021",
-                    expired: true,
-                    editDisabled: true,
-                    logoBase: base,
-                  })}
+                  <div class="cms-cab-shot-wrap">
+                    ${shotImg(
+                      base,
+                      "images/screens/cab-passes/expired-pass-issued-dark.png",
+                      "Expired blue driving cab pass with SCAN TO VERIFY still available for audit",
+                      554,
+                      280
+                    )}
+                  </div>
                 </div>
 
                 <div class="cms-panel" data-cms-panel="6" hidden>
-                  <div class="cms-cab-overview">
-                    <div class="cms-cab-overview__head">
-                      <div class="cms-cab-overview__title">
-                        <span class="cms-cab-overview__icon" aria-hidden="true">🔑</span>
-                        <div>
-                          <h3>Cab Passes</h3>
-                          <p>Digital passes show the QR on the right of the issued preview. Expand a row to manage the pass.</p>
-                        </div>
-                      </div>
-                      <button type="button" class="cms-btn cms-btn--teal">+ Add new cab pass</button>
-                    </div>
-                    ${issuedRow({
-                      colour: "blue",
-                      subtitle: "OPERATIONAL RULES COMPETENT",
-                      passNo: "10843529",
-                      from: "From 12th January 2020",
-                      to: "To 11th January 2021",
-                      expired: true,
-                      editDisabled: true,
-                      expandLabel: "Collapse",
-                      logoBase: base,
-                    })}
-                    ${issuedRow({
-                      colour: "green",
-                      subtitle: "AUTHORISED TO ASSESS",
-                      passNo: "35753718",
-                      from: "From 25th August 2026",
-                      to: "To 26th August 2026",
-                      expandLabel: "Collapse",
-                      logoBase: base,
-                    })}
+                  <div class="cms-cab-shot-wrap cms-cab-shot-wrap--scroll">
+                    ${shotImg(
+                      base,
+                      "images/screens/cab-passes/cab-passes-dark.png",
+                      "Two digital passes on the employee Cab Passes tab, including an expired blue pass and a live green assess pass",
+                      1024,
+                      757
+                    )}
                   </div>
                 </div>
               </div>
