@@ -1642,26 +1642,7 @@ export const featureGroups = [
         ],
         bulletTiles: true,
         copyTiles: true,
-        shotGrid: "viewer",
-        viewerAuto: false,
-        shots: [
-          {
-            src: "images/screens/comp-config/framework-apply-cycles.png",
-            caption: "Applying a competency framework across cycles.",
-          },
-          {
-            src: "images/screens/comp-config/grade-scale.png",
-            caption: "The grading scale used by assessors.",
-          },
-          {
-            src: "images/screens/comp-config/set-company-standards.png",
-            caption: "Company standards for assessment and competence.",
-          },
-          {
-            src: "images/screens/main-sys/timings-standards.png",
-            caption: "Timing standards including trainee daylight and darkness minimums.",
-          },
-        ],
+        interactiveDemo: "cms-standards",
       },
       {
         heading: "Traction, routes and depots",

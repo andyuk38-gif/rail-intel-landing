@@ -32,6 +32,7 @@ import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../con
 import { renderCompetencyEngineBay, renderCompetencyEngineHero, renderEngineUnplug } from "../content/competency-engine.mjs";
 import { renderIncidentsInteractiveDemo } from "../content/incidents-monitoring-demos.mjs";
 import { renderAdminMenuHero } from "../content/admin-menu-hero.mjs";
+import { renderCmsStandardsDemo } from "../content/cms-standards-demo.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -57,6 +58,8 @@ const ASSET_INPUTS = [
   "js/competency-engine.js",
   "css/incidents-monitoring-demo.css",
   "js/incidents-monitoring-demo.js",
+  "css/cms-feature-demos.css",
+  "js/cms-feature-demos.js",
   "content/email-templates.generated.mjs",
 ];
 
@@ -1280,7 +1283,9 @@ function renderSection(section, base) {
       .join("\n");
 
   let shots = "";
-  if (section.interactiveDemo) {
+  if (section.interactiveDemo === "cms-standards") {
+    shots = renderCmsStandardsDemo();
+  } else if (section.interactiveDemo) {
     shots = renderIncidentsInteractiveDemo(section.interactiveDemo);
   } else if (section.shots) {
     if (viewer) {
@@ -2654,6 +2659,9 @@ ${heroCopy}
   const flipbookPage = group.slug === "printable-profile";
   const commHubPage = group.slug === "communications-hub";
   const incidentsDemoPage = Boolean(group.interactiveDemos);
+  const cmsDemoPage =
+    group.slug === "administration" ||
+    group.sections?.some((section) => section.interactiveDemo === "cms-standards");
   const headOptions = flipbookPage
     ? { extraStylesheets: ["css/profile-flipbook.css"] }
     : commHubPage
@@ -2662,7 +2670,9 @@ ${heroCopy}
         ? { extraStylesheets: ["css/competency-engine.css"], rememberEngine: true }
         : incidentsDemoPage
           ? { extraStylesheets: ["css/incidents-monitoring-demo.css"] }
-          : {};
+          : cmsDemoPage
+            ? { extraStylesheets: ["css/cms-feature-demos.css"] }
+            : {};
   const footerOptions = flipbookPage
     ? { extraScripts: ["js/profile-flipbook.js"] }
     : commHubPage
@@ -2671,7 +2681,9 @@ ${heroCopy}
         ? { extraScripts: ["js/competency-engine.js"] }
         : incidentsDemoPage
           ? { extraScripts: ["js/incidents-monitoring-demo.js"] }
-          : {};
+          : cmsDemoPage
+            ? { extraScripts: ["js/cms-feature-demos.js"] }
+            : {};
 
   return (
     renderHead(base, pageSeo, headOptions) +
