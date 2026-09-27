@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://railintel.co.uk/images/share/hero-share.jpg" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Rail Intel Administration | Roles, Standards & Module Config","description":"Configure organisation structure, role permissions, competency standards, traction, routes, add-on modules and the Investigations connector — without vendor change requests.","url":"https://railintel.co.uk/features/administration.html","isPartOf":{"@type":"WebSite","name":"Rail Intel","url":"https://railintel.co.uk"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Rail Intel","item":"https://railintel.co.uk/"},{"@type":"ListItem","position":2,"name":"Features","item":"https://railintel.co.uk/features/index.html"},{"@type":"ListItem","position":3,"name":"Administration","item":"https://railintel.co.uk/features/administration.html"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can we configure standards without custom development?","acceptedAnswer":{"@type":"Answer","text":"Yes. Frameworks, grading scales, company standards, timing rules, traction, routes and permissions are all configured in Administration by your administrators."}},{"@type":"Question","name":"How are optional modules activated?","acceptedAnswer":{"@type":"Answer","text":"From the in-app Add-ons library. Each module can be trialled for 14 days or subscribed annually without a separate procurement workflow."}}],"url":"https://railintel.co.uk/features/administration.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can we configure standards without custom development?","acceptedAnswer":{"@type":"Answer","text":"Yes. Frameworks, grading scales, company standards, timing rules, traction, routes and permissions are all configured in Administration by your administrators."}},{"@type":"Question","name":"How are optional modules activated?","acceptedAnswer":{"@type":"Answer","text":"From the in-app Add-ons library. Each module can be trialled for 14 days or subscribed annually without a separate procurement workflow."}},{"@type":"Question","name":"Can we tailor permissions to how our depots and teams work?","acceptedAnswer":{"@type":"Answer","text":"Yes. Custom job roles and granular permissions let you match access to each role, including own-record access for employees and line-manager scope so managers see only their reportees."}},{"@type":"Question","name":"Where are traction, routes and depots configured?","acceptedAnswer":{"@type":"Answer","text":"Once in Administration under Company configuration. Those values are then reused across route competence, complementary certificates and assessment records, so the vocabulary stays consistent everywhere."}},{"@type":"Question","name":"How does the Investigations connector work?","acceptedAnswer":{"@type":"Answer","text":"Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval, so workforce context can sit on a live case."}}],"url":"https://railintel.co.uk/features/administration.html"}</script>
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
@@ -34,8 +34,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=64290345" />
-  <link rel="stylesheet" href="../css/pages.css?v=64290345" />
+  <link rel="stylesheet" href="../css/style.css?v=76842247" />
+  <link rel="stylesheet" href="../css/pages.css?v=76842247" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -290,9 +290,9 @@
   </div>
 
   <main>
-    <section class="page-hero page-hero--intro-split">
+    <section class="page-hero page-hero--intro-split page-hero--admin-menu">
       <div class="container">
-        <div class="page-hero__inner page-hero__inner--split page-hero__inner--with-intro">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--with-intro page-hero__inner--admin-menu">
           <div class="page-hero__copy">
           <p class="breadcrumb"><a href="../">Rail Intel</a> / <a href="../features/">Features</a> / Administration</p>
           <span class="page-badge page-badge--core">Included as standard</span>
@@ -304,29 +304,181 @@
             <p>Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.</p>
             <p>The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.</p>
             <div class="admin-intro-tiles" data-admin-intro-tiles>
-              <article class="admin-intro-tile is-active" data-admin-intro-tile>
+              <article class="admin-intro-tile is-active" data-admin-intro-tile data-admin-intro-group="team" tabindex="0">
                 <h3 class="admin-intro-tile__title">Team Management</h3>
                 <p>Administrator seats, users and access.</p>
               </article>
-              <article class="admin-intro-tile" data-admin-intro-tile>
+              <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="modules" tabindex="0">
                 <h3 class="admin-intro-tile__title">Module shortcuts</h3>
                 <p>QA Verifications, Trainee and Leave &amp; Absence when those add-ons are active.</p>
               </article>
-              <article class="admin-intro-tile" data-admin-intro-tile>
+              <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="storage" tabindex="0">
                 <h3 class="admin-intro-tile__title">Storage</h3>
                 <p>Document storage administration.</p>
               </article>
-              <article class="admin-intro-tile" data-admin-intro-tile>
+              <article class="admin-intro-tile" data-admin-intro-tile data-admin-intro-group="config" tabindex="0">
                 <h3 class="admin-intro-tile__title">Company configuration</h3>
                 <p>Roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.</p>
               </article>
             </div>
           </div>
           </div>
-          <div class="page-hero__media">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 489px">
-            <img src="../images/screens/main-sys/adminmenu.png?v=64290345" alt="The Administration fly-out menu — team management, module settings, storage and company configuration." width="489" height="1024" loading="lazy" decoding="async" />
+          <div class="page-hero__media page-hero__media--admin-menu">
+        <figure class="shot shot--full admin-menu-shot reveal">
+          <div class="admin-menu" data-admin-menu data-active-group="team" role="img" aria-label="The Administration fly-out menu — team management, module settings, storage and company configuration.">
+            <div class="admin-menu__sidebar">
+              <div class="admin-menu__brand">
+                <img class="admin-menu__logo" src="../images/rail-intel-icon.png" alt="" width="40" height="40" decoding="async" />
+                <div>
+                  <p class="admin-menu__brand-name">Rail Intel CMS</p>
+                  <p class="admin-menu__brand-by">BY RAILINTEL.CO.UK</p>
+                </div>
+              </div>
+              <div class="admin-menu__clock" aria-hidden="true">
+                <span>09</span><span class="admin-menu__clock-sep">:</span><span>06</span><span class="admin-menu__clock-sep">:</span><span>18</span>
+              </div>
+              <div class="admin-menu__nav">
+              <div class="admin-menu__nav-item is-accent">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                <span>Dashboard</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span>Employees</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .2.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+                <span>Medicals</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h4"/><path d="M6 13h2"/><circle cx="16" cy="12" r="2"/></svg>
+                <span>Licencing</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                <span>Incidents</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14v4"/><path d="M12 10v8"/><path d="M17 7v11"/></svg>
+                <span>Reporting</span>
+                
+              </div>
+              <div class="admin-menu__nav-item is-active">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>Administration</span>
+                <span class="admin-menu__nav-chevron" aria-hidden="true"><svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+              </div>
+              </div>
+              <div class="admin-menu__nav admin-menu__nav--foot">
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                <span>Help &amp; Support</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                <span>Addons</span>
+                
+              </div>
+              <div class="admin-menu__nav-item">
+                <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Logout</span>
+                
+              </div>
+              </div>
+              <div class="admin-menu__collapse">
+                <span class="admin-menu__collapse-btn" aria-hidden="true"><svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></span>
+                <span>COLLAPSE MENU</span>
+              </div>
+            </div>
+            <div class="admin-menu__flyout">
+              <div class="admin-menu__fly-head">
+                <div>
+                  <p class="admin-menu__fly-kicker">Administration</p>
+                  <p class="admin-menu__fly-title">Menu</p>
+                </div>
+                <span class="admin-menu__fly-close" aria-hidden="true"><svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span>
+              </div>
+              <div class="admin-menu__fly-body">
+                <div class="admin-menu__fly-group" data-admin-group-block="team">
+                <div class="admin-menu__fly-item" data-admin-group="team">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                  <span>Team Management</span>
+                </div>
+                </div>
+                <div class="admin-menu__fly-group" data-admin-group-block="modules">
+                <div class="admin-menu__fly-item" data-admin-group="modules">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
+                  <span>QA Verifications</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="modules">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                  <span>Trainee</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="modules">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                  <span>Leave &amp; Absence</span>
+                </div>
+                </div>
+                <div class="admin-menu__storage" data-admin-group="storage" data-admin-group-block="storage">
+                  <span>STORAGE</span>
+                  <span aria-hidden="true"><svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+                </div>
+                <div class="admin-menu__config" data-admin-group-block="config">
+                  <div class="admin-menu__config-head" data-admin-group="config">
+                    <span>COMPANY CONFIGURATION</span>
+                    <span aria-hidden="true"><svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </div>
+                  <div class="admin-menu__config-list">
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v.01"/></svg>
+                  <span>Custom Job Roles</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+                  <span>Grading Scale</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  <span>Company email templates</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  <span>Cycle Builder</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 14h6"/><path d="M9 18h6"/></svg>
+                  <span>Company Standards</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+                  <span>Traction, Routes &amp; Depots</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5V12"/><path d="M12 12H5v4.5"/><path d="M12 12h7v4.5"/></svg>
+                  <span>Organisation Structure</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+                  <span>Investigations module link</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                  <span>Role Permissions</span>
+                </div>
+                <div class="admin-menu__fly-item" data-admin-group="config">
+                  <svg class="admin-menu__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <span>Company logo</span>
+                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <figcaption class="shot__caption">The Administration fly-out menu — team management, module settings, storage and company configuration.</figcaption>
         </figure>
@@ -338,19 +490,41 @@
 
     <section class="page-section page-section--viewer">
       <div class="container container--showcase">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--copy-tiles">
           <h2>Organisation structure, roles and permissions</h2>
-          <p>Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular — an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.</p>
+          <div class="page-section__copy-tiles">
+            <div class="page-section__copy-tiles-copy">
+          <p>Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular, an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.</p>
           <p>The same permission model gates every core capability: the employee directory, monitoring, assessing, medicals, incidents, reporting and optional modules. Nothing is all-or-nothing unless you configure it that way.</p>
-          <ul class="spec-list">
-            <li><strong>Custom job roles</strong> for assessors, managers, instructors and administrators.</li>
-            <li><strong>Granular permissions</strong> across records, assessing, monitoring, reporting and configuration.</li>
-            <li><strong>Own-record access</strong> for employees who should see only their own record.</li>
-            <li><strong>Line-manager scope</strong> so managers see their reportees without the whole company.</li>
-          </ul>
+            </div>
+            <div class="page-section__copy-tiles-grid">
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Custom job roles</h3>
+              <p class="spec-tile__detail">for assessors, managers, instructors and administrators.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">Granular permissions</h3>
+              <p class="spec-tile__detail">across records, assessing, monitoring, reporting and configuration.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Own-record access</h3>
+              <p class="spec-tile__detail">for employees who should see only their own record.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Line-manager scope</h3>
+              <p class="spec-tile__detail">so managers see their reportees without the whole company.</p>
+            </article>
+          </div>
+            </div>
+          </div>
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="3" tabindex="0">
+      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="3" tabindex="0">
         <div class="shot-viewer__rail">
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">←</span>
@@ -409,7 +583,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/org-structure.png?v=64290345"
+              src="../images/screens/comp-config/org-structure.png?v=76842247"
               alt="Organisation structure configuration."
               width="700"
               height="464"
@@ -427,7 +601,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/configure-company-role-permissions.png?v=64290345"
+              src="../images/screens/comp-config/configure-company-role-permissions.png?v=76842247"
               alt="Configuring permissions for a company job role."
               width="693"
               height="521"
@@ -445,7 +619,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/main-sys/role-permissions-configure.png?v=64290345"
+              src="../images/screens/main-sys/role-permissions-configure.png?v=76842247"
               alt="Granular permission assignment across the platform."
               width="704"
               height="558"
@@ -463,19 +637,41 @@
 
     <section class="page-section page-section--viewer">
       <div class="container container--showcase">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--copy-tiles">
           <h2>Competency standards and frameworks</h2>
-          <p>Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run — so assessors in every depot work to the same bar.</p>
-          <p>When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification — not after someone re-keys a spreadsheet.</p>
-          <ul class="spec-list">
-            <li><strong>Competency frameworks</strong> applied across cycles and roles.</li>
-            <li><strong>Grading scales</strong> that assessors use in the field.</li>
-            <li><strong>Company standards</strong> for assessment and competence outcomes.</li>
-            <li><strong>Timing standards</strong> including trainee daylight and darkness minimums.</li>
-          </ul>
+          <div class="page-section__copy-tiles">
+            <div class="page-section__copy-tiles-copy">
+          <p>Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run, so assessors in every depot work to the same bar.</p>
+          <p>When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification, not after someone re-keys a spreadsheet.</p>
+            </div>
+            <div class="page-section__copy-tiles-grid">
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Competency frameworks</h3>
+              <p class="spec-tile__detail">applied across cycles and roles.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">Grading scales</h3>
+              <p class="spec-tile__detail">that assessors use in the field.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Company standards</h3>
+              <p class="spec-tile__detail">for assessment and competence outcomes.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Timing standards</h3>
+              <p class="spec-tile__detail">including trainee daylight and darkness minimums.</p>
+            </article>
+          </div>
+            </div>
+          </div>
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="4" tabindex="0">
+      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="4" tabindex="0">
         <div class="shot-viewer__rail">
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">←</span>
@@ -546,7 +742,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/framework-apply-cycles.png?v=64290345"
+              src="../images/screens/comp-config/framework-apply-cycles.png?v=76842247"
               alt="Applying a competency framework across cycles."
               width="705"
               height="388"
@@ -564,7 +760,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/grade-scale.png?v=64290345"
+              src="../images/screens/comp-config/grade-scale.png?v=76842247"
               alt="The grading scale used by assessors."
               width="703"
               height="290"
@@ -582,7 +778,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/set-company-standards.png?v=64290345"
+              src="../images/screens/comp-config/set-company-standards.png?v=76842247"
               alt="Company standards for assessment and competence."
               width="699"
               height="489"
@@ -600,7 +796,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/main-sys/timings-standards.png?v=64290345"
+              src="../images/screens/main-sys/timings-standards.png?v=76842247"
               alt="Timing standards including trainee daylight and darkness minimums."
               width="786"
               height="462"
@@ -625,7 +821,7 @@
 
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="4" tabindex="0">
+      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="4" tabindex="0">
         <div class="shot-viewer__rail">
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">←</span>
@@ -696,7 +892,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/train-routes/traction-route-overview.png?v=64290345"
+              src="../images/screens/train-routes/traction-route-overview.png?v=76842247"
               alt="Traction and route overview for the company."
               width="699"
               height="353"
@@ -714,7 +910,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/train-routes/add-traction.png?v=64290345"
+              src="../images/screens/train-routes/add-traction.png?v=76842247"
               alt="Adding a traction type."
               width="776"
               height="259"
@@ -732,7 +928,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/train-routes/add-route.png?v=64290345"
+              src="../images/screens/train-routes/add-route.png?v=76842247"
               alt="Adding a route."
               width="692"
               height="261"
@@ -750,7 +946,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/set-traction-routes-depots.png?v=64290345"
+              src="../images/screens/comp-config/set-traction-routes-depots.png?v=76842247"
               alt="Traction, routes and depots configuration."
               width="696"
               height="323"
@@ -768,19 +964,41 @@
 
     <section class="page-section page-section--viewer">
       <div class="container container--showcase">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--copy-tiles">
           <h2>Modules, licences and integrations</h2>
+          <div class="page-section__copy-tiles">
+            <div class="page-section__copy-tiles-copy">
           <p>Optional modules are activated from the Add-ons library inside Rail Intel CMS. Each module can be taken on an annual subscription or trialled for 14 days, and your system administrator enables it for the company directly.</p>
           <p>Every company includes two administrator seats; additional Company Admin licences are purchased by quantity and managed in Team Management. Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval.</p>
-          <ul class="spec-list">
-            <li><strong>Add-on activation</strong> from the in-app library — no separate procurement workflow.</li>
-            <li><strong>14-day trials</strong> before you commit to an annual subscription.</li>
-            <li><strong>Company Admin licences</strong> managed in Team Management.</li>
-            <li><strong>Investigations connector</strong> for workforce context on a live case.</li>
-          </ul>
+            </div>
+            <div class="page-section__copy-tiles-grid">
+          <div class="spec-tiles" role="list">
+            <article class="spec-tile" style="--spec-tile-accent: #38bdf8" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">01</span>
+              <h3 class="spec-tile__title">Add-on activation</h3>
+              <p class="spec-tile__detail">from the in-app library, no separate procurement workflow.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #f59e0b" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">02</span>
+              <h3 class="spec-tile__title">14-day trials</h3>
+              <p class="spec-tile__detail">before you commit to an annual subscription.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #34d399" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">03</span>
+              <h3 class="spec-tile__title">Company Admin licences</h3>
+              <p class="spec-tile__detail">managed in Team Management.</p>
+            </article>
+            <article class="spec-tile" style="--spec-tile-accent: #a78bfa" role="listitem">
+              <span class="spec-tile__index" aria-hidden="true">04</span>
+              <h3 class="spec-tile__title">Investigations connector</h3>
+              <p class="spec-tile__detail">for workforce context on a live case.</p>
+            </article>
+          </div>
+            </div>
+          </div>
         </div>
 
-      <div class="shot-viewer reveal" data-shot-viewer data-shot-count="3" tabindex="0">
+      <div class="shot-viewer reveal" data-shot-viewer data-shot-auto="off" data-shot-count="3" tabindex="0">
         <div class="shot-viewer__rail">
           <button type="button" class="shot-viewer__nav" data-shot-viewer-prev aria-label="Previous screenshot">
             <span aria-hidden="true">←</span>
@@ -839,7 +1057,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/main-sys/addons-page.png?v=64290345"
+              src="../images/screens/main-sys/addons-page.png?v=76842247"
               alt="The Add-ons page where optional modules are activated."
               width="791"
               height="528"
@@ -857,7 +1075,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/addons-library.png?v=64290345"
+              src="../images/screens/comp-config/addons-library.png?v=76842247"
               alt="The add-ons library with available modules."
               width="690"
               height="562"
@@ -875,7 +1093,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="../images/screens/comp-config/investigation-apimanagement.png?v=64290345"
+              src="../images/screens/comp-config/investigation-apimanagement.png?v=76842247"
               alt="Investigations API connector management."
               width="699"
               height="444"
@@ -891,24 +1109,8 @@
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Flexibility without custom development</h2>
-          <p>Administration is included in core Rail Intel. You configure organisation, standards, modules and security yourself — and adjust them as your operation changes. For the full security story, see the Security page.</p>
-        </div>
-        <div class="page-actions">
-          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-          <a href="../security.html" class="btn btn-ghost btn-lg">Security overview</a>
-        </div>
-      </div>
-    </section>
 
-    <section class="page-section page-section--tight">
-      <div class="container">
-        <p class="page-lead">Related: <a href="../security.html">Security</a>, <a href="../how-it-works.html">How it works</a></p>
-      </div>
-    </section>
+
 
     <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
@@ -935,6 +1137,39 @@
             <div class="faq-accordion__panel">
             <div class="faq-accordion__panel-inner">
               <p>From the in-app Add-ons library. Each module can be trialled for 14 days or subscribed annually without a separate procurement workflow.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Can we tailor permissions to how our depots and teams work?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>Yes. Custom job roles and granular permissions let you match access to each role, including own-record access for employees and line-manager scope so managers see only their reportees.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">Where are traction, routes and depots configured?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>Once in Administration under Company configuration. Those values are then reused across route competence, complementary certificates and assessment records, so the vocabulary stays consistent everywhere.</p>
+            </div>
+            </div>
+          </details>
+          <details class="faq-accordion__item">
+            <summary class="faq-accordion__question">
+              <span class="faq-accordion__question-text">How does the Investigations connector work?</span>
+              <span class="faq-accordion__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-accordion__panel">
+            <div class="faq-accordion__panel-inner">
+              <p>Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval, so workforce context can sit on a live case.</p>
             </div>
             </div>
           </details>
@@ -1016,8 +1251,8 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=64290345"></script>
-  <script src="../js/newsletter.js?v=64290345"></script>
-  <script src="../js/share.js?v=64290345"></script>
+  <script src="../js/site.js?v=76842247"></script>
+  <script src="../js/newsletter.js?v=76842247"></script>
+  <script src="../js/share.js?v=76842247"></script>
 </body>
 </html>

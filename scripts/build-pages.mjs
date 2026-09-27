@@ -31,6 +31,7 @@ import { renderProfileFlipbookSection } from "../content/profile-flipbook.mjs";
 import { renderCommunicationsHubPage, renderCommunicationsHubHero } from "../content/communications-hub.mjs";
 import { renderCompetencyEngineBay, renderCompetencyEngineHero, renderEngineUnplug } from "../content/competency-engine.mjs";
 import { renderIncidentsInteractiveDemo } from "../content/incidents-monitoring-demos.mjs";
+import { renderAdminMenuHero } from "../content/admin-menu-hero.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -825,6 +826,7 @@ function renderViewerGallery(section, base) {
   const viewerClass = ["shot-viewer", "reveal", sidebar ? "shot-viewer--sidebar" : null]
     .filter(Boolean)
     .join(" ");
+  const autoAttr = section.viewerAuto === false ? ' data-shot-auto="off"' : "";
   const prevArrow = sidebar ? "↑" : "←";
   const nextArrow = sidebar ? "↓" : "→";
 
@@ -930,14 +932,14 @@ ${frames}
         </div>`;
 
   if (sidebar) {
-    return `      <div class="${viewerClass}" data-shot-viewer data-shot-count="${count}" tabindex="0">
+    return `      <div class="${viewerClass}" data-shot-viewer${autoAttr} data-shot-count="${count}" tabindex="0">
         <div class="shot-viewer__cluster">
 ${coreHtml}
         </div>${partnerHtml}
       </div>`;
   }
 
-  return `      <div class="${viewerClass}" data-shot-viewer data-shot-count="${count}" tabindex="0">
+  return `      <div class="${viewerClass}" data-shot-viewer${autoAttr} data-shot-count="${count}" tabindex="0">
 ${coreHtml}
       </div>`;
 }
@@ -1351,6 +1353,18 @@ ${body}
 ${bullets}
           <div class="page-section__head-media">
 ${headShotHtml}
+          </div>
+        </div>`
+      : section.copyTiles && bullets
+        ? `        <div class="page-section__head page-section__head--copy-tiles">
+${sectionHeadingMarkup}
+          <div class="page-section__copy-tiles">
+            <div class="page-section__copy-tiles-copy">
+${body}
+            </div>
+            <div class="page-section__copy-tiles-grid">
+${bullets}
+            </div>
           </div>
         </div>`
       : `        <div class="page-section__head${wide ? " page-section__head--wide" : ""}">
@@ -2509,12 +2523,13 @@ function renderHeroIntro(intro) {
   const body = (intro.body || []).map((text) => `            <p>${rich(text)}</p>`).join("\n");
   const tiles = intro.tiles
     ? `            <div class="admin-intro-tiles" data-admin-intro-tiles>\n${intro.tiles
-        .map(
-          (tile, index) => `              <article class="admin-intro-tile${index === 0 ? " is-active" : ""}" data-admin-intro-tile>
+        .map((tile, index) => {
+          const groupAttr = tile.group ? ` data-admin-intro-group="${esc(tile.group)}"` : "";
+          return `              <article class="admin-intro-tile${index === 0 ? " is-active" : ""}" data-admin-intro-tile${groupAttr} tabindex="0">
                 <h3 class="admin-intro-tile__title">${esc(tile.title)}</h3>
                 <p>${esc(tile.detail)}</p>
-              </article>`
-        )
+              </article>`;
+        })
         .join("\n")}\n            </div>`
     : intro.bullets
       ? `            <ul class="spec-list">\n${intro.bullets
@@ -2562,12 +2577,15 @@ ${heroLeadMarkup}\n`
 }${renderHeroActions(group, base)}${renderHeroIntro(group.heroIntro)}`;
 
   const heroRegulators = renderHeroRegulators(group.heroRegulators, base);
+  const adminMenuHero = group.heroGraphic === "admin-menu";
   const heroGraphic =
     group.heroGraphic === "medicals-licensing"
       ? renderMedicalsLicensingHeroGraphic(base)
-      : competencyEngineHero
-        ? renderCompetencyEngineHero(base)
-        : "";
+      : adminMenuHero
+        ? renderAdminMenuHero(base)
+        : competencyEngineHero
+          ? renderCompetencyEngineHero(base)
+          : "";
   const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
     : group.slug === "communications-hub"
@@ -2601,11 +2619,11 @@ ${heroMedia}
           } catch (err) {}
         </script>`
     : hasHeroMedia
-    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}${incidentsHero ? " page-hero__inner--incidents" : ""}">
+    ? `        <div class="page-hero__inner page-hero__inner--split${tunnelHero ? " page-hero__inner--tunnel" : ""}${group.heroIntro ? " page-hero__inner--with-intro" : ""}${group.heroRegulators ? " page-hero__inner--regulators" : ""}${medicalsLicensingHero ? " page-hero__inner--medicals-licensing" : ""}${adminMenuHero ? " page-hero__inner--admin-menu" : ""}${incidentsHero ? " page-hero__inner--incidents" : ""}">
           <div class="page-hero__copy">
 ${heroCopy}
           </div>
-          <div class="page-hero__media${incidentsHero ? " page-hero__media--incidents" : ""}">
+          <div class="page-hero__media${incidentsHero ? " page-hero__media--incidents" : ""}${adminMenuHero ? " page-hero__media--admin-menu" : ""}">
 ${heroMedia}
           </div>
         </div>`
@@ -2640,7 +2658,7 @@ ${heroCopy}
     renderHead(base, pageSeo, headOptions) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}${incidentsHero ? " page-hero--incidents" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${adminMenuHero ? " page-hero--admin-menu" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}${incidentsHero ? " page-hero--incidents" : ""}">
       <div class="container">
 ${heroInner}
       </div>

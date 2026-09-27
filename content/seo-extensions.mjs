@@ -413,11 +413,23 @@ export const seoExtensions = {
         answer:
           "From the in-app Add-ons library. Each module can be trialled for 14 days or subscribed annually without a separate procurement workflow.",
       },
+      {
+        question: "Can we tailor permissions to how our depots and teams work?",
+        answer:
+          "Yes. Custom job roles and granular permissions let you match access to each role, including own-record access for employees and line-manager scope so managers see only their reportees.",
+      },
+      {
+        question: "Where are traction, routes and depots configured?",
+        answer:
+          "Once in Administration under Company configuration. Those values are then reused across route competence, complementary certificates and assessment records, so the vocabulary stays consistent everywhere.",
+      },
+      {
+        question: "How does the Investigations connector work?",
+        answer:
+          "Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval, so workforce context can sit on a live case.",
+      },
     ],
-    relatedLinks: [
-      { name: "Security", href: "security.html" },
-      { name: "How it works", href: "how-it-works.html" },
-    ],
+    relatedLinks: [],
   },
 
   "reporting-administration": {

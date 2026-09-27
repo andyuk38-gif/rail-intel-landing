@@ -1561,13 +1561,7 @@ export const featureGroups = [
       '<span class="hero-title__accent">Configure</span> Rail Intel to match how your <span class="hero-title__accent">operation</span> runs',
     lead:
       "Administration is where Rail Intel becomes yours. System and company administrators define who can see and do what, set the competency standards assessors work to, configure traction and routes once for the whole company, activate optional modules and govern sign-in policy — without a vendor change request.",
-    heroShot: {
-      src: "images/screens/main-sys/adminmenu.png",
-      caption:
-        "The Administration fly-out menu — team management, module settings, storage and company configuration.",
-      scale: 1,
-      full: true,
-    },
+    heroGraphic: "admin-menu",
     hideHeroActions: true,
     heroIntro: {
       heading: "The Administration menu",
@@ -1579,27 +1573,32 @@ export const featureGroups = [
         {
           title: "Team Management",
           detail: "Administrator seats, users and access.",
+          group: "team",
         },
         {
           title: "Module shortcuts",
           detail: "QA Verifications, Trainee and Leave & Absence when those add-ons are active.",
+          group: "modules",
         },
         {
           title: "Storage",
           detail: "Document storage administration.",
+          group: "storage",
         },
         {
           title: "Company configuration",
           detail:
             "Roles, grading, templates, cycles, standards, traction, routes, org structure, integrations, permissions and branding.",
+          group: "config",
         },
       ],
     },
+    viewerAuto: false,
     sections: [
       {
         heading: "Organisation structure, roles and permissions",
         body: [
-          "Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular — an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.",
+          "Your organisation structure, custom job roles and role permissions determine who sees and does what across Rail Intel. Permissions are granular, an assessor, a line manager and a company administrator each get exactly the access their role requires, and you can tailor roles to match how your depots and teams actually work.",
           "The same permission model gates every core capability: the employee directory, monitoring, assessing, medicals, incidents, reporting and optional modules. Nothing is all-or-nothing unless you configure it that way.",
         ],
         bullets: [
@@ -1608,7 +1607,10 @@ export const featureGroups = [
           "**Own-record access** for employees who should see only their own record.",
           "**Line-manager scope** so managers see their reportees without the whole company.",
         ],
+        bulletTiles: true,
+        copyTiles: true,
         shotGrid: "viewer",
+        viewerAuto: false,
         shots: [
           {
             src: "images/screens/comp-config/org-structure.png",
@@ -1627,8 +1629,8 @@ export const featureGroups = [
       {
         heading: "Competency standards and frameworks",
         body: [
-          "Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run — so assessors in every depot work to the same bar.",
-          "When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification — not after someone re-keys a spreadsheet.",
+          "Cycles are only as good as the standard behind them. Frameworks, grading scales, company standards and timing rules are configured once in Administration and applied across every cycle you run, so assessors in every depot work to the same bar.",
+          "When your standard changes, you update the configuration and the live record reflects it on the next assessment or verification, not after someone re-keys a spreadsheet.",
         ],
         bullets: [
           "**Competency frameworks** applied across cycles and roles.",
@@ -1636,7 +1638,10 @@ export const featureGroups = [
           "**Company standards** for assessment and competence outcomes.",
           "**Timing standards** including trainee daylight and darkness minimums.",
         ],
+        bulletTiles: true,
+        copyTiles: true,
         shotGrid: "viewer",
+        viewerAuto: false,
         shots: [
           {
             src: "images/screens/comp-config/framework-apply-cycles.png",
@@ -1663,6 +1668,7 @@ export const featureGroups = [
           "Adding a new route or traction type is an administrator task, not a data-entry job repeated on every employee record.",
         ],
         shotGrid: "viewer",
+        viewerAuto: false,
         shots: [
           {
             src: "images/screens/train-routes/traction-route-overview.png",
@@ -1689,12 +1695,15 @@ export const featureGroups = [
           "Every company includes two administrator seats; additional Company Admin licences are purchased by quantity and managed in Team Management. Where Rail Intel Investigations is in use, the API connector in Administration binds one Investigations company to one CMS tenant with dual-approval.",
         ],
         bullets: [
-          "**Add-on activation** from the in-app library — no separate procurement workflow.",
+          "**Add-on activation** from the in-app library, no separate procurement workflow.",
           "**14-day trials** before you commit to an annual subscription.",
           "**Company Admin licences** managed in Team Management.",
           "**Investigations connector** for workforce context on a live case.",
         ],
+        bulletTiles: true,
+        copyTiles: true,
         shotGrid: "viewer",
+        viewerAuto: false,
         shots: [
           {
             src: "images/screens/main-sys/addons-page.png",
@@ -1711,13 +1720,7 @@ export const featureGroups = [
         ],
       },
     ],
-    cta: {
-      heading: "Flexibility without custom development",
-      body:
-        "Administration is included in core Rail Intel. You configure organisation, standards, modules and security yourself — and adjust them as your operation changes. For the full security story, see the Security page.",
-      secondaryHref: "../security.html",
-      secondaryLabel: "Security overview",
-    },
+    hideCta: true,
   },
 
   {

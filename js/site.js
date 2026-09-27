@@ -971,18 +971,27 @@
   var adminIntroTiles = document.querySelector("[data-admin-intro-tiles]");
   if (adminIntroTiles) {
     var adminTiles = Array.prototype.slice.call(adminIntroTiles.querySelectorAll("[data-admin-intro-tile]"));
+    var adminMenu = document.querySelector("[data-admin-menu]");
     var adminDefaultTile = 0;
 
     function setAdminTileActive(index) {
       adminTiles.forEach(function (tile, tileIndex) {
         tile.classList.toggle("is-active", tileIndex === index);
       });
+      if (adminMenu) {
+        var group =
+          (adminTiles[index] && adminTiles[index].getAttribute("data-admin-intro-group")) || "team";
+        adminMenu.setAttribute("data-active-group", group);
+      }
     }
 
     setAdminTileActive(adminDefaultTile);
 
     adminTiles.forEach(function (tile, tileIndex) {
       tile.addEventListener("mouseenter", function () {
+        setAdminTileActive(tileIndex);
+      });
+      tile.addEventListener("focus", function () {
         setAdminTileActive(tileIndex);
       });
     });
@@ -1618,6 +1627,15 @@
       }
     }
 
+    function holdPageScroll(fn) {
+      var scrollY = window.scrollY || window.pageYOffset || 0;
+      fn();
+      window.scrollTo(0, scrollY);
+      window.requestAnimationFrame(function () {
+        window.scrollTo(0, scrollY);
+      });
+    }
+
     function syncTiles() {
       tiles.forEach(function (tile, tileIndex) {
         var active = tileIndex === index;
@@ -1630,17 +1648,19 @@
     }
 
     function applyState(previousIndex) {
-      frames.forEach(function (frame, frameIndex) {
-        var isActive = frameIndex === index;
-        frame.classList.remove("is-exiting");
-        if (frameIndex === previousIndex && previousIndex !== index) {
-          frame.classList.add("is-exiting");
-        }
-        frame.classList.toggle("is-active", isActive);
-        frame.setAttribute("aria-hidden", isActive ? "false" : "true");
+      holdPageScroll(function () {
+        frames.forEach(function (frame, frameIndex) {
+          var isActive = frameIndex === index;
+          frame.classList.remove("is-exiting");
+          if (frameIndex === previousIndex && previousIndex !== index) {
+            frame.classList.add("is-exiting");
+          }
+          frame.classList.toggle("is-active", isActive);
+          frame.setAttribute("aria-hidden", isActive ? "false" : "true");
+        });
+        syncTiles();
+        if (typeof syncPreview === "function") syncPreview();
       });
-      syncTiles();
-      if (typeof syncPreview === "function") syncPreview();
 
       if (!reduced && previousIndex !== undefined && previousIndex !== index) {
         window.setTimeout(function () {
@@ -1689,9 +1709,11 @@
       if (elapsed < VIEWER_AUTO_MS) progressTimer = requestAnimationFrame(tickProgress);
     }
 
+    var autoDisabled = viewerRoot.getAttribute("data-shot-auto") === "off";
+
     function startAuto() {
       stopAuto();
-      if (reduced || paused || count < 2) return;
+      if (autoDisabled || reduced || paused || count < 2) return;
       progressStart = Date.now();
       tickProgress();
       autoTimer = setInterval(function () {
