@@ -338,7 +338,7 @@ export function renderCmsCabPassesDemo(base = "../") {
                 </div>
 
                 <div class="cms-panel" data-cms-panel="6" hidden>
-                  <div class="cms-cab-shot-wrap cms-cab-shot-wrap--scroll">
+                  <div class="cms-cab-shot-wrap">
                     ${shotImg(
                       base,
                       "images/screens/cab-passes/cab-passes-dark.png",
@@ -387,7 +387,7 @@ export function renderCmsCabPassesReportDemo(base = "../") {
                 </div>
 
                 <div class="cms-panel is-active" data-cms-panel="0">
-                  <div class="cms-cab-shot-wrap cms-cab-shot-wrap--scroll">
+                  <div class="cms-cab-shot-wrap">
                     ${shotImg(
                       base,
                       "images/screens/cab-passes/verification-report-cab-passes.png",

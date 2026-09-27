@@ -2802,12 +2802,8 @@
   justify-content: center;
   align-items: flex-start;
   padding: 0.35rem 0.15rem 0.55rem;
-}
-
-.cms-cab-shot-wrap--scroll {
-  max-height: min(70vh, 42rem);
-  overflow: auto;
-  justify-content: flex-start;
+  max-height: none;
+  overflow: visible;
 }
 
 .cms-cab-shot {
@@ -2820,9 +2816,12 @@
   background: #0b1220;
 }
 
-.cms-cab-shot--native {
+/* Beat .browser-mockup__content img { width: 100% } so compact shots stay sharp. */
+.browser-mockup__content img.cms-cab-shot.cms-cab-shot--native,
+.cms-cab-shot-wrap .cms-cab-shot--native {
   width: auto;
-  max-width: min(100%, 28rem);
+  max-width: min(100%, 22rem);
+  height: auto;
   margin-inline: auto;
 }
 
