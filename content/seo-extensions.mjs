@@ -479,10 +479,23 @@ export const seoExtensions = {
         answer:
           "Yes. Issue workflow captures colour classification and validity so the pass in the pocket matches the system of record.",
       },
+      {
+        question: "Does someone need a Rail Intel login to check a pass?",
+        answer:
+          "No. Scanning the QR code opens the live pass in a browser with no sign-in, so gate staff or other checkers can validate authority without a Rail Intel account.",
+      },
+      {
+        question: "Is Digital Cab Passes included in core Rail Intel?",
+        answer:
+          "Yes. Issuing and managing digital cab passes is part of core Rail Intel. Showing pass status on verification reports requires the QA Verifications add-on.",
+      },
+      {
+        question: "What happens when a cab pass expires?",
+        answer:
+          "Expired passes stay on the employee record with status clear at a glance, and the QR remains available for audit. From the pass preview you can renew, revoke, edit or delete without leaving the Cab Passes tab.",
+      },
     ],
-    relatedLinks: [
-      { name: "Tunnel Mode", href: "features/tunnel-mode.html" },
-    ],
+    relatedLinks: [],
   },
 
   languages: {

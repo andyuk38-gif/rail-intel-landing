@@ -121,6 +121,16 @@
       });
     });
 
+    // Cab pass colour picker
+    root.querySelectorAll("[data-cms-cab-colour]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        hold(true);
+        root.querySelectorAll("[data-cms-cab-colour]").forEach(function (other) {
+          other.classList.toggle("is-selected", other === btn);
+        });
+      });
+    });
+
     // Safety got-it
     var safetyBtn = root.querySelector("[data-cms-safety-ack]");
     if (safetyBtn) {

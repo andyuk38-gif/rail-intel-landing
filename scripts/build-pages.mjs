@@ -36,6 +36,11 @@ import { renderCmsStandardsDemo } from "../content/cms-standards-demo.mjs";
 import { renderCmsAdminOrgDemo } from "../content/cms-admin-org-demo.mjs";
 import { renderCmsAdminTractionDemo } from "../content/cms-admin-traction-demo.mjs";
 import { renderCmsAdminAddonsDemo } from "../content/cms-admin-addons-demo.mjs";
+import {
+  renderCmsCabPassesDemo,
+  renderCmsCabPassesReportDemo,
+  renderCmsCabPassesHero,
+} from "../content/cms-cab-passes-demo.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(join(root, "images/screens/manifest.json"), "utf8"));
@@ -1294,6 +1299,10 @@ function renderSection(section, base) {
     shots = renderCmsAdminTractionDemo();
   } else if (section.interactiveDemo === "cms-admin-addons") {
     shots = renderCmsAdminAddonsDemo();
+  } else if (section.interactiveDemo === "cms-cab-passes") {
+    shots = renderCmsCabPassesDemo(base);
+  } else if (section.interactiveDemo === "cms-cab-passes-report") {
+    shots = renderCmsCabPassesReportDemo(base);
   } else if (section.interactiveDemo) {
     shots = renderIncidentsInteractiveDemo(section.interactiveDemo);
   } else if (section.shots) {
@@ -2581,6 +2590,7 @@ function featurePage(group) {
 
   const competencyEngineHero = group.heroGraphic === "competency-engine";
   const adminMenuHero = group.heroGraphic === "admin-menu";
+  const cabPassesHero = group.heroGraphic === "cab-passes";
   const heroLeadMarkup = renderHeroLead(group.lead);
 
   const heroCopy = `          <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}features/">Features</a> / ${esc(
@@ -2606,7 +2616,9 @@ ${heroLeadMarkup}\n`
         ? renderAdminMenuHero(base)
         : competencyEngineHero
           ? renderCompetencyEngineHero(base)
-          : "";
+          : cabPassesHero
+            ? renderCmsCabPassesHero(base)
+            : "";
   const heroMedia = group.heroShot
     ? renderShot(group.heroShot, base, { fill: true })
     : group.slug === "communications-hub"
@@ -2670,10 +2682,16 @@ ${heroCopy}
   const incidentsDemoPage = Boolean(group.interactiveDemos);
   const cmsDemoPage =
     group.slug === "administration" ||
+    group.slug === "digital-cab-passes" ||
     group.sections?.some((section) =>
-      ["cms-standards", "cms-admin-org", "cms-admin-traction", "cms-admin-addons"].includes(
-        section.interactiveDemo
-      )
+      [
+        "cms-standards",
+        "cms-admin-org",
+        "cms-admin-traction",
+        "cms-admin-addons",
+        "cms-cab-passes",
+        "cms-cab-passes-report",
+      ].includes(section.interactiveDemo)
     );
   const headOptions = flipbookPage
     ? { extraStylesheets: ["css/profile-flipbook.css"] }
