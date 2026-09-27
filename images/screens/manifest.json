@@ -1,11 +1,31 @@
 {
-  "images/screens/assessing/assessing-criteria.png": {
-    "width": 503,
-    "height": 734
+  "images/product/brochure-headshot.png": {
+    "width": 1024,
+    "height": 1024
+  },
+  "images/product/employee-profile-brochure-page.png": {
+    "width": 1040,
+    "height": 1456
+  },
+  "images/product/incidents-spad-hero.png": {
+    "width": 1280,
+    "height": 720
+  },
+  "images/product/printable-profile-hero.png": {
+    "width": 1024,
+    "height": 1024
+  },
+  "images/product/reporting-analytics-hero.jpg": {
+    "width": 672,
+    "height": 563
   },
   "images/screens/assessing/AssessInDark.jpg": {
     "width": 1024,
     "height": 870
+  },
+  "images/screens/assessing/assessing-criteria.png": {
+    "width": 503,
+    "height": 734
   },
   "images/screens/assessing/dark-switch-safety.png": {
     "width": 434,
@@ -23,9 +43,29 @@
     "width": 430,
     "height": 665
   },
+  "images/screens/cab-passes/andy-hill-pass-portrait.png": {
+    "width": 864,
+    "height": 1152
+  },
+  "images/screens/cab-passes/asset-logo.png": {
+    "width": 68,
+    "height": 30
+  },
+  "images/screens/cab-passes/asset-photo.png": {
+    "width": 68,
+    "height": 68
+  },
+  "images/screens/cab-passes/asset-qr-mini.png": {
+    "width": 68,
+    "height": 68
+  },
   "images/screens/cab-passes/green-pass-issued-dark.png": {
     "width": 559,
     "height": 277
+  },
+  "images/screens/cab-passes/verification-report-cab-passes.png": {
+    "width": 1024,
+    "height": 850
   },
   "images/screens/comp-config/framework-apply-cycles.png": {
     "width": 1410,
@@ -95,6 +135,14 @@
     "width": 488,
     "height": 882
   },
+  "images/screens/leave-absence/leave-absence-dashboard-dark.png": {
+    "width": 1024,
+    "height": 904
+  },
+  "images/screens/leave-absence/leave-absence-entitlements-dark.png": {
+    "width": 1024,
+    "height": 679
+  },
   "images/screens/leave-absence/leave-absence-entitlements.png": {
     "width": 1142,
     "height": 681
@@ -111,21 +159,13 @@
     "width": 1024,
     "height": 783
   },
-  "images/screens/leave-absence/leave-absence-entitlements-dark.png": {
-    "width": 1024,
-    "height": 679
+  "images/screens/leave-absence/leave-absence-reporting.png": {
+    "width": 1159,
+    "height": 695
   },
   "images/screens/leave-absence/leave-absence-set-entitlement-dark.png": {
     "width": 427,
     "height": 388
-  },
-  "images/screens/leave-absence/leave-absence-dashboard-dark.png": {
-    "width": 1024,
-    "height": 904
-  },
-  "images/screens/leave-absence/leave-absence-reporting.png": {
-    "width": 1159,
-    "height": 695
   },
   "images/screens/leave-absence/leave-absence-year-policy.png": {
     "width": 1168,
@@ -151,6 +191,10 @@
     "width": 1386,
     "height": 797
   },
+  "images/screens/main-sys/account-two-factor.png": {
+    "width": 535,
+    "height": 830
+  },
   "images/screens/main-sys/adminmenu.png": {
     "width": 489,
     "height": 1024
@@ -159,25 +203,33 @@
     "width": 1384,
     "height": 735
   },
+  "images/screens/main-sys/left-navand-flyout-menu.png": {
+    "width": 559,
+    "height": 1205
+  },
   "images/screens/main-sys/lock-employee-profile.png": {
     "width": 484,
     "height": 410
   },
-  "images/screens/main-sys/left-navand-flyout-menu.png": {
-    "width": 559,
-    "height": 1205
+  "images/screens/main-sys/login-authenticator-code.png": {
+    "width": 396,
+    "height": 768
+  },
+  "images/screens/main-sys/login-screen-portrait.png": {
+    "width": 560,
+    "height": 911
   },
   "images/screens/main-sys/login-screen.png": {
     "width": 1627,
     "height": 911
   },
+  "images/screens/main-sys/print-before-you-print.png": {
+    "width": 552,
+    "height": 830
+  },
   "images/screens/main-sys/reporting-analytics-dashboard.png": {
     "width": 1024,
     "height": 2097
-  },
-  "images/screens/main-sys/reporting-compliance-overview.png": {
-    "width": 1024,
-    "height": 650
   },
   "images/screens/main-sys/reporting-analytics1.png": {
     "width": 1381,
@@ -186,6 +238,10 @@
   "images/screens/main-sys/reporting-analytics2.png": {
     "width": 1373,
     "height": 1073
+  },
+  "images/screens/main-sys/reporting-compliance-overview.png": {
+    "width": 1024,
+    "height": 650
   },
   "images/screens/main-sys/timings-standards.png": {
     "width": 1572,
@@ -203,10 +259,6 @@
     "width": 1389,
     "height": 725
   },
-  "images/screens/medical/medication-checks-icon.jpg": {
-    "width": 840,
-    "height": 880
-  },
   "images/screens/medical/medication-check-form.png": {
     "width": 869,
     "height": 1187
@@ -214,6 +266,10 @@
   "images/screens/medical/medication-check-submitted.png": {
     "width": 760,
     "height": 784
+  },
+  "images/screens/medical/medication-checks-icon.jpg": {
+    "width": 840,
+    "height": 880
   },
   "images/screens/medical/new-medical-record.png": {
     "width": 1024,
@@ -223,13 +279,13 @@
     "width": 1024,
     "height": 67
   },
-  "images/screens/medical/orr-registered-psychologist-list.png": {
-    "width": 680,
-    "height": 413
-  },
   "images/screens/medical/orr-registered-doctor-list.png": {
     "width": 676,
     "height": 405
+  },
+  "images/screens/medical/orr-registered-psychologist-list.png": {
+    "width": 680,
+    "height": 413
   },
   "images/screens/messaging-employee/email-notify-new-message.png": {
     "width": 980,
@@ -239,17 +295,17 @@
     "width": 519,
     "height": 621
   },
-  "images/screens/monitor-plans-incidents/cdp-plan-overview.png": {
+  "images/screens/monitor-plans-incidents/cdp-duplicate-incident-plan.png": {
     "width": 1024,
-    "height": 195
+    "height": 404
   },
   "images/screens/monitor-plans-incidents/cdp-new-plan.png": {
     "width": 1024,
     "height": 352
   },
-  "images/screens/monitor-plans-incidents/cdp-duplicate-incident-plan.png": {
+  "images/screens/monitor-plans-incidents/cdp-plan-overview.png": {
     "width": 1024,
-    "height": 404
+    "height": 195
   },
   "images/screens/safety-briefs/safety-brief-records-dark.png": {
     "width": 1024,
@@ -259,6 +315,18 @@
     "width": 495,
     "height": 598
   },
+  "images/screens/tasks/task-create-form.png": {
+    "width": 489,
+    "height": 605
+  },
+  "images/screens/tasks/task-detail-open.png": {
+    "width": 1009,
+    "height": 753
+  },
+  "images/screens/tasks/task-employee-list.png": {
+    "width": 1024,
+    "height": 194
+  },
   "images/screens/tasks/task-overview.png": {
     "width": 1570,
     "height": 534
@@ -266,18 +334,6 @@
   "images/screens/tasks/task-view-popup.png": {
     "width": 1010,
     "height": 752
-  },
-  "images/screens/tasks/task-employee-list.png": {
-    "width": 1024,
-    "height": 194
-  },
-  "images/screens/tasks/task-detail-open.png": {
-    "width": 1009,
-    "height": 753
-  },
-  "images/screens/tasks/task-create-form.png": {
-    "width": 489,
-    "height": 605
   },
   "images/screens/tasks/workspace-tasks-addon.png": {
     "width": 1024,
@@ -347,13 +403,17 @@
     "width": 1011,
     "height": 817
   },
+  "images/screens/verification/CheckConfigMedicalCustom.png": {
+    "width": 1024,
+    "height": 997
+  },
   "images/screens/verification/CheckConfigVerification.png": {
     "width": 1024,
     "height": 748
   },
-  "images/screens/verification/CheckConfigMedicalCustom.png": {
-    "width": 1024,
-    "height": 997
+  "images/screens/verification/qa-verifications-addon-tile.png": {
+    "width": 359,
+    "height": 263
   },
   "images/screens/verification/report/verification-report-cab-pass.jpg": {
     "width": 1024,
@@ -398,45 +458,5 @@
   "images/screens/verification/verification-sampled-run-analysis.png": {
     "width": 1024,
     "height": 131
-  },
-  "images/screens/verification/qa-verifications-addon-tile.png": {
-    "width": 359,
-    "height": 263
-  },
-  "images/screens/main-sys/account-two-factor.png": {
-    "width": 535,
-    "height": 830
-  },
-  "images/screens/main-sys/login-authenticator-code.png": {
-    "width": 396,
-    "height": 768
-  },
-  "images/screens/main-sys/login-screen-portrait.png": {
-    "width": 560,
-    "height": 911
-  },
-  "images/screens/main-sys/print-before-you-print.png": {
-    "width": 552,
-    "height": 830
-  },
-  "images/product/printable-profile-hero.png": {
-    "width": 1024,
-    "height": 1024
-  },
-  "images/product/employee-profile-brochure-page.png": {
-    "width": 1040,
-    "height": 1456
-  },
-  "images/product/brochure-headshot.png": {
-    "width": 1024,
-    "height": 1024
-  },
-  "images/product/reporting-analytics-hero.jpg": {
-    "width": 672,
-    "height": 563
-  },
-  "images/product/incidents-spad-hero.png": {
-    "width": 1280,
-    "height": 720
   }
 }

@@ -1760,6 +1760,8 @@ export const featureGroups = [
         heading: "Issue a digital cab pass in a few steps",
         body: [
           "From colour choice to QR verification, the flow stays on the employee record. No separate system, no login for the person scanning the pass.",
+          "You pick the pass colour first, green, yellow, blue, red or black, then fill the same fields as a standard driving cab pass: validity dates, routes, endorsements and issuer signature. Nothing is created until you confirm.",
+          "Once issued, a QR sits beside the photo for public verification in a browser. Email a copy to the employee with a view link, and manage renew, revoke, edit or delete from the pass preview without leaving the Cab Passes tab.",
         ],
         bulletTiles: true,
         copyTiles: true,
@@ -1791,6 +1793,8 @@ export const featureGroups = [
         heading: "On QA verification reports",
         body: [
           "Digital Cab Passes is included as standard. When the QA Verifications add-on is purchased, cab pass status forms part of the employee verification report. Expired or unsigned passes surface as review items; in-date signed passes show as compliant, with a direct path back to Cab Passes to fix anything that needs attention.",
+          "Each issued pass appears in a Cab Pass preview on the report with colour, pass number and expiry, so the checker sees the live authority rather than a static note. Outcomes resolve to Review or Compliant for every pass on the record.",
+          "Where a pass needs renewing or updating, Fix in Cab Passes opens the record from the report so the fix happens in the same system of record that issued it. Without the QA Verifications add-on, passes still live on the employee record; report status simply is not included until that module is active.",
         ],
         bulletTiles: true,
         copyTiles: true,
