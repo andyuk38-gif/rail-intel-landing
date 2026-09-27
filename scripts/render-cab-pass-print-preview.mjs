@@ -22,11 +22,55 @@ if (!existsSync(vaultPw)) {
 }
 const { chromium } = await import(vaultPw);
 
-// Crop pass card from issued green pass screenshot
+// Crop tightly to the green pass card (exclude UI chrome / SCAN panel), then
+// resize to ISO ID-1 so it fills the cut-zone slot edge-to-edge.
 const cropPy = `
 from PIL import Image
+import numpy as np
+
 img = Image.open(${JSON.stringify(join(ROOT, "images/screens/cab-passes/green-pass-issued-dark.png"))}).convert("RGB")
-card = img.crop((8, 28, 380, 268))
+a = np.array(img)
+
+def is_green(p):
+  r, g, b = (int(p[0]), int(p[1]), int(p[2]))
+  return g > 80 and g > r + 25 and g > b + 25
+
+h, w, _ = a.shape
+top = bottom = left = right = None
+for y in range(h):
+  if any(is_green(a[y, x]) for x in range(20, 360)):
+    top = y
+    break
+for y in range(h - 1, -1, -1):
+  if any(is_green(a[y, x]) for x in range(20, 360)):
+    bottom = y
+    break
+for x in range(w):
+  if any(is_green(a[y, x]) for y in range(top, bottom + 1)):
+    left = x
+    break
+for x in range(359, -1, -1):
+  if any(is_green(a[y, x]) for y in range(top, bottom + 1)):
+    right = x
+    break
+
+card = img.crop((left, top, right + 1, bottom + 1))
+ca = np.array(card)
+nw = ~((ca[:, :, 0] > 245) & (ca[:, :, 1] > 245) & (ca[:, :, 2] > 245))
+ys, xs = np.where(nw)
+card = card.crop((int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1))
+# Exact ID-1 pixels so object-fit:fill maps 1:1 into the cut slot
+card = card.resize((856, 540), Image.Resampling.LANCZOS)
+# Squared green edge — rounded-corner source leaves white at the PNG corners
+from PIL import ImageDraw
+ca = __import__("numpy").array(card)
+border = tuple(int(x) for x in ca[2, 428])
+draw = ImageDraw.Draw(card)
+bw = 6
+draw.rectangle([0, 0, 855, bw - 1], fill=border)
+draw.rectangle([0, 540 - bw, 855, 539], fill=border)
+draw.rectangle([0, 0, bw - 1, 539], fill=border)
+draw.rectangle([856 - bw, 0, 855, 539], fill=border)
 card.save(${JSON.stringify(join(TMP, "pass-front.png"))})
 print(card.size)
 `;
@@ -52,11 +96,10 @@ body {
 }
 .sheet {
   width: 210mm;
-  min-height: 297mm;
   margin: 0 auto 12mm;
   background: #fff;
   box-sizing: border-box;
-  padding: 12mm;
+  padding: 10mm 12mm 8mm;
   display: flex;
   flex-direction: column;
   box-shadow: 0 8px 30px rgba(15,23,42,.18);
@@ -65,53 +108,53 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 10mm;
-  margin-bottom: 8mm;
-  padding-bottom: 4mm;
+  gap: 8mm;
+  margin-bottom: 6mm;
+  padding-bottom: 3.5mm;
   border-bottom: 1px solid #cbd5e1;
 }
 .cab-pass-print-instructions { flex: 1; min-width: 0; }
 .cab-pass-print-instructions h1 {
-  margin: 0 0 2.5mm;
-  font-size: 13pt;
+  margin: 0 0 2mm;
+  font-size: 12pt;
   font-weight: 800;
   letter-spacing: -0.01em;
 }
 .cab-pass-print-instructions p {
-  margin: 0 0 2mm;
-  font-size: 9.5pt;
-  line-height: 1.45;
+  margin: 0 0 1.5mm;
+  font-size: 8.5pt;
+  line-height: 1.4;
   color: #334155;
 }
 .cab-pass-print-instructions ol {
-  margin: 2mm 0 0;
-  padding-left: 5mm;
-  font-size: 9pt;
-  line-height: 1.4;
+  margin: 1.5mm 0 0;
+  padding-left: 4.5mm;
+  font-size: 8pt;
+  line-height: 1.35;
   color: #475569;
 }
-.cab-pass-print-instructions li { margin-bottom: 1mm; }
+.cab-pass-print-instructions li { margin-bottom: 0.6mm; }
 .cab-pass-print-logo {
   flex-shrink: 0;
-  width: 28mm;
+  width: 22mm;
   height: auto;
 }
 .cab-pass-print-card-area {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6mm 4mm 10mm;
+  padding: 8mm 2mm 6mm;
 }
 .cab-pass-cut-zone {
   position: relative;
-  box-sizing: content-box;
+  box-sizing: border-box;
   width: ${CARD_W_MM};
   height: ${CARD_H_MM};
-  padding: 4mm;
-  border: 1.5px dashed #64748b;
-  border-radius: 2mm;
-  background: #f8fafc;
+  padding: 0;
+  border: 2px dashed #64748b;
+  border-radius: 0.8mm;
+  background: #fff;
+  overflow: visible;
 }
 .cab-pass-cut-label {
   position: absolute;
@@ -127,31 +170,36 @@ body {
   color: #64748b;
   background: #fff;
   white-space: nowrap;
+  z-index: 2;
 }
 .cab-pass-scissors {
   position: absolute;
   font-size: 13pt;
   line-height: 1;
   color: #64748b;
+  z-index: 2;
 }
-.cab-pass-scissors-tl { top: -2mm; left: -1mm; transform: rotate(-50deg); }
-.cab-pass-scissors-tr { top: -2mm; right: -1mm; transform: rotate(40deg) scaleX(-1); }
-.cab-pass-scissors-bl { bottom: -2mm; left: -1mm; transform: rotate(50deg) scaleX(-1); }
-.cab-pass-scissors-br { bottom: -2mm; right: -1mm; transform: rotate(-40deg); }
+.cab-pass-scissors-tl { top: -2.5mm; left: -2.5mm; transform: rotate(-50deg); }
+.cab-pass-scissors-tr { top: -2.5mm; right: -2.5mm; transform: rotate(40deg) scaleX(-1); }
+.cab-pass-scissors-bl { bottom: -2.5mm; left: -2.5mm; transform: rotate(50deg) scaleX(-1); }
+.cab-pass-scissors-br { bottom: -2.5mm; right: -2.5mm; transform: rotate(-40deg); }
 .cab-pass-card-slot {
-  width: ${CARD_W_MM};
-  height: ${CARD_H_MM};
+  position: absolute;
+  /* Extend under the dashed border so the pass fills to the cut line */
+  inset: -2px;
   overflow: hidden;
-  border-radius: 0.8mm;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+  border-radius: 0.55mm;
   background: #fff;
 }
 .cab-pass-card-slot img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: left center;
+  object-fit: fill;
+}
+.cab-pass-card-slot > .pass-reverse {
+  width: 100%;
+  height: 100%;
 }
 .cab-pass-page-footer {
   margin-top: auto;
@@ -263,8 +311,17 @@ html,body{margin:0;background:#0b111a;font-family:system-ui,-apple-system,sans-s
 .label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#93a0b5}
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid #64748b;background:#1e293b;color:#e2e8f0;border-radius:10px;padding:7px 11px;font-size:12px;font-weight:600}
 .copy{font-size:12px;line-height:1.45;color:#93a0b5;margin:0 0 14px;max-width:42rem}
-.card{display:flex;justify-content:center;padding:8px 0 4px}
-.card img{width:min(100%,420px);height:auto;border-radius:8px;border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.card{display:flex;justify-content:center;padding:4px 0 2px}
+.card-frame{
+  width:min(100%,28rem);
+  aspect-ratio:85.6/53.98;
+  border-radius:10px;
+  border:2px solid rgba(148,163,184,.55);
+  background:#f8fafc;
+  overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+.card-frame img{display:block;width:100%;height:100%;object-fit:fill}
 .hint{margin:10px auto 0;text-align:center;font-size:10px;color:#6b778c;max-width:22rem}
 </style></head><body>
 <div class="wrap"><div class="panel">
@@ -273,7 +330,7 @@ html,body{margin:0;background:#0b111a;font-family:system-ui,-apple-system,sans-s
     <button class="btn" type="button">🖨 Print credit-card size</button>
   </div>
   <p class="copy">Landscape ISO ID-1 layout (85.6 × 53.98 mm). Tap the card to flip — conditions of use are on the reverse. <strong style="color:#cbd5e1">Print credit-card size</strong> opens a two-page A4 sheet (front and reverse) with cut guides — use double-sided print, flip on long edge.</p>
-  <div class="card"><img src="file://${passFront}" alt="Credit-card cab pass preview" /></div>
+  <div class="card"><div class="card-frame"><img src="file://${passFront}" alt="Credit-card cab pass preview" /></div></div>
   <p class="hint">Tap the card to flip — front shows all lines on the left, photo and verification QR in matching panels on the right; reverse shows conditions of use.</p>
 </div></div>
 </body></html>`

@@ -1791,6 +1791,8 @@ export const featureGroups = [
       },
       {
         heading: "Print a credit-card cab pass",
+        mod: "cab-pass-print",
+        shotGrid: "hero-stack",
         body: [
           "From Pass layout & print on the Cab Passes tab, the issued pass sits in a landscape ISO ID-1 preview (85.6 × 53.98 mm). Tap the card to flip between the front and the conditions of use on the reverse.",
           "Print credit-card size opens a two-page A4 print preview — page 1 is the front of the pass, page 2 is the reverse rotated for duplex alignment. Both pages share cut guides, scissors marks and step-by-step instructions so the physical card lines up when you print double-sided with flip on long edge.",
@@ -1826,6 +1828,7 @@ export const featureGroups = [
             alt: "Pass layout and print panel with ISO ID-1 cab pass preview and Print credit-card size button",
             caption:
               "Pass layout & print — ISO ID-1 preview on the Cab Passes tab, with Print credit-card size.",
+            full: true,
             scale: 1,
           },
           {
@@ -1833,14 +1836,16 @@ export const featureGroups = [
             alt: "A4 print preview page 1 showing the front of the driving cab pass with cut guides",
             caption:
               "Print preview — page 1 (front) with cut guides, scissors marks and duplex instructions.",
-            scale: 1,
+            scale: 0.42,
+            bordered: true,
           },
           {
             src: "images/screens/cab-passes/cab-pass-print-reverse.png",
             alt: "A4 print preview page 2 showing the reverse conditions of use rotated for flip on long edge",
             caption:
               "Print preview — page 2 (reverse) rotated for flip on long edge so the back aligns when cut.",
-            scale: 1,
+            scale: 0.42,
+            bordered: true,
           },
         ],
       },
