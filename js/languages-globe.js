@@ -1,6 +1,6 @@
 /**
- * Languages coverage globe — interactive Three.js earth with language markers.
- * Click a language or city pin to focus coverage. Manual orbit only (no auto motion).
+ * Languages coverage globe — premium interactive Three.js earth.
+ * Manual orbit only. One language at a time. City pins with labels on select.
  */
 
 const root = document.querySelector("[data-lang-globe]");
@@ -29,20 +29,10 @@ function boot(root) {
       const fromCatalog = placeCatalog.find((item) => item.code === code);
       const lat = parseFloat(btn.getAttribute("data-lang-lat"));
       const lng = parseFloat(btn.getAttribute("data-lang-lng"));
-      const places =
-        fromCatalog?.places?.filter(
-          (place) => Number.isFinite(place.lat) && Number.isFinite(place.lng)
-        ) ||
+      const rawPlaces =
+        fromCatalog?.places?.filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)) ||
         (Number.isFinite(lat) && Number.isFinite(lng)
-          ? [
-              {
-                name: btn.getAttribute("data-lang-region") || code,
-                country: "",
-                lat,
-                lng,
-                primary: true,
-              },
-            ]
+          ? [{ name: btn.getAttribute("data-lang-region") || code, country: "", lat, lng, primary: true }]
           : []);
 
       return {
@@ -50,10 +40,13 @@ function boot(root) {
         name: btn.getAttribute("data-lang-name") || fromCatalog?.name || "",
         nativeName: btn.getAttribute("data-lang-native") || fromCatalog?.nativeName || "",
         region: btn.getAttribute("data-lang-region") || fromCatalog?.region || "",
-        places: places.map((place, index) => ({
-          ...place,
-          id: code + ":" + index + ":" + place.name,
+        places: rawPlaces.map((place, index) => ({
+          name: place.name,
+          country: place.country || "",
+          lat: place.lat,
+          lng: place.lng,
           primary: Boolean(place.primary) || index === 0,
+          id: code + ":" + index,
         })),
         button: btn,
       };
@@ -64,11 +57,9 @@ function boot(root) {
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let activeCode = languages[0].code;
-  let activePlaceId =
-    languages[0].places.find((p) => p.primary)?.id || languages[0].places[0].id;
+  let activePlaceId = languages[0].places.find((p) => p.primary)?.id || languages[0].places[0].id;
   let focusHandler = null;
 
-  // City chip strip under status
   let placesEl = root.querySelector("[data-lang-globe-places]");
   if (!placesEl && statusEl) {
     placesEl = document.createElement("div");
@@ -90,22 +81,28 @@ function boot(root) {
   }
 
   function getPlace(lang, placeId) {
-    return lang.places.find((p) => p.id === placeId) || lang.places.find((p) => p.primary) || lang.places[0];
+    return (
+      lang.places.find((p) => p.id === placeId) ||
+      lang.places.find((p) => p.primary) ||
+      lang.places[0]
+    );
   }
 
   function setStatus(lang, place) {
     if (!statusEl) return;
     statusEl.innerHTML =
-      "<strong>" +
+      '<p class="lang-globe__status-line"><strong>' +
       escapeHtml(lang.name) +
       "</strong> · " +
       escapeHtml(lang.nativeName) +
-      "<br /><span class=\"lang-globe__status-places\">" +
+      "</p>" +
+      '<p class="lang-globe__status-city">' +
       escapeHtml(place.name) +
       (place.country ? ", " + escapeHtml(place.country) : "") +
-      " · " +
+      "</p>" +
+      '<p class="lang-globe__status-region">' +
       escapeHtml(lang.region) +
-      "</span>";
+      "</p>";
   }
 
   function renderPlaceChips(lang, placeId) {
@@ -113,12 +110,15 @@ function boot(root) {
     placesEl.innerHTML = lang.places
       .map(
         (place) =>
-          `<button type="button" class="lang-globe__place-chip${
-            place.id === placeId ? " is-active" : ""
-          }" data-place-id="${escapeHtml(place.id)}" data-lang-code="${escapeHtml(lang.code)}">
-            <span class="lang-globe__place-dot" aria-hidden="true"></span>
-            ${escapeHtml(place.name)}
-          </button>`
+          '<button type="button" class="lang-globe__place-chip' +
+          (place.id === placeId ? " is-active" : "") +
+          '" data-place-id="' +
+          escapeHtml(place.id) +
+          '" data-lang-code="' +
+          escapeHtml(lang.code) +
+          '">' +
+          escapeHtml(place.name) +
+          "</button>"
       )
       .join("");
 
@@ -146,9 +146,8 @@ function boot(root) {
     stage.querySelectorAll("[data-flat-marker]").forEach((el) => {
       const onLang = el.getAttribute("data-flat-marker") === code;
       const onPlace = el.getAttribute("data-place-id") === placeId;
-      el.classList.toggle("is-active", onLang);
+      el.hidden = !onLang;
       el.classList.toggle("is-selected", onPlace);
-      el.classList.toggle("is-dim", !onLang);
     });
     if (labelsLayer) {
       labelsLayer.querySelectorAll(".lang-globe__label").forEach((el) => {
@@ -165,9 +164,7 @@ function boot(root) {
     if (!lang) return;
     const place = getPlace(lang, placeId);
     syncUi(code, place.id);
-    if (typeof focusHandler === "function") {
-      focusHandler(code, place.id, animate !== false);
-    }
+    if (typeof focusHandler === "function") focusHandler(code, place.id, animate !== false);
   }
 
   function selectLanguage(code, animate) {
@@ -203,8 +200,8 @@ function boot(root) {
 
   function projectFlat(lat, lng) {
     return {
-      x: Math.min(0.94, Math.max(0.06, 0.5 + lng / 360)),
-      y: Math.min(0.94, Math.max(0.06, 0.5 - lat / 180)),
+      x: Math.min(0.92, Math.max(0.08, 0.5 + lng / 360)),
+      y: Math.min(0.92, Math.max(0.08, 0.5 - lat / 180)),
     };
   }
 
@@ -215,7 +212,6 @@ function boot(root) {
 
     const disc = document.createElement("div");
     disc.className = "lang-globe__flat";
-    disc.setAttribute("aria-hidden", "true");
     disc.innerHTML = `
       <div class="lang-globe__flat-glow"></div>
       <div class="lang-globe__flat-sphere">
@@ -227,30 +223,27 @@ function boot(root) {
       <div class="lang-globe__flat-markers"></div>
     `;
     canvasWrap.appendChild(disc);
-
     const markersHost = disc.querySelector(".lang-globe__flat-markers");
+
     languages.forEach((lang) => {
       lang.places.forEach((place) => {
         const pos = projectFlat(place.lat, place.lng);
         const marker = document.createElement("button");
         marker.type = "button";
-        marker.className = "lang-globe__flat-marker" + (place.primary ? " is-primary" : "");
+        marker.className = "lang-globe__flat-marker";
         marker.setAttribute("data-flat-marker", lang.code);
         marker.setAttribute("data-place-id", place.id);
         marker.setAttribute(
           "aria-label",
-          lang.name + " — " + place.name + (place.country ? ", " + place.country : "")
+          place.name + (place.country ? ", " + place.country : "")
         );
         marker.style.left = pos.x * 100 + "%";
         marker.style.top = pos.y * 100 + "%";
-        marker.innerHTML = `
-          <span class="lang-globe__flat-pulse"></span>
-          <span class="lang-globe__flat-core"></span>
-          <span class="lang-globe__flat-tag">${escapeHtml(place.name)}</span>
-        `;
-        marker.addEventListener("click", () => {
-          selectPlace(lang.code, place.id, true);
-        });
+        marker.innerHTML =
+          '<span class="lang-globe__flat-core"></span><span class="lang-globe__flat-tag">' +
+          escapeHtml(place.name) +
+          "</span>";
+        marker.addEventListener("click", () => selectPlace(lang.code, place.id, true));
         markersHost.appendChild(marker);
       });
     });
@@ -260,13 +253,11 @@ function boot(root) {
       const lang = getLang(code);
       const place = getPlace(lang, placeId);
       if (!sphere || !place) return;
+      const x = 50 - place.lng * 0.28;
+      const y = 50 - place.lat * 0.22;
+      sphere.style.backgroundPosition = "center, " + x + "% " + y + "%";
       sphere.style.transform =
-        "rotateX(" +
-        (6 + place.lat * 0.01) +
-        "deg) rotateY(" +
-        place.lng * -0.12 +
-        "deg)";
-
+        "rotateX(" + (6 + place.lat * 0.05) + "deg) rotateY(" + place.lng * -0.06 + "deg)";
       markersHost.querySelectorAll(".lang-globe__flat-tag").forEach((tag) => {
         const parent = tag.closest("[data-place-id]");
         tag.hidden = !(parent && parent.getAttribute("data-place-id") === placeId);
@@ -274,8 +265,7 @@ function boot(root) {
     };
 
     const hint = root.querySelector(".lang-globe__hint");
-    if (hint) hint.textContent = "Click a city pin · Or choose a language";
-
+    if (hint) hint.textContent = "Choose a language, then a city";
     selectPlace(activeCode, activePlaceId, false);
   }
 
@@ -294,14 +284,15 @@ function boot(root) {
       "https://esm.sh/three@0.170.0/examples/jsm/controls/OrbitControls.js"
     );
 
-    const GLOBE_RADIUS = 1.6;
-    const MARKER_RADIUS = 0.026;
+    const GLOBE_RADIUS = 1.72;
+    const MARKER_R = 0.028;
+    const CAM_DIST = 3.55;
     const EARTH_TEX =
-      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-dark.jpg";
-    const LIGHTS_TEX =
-      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-night.jpg";
+      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-blue-marble.jpg";
     const BUMP_TEX =
       "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-topology.png";
+    const WATER_TEX =
+      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-water.png";
 
     const width = stage.clientWidth;
     const height = stage.clientHeight;
@@ -323,39 +314,38 @@ function boot(root) {
 
     if (fallback) fallback.hidden = true;
     canvasWrap.innerHTML = "";
-
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobileLike ? 1.75 : 2));
     renderer.setSize(width, height, false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.22;
     canvasWrap.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(mobileLike ? 46 : 42, width / height, 0.1, 100);
-    camera.position.set(mobileLike ? 0.55 : 0.85, mobileLike ? 0.95 : 1.15, mobileLike ? 3.85 : 3.65);
+    const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 100);
+    camera.position.set(0.35, 0.55, CAM_DIST);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.enablePan = false;
-    controls.minDistance = mobileLike ? 3.05 : 2.75;
-    controls.maxDistance = mobileLike ? 5.2 : 5.5;
+    controls.minDistance = 2.85;
+    controls.maxDistance = 4.8;
     controls.enableZoom = !mobileLike;
-    controls.rotateSpeed = mobileLike ? 0.72 : 1;
+    controls.rotateSpeed = mobileLike ? 0.55 : 0.72;
     controls.autoRotate = false;
     controls.target.set(0, 0, 0);
     if (THREE.TOUCH) {
-      controls.touches = {
-        ONE: THREE.TOUCH.ROTATE,
-        TWO: THREE.TOUCH.DOLLY_PAN,
-      };
+      controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
     }
 
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
+    // Sparse starfield — keep quiet so earth stays the hero
     {
-      const count = 1200;
+      const count = 480;
       const positions = new Float32Array(count * 3);
       for (let i = 0; i < count; i += 1) {
         const r = 18 + Math.random() * 28;
@@ -365,32 +355,33 @@ function boot(root) {
         positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
         positions[i * 3 + 2] = r * Math.cos(phi);
       }
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       scene.add(
         new THREE.Points(
-          geometry,
+          geo,
           new THREE.PointsMaterial({
-            color: 0xb8c4d8,
-            size: 0.03,
-            sizeAttenuation: true,
+            color: 0xb8c6d9,
+            size: 0.022,
             transparent: true,
-            opacity: 0.65,
+            opacity: 0.4,
             depthWrite: false,
+            sizeAttenuation: true,
           })
         )
       );
     }
 
-    scene.add(new THREE.AmbientLight(0xb4c4dc, 0.95));
-    const key = new THREE.DirectionalLight(0xffffff, 1.45);
-    key.position.set(4, 2.5, 3);
+    // Even, exhibition lighting so continents stay readable
+    scene.add(new THREE.AmbientLight(0xd8e4f5, 0.95));
+    const key = new THREE.DirectionalLight(0xffffff, 1.85);
+    key.position.set(4.5, 2.8, 3.2);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0x9eb6ff, 0.75);
+    const fill = new THREE.DirectionalLight(0xa8c4ff, 0.65);
     fill.position.set(-3.5, 1.2, -2.5);
     scene.add(fill);
-    const rim = new THREE.DirectionalLight(0x6ea0ff, 0.7);
-    rim.position.set(-3, -1, -2);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.45);
+    rim.position.set(-1, -2.5, -3.5);
     scene.add(rim);
 
     function latLngToVector3(lat, lng, radius) {
@@ -403,38 +394,14 @@ function boot(root) {
       );
     }
 
-    /** Great-circle arc that stays above the surface (no stub clipping). */
-    function buildArcPoints(fromLat, fromLng, toLat, toLng) {
-      const start = latLngToVector3(fromLat, fromLng, 1).normalize();
-      const end = latLngToVector3(toLat, toLng, 1).normalize();
-      let angle = start.angleTo(end);
-      if (angle < 0.02) return null;
-      if (angle > Math.PI - 0.02) angle = Math.PI - 0.02;
-
-      const points = [];
-      const steps = Math.max(48, Math.floor(angle * 48));
-      const sinAngle = Math.sin(angle);
-      for (let i = 0; i <= steps; i += 1) {
-        const t = i / steps;
-        const p = new THREE.Vector3()
-          .copy(start)
-          .multiplyScalar(Math.sin((1 - t) * angle) / sinAngle)
-          .add(end.clone().multiplyScalar(Math.sin(t * angle) / sinAngle));
-        // Peak altitude mid-route so the line clears the globe
-        const altitude = GLOBE_RADIUS * (1.035 + 0.22 * Math.sin(Math.PI * t) * (0.55 + angle / Math.PI));
-        points.push(p.normalize().multiplyScalar(altitude));
-      }
-      return points;
-    }
-
+    // Day marble — full brightness, no muddy tint
     const earthMat = new THREE.MeshStandardMaterial({
-      color: 0xd7e4f5,
+      color: 0xffffff,
       roughness: 0.82,
       metalness: 0.04,
-      emissive: 0x1a2a44,
-      emissiveIntensity: 0.35,
     });
-    globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(GLOBE_RADIUS, 96, 96), earthMat));
+    const earth = new THREE.Mesh(new THREE.SphereGeometry(GLOBE_RADIUS, 128, 128), earthMat);
+    globeGroup.add(earth);
 
     const loader = new THREE.TextureLoader();
     loader.setCrossOrigin("anonymous");
@@ -442,49 +409,49 @@ function boot(root) {
       EARTH_TEX,
       (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;
-        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        tex.anisotropy = Math.min(12, renderer.capabilities.getMaxAnisotropy());
         earthMat.map = tex;
         earthMat.needsUpdate = true;
       },
       undefined,
       () => {
-        earthMat.color = new THREE.Color(0x2a4060);
+        earthMat.color = new THREE.Color(0x2a4a6e);
       }
     );
     loader.load(
-      LIGHTS_TEX,
+      BUMP_TEX,
       (tex) => {
-        tex.colorSpace = THREE.SRGBColorSpace;
-        earthMat.emissiveMap = tex;
-        earthMat.emissive = new THREE.Color(0xffffff);
-        earthMat.emissiveIntensity = 0.5;
+        earthMat.bumpMap = tex;
+        earthMat.bumpScale = 0.035;
         earthMat.needsUpdate = true;
       },
       undefined,
       () => {}
     );
     loader.load(
-      BUMP_TEX,
+      WATER_TEX,
       (tex) => {
-        earthMat.bumpMap = tex;
-        earthMat.bumpScale = 0.045;
+        earthMat.metalnessMap = tex;
+        earthMat.metalness = 0.42;
+        earthMat.roughness = 0.72;
         earthMat.needsUpdate = true;
       },
       undefined,
       () => {}
     );
 
+    // Soft atmospheric halo
     globeGroup.add(
       new THREE.Mesh(
-        new THREE.SphereGeometry(GLOBE_RADIUS * 1.12, 64, 64),
+        new THREE.SphereGeometry(GLOBE_RADIUS * 1.07, 64, 64),
         new THREE.ShaderMaterial({
           side: THREE.BackSide,
           transparent: true,
           depthWrite: false,
           uniforms: {
-            glowColor: { value: new THREE.Color(0x4d7cff) },
-            coefficient: { value: 0.22 },
-            power: { value: 3.8 },
+            glowColor: { value: new THREE.Color(0x7eb0ff) },
+            coefficient: { value: 0.32 },
+            power: { value: 3.6 },
           },
           vertexShader: `
             varying vec3 vNormal;
@@ -500,92 +467,109 @@ function boot(root) {
             varying vec3 vNormal;
             void main() {
               float intensity = pow(coefficient - dot(vNormal, vec3(0.0, 0.0, 1.0)), power);
-              gl_FragColor = vec4(glowColor, 1.0) * intensity;
+              gl_FragColor = vec4(glowColor, 1.0) * intensity * 0.85;
             }
           `,
         })
       )
     );
 
-    const equator = new THREE.Mesh(
-      new THREE.TorusGeometry(GLOBE_RADIUS + 0.004, 0.002, 8, 128),
-      new THREE.MeshBasicMaterial({ color: 0x8aa0c0, transparent: true, opacity: 0.14 })
+    // Subtle under-glow disc for depth
+    const floorGlow = new THREE.Mesh(
+      new THREE.CircleGeometry(GLOBE_RADIUS * 1.05, 64),
+      new THREE.MeshBasicMaterial({
+        color: 0x3a5f9a,
+        transparent: true,
+        opacity: 0.18,
+        depthWrite: false,
+      })
     );
-    equator.rotation.x = Math.PI / 2;
-    globeGroup.add(equator);
+    floorGlow.rotation.x = -Math.PI / 2;
+    floorGlow.position.y = -GLOBE_RADIUS * 0.98;
+    globeGroup.add(floorGlow);
 
     const markers = [];
     const labelEls = [];
-    const arcs = [];
     const hitScale = mobileLike ? 5.5 : 4.2;
 
     languages.forEach((lang) => {
-      const primary = lang.places.find((p) => p.primary) || lang.places[0];
-
       lang.places.forEach((place) => {
         const group = new THREE.Group();
-        const pos = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS + 0.014);
+        const pos = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS + 0.012);
         group.position.copy(pos);
-        group.lookAt(pos.clone().multiplyScalar(2));
+        group.lookAt(0, 0, 0);
         group.userData = {
           code: lang.code,
           placeId: place.id,
           placeName: place.name,
           country: place.country || "",
-          primary: Boolean(place.primary),
-          active: false,
-          selected: false,
+          primary: place.primary,
         };
 
-        const size = place.primary ? MARKER_RADIUS * 1.2 : MARKER_RADIUS;
-        const core = new THREE.Mesh(
-          new THREE.SphereGeometry(size, 16, 16),
+        // +Z is outward after lookAt points -Z at centre
+        const stem = new THREE.Mesh(
+          new THREE.CylinderGeometry(MARKER_R * 0.16, MARKER_R * 0.22, MARKER_R * 2.4, 10),
+          new THREE.MeshBasicMaterial({ color: 0xf59e0b })
+        );
+        stem.rotation.x = Math.PI / 2;
+        stem.position.z = MARKER_R * 1.2;
+        group.add(stem);
+        group.userData.stem = stem;
+
+        const head = new THREE.Mesh(
+          new THREE.SphereGeometry(MARKER_R, 20, 20),
           new THREE.MeshStandardMaterial({
-            color: 0xffc14a,
+            color: 0xffc857,
             emissive: 0xf59e0b,
-            emissiveIntensity: 0.95,
+            emissiveIntensity: 0.85,
             metalness: 0.2,
             roughness: 0.3,
           })
         );
-        group.add(core);
-        group.userData.core = core;
+        head.position.z = MARKER_R * 2.35;
+        group.add(head);
+        group.userData.head = head;
 
-        const shell = new THREE.Mesh(
-          new THREE.SphereGeometry(size * 1.45, 14, 14),
-          new THREE.MeshBasicMaterial({
-            color: 0xffe08a,
-            transparent: true,
-            opacity: 0.35,
-            depthWrite: false,
-          })
-        );
-        group.add(shell);
-        group.userData.shell = shell;
-
-        const ring = new THREE.Mesh(
-          new THREE.RingGeometry(size * 1.7, size * 2.4, 48),
+        const halo = new THREE.Mesh(
+          new THREE.CircleGeometry(MARKER_R * 1.7, 32),
           new THREE.MeshBasicMaterial({
             color: 0xfbbf24,
             transparent: true,
-            opacity: 0.7,
+            opacity: 0.35,
             side: THREE.DoubleSide,
             depthWrite: false,
           })
         );
+        halo.position.z = MARKER_R * 2.34;
+        group.add(halo);
+        group.userData.halo = halo;
+
+        const ring = new THREE.Mesh(
+          new THREE.RingGeometry(MARKER_R * 2.0, MARKER_R * 2.55, 48),
+          new THREE.MeshBasicMaterial({
+            color: 0xffe08a,
+            transparent: true,
+            opacity: 0.9,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+          })
+        );
+        ring.position.z = MARKER_R * 2.35;
         ring.visible = false;
         group.add(ring);
         group.userData.ring = ring;
 
         const hit = new THREE.Mesh(
-          new THREE.SphereGeometry(size * hitScale, 8, 8),
+          new THREE.SphereGeometry(MARKER_R * hitScale, 8, 8),
           new THREE.MeshBasicMaterial({ visible: false })
         );
+        hit.position.z = MARKER_R * 2.35;
         hit.userData.code = lang.code;
         hit.userData.placeId = place.id;
         group.add(hit);
         group.userData.hit = hit;
 
+        group.visible = false;
         globeGroup.add(group);
         markers.push(group);
 
@@ -595,34 +579,15 @@ function boot(root) {
           el.setAttribute("data-lang", lang.code);
           el.setAttribute("data-place-id", place.id);
           el.innerHTML =
+            "<strong>" +
             escapeHtml(place.name) +
-            "<span>" +
+            "</strong><span>" +
             escapeHtml(lang.name) +
             (place.country ? " · " + escapeHtml(place.country) : "") +
             "</span>";
           labelsLayer.appendChild(el);
-          labelEls.push({ el: el, marker: group });
+          labelEls.push({ el, marker: group });
         }
-      });
-
-      // Full arcs from hub to every other city (proper spherical paths)
-      lang.places.forEach((place) => {
-        if (place.id === primary.id) return;
-        const pts = buildArcPoints(primary.lat, primary.lng, place.lat, place.lng);
-        if (!pts) return;
-        const line = new THREE.Line(
-          new THREE.BufferGeometry().setFromPoints(pts),
-          new THREE.LineBasicMaterial({
-            color: 0xfbbf24,
-            transparent: true,
-            opacity: 0.55,
-            depthWrite: false,
-          })
-        );
-        line.visible = false;
-        line.userData = { code: lang.code, toPlaceId: place.id };
-        globeGroup.add(line);
-        arcs.push(line);
       });
     });
 
@@ -636,29 +601,19 @@ function boot(root) {
       markers.forEach((marker) => {
         const onLang = marker.userData.code === code;
         const onPlace = marker.userData.placeId === placeId;
-        marker.userData.active = onLang;
-        marker.userData.selected = onPlace;
-        marker.scale.setScalar(onPlace ? 1.55 : onLang ? 1.12 : 0.62);
-        if (marker.userData.core) {
-          marker.userData.core.material.emissiveIntensity = onPlace ? 1.7 : onLang ? 1.1 : 0.35;
-          marker.userData.core.material.color.set(onPlace ? 0xffe08a : onLang ? 0xffc14a : 0xb8893a);
-          marker.userData.core.material.transparent = !onLang;
-          marker.userData.core.material.opacity = onLang ? 1 : 0.55;
+        marker.visible = onLang;
+        marker.scale.setScalar(onPlace ? 1.4 : 0.92);
+        if (marker.userData.head) {
+          marker.userData.head.material.emissiveIntensity = onPlace ? 1.55 : 0.55;
+          marker.userData.head.material.color.set(onPlace ? 0xffe8a8 : 0xffc857);
         }
-        if (marker.userData.shell) {
-          marker.userData.shell.material.opacity = onPlace ? 0.6 : onLang ? 0.28 : 0.08;
+        if (marker.userData.halo) {
+          marker.userData.halo.material.opacity = onPlace ? 0.55 : 0.22;
         }
-        if (marker.userData.ring) {
-          marker.userData.ring.visible = onPlace;
-        }
+        if (marker.userData.ring) marker.userData.ring.visible = onPlace;
       });
       labelEls.forEach(({ el }) => {
         el.classList.toggle("is-visible", el.getAttribute("data-place-id") === placeId);
-      });
-      arcs.forEach((arc) => {
-        const show = arc.userData.code === code;
-        arc.visible = show;
-        arc.material.opacity = show ? 0.5 : 0;
       });
     }
 
@@ -669,10 +624,9 @@ function boot(root) {
       syncMarkers(code, place.id);
 
       const target = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS);
-      const camDist = Math.max(camera.position.length(), mobileLike ? 3.7 : 3.55);
-      const desired = target.clone().normalize().multiplyScalar(camDist);
-      desired.y += 0.25;
-      desired.setLength(Math.max(desired.length(), camDist));
+      const desired = target.clone().normalize().multiplyScalar(CAM_DIST);
+      desired.y += 0.12;
+      desired.setLength(CAM_DIST);
 
       if (!animate || reducedMotion) {
         camera.position.copy(desired);
@@ -686,30 +640,27 @@ function boot(root) {
         start: camera.position.clone(),
         end: desired,
         startTime: performance.now(),
-        duration: 1000,
+        duration: 780,
       };
     }
 
-    focusHandler = (code, placeId, animate) => {
-      focusPlace(code, placeId, animate);
-    };
+    focusHandler = (code, placeId, animate) => focusPlace(code, placeId, animate);
 
     function projectLabels() {
       const w = stage.clientWidth;
       const h = stage.clientHeight;
       const camDir = camera.position.clone().normalize();
       labelEls.forEach(({ el, marker }) => {
-        if (!el.classList.contains("is-visible")) {
+        if (!el.classList.contains("is-visible") || !marker.visible) {
           el.style.visibility = "hidden";
           return;
         }
         const world = new THREE.Vector3();
         marker.getWorldPosition(world);
-        const facing = world.clone().normalize().dot(camDir) > 0.05;
+        world.addScaledVector(world.clone().normalize(), 0.12);
+        const facing = world.clone().normalize().dot(camDir) > 0.08;
         const ndc = world.clone().project(camera);
-        const onScreen =
-          facing && ndc.z < 1 && Math.abs(ndc.x) <= 1.15 && Math.abs(ndc.y) <= 1.15;
-        if (!onScreen) {
+        if (!facing || ndc.z >= 1 || Math.abs(ndc.x) > 1.05 || Math.abs(ndc.y) > 1.05) {
           el.style.visibility = "hidden";
           return;
         }
@@ -751,10 +702,11 @@ function boot(root) {
       }
 
       markers.forEach((marker) => {
-        if (!marker.userData.selected || !marker.userData.ring) return;
-        const ringScale = 1 + (Math.sin(elapsed * 2.4) * 0.5 + 0.5) * 0.35;
-        marker.userData.ring.scale.set(ringScale, ringScale, 1);
-        marker.userData.ring.material.opacity = 0.65 - ringScale * 0.1;
+        if (!marker.userData.ring || !marker.userData.ring.visible) return;
+        const pulse = 0.5 + 0.5 * Math.sin(elapsed * 2.4);
+        const s = 1 + pulse * 0.35;
+        marker.userData.ring.scale.set(s, s, 1);
+        marker.userData.ring.material.opacity = 0.85 - pulse * 0.35;
       });
 
       controls.update();
@@ -786,28 +738,26 @@ function boot(root) {
       const dx = event.clientX - pointerStart.x;
       const dy = event.clientY - pointerStart.y;
       pointerStart = null;
-      if (Math.hypot(dx, dy) > 10) return;
+      if (Math.hypot(dx, dy) > 8) return;
       const rect = renderer.domElement.getBoundingClientRect();
       const pointer = new THREE.Vector2(
         ((event.clientX - rect.left) / rect.width) * 2 - 1,
         -((event.clientY - rect.top) / rect.height) * 2 + 1
       );
       const raycaster = new THREE.Raycaster();
+      raycaster.params.Mesh = raycaster.params.Mesh || {};
       raycaster.setFromCamera(pointer, camera);
-      const intersects = raycaster.intersectObjects(
-        markers.map((m) => m.userData.hit),
+      const hits = raycaster.intersectObjects(
+        markers.filter((m) => m.visible).map((m) => m.userData.hit),
         false
       );
-      if (!intersects.length) return;
-      const hit = intersects[0].object.userData;
-      selectPlace(hit.code, hit.placeId, true);
+      if (!hits.length) return;
+      selectPlace(hits[0].object.userData.code, hits[0].object.userData.placeId, true);
     });
 
     window.addEventListener("resize", scheduleResize);
     window.addEventListener("orientationchange", scheduleResize);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", scheduleResize);
-    }
+    if (window.visualViewport) window.visualViewport.addEventListener("resize", scheduleResize);
     window.addEventListener("pagehide", () => {
       disposed = true;
       window.cancelAnimationFrame(animFrame);
@@ -816,7 +766,7 @@ function boot(root) {
     });
 
     const hint = root.querySelector(".lang-globe__hint");
-    if (hint) hint.textContent = "Click a city · Drag to orbit";
+    if (hint) hint.textContent = "Click a city · Drag to explore";
 
     selectPlace(activeCode, activePlaceId, false);
     animate();
@@ -830,7 +780,5 @@ function boot(root) {
     return;
   }
 
-  mountThreeGlobe().catch(() => {
-    mountFlatGlobe();
-  });
+  mountThreeGlobe().catch(() => mountFlatGlobe());
 }

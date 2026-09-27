@@ -1936,8 +1936,8 @@ export const languages = {
   globe: {
     heading: "Coverage across your network",
     lead:
-      "Explore where each Rail Intel interface language is used. Select a language — markers light up across the regions that speak it.",
-    hint: "Click a city · Drag to orbit",
+      "Select a language, then open any city on the globe. Drag to explore coverage — one language at a time, clearly marked.",
+    hint: "Click a city · Drag to explore",
   },
   items: [
     {
