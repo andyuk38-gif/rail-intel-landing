@@ -284,9 +284,11 @@ function boot(root) {
       "https://esm.sh/three@0.170.0/examples/jsm/controls/OrbitControls.js"
     );
 
-    const GLOBE_RADIUS = 1.72;
-    const MARKER_R = 0.028;
-    const CAM_DIST = 3.55;
+    const GLOBE_RADIUS = 1.8;
+    const MARKER_R = 0.03;
+    const FOV = 38;
+    // >1 fills width of a landscape stage (mild vertical crop); feels full-bleed
+    const FILL = 1.32;
     const EARTH_TEX =
       "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-blue-marble.jpg";
     const BUMP_TEX =
@@ -297,6 +299,13 @@ function boot(root) {
     const width = stage.clientWidth;
     const height = stage.clientHeight;
     if (width < 2 || height < 2) throw new Error("stage-size");
+
+    function cameraDistance() {
+      const halfFov = (FOV * Math.PI) / 360;
+      return GLOBE_RADIUS / (Math.tan(halfFov) * FILL);
+    }
+
+    const CAM_DIST = cameraDistance();
 
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     const isNarrow = window.matchMedia("(max-width: 960px)").matches;
@@ -323,15 +332,15 @@ function boot(root) {
     canvasWrap.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 100);
-    camera.position.set(0.35, 0.55, CAM_DIST);
+    const camera = new THREE.PerspectiveCamera(FOV, width / height, 0.1, 100);
+    camera.position.set(0.2, 0.35, CAM_DIST);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.enablePan = false;
-    controls.minDistance = 2.85;
-    controls.maxDistance = 4.8;
+    controls.minDistance = CAM_DIST * 0.78;
+    controls.maxDistance = CAM_DIST * 1.25;
     controls.enableZoom = !mobileLike;
     controls.rotateSpeed = mobileLike ? 0.55 : 0.72;
     controls.autoRotate = false;
@@ -624,9 +633,10 @@ function boot(root) {
       syncMarkers(code, place.id);
 
       const target = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS);
-      const desired = target.clone().normalize().multiplyScalar(CAM_DIST);
-      desired.y += 0.12;
-      desired.setLength(CAM_DIST);
+      const dist = cameraDistance();
+      const desired = target.clone().normalize().multiplyScalar(dist);
+      desired.y += 0.08;
+      desired.setLength(dist);
 
       if (!animate || reducedMotion) {
         camera.position.copy(desired);

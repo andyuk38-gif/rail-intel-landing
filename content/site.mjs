@@ -1936,7 +1936,7 @@ export const languages = {
   globe: {
     heading: "Coverage across your network",
     lead:
-      "Select a language, then open any city on the globe. Drag to explore coverage — one language at a time, clearly marked.",
+      "Pick a language and city above, then drag the globe to explore coverage — one language at a time.",
     hint: "Click a city · Drag to explore",
   },
   items: [

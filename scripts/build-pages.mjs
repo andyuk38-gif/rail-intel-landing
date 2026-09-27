@@ -2830,15 +2830,22 @@ function languagesHubPage() {
 
     <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
       <script type="application/json" data-lang-globe-data>${JSON.stringify(globePlaces).replace(/</g, "\\u003c")}</script>
-      <div class="container lang-globe__inner">
-        <div class="lang-globe__copy">
-          <p class="lang-globe__eyebrow">Global interface coverage</p>
-          <h2>${esc(languages.globe?.heading || "Coverage across your network")}</h2>
-          <p>${esc(languages.globe?.lead || languages.lead)}</p>
+      <div class="lang-globe__inner">
+        <div class="lang-globe__toolbar container">
+          <div class="lang-globe__intro">
+            <p class="lang-globe__eyebrow">Global interface coverage</p>
+            <div class="lang-globe__intro-row">
+              <div class="lang-globe__intro-copy">
+                <h2>${esc(languages.globe?.heading || "Coverage across your network")}</h2>
+                <p>${esc(languages.globe?.lead || languages.lead)}</p>
+              </div>
+              <div class="lang-globe__status" data-lang-globe-status></div>
+            </div>
+          </div>
           <ul class="lang-globe__list">
 ${globeItems}
           </ul>
-          <p class="lang-globe__status" data-lang-globe-status></p>
+          <div class="lang-globe__places" data-lang-globe-places></div>
         </div>
         <div class="lang-globe__stage" data-lang-globe-stage>
           <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
