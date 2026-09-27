@@ -63,8 +63,6 @@ function boot(root) {
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let activeCode = languages[0].code;
-  let autoIndex = 0;
-  let autoTimer = 0;
   let focusHandler = null;
 
   function escapeHtml(value) {
@@ -77,20 +75,15 @@ function boot(root) {
 
   function setStatus(lang) {
     if (!statusEl) return;
-    const placeCount = lang.places.length;
-    const placeWord = placeCount === 1 ? "location" : "locations";
+    const places = lang.places.map((p) => p.name).join(" · ");
     statusEl.innerHTML =
       "<strong>" +
       escapeHtml(lang.name) +
       "</strong> · " +
       escapeHtml(lang.nativeName) +
-      " · " +
-      escapeHtml(lang.region) +
-      " <span class=\"lang-globe__status-count\">(" +
-      placeCount +
-      " " +
-      placeWord +
-      ")</span>";
+      "<br /><span class=\"lang-globe__status-places\">" +
+      escapeHtml(places) +
+      "</span>";
   }
 
   function syncUi(code) {
@@ -122,27 +115,11 @@ function boot(root) {
     if (typeof focusHandler === "function") focusHandler(code, animate !== false);
   }
 
-  function scheduleAutoCycle() {
-    window.clearTimeout(autoTimer);
-    if (reducedMotion) return;
-    autoTimer = window.setTimeout(() => {
-      if (document.hidden) {
-        scheduleAutoCycle();
-        return;
-      }
-      autoIndex = (autoIndex + 1) % languages.length;
-      selectLanguage(languages[autoIndex].code, true);
-      scheduleAutoCycle();
-    }, 6200);
-  }
-
   function bindChrome() {
     listButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const code = btn.getAttribute("data-lang-globe-select");
-        autoIndex = languages.findIndex((l) => l.code === code);
         selectLanguage(code, true);
-        scheduleAutoCycle();
       });
     });
 
@@ -152,9 +129,7 @@ function boot(root) {
       card.addEventListener("click", () => {
         const code = card.getAttribute("data-lang");
         if (!code) return;
-        autoIndex = languages.findIndex((l) => l.code === code);
         selectLanguage(code, true);
-        scheduleAutoCycle();
         root.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
       });
       card.addEventListener("keydown", (event) => {
@@ -162,11 +137,6 @@ function boot(root) {
         event.preventDefault();
         card.click();
       });
-    });
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) window.clearTimeout(autoTimer);
-      else scheduleAutoCycle();
     });
   }
 
@@ -221,9 +191,7 @@ function boot(root) {
             ? `<span class="lang-globe__flat-tag">${escapeHtml(place.name)}</span>`
             : "");
         marker.addEventListener("click", () => {
-          autoIndex = languages.findIndex((l) => l.code === lang.code);
           selectLanguage(lang.code, true);
-          scheduleAutoCycle();
         });
         markersHost.appendChild(marker);
       });
@@ -247,16 +215,10 @@ function boot(root) {
 
     const hint = root.querySelector(".lang-globe__hint");
     if (hint) {
-      const touchHint =
-        window.matchMedia("(pointer: coarse)").matches ||
-        window.matchMedia("(max-width: 960px)").matches;
-      hint.textContent = touchHint
-        ? "Tap a language · Markers show where it is used"
-        : "Select a language · Markers show where it is used";
+      hint.textContent = "Select a language to highlight where it is used";
     }
 
     selectLanguage(activeCode, false);
-    scheduleAutoCycle();
   }
 
   function hasWebGL() {
@@ -275,7 +237,7 @@ function boot(root) {
     );
 
     const GLOBE_RADIUS = 1.6;
-    const MARKER_RADIUS = 0.034;
+    const MARKER_RADIUS = 0.024;
     const EARTH_TEX =
       "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-dark.jpg";
     const LIGHTS_TEX =
@@ -322,8 +284,7 @@ function boot(root) {
     controls.maxDistance = mobileLike ? 5.2 : 5.5;
     controls.enableZoom = !mobileLike;
     controls.rotateSpeed = mobileLike ? 0.72 : 1;
-    controls.autoRotate = !reducedMotion;
-    controls.autoRotateSpeed = mobileLike ? 0.28 : 0.35;
+    controls.autoRotate = false;
     controls.target.set(0, 0, 0);
     if (THREE.TOUCH) {
       controls.touches = {
@@ -508,58 +469,60 @@ function boot(root) {
           active: false,
         };
 
-        const size = place.primary ? MARKER_RADIUS * 1.35 : MARKER_RADIUS;
+        const size = place.primary ? MARKER_RADIUS * 1.35 : MARKER_RADIUS * 0.78;
         const core = new THREE.Mesh(
-          new THREE.SphereGeometry(size, 18, 18),
+          new THREE.SphereGeometry(size, 16, 16),
           new THREE.MeshStandardMaterial({
             color: 0xffc14a,
             emissive: 0xf59e0b,
-            emissiveIntensity: 1.15,
+            emissiveIntensity: 0.9,
             metalness: 0.2,
-            roughness: 0.28,
+            roughness: 0.3,
           })
         );
         group.add(core);
         group.userData.core = core;
 
-        // Bright outer shell so pins stay readable over dark oceans and land
         const shell = new THREE.Mesh(
-          new THREE.SphereGeometry(size * 1.55, 16, 16),
+          new THREE.SphereGeometry(size * 1.4, 14, 14),
           new THREE.MeshBasicMaterial({
             color: 0xffe08a,
             transparent: true,
-            opacity: 0.55,
+            opacity: place.primary ? 0.45 : 0.28,
             depthWrite: false,
           })
         );
         group.add(shell);
         group.userData.shell = shell;
 
-        const halo = new THREE.Mesh(
-          new THREE.SphereGeometry(size * 2.6, 16, 16),
-          new THREE.MeshBasicMaterial({
-            color: 0xf59e0b,
-            transparent: true,
-            opacity: 0.32,
-            depthWrite: false,
-          })
-        );
-        group.add(halo);
-        group.userData.halo = halo;
+        // Soft halo only on primary hubs — avoids Europe turning into one orange blob
+        if (place.primary) {
+          const halo = new THREE.Mesh(
+            new THREE.SphereGeometry(size * 2.2, 16, 16),
+            new THREE.MeshBasicMaterial({
+              color: 0xf59e0b,
+              transparent: true,
+              opacity: 0.22,
+              depthWrite: false,
+            })
+          );
+          group.add(halo);
+          group.userData.halo = halo;
 
-        const ring = new THREE.Mesh(
-          new THREE.RingGeometry(size * 1.9, size * 2.85, 48),
-          new THREE.MeshBasicMaterial({
-            color: 0xfbbf24,
-            transparent: true,
-            opacity: 0.7,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-          })
-        );
-        ring.visible = false;
-        group.add(ring);
-        group.userData.ring = ring;
+          const ring = new THREE.Mesh(
+            new THREE.RingGeometry(size * 1.8, size * 2.5, 48),
+            new THREE.MeshBasicMaterial({
+              color: 0xfbbf24,
+              transparent: true,
+              opacity: 0.65,
+              side: THREE.DoubleSide,
+              depthWrite: false,
+            })
+          );
+          ring.visible = false;
+          group.add(ring);
+          group.userData.ring = ring;
+        }
 
         const hit = new THREE.Mesh(
           new THREE.SphereGeometry(size * hitScale, 8, 8),
@@ -572,33 +535,34 @@ function boot(root) {
         globeGroup.add(group);
         markers.push(group);
 
-        if (labelsLayer) {
+        // One label per language (primary city only) — stops stacked tooltips
+        if (labelsLayer && place.primary) {
           const el = document.createElement("div");
-          el.className = "lang-globe__label" + (place.primary ? " lang-globe__label--primary" : "");
+          el.className = "lang-globe__label lang-globe__label--primary";
           el.setAttribute("data-lang", lang.code);
           el.innerHTML =
+            escapeHtml(lang.name) +
+            "<span>" +
             escapeHtml(place.name) +
-            (place.country
-              ? "<span>" + escapeHtml(place.country) + "</span>"
-              : "<span>" + escapeHtml(lang.name) + "</span>");
+            (place.country ? ", " + escapeHtml(place.country) : "") +
+            "</span>";
           labelsLayer.appendChild(el);
-          labelEls.push(el);
-        } else {
-          labelEls.push(null);
+          labelEls.push({ el: el, marker: group });
         }
       });
 
-      // Soft arcs from primary hub to sibling places of the same language
+      // Arcs only to distant regions — skip short hops that clutter Europe
       lang.places.forEach((place) => {
         if (place === primary) return;
         const start = latLngToVector3(primary.lat, primary.lng, GLOBE_RADIUS + 0.02);
         const end = latLngToVector3(place.lat, place.lng, GLOBE_RADIUS + 0.02);
+        if (start.distanceTo(end) < GLOBE_RADIUS * 0.55) return;
         const mid = start.clone().add(end).multiplyScalar(0.5);
-        mid.normalize().multiplyScalar(GLOBE_RADIUS * (1.12 + start.distanceTo(end) * 0.06));
+        mid.normalize().multiplyScalar(GLOBE_RADIUS * (1.14 + start.distanceTo(end) * 0.05));
         const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
         const line = new THREE.Line(
-          new THREE.BufferGeometry().setFromPoints(curve.getPoints(40)),
-          new THREE.LineBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.2 })
+          new THREE.BufferGeometry().setFromPoints(curve.getPoints(36)),
+          new THREE.LineBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.12 })
         );
         line.userData = { code: lang.code };
         globeGroup.add(line);
@@ -616,31 +580,39 @@ function boot(root) {
       markers.forEach((marker) => {
         const on = marker.userData.code === code;
         marker.userData.active = on;
-        // Keep inactive pins large and bright so worldwide coverage stays readable
-        marker.scale.setScalar(on ? (marker.userData.primary ? 1.55 : 1.28) : 1.05);
+        marker.scale.setScalar(
+          on ? (marker.userData.primary ? 1.4 : 1.05) : marker.userData.primary ? 0.85 : 0.65
+        );
         marker.visible = true;
         if (marker.userData.core) {
-          marker.userData.core.material.emissiveIntensity = on ? 1.75 : 1.05;
-          marker.userData.core.material.color.set(on ? 0xffd36a : 0xffc14a);
-          marker.userData.core.material.transparent = false;
-          marker.userData.core.material.opacity = 1;
+          marker.userData.core.material.emissiveIntensity = on
+            ? marker.userData.primary
+              ? 1.5
+              : 1.05
+            : 0.45;
+          marker.userData.core.material.color.set(on ? 0xffd36a : 0xd4a24a);
+          marker.userData.core.material.transparent = !on;
+          marker.userData.core.material.opacity = on ? 1 : 0.7;
         }
         if (marker.userData.shell) {
-          marker.userData.shell.material.opacity = on ? 0.72 : 0.48;
+          marker.userData.shell.material.opacity = on
+            ? marker.userData.primary
+              ? 0.55
+              : 0.3
+            : 0.12;
         }
         if (marker.userData.halo) {
-          marker.userData.halo.material.opacity = on ? 0.42 : 0.26;
+          marker.userData.halo.material.opacity = on ? 0.28 : 0.08;
         }
         if (marker.userData.ring) {
           marker.userData.ring.visible = on && marker.userData.primary;
         }
       });
-      labelEls.forEach((el) => {
-        if (!el) return;
+      labelEls.forEach(({ el }) => {
         el.classList.toggle("is-visible", el.getAttribute("data-lang") === code);
       });
       arcs.forEach((arc) => {
-        arc.material.opacity = arc.userData.code === code ? 0.55 : 0.12;
+        arc.material.opacity = arc.userData.code === code ? 0.4 : 0.04;
       });
     }
 
@@ -680,9 +652,7 @@ function boot(root) {
       const w = stage.clientWidth;
       const h = stage.clientHeight;
       const camDir = camera.position.clone().normalize();
-      markers.forEach((marker, index) => {
-        const el = labelEls[index];
-        if (!el) return;
+      labelEls.forEach(({ el, marker }) => {
         if (!el.classList.contains("is-visible")) {
           el.style.visibility = "hidden";
           return;
@@ -734,21 +704,18 @@ function boot(root) {
         if (t >= 1) focusTween = null;
       }
 
-      controls.autoRotate = !pointerDown && !focusTween && !reducedMotion;
-      controls.autoRotateSpeed = mobileLike ? 0.28 : 0.35;
+      controls.autoRotate = false;
 
       markers.forEach((marker) => {
-        const pulse = 1 + Math.sin(elapsed * 2.2 + marker.position.x * 4) * 0.1;
+        if (!marker.userData.active || !marker.userData.primary) return;
+        const pulse = 1 + Math.sin(elapsed * 2.2) * 0.08;
         if (marker.userData.halo) {
-          marker.userData.halo.scale.setScalar(pulse * (marker.userData.active ? 1.35 : 1.1));
-        }
-        if (marker.userData.shell) {
-          marker.userData.shell.scale.setScalar(0.96 + pulse * 0.04);
+          marker.userData.halo.scale.setScalar(pulse * 1.2);
         }
         if (marker.userData.ring && marker.userData.ring.visible) {
-          const ringScale = 1 + (Math.sin(elapsed * 3) * 0.5 + 0.5) * 0.55;
+          const ringScale = 1 + (Math.sin(elapsed * 2.6) * 0.5 + 0.5) * 0.4;
           marker.userData.ring.scale.set(ringScale, ringScale, 1);
-          marker.userData.ring.material.opacity = 0.7 - ringScale * 0.18;
+          marker.userData.ring.material.opacity = 0.6 - ringScale * 0.12;
         }
       });
 
@@ -760,19 +727,16 @@ function boot(root) {
     renderer.domElement.addEventListener("pointerdown", () => {
       pointerDown = true;
       canvasWrap.classList.add("is-dragging");
-      window.clearTimeout(autoTimer);
     });
     window.addEventListener("pointerup", () => {
       if (!pointerDown) return;
       pointerDown = false;
       canvasWrap.classList.remove("is-dragging");
-      scheduleAutoCycle();
     });
     window.addEventListener("pointercancel", () => {
       if (!pointerDown) return;
       pointerDown = false;
       canvasWrap.classList.remove("is-dragging");
-      scheduleAutoCycle();
     });
 
     let pointerStart = null;
@@ -798,9 +762,7 @@ function boot(root) {
       );
       if (!intersects.length) return;
       const code = intersects[0].object.userData.code;
-      autoIndex = languages.findIndex((l) => l.code === code);
       selectLanguage(code, true);
-      scheduleAutoCycle();
     });
 
     window.addEventListener("resize", scheduleResize);
@@ -811,20 +773,18 @@ function boot(root) {
     window.addEventListener("pagehide", () => {
       disposed = true;
       window.cancelAnimationFrame(animFrame);
-      window.clearTimeout(autoTimer);
       window.clearTimeout(resizeTimer);
       renderer.dispose();
     });
 
     const hint = root.querySelector(".lang-globe__hint");
-    if (hint && mobileLike) {
-      hint.textContent = "Swipe to orbit · Tap markers for each region";
-    } else if (hint) {
-      hint.textContent = "Drag to orbit · Markers show where each language is used";
+    if (hint) {
+      hint.textContent = mobileLike
+        ? "Select a language · Drag to orbit"
+        : "Select a language · Drag to orbit";
     }
 
     selectLanguage(activeCode, false);
-    scheduleAutoCycle();
     animate();
   }
 
