@@ -37,6 +37,8 @@
   <link rel="stylesheet" href="../css/style.css?v=116802302" />
   <link rel="stylesheet" href="../css/pages.css?v=116802302" />
   <link rel="stylesheet" href="../css/competency-engine.css?v=116802302" />
+  <link rel="stylesheet" href="../css/cycle-builder-demo.css?v=116802302" />
+  <link rel="stylesheet" href="../css/cms-feature-demos.css?v=116802880" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -1031,31 +1033,306 @@
           </ul>
         </div>
 
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1410px">
-            <img src="../images/screens/cycle-builder/cycle-builder-overview.png?v=116802302" alt="Cycle Builder: choose a template or build a custom competency cycle." width="1410" height="739" loading="lazy" decoding="async" />
+      <div class="cb-demo reveal" data-cycle-builder-demo>
+        <div class="cb-demo__stage">
+          <div class="browser-mockup browser-mockup--primary">
+            <div class="browser-mockup__chrome">
+              <span class="browser-mockup__dots"></span>
+              <span class="browser-mockup__url">cms.railintel.co.uk/cycle-builder</span>
+            </div>
+            <div class="browser-mockup__content">
+              <div class="cb-app" role="region" aria-label="Cycle Builder interactive preview">
+                <div class="cb-app__top">
+                  <div>
+                    <h3 class="cb-app__title">Cycle Builder</h3>
+                    <p class="cb-app__sub" data-cb-subtitle>Step 1 of 4 — choose template or custom.</p>
+                  </div>
+                  <span class="cb-app__badge"><span class="cb-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                </div>
+
+                <div class="cb-steps" role="list">
+                  <button type="button" class="cb-step is-active" data-cb-step="0" role="listitem" aria-current="step">
+                    <span class="cb-step__num">1</span>
+                    <span class="cb-step__copy">
+                      <span class="cb-step__label">Method</span>
+                      <span class="cb-step__hint">How to build</span>
+                    </span>
+                  </button>
+                  <button type="button" class="cb-step" data-cb-step="1" role="listitem">
+                    <span class="cb-step__num">2</span>
+                    <span class="cb-step__copy">
+                      <span class="cb-step__label">Details</span>
+                      <span class="cb-step__hint">Cycle details</span>
+                    </span>
+                  </button>
+                  <button type="button" class="cb-step" data-cb-step="2" role="listitem">
+                    <span class="cb-step__num">3</span>
+                    <span class="cb-step__copy">
+                      <span class="cb-step__label">Criteria</span>
+                      <span class="cb-step__hint">Add criteria</span>
+                    </span>
+                  </button>
+                  <button type="button" class="cb-step" data-cb-step="3" role="listitem">
+                    <span class="cb-step__num">4</span>
+                    <span class="cb-step__copy">
+                      <span class="cb-step__label">Events</span>
+                      <span class="cb-step__hint">Assessment events</span>
+                    </span>
+                  </button>
+                </div>
+                <div class="cb-progress" aria-hidden="true"><div class="cb-progress__bar" data-cb-progress></div></div>
+
+                <div class="cb-panels">
+                  <!-- Step 1: Method -->
+                  <div class="cb-panel is-active" data-cb-panel="0">
+                    <div class="cb-panel__scroll">
+                      <div class="cb-existing is-open" data-cb-existing>
+                        <button type="button" class="cb-existing__head" data-cb-existing-toggle aria-expanded="true">
+                          <span class="cb-existing__left">
+                            <span class="cb-existing__chev" aria-hidden="true">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+                            </span>
+                            Manage existing cycles
+                          </span>
+                          <span class="cb-existing__count">1 item</span>
+                        </button>
+                        <div class="cb-existing__body">
+                          <div class="cb-existing__inner">
+                            <div class="cb-existing__row">
+                              <div class="cb-existing__meta">
+                                <strong>ML Driver v3 (2yr)</strong>
+                                <span>2 employees assigned</span>
+                              </div>
+                              <div class="cb-existing__actions">
+                                <button type="button" class="cb-icon-btn" aria-label="Delete cycle" tabindex="-1">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V5h6v2m-8 0l1 12h8l1-12"/></svg>
+                                </button>
+                                <button type="button" class="cb-icon-btn" aria-label="Duplicate cycle" tabindex="-1">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="cb-question">
+                        <h3>How do you want to build this cycle?</h3>
+                        <p>Pick a starting point. You can change this later by going back a step.</p>
+                      </div>
+
+                      <div class="cb-choices">
+                        <button type="button" class="cb-choice" data-cb-choice="template" aria-pressed="false">
+                          <span class="cb-choice__check" aria-hidden="true">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                          </span>
+                          <span class="cb-choice__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 4h7l3 3v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M15 4v3h3M9 12h6M9 16h4"/></svg>
+                          </span>
+                          <span class="cb-choice__title">Use a template</span>
+                          <p class="cb-choice__desc">Start from a ready-made competency framework, then customise.</p>
+                        </button>
+                        <button type="button" class="cb-choice" data-cb-choice="custom" aria-pressed="false">
+                          <span class="cb-choice__check" aria-hidden="true">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                          </span>
+                          <span class="cb-choice__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                          </span>
+                          <span class="cb-choice__title">Build custom</span>
+                          <p class="cb-choice__desc">Create your own criteria from a blank cycle.</p>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="cb-footer">
+                      <p class="cb-footer__msg" data-cb-msg="0">Choose template or custom to continue.</p>
+                      <div class="cb-footer__actions">
+                        <button type="button" class="cb-btn cb-btn--primary" data-cb-continue="0" disabled>Continue</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 2: Details -->
+                  <div class="cb-panel" data-cb-panel="1" hidden>
+                    <div class="cb-panel__scroll">
+                      <div class="cb-form-card">
+                        <h3>Name your cycle</h3>
+                        <p>Give it a clear title and how long it should run (templates may set these for you later).</p>
+                        <div class="cb-fields">
+                          <div class="cb-field">
+                            <label for="cb-demo-title">Title</label>
+                            <input id="cb-demo-title" class="cb-field__input--typing" type="text" data-cb-title value="" placeholder="e.g. ML Driver v3 (2yr)" autocomplete="off" />
+                            <span class="cb-field__hint" data-cb-duration-hint>Total duration: 24 months</span>
+                          </div>
+                          <div class="cb-field">
+                            <label for="cb-demo-duration">Duration</label>
+                            <input id="cb-demo-duration" type="number" min="1" data-cb-duration value="2" />
+                          </div>
+                          <div class="cb-field">
+                            <label for="cb-demo-unit">Unit</label>
+                            <select id="cb-demo-unit" data-cb-unit>
+                              <option>Years</option>
+                              <option>Months</option>
+                              <option>Weeks</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cb-footer">
+                      <p class="cb-footer__msg" data-cb-msg="1">Enter a title to continue.</p>
+                      <div class="cb-footer__actions">
+                        <button type="button" class="cb-btn cb-btn--ghost" data-cb-back>Back</button>
+                        <button type="button" class="cb-btn cb-btn--primary" data-cb-continue="1" disabled>Continue</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 3: Criteria -->
+                  <div class="cb-panel" data-cb-panel="2" hidden>
+                    <div class="cb-panel__scroll">
+                      <div class="cb-criteria">
+                        <div class="cb-criteria__head">
+                          <div>
+                            <h3>Add competency criteria</h3>
+                            <p>Criteria are grouped into two lists: Demonstrate and Explain.</p>
+                          </div>
+                          <span class="cb-pill" data-cb-criteria-pill>0 complete</span>
+                        </div>
+                        <div class="cb-criteria__grid">
+                          <div class="cb-dropzones">
+                            <div class="cb-drop cb-drop--demo" data-cb-drop="demo">
+                              <div class="cb-drop__bar">
+                                <span class="cb-drop__label">Demonstrate</span>
+                                <span class="cb-drop__count" data-cb-demo-count>0</span>
+                              </div>
+                              <div class="cb-drop__list" data-cb-demo-list>
+                                <p class="cb-drop__empty">Drop criteria here.</p>
+                              </div>
+                            </div>
+                            <div class="cb-drop cb-drop--explain" data-cb-drop="explain">
+                              <div class="cb-drop__bar">
+                                <span class="cb-drop__label">Explain</span>
+                                <span class="cb-drop__count" data-cb-explain-count>0</span>
+                              </div>
+                              <div class="cb-drop__list" data-cb-explain-list>
+                                <p class="cb-drop__empty">Drop criteria here.</p>
+                              </div>
+                            </div>
+                            <button type="button" class="cb-linkish">Optional: rename Demonstrate / Explain columns</button>
+                          </div>
+                          <div class="cb-library">
+                            <h4 class="cb-library__title">Template library</h4>
+                            <p class="cb-library__legend">Fixed = use as-is · Editable = customise.</p>
+                            <div class="cb-template">
+                              <div class="cb-template__meta">
+                                <div class="cb-template__name">
+                                  Train Driver v1 (495 lines)
+                                  <span class="cb-template__tag">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3h1.5A1.5 1.5 0 0 1 20 11.5v8A1.5 1.5 0 0 1 18.5 21h-13A1.5 1.5 0 0 1 4 19.5v-8A1.5 1.5 0 0 1 5.5 10H7zm2 0h6V7a3 3 0 0 0-6 0v3z"/></svg>
+                                    Fixed
+                                  </span>
+                                </div>
+                              </div>
+                              <button type="button" class="cb-template__use" data-cb-use-template>Use this template</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cb-footer">
+                      <p class="cb-footer__msg" data-cb-msg="2">Add at least one criterion, or use a fixed template.</p>
+                      <div class="cb-footer__actions">
+                        <button type="button" class="cb-btn cb-btn--ghost" data-cb-back>Back</button>
+                        <button type="button" class="cb-btn cb-btn--primary" data-cb-continue="2" disabled>Continue to assessment events</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 4: Events -->
+                  <div class="cb-panel" data-cb-panel="3" hidden>
+                    <div class="cb-panel__scroll">
+                      <div class="cb-events">
+                        <h3>Schedule assessment events</h3>
+                        <p>Add each assessment window within the 24-month cycle. You need at least one event to save.</p>
+
+                        <div class="cb-timeline" aria-hidden="true">
+                          <div class="cb-timeline__label">
+                            <span>24-month cycle window</span>
+                            <span>Live preview</span>
+                          </div>
+                          <div class="cb-timeline__track">
+                            <div class="cb-timeline__fill" data-cb-timeline-fill></div>
+                          </div>
+                          <div class="cb-timeline__marks">
+                            <span>M1</span><span>M6</span><span>M12</span><span>M18</span><span>M24</span>
+                          </div>
+                        </div>
+
+                        <div class="cb-event is-invalid" data-cb-event>
+                          <div class="cb-event__row">
+                            <div class="cb-field">
+                              <label for="cb-demo-event-title">Title</label>
+                              <input id="cb-demo-event-title" type="text" data-cb-event-title placeholder="e.g. Practical Ride Assessment" autocomplete="off" />
+                            </div>
+                            <div class="cb-field">
+                              <label for="cb-demo-event-start">Start month</label>
+                              <select id="cb-demo-event-start" data-cb-event-start>
+                                <option value="1">Month 1</option>
+                                <option value="3">Month 3</option>
+                                <option value="6">Month 6</option>
+                                <option value="12">Month 12</option>
+                              </select>
+                            </div>
+                            <div class="cb-field">
+                              <label for="cb-demo-event-end">End month</label>
+                              <select id="cb-demo-event-end" data-cb-event-end>
+                                <option value="3" selected>Month 3</option>
+                                <option value="6">Month 6</option>
+                                <option value="12">Month 12</option>
+                                <option value="24">Month 24</option>
+                              </select>
+                            </div>
+                            <button type="button" class="cb-icon-btn" aria-label="Remove event" tabindex="-1">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V5h6v2m-8 0l1 12h8l1-12"/></svg>
+                            </button>
+                          </div>
+                          <div class="cb-field">
+                            <label for="cb-demo-event-desc">Description (optional)</label>
+                            <textarea id="cb-demo-event-desc" rows="2" placeholder="Optional description"></textarea>
+                          </div>
+                          <p class="cb-event__warn" data-cb-event-warn>Title is required</p>
+                        </div>
+
+                        <button type="button" class="cb-add-event" data-cb-add-event>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                          Add event
+                        </button>
+                      </div>
+                    </div>
+                    <div class="cb-footer">
+                      <p class="cb-footer__msg" data-cb-msg="3">Add a titled event to save the cycle.</p>
+                      <div class="cb-footer__actions">
+                        <button type="button" class="cb-btn cb-btn--ghost" data-cb-back>Back</button>
+                        <button type="button" class="cb-btn cb-btn--primary" data-cb-save disabled>Save cycle</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <figcaption class="shot__caption">Cycle Builder: choose a template or build a custom competency cycle.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 690px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/use-template-cb.png?v=116802302" alt="Starting from a ready-made template." width="690" height="115" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="cb-demo__nav">
+          <div class="cb-demo__tabs" role="group" aria-label="Cycle Builder steps">
+            <button type="button" class="cb-demo__tab is-active" data-cb-tab="0" aria-pressed="true">1 · Method</button>
+            <button type="button" class="cb-demo__tab" data-cb-tab="1" aria-pressed="false">2 · Details</button>
+            <button type="button" class="cb-demo__tab" data-cb-tab="2" aria-pressed="false">3 · Criteria</button>
+            <button type="button" class="cb-demo__tab" data-cb-tab="3" aria-pressed="false">4 · Events</button>
           </div>
-          <figcaption class="shot__caption">Starting from a ready-made template.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 693px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/add-competency-criteria.png?v=116802302" alt="Attaching competency criteria to the cycle." width="693" height="322" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Attaching competency criteria to the cycle.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 697px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycle-builder/schedule-events-assessment.png?v=116802302" alt="Scheduling the assessment events that make up the cycle." width="697" height="241" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Scheduling the assessment events that make up the cycle.</figcaption>
-        </figure>
+          <p class="cb-demo__note"><strong>Interactive preview</strong> — hover to pause, or jump between steps.</p>
+        </div>
       </div>
 
       </div>
@@ -1067,36 +1344,250 @@
           <h2>Live cycles on the employee record</h2>
           <p>Once assigned, a cycle is live on the employee record with its start and expiry. Only one live cycle of a given type is allowed at a time, so the record cannot drift into ambiguity. Closing a cycle moves it to closed cycles and keeps the history.</p>
           <p>Continuous cycles are supported for competencies that renew rather than end, and a CDP can carry over between cycles so an open development point is not lost at the boundary.</p>
-
         </div>
 
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1399px">
-            <img src="../images/screens/cycles/current-cycles.png?v=116802302" alt="Live cycles on an employee record with start and expiry dates." width="1399" height="914" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Live cycles on an employee record with start and expiry dates.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 697px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycles/individual-cycle-view.png?v=116802302" alt="An individual cycle with its scheduled events and progress." width="697" height="455" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">An individual cycle with its scheduled events and progress.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 779px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycles/continuous-cycles.png?v=116802302" alt="Continuous cycles for competencies that renew rather than expire." width="779" height="422" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Continuous cycles for competencies that renew rather than expire.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 262px">
-          <div class="shot__frame">
-            <img src="../images/screens/cycles/cont-cycle-cdp-carryover.png?v=116802302" alt="A development point carried over into the next cycle." width="262" height="243" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">A development point carried over into the next cycle.</figcaption>
-        </figure>
-      </div>
+        <div class="cms-demo reveal" data-cms-demo data-cms-labels="Live cycles · start and expiry on the employee record.|Assessment record · scheduled events and progress.|Continuous cycles · renew rather than expire.|CDP carry-over · unfinished monitoring moves forward.">
+          <div class="cms-demo__stage">
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url">cms.railintel.co.uk/employees/cycles</span>
+              </div>
+              <div class="browser-mockup__content">
+                <div class="cms-app" role="region" aria-label="Live cycles interactive preview">
+                  <div class="cms-app__bar">
+                    <div>
+                      <h3 class="cms-app__title">Employee cycles</h3>
+                      <p class="cms-app__sub" data-cms-subtitle>Live cycles · start and expiry on the employee record.</p>
+                    </div>
+                    <span class="cms-app__badge"><span class="cms-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                  </div>
 
+                  <!-- Live cycles list -->
+                  <div class="cms-panel is-active" data-cms-panel="0">
+                    <div class="cms-tabs-row" aria-hidden="true">
+                      <span class="cms-chip-tab">Overview</span>
+                      <span class="cms-chip-tab">Medical</span>
+                      <span class="cms-chip-tab">Licensing</span>
+                      <span class="cms-chip-tab is-on">Operations</span>
+                      <span class="cms-chip-tab">Development</span>
+                    </div>
+                    <div class="cms-alert" role="status">
+                      <span class="cms-alert__icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+                      </span>
+                      NOT SAFE TO WORK — Mandatory competency expired.
+                    </div>
+                    <div class="cms-card" style="margin-top:0.75rem">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>Live cycles</h3>
+                          <p>Expiry is 2 years for train driver cycles, 1 year for PTS. Only live assignments accept new assessments.</p>
+                        </div>
+                      </div>
+                      <div class="cms-info">
+                        <span aria-hidden="true">ℹ</span>
+                        Closing a cycle moves it to Closed Cycles and keeps the full history on the record.
+                      </div>
+                      <div class="cms-assign">
+                        <div class="cms-field">
+                          <label for="cms-live-cycle">Assign cycle</label>
+                          <select id="cms-live-cycle">
+                            <option>— Choose a cycle —</option>
+                            <option selected>ML Driver v3</option>
+                            <option>PTS annual</option>
+                          </select>
+                        </div>
+                        <div class="cms-field">
+                          <label for="cms-live-start">Start date</label>
+                          <input id="cms-live-start" type="text" value="08/08/2026" readonly />
+                        </div>
+                        <button type="button" class="cms-btn cms-btn--primary" data-cms-flash="Assign" data-cms-done="Assigned">Assign</button>
+                      </div>
+                      <table class="cms-table">
+                        <thead>
+                          <tr><th>Cycle</th><th>Start</th><th>Expiry</th><th>Action</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>ML Driver v3</strong></td>
+                            <td>18-07-2026</td>
+                            <td>18-07-2028</td>
+                            <td>
+                              <span class="cms-row-actions">
+                                <button type="button" class="cms-btn cms-btn--ghost">View</button>
+                                <button type="button" class="cms-btn cms-btn--danger" aria-label="Remove">✕</button>
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="cms-card">
+                      <div class="cms-card__head"><div><h3>Closed cycles</h3></div></div>
+                      <table class="cms-table">
+                        <thead><tr><th>Cycle</th><th>Closed by</th><th>Action</th></tr></thead>
+                        <tbody><tr><td class="cms-table__empty" colspan="3">No closed cycles yet.</td></tr></tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- Individual assessment record -->
+                  <div class="cms-panel" data-cms-panel="1" hidden>
+                    <div class="cms-record__top">
+                      <div>
+                        <h3 class="cms-app__title" style="font-size:1.05rem">ML Driver v3 · Assessment record</h3>
+                        <p class="cms-record__meta">Assigned: 18-07-2026 → Expiry: 18-07-2028</p>
+                      </div>
+                      <button type="button" class="cms-btn cms-btn--ghost">View criteria &amp; elements</button>
+                    </div>
+                    <div class="cms-summary">
+                      <div class="cms-card">
+                        <h4 style="margin:0 0 0.55rem;font-size:0.82rem">Cycle event breakdown</h4>
+                        <ol class="cms-breakdown">
+                          <li><span class="cms-pill cms-pill--blue">CDP MONITORING</span> Monitoring Review</li>
+                          <li><span class="cms-pill cms-pill--violet">ASSESSMENT</span> PRA</li>
+                          <li><span class="cms-pill cms-pill--violet">ASSESSMENT</span> OTDR</li>
+                        </ol>
+                      </div>
+                      <div class="cms-gauge">
+                        <div class="cms-gauge__ring" style="--pct:4"><div><strong>4%</strong><span>covered</span></div></div>
+                        <p>19 covered · 476 left</p>
+                      </div>
+                    </div>
+                    <article class="cms-event cms-event--done">
+                      <div class="cms-event__row">
+                        <div>
+                          <h4 class="cms-event__title">Monitoring Review <span class="cms-pill cms-pill--blue">CDP MONITORING</span></h4>
+                          <p class="cms-event__dates">Completed 23-07-2026 13:00 · Andy Hill</p>
+                        </div>
+                        <span class="cms-event__status cms-event__status--done">Completed</span>
+                      </div>
+                      <div class="cms-event__actions"><button type="button" class="cms-btn cms-btn--ghost">Edit event</button></div>
+                    </article>
+                    <article class="cms-event cms-event--done">
+                      <div class="cms-event__row">
+                        <div>
+                          <h4 class="cms-event__title">PRA <span class="cms-pill cms-pill--violet">ASSESSMENT</span></h4>
+                          <p class="cms-event__dates">Duration 47:07 · Andy Hill</p>
+                        </div>
+                        <span class="cms-event__status cms-event__status--done">Completed</span>
+                      </div>
+                      <div class="cms-event__badges">
+                        <span class="cms-pill cms-pill--green">Completed</span>
+                        <span class="cms-pill cms-pill--blue">8 / 495 criteria</span>
+                        <span class="cms-pill cms-pill--amber">2 warnings</span>
+                        <span class="cms-pill cms-pill--red">2 errors</span>
+                      </div>
+                      <div class="cms-event__actions"><button type="button" class="cms-btn cms-btn--ghost">Edit assessment</button></div>
+                    </article>
+                    <article class="cms-event cms-event--live">
+                      <div class="cms-event__row">
+                        <div>
+                          <h4 class="cms-event__title">OTDR <span class="cms-pill cms-pill--violet">ASSESSMENT</span></h4>
+                          <p class="cms-event__dates">Opened by Andy Hill · 11 / 495 criteria</p>
+                        </div>
+                        <span class="cms-event__status cms-event__status--live">Still in progress</span>
+                      </div>
+                      <div class="cms-event__actions">
+                        <button type="button" class="cms-btn cms-btn--primary">Return to assessment</button>
+                      </div>
+                    </article>
+                  </div>
+
+                  <!-- Continuous -->
+                  <div class="cms-panel" data-cms-panel="2" hidden>
+                    <div class="cms-record__top">
+                      <div>
+                        <h3 class="cms-app__title" style="font-size:1.05rem">Continuous cycle · Assessment record</h3>
+                        <p class="cms-record__meta">Assigned: 11-08-2026 → Expiry: 11-10-2026 · renews on close</p>
+                      </div>
+                      <button type="button" class="cms-btn cms-btn--ghost">View criteria &amp; elements</button>
+                    </div>
+                    <div class="cms-summary">
+                      <div class="cms-card">
+                        <h4 style="margin:0 0 0.55rem;font-size:0.82rem">Cycle event breakdown</h4>
+                        <ol class="cms-breakdown">
+                          <li><span class="cms-pill cms-pill--violet">ASSESSMENT</span> PRA · 11-08 to 11-09</li>
+                          <li><span class="cms-pill cms-pill--violet">ASSESSMENT</span> OTDR · 11-09 to 11-10</li>
+                        </ol>
+                      </div>
+                      <div class="cms-gauge">
+                        <div class="cms-gauge__ring" style="--pct:0"><div><strong>0%</strong><span>covered</span></div></div>
+                        <p>0 covered · 2 left</p>
+                      </div>
+                    </div>
+                    <article class="cms-event cms-event--live">
+                      <div class="cms-event__row">
+                        <div>
+                          <h4 class="cms-event__title">pra <span class="cms-pill cms-pill--violet">ASSESSMENT</span></h4>
+                          <p class="cms-event__dates">11-08-2026 → 11-09-2026</p>
+                        </div>
+                        <span class="cms-pill cms-pill--amber">Open</span>
+                      </div>
+                      <div class="cms-event__badges">
+                        <span class="cms-pill cms-pill--blue">0 / 2 criteria</span>
+                        <span class="cms-pill cms-pill--amber">2 left</span>
+                      </div>
+                      <div class="cms-event__actions"><button type="button" class="cms-btn cms-btn--primary">Open assessment</button></div>
+                    </article>
+                    <article class="cms-event">
+                      <div class="cms-event__row">
+                        <div>
+                          <h4 class="cms-event__title">otdr <span class="cms-pill cms-pill--violet">ASSESSMENT</span></h4>
+                          <p class="cms-event__dates">11-09-2026 → 11-10-2026</p>
+                        </div>
+                        <span class="cms-pill cms-pill--blue">Upcoming</span>
+                      </div>
+                      <div class="cms-event__actions"><button type="button" class="cms-btn cms-btn--ghost" disabled>Open assessment</button></div>
+                    </article>
+                  </div>
+
+                  <!-- CDP carryover modal -->
+                  <div class="cms-panel" data-cms-panel="3" hidden>
+                    <div class="cms-modal-stage">
+                      <div class="cms-modal" role="dialog" aria-label="Continue continuous cycle">
+                        <div class="cms-modal__head">
+                          <span class="cms-modal__icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg>
+                          </span>
+                          <div>
+                            <strong>Continue continuous cycle</strong>
+                            <span>ML Driver v3</span>
+                          </div>
+                        </div>
+                        <div class="cms-modal__body">
+                          <p>This period will be <strong>closed</strong> and listed under <strong>Closed Cycles</strong>. A new live period starts with the same assessment schedule from the day after expiry.</p>
+                          <div class="cms-info" style="margin:0">
+                            <span aria-hidden="true">ℹ</span>
+                            <div><strong>CDP monitoring carries over.</strong> Unfinished CDP monitoring events move into the new period. They do not block renewal.</div>
+                          </div>
+                          <ul class="cms-modal__checks">
+                            <li><span style="color:var(--cms-green)" aria-hidden="true">✓</span> A live F1/F2 medical is required to renew.</li>
+                            <li><span style="color:var(--cms-blue)" aria-hidden="true">ℹ</span> Assessment evidence and grades stay available from Closed Cycles.</li>
+                          </ul>
+                        </div>
+                        <div class="cms-modal__foot">
+                          <button type="button" class="cms-btn cms-btn--ghost">Cancel</button>
+                          <button type="button" class="cms-btn cms-btn--primary" data-cms-flash="Continue cycle" data-cms-done="Renewed">Continue cycle</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cms-demo__nav">
+            <div class="cms-demo__tabs" role="group" aria-label="Live cycles views">
+              <button type="button" class="cms-demo__tab is-active" data-cms-tab="0" aria-pressed="true">Live cycles</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="1" aria-pressed="false">Assessment record</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="2" aria-pressed="false">Continuous</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="3" aria-pressed="false">CDP carry-over</button>
+            </div>
+            <p class="cms-demo__note"><strong>Interactive preview</strong> — hover to pause, or jump between views.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1105,30 +1596,179 @@
         <div class="page-section__head">
           <h2>Assessing in the field</h2>
           <p>Assessments are completed against structured criteria with observations recorded as they are made. Where an observation falls short, the criterion is flagged rather than silently passed, and the assessment can be started within its early window when operationally necessary.</p>
-
         </div>
 
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot shot--full reveal">
-          <div class="shot__frame shot__frame--fullwidth" style="--shot-display-width: 1251px">
-            <img src="../images/screens/cycles/active-assessment.png?v=116802302" alt="Active competency assessment — choose a unit and assess Demonstrate or Explain criteria." width="1251" height="974" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Active competency assessment — choose a unit and assess Demonstrate or Explain criteria.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 430px">
-          <div class="shot__frame">
-            <img src="../images/screens/assessing/in-cab-safety.png?v=116802302" alt="In-cab safety: dark mode for windscreen glare and flagging criteria to finish later." width="430" height="665" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">In-cab safety: dark mode for windscreen glare and flagging criteria to finish later.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 624px">
-          <div class="shot__frame">
-            <img src="../images/screens/assessing/flagged-based-on-observations.png?v=116802302" alt="Criteria flagged on the basis of recorded observations." width="624" height="504" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Criteria flagged on the basis of recorded observations.</figcaption>
-        </figure>
-      </div>
+        <div class="cms-demo reveal" data-cms-demo data-cms-labels="Active assessment · Demonstrate and Explain criteria.|In-cab safety · dark mode and flags for later.|Flagged criteria · return when it is safe to finish.">
+          <div class="cms-demo__stage">
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url">cms.railintel.co.uk/assessments/otdr</span>
+              </div>
+              <div class="browser-mockup__content">
+                <div class="cms-app" role="region" aria-label="Field assessment interactive preview">
+                  <div class="cms-app__bar">
+                    <div>
+                      <h3 class="cms-app__title">Field assessment</h3>
+                      <p class="cms-app__sub" data-cms-subtitle>Active assessment · Demonstrate and Explain criteria.</p>
+                    </div>
+                    <span class="cms-app__badge"><span class="cms-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                  </div>
 
+                  <div class="cms-panel is-active" data-cms-panel="0">
+                    <div>
+                      <span class="cms-pill cms-pill--violet">Assessment event</span>
+                      <h3 style="margin:0.4rem 0 0;font-size:1.15rem">OTDR assessment</h3>
+                      <div class="cms-assess__meta">
+                        <span>ML Driver v3</span>
+                        <span>Window: 18-08-2026 to 18-10-2026</span>
+                        <span>Duration: 2:14 (in progress)</span>
+                      </div>
+                    </div>
+                    <div class="cms-assess__toolbar">
+                      <div>
+                        <strong style="font-size:0.9rem">Train Driver v1</strong>
+                        <div style="font-size:0.74rem;color:var(--cms-muted)">495 criteria across 10 units</div>
+                      </div>
+                      <div class="cms-progress">
+                        <div class="cms-progress__track"><div class="cms-progress__fill" data-cms-assess-fill data-base="19" style="width:3.8%"></div></div>
+                        <span>19 / 495</span>
+                      </div>
+                    </div>
+                    <div class="cms-filters">
+                      <select aria-label="Unit filter"><option>All units</option><option>Unit 4 — Operate trains in service</option></select>
+                      <select aria-label="Type filter"><option>All types</option><option>Demonstrate</option><option>Explain</option></select>
+                      <button type="button" data-cms-flagged-count>Flagged (0)</button>
+                      <button type="button" class="is-on">Assessed (11)</button>
+                    </div>
+                    <div class="cms-banner">
+                      <span>Active assessment event: <strong>OTDR</strong> · grades and notes link to this window.</span>
+                      <span class="cms-pill cms-pill--violet">In progress</span>
+                    </div>
+                    <div class="cms-tiles">
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Obtain, acknowledge, read and update publications as necessary.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Explain</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Time allowance for signing on and actions to take during that time.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Explain</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Personal equipment and publications to be carried whilst on duty.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Explain</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Reason for rules, regulations and instructions within the rail industry.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Monitor train departure and dwell times against the working timetable.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Explain</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>The evacuation and accident reporting procedures.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="cms-panel" data-cms-panel="1" hidden>
+                    <div class="cms-safety">
+                      <h3>Stay focused where safety matters</h3>
+                      <p>If you are in a driving cab, or any area where using a device could compromise safety, prefer observing and questioning first. Minimise typing until it is safe to do so.</p>
+                      <div class="cms-safety__card">
+                        <h4>Windscreen reflections</h4>
+                        <p>Switch to <strong>dark mode</strong> to reduce glare in the cab or tunnel. Dark mode is on — use the control at the top of the assessment window.</p>
+                      </div>
+                      <div class="cms-safety__card cms-safety__card--flag">
+                        <h4>How to use a flag</h4>
+                        <p>Tap the flag on a tile after you observe or ask about an element. Return when safe to add notes or evidence, then clear the flag.</p>
+                        <button type="button" class="cms-tile is-flagged" style="margin-top:0.7rem;width:100%;cursor:default" tabindex="-1">
+                          <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                          <p>Example element — tap the flag (top right) after you observe or ask about it.</p>
+                          <span class="cms-tile__later">Return later</span>
+                        </button>
+                      </div>
+                      <p class="cms-safety__note">You cannot mark the assessment complete while any flags remain.</p>
+                      <div class="cms-safety__actions">
+                        <button type="button" class="cms-btn cms-btn--primary" data-cms-safety-ack>Got it — use flags</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cms-panel" data-cms-panel="2" hidden>
+                    <div>
+                      <span class="cms-pill cms-pill--violet">Assessment event</span>
+                      <h3 style="margin:0.4rem 0 0;font-size:1.15rem">PRA assessment</h3>
+                      <div class="cms-assess__meta">
+                        <span>ML Driver v3</span>
+                        <span>Window: 27-08-2026 to 27-10-2026</span>
+                        <span>Duration: 1:49 (in progress)</span>
+                      </div>
+                    </div>
+                    <div class="cms-filters">
+                      <select aria-label="Unit"><option>Unit 4 — Operate trains in service</option></select>
+                      <select aria-label="Type"><option>Demonstrate</option></select>
+                      <button type="button" class="is-on" data-cms-flagged-count>Flagged (2)</button>
+                      <button type="button">Assessed</button>
+                    </div>
+                    <div class="cms-banner">
+                      <span>Active assessment event: <strong>PRA</strong> · flagged tiles wait for notes when safe.</span>
+                      <span class="cms-pill cms-pill--amber">2 flagged</span>
+                    </div>
+                    <div class="cms-tiles">
+                      <button type="button" class="cms-tile is-flagged" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Monitor train departure and dwell times against the working timetable.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Check the correct signal is cleared before moving the train.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile is-flagged" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Make station announcements at the correct locations and times.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Apply correct door procedures for the rolling stock in use.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Respond correctly to a signal passed at danger scenario.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                      <button type="button" class="cms-tile" data-cms-tile>
+                        <div class="cms-tile__top"><span class="cms-tile__kind">Demonstrate</span><span class="cms-tile__flag" aria-hidden="true">⚑</span></div>
+                        <p>Secure the train correctly when leaving the cab unattended.</p>
+                        <span class="cms-tile__later">Return later</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cms-demo__nav">
+            <div class="cms-demo__tabs" role="group" aria-label="Assessing views">
+              <button type="button" class="cms-demo__tab is-active" data-cms-tab="0" aria-pressed="true">Active assessment</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="1" aria-pressed="false">In-cab safety</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="2" aria-pressed="false">Flagged criteria</button>
+            </div>
+            <p class="cms-demo__note"><strong>Tap tiles</strong> to flag criteria for later — hover pauses autoplay.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1137,55 +1777,248 @@
         <div class="page-section__head">
           <h2>The standards behind the cycle</h2>
           <p>Cycles are only as good as the standard behind them. Frameworks, grading scales and company timing standards are configured once and applied across every cycle you run.</p>
-
         </div>
 
-      <div class="shot-grid shot-grid--two">
-        <figure class="shot reveal" style="max-width: 705px">
-          <div class="shot__frame">
-            <img src="../images/screens/comp-config/framework-apply-cycles.png?v=116802302" alt="Applying a competency framework across cycles." width="705" height="388" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Applying a competency framework across cycles.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 703px">
-          <div class="shot__frame">
-            <img src="../images/screens/comp-config/grade-scale.png?v=116802302" alt="The grading scale used by assessors." width="703" height="290" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">The grading scale used by assessors.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 699px">
-          <div class="shot__frame">
-            <img src="../images/screens/comp-config/set-company-standards.png?v=116802302" alt="Company standards for assessment and competence." width="699" height="489" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Company standards for assessment and competence.</figcaption>
-        </figure>
-        <figure class="shot reveal" style="max-width: 786px">
-          <div class="shot__frame">
-            <img src="../images/screens/main-sys/timings-standards.png?v=116802302" alt="Timing standards including trainee daylight and darkness minimums." width="786" height="462" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="shot__caption">Timing standards including trainee daylight and darkness minimums.</figcaption>
-        </figure>
-      </div>
+        <div class="cms-demo reveal" data-cms-demo data-cms-labels="Framework · cycles available to assign.|Grading scale · outcomes assessors can award.|Timing standards · daylight, darkness and session minimums.">
+          <div class="cms-demo__stage">
+            <div class="browser-mockup browser-mockup--primary">
+              <div class="browser-mockup__chrome">
+                <span class="browser-mockup__dots"></span>
+                <span class="browser-mockup__url">cms.railintel.co.uk/settings/standards</span>
+              </div>
+              <div class="browser-mockup__content">
+                <div class="cms-app" role="region" aria-label="Standards interactive preview">
+                  <div class="cms-app__bar">
+                    <div>
+                      <h3 class="cms-app__title">Company standards</h3>
+                      <p class="cms-app__sub" data-cms-subtitle>Framework · cycles available to assign.</p>
+                    </div>
+                    <span class="cms-app__badge"><span class="cms-app__badge-dot" aria-hidden="true"></span> Dark mode</span>
+                  </div>
 
-      </div>
-    </section>
+                  <div class="cms-panel is-active" data-cms-panel="0">
+                    <div class="cms-card">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>Framework (competency cycles)</h3>
+                          <p>Manage cycles used as the company framework. Applied cycles become available when assigning to employees.</p>
+                        </div>
+                      </div>
+                      <div class="cms-info">
+                        <span aria-hidden="true">ℹ</span>
+                        Next step — add at least one cycle from Cycle Builder to finish setup.
+                      </div>
+                      <h4 style="margin:0 0 0.45rem;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--cms-faint)">Applied cycles</h4>
+                      <ul class="cms-list">
+                        <li>
+                          <span class="cms-list__left"><span class="cms-check" aria-hidden="true">✓</span> ML Driver v3</span>
+                          <button type="button" class="cms-btn cms-btn--danger" aria-label="Remove">✕</button>
+                        </li>
+                      </ul>
+                      <h4 style="margin:0.9rem 0 0.45rem;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--cms-faint)">Your company cycles</h4>
+                      <ul class="cms-list">
+                        <li>
+                          <span>ML Driver v3</span>
+                          <button type="button" class="cms-btn cms-btn--ghost">Edit cycle name</button>
+                        </li>
+                        <li>
+                          <span>Test Cycle</span>
+                          <button type="button" class="cms-btn cms-btn--ghost">Edit cycle name</button>
+                        </li>
+                      </ul>
+                      <div class="cms-assign" style="margin:0.9rem 0 0">
+                        <div class="cms-field">
+                          <label for="cms-add-cycle">Add cycle</label>
+                          <select id="cms-add-cycle"><option>— Choose a cycle —</option><option>PTS annual</option></select>
+                        </div>
+                        <span></span>
+                        <button type="button" class="cms-btn cms-btn--primary" data-cms-flash="Add cycle" data-cms-done="Added">Add cycle</button>
+                      </div>
+                    </div>
+                  </div>
 
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Everything here is included</h2>
-          <p>These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.</p>
+                  <div class="cms-panel" data-cms-panel="1" hidden>
+                    <div class="cms-card">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>Grading scale</h3>
+                          <p>Choose the grading options that apply to your assessments. Nothing is selected by default — pick the grades you need, then save.</p>
+                        </div>
+                      </div>
+                      <div class="cms-grades">
+                        <button type="button" class="cms-grade" data-cms-grade aria-pressed="false"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Competent no advice</strong><p>Fully competent with no additional guidance required.</p></button>
+                        <button type="button" class="cms-grade" data-cms-grade aria-pressed="false"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Competent with advice</strong><p>Competent but was advised on minor points.</p></button>
+                        <button type="button" class="cms-grade is-on" data-cms-grade aria-pressed="true"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Review</strong><p>Requires further review before competency can be confirmed.</p></button>
+                        <button type="button" class="cms-grade is-on" data-cms-grade aria-pressed="true"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Advisory</strong><p>Advisory support recommended during task performance.</p></button>
+                        <button type="button" class="cms-grade is-on" data-cms-grade aria-pressed="true"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Not yet competent</strong><p>Has not yet demonstrated the required competency level.</p></button>
+                        <button type="button" class="cms-grade is-on" data-cms-grade aria-pressed="true"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Pass</strong><p>Assessment passed successfully.</p></button>
+                        <button type="button" class="cms-grade" data-cms-grade aria-pressed="false"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Fail</strong><p>Assessment not passed; further training required.</p></button>
+                        <button type="button" class="cms-grade cms-grade--danger" data-cms-grade aria-pressed="false"><span class="cms-grade__mark" aria-hidden="true"></span><strong>Unsafe / Fail</strong><p>Unsafe practice; immediate intervention required.</p></button>
+                      </div>
+                      <div class="cms-grades-foot">
+                        <span data-cms-grade-count>4 grades selected</span>
+                        <button type="button" class="cms-btn cms-btn--primary" data-cms-flash="Save" data-cms-done="Saved">Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cms-panel" data-cms-panel="2" hidden>
+                    <div class="cms-warn-banner">
+                      <span aria-hidden="true">⚠</span>
+                      These timings feed reporting and verification. Changing them affects every cycle that references company standards.
+                    </div>
+                    <div class="cms-card">
+                      <div class="cms-card__head">
+                        <div>
+                          <h3>Standard timings</h3>
+                          <p>Daylight and darkness minimums for trainees, rolling competence hours, and the shortest meaningful assessing session.</p>
+                        </div>
+                      </div>
+                      <div class="cms-timing-grid">
+                        <div class="cms-timing">
+                          <h4>Trainee driving</h4>
+                          <p>Minimum daylight and darktime driving hours before competence can be signed off.</p>
+                          <div class="cms-dials">
+                            <div class="cms-dial cms-dial--day" aria-label="Daylight 235 hours">
+                              <div class="cms-dial__scene" aria-hidden="true">
+                                <span class="cms-dial__sun"></span>
+                                <svg class="cms-dial__cloud cms-dial__cloud--a" viewBox="0 0 96 42" width="68" height="30" focusable="false">
+                                  <defs>
+                                    <filter id="cmsMistA" x="-35%" y="-55%" width="170%" height="210%">
+                                      <feGaussianBlur stdDeviation="2.4"/>
+                                    </filter>
+                                    <linearGradient id="cmsVolA" x1="0.5" y1="0" x2="0.5" y2="1">
+                                      <stop offset="0%" stop-color="#ffffff"/>
+                                      <stop offset="55%" stop-color="#f1f5f9"/>
+                                      <stop offset="100%" stop-color="#94a3b8"/>
+                                    </linearGradient>
+                                  </defs>
+                                  <g filter="url(#cmsMistA)">
+                                    <ellipse cx="40" cy="24" rx="30" ry="12" fill="#fff" opacity="0.35"/>
+                                    <path fill="url(#cmsVolA)" d="M14 30c-7 0-12-4.6-10.4-10.2C1.2 15.4 5.4 10 13 11c2.4-5.8 10.8-7.6 16.4-3.6 3.4-4.2 10.8-4.6 14.8-.4 5-3.2 12 .4 12.8 5.8 5.8.4 9.2 5.2 6.8 10.2-1.6 3.4-5.8 6.2-12.2 6.2H14z"/>
+                                  </g>
+                                </svg>
+                                <svg class="cms-dial__cloud cms-dial__cloud--b" viewBox="0 0 84 38" width="56" height="25" focusable="false">
+                                  <defs>
+                                    <filter id="cmsMistB" x="-35%" y="-55%" width="170%" height="210%">
+                                      <feGaussianBlur stdDeviation="2.8"/>
+                                    </filter>
+                                    <linearGradient id="cmsVolB" x1="0.5" y1="0" x2="0.5" y2="1">
+                                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                                      <stop offset="60%" stop-color="#e2e8f0"/>
+                                      <stop offset="100%" stop-color="#64748b"/>
+                                    </linearGradient>
+                                  </defs>
+                                  <g filter="url(#cmsMistB)">
+                                    <ellipse cx="36" cy="22" rx="26" ry="11" fill="#f8fafc" opacity="0.3"/>
+                                    <path fill="url(#cmsVolB)" opacity="0.92" d="M12 27c-5.8 0-10-4-8.6-8.6C1.6 14.4 5.2 9.8 11.2 10.6c2-4.8 8.8-6.4 13.4-2.8 2.8-3.6 8.8-4 12.2-.2 4.2-2.6 10.2.6 10.8 5.2 4.8.2 7.6 4.4 5.6 8.6-1.4 2.8-4.8 5-10.2 5H12z"/>
+                                  </g>
+                                </svg>
+                                <svg class="cms-dial__cloud cms-dial__cloud--c" viewBox="0 0 72 34" width="48" height="23" focusable="false">
+                                  <defs>
+                                    <filter id="cmsMistC" x="-40%" y="-60%" width="180%" height="220%">
+                                      <feGaussianBlur stdDeviation="2.2"/>
+                                    </filter>
+                                    <linearGradient id="cmsVolC" x1="0.5" y1="0" x2="0.5" y2="1">
+                                      <stop offset="0%" stop-color="#ffffff"/>
+                                      <stop offset="100%" stop-color="#94a3b8"/>
+                                    </linearGradient>
+                                  </defs>
+                                  <g filter="url(#cmsMistC)">
+                                    <ellipse cx="32" cy="20" rx="22" ry="9" fill="#fff" opacity="0.28"/>
+                                    <path fill="url(#cmsVolC)" d="M10 24.5c-5 0-8.8-3.4-7.6-7.2C1 14 4.2 9.8 9.4 10.6c1.8-4.2 7.8-5.4 11.8-2.2 2.6-3.2 8-3.4 10.8 0 3.8-2.2 9 .6 9.4 4.6 4.2.2 6.6 3.8 4.8 7.2-1.2 2.4-4.2 4.3-8.8 4.3H10z"/>
+                                  </g>
+                                </svg>
+                                <svg class="cms-dial__cloud cms-dial__cloud--d" viewBox="0 0 78 36" width="52" height="24" focusable="false">
+                                  <defs>
+                                    <filter id="cmsMistD" x="-40%" y="-60%" width="180%" height="220%">
+                                      <feGaussianBlur stdDeviation="3.2"/>
+                                    </filter>
+                                    <linearGradient id="cmsVolD" x1="0.5" y1="0" x2="0.5" y2="1">
+                                      <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.9"/>
+                                      <stop offset="55%" stop-color="#cbd5e1"/>
+                                      <stop offset="100%" stop-color="#64748b" stop-opacity="0.8"/>
+                                    </linearGradient>
+                                  </defs>
+                                  <g filter="url(#cmsMistD)">
+                                    <ellipse cx="34" cy="20" rx="24" ry="10" fill="#e2e8f0" opacity="0.28"/>
+                                    <path fill="url(#cmsVolD)" d="M11 25.5c-5.4 0-9.4-3.6-8-7.8C1.4 14 5 9.8 10.4 10.6c2-4.4 8.2-5.8 12.4-2.4 2.8-3.4 8.6-3.6 11.8.2 4-2.4 9.4.8 9.8 5 4.4.2 7 4 5.2 7.8-1.4 2.8-4.6 4.8-9.8 4.8H11z"/>
+                                  </g>
+                                </svg>
+                              </div>
+                              <div class="cms-dial__readout"><strong>235</strong><span>Hrs daylight</span></div>
+                            </div>
+                            <div class="cms-dial cms-dial--night" aria-label="Dark 40 hours">
+                              <div class="cms-dial__scene" aria-hidden="true">
+                                <span class="cms-dial__stars"></span>
+                                <svg class="cms-dial__moon" viewBox="0 0 32 32" width="20" height="20" aria-hidden="true">
+                                  <defs>
+                                    <radialGradient id="cmsMoonGlow" cx="35%" cy="35%" r="65%">
+                                      <stop offset="0%" stop-color="#f8fafc"/>
+                                      <stop offset="55%" stop-color="#e2e8f0"/>
+                                      <stop offset="100%" stop-color="#94a3b8"/>
+                                    </radialGradient>
+                                  </defs>
+                                  <circle cx="16" cy="16" r="11" fill="url(#cmsMoonGlow)"/>
+                                  <circle cx="12" cy="13" r="1.6" fill="rgba(100,116,139,0.35)"/>
+                                  <circle cx="19" cy="18" r="2.1" fill="rgba(100,116,139,0.28)"/>
+                                  <circle cx="14" cy="20" r="1.1" fill="rgba(100,116,139,0.3)"/>
+                                </svg>
+                              </div>
+                              <div class="cms-dial__readout"><strong>40</strong><span>Hrs dark</span></div>
+                            </div>
+                          </div>
+                          <p class="cms-timing__total">Total minimum <strong>275h 0m</strong></p>
+                        </div>
+                        <div class="cms-timing">
+                          <h4>Maintain competence</h4>
+                          <p>Minimum driving hours on a rolling months window to keep competence current.</p>
+                          <div class="cms-dials">
+                            <div class="cms-dial cms-dial--rolling" aria-label="4 hours per 1 month">
+                              <div class="cms-dial__scene" aria-hidden="true">
+                                <span class="cms-dial__orbit"></span>
+                                <span class="cms-dial__orbit cms-dial__orbit--2"></span>
+                                <span class="cms-dial__node"></span>
+                              </div>
+                              <div class="cms-dial__readout"><strong>4h</strong><span>/ 1 month</span></div>
+                            </div>
+                          </div>
+                          <p class="cms-timing__total">Total minimum <strong>4h 0m</strong></p>
+                        </div>
+                        <div class="cms-timing">
+                          <h4>Minimum assessing time</h4>
+                          <p>Shortest session an assessor should spend to gather meaningful evidence.</p>
+                          <div class="cms-dials">
+                            <div class="cms-dial cms-dial--session" aria-label="30 minutes">
+                              <div class="cms-dial__scene" aria-hidden="true">
+                                <span class="cms-dial__tick"></span>
+                                <span class="cms-dial__hand"></span>
+                                <span class="cms-dial__pulse"></span>
+                              </div>
+                              <div class="cms-dial__readout"><strong>30</strong><span>Min session</span></div>
+                            </div>
+                          </div>
+                          <p class="cms-timing__total">Total minimum <strong>0h 30m</strong></p>
+                        </div>
+                      </div>
+                      <div style="margin-top:0.9rem">
+                        <button type="button" class="cms-btn cms-btn--primary" data-cms-flash="Save standards" data-cms-done="Standards saved">Save standards</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cms-demo__nav">
+            <div class="cms-demo__tabs" role="group" aria-label="Standards views">
+              <button type="button" class="cms-demo__tab is-active" data-cms-tab="0" aria-pressed="true">Framework</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="1" aria-pressed="false">Grading scale</button>
+              <button type="button" class="cms-demo__tab" data-cms-tab="2" aria-pressed="false">Timing standards</button>
+            </div>
+            <p class="cms-demo__note"><strong>Interactive preview</strong> — toggle grades, save actions flash confirmation.</p>
+          </div>
         </div>
-        <div class="page-actions">
-          <a href="https://cms.railintel.co.uk" class="btn btn-primary btn-lg">Open Rail Intel</a>
-          <a href="../products/" class="btn btn-ghost btn-lg">Browse all add-ons</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section page-section--tight">
-      <div class="container">
-        <p class="page-lead">Related: <a href="../features/medicals-licensing.html">Medicals &amp; Licences</a>, <a href="../products/qa-verifications.html">QA Verifications add-on</a></p>
       </div>
     </section>
 
@@ -1299,5 +2132,7 @@
   <script src="../js/newsletter.js?v=116802302"></script>
   <script src="../js/share.js?v=116802302"></script>
   <script src="../js/competency-engine.js?v=116802302"></script>
+  <script src="../js/cycle-builder-demo.js?v=116802302"></script>
+  <script src="../js/cms-feature-demos.js?v=116802302"></script>
 </body>
 </html>
