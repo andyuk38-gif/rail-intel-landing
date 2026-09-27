@@ -90,6 +90,7 @@ function boot(root) {
 
   function setStatus(lang, place) {
     if (!statusEl) return;
+    const countries = [...new Set(lang.places.map((p) => p.country).filter(Boolean))];
     statusEl.innerHTML =
       '<p class="lang-globe__status-line"><strong>' +
       escapeHtml(lang.name) +
@@ -100,6 +101,11 @@ function boot(root) {
       escapeHtml(place.name) +
       (place.country ? ", " + escapeHtml(place.country) : "") +
       "</p>" +
+      (countries.length
+        ? '<p class="lang-globe__status-countries"><span>Countries</span> ' +
+          escapeHtml(countries.join(" · ")) +
+          "</p>"
+        : "") +
       '<p class="lang-globe__status-region">' +
       escapeHtml(lang.region) +
       "</p>";
@@ -116,8 +122,15 @@ function boot(root) {
           escapeHtml(place.id) +
           '" data-lang-code="' +
           escapeHtml(lang.code) +
+          '" aria-label="' +
+          escapeHtml(place.name + (place.country ? ", " + place.country : "")) +
           '">' +
+          '<span class="lang-globe__place-city">' +
           escapeHtml(place.name) +
+          "</span>" +
+          (place.country
+            ? '<span class="lang-globe__place-country">' + escapeHtml(place.country) + "</span>"
+            : "") +
           "</button>"
       )
       .join("");
@@ -151,7 +164,11 @@ function boot(root) {
     });
     if (labelsLayer) {
       labelsLayer.querySelectorAll(".lang-globe__label").forEach((el) => {
-        el.classList.toggle("is-visible", el.getAttribute("data-place-id") === placeId);
+        const onLang = el.getAttribute("data-lang") === code;
+        const onPlace = el.getAttribute("data-place-id") === placeId;
+        el.classList.toggle("is-visible", onLang);
+        el.classList.toggle("is-active", onPlace);
+        el.classList.toggle("lang-globe__label--pin", onLang && !onPlace);
       });
     }
 
@@ -241,7 +258,10 @@ function boot(root) {
         marker.style.top = pos.y * 100 + "%";
         marker.innerHTML =
           '<span class="lang-globe__flat-core"></span><span class="lang-globe__flat-tag">' +
+          '<strong>' +
           escapeHtml(place.name) +
+          "</strong>" +
+          (place.country ? "<em>" + escapeHtml(place.country) + "</em>" : "") +
           "</span>";
         marker.addEventListener("click", () => selectPlace(lang.code, place.id, true));
         markersHost.appendChild(marker);
@@ -260,7 +280,10 @@ function boot(root) {
         "rotateX(" + (6 + place.lat * 0.05) + "deg) rotateY(" + place.lng * -0.06 + "deg)";
       markersHost.querySelectorAll(".lang-globe__flat-tag").forEach((tag) => {
         const parent = tag.closest("[data-place-id]");
-        tag.hidden = !(parent && parent.getAttribute("data-place-id") === placeId);
+        const onLang = parent && parent.getAttribute("data-flat-marker") === code;
+        const onPlace = parent && parent.getAttribute("data-place-id") === placeId;
+        tag.hidden = !onLang;
+        tag.classList.toggle("is-active", Boolean(onPlace));
       });
     };
 
@@ -285,16 +308,14 @@ function boot(root) {
     );
 
     const GLOBE_RADIUS = 1.8;
-    const MARKER_R = 0.03;
-    const FOV = 38;
-    // >1 fills width of a landscape stage (mild vertical crop); feels full-bleed
-    const FILL = 1.32;
-    const EARTH_TEX =
-      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-blue-marble.jpg";
+    const MARKER_R = 0.032;
+    const FOV = 36;
+    // Keep the full sphere (plus atmosphere) inside the stage on load
+    const FILL = 0.74;
+    const NIGHT_TEX =
+      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-night.jpg";
     const BUMP_TEX =
       "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-topology.png";
-    const WATER_TEX =
-      "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-water.png";
 
     const width = stage.clientWidth;
     const height = stage.clientHeight;
@@ -302,7 +323,8 @@ function boot(root) {
 
     function cameraDistance() {
       const halfFov = (FOV * Math.PI) / 360;
-      return GLOBE_RADIUS / (Math.tan(halfFov) * FILL);
+      // Include atmosphere shell so nothing is cropped
+      return (GLOBE_RADIUS * 1.08) / (Math.tan(halfFov) * FILL);
     }
 
     const CAM_DIST = cameraDistance();
@@ -328,21 +350,21 @@ function boot(root) {
     renderer.setSize(width, height, false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.22;
+    renderer.toneMappingExposure = 1.55;
     canvasWrap.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(FOV, width / height, 0.1, 100);
-    camera.position.set(0.2, 0.35, CAM_DIST);
+    camera.position.set(0.15, 0.25, CAM_DIST);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.enablePan = false;
-    controls.minDistance = CAM_DIST * 0.78;
-    controls.maxDistance = CAM_DIST * 1.25;
+    controls.minDistance = CAM_DIST * 0.92;
+    controls.maxDistance = CAM_DIST * 1.2;
     controls.enableZoom = !mobileLike;
-    controls.rotateSpeed = mobileLike ? 0.55 : 0.72;
+    controls.rotateSpeed = mobileLike ? 0.55 : 0.7;
     controls.autoRotate = false;
     controls.target.set(0, 0, 0);
     if (THREE.TOUCH) {
@@ -352,12 +374,12 @@ function boot(root) {
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Sparse starfield — keep quiet so earth stays the hero
+    // Night sky — denser, quieter stars
     {
-      const count = 480;
+      const count = 1400;
       const positions = new Float32Array(count * 3);
       for (let i = 0; i < count; i += 1) {
-        const r = 18 + Math.random() * 28;
+        const r = 16 + Math.random() * 36;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(2 * Math.random() - 1);
         positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
@@ -370,10 +392,10 @@ function boot(root) {
         new THREE.Points(
           geo,
           new THREE.PointsMaterial({
-            color: 0xb8c6d9,
-            size: 0.022,
+            color: 0xc9d6ea,
+            size: 0.02,
             transparent: true,
-            opacity: 0.4,
+            opacity: 0.55,
             depthWrite: false,
             sizeAttenuation: true,
           })
@@ -381,16 +403,13 @@ function boot(root) {
       );
     }
 
-    // Even, exhibition lighting so continents stay readable
-    scene.add(new THREE.AmbientLight(0xd8e4f5, 0.95));
-    const key = new THREE.DirectionalLight(0xffffff, 1.85);
-    key.position.set(4.5, 2.8, 3.2);
+    // Low key night lighting — city lights come from the texture itself
+    scene.add(new THREE.AmbientLight(0x6a7a9a, 0.35));
+    const key = new THREE.DirectionalLight(0xa8b8d8, 0.55);
+    key.position.set(3.5, 1.8, 2.8);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0xa8c4ff, 0.65);
-    fill.position.set(-3.5, 1.2, -2.5);
-    scene.add(fill);
-    const rim = new THREE.DirectionalLight(0xffffff, 0.45);
-    rim.position.set(-1, -2.5, -3.5);
+    const rim = new THREE.DirectionalLight(0x4a6aaa, 0.4);
+    rim.position.set(-3, -1, -2.5);
     scene.add(rim);
 
     function latLngToVector3(lat, lng, radius) {
@@ -403,11 +422,13 @@ function boot(root) {
       );
     }
 
-    // Day marble — full brightness, no muddy tint
+    // Night earth with city lights (emissive map = the glow)
     const earthMat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
-      roughness: 0.82,
-      metalness: 0.04,
+      emissive: 0xffffff,
+      emissiveIntensity: 1.45,
+      roughness: 1,
+      metalness: 0,
     });
     const earth = new THREE.Mesh(new THREE.SphereGeometry(GLOBE_RADIUS, 128, 128), earthMat);
     globeGroup.add(earth);
@@ -415,52 +436,43 @@ function boot(root) {
     const loader = new THREE.TextureLoader();
     loader.setCrossOrigin("anonymous");
     loader.load(
-      EARTH_TEX,
+      NIGHT_TEX,
       (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;
         tex.anisotropy = Math.min(12, renderer.capabilities.getMaxAnisotropy());
         earthMat.map = tex;
+        earthMat.emissiveMap = tex;
         earthMat.needsUpdate = true;
       },
       undefined,
       () => {
-        earthMat.color = new THREE.Color(0x2a4a6e);
+        earthMat.color = new THREE.Color(0x0a1528);
+        earthMat.emissive = new THREE.Color(0x1a2a44);
       }
     );
     loader.load(
       BUMP_TEX,
       (tex) => {
         earthMat.bumpMap = tex;
-        earthMat.bumpScale = 0.035;
-        earthMat.needsUpdate = true;
-      },
-      undefined,
-      () => {}
-    );
-    loader.load(
-      WATER_TEX,
-      (tex) => {
-        earthMat.metalnessMap = tex;
-        earthMat.metalness = 0.42;
-        earthMat.roughness = 0.72;
+        earthMat.bumpScale = 0.028;
         earthMat.needsUpdate = true;
       },
       undefined,
       () => {}
     );
 
-    // Soft atmospheric halo
+    // Soft night atmosphere
     globeGroup.add(
       new THREE.Mesh(
-        new THREE.SphereGeometry(GLOBE_RADIUS * 1.07, 64, 64),
+        new THREE.SphereGeometry(GLOBE_RADIUS * 1.06, 64, 64),
         new THREE.ShaderMaterial({
           side: THREE.BackSide,
           transparent: true,
           depthWrite: false,
           uniforms: {
-            glowColor: { value: new THREE.Color(0x7eb0ff) },
-            coefficient: { value: 0.32 },
-            power: { value: 3.6 },
+            glowColor: { value: new THREE.Color(0x4a7fd4) },
+            coefficient: { value: 0.3 },
+            power: { value: 3.8 },
           },
           vertexShader: `
             varying vec3 vNormal;
@@ -476,26 +488,12 @@ function boot(root) {
             varying vec3 vNormal;
             void main() {
               float intensity = pow(coefficient - dot(vNormal, vec3(0.0, 0.0, 1.0)), power);
-              gl_FragColor = vec4(glowColor, 1.0) * intensity * 0.85;
+              gl_FragColor = vec4(glowColor, 1.0) * intensity * 0.9;
             }
           `,
         })
       )
     );
-
-    // Subtle under-glow disc for depth
-    const floorGlow = new THREE.Mesh(
-      new THREE.CircleGeometry(GLOBE_RADIUS * 1.05, 64),
-      new THREE.MeshBasicMaterial({
-        color: 0x3a5f9a,
-        transparent: true,
-        opacity: 0.18,
-        depthWrite: false,
-      })
-    );
-    floorGlow.rotation.x = -Math.PI / 2;
-    floorGlow.position.y = -GLOBE_RADIUS * 0.98;
-    globeGroup.add(floorGlow);
 
     const markers = [];
     const labelEls = [];
@@ -591,8 +589,7 @@ function boot(root) {
             "<strong>" +
             escapeHtml(place.name) +
             "</strong><span>" +
-            escapeHtml(lang.name) +
-            (place.country ? " · " + escapeHtml(place.country) : "") +
+            escapeHtml(place.country || lang.name) +
             "</span>";
           labelsLayer.appendChild(el);
           labelEls.push({ el, marker: group });
@@ -611,18 +608,22 @@ function boot(root) {
         const onLang = marker.userData.code === code;
         const onPlace = marker.userData.placeId === placeId;
         marker.visible = onLang;
-        marker.scale.setScalar(onPlace ? 1.4 : 0.92);
+        marker.scale.setScalar(onPlace ? 1.45 : 1);
         if (marker.userData.head) {
-          marker.userData.head.material.emissiveIntensity = onPlace ? 1.55 : 0.55;
+          marker.userData.head.material.emissiveIntensity = onPlace ? 1.7 : 0.7;
           marker.userData.head.material.color.set(onPlace ? 0xffe8a8 : 0xffc857);
         }
         if (marker.userData.halo) {
-          marker.userData.halo.material.opacity = onPlace ? 0.55 : 0.22;
+          marker.userData.halo.material.opacity = onPlace ? 0.6 : 0.28;
         }
         if (marker.userData.ring) marker.userData.ring.visible = onPlace;
       });
       labelEls.forEach(({ el }) => {
-        el.classList.toggle("is-visible", el.getAttribute("data-place-id") === placeId);
+        const onLang = el.getAttribute("data-lang") === code;
+        const onPlace = el.getAttribute("data-place-id") === placeId;
+        el.classList.toggle("is-visible", onLang);
+        el.classList.toggle("is-active", onPlace);
+        el.classList.toggle("lang-globe__label--pin", onLang && !onPlace);
       });
     }
 

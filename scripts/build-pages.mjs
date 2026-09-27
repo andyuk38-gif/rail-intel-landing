@@ -2845,7 +2845,10 @@ function languagesHubPage() {
           <ul class="lang-globe__list">
 ${globeItems}
           </ul>
-          <div class="lang-globe__places" data-lang-globe-places></div>
+          <div class="lang-globe__coverage">
+            <p class="lang-globe__coverage-label">Cities &amp; countries</p>
+            <div class="lang-globe__places" data-lang-globe-places></div>
+          </div>
         </div>
         <div class="lang-globe__stage" data-lang-globe-stage>
           <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
