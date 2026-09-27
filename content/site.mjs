@@ -1262,7 +1262,7 @@ export const featureGroups = [
       {
         heading: "RAIB requests and the SPOC",
         body: [
-          "When the Rail Accident Investigation Branch (RAIB) opens an inquiry, your organisation nominates a Single Person of Contact (SPOC). The SPOC is the person investigators liaise with on evidence, access and the employee records they need to review.",
+          "When the Rail Accident Investigation Branch (RAIB) opens an inquiry, your organisation nominates a Single Point of Contact (SPOC). The SPOC is the person investigators liaise with on evidence, access and the employee records they need to review.",
           "In normal practice that role sits with the company administrator. In Rail Intel CMS, only a company administrator can apply or release a profile lock, so the SPOC can freeze the relevant record when it becomes material and keep it stable for the duration of the inquiry.",
         ],
         headLogo: {
