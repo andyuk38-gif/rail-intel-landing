@@ -1923,6 +1923,7 @@ export const featureGroups = [
     tagline: "International language support",
     lead:
       "Assessors, managers and administrators can work in the language that suits their team. Choose a language at sign-in, or switch anytime from the header.",
+    hideHeroActions: true,
     sections: [],
   },
 ];
@@ -1934,9 +1935,12 @@ export const languages = {
   lead:
     "The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.",
   globe: {
-    heading: "Coverage across your network",
+    eyebrow: "Supported languages",
+    heading: "Languages spoken by country*",
     lead:
-      "Choose a language, then jump to any city or country it covers. The night globe shows where the interface reaches.",
+      "Choose a language, then jump to a city or country where it is commonly used. The night globe highlights those locations.",
+    footnote:
+      "*Countries listed are representative examples. Official languages, regional usage and local terminology may vary.",
     hint: "Click a city · Drag to explore · Use +/− to zoom",
   },
   items: [

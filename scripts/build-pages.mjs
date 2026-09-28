@@ -2830,10 +2830,7 @@ function languagesHubPage() {
           <span class="page-badge page-badge--core">Included as standard</span>
           <h1 class="page-title">${esc(group.tagline)}</h1>
           <p class="page-lead">${esc(group.lead)}</p>
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="${base}features/" class="btn btn-ghost btn-lg">All features</a>
-          </div>
+${renderHeroActions(group, base)}
         </div>
       </div>
     </section>
@@ -2843,10 +2840,15 @@ function languagesHubPage() {
       <div class="lang-globe__inner">
         <div class="lang-globe__header container">
           <div class="lang-globe__intro">
-            <p class="lang-globe__eyebrow">Global interface coverage</p>
+            <p class="lang-globe__eyebrow">${esc(languages.globe?.eyebrow || "Supported languages")}</p>
             <div class="lang-globe__intro-copy">
-              <h2>${esc(languages.globe?.heading || "Coverage across your network")}</h2>
+              <h2>${esc(languages.globe?.heading || "Languages spoken by country*")}</h2>
               <p>${esc(languages.globe?.lead || languages.lead)}</p>
+              ${
+                languages.globe?.footnote
+                  ? `<p class="lang-globe__footnote">${esc(languages.globe.footnote)}</p>`
+                  : ""
+              }
             </div>
           </div>
           <ul class="lang-globe__list">
@@ -2909,11 +2911,6 @@ ${cards}
       </div>
     </section>
 
-${renderCta(base, {
-  heading: "Work in the language your team uses",
-  body: "Language support is part of core Rail Intel. Users can select and switch language at sign-in or from the header — no separate enable step.",
-})}
-${renderRelatedLinks(base, mergedItem(group, group.slug).relatedLinks)}
 ${renderFaqSection(pageSeo.faq, base)}
   </main>
 
