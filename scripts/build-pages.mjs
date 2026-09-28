@@ -2831,43 +2831,45 @@ function languagesHubPage() {
     <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
       <script type="application/json" data-lang-globe-data>${JSON.stringify(globePlaces).replace(/</g, "\\u003c")}</script>
       <div class="lang-globe__inner">
-        <div class="lang-globe__toolbar container">
+        <div class="lang-globe__header container">
           <div class="lang-globe__intro">
             <p class="lang-globe__eyebrow">Global interface coverage</p>
-            <div class="lang-globe__intro-row">
-              <div class="lang-globe__intro-copy">
-                <h2>${esc(languages.globe?.heading || "Coverage across your network")}</h2>
-                <p>${esc(languages.globe?.lead || languages.lead)}</p>
-              </div>
-              <div class="lang-globe__status" data-lang-globe-status></div>
+            <div class="lang-globe__intro-copy">
+              <h2>${esc(languages.globe?.heading || "Coverage across your network")}</h2>
+              <p>${esc(languages.globe?.lead || languages.lead)}</p>
             </div>
           </div>
           <ul class="lang-globe__list">
 ${globeItems}
           </ul>
-          <div class="lang-globe__coverage">
-            <p class="lang-globe__coverage-label">Cities &amp; countries</p>
-            <div class="lang-globe__places" data-lang-globe-places></div>
-          </div>
         </div>
-        <div class="lang-globe__stage-wrap">
-          <div class="lang-globe__stage" data-lang-globe-stage>
-            <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
-            <div class="lang-globe__overlay" aria-hidden="true"></div>
-            <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
-            <div class="lang-globe__hud" aria-hidden="true">
-              <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>${languages.items.length} languages live</span>
+        <div class="lang-globe__body container">
+          <aside class="lang-globe__sidebar">
+            <div class="lang-globe__status" data-lang-globe-status></div>
+            <div class="lang-globe__coverage">
+              <p class="lang-globe__coverage-label">Cities &amp; countries</p>
+              <div class="lang-globe__places" data-lang-globe-places></div>
             </div>
-            <div class="lang-globe__zoom" data-lang-globe-zoom>
-              <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-in aria-label="Zoom in">
-                <span aria-hidden="true">+</span>
-              </button>
-              <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-out aria-label="Zoom out">
-                <span aria-hidden="true">−</span>
-              </button>
+          </aside>
+          <div class="lang-globe__stage-wrap">
+            <div class="lang-globe__stage" data-lang-globe-stage>
+              <div class="lang-globe__canvas-wrap" data-lang-globe-canvas></div>
+              <div class="lang-globe__overlay" aria-hidden="true"></div>
+              <div class="lang-globe__labels" data-lang-globe-labels aria-hidden="true"></div>
+              <div class="lang-globe__hud" aria-hidden="true">
+                <span class="lang-globe__pill"><span class="lang-globe__pill-dot"></span>${languages.items.length} languages live</span>
+              </div>
+              <div class="lang-globe__zoom" data-lang-globe-zoom>
+                <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-in aria-label="Zoom in">
+                  <span aria-hidden="true">+</span>
+                </button>
+                <button type="button" class="lang-globe__zoom-btn" data-lang-globe-zoom-out aria-label="Zoom out">
+                  <span aria-hidden="true">−</span>
+                </button>
+              </div>
+              <p class="lang-globe__hint">${esc(languages.globe?.hint || "Drag to orbit · Click a marker to focus")}</p>
+              <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
             </div>
-            <p class="lang-globe__hint">${esc(languages.globe?.hint || "Drag to orbit · Click a marker to focus")}</p>
-            <div class="lang-globe__fallback" data-lang-globe-fallback hidden>Interactive globe unavailable in this browser.</div>
           </div>
         </div>
       </div>
