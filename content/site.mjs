@@ -993,6 +993,8 @@ export const featureGroups = [
     taglineHtml:
       'Are you ready to plug in our <span class="hero-title__accent">technology</span> to your <span class="hero-title__accent">operations</span>?',
     heroGraphic: "competency-engine",
+    hideCompetencyEngineDiagram: true,
+    hideHeroActions: true,
     lead:
       "Our competency engine is the most powerful and complex CMS built for rail, with inbuilt strict conditional rules, communications, and powerful add-ons to cater for your needs, ensuring everything stays in one system rather than spread across different platforms, all powered by Rail Intel, a company with extensive operational experience in rail.",
     faq: [
@@ -1014,6 +1016,8 @@ export const featureGroups = [
     sections: [
       {
         heading: "Build a cycle from a template or from scratch",
+        fullWidth: true,
+        bulletTiles: true,
         body: [
           "Cycle Builder walks through the cycle in four steps: method, details, criteria and events. Start from a ready-made framework or build a custom cycle for a role your operation defines itself.",
         ],
@@ -1046,6 +1050,7 @@ export const featureGroups = [
       },
       {
         heading: "Live cycles on the employee record",
+        fullWidth: true,
         body: [
           "Once assigned, a cycle is live on the employee record with its start and expiry. Only one live cycle of a given type is allowed at a time, so the record cannot drift into ambiguity. Closing a cycle moves it to closed cycles and keeps the history.",
           "Continuous cycles are supported for competencies that renew rather than end, and a CDP can carry over between cycles so an open development point is not lost at the boundary.",
@@ -1073,6 +1078,7 @@ export const featureGroups = [
       },
       {
         heading: "Assessing in the field",
+        fullWidth: true,
         body: [
           "Assessments are completed against structured criteria with observations recorded as they are made. Where an observation falls short, the criterion is flagged rather than silently passed, and the assessment can be started within its early window when operationally necessary.",
         ],
@@ -1096,6 +1102,7 @@ export const featureGroups = [
       },
       {
         heading: "The standards behind the cycle",
+        fullWidth: true,
         body: [
           "Cycles are only as good as the standard behind them. Frameworks, grading scales and company timing standards are configured once and applied across every cycle you run.",
         ],

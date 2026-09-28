@@ -2662,9 +2662,13 @@ ${heroLeadMarkup}\n`
 ${heroCopy}
           </div>
 ${renderCompetencyEngineBay(base)}
-          <div class="page-hero__media page-hero__media--engine">
+${
+  group.hideCompetencyEngineDiagram
+    ? ""
+    : `          <div class="page-hero__media page-hero__media--engine">
 ${heroMedia}
-          </div>
+          </div>`
+}
         </div>
         <script>
           try {
@@ -2713,7 +2717,10 @@ ${heroCopy}
     : commHubPage
       ? { extraStylesheets: ["css/communications-hub.css"] }
       : competencyEngineHero
-        ? { extraStylesheets: ["css/competency-engine.css"], rememberEngine: true }
+        ? {
+            extraStylesheets: ["css/competency-engine.css"],
+            rememberEngine: !group.hideCompetencyEngineDiagram,
+          }
         : incidentsDemoPage
           ? { extraStylesheets: ["css/incidents-monitoring-demo.css"] }
           : cmsDemoPage
@@ -2723,7 +2730,7 @@ ${heroCopy}
     ? { extraScripts: ["js/profile-flipbook.js"] }
     : commHubPage
       ? { extraScripts: ["js/communications-hub.js"] }
-      : competencyEngineHero
+      : competencyEngineHero && !group.hideCompetencyEngineDiagram
         ? { extraScripts: ["js/competency-engine.js"] }
         : incidentsDemoPage
           ? { extraScripts: ["js/incidents-monitoring-demo.js"] }
