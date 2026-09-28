@@ -994,6 +994,7 @@ export const featureGroups = [
     taglineHtml:
       'Competency <span class="hero-title__accent">cycles</span> that drive assessment and keep competence <span class="hero-title__accent">current</span>',
     hideHeroActions: true,
+    heroLeadFullWidth: true,
     lead:
       "Our competency engine is the most powerful and complex CMS built for rail, with inbuilt strict conditional rules, communications, and powerful add-ons to cater for your needs, ensuring everything stays in one system rather than spread across different platforms, all powered by Rail Intel, a company with extensive operational experience in rail.",
     faq: [

@@ -2742,7 +2742,7 @@ ${heroCopy}
     renderHead(base, pageSeo, headOptions) +
     `
   <main>
-    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${adminMenuHero ? " page-hero--admin-menu" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}${incidentsHero ? " page-hero--incidents" : ""}">
+    <section class="page-hero${group.heroIntro ? " page-hero--intro-split" : ""}${tunnelHero ? " page-hero--tunnel" : ""}${group.slug === "printable-profile" ? " page-hero--printable-profile" : ""}${group.slug === "communications-hub" ? " page-hero--communications-hub" : ""}${medicalsLicensingHero ? " page-hero--medicals-licensing" : ""}${adminMenuHero ? " page-hero--admin-menu" : ""}${competencyEngineHero ? " page-hero--competency-engine" : ""}${incidentsHero ? " page-hero--incidents" : ""}${group.heroLeadFullWidth ? " page-hero--full-lead" : ""}">
       <div class="container">
 ${heroInner}
       </div>
