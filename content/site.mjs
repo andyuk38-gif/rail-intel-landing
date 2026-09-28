@@ -1129,6 +1129,7 @@ export const featureGroups = [
     taglineHtml:
       'The most <span class="hero-title__accent">professional</span> employee competence portfolio',
     hideHeroActions: true,
+    hideCta: true,
     heroShot: {
       src: "images/product/printable-profile-hero.png",
       alt:
@@ -1141,14 +1142,6 @@ export const featureGroups = [
     },
     lead:
       "For audits, management review or formal packs, Rail Intel turns the live employee record into a branded competence portfolio, full-colour brochure, print-ready PDF, or on-screen layout, generated from the data already in the system.",
-    cta: {
-      heading: "Everything here is included",
-      body:
-        "These capabilities are part of core Rail Intel, gated only by the permissions you assign. Optional modules extend them further.",
-      primaryHref: "get-started.html",
-      primaryLabel: "Get started",
-      showSecondary: false,
-    },
     sections: [
       {
         heading: "Data protection before you print",
