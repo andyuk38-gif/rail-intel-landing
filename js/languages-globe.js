@@ -126,7 +126,7 @@ function boot(root) {
     // Wave offsets depend on the horizontal position only, so they are cached
     // per column and reused down each row.
     let colOffset = null;
-    let colScaleY = null;
+    let colStretch = null;
     let colSampleX = null;
     let colShade = null;
 
@@ -146,7 +146,7 @@ function boot(root) {
       canvas.style.height = cssH + "px";
       dest = ctx.createImageData(destW, destH);
       colOffset = new Float32Array(destW);
-      colScaleY = new Float32Array(destW);
+      colStretch = new Float32Array(destW);
       colSampleX = new Float32Array(destW);
       colShade = new Float32Array(destW);
       return true;
@@ -195,28 +195,38 @@ function boot(root) {
       const sh = src.h;
 
       const { flagTop, flagH, flagLeft, flagW } = layout();
-      const amplitude = flagH * 0.16;
+      const amplitude = flagH * 0.13;
 
       for (let px = 0; px < destW; px += 1) {
         const u = (px - flagLeft) / flagW;
-        // Sweep stays well above zero at the hoist so the curl runs across the
-        // whole cloth rather than looking pinned on the left.
-        const sweep = 0.62 + 0.38 * u;
-        const phase = u * 7.2 - time * 2.3;
+        // Amplitude grows from hoist to fly. Swinging the hoist as hard as the
+        // fly slid the whole cloth as one block, which on a flag of plain
+        // horizontal bands reads as a scrolling texture rather than cloth.
+        const sweep = 0.3 + 0.7 * u;
+        // Each component travels at its own speed. Deriving them all from one
+        // phase gave them a single speed, so the whole fold profile slid across
+        // unchanged — which after a few seconds reads as a scrolling texture.
+        const p1 = u * 6.4 - time * 2.1;
+        const p2 = u * 11.3 - time * 2.9 + 0.6;
+        const p3 = u * 3.6 - time * 1.35 + 2.1;
+        const c1 = Math.cos(p1);
+        // Slow swell, so folds build and subside rather than repeating forever.
+        const gust = 0.78 + 0.22 * Math.sin(time * 0.41 + u * 1.1);
         const wave =
-          Math.sin(phase) * 0.62 + Math.sin(phase * 1.77 + 0.6) * 0.24 + Math.sin(phase * 0.53) * 0.14;
+          (Math.sin(p1) * 0.6 + Math.sin(p2) * 0.23 + Math.sin(p3) * 0.17) * gust;
         const slope =
-          (Math.cos(phase) * 0.62 * 7.2 +
-            Math.cos(phase * 1.77 + 0.6) * 0.24 * 12.7 +
-            Math.cos(phase * 0.53) * 0.14 * 3.8) *
-          sweep;
+          (c1 * 0.6 * 6.4 + Math.cos(p2) * 0.23 * 11.3 + Math.cos(p3) * 0.17 * 3.6) * sweep * gust;
 
-        colOffset[px] = amplitude * sweep * wave;
-        colScaleY[px] = 1 - sweep * 0.1 * Math.cos(phase);
+        const offset = amplitude * sweep * wave;
+        colOffset[px] = offset;
+        // A fold carries the lower edge further than the upper one, so the
+        // cloth is stretched where it swings down and gathered where it swings
+        // up. Without this the bands travel as rigid parallel lines.
+        colStretch[px] = flagH * (1 - sweep * 0.16 * c1) + offset * 0.9;
         // Cloth gathers slightly along the wave as folds pass through. Clamped
         // so the outer columns never sample past the source and flicker.
-        colSampleX[px] = Math.min(1, Math.max(0, u + sweep * 0.03 * Math.cos(phase)));
-        colShade[px] = Math.max(0.68, Math.min(1.24, 1 - slope * 0.055));
+        colSampleX[px] = Math.min(1, Math.max(0, u + sweep * 0.045 * c1));
+        colShade[px] = Math.max(0.6, Math.min(1.3, 1 - slope * 0.075));
       }
 
       const spanX = sw - PAD * 2 - 1;
@@ -230,7 +240,7 @@ function boot(root) {
       for (let py = 0; py < destH; py += 1) {
         for (let px = 0; px < destW; px += 1, di += 4) {
           const u = colSampleX[px];
-          const stretch = flagH * colScaleY[px];
+          const stretch = colStretch[px];
           const centre = flagTop + flagH * 0.5 + colOffset[px];
           const v = (py - centre) / stretch + 0.5;
           if (v < -0.08 || v > 1.08) {

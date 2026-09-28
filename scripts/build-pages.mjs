@@ -8,7 +8,7 @@
  * Run: node scripts/build-pages.mjs
  */
 import { createHash } from "crypto";
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { site, products, upcomingProducts, addons, capacityAddons, featureGroups, howItWorks, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
@@ -80,6 +80,16 @@ function computeAssetVersion() {
     if (!existsSync(path)) continue;
     hash.update(rel);
     hash.update(readFileSync(path));
+  }
+  // Flags are the one image set that gets redrawn, so they need to move the
+  // version themselves rather than waiting on an unrelated CSS or JS edit.
+  const flagDir = join(root, "images/flags");
+  if (existsSync(flagDir)) {
+    for (const name of readdirSync(flagDir).sort()) {
+      if (!name.endsWith(".svg")) continue;
+      hash.update(name);
+      hash.update(readFileSync(join(flagDir, name)));
+    }
   }
   return parseInt(hash.digest("hex").slice(0, 7), 16);
 }
@@ -2386,7 +2396,7 @@ function renderSectionHeadPhoto(photo, base) {
 function renderSectionHeading(section, base) {
   if (section.headingHtml) return section.headingHtml;
   if (section.headingFlag) {
-    return `<span class="page-section__heading-with-flag"><img class="page-section__heading-flag" src="${base}images/flags/${esc(section.headingFlag)}.svg" alt="" width="28" height="18" aria-hidden="true" decoding="async" /><span>${esc(section.heading)}</span></span>`;
+    return `<span class="page-section__heading-with-flag"><img class="page-section__heading-flag" src="${base}images/flags/${esc(section.headingFlag)}.svg?v=${ASSET_VERSION}" alt="" width="28" height="18" aria-hidden="true" decoding="async" /><span>${esc(section.heading)}</span></span>`;
   }
   return esc(section.heading);
 }
@@ -2763,7 +2773,7 @@ function languagesHubPage() {
   const group = featureGroups.find((item) => item.slug === "languages");
   const cards = languages.items
     .map(
-      (lang) => `        <article class="card card--language card--language--${esc(lang.code)}" data-lang="${esc(lang.code)}" style="--lang-flag: url('${base}images/flags/${esc(lang.flag)}.svg')">
+      (lang) => `        <article class="card card--language card--language--${esc(lang.code)}" data-lang="${esc(lang.code)}" style="--lang-flag: url('${base}images/flags/${esc(lang.flag)}.svg?v=${ASSET_VERSION}')">
           <span class="card__kicker">${esc(lang.code.toUpperCase())}</span>
           <h3>${esc(lang.name)}</h3>
           <p class="card__native" lang="${esc(lang.code)}">${esc(lang.nativeName)}</p>
@@ -2776,7 +2786,7 @@ function languagesHubPage() {
     .map(
       (lang, index) => `              <li>
                 <button type="button" class="lang-globe__item${index === 0 ? " is-active" : ""}" data-lang-globe-select="${esc(lang.code)}" data-lang-name="${esc(lang.name)}" data-lang-native="${esc(lang.nativeName)}" data-lang-region="${esc(lang.region || "")}" data-lang-lat="${esc(lang.lat)}" data-lang-lng="${esc(lang.lng)}" aria-pressed="${index === 0 ? "true" : "false"}">
-                  <img class="lang-globe__flag" src="${base}images/flags/${esc(lang.flag)}.svg" alt="" width="28" height="20" loading="lazy" />
+                  <img class="lang-globe__flag" src="${base}images/flags/${esc(lang.flag)}.svg?v=${ASSET_VERSION}" alt="" width="28" height="20" loading="lazy" />
                   <span class="lang-globe__meta">
                     <span class="lang-globe__name">${esc(lang.name)}</span>
                     <span class="lang-globe__native" lang="${esc(lang.code)}">${esc(lang.nativeName)}</span>
