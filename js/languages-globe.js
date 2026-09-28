@@ -40,6 +40,7 @@ function boot(root) {
         name: btn.getAttribute("data-lang-name") || fromCatalog?.name || "",
         nativeName: btn.getAttribute("data-lang-native") || fromCatalog?.nativeName || "",
         region: btn.getAttribute("data-lang-region") || fromCatalog?.region || "",
+        flagSrc: btn.querySelector(".lang-globe__flag")?.getAttribute("src") || "",
         places: rawPlaces.map((place, index) => ({
           name: place.name,
           country: place.country || "",
@@ -66,6 +67,316 @@ function boot(root) {
     placesEl.className = "lang-globe__places";
     placesEl.setAttribute("data-lang-globe-places", "");
     statusEl.insertAdjacentElement("afterend", placesEl);
+  }
+
+  const spokenRoot = root.querySelector("[data-lang-globe-spoken]");
+  const spokenFlag = root.querySelector("[data-lang-globe-spoken-flag]");
+  const spokenName = root.querySelector("[data-lang-globe-spoken-name]");
+  const spokenNative = root.querySelector("[data-lang-globe-spoken-native]");
+
+  /**
+   * Cloth flag warped per destination pixel with bilinear sampling, so stripe
+   * edges stay smooth. Wave phase only ever advances: folds travel hoist → fly
+   * rather than rocking back and forth.
+   */
+  function createFlagCloth(host) {
+    if (!host) {
+      return {
+        setSrc() {},
+        setLabel() {},
+      };
+    }
+
+    host.replaceChildren();
+    const still = document.createElement("img");
+    still.className = "lang-globe__flag-still";
+    still.alt = "";
+    still.decoding = "async";
+    host.appendChild(still);
+
+    const canvas = document.createElement("canvas");
+    canvas.className = "lang-globe__flag-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+    host.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) {
+      return {
+        setSrc(src) {
+          if (src) still.src = src;
+        },
+        setLabel(label) {
+          host.setAttribute("aria-label", label);
+        },
+      };
+    }
+
+    const OPACITY = 0.6;
+    const PAD = 2;
+    let src = null; // { data, w, h }
+    let srcImage = null;
+    let dest = null;
+    let destW = 0;
+    let destH = 0;
+    let ratio = 1;
+    let frame = 0;
+    let visible = true;
+    const startedAt = performance.now();
+
+    // Wave offsets depend on the horizontal position only, so they are cached
+    // per column and reused down each row.
+    let colOffset = null;
+    let colScaleY = null;
+    let colSampleX = null;
+    let colShade = null;
+
+    function measure() {
+      const rect = host.getBoundingClientRect();
+      const cssW = Math.max(1, Math.round(rect.width));
+      const cssH = Math.max(1, Math.round(rect.height));
+      ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const nextW = Math.max(1, Math.round(cssW * ratio));
+      const nextH = Math.max(1, Math.round(cssH * ratio));
+      if (nextW === destW && nextH === destH) return false;
+      destW = nextW;
+      destH = nextH;
+      canvas.width = destW;
+      canvas.height = destH;
+      canvas.style.width = cssW + "px";
+      canvas.style.height = cssH + "px";
+      dest = ctx.createImageData(destW, destH);
+      colOffset = new Float32Array(destW);
+      colScaleY = new Float32Array(destW);
+      colSampleX = new Float32Array(destW);
+      colShade = new Float32Array(destW);
+      return true;
+    }
+
+    function layout() {
+      const marginY = destH * 0.16;
+      return {
+        flagTop: marginY,
+        flagH: destH - marginY * 2,
+        flagLeft: 1,
+        flagW: destW - 2,
+      };
+    }
+
+    function rasterise(image) {
+      // Match the sheet to the destination flag box, not the artwork's own
+      // aspect: sampling must stay a slight magnification, because minifying
+      // with a single bilinear tap is what makes moving edges shimmer.
+      const box = layout();
+      const w = Math.max(64, Math.round(box.flagW * 1.25));
+      const h = Math.max(32, Math.round(box.flagH * 1.25));
+      const sheet = document.createElement("canvas");
+      sheet.width = w + PAD * 2;
+      sheet.height = h + PAD * 2;
+      const sheetCtx = sheet.getContext("2d");
+      sheetCtx.imageSmoothingEnabled = true;
+      if ("imageSmoothingQuality" in sheetCtx) sheetCtx.imageSmoothingQuality = "high";
+      // Transparent padding lets bilinear sampling fade the cloth edges instead
+      // of clipping them into hard stair-steps.
+      sheetCtx.drawImage(image, PAD, PAD, w, h);
+      const pixels = sheetCtx.getImageData(0, 0, sheet.width, sheet.height);
+      src = { data: pixels.data, w: sheet.width, h: sheet.height };
+    }
+
+    function draw(now) {
+      // The sheet is sized from the destination box, so a resize needs a redraw
+      // of the source as well.
+      if (measure() && srcImage) rasterise(srcImage);
+      if (!src || !dest) return;
+
+      const time = (now - startedAt) / 1000;
+      const out = dest.data;
+      const sData = src.data;
+      const sw = src.w;
+      const sh = src.h;
+
+      const { flagTop, flagH, flagLeft, flagW } = layout();
+      const amplitude = flagH * 0.16;
+
+      for (let px = 0; px < destW; px += 1) {
+        const u = (px - flagLeft) / flagW;
+        // Sweep stays well above zero at the hoist so the curl runs across the
+        // whole cloth rather than looking pinned on the left.
+        const sweep = 0.62 + 0.38 * u;
+        const phase = u * 7.2 - time * 2.3;
+        const wave =
+          Math.sin(phase) * 0.62 + Math.sin(phase * 1.77 + 0.6) * 0.24 + Math.sin(phase * 0.53) * 0.14;
+        const slope =
+          (Math.cos(phase) * 0.62 * 7.2 +
+            Math.cos(phase * 1.77 + 0.6) * 0.24 * 12.7 +
+            Math.cos(phase * 0.53) * 0.14 * 3.8) *
+          sweep;
+
+        colOffset[px] = amplitude * sweep * wave;
+        colScaleY[px] = 1 - sweep * 0.1 * Math.cos(phase);
+        // Cloth gathers slightly along the wave as folds pass through. Clamped
+        // so the outer columns never sample past the source and flicker.
+        colSampleX[px] = Math.min(1, Math.max(0, u + sweep * 0.03 * Math.cos(phase)));
+        colShade[px] = Math.max(0.68, Math.min(1.24, 1 - slope * 0.055));
+      }
+
+      const spanX = sw - PAD * 2 - 1;
+      const spanY = sh - PAD * 2 - 1;
+      // Three vertical taps per pixel: the wave displaces vertically, so this is
+      // where coverage needs averaging to keep moving edges from stepping.
+      const TAPS = [-0.34, 0, 0.34];
+      const tapWeight = 1 / TAPS.length;
+
+      let di = 0;
+      for (let py = 0; py < destH; py += 1) {
+        for (let px = 0; px < destW; px += 1, di += 4) {
+          const u = colSampleX[px];
+          const stretch = flagH * colScaleY[px];
+          const centre = flagTop + flagH * 0.5 + colOffset[px];
+          const v = (py - centre) / stretch + 0.5;
+          if (v < -0.08 || v > 1.08) {
+            out[di + 3] = 0;
+            continue;
+          }
+
+          const fx = PAD + u * spanX;
+          const x0 = Math.floor(fx);
+          if (x0 < 0 || x0 + 1 >= sw) {
+            out[di + 3] = 0;
+            continue;
+          }
+          const tx = fx - x0;
+          const step = 1 / stretch;
+
+          let r = 0;
+          let g = 0;
+          let b = 0;
+          let a = 0;
+
+          for (let t = 0; t < TAPS.length; t += 1) {
+            const vt = v + TAPS[t] * step;
+            // Out-of-range taps contribute nothing, which is what fades the
+            // cloth edge across a pixel instead of clipping it.
+            if (vt < 0 || vt > 1) continue;
+
+            const fy = PAD + vt * spanY;
+            const y0 = Math.floor(fy);
+            if (y0 < 0 || y0 + 1 >= sh) continue;
+            const ty = fy - y0;
+
+            const w00 = (1 - tx) * (1 - ty);
+            const w10 = tx * (1 - ty);
+            const w01 = (1 - tx) * ty;
+            const w11 = tx * ty;
+
+            const i00 = (y0 * sw + x0) * 4;
+            const i10 = i00 + 4;
+            const i01 = i00 + sw * 4;
+            const i11 = i01 + 4;
+
+            const a00 = sData[i00 + 3] * w00;
+            const a10 = sData[i10 + 3] * w10;
+            const a01 = sData[i01 + 3] * w01;
+            const a11 = sData[i11 + 3] * w11;
+
+            // getImageData is not premultiplied, so weight each texel's colour
+            // by its own alpha. Mixing raw colour with transparent padding would
+            // otherwise drag the edges toward black.
+            r += sData[i00] * a00 + sData[i10] * a10 + sData[i01] * a01 + sData[i11] * a11;
+            g += sData[i00 + 1] * a00 + sData[i10 + 1] * a10 + sData[i01 + 1] * a01 + sData[i11 + 1] * a11;
+            b += sData[i00 + 2] * a00 + sData[i10 + 2] * a10 + sData[i01 + 2] * a01 + sData[i11 + 2] * a11;
+            a += a00 + a10 + a01 + a11;
+          }
+
+          if (a === 0) {
+            out[di + 3] = 0;
+            continue;
+          }
+
+          // Undo the premultiply: colour is the coverage-weighted average, while
+          // alpha keeps the partial coverage that softens the silhouette.
+          const shade = colShade[px] / a;
+          out[di] = r * shade;
+          out[di + 1] = g * shade;
+          out[di + 2] = b * shade;
+          out[di + 3] = a * tapWeight * OPACITY;
+        }
+      }
+
+      ctx.putImageData(dest, 0, 0);
+    }
+
+    function loop(now) {
+      draw(now);
+      frame = visible && !reducedMotion ? window.requestAnimationFrame(loop) : 0;
+    }
+
+    function start() {
+      if (frame) return;
+      if (reducedMotion) {
+        draw(startedAt + 900);
+        return;
+      }
+      frame = window.requestAnimationFrame(loop);
+    }
+
+    if (typeof ResizeObserver !== "undefined") {
+      new ResizeObserver(() => {
+        if (!frame) draw(performance.now());
+      }).observe(host);
+    }
+
+    if (typeof IntersectionObserver !== "undefined" && !reducedMotion) {
+      new IntersectionObserver(
+        (entries) => {
+          visible = entries.some((entry) => entry.isIntersecting);
+          if (visible) start();
+          else if (frame) {
+            window.cancelAnimationFrame(frame);
+            frame = 0;
+          }
+        },
+        { rootMargin: "140px" }
+      ).observe(host);
+    }
+
+    return {
+      setSrc(source) {
+        if (!source) return;
+        still.src = source;
+        const image = new Image();
+        image.decoding = "async";
+        image.onload = () => {
+          measure();
+          srcImage = image;
+          rasterise(image);
+          host.classList.add("is-live");
+          start();
+          if (!frame) draw(performance.now());
+        };
+        image.src = source;
+      },
+      setLabel(label) {
+        host.setAttribute("aria-label", label);
+      },
+    };
+  }
+
+  const flagCloth = createFlagCloth(spokenFlag);
+
+  function syncSpokenFlag(lang) {
+    if (!lang) return;
+    if (lang.flagSrc) flagCloth.setSrc(lang.flagSrc);
+    flagCloth.setLabel((lang.name || "Language") + " flag");
+    if (spokenName) spokenName.textContent = lang.name || "";
+    if (spokenNative) {
+      const same =
+        !lang.nativeName ||
+        String(lang.nativeName).trim().toLowerCase() === String(lang.name || "").trim().toLowerCase();
+      spokenNative.textContent = same ? "" : lang.nativeName || "";
+      spokenNative.hidden = same;
+      spokenNative.setAttribute("lang", lang.code || "");
+    }
+    if (spokenRoot) spokenRoot.hidden = false;
   }
 
   function escapeHtml(value) {
@@ -174,6 +485,7 @@ function boot(root) {
 
     setStatus(lang, place);
     renderPlaceChips(lang, placeId);
+    syncSpokenFlag(lang);
   }
 
   function selectPlace(code, placeId, animate) {

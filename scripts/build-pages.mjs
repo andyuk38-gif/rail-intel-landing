@@ -2850,6 +2850,18 @@ ${globeItems}
               <p class="lang-globe__coverage-label">Cities &amp; countries</p>
               <div class="lang-globe__places" data-lang-globe-places></div>
             </div>
+            <div class="lang-globe__spoken" data-lang-globe-spoken>
+              <div
+                class="lang-globe__flag-cloth"
+                data-lang-globe-spoken-flag
+                role="img"
+                aria-label="${esc(languages.items[0]?.name || "Language")} flag"
+              ></div>
+              <p class="lang-globe__spoken-meta">
+                <strong data-lang-globe-spoken-name>${esc(languages.items[0]?.name || "")}</strong>
+                <span data-lang-globe-spoken-native lang="${esc(languages.items[0]?.code || "")}">${esc(languages.items[0]?.nativeName || "")}</span>
+              </p>
+            </div>
           </aside>
           <div class="lang-globe__stage-wrap">
             <div class="lang-globe__stage" data-lang-globe-stage>
