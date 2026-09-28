@@ -1,5 +1,5 @@
 /**
- * Generates the Products, Features, How it works and Security pages from
+ * Generates the Products, Features and Security pages from
  * content/site.mjs, and keeps the shared navigation in index.html in step.
  *
  * Output is plain static HTML committed to the repo, so GitHub Pages serves it
@@ -11,7 +11,7 @@ import { createHash } from "crypto";
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { site, products, upcomingProducts, addons, capacityAddons, featureGroups, howItWorks, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
+import { site, products, upcomingProducts, addons, capacityAddons, featureGroups, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
 import {
   SITE_URL,
@@ -245,7 +245,6 @@ ${renderNavItems(base, addonItems)}
           "features/",
           "All features"
         )}
-          <a href="${base}how-it-works.html" class="nav-link">How it works</a>
           <a href="${base}security.html" class="nav-link">Security</a>
           <a href="${base}get-started.html" class="nav-link">Get started</a>
           <a href="${site.app}" class="nav-link">Log in</a>
@@ -3048,80 +3047,6 @@ ${renderFaqSection(pageSeo.faq, base)}
   );
 }
 
-function howItWorksPage() {
-  const base = "";
-  const steps = howItWorks.steps
-    .map(
-      (step) => `          <li>
-            <h3>${esc(step.heading)}</h3>
-            <p>${esc(step.body)}</p>
-          </li>`
-    )
-    .join("\n");
-
-  const pageSeo = staticPageSeo("how-it-works.html");
-
-  return (
-    renderHead(base, pageSeo) +
-    `
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <div class="page-hero__inner">
-          <p class="breadcrumb"><a href="${base}/">Rail Intel</a> / How it works</p>
-          <h1 class="page-title">${esc(howItWorks.title)}</h1>
-          <p class="page-lead">Implementing a <a href="${base}guides/rail-competency-management-software.html">rail competence management system</a> follows six practical steps. ${esc(howItWorks.lead)}</p>
-          <div class="page-actions">
-            <a href="${site.app}" class="btn btn-primary btn-lg">Open Rail Intel</a>
-            <a href="features/" class="btn btn-ghost btn-lg">See the features</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Six steps from spreadsheet to system of record</h2>
-          <p>Most operators are live on their first cycles within weeks, because the configuration follows standards you already work to.</p>
-        </div>
-        <ol class="steps">
-${steps}
-        </ol>
-      </div>
-    </section>
-
-    <section class="page-section">
-      <div class="container">
-        <div class="page-section__head">
-          <h2>Where the screenshots come from</h2>
-          <p>Every screenshot across this site is taken from the live Rail Intel application. Use the expand control on any image to view it at full resolution.</p>
-        </div>
-        <div class="shot-grid shot-grid--two">
-${renderShot(
-  {
-    src: "images/screens/main-sys/dashboard.png",
-    caption: "The Rail Intel dashboard: compliance position across the workforce at a glance.",
-  },
-  base
-)}
-${renderShot(
-  {
-    src: "images/screens/main-sys/your-team-compliance.png",
-    caption: "Team compliance summary showing who is on track and who is not.",
-  },
-  base
-)}
-        </div>
-      </div>
-    </section>
-  </main>
-
-` +
-    renderFooter(base)
-  );
-}
-
 function renderGetStartedPoBanner() {
   const banner = getStarted.poBanner;
   return `              <div class="signup-po-banner" role="note" aria-label="${esc(banner.label)}">
@@ -4293,7 +4218,6 @@ for (const group of featureGroups) {
   );
 }
 
-emit("how-it-works.html", howItWorksPage());
 emit("security.html", securityPage());
 emit("privacy.html", privacyPage());
 emit("contact.html", contactPage());

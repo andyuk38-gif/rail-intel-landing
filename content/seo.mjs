@@ -132,16 +132,6 @@ export const staticPages = {
       { name: "Features", path: "features/index.html" },
     ],
   },
-  "how-it-works.html": {
-    title: "How Rail Intel Works | Implementation for Rail Competency",
-    description:
-      "See how Rail Intel implementation works: configure your standard, build competency cycles, load people, assess in the field, monitor compliance and produce audit evidence.",
-    keywords: "rail competency implementation, competence cycle setup, rail software onboarding",
-    breadcrumbs: [
-      { name: "Rail Intel", path: "/" },
-      { name: "How it works", path: "how-it-works.html" },
-    ],
-  },
   "security.html": {
     title: "Rail Intel Security | Azure Hosting, 2FA & Access Control",
     description:
@@ -327,7 +317,6 @@ export function allSitemapPaths({ products, addons, featureGroups, guideList = g
     "/",
     "products/index.html",
     "features/index.html",
-    "how-it-works.html",
     "security.html",
     "privacy.html",
     "contact.html",

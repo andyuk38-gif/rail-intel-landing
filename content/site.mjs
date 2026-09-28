@@ -2083,46 +2083,6 @@ export const languages = {
   ],
 };
 
-/* ------------------------------------------------------------- how it works */
-
-export const howItWorks = {
-  title: "How Rail Intel works",
-  lead:
-    "Rail Intel replaces the spreadsheet that tracks who is competent with a live system of record. Here is what implementation actually looks like.",
-  steps: [
-    {
-      heading: "Configure your standard",
-      body:
-        "Set up your organisation structure, job roles, grading scale, traction, routes and depots, and the timing standards your operation works to. This is the vocabulary everything else uses.",
-    },
-    {
-      heading: "Build your competency cycles",
-      body:
-        "Use Cycle Builder to create the cycles each role must complete — from a template or from scratch — with their criteria and scheduled assessment events.",
-    },
-    {
-      heading: "Load your people",
-      body:
-        "Create employee records with their licences, medicals, cab passes, training and experience. Each person ends up with one record covering everything that determines whether they can sign on.",
-    },
-    {
-      heading: "Assess in the field",
-      body:
-        "Assessors work against structured criteria, recording observations as they are made. Findings that fall short are flagged, and a competence development plan can be raised on the spot.",
-    },
-    {
-      heading: "Monitor and act",
-      body:
-        "The dashboard shows who is on track, off track, overdue or due soon. Expired medicals and lapsed mandatory competencies mark a person as not safe to work before they reach the railway.",
-    },
-    {
-      heading: "Evidence it",
-      body:
-        "Reporting gives the position across the workforce, and the QA Verifications module produces per-employee compliance evidence with a retained run history for audit.",
-    },
-  ],
-};
-
 /* ----------------------------------------------------------------- security */
 
 export const security = {
