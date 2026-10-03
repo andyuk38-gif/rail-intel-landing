@@ -59,12 +59,12 @@ export const products = [
       {
         question: "Is Rail Intel Investigations separate from CMS?",
         answer:
-          "Yes. Investigations is designed to run as a standalone system. When you use Rail Intel CMS as well, an optional link via secure API tokens lets both products stay aligned on people and competency context — while investigation data remains in Investigations, under your access controls.",
+          "Yes. Investigations is designed to run as a standalone system. When you use Rail Intel CMS as well, an optional link via secure API tokens lets both products stay aligned on people and competency context, while investigation data remains in Investigations, under your access controls.",
       },
       {
         question: "How will Investigations link to Rail Intel CMS?",
         answer:
-          "We're planning a deliberate, token-based API connection configured by administrators on both sides — not an open data merge. Approved tokens allow agreed workforce and competency lookups to support an investigation; the case file, evidence and findings stay confidential within Investigations unless you choose to share them through your normal process.",
+          "We're planning a deliberate, token-based API connection configured by administrators on both sides, not an open data merge. Approved tokens allow agreed workforce and competency lookups to support an investigation; the case file, evidence and findings stay confidential within Investigations unless you choose to share them through your normal process.",
       },
       {
         question: "Will the features on this page match the final product?",
