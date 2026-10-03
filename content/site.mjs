@@ -49,7 +49,7 @@ export const products = [
       "Evidence-first rail investigations — in active development for a mid-2027 launch.",
     tagline: "Investigations with the evidence in one place",
     lead:
-      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file — not scattered across email, chat and shared drives. It includes an automated, industry-aligned fatigue engine for safety-critical staff, shaped with pilots and rail industry partners. Active development continues toward a planned launch in mid 2027.",
+      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file, not scattered across email, chat and shared drives. It includes an automated, industry-aligned fatigue engine for safety-critical staff, shaped with pilots and rail industry partners. Active development continues toward a planned launch in mid 2027.",
     faq: [
       {
         question: "When will Rail Intel Investigations launch?",
@@ -92,11 +92,11 @@ export const products = [
     preview: {
       launchLabel: "Mid 2027",
       statusNote:
-        "Built with UK rail investigation practice in mind — designed for assurance teams, investigators and safety leadership.",
+        "Built with UK rail investigation practice in mind, designed for assurance teams, investigators and safety leadership.",
       milestones: [
         "Active development with early design partners",
         "Fatigue engine informed by pilots and rail industry partners",
-        "Standalone app — not a CMS add-on module",
+        "Standalone app, not a CMS add-on module",
         "Optional secure API link to Rail Intel CMS when you need alignment",
         "Early access conversations ahead of launch",
       ],
@@ -104,47 +104,47 @@ export const products = [
         "Capabilities described on this page reflect work in progress. Detail, screens and workflows may change before launch.",
       pillarsHeading: "What we're building towards",
       pillarsLead:
-        "A single investigation workspace that keeps evidence, analysis, decisions and close-out on one auditable trail, so you're not reconstructing the file from inboxes at review time.",
+        "A single investigation workspace that keeps evidence, analysis, decisions and close-out on one auditable trail — so you're not reconstructing the file from inboxes at review time.",
       pillars: [
         {
           title: "One case workspace",
           detail:
-            "Run the investigation from one place, with overview, tasks, findings and close-out, instead of parallel folders and message threads.",
+            "Run the investigation from one place — overview, tasks, findings and close-out — instead of parallel folders and message threads.",
         },
         {
-          title: "Structured evidence, analysis",
+          title: "Structured evidence & analysis",
           detail:
             "Capture findings and root-cause themes with references back to evidence, so the narrative is searchable and reviewable.",
         },
         {
-          title: "Recommendations, actions",
+          title: "Recommendations → actions",
           detail:
-            "Turn agreed recommendations into owned follow-up with visible status, so assurance can see what's still open.",
+            "Turn agreed recommendations into owned follow-up with visible status — so assurance can see what's still open.",
         },
         {
-          title: "Assurance ready reporting",
+          title: "Assurance-ready reporting",
           detail:
-            "Compile the investigation record for export and sign-off when you're ready to close, with an audit trail behind changes.",
+            "Compile the investigation record for export and sign-off when you're ready to close — with an audit trail behind changes.",
         },
         {
           title: "Automated fatigue calculator",
           detail:
-            "Analyse shift patterns for safety-critical staff with an automated engine aligned to industry expectations, built for investigation use, not spreadsheet side calculations.",
+            "Analyse shift patterns for safety-critical staff with an automated engine aligned to industry expectations — built for investigation use, not spreadsheet side calculations.",
         },
         {
-          title: "Fatigue trends, assurance",
+          title: "Fatigue trends & assurance",
           detail:
             "Go beyond a single case snapshot with trend views that help safety and assurance teams understand fatigue exposure over time.",
         },
         {
-          title: "Safety critical workflows",
+          title: "Safety-critical workflows",
           detail:
-            "Drugs & alcohol and other operational factors on the investigation path when your procedure requires them, alongside fatigue where the case demands it.",
+            "Drugs & alcohol and other operational factors on the investigation path when your procedure requires them — alongside fatigue where the case demands it.",
         },
         {
           title: "Secure CMS linking",
           detail:
-            "Optional API tokens connect Investigations to Rail Intel CMS so people and competency data stay aligned, without moving confidential case material into CMS.",
+            "Optional API tokens connect Investigations to Rail Intel CMS so people and competency data stay aligned — without moving confidential case material into CMS.",
         },
         {
           title: "Standalone by design",
@@ -156,30 +156,30 @@ export const products = [
         {
           heading: "Designed for how rail actually investigates",
           body: [
-            "Investigations rarely fail because teams lack commitment — they fail because the record fragments. Rail Intel Investigations is being shaped around evidence-first practice: one file per case, clear roles, and a path from opening the investigation to sealing the outcome.",
+            "Investigations rarely fail because teams lack commitment, they fail because the record fragments. Rail Intel Investigations is being shaped around evidence-first practice: one file per case, clear roles, and a path from opening the investigation to sealing the outcome.",
             "We're not trying to replace your safety management system overnight. The goal is a focused app that does investigation workflow well, sits alongside Rail Intel CMS, and respects the assurance expectations UK operators already work to.",
           ],
         },
         {
           heading: "A fatigue engine built to a higher standard",
           body: [
-            "Fatigue belongs on the critical path for many rail investigations — but it is often handled with manual spreadsheets, opaque assumptions and little continuity between cases. We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns within the investigation file, aligned with industry standards and the way UK operators already frame fatigue risk.",
-            "The engine is designed for depth: structured inputs, defensible outputs, and trend analysis so investigators and assurance leads can move from a single shift pattern to organisational patterns over time. Our aim is the most sophisticated fatigue capability ever integrated into a rail investigation platform — a reference-grade tool, not a checklist bolt-on.",
+            "Fatigue belongs on the critical path for many rail investigations, but it is often handled with manual spreadsheets, opaque assumptions and little continuity between cases. We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns within the investigation file, aligned with industry standards and the way UK operators already frame fatigue risk.",
+            "The engine is designed for depth: structured inputs, defensible outputs, and trend analysis so investigators and assurance leads can move from a single shift pattern to organisational patterns over time. Our aim is the most sophisticated fatigue capability ever integrated into a rail investigation platform, a reference-grade tool, not a checklist bolt-on.",
             "That ambition is grounded in research and delivery. We have tested concepts with pilot operators, worked with rail industry partners, and drawn on hands-on operational experience to decide what investigators actually need at 02:00 when the file has to stand up to review. Capabilities on this page reflect that direction; exact models, thresholds and reporting may change as we complete development.",
           ],
         },
         {
-          heading: "Aligned with CMS — or fully standalone",
+          heading: "Aligned with CMS, or fully standalone",
           body: [
-            "Rail Intel CMS remains the competency system of record; Investigations is a separate product for investigation teams. You can operate Investigations alone, with no CMS tenant required — many organisations will want that separation so sensitive case material stays inside the investigation boundary.",
-            "When you use both products, we're building linkage through secure API tokens issued and approved on each side. That keeps the systems aligned on agreed workforce and competency context — who someone is, cycle status, team membership — while investigation evidence, findings and reports remain confidential within Investigations unless you export or share them deliberately.",
+            "Rail Intel CMS remains the competency system of record; Investigations is a separate product for investigation teams. You can operate Investigations alone, with no CMS tenant required, many organisations will want that separation so sensitive case material stays inside the investigation boundary.",
+            "When you use both products, we're building linkage through secure API tokens issued and approved on each side. That keeps the systems aligned on agreed workforce and competency context, who someone is, cycle status, team membership, while investigation evidence, findings and reports remain confidential within Investigations unless you export or share them deliberately.",
             "The connection is optional and administrator-controlled, not an automatic merge of databases. Add-ons such as Driver Reports can still feed structured operational events into your wider safety picture; Investigations is where those events can mature into a managed case when your process demands it.",
           ],
         },
       ],
       ctaHeading: "Follow the build",
       ctaBody:
-        "Register your interest for launch updates, early walkthroughs and the chance to influence what ships first. Rail Intel CMS continues on its own roadmap — Investigations joins the suite when it's ready for operators.",
+        "Register your interest for launch updates, early walkthroughs and the chance to influence what ships first. Rail Intel CMS continues on its own roadmap, Investigations joins the suite when it's ready for operators.",
     },
   },
 ];
