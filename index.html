@@ -345,14 +345,16 @@
               </div>
               <div class="engine-bay__track">
                 <svg class="engine-bay__drag-rails-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation" aria-hidden="true">
-                  <line class="engine-bay__drag-rail-line" x1="22" y1="36" x2="10" y2="76" />
-                  <line class="engine-bay__drag-rail-line" x1="78" y1="36" x2="90" y2="76" />
-                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0" transform="translate(19 44)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
-                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.35" transform="translate(16 56)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
-                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.7" transform="translate(13 68)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
-                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0" transform="translate(81 44)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
-                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.35" transform="translate(84 56)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
-                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.7" transform="translate(87 68)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                  <defs>
+                    <path id="engine-bay-rail-left" d="M 19.5 37 L 19.5 88" />
+                    <path id="engine-bay-rail-right" d="M 80.5 37 L 80.5 88" />
+                  </defs>
+                  <line class="engine-bay__drag-rail-line" x1="19.5" y1="37" x2="19.5" y2="88" />
+                  <line class="engine-bay__drag-rail-line" x1="80.5" y1="37" x2="80.5" y2="88" />
+                  <g class="engine-bay__drag-rail-arrow"><path d="M0 0 V4.5 M-3.25 3.25 L0 7 L3.25 3.25" /><animateMotion dur="2.4s" repeatCount="indefinite" begin="0s" calcMode="linear" keyPoints="0;1" keyTimes="0;1" rotate="auto"><mpath href="#engine-bay-rail-left" /></animateMotion></g>
+                  <g class="engine-bay__drag-rail-arrow"><path d="M0 0 V4.5 M-3.25 3.25 L0 7 L3.25 3.25" /><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s" calcMode="linear" keyPoints="0;1" keyTimes="0;1" rotate="auto"><mpath href="#engine-bay-rail-left" /></animateMotion></g>
+                  <g class="engine-bay__drag-rail-arrow"><path d="M0 0 V4.5 M-3.25 3.25 L0 7 L3.25 3.25" /><animateMotion dur="2.4s" repeatCount="indefinite" begin="0s" calcMode="linear" keyPoints="0;1" keyTimes="0;1" rotate="auto"><mpath href="#engine-bay-rail-right" /></animateMotion></g>
+                  <g class="engine-bay__drag-rail-arrow"><path d="M0 0 V4.5 M-3.25 3.25 L0 7 L3.25 3.25" /><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s" calcMode="linear" keyPoints="0;1" keyTimes="0;1" rotate="auto"><mpath href="#engine-bay-rail-right" /></animateMotion></g>
                 </svg>
               <div class="engine-bay__home" data-engine-home>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">

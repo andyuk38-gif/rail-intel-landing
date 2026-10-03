@@ -506,21 +506,29 @@ function socketBox() {
 }
 
 function dragRailsMarkup() {
-  const arrow = (x, y, delay) =>
-    `<g class="engine-bay__drag-rail-arrow" style="--rail-delay:${delay}" transform="translate(${x} ${y})">
-      <path d="M0 0 V6" />
-      <path d="M-4 4.5 L0 8.5 L4 4.5" />
+  const leftX = 19.5;
+  const rightX = 80.5;
+  const y1 = 37;
+  const y2 = 88;
+  const dur = 2.4;
+  const motion = (pathId, begin) =>
+    `<g class="engine-bay__drag-rail-arrow">
+      <path d="M0 0 V4.5 M-3.25 3.25 L0 7 L3.25 3.25" />
+      <animateMotion dur="${dur}s" repeatCount="indefinite" begin="${begin}s" calcMode="linear" keyPoints="0;1" keyTimes="0;1" rotate="auto">
+        <mpath href="#${pathId}" />
+      </animateMotion>
     </g>`;
+  const arrows = (pathId) => `${motion(pathId, 0)}${motion(pathId, dur / 2)}`;
   return `              <div class="engine-bay__track">
                 <svg class="engine-bay__drag-rails-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation" aria-hidden="true">
-                  <line class="engine-bay__drag-rail-line" x1="22" y1="36" x2="10" y2="76" />
-                  <line class="engine-bay__drag-rail-line" x1="78" y1="36" x2="90" y2="76" />
-                  ${arrow(19, 44, 0)}
-                  ${arrow(16, 56, 0.35)}
-                  ${arrow(13, 68, 0.7)}
-                  ${arrow(81, 44, 0)}
-                  ${arrow(84, 56, 0.35)}
-                  ${arrow(87, 68, 0.7)}
+                  <defs>
+                    <path id="engine-bay-rail-left" d="M ${leftX} ${y1} L ${leftX} ${y2}" />
+                    <path id="engine-bay-rail-right" d="M ${rightX} ${y1} L ${rightX} ${y2}" />
+                  </defs>
+                  <line class="engine-bay__drag-rail-line" x1="${leftX}" y1="${y1}" x2="${leftX}" y2="${y2}" />
+                  <line class="engine-bay__drag-rail-line" x1="${rightX}" y1="${y1}" x2="${rightX}" y2="${y2}" />
+                  ${arrows("engine-bay-rail-left")}
+                  ${arrows("engine-bay-rail-right")}
                 </svg>`;
 }
 

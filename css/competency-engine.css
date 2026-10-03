@@ -1255,9 +1255,7 @@ body.is-engine-open .engine-socket-hit__label,
 }
 
 .engine-bay__drag-rail-arrow {
-  opacity: 0.4;
-  animation: engine-bay-rail-arrow 2.1s ease-in-out infinite;
-  animation-delay: var(--rail-delay, 0s);
+  opacity: 0.92;
 }
 
 .engine-bay__drag-rail-arrow path {
@@ -1277,11 +1275,8 @@ body.is-engine-open .engine-socket-hit__label,
 }
 
 .engine-bay.is-interacting .engine-bay__drag-rail-line,
-.engine-bay.is-interacting .engine-bay__drag-rail-arrow path,
 .engine-bay.is-armed .engine-bay__drag-rail-line,
-.engine-bay.is-armed .engine-bay__drag-rail-arrow path,
-.engine-bay.is-spent .engine-bay__drag-rail-line,
-.engine-bay.is-spent .engine-bay__drag-rail-arrow path {
+.engine-bay.is-spent .engine-bay__drag-rail-line {
   animation: none;
 }
 
@@ -1607,11 +1602,6 @@ body:has([data-engine-token]):not(.is-engine-open) .engine-bay .engine-socket__p
 
 @keyframes engine-bay-rail-dash {
   to { stroke-dashoffset: -20; }
-}
-
-@keyframes engine-bay-rail-arrow {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  45% { opacity: 1; transform: translateY(3px); }
 }
 
 @keyframes engine-label-float {
