@@ -104,12 +104,12 @@ export const products = [
         "Capabilities described on this page reflect work in progress. Detail, screens and workflows may change before launch.",
       pillarsHeading: "What we're building towards",
       pillarsLead:
-        "A single investigation workspace that keeps evidence, analysis, decisions and close-out on one auditable trail — so you're not reconstructing the file from inboxes at review time.",
+        "A single investigation workspace that keeps evidence, analysis, decisions and close-out on one auditable trail, so you're not reconstructing the file from inboxes at review time.",
       pillars: [
         {
           title: "One case workspace",
           detail:
-            "Run the investigation from one place — overview, tasks, findings and close-out — instead of parallel folders and message threads.",
+            "Run the investigation from one place, with overview, tasks, findings and close-out, instead of parallel folders and message threads.",
         },
         {
           title: "Structured evidence & analysis",
@@ -117,19 +117,19 @@ export const products = [
             "Capture findings and root-cause themes with references back to evidence, so the narrative is searchable and reviewable.",
         },
         {
-          title: "Recommendations → actions",
+          title: "Recommendations, actions",
           detail:
-            "Turn agreed recommendations into owned follow-up with visible status — so assurance can see what's still open.",
+            "Turn agreed recommendations into owned follow-up with visible status, so assurance can see what's still open.",
         },
         {
           title: "Assurance-ready reporting",
           detail:
-            "Compile the investigation record for export and sign-off when you're ready to close — with an audit trail behind changes.",
+            "Compile the investigation record for export and sign-off when you're ready to close, with an audit trail behind changes.",
         },
         {
           title: "Automated fatigue calculator",
           detail:
-            "Analyse shift patterns for safety-critical staff with an automated engine aligned to industry expectations — built for investigation use, not spreadsheet side calculations.",
+            "Analyse shift patterns for safety-critical staff with an automated engine aligned to industry expectations, built for investigation use, not spreadsheet side calculations.",
         },
         {
           title: "Fatigue trends & assurance",
@@ -139,12 +139,12 @@ export const products = [
         {
           title: "Safety-critical workflows",
           detail:
-            "Drugs & alcohol and other operational factors on the investigation path when your procedure requires them — alongside fatigue where the case demands it.",
+            "Drugs & alcohol and other operational factors on the investigation path when your procedure requires them, alongside fatigue where the case demands it.",
         },
         {
           title: "Secure CMS linking",
           detail:
-            "Optional API tokens connect Investigations to Rail Intel CMS so people and competency data stay aligned — without moving confidential case material into CMS.",
+            "Optional API tokens connect Investigations to Rail Intel CMS so people and competency data stay aligned, without moving confidential case material into CMS.",
         },
         {
           title: "Standalone by design",
