@@ -92,12 +92,22 @@ function admin_forward_newsletter_subscribe_to_cms(array $body): array
     }
 
     $name = trim((string) ($body['name'] ?? ''));
-    $payload = json_encode([
+    $productInterest = strtolower(trim((string) ($body['product_interest'] ?? $body['productInterest'] ?? '')));
+    $allowedProducts = ['cms', 'investigations', 'both'];
+    if (!in_array($productInterest, $allowedProducts, true)) {
+        $productInterest = $source === 'EOI' ? 'cms' : '';
+    }
+
+    $payloadData = [
         'email' => $body['email'] ?? '',
         'name' => $name !== '' ? $name : null,
         'website' => $body['website'] ?? '',
         'source' => $source,
-    ], JSON_UNESCAPED_UNICODE);
+    ];
+    if ($productInterest !== '') {
+        $payloadData['product_interest'] = $productInterest;
+    }
+    $payload = json_encode($payloadData, JSON_UNESCAPED_UNICODE);
 
     if ($payload === false) {
         throw new RuntimeException('Failed to encode subscribe payload.');

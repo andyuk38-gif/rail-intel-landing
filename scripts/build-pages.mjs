@@ -105,6 +105,12 @@ const rich = (value) => esc(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong
 
 const appUrl = (key) => site[key] || site.app;
 
+function normalizeEoiProduct(raw) {
+  const value = String(raw || "").trim().toLowerCase();
+  if (value === "investigations" || value === "cms") return value;
+  return "";
+}
+
 /* ------------------------------------------------------------------ chrome */
 
 function renderDevBanner() {
@@ -1524,6 +1530,9 @@ ${(theme.body || []).map((paragraph) => `          <p>${esc(paragraph)}</p>`).jo
     ? `        <p class="inv-preview-disclaimer">${esc(preview.disclaimer)}</p>`
     : "";
 
+  const eoiProduct = normalizeEoiProduct(product.eoiProduct || product.preview?.eoiProduct || "");
+  const eoiProductAttr = eoiProduct ? ` data-eoi-product="${esc(eoiProduct)}"` : "";
+
   return (
     renderHead(base, pageSeo) +
     `
@@ -1539,7 +1548,7 @@ ${(theme.body || []).map((paragraph) => `          <p>${esc(paragraph)}</p>`).jo
             <h1 class="page-title">${esc(product.tagline)}</h1>
             <p class="page-lead">${esc(product.lead)}</p>
             <div class="page-actions">
-              <button type="button" class="btn btn-primary btn-lg" data-eoi-open>Register your interest</button>
+              <button type="button" class="btn btn-primary btn-lg" data-eoi-open${eoiProductAttr}>Register your interest</button>
               <a href="${base}contact.html" class="btn btn-ghost btn-lg">Talk to us</a>
             </div>
           </div>
@@ -1576,7 +1585,7 @@ ${themeSections}
             <p>${esc(preview.ctaBody || "")}</p>
           </div>
           <div class="inv-preview-cta__actions page-actions">
-            <button type="button" class="btn btn-primary btn-lg" data-eoi-open>Register your interest</button>
+            <button type="button" class="btn btn-primary btn-lg" data-eoi-open${eoiProductAttr}>Register your interest</button>
             <a href="${base}" class="btn btn-ghost btn-lg">About Rail Intel CMS</a>
           </div>
         </div>

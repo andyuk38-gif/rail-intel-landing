@@ -4,6 +4,7 @@
 
   var STORAGE_COLLAPSED = "railintel_eoi_collapsed";
   var STORAGE_REGISTERED = "railintel_eoi_registered";
+  var STORAGE_PRODUCT = "railintel_eoi_product_interest";
   var SHOW_DELAY_MS = 4000;
 
   var widget = document.querySelector("[data-eoi-widget]");
@@ -75,7 +76,24 @@
     revealWidget();
   }
 
+  function applyEoiProductPreset() {
+    if (!form) return;
+    var select = form.querySelector('[name="product_interest"]');
+    if (!select) return;
+    var preset = "";
+    try {
+      preset = sessionStorage.getItem(STORAGE_PRODUCT) || "";
+    } catch (e) {}
+    if (!preset && /\/products\/investigations\.html$/i.test(window.location.pathname)) {
+      preset = "investigations";
+    }
+    if (preset === "cms" || preset === "investigations") {
+      select.value = preset;
+    }
+  }
+
   function focusEoiPanel() {
+    applyEoiProductPreset();
     var nameInput = form && form.querySelector('input[name="name"]');
     if (nameInput) {
       window.setTimeout(function () {
@@ -221,7 +239,10 @@
   if (form) {
     var nameInput = form.querySelector('input[name="name"]');
     var emailInput = form.querySelector('input[type="email"]');
+    var productSelect = form.querySelector('[name="product_interest"]');
     var honeypot = form.querySelector('input[name="website"]');
+
+    applyEoiProductPreset();
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -229,6 +250,8 @@
 
       var name = nameInput.value.trim();
       var email = emailInput.value.trim();
+      var productInterest = productSelect ? productSelect.value.trim() : "cms";
+      if (productInterest !== "investigations") productInterest = "cms";
       if (!name || !email) return;
 
       if (submitBtn) {
@@ -241,6 +264,7 @@
         email: email,
         name: name,
         source: "EOI",
+        product_interest: productInterest,
         website: honeypot && honeypot.value ? String(honeypot.value) : "",
       })
         .then(function () {

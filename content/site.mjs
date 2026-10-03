@@ -89,6 +89,7 @@ export const products = [
     ],
     href: "products/investigations.html",
     appUrlKey: "investigations",
+    eoiProduct: "investigations",
     preview: {
       launchLabel: "Mid 2027",
       statusNote:

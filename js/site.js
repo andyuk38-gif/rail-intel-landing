@@ -11,6 +11,26 @@
   /* ---------- Dev banner → EOI register-interest panel ---------- */
 
   var EOI_REGISTERED_KEY = "railintel_eoi_registered";
+  var EOI_PRODUCT_KEY = "railintel_eoi_product_interest";
+
+  function normalizeEoiProduct(raw) {
+    var value = String(raw || "").trim().toLowerCase();
+    if (value === "investigations" || value === "cms") return value;
+    return "";
+  }
+
+  function detectEoiProductFromPath() {
+    if (/\/products\/investigations\.html$/i.test(window.location.pathname)) return "investigations";
+    return "";
+  }
+
+  function storeEoiProductInterest(product) {
+    var normalized = normalizeEoiProduct(product);
+    if (!normalized) return;
+    try {
+      sessionStorage.setItem(EOI_PRODUCT_KEY, normalized);
+    } catch (e) {}
+  }
 
   function isEoiRegistered() {
     try {
@@ -104,6 +124,11 @@
       showEoiAlreadyRegisteredNotice();
       return;
     }
+
+    var trigger = event && event.target ? event.target.closest("[data-eoi-open]") : null;
+    var product =
+      (trigger && trigger.getAttribute("data-eoi-product")) || detectEoiProductFromPath() || "";
+    storeEoiProductInterest(product);
 
     if (tryOpenEoiPanel()) return;
 
