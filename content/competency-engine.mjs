@@ -506,19 +506,21 @@ function socketBox() {
 }
 
 function dragRailsMarkup() {
-  const arrowSvg =
-    '<svg viewBox="0 0 8 10" aria-hidden="true"><path d="M4 0.8 V4.2" /><path d="M2.1 2.8 L4 4.8 L5.9 2.8" /></svg>';
-  const arrow = (side, delay) =>
-    `<span class="engine-bay__drag-rail-arrow" data-engine-rail-arrow="${side}" style="--rail-delay:${delay}s" aria-hidden="true">${arrowSvg}</span>`;
+  const chevron = (side, delay) =>
+    `<g class="engine-bay__rail-chevron-wrap" data-engine-rail-chevron="${side}" data-rail-delay="${delay}">
+      <path class="engine-bay__rail-chevron" d="M-2.4 0 L0 2.4 L2.4 0" />
+      <animateTransform attributeName="transform" type="translate" dur="2.4s" repeatCount="indefinite" calcMode="linear" />
+      <animate attributeName="opacity" dur="2.4s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.08;0.92;1" />
+    </g>`;
   return `              <div class="engine-bay__track">
                 <svg class="engine-bay__drag-rails-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation" aria-hidden="true">
                   <line class="engine-bay__drag-rail-line" data-engine-rail="left" x1="0" y1="0" x2="0" y2="0" />
                   <line class="engine-bay__drag-rail-line" data-engine-rail="right" x1="0" y1="0" x2="0" y2="0" />
-                </svg>
-                ${arrow("left", 0)}
-                ${arrow("left", 1.2)}
-                ${arrow("right", 0)}
-                ${arrow("right", 1.2)}`;
+                  ${chevron("left", 0)}
+                  ${chevron("left", 1.2)}
+                  ${chevron("right", 0)}
+                  ${chevron("right", 1.2)}
+                </svg>`;
 }
 
 function dragRailsTrackClose() {

@@ -330,25 +330,18 @@
         right: railsSvg.querySelector('[data-engine-rail="right"]'),
       }
     : null;
-  var railArrows = track
-    ? Array.prototype.slice.call(track.querySelectorAll("[data-engine-rail-arrow]"))
+  var railChevrons = railsSvg
+    ? Array.prototype.slice.call(railsSvg.querySelectorAll("[data-engine-rail-chevron]"))
     : [];
 
-  // Normalised anchor points from the tray chip and socket SVG view boxes.
-  var CHIP_RAIL = { left: { x: 0.106, y: 0.57 }, right: { x: 0.894, y: 0.57 } };
-  var SOCK_RAIL = { left: { x: 0.041, y: 0.88 }, right: { x: 0.959, y: 0.88 } };
+  // Tray chip / socket SVG anchors (lower die corners → upper socket corners).
+  var CHIP_RAIL = { left: { x: 0.106, y: 0.773 }, right: { x: 0.894, y: 0.773 } };
+  var SOCK_RAIL = { left: { x: 0.041, y: 0.124 }, right: { x: 0.959, y: 0.124 } };
 
   function railPointPct(containerRect, trackRect, anchor) {
     return {
       x: ((containerRect.left - trackRect.left) + containerRect.width * anchor.x) / trackRect.width * 100,
       y: ((containerRect.top - trackRect.top) + containerRect.height * anchor.y) / trackRect.height * 100,
-    };
-  }
-
-  function railPointPx(containerRect, trackRect, anchor) {
-    return {
-      x: containerRect.left - trackRect.left + containerRect.width * anchor.x,
-      y: containerRect.top - trackRect.top + containerRect.height * anchor.y,
     };
   }
 
@@ -360,32 +353,41 @@
     var wellRect = traySocket.getBoundingClientRect();
 
     ["left", "right"].forEach(function (side) {
-      var startPct = railPointPct(tokenRect, trackRect, CHIP_RAIL[side]);
-      var endPct = railPointPct(wellRect, trackRect, SOCK_RAIL[side]);
-      var startPx = railPointPx(tokenRect, trackRect, CHIP_RAIL[side]);
-      var endPx = railPointPx(wellRect, trackRect, SOCK_RAIL[side]);
+      var chip = railPointPct(tokenRect, trackRect, CHIP_RAIL[side]);
+      var sock = railPointPct(wellRect, trackRect, SOCK_RAIL[side]);
+      var x = chip.x;
+      var y1 = chip.y;
+      var y2 = sock.y;
+      if (y2 <= y1 + 0.5) return;
+
       var line = railLines[side];
       if (!line) return;
-      line.setAttribute("x1", startPct.x.toFixed(2));
-      line.setAttribute("y1", startPct.y.toFixed(2));
-      line.setAttribute("x2", endPct.x.toFixed(2));
-      line.setAttribute("y2", endPct.y.toFixed(2));
-      var path =
-        'path("M ' +
-        startPx.x.toFixed(2) +
+      line.setAttribute("x1", x.toFixed(2));
+      line.setAttribute("y1", y1.toFixed(2));
+      line.setAttribute("x2", x.toFixed(2));
+      line.setAttribute("y2", y2.toFixed(2));
+
+      var move =
+        x.toFixed(2) +
         " " +
-        startPx.y.toFixed(2) +
-        " L " +
-        endPx.x.toFixed(2) +
+        y1.toFixed(2) +
+        "; " +
+        x.toFixed(2) +
         " " +
-        endPx.y.toFixed(2) +
-        '")';
-      railArrows
-        .filter(function (arrow) {
-          return arrow.getAttribute("data-engine-rail-arrow") === side;
+        y2.toFixed(2);
+      railChevrons
+        .filter(function (group) {
+          return group.getAttribute("data-engine-rail-chevron") === side;
         })
-        .forEach(function (arrow) {
-          arrow.style.setProperty("--rail-offset-path", path);
+        .forEach(function (group) {
+          var motion = group.querySelector("animateTransform");
+          var fade = group.querySelector("animate");
+          var delay = group.getAttribute("data-rail-delay") || "0";
+          if (motion) {
+            motion.setAttribute("values", move);
+            motion.setAttribute("begin", delay + "s");
+          }
+          if (fade) fade.setAttribute("begin", delay + "s");
         });
     });
   }
