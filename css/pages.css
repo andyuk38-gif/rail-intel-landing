@@ -10129,7 +10129,157 @@ body.lightbox-open {
   }
 }
 
+/* Rail Intel Investigations — in-development marketing page */
 
+.page-badge--preview {
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.38);
+}
+
+.page-hero--inv-preview::before {
+  background:
+    radial-gradient(ellipse 70% 55% at 12% 0%, rgba(59, 130, 246, 0.14), transparent 55%),
+    radial-gradient(ellipse 50% 45% at 88% 20%, rgba(245, 158, 11, 0.12), transparent 50%);
+}
+
+.page-hero__inner--inv-preview {
+  align-items: center;
+  gap: 2.5rem 3rem;
+}
+
+.page-hero__inner--inv-preview .page-hero__media {
+  width: 100%;
+  max-width: 22rem;
+  justify-self: end;
+}
+
+.inv-preview-status {
+  padding: 1.35rem 1.4rem 1.45rem;
+  border-radius: 1rem;
+  background: linear-gradient(155deg, rgba(15, 23, 42, 0.92), rgba(12, 15, 20, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.inv-preview-status__eyebrow {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.inv-preview-status__launch {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fde68a;
+}
+
+.inv-preview-status__text {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.inv-preview-status__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.inv-preview-status__list li {
+  position: relative;
+  padding-left: 1.15rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+.inv-preview-status__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.page-section--inv-preview-pillars .spec-tiles {
+  margin-top: 0.25rem;
+}
+
+.inv-preview-disclaimer {
+  margin: 1.75rem 0 0;
+  max-width: 42rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.inv-preview-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  padding: 1.75rem 1.85rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(59, 130, 246, 0.06));
+}
+
+.inv-preview-cta__copy {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.inv-preview-cta__copy h2 {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+}
+
+.inv-preview-cta__copy p {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.inv-preview-cta__actions {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .page-hero__inner--inv-preview .page-hero__media {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .inv-preview-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inv-preview-cta__actions {
+    width: 100%;
+  }
+}
 
 
 

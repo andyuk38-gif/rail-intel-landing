@@ -1484,7 +1484,117 @@ ${primaryLink}${secondaryLink}
 
 /* ------------------------------------------------------------------- pages */
 
+function productPreviewPage(product) {
+  const base = "../";
+  const preview = product.preview || {};
+  const item = mergedItem(product, product.slug);
+  const pageSeo = seoForItem(item, {
+    path: product.href,
+    titleFallback: `${product.name} – Rail Intel`,
+    descriptionFallback: product.summary,
+    breadcrumbParent: { name: "Products", path: "products/index.html" },
+  });
+  const badgeClass = product.pageBadgeClass || "page-badge--preview";
+  const milestones = preview.milestones || [];
+  const pillars = preview.pillars || [];
+  const themes = preview.themes || [];
+
+  const milestoneList = milestones.length
+    ? `            <ul class="inv-preview-status__list">\n${milestones
+        .map((line) => `              <li>${esc(line)}</li>`)
+        .join("\n")}\n            </ul>`
+    : "";
+
+  const pillarTiles = renderSpecTileList(pillars, "        ", { hideIndex: true });
+
+  const themeSections = themes
+    .map(
+      (theme) => `    <section class="page-section">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(theme.heading)}</h2>
+${(theme.body || []).map((paragraph) => `          <p>${esc(paragraph)}</p>`).join("\n")}
+        </div>
+      </div>
+    </section>`
+    )
+    .join("\n\n");
+
+  const disclaimer = preview.disclaimer
+    ? `        <p class="inv-preview-disclaimer">${esc(preview.disclaimer)}</p>`
+    : "";
+
+  return (
+    renderHead(base, pageSeo) +
+    `
+  <main class="inv-preview">
+    <section class="page-hero page-hero--inv-preview">
+      <div class="container">
+        <div class="page-hero__inner page-hero__inner--split page-hero__inner--inv-preview">
+          <div class="page-hero__copy">
+            <p class="breadcrumb"><a href="${base}">Rail Intel</a> / <a href="${base}products/">Product</a> / ${esc(
+      product.name
+    )}</p>
+            <span class="page-badge ${badgeClass}">${esc(product.pageBadge || "In development")}</span>
+            <h1 class="page-title">${esc(product.tagline)}</h1>
+            <p class="page-lead">${esc(product.lead)}</p>
+            <div class="page-actions">
+              <button type="button" class="btn btn-primary btn-lg" data-eoi-open>Register your interest</button>
+              <a href="${base}contact.html" class="btn btn-ghost btn-lg">Talk to us</a>
+            </div>
+          </div>
+          <div class="page-hero__media">
+            <div class="inv-preview-status" role="status" aria-label="Development status">
+              <p class="inv-preview-status__eyebrow">Planned launch</p>
+              <p class="inv-preview-status__launch">${esc(preview.launchLabel || "Mid 2027")}</p>
+              <p class="inv-preview-status__text">${esc(preview.statusNote || "")}</p>
+${milestoneList}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--inv-preview-pillars">
+      <div class="container">
+        <div class="page-section__head">
+          <h2>${esc(preview.pillarsHeading || "What we're building")}</h2>
+          <p>${esc(preview.pillarsLead || "")}</p>
+        </div>
+${pillarTiles}
+${disclaimer}
+      </div>
+    </section>
+
+${themeSections}
+
+    <section class="page-section page-section--inv-preview-cta">
+      <div class="container">
+        <div class="inv-preview-cta">
+          <div class="inv-preview-cta__copy">
+            <h2>${esc(preview.ctaHeading || "Follow the build")}</h2>
+            <p>${esc(preview.ctaBody || "")}</p>
+          </div>
+          <div class="inv-preview-cta__actions page-actions">
+            <button type="button" class="btn btn-primary btn-lg" data-eoi-open>Register your interest</button>
+            <a href="${base}" class="btn btn-ghost btn-lg">About Rail Intel CMS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+${renderFaqSection(pageSeo.faq, base)}
+  </main>
+
+` +
+    renderFooter(base)
+  );
+}
+
 function productPage(product) {
+  if (product.pageTemplate === "preview") {
+    return productPreviewPage(product);
+  }
+
   const base = "../";
   const url = appUrl(product.appUrlKey);
   const sections = (product.sections || []).map((section) => renderSection(section, base)).join("\n\n");
@@ -1962,8 +2072,9 @@ function productsIndex() {
   const appCards = products
     .map((product) => {
       const href = product.href === "" ? base || "/" : `${base}${product.href}`;
+      const kicker = product.cardKicker || "App";
       return `        <a class="card" href="${href}">
-          <span class="card__kicker">App</span>
+          <span class="card__kicker">${esc(kicker)}</span>
           <h3>${esc(product.name)}</h3>
           <p>${esc(product.summary)}</p>
           <span class="card__more">Read more &rarr;</span>

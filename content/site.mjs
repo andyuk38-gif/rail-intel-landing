@@ -37,106 +37,113 @@ export const products = [
   {
     slug: "investigations",
     name: "Rail Intel Investigations",
+    pageTemplate: "preview",
+    cardKicker: "In development",
+    pageBadge: "In development",
     seoTitle: "Rail Investigations Software | Rail Intel Investigations",
     seoDescription:
-      "Evidence-first rail investigation software for cases, RCA, recommendations, actions and sealed final reports — with optional CMS competency context.",
+      "Rail Intel Investigations — evidence-first investigation software for UK rail, in active development with a planned mid-2027 launch.",
     seoKeywords: "rail investigations software, incident investigation rail, RCA rail, ORR investigation evidence",
     summary:
-      "Evidence-first rail investigations — from opening a case through recommendations, actions and a sealed final report.",
-    tagline: "Investigate with evidence, not email threads",
+      "Evidence-first rail investigations — in active development for a mid-2027 launch.",
+    tagline: "Investigations with the evidence in one place",
     lead:
-      "Rail Intel Investigations is a standalone app for running investigations end to end: one file per case, with a command centre, structured evidence and RCA, recommendations that become owned actions, and a signed final report. Link it to Rail Intel CMS when you want competency and workforce context on the subject without leaving the investigation.",
+      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file — not scattered across email, chat and shared drives. It's in active development now, with a planned launch in mid 2027.",
     faq: [
+      {
+        question: "When will Rail Intel Investigations launch?",
+        answer:
+          "We're targeting a mid-2027 launch. Register your interest to hear about early access, walkthroughs and how the product is shaping up as development continues.",
+      },
       {
         question: "Is Rail Intel Investigations separate from CMS?",
         answer:
-          "Yes. Investigations is a standalone app. An optional connector links one Investigations company to one CMS tenant when you want shared people and competency context.",
+          "Yes. Investigations is planned as a standalone app alongside Rail Intel CMS. We're exploring an optional link so you can pull workforce and competency context into a case when you need it — without merging the two products.",
       },
       {
-        question: "Can final reports be signed and sealed?",
+        question: "Will the features on this page match the final product?",
         answer:
-          "Yes. The final report compiles case artefacts for PDF export with dual sign-off from the Lead Investigator and Designated Competent Person.",
+          "Not exactly. This page describes the direction of travel from current development themes. Screens, workflows and module names may change before launch.",
+      },
+      {
+        question: "Can we talk to the team before launch?",
+        answer:
+          "Yes. Use Register your interest or contact us if you want to share how your operation runs investigations today — that feedback helps us prioritise what ships first.",
       },
     ],
     relatedLinks: [
       { name: "Rail Intel CMS", href: "" },
-      { name: "Competency & Cycles", href: "features/competency-cycles.html" },
+      { name: "Driver Reports", href: "products/driver-reports.html" },
       { name: "Security", href: "security.html" },
     ],
     href: "products/investigations.html",
     appUrlKey: "investigations",
-    cta: "Open Investigations",
-    sections: [
-      {
-        heading: "Command centre for the live case",
-        body: [
-          "Every investigation is one workspace — Overview, Gantt, Tasks, Recommendations, Actions, Findings, D&A, Fatigue, Chat, Final report and Audit — so the file does not live in email threads and shared drives.",
-          "Open cases as manual investigations or from an incident feed when that source is configured. Capture location with coordinates, what3words and a map, set the investigation level, and assign a lead and team.",
-        ],
-        bullets: [
-          "**Statuses** Open, In review and Closed, with Level 1 / 2 / 3 (and Other) for severity.",
-          "**Configurable incident types** for your operation (SPAD, derailment, collision, welfare escalation and more).",
-          "**Gantt and tasks** so planned work sits on a timeline against the case.",
-        ],
-      },
-      {
-        heading: "Recommendations that become owned actions",
-        body: [
-          "Raise recommendations against the case and the evidence behind them. HSSE and DCP roles approve or reject; rejection needs a written justification. Approval creates a tracked action that moves from open through in progress to done — so close-out is visible, not assumed.",
-        ],
-        bullets: [
-          "**Recommendation board** with pending, approved and rejected states.",
-          "**Mandatory rejection justification** so a no is auditable.",
-          "**Actions from approvals** with clear ownership and status.",
-        ],
-      },
-      {
-        heading: "Evidence, RCA and the final report",
-        body: [
-          "Record findings against human performance factors and the ten incident factors, with an evidence reference and narrative on each item. When the investigation is ready, the final report compiles the artefacts for print or PDF, with signature pads for the Lead Investigator and Designated Competent Person — and seals when both have signed.",
-        ],
-        bullets: [
-          "**RCA coding** against human performance and ten-incident-factor frameworks.",
-          "**Print / Export PDF** of the compiled final report.",
-          "**Dual sign-off** (Lead Investigator + DCP) before the report is sealed.",
-          "**Hash-linked audit chain** of who did what, and when, on the case.",
-        ],
-      },
-      {
-        heading: "Drugs & alcohol and fatigue on the critical path",
-        body: [
-          "D&A screening sits on the investigation when the level or incident type requires it — breath, urine, blood or saliva, with consent and results, and follow-up actions where needed. Fatigue can be assessed against the shift pattern entered for that case, with a tenant-level FRMS view structured as Plan, Do, Check and Act.",
-        ],
-        bullets: [
-          "**Mandatory or recommended D&A** driven by investigation level and incident type.",
-          "**Shift pattern on the case** for fatigue context during the investigation.",
-          "**FRMS workspace** for the tenant, separate from the individual case file.",
-        ],
-      },
-      {
-        heading: "Connected to Rail Intel CMS when you need it",
-        body: [
-          "Investigations and CMS stay separate products. When linked through Admin → API Management, a dual-approval token binds one Investigations company to one CMS tenant. You can then look up the employee under investigation, pull competency cycle status and recent medication declarations, and pick lead and team members from CMS team management and employee records.",
-          "Roster and shift data for fatigue stay in Investigations — CMS does not supply them.",
-        ],
-        bullets: [
-          "**Dual-approval CMS connector** so pairing is deliberate on both sides.",
-          "**Subject lookup** with competency cycle (in date / due soon / overdue) and recent medications.",
-          "**Lead and team** selectable from CMS people where the link is active.",
-        ],
-      },
-      {
-        heading: "Roles, tenants and assurance views",
-        body: [
-          "Workspaces are multi-tenant and entered with a company code. Roles cover System Admin, Company Admin, Lead Investigator, Investigator, HSSE and DCP, with capability overrides on top of the role baseline — the same idea as CMS permissions, tuned for investigation work.",
-        ],
-        bullets: [
-          "**Reporting** for open / in review / closed mix, levels, incident types, RCA counts and sealed reports.",
-          "**Recommendations and Compliance** sections for assurance oversight across the workspace.",
-          "**Admin** for users, email templates, incident catalogue and the CMS API link.",
-        ],
-      },
-    ],
+    preview: {
+      launchLabel: "Mid 2027",
+      statusNote:
+        "Built with UK rail investigation practice in mind — designed for assurance teams, investigators and safety leadership.",
+      milestones: [
+        "Active development with early design partners",
+        "Standalone app — not a CMS add-on module",
+        "Early access conversations ahead of launch",
+      ],
+      disclaimer:
+        "Capabilities described on this page reflect work in progress. Detail, screens and workflows may change before launch.",
+      pillarsHeading: "What we're building towards",
+      pillarsLead:
+        "A single investigation workspace that keeps evidence, analysis, decisions and close-out on one auditable trail — so you're not reconstructing the file from inboxes at review time.",
+      pillars: [
+        {
+          title: "One case workspace",
+          detail:
+            "Run the investigation from one place — overview, tasks, findings and close-out — instead of parallel folders and message threads.",
+        },
+        {
+          title: "Structured evidence & analysis",
+          detail:
+            "Capture findings and root-cause themes with references back to evidence, so the narrative is searchable and reviewable.",
+        },
+        {
+          title: "Recommendations → actions",
+          detail:
+            "Turn agreed recommendations into owned follow-up with visible status — so assurance can see what's still open.",
+        },
+        {
+          title: "Assurance-ready reporting",
+          detail:
+            "Compile the investigation record for export and sign-off when you're ready to close — with an audit trail behind changes.",
+        },
+        {
+          title: "Safety-critical workflows",
+          detail:
+            "Room for drugs & alcohol, fatigue and other operational factors on the investigation path when your procedure requires them.",
+        },
+        {
+          title: "Optional CMS context",
+          detail:
+            "When linked to Rail Intel CMS, bring workforce and competency context into the case without duplicating your system of record.",
+        },
+      ],
+      themes: [
+        {
+          heading: "Designed for how rail actually investigates",
+          body: [
+            "Investigations rarely fail because teams lack commitment — they fail because the record fragments. Rail Intel Investigations is being shaped around evidence-first practice: one file per case, clear roles, and a path from opening the investigation to sealing the outcome.",
+            "We're not trying to replace your safety management system overnight. The goal is a focused app that does investigation workflow well, sits alongside Rail Intel CMS, and respects the assurance expectations UK operators already work to.",
+          ],
+        },
+        {
+          heading: "Part of the Rail Intel suite",
+          body: [
+            "Rail Intel CMS remains the competency system of record. Investigations is a separate product for investigation teams — with optional connectivity when you want shared people data and competency context on the subject of an investigation.",
+            "Add-ons such as Driver Reports can feed structured operational events into your wider safety picture; Investigations is where those events can mature into a managed case when your process demands it.",
+          ],
+        },
+      ],
+      ctaHeading: "Follow the build",
+      ctaBody:
+        "Register your interest for launch updates, early walkthroughs and the chance to influence what ships first. Rail Intel CMS continues on its own roadmap — Investigations joins the suite when it's ready for operators.",
+    },
   },
 ];
 
