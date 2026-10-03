@@ -1246,37 +1246,66 @@ body.is-engine-open .engine-socket-hit__label,
 }
 
 .engine-bay__drag-rail-line {
-  stroke: rgba(251, 191, 36, 0.46);
-  stroke-width: 1.5;
+  stroke: rgba(251, 191, 36, 0.38);
+  stroke-width: 1.35;
   stroke-linecap: round;
-  stroke-dasharray: 4 7;
+  stroke-dasharray: 3 9;
   vector-effect: non-scaling-stroke;
-  animation: engine-bay-rail-dash 1.4s linear infinite;
+  animation: engine-bay-rail-dash 2.4s linear infinite;
 }
 
 .engine-bay__drag-rail-arrow {
-  opacity: 0.92;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 0.38rem;
+  height: 0.48rem;
+  margin-left: -0.19rem;
+  margin-top: -0.24rem;
+  color: #fbbf24;
+  pointer-events: none;
+  opacity: 0.25;
+  offset-path: var(--rail-offset-path);
+  offset-distance: 0%;
+  offset-rotate: auto 90deg;
+  offset-anchor: center;
+  animation: engine-bay-arrow-offset 2.4s linear infinite;
+  animation-delay: var(--rail-delay, 0s);
+}
+
+.engine-bay__drag-rail-arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 .engine-bay__drag-rail-arrow path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.65;
+  stroke-width: 1.35;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
 
 .engine-bay.is-interacting .engine-bay__drag-rails-svg,
+.engine-bay.is-interacting .engine-bay__drag-rail-arrow,
 .engine-bay.is-armed .engine-bay__drag-rails-svg,
-.engine-bay.is-spent .engine-bay__drag-rails-svg {
+.engine-bay.is-armed .engine-bay__drag-rail-arrow,
+.engine-bay.is-spent .engine-bay__drag-rails-svg,
+.engine-bay.is-spent .engine-bay__drag-rail-arrow {
   opacity: 0;
   visibility: hidden;
 }
 
 .engine-bay.is-interacting .engine-bay__drag-rail-line,
 .engine-bay.is-armed .engine-bay__drag-rail-line,
-.engine-bay.is-spent .engine-bay__drag-rail-line {
+.engine-bay.is-spent .engine-bay__drag-rail-line,
+.engine-bay.is-interacting .engine-bay__drag-rail-arrow,
+.engine-bay.is-armed .engine-bay__drag-rail-arrow,
+.engine-bay.is-spent .engine-bay__drag-rail-arrow {
   animation: none;
 }
 
@@ -1601,7 +1630,24 @@ body:has([data-engine-token]):not(.is-engine-open) .engine-bay .engine-socket__p
 }
 
 @keyframes engine-bay-rail-dash {
-  to { stroke-dashoffset: -20; }
+  to { stroke-dashoffset: -24; }
+}
+
+@keyframes engine-bay-arrow-offset {
+  0% {
+    offset-distance: 0%;
+    opacity: 0.25;
+  }
+  14% {
+    opacity: 1;
+  }
+  86% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0.25;
+  }
 }
 
 @keyframes engine-label-float {
@@ -1716,7 +1762,7 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
   .engine-socket__pulse,
   .engine-token,
   .engine-bay__drag-rail-line,
-  .engine-bay__drag-rail-arrow path,
+  .engine-bay__drag-rail-arrow,
   .engine-bay .engine-token:not(.is-lifted):not(.is-dragging) .engine-token__svg,
   .engine-socket-hit__label,
   .engine-trace,

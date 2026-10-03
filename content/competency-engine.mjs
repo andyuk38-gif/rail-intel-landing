@@ -506,30 +506,19 @@ function socketBox() {
 }
 
 function dragRailsMarkup() {
-  const leftX = 19.5;
-  const rightX = 80.5;
-  const y1 = 37;
-  const y2 = 88;
-  const dur = 2.4;
-  const motion = (pathId, begin) =>
-    `<g class="engine-bay__drag-rail-arrow">
-      <path d="M0 0 V4.5 M-3.25 3.25 L0 7 L3.25 3.25" />
-      <animateMotion dur="${dur}s" repeatCount="indefinite" begin="${begin}s" calcMode="linear" keyPoints="0;1" keyTimes="0;1" rotate="auto">
-        <mpath href="#${pathId}" />
-      </animateMotion>
-    </g>`;
-  const arrows = (pathId) => `${motion(pathId, 0)}${motion(pathId, dur / 2)}`;
+  const arrowSvg =
+    '<svg viewBox="0 0 8 10" aria-hidden="true"><path d="M4 0.8 V4.2" /><path d="M2.1 2.8 L4 4.8 L5.9 2.8" /></svg>';
+  const arrow = (side, delay) =>
+    `<span class="engine-bay__drag-rail-arrow" data-engine-rail-arrow="${side}" style="--rail-delay:${delay}s" aria-hidden="true">${arrowSvg}</span>`;
   return `              <div class="engine-bay__track">
                 <svg class="engine-bay__drag-rails-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation" aria-hidden="true">
-                  <defs>
-                    <path id="engine-bay-rail-left" d="M ${leftX} ${y1} L ${leftX} ${y2}" />
-                    <path id="engine-bay-rail-right" d="M ${rightX} ${y1} L ${rightX} ${y2}" />
-                  </defs>
-                  <line class="engine-bay__drag-rail-line" x1="${leftX}" y1="${y1}" x2="${leftX}" y2="${y2}" />
-                  <line class="engine-bay__drag-rail-line" x1="${rightX}" y1="${y1}" x2="${rightX}" y2="${y2}" />
-                  ${arrows("engine-bay-rail-left")}
-                  ${arrows("engine-bay-rail-right")}
-                </svg>`;
+                  <line class="engine-bay__drag-rail-line" data-engine-rail="left" x1="0" y1="0" x2="0" y2="0" />
+                  <line class="engine-bay__drag-rail-line" data-engine-rail="right" x1="0" y1="0" x2="0" y2="0" />
+                </svg>
+                ${arrow("left", 0)}
+                ${arrow("left", 1.2)}
+                ${arrow("right", 0)}
+                ${arrow("right", 1.2)}`;
 }
 
 function dragRailsTrackClose() {

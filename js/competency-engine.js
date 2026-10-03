@@ -322,6 +322,89 @@
 
   if (!token || !home || !socketEl()) return;
 
+  var track = bay && bay.querySelector(".engine-bay__track");
+  var railsSvg = track && track.querySelector(".engine-bay__drag-rails-svg");
+  var railLines = railsSvg
+    ? {
+        left: railsSvg.querySelector('[data-engine-rail="left"]'),
+        right: railsSvg.querySelector('[data-engine-rail="right"]'),
+      }
+    : null;
+  var railArrows = track
+    ? Array.prototype.slice.call(track.querySelectorAll("[data-engine-rail-arrow]"))
+    : [];
+
+  // Normalised anchor points from the tray chip and socket SVG view boxes.
+  var CHIP_RAIL = { left: { x: 0.106, y: 0.57 }, right: { x: 0.894, y: 0.57 } };
+  var SOCK_RAIL = { left: { x: 0.041, y: 0.88 }, right: { x: 0.959, y: 0.88 } };
+
+  function railPointPct(containerRect, trackRect, anchor) {
+    return {
+      x: ((containerRect.left - trackRect.left) + containerRect.width * anchor.x) / trackRect.width * 100,
+      y: ((containerRect.top - trackRect.top) + containerRect.height * anchor.y) / trackRect.height * 100,
+    };
+  }
+
+  function railPointPx(containerRect, trackRect, anchor) {
+    return {
+      x: containerRect.left - trackRect.left + containerRect.width * anchor.x,
+      y: containerRect.top - trackRect.top + containerRect.height * anchor.y,
+    };
+  }
+
+  function layoutBayRails() {
+    if (!track || !railsSvg || !railLines || !traySocket || !token || bay.classList.contains("is-spent")) return;
+    var trackRect = track.getBoundingClientRect();
+    if (trackRect.width < 8 || trackRect.height < 8) return;
+    var tokenRect = token.getBoundingClientRect();
+    var wellRect = traySocket.getBoundingClientRect();
+
+    ["left", "right"].forEach(function (side) {
+      var startPct = railPointPct(tokenRect, trackRect, CHIP_RAIL[side]);
+      var endPct = railPointPct(wellRect, trackRect, SOCK_RAIL[side]);
+      var startPx = railPointPx(tokenRect, trackRect, CHIP_RAIL[side]);
+      var endPx = railPointPx(wellRect, trackRect, SOCK_RAIL[side]);
+      var line = railLines[side];
+      if (!line) return;
+      line.setAttribute("x1", startPct.x.toFixed(2));
+      line.setAttribute("y1", startPct.y.toFixed(2));
+      line.setAttribute("x2", endPct.x.toFixed(2));
+      line.setAttribute("y2", endPct.y.toFixed(2));
+      var path =
+        'path("M ' +
+        startPx.x.toFixed(2) +
+        " " +
+        startPx.y.toFixed(2) +
+        " L " +
+        endPx.x.toFixed(2) +
+        " " +
+        endPx.y.toFixed(2) +
+        '")';
+      railArrows
+        .filter(function (arrow) {
+          return arrow.getAttribute("data-engine-rail-arrow") === side;
+        })
+        .forEach(function (arrow) {
+          arrow.style.setProperty("--rail-offset-path", path);
+        });
+    });
+  }
+
+  layoutBayRails();
+  window.requestAnimationFrame(layoutBayRails);
+  window.addEventListener("resize", layoutBayRails);
+  if (typeof ResizeObserver !== "undefined" && track) {
+    var railObserver = new ResizeObserver(function () {
+      layoutBayRails();
+    });
+    railObserver.observe(track);
+    railObserver.observe(token);
+    railObserver.observe(traySocket);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(layoutBayRails);
+  }
+
   function socketMostlyVisible() {
     var rect = socketEl().getBoundingClientRect();
     return rect.top >= 80 && rect.bottom <= window.innerHeight - 16 && rect.height > 20;
