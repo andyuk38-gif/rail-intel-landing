@@ -74,12 +74,12 @@ export const products = [
       {
         question: "Can we talk to the team before launch?",
         answer:
-          "Yes. Use Register your interest or contact us if you want to share how your operation runs investigations today — that feedback helps us prioritise what ships first.",
+          "Yes. Use Register your interest or contact us if you want to share how your operation runs investigations today, that feedback helps us prioritise what ships first.",
       },
       {
         question: "What fatigue capability is planned for Investigations?",
         answer:
-          "We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns against industry-aligned criteria, supports investigation-level assessment, and offers deeper trend views for assurance. It reflects pilot work, partner input and operational experience — final behaviour and standards mapping may evolve before launch.",
+          "We're building an advanced and automated fatigue calculator for safety-critical staff that analyses shift patterns against industry-aligned criteria, supports investigation-level assessment, and offers deeper trend views for assurance. It reflects research from HSSE, Airlines and Rail partners, final behaviour and standards mapping may evolve before launch.",
       },
     ],
     relatedLinks: [
