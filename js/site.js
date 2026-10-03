@@ -30,6 +30,63 @@
     hideDevBannerEoiButton();
   }
 
+  var eoiNoticeRoot = null;
+  var eoiNoticeLastFocus = null;
+
+  function ensureEoiNotice() {
+    if (eoiNoticeRoot) return eoiNoticeRoot;
+
+    eoiNoticeRoot = document.createElement("div");
+    eoiNoticeRoot.className = "eoi-notice";
+    eoiNoticeRoot.hidden = true;
+    eoiNoticeRoot.innerHTML =
+      '<div class="eoi-notice__backdrop" data-eoi-notice-dismiss tabindex="-1"></div>' +
+      '<div class="eoi-notice__panel" role="alertdialog" aria-modal="true" aria-labelledby="eoi-notice-title" aria-describedby="eoi-notice-desc">' +
+      '<h2 class="eoi-notice__title" id="eoi-notice-title">Interest already registered</h2>' +
+      '<p class="eoi-notice__text" id="eoi-notice-desc">Your interest has already been registered. We will be in touch as we approach the April 2027 launch.</p>' +
+      '<button type="button" class="btn btn-primary eoi-notice__btn" data-eoi-notice-close>OK</button>' +
+      "</div>";
+    document.body.appendChild(eoiNoticeRoot);
+
+    function closeEoiNotice() {
+      if (!eoiNoticeRoot || eoiNoticeRoot.hidden) return;
+      eoiNoticeRoot.hidden = true;
+      document.body.classList.remove("eoi-notice-open");
+      if (eoiNoticeLastFocus && typeof eoiNoticeLastFocus.focus === "function") {
+        eoiNoticeLastFocus.focus({ preventScroll: true });
+      }
+      eoiNoticeLastFocus = null;
+    }
+
+    eoiNoticeRoot.addEventListener("click", function (event) {
+      if (event.target.closest("[data-eoi-notice-dismiss], [data-eoi-notice-close]")) {
+        event.preventDefault();
+        closeEoiNotice();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && eoiNoticeRoot && !eoiNoticeRoot.hidden) {
+        event.preventDefault();
+        closeEoiNotice();
+      }
+    });
+
+    eoiNoticeRoot._close = closeEoiNotice;
+    return eoiNoticeRoot;
+  }
+
+  function showEoiAlreadyRegisteredNotice() {
+    var root = ensureEoiNotice();
+    eoiNoticeLastFocus = document.activeElement;
+    root.hidden = false;
+    document.body.classList.add("eoi-notice-open");
+    var closeBtn = root.querySelector("[data-eoi-notice-close]");
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  }
+
+  window.railintelEoiShowAlreadyRegistered = showEoiAlreadyRegisteredNotice;
+
   function isHomePage() {
     var path = window.location.pathname;
     return path === "/" || /\/index\.html$/i.test(path);
@@ -43,7 +100,10 @@
   function openRegisterInterest(event) {
     if (event) event.preventDefault();
 
-    if (isEoiRegistered()) return;
+    if (isEoiRegistered()) {
+      showEoiAlreadyRegisteredNotice();
+      return;
+    }
 
     if (tryOpenEoiPanel()) return;
 
@@ -69,6 +129,15 @@
     if (!event.target.closest(".dev-banner__btn, [data-eoi-open]")) return;
     openRegisterInterest(event);
   });
+
+  window.addEventListener("hashchange", function () {
+    if (location.hash !== "#register-interest" || !isEoiRegistered()) return;
+    showEoiAlreadyRegisteredNotice();
+  });
+
+  if (location.hash === "#register-interest" && isEoiRegistered()) {
+    window.setTimeout(showEoiAlreadyRegisteredNotice, 0);
+  }
 
   /* ---------- Dropdown navigation ---------- */
 
