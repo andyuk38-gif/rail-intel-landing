@@ -828,7 +828,6 @@ export function renderCompetencyEngineBay(base = "../") {
                 <p class="engine-bay__unlock-copy">You have now unlocked the <span>potential technologies</span> for your operations.</p>
               </div>
               <div class="engine-bay__home" data-engine-home>
-              <span class="engine-bay__chip-tag" aria-hidden="true">Drag me down</span>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
                 <svg class="engine-token__svg" viewBox="${fmt(seat.x)} ${fmt(seat.y)} ${fmt(seat.w)} ${fmt(seat.h)}" role="presentation" aria-hidden="true">
                   <defs>
@@ -840,6 +839,7 @@ ${chipBody(base, "token")}
               </button>
               </div>
               <div class="engine-bay__drag-guide" aria-hidden="true">
+                <span class="engine-bay__chip-tag">Drag me down</span>
                 <svg class="engine-bay__drag-guide-icon" viewBox="0 0 24 32" width="20" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 4v16M7 15l5 5 5-5" />
                   <path class="engine-bay__drag-guide-icon-trail" d="M12 0v8M7 7l5 5 5-5" opacity="0.45" />
