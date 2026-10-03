@@ -112,7 +112,7 @@ export const products = [
             "Run the investigation from one place, with overview, tasks, findings and close-out, instead of parallel folders and message threads.",
         },
         {
-          title: "Structured evidence & analysis",
+          title: "Structured evidence, analysis",
           detail:
             "Capture findings and root-cause themes with references back to evidence, so the narrative is searchable and reviewable.",
         },
@@ -122,7 +122,7 @@ export const products = [
             "Turn agreed recommendations into owned follow-up with visible status, so assurance can see what's still open.",
         },
         {
-          title: "Assurance-ready reporting",
+          title: "Assurance ready reporting",
           detail:
             "Compile the investigation record for export and sign-off when you're ready to close, with an audit trail behind changes.",
         },
@@ -132,12 +132,12 @@ export const products = [
             "Analyse shift patterns for safety-critical staff with an automated engine aligned to industry expectations, built for investigation use, not spreadsheet side calculations.",
         },
         {
-          title: "Fatigue trends & assurance",
+          title: "Fatigue trends, assurance",
           detail:
             "Go beyond a single case snapshot with trend views that help safety and assurance teams understand fatigue exposure over time.",
         },
         {
-          title: "Safety-critical workflows",
+          title: "Safety critical workflows",
           detail:
             "Drugs & alcohol and other operational factors on the investigation path when your procedure requires them, alongside fatigue where the case demands it.",
         },
