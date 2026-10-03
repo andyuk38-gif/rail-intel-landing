@@ -21,6 +21,10 @@
   var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
   var submitLabel = submitBtn ? submitBtn.textContent : "";
 
+  function isInvestigationsPage() {
+    return /\/products\/investigations\.html$/i.test(window.location.pathname);
+  }
+
   function isRegistered() {
     try {
       return localStorage.getItem(STORAGE_REGISTERED) === "1";
@@ -89,7 +93,18 @@
     }
     if (preset === "cms" || preset === "investigations") {
       select.value = preset;
+      return;
     }
+    if (!isInvestigationsPage()) {
+      select.value = "cms";
+    }
+  }
+
+  function reopenEoiForm() {
+    if (form) form.hidden = false;
+    if (successView) successView.hidden = true;
+    clearMessage();
+    applyEoiProductPreset();
   }
 
   function focusEoiPanel() {
@@ -104,6 +119,9 @@
 
   function openEoiPanel() {
     if (!widget || !widget.isConnected) return false;
+    if (isInvestigationsPage() && isRegistered()) {
+      reopenEoiForm();
+    }
     if (showTimeoutId !== null) {
       window.clearTimeout(showTimeoutId);
       showTimeoutId = null;
@@ -179,7 +197,7 @@
     });
   }
 
-  if (isRegistered()) {
+  if (isRegistered() && !isInvestigationsPage()) {
     window.railintelEoiOpen = null;
     widget.remove();
     return;
@@ -250,8 +268,12 @@
 
       var name = nameInput.value.trim();
       var email = emailInput.value.trim();
-      var productInterest = productSelect ? productSelect.value.trim() : "cms";
-      if (productInterest !== "investigations") productInterest = "cms";
+      var productInterest = productSelect ? productSelect.value.trim() : "";
+      if (productInterest !== "cms" && productInterest !== "investigations") {
+        showMessage("Please select the product you are interested in.", "error");
+        if (productSelect) productSelect.focus({ preventScroll: true });
+        return;
+      }
       if (!name || !email) return;
 
       if (submitBtn) {

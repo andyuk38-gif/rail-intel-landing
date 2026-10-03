@@ -34,8 +34,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=22022883" />
-  <link rel="stylesheet" href="../css/pages.css?v=22022883" />
+  <link rel="stylesheet" href="../css/style.css?v=46928641" />
+  <link rel="stylesheet" href="../css/pages.css?v=46928641" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -297,8 +297,29 @@
           </div>
           <div class="page-hero__media">
             <div class="inv-preview-status" role="status" aria-label="Development status">
-              <p class="inv-preview-status__eyebrow">Planned launch</p>
-              <p class="inv-preview-status__launch">Mid 2027</p>
+              <div class="inv-preview-status__intro">
+                <div class="inv-preview-status__head">
+                  <p class="inv-preview-status__eyebrow">Planned launch</p>
+                  <p class="inv-preview-status__launch">Mid 2027</p>
+                </div>
+              <div class="inv-preview-status__code" aria-hidden="true">
+                <div class="inv-preview-status__code-window">
+                  <span class="inv-preview-status__code-bar">
+                    <span class="inv-preview-status__code-dot"></span>
+                    <span class="inv-preview-status__code-dot"></span>
+                    <span class="inv-preview-status__code-dot"></span>
+                    <span class="inv-preview-status__code-file">case.service.ts</span>
+                  </span>
+                  <code class="inv-preview-status__code-body">
+                    <span class="inv-preview-status__code-line" style="--i:0"><span class="tok-kw">const</span> file = <span class="tok-fn">openCase</span>();</span>
+                    <span class="inv-preview-status__code-line" style="--i:1"><span class="tok-fn">await</span> file.<span class="tok-fn">addEvidence</span>();</span>
+                    <span class="inv-preview-status__code-line" style="--i:2">fatigue.<span class="tok-fn">analyse</span>(shifts);</span>
+                    <span class="inv-preview-status__code-line" style="--i:3">cms.<span class="tok-fn">link</span>(<span class="tok-str">token</span>);</span>
+                    <span class="inv-preview-status__code-line inv-preview-status__code-line--cursor" style="--i:4"><span class="tok-fn">seal</span>(file);<span class="inv-preview-status__code-cursor"></span></span>
+                  </code>
+                </div>
+              </div>
+              </div>
               <p class="inv-preview-status__text">Built with UK rail investigation practice in mind, designed for assurance teams, investigators and safety leadership.</p>
             <ul class="inv-preview-status__list">
               <li>Active development with early design partners</li>
@@ -381,7 +402,7 @@
           <p>That ambition is grounded in research and delivery. We have tested concepts with pilot operators, worked with rail industry partners, and drawn on hands-on operational experience to decide what investigators actually need at 02:00 when the file has to stand up to review. Capabilities on this page reflect that direction; exact models, thresholds and reporting may change as we complete development.</p>
           </div>
           <figure class="inv-preview-theme__figure">
-            <img class="inv-preview-theme__img" src="../images/product/investigations-fatigue-engine.jpg?v=22022883" alt="Abstract illustration combining a human profile with fatigue risk glows and advanced shift-pattern analytics overlays." width="864" height="1152" loading="lazy" decoding="async" />
+            <img class="inv-preview-theme__img" src="../images/product/investigations-fatigue-engine.jpg?v=46928641" alt="Abstract illustration combining a human profile with fatigue risk glows and advanced shift-pattern analytics overlays." width="864" height="1152" loading="lazy" decoding="async" />
           </figure>
         </div>
       </div>
@@ -397,7 +418,7 @@
           <p>The connection is optional and administrator-controlled, not an automatic merge of databases. Add-ons such as Driver Reports can still feed structured operational events into your wider safety picture; Investigations is where those events can mature into a managed case when your process demands it.</p>
           </div>
           <figure class="inv-preview-theme__figure">
-            <img class="inv-preview-theme__img" src="../images/product/investigations-cms-linking.jpg?v=22022883" alt="Abstract illustration of Rail Intel CMS workforce competency data linked to Investigations through a secure API token bridge." width="864" height="1152" loading="lazy" decoding="async" />
+            <img class="inv-preview-theme__img" src="../images/product/investigations-cms-linking.jpg?v=46928641" alt="Abstract illustration of Rail Intel CMS workforce competency data linked to Investigations through a secure API token bridge." width="864" height="1152" loading="lazy" decoding="async" />
           </figure>
         </div>
       </div>
@@ -567,9 +588,111 @@
       </div>
     </div>
   </footer>
+  <div class="eoi-widget" data-eoi-widget hidden aria-hidden="true">
+    <div class="eoi-teaser-shell">
+      <button type="button" class="eoi-teaser__close" data-eoi-teaser-dismiss aria-label="Minimise notification">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <button type="button" class="eoi-teaser" data-eoi-teaser aria-expanded="false" aria-controls="eoi-panel" aria-label="Register your interest for April 2027 launch">
+        <span class="eoi-teaser__grip" aria-hidden="true">
+          <svg width="10" height="14" viewBox="0 0 10 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2L3 7l5 5"/></svg>
+        </span>
+        <span class="eoi-teaser__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+        </span>
+        <span class="eoi-teaser__text">
+          <span class="eoi-teaser__label">Launching April 2027</span>
+          <span class="eoi-teaser__date">Click here to register your interest for early discounts</span>
+        </span>
+        <span class="eoi-teaser__tab-label" aria-hidden="true">Register your interest</span>
+      </button>
+    </div>
 
-  <script src="../js/site.js?v=22022883"></script>
-  <script src="../js/newsletter.js?v=22022883"></script>
-  <script src="../js/share.js?v=22022883"></script>
+    <div class="eoi-panel" id="eoi-panel" data-eoi-panel hidden role="dialog" aria-labelledby="eoi-title">
+      <div class="eoi-panel__header">
+        <div class="eoi-panel__actions">
+          <button type="button" class="eoi-panel__btn-icon" data-eoi-close aria-label="Minimise">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+          </button>
+          <button type="button" class="eoi-panel__btn-icon" data-eoi-dismiss aria-label="Slide to side">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <span class="eoi-panel__badge"><span class="eoi-panel__badge-dot" aria-hidden="true"></span> April 2027 launch</span>
+        <h2 class="eoi-panel__title" id="eoi-title">Register your interest</h2>
+        <p class="eoi-panel__lead">Interested in becoming our client and sourcing our products when we launch?</p>
+      </div>
+
+      <div class="eoi-panel__body">
+        <ul class="eoi-perks" aria-label="Benefits">
+          <li>
+            <span class="eoi-perks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </span>
+            Onboard with us prior to launch
+          </li>
+          <li>
+            <span class="eoi-perks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </span>
+            Early discounts apply before launch
+          </li>
+          <li>
+            <span class="eoi-perks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            Bundled modules for free as introductory offer*
+          </li>
+        </ul>
+        <div class="eoi-perks-footnote">
+          <p class="eoi-perks-footnote__lead">* INTRODUCTORY OFFER: The following modules are FREE, subject to a minimum 12-month contract:</p>
+          <ul class="eoi-modules-list">
+            <li>Task assignment</li>
+            <li>Safety Briefs</li>
+            <li>Driver Reports</li>
+            <li>Leave &amp; Absence</li>
+            <li>Medication Checks</li>
+          </ul>
+        </div>
+
+        <form class="eoi-form" data-eoi-form>
+          <div class="field">
+            <label for="eoi-name">Your name</label>
+            <input id="eoi-name" type="text" name="name" placeholder="Jane Smith" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="eoi-email">Work email</label>
+            <input id="eoi-email" type="email" name="email" placeholder="you@company.co.uk" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="eoi-product">Product of interest</label>
+            <select id="eoi-product" name="product_interest" required>
+              <option value="" disabled selected hidden>Select a product</option>
+              <option value="cms">Rail Intel CMS</option>
+              <option value="investigations">Rail Intel Investigations</option>
+            </select>
+          </div>
+          <input type="text" name="website" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn btn-primary">Register my interest</button>
+          <p class="eoi-form__note">Launching platform in April 2027.</p>
+          <p class="eoi-message" data-eoi-message hidden></p>
+        </form>
+
+        <div class="eoi-success" data-eoi-success hidden>
+          <div class="eoi-success__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <p class="eoi-success__title">You are on the list</p>
+          <p class="eoi-success__text">Thanks — we will be in touch as we approach the April 2027 launch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="../js/site.js?v=46928641"></script>
+  <script src="../js/newsletter.js?v=46928641"></script>
+  <script src="../js/share.js?v=46928641"></script>
+  <script src="../js/eoi.js?v=46928641"></script>
 </body>
 </html>

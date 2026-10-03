@@ -12,6 +12,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { site, products, upcomingProducts, addons, capacityAddons, featureGroups, security, privacy, contact, getStarted, languages } from "../content/site.mjs";
+import { renderEoiWidget } from "../content/eoi-widget.mjs";
 import { homeGallery } from "../content/home-gallery.mjs";
 import {
   SITE_URL,
@@ -546,12 +547,16 @@ function renderFooter(base, options = {}) {
     .join("\n");
   const extraScriptBlock = [extraScripts, extraModuleScripts].filter(Boolean).join("\n");
   const extraScriptSuffix = extraScriptBlock ? `${extraScriptBlock}\n` : "";
-  return `${renderFooterMarkup(base)}
+  const eoiBlock = options.includeEoi ? `\n${renderEoiWidget()}\n` : "";
+  const eoiScript = options.includeEoi
+    ? `  <script src="${base}js/eoi.js?v=${ASSET_VERSION}"></script>\n`
+    : "";
+  return `${renderFooterMarkup(base)}${eoiBlock}
 
   <script src="${base}js/site.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/newsletter.js?v=${ASSET_VERSION}"></script>
   <script src="${base}js/share.js?v=${ASSET_VERSION}"></script>
-${extraScriptSuffix}</body>
+${eoiScript}${extraScriptSuffix}</body>
 </html>
 `;
 }
@@ -1482,6 +1487,26 @@ ${primaryLink}${secondaryLink}
 
 /* ------------------------------------------------------------------- pages */
 
+function renderInvPreviewStatusCode() {
+  return `              <div class="inv-preview-status__code" aria-hidden="true">
+                <div class="inv-preview-status__code-window">
+                  <span class="inv-preview-status__code-bar">
+                    <span class="inv-preview-status__code-dot"></span>
+                    <span class="inv-preview-status__code-dot"></span>
+                    <span class="inv-preview-status__code-dot"></span>
+                    <span class="inv-preview-status__code-file">case.service.ts</span>
+                  </span>
+                  <code class="inv-preview-status__code-body">
+                    <span class="inv-preview-status__code-line" style="--i:0"><span class="tok-kw">const</span> file = <span class="tok-fn">openCase</span>();</span>
+                    <span class="inv-preview-status__code-line" style="--i:1"><span class="tok-fn">await</span> file.<span class="tok-fn">addEvidence</span>();</span>
+                    <span class="inv-preview-status__code-line" style="--i:2">fatigue.<span class="tok-fn">analyse</span>(shifts);</span>
+                    <span class="inv-preview-status__code-line" style="--i:3">cms.<span class="tok-fn">link</span>(<span class="tok-str">token</span>);</span>
+                    <span class="inv-preview-status__code-line inv-preview-status__code-line--cursor" style="--i:4"><span class="tok-fn">seal</span>(file);<span class="inv-preview-status__code-cursor"></span></span>
+                  </code>
+                </div>
+              </div>`;
+}
+
 function productPreviewPage(product) {
   const base = "../";
   const preview = product.preview || {};
@@ -1570,8 +1595,13 @@ ${bodyHtml}
           </div>
           <div class="page-hero__media">
             <div class="inv-preview-status" role="status" aria-label="Development status">
-              <p class="inv-preview-status__eyebrow">Planned launch</p>
-              <p class="inv-preview-status__launch">${esc(preview.launchLabel || "Mid 2027")}</p>
+              <div class="inv-preview-status__intro">
+                <div class="inv-preview-status__head">
+                  <p class="inv-preview-status__eyebrow">Planned launch</p>
+                  <p class="inv-preview-status__launch">${esc(preview.launchLabel || "Mid 2027")}</p>
+                </div>
+${renderInvPreviewStatusCode()}
+              </div>
               <p class="inv-preview-status__text">${esc(preview.statusNote || "")}</p>
 ${milestoneList}
             </div>
@@ -1611,7 +1641,7 @@ ${renderFaqSection(pageSeo.faq, base)}
   </main>
 
 ` +
-    renderFooter(base)
+    renderFooter(base, { includeEoi: true })
   );
 }
 
@@ -4311,6 +4341,8 @@ function syncIndex() {
   );
 
   html = replaceBetween(html, "<!-- footer:start -->", "<!-- footer:end -->", renderFooterMarkup(""));
+
+  html = replaceBetween(html, "<!-- eoi:start -->", "<!-- eoi:end -->", `\n${renderEoiWidget()}\n  `);
 
   html = html
     .replace(/css\/style\.css\?v=\d+/, `css/style.css?v=${ASSET_VERSION}`)

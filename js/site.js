@@ -24,6 +24,10 @@
     return "";
   }
 
+  function isInvestigationsPage() {
+    return /\/products\/investigations\.html$/i.test(window.location.pathname);
+  }
+
   function storeEoiProductInterest(product) {
     var normalized = normalizeEoiProduct(product);
     if (!normalized) return;
@@ -46,7 +50,7 @@
     });
   }
 
-  if (isEoiRegistered()) {
+  if (isEoiRegistered() && !isInvestigationsPage()) {
     hideDevBannerEoiButton();
   }
 
@@ -120,7 +124,7 @@
   function openRegisterInterest(event) {
     if (event) event.preventDefault();
 
-    if (isEoiRegistered()) {
+    if (isEoiRegistered() && !isInvestigationsPage()) {
       showEoiAlreadyRegisteredNotice();
       return;
     }
@@ -156,11 +160,11 @@
   });
 
   window.addEventListener("hashchange", function () {
-    if (location.hash !== "#register-interest" || !isEoiRegistered()) return;
+    if (location.hash !== "#register-interest" || !isEoiRegistered() || isInvestigationsPage()) return;
     showEoiAlreadyRegisteredNotice();
   });
 
-  if (location.hash === "#register-interest" && isEoiRegistered()) {
+  if (location.hash === "#register-interest" && isEoiRegistered() && !isInvestigationsPage()) {
     window.setTimeout(showEoiAlreadyRegisteredNotice, 0);
   }
 
