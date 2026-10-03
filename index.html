@@ -343,24 +343,17 @@
                 </span>
                 <p class="engine-bay__unlock-copy">You have now unlocked the <span>potential technologies</span> for your operations.</p>
               </div>
-              <div class="engine-bay__drag-rails" aria-hidden="true">
-                <svg class="engine-bay__drag-rail engine-bay__drag-rail--left" viewBox="0 0 20 96" preserveAspectRatio="xMidYMin meet" role="presentation" aria-hidden="true">
-      <line class="engine-bay__drag-rail-line" x1="10" y1="4" x2="10" y2="92" />
-      <g class="engine-bay__drag-rail-flow">
-      <path d="M10 22 L6 16 L14 16" />
-      <path d="M10 50 L6 44 L14 44" />
-      <path d="M10 78 L6 72 L14 72" />
-    </g>
-    </svg>
-                <svg class="engine-bay__drag-rail engine-bay__drag-rail--right" viewBox="0 0 20 96" preserveAspectRatio="xMidYMin meet" role="presentation" aria-hidden="true">
-      <line class="engine-bay__drag-rail-line" x1="10" y1="4" x2="10" y2="92" />
-      <g class="engine-bay__drag-rail-flow">
-      <path d="M10 22 L6 16 L14 16" />
-      <path d="M10 50 L6 44 L14 44" />
-      <path d="M10 78 L6 72 L14 72" />
-    </g>
-    </svg>
-              </div>
+              <div class="engine-bay__track">
+                <svg class="engine-bay__drag-rails-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation" aria-hidden="true">
+                  <line class="engine-bay__drag-rail-line" x1="22" y1="36" x2="10" y2="76" />
+                  <line class="engine-bay__drag-rail-line" x1="78" y1="36" x2="90" y2="76" />
+                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0" transform="translate(19 44)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.35" transform="translate(16 56)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.7" transform="translate(13 68)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0" transform="translate(81 44)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.35" transform="translate(84 56)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                  <g class="engine-bay__drag-rail-arrow" style="--rail-delay:0.7" transform="translate(87 68)"><path d="M0 0 V6" /><path d="M-4 4.5 L0 8.5 L4 4.5" /></g>
+                </svg>
               <div class="engine-bay__home" data-engine-home>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
                 <svg class="engine-token__svg" viewBox="502.1 281.6 395.8 260.8" role="presentation" aria-hidden="true">
@@ -508,6 +501,7 @@
                 </svg>
                 <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop chip here</span>
                 <span class="engine-socket-hit__label engine-socket-hit__label--armed">Place to unlock</span>
+              </div>
               </div>
             </div>
             <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag the chip down onto the socket</span></p>

@@ -506,20 +506,26 @@ function socketBox() {
 }
 
 function dragRailsMarkup() {
-  const chevrons = `<g class="engine-bay__drag-rail-flow">
-      <path d="M10 22 L6 16 L14 16" />
-      <path d="M10 50 L6 44 L14 44" />
-      <path d="M10 78 L6 72 L14 72" />
+  const arrow = (x, y, delay) =>
+    `<g class="engine-bay__drag-rail-arrow" style="--rail-delay:${delay}" transform="translate(${x} ${y})">
+      <path d="M0 0 V6" />
+      <path d="M-4 4.5 L0 8.5 L4 4.5" />
     </g>`;
-  const rail = (side) =>
-    `<svg class="engine-bay__drag-rail engine-bay__drag-rail--${side}" viewBox="0 0 20 96" preserveAspectRatio="xMidYMin meet" role="presentation" aria-hidden="true">
-      <line class="engine-bay__drag-rail-line" x1="10" y1="4" x2="10" y2="92" />
-      ${chevrons}
-    </svg>`;
-  return `              <div class="engine-bay__drag-rails" aria-hidden="true">
-                ${rail("left")}
-                ${rail("right")}
-              </div>`;
+  return `              <div class="engine-bay__track">
+                <svg class="engine-bay__drag-rails-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation" aria-hidden="true">
+                  <line class="engine-bay__drag-rail-line" x1="22" y1="36" x2="10" y2="76" />
+                  <line class="engine-bay__drag-rail-line" x1="78" y1="36" x2="90" y2="76" />
+                  ${arrow(19, 44, 0)}
+                  ${arrow(16, 56, 0.35)}
+                  ${arrow(13, 68, 0.7)}
+                  ${arrow(81, 44, 0)}
+                  ${arrow(84, 56, 0.35)}
+                  ${arrow(87, 68, 0.7)}
+                </svg>`;
+}
+
+function dragRailsTrackClose() {
+  return `              </div>`;
 }
 
 function traySocketMarkup() {
@@ -857,6 +863,7 @@ ${chipBody(base, "token")}
               </button>
               </div>
 ${traySocketMarkup()}
+${dragRailsTrackClose()}
             </div>
             <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag the chip down onto the socket</span></p>
           </aside>`;

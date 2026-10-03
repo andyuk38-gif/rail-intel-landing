@@ -1224,70 +1224,64 @@ body.is-engine-open .engine-socket-hit__label,
   pointer-events: none;
 }
 
-.engine-bay__drag-rails {
-  position: absolute;
-  inset: 7% 4% 10%;
+.engine-bay__track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0.1rem;
   z-index: 0;
-  pointer-events: none;
 }
 
-.engine-bay__drag-rail {
+.engine-bay__drag-rails-svg {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1.15rem;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
   height: 100%;
   overflow: visible;
+  pointer-events: none;
   color: #fbbf24;
 }
 
-.engine-bay__drag-rail--left {
-  left: 0;
-}
-
-.engine-bay__drag-rail--right {
-  right: 0;
-}
-
 .engine-bay__drag-rail-line {
-  stroke: rgba(251, 191, 36, 0.42);
-  stroke-width: 1.6;
+  stroke: rgba(251, 191, 36, 0.46);
+  stroke-width: 1.5;
   stroke-linecap: round;
-  stroke-dasharray: 3 7;
+  stroke-dasharray: 4 7;
+  vector-effect: non-scaling-stroke;
   animation: engine-bay-rail-dash 1.4s linear infinite;
 }
 
-.engine-bay__drag-rail-flow path {
+.engine-bay__drag-rail-arrow {
+  opacity: 0.4;
+  animation: engine-bay-rail-arrow 2.1s ease-in-out infinite;
+  animation-delay: var(--rail-delay, 0s);
+}
+
+.engine-bay__drag-rail-arrow path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 1.65;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.35;
-  animation: engine-bay-rail-chevron 2.1s ease-in-out infinite;
+  vector-effect: non-scaling-stroke;
 }
 
-.engine-bay__drag-rail-flow path:nth-child(2) {
-  animation-delay: 0.35s;
-}
-
-.engine-bay__drag-rail-flow path:nth-child(3) {
-  animation-delay: 0.7s;
-}
-
-.engine-bay.is-interacting .engine-bay__drag-rails,
-.engine-bay.is-armed .engine-bay__drag-rails,
-.engine-bay.is-spent .engine-bay__drag-rails {
+.engine-bay.is-interacting .engine-bay__drag-rails-svg,
+.engine-bay.is-armed .engine-bay__drag-rails-svg,
+.engine-bay.is-spent .engine-bay__drag-rails-svg {
   opacity: 0;
   visibility: hidden;
 }
 
 .engine-bay.is-interacting .engine-bay__drag-rail-line,
-.engine-bay.is-interacting .engine-bay__drag-rail-flow path,
+.engine-bay.is-interacting .engine-bay__drag-rail-arrow path,
 .engine-bay.is-armed .engine-bay__drag-rail-line,
-.engine-bay.is-armed .engine-bay__drag-rail-flow path,
+.engine-bay.is-armed .engine-bay__drag-rail-arrow path,
 .engine-bay.is-spent .engine-bay__drag-rail-line,
-.engine-bay.is-spent .engine-bay__drag-rail-flow path {
+.engine-bay.is-spent .engine-bay__drag-rail-arrow path {
   animation: none;
 }
 
@@ -1615,9 +1609,9 @@ body:has([data-engine-token]):not(.is-engine-open) .engine-bay .engine-socket__p
   to { stroke-dashoffset: -20; }
 }
 
-@keyframes engine-bay-rail-chevron {
-  0%, 100% { opacity: 0.28; transform: translateY(0); }
-  45% { opacity: 1; transform: translateY(5px); }
+@keyframes engine-bay-rail-arrow {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  45% { opacity: 1; transform: translateY(3px); }
 }
 
 @keyframes engine-label-float {
@@ -1732,7 +1726,7 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
   .engine-socket__pulse,
   .engine-token,
   .engine-bay__drag-rail-line,
-  .engine-bay__drag-rail-flow path,
+  .engine-bay__drag-rail-arrow path,
   .engine-bay .engine-token:not(.is-lifted):not(.is-dragging) .engine-token__svg,
   .engine-socket-hit__label,
   .engine-trace,
