@@ -505,6 +505,23 @@ function socketBox() {
   return boundsOf([...housing, ...pulse], 18);
 }
 
+function dragRailsMarkup() {
+  const chevrons = `<g class="engine-bay__drag-rail-flow">
+      <path d="M10 22 L6 16 L14 16" />
+      <path d="M10 50 L6 44 L14 44" />
+      <path d="M10 78 L6 72 L14 72" />
+    </g>`;
+  const rail = (side) =>
+    `<svg class="engine-bay__drag-rail engine-bay__drag-rail--${side}" viewBox="0 0 20 96" preserveAspectRatio="xMidYMin meet" role="presentation" aria-hidden="true">
+      <line class="engine-bay__drag-rail-line" x1="10" y1="4" x2="10" y2="92" />
+      ${chevrons}
+    </svg>`;
+  return `              <div class="engine-bay__drag-rails" aria-hidden="true">
+                ${rail("left")}
+                ${rail("right")}
+              </div>`;
+}
+
 function traySocketMarkup() {
   const box = socketBox();
   return `              <div class="engine-bay__well" data-engine-socket>
@@ -518,7 +535,7 @@ function traySocketMarkup() {
 ${socketMarkup()}
                 </svg>
                 <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop chip here</span>
-                <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release to unlock</span>
+                <span class="engine-socket-hit__label engine-socket-hit__label--armed">Place to unlock</span>
               </div>`;
 }
 
@@ -827,6 +844,7 @@ export function renderCompetencyEngineBay(base = "../") {
                 </span>
                 <p class="engine-bay__unlock-copy">You have now unlocked the <span>potential technologies</span> for your operations.</p>
               </div>
+${dragRailsMarkup()}
               <div class="engine-bay__home" data-engine-home>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
                 <svg class="engine-token__svg" viewBox="${fmt(seat.x)} ${fmt(seat.y)} ${fmt(seat.w)} ${fmt(seat.h)}" role="presentation" aria-hidden="true">
@@ -837,13 +855,6 @@ ${chipBody(base, "token")}
                 </svg>
                 <span class="sr-only">Competency engine chip. Drag it down onto the socket below to unlock the site, or press to seat it.</span>
               </button>
-              </div>
-              <div class="engine-bay__drag-guide" aria-hidden="true">
-                <span class="engine-bay__chip-tag">Drag me down</span>
-                <svg class="engine-bay__drag-guide-icon" viewBox="0 0 24 32" width="20" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 4v16M7 15l5 5 5-5" />
-                  <path class="engine-bay__drag-guide-icon-trail" d="M12 0v8M7 7l5 5 5-5" opacity="0.45" />
-                </svg>
               </div>
 ${traySocketMarkup()}
             </div>
