@@ -179,17 +179,14 @@ function renderShare(base) {
 function renderNav(base) {
   // The trigger is a link so a desktop click goes to the section index, while
   // hover (or a tap on touch) reveals the panel.
-  const featureGroup = (id, label, items, allHref, allLabel) => `
+  const featureGroup = (id, label, items, indexHref) => `
           <div class="nav-group" data-nav-group data-open="false">
-            <a class="nav-trigger" href="${base}${allHref}" data-nav-trigger aria-expanded="false" aria-controls="${id}-panel">
+            <a class="nav-trigger" href="${base}${indexHref}" data-nav-trigger aria-expanded="false" aria-controls="${id}-panel">
               ${esc(label)}<span class="nav-trigger__chevron" aria-hidden="true"></span>
             </a>
             <div class="nav-panel" id="${id}-panel">
               <div class="nav-panel__grid">
 ${renderNavItems(base, items)}
-              </div>
-              <div class="nav-panel__footer">
-                <a class="nav-panel__all" href="${base}${allHref}">${esc(allLabel)} &rarr;</a>
               </div>
             </div>
           </div>`;
@@ -233,9 +230,6 @@ ${productAppItems}
               <div class="nav-panel__grid">
 ${renderNavItems(base, addonItems)}
               </div>
-              <div class="nav-panel__footer">
-                <a class="nav-panel__all" href="${base}products/">All add-on modules &rarr;</a>
-              </div>
             </div>
           </div>`;
 
@@ -248,12 +242,10 @@ ${renderNavItems(base, addonItems)}
           "features",
           "Features",
           featureItems,
-          "features/",
-          "All features"
+          "features/"
         )}
           <a href="${base}security.html" class="nav-link">Security</a>
           <a href="${base}get-started.html" class="nav-link">Get started</a>
-          <a href="${site.app}" class="nav-link">Log in</a>
           <a href="${site.app}" class="btn btn-primary">Go to app</a>
         </div>
       </nav>`;
