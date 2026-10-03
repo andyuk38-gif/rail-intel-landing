@@ -517,8 +517,8 @@ function traySocketMarkup() {
                   </defs>
 ${socketMarkup()}
                 </svg>
-                <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop here</span>
-                <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release</span>
+                <span class="engine-socket-hit__label engine-socket-hit__label--idle">Drop chip here</span>
+                <span class="engine-socket-hit__label engine-socket-hit__label--armed">Release to unlock</span>
               </div>`;
 }
 
@@ -819,7 +819,7 @@ ${tickerItems}
 export function renderCompetencyEngineBay(base = "../") {
   const seat = chipBox();
   return `          <aside class="engine-bay" data-engine-bay style="--token-ratio: ${fmt(seat.w)} / ${fmt(seat.h)}">
-            <p class="engine-bay__kicker" data-engine-kicker>Ready to plug-in</p>
+            <p class="engine-bay__kicker" data-engine-kicker>Drag down to unlock</p>
             <div class="engine-bay__slot">
               <div class="engine-bay__unlock">
                 <span class="engine-bay__unlock-mark" aria-hidden="true">
@@ -828,6 +828,7 @@ export function renderCompetencyEngineBay(base = "../") {
                 <p class="engine-bay__unlock-copy">You have now unlocked the <span>potential technologies</span> for your operations.</p>
               </div>
               <div class="engine-bay__home" data-engine-home>
+              <span class="engine-bay__chip-tag" aria-hidden="true">Drag me down</span>
               <button type="button" class="engine-token" data-engine-token aria-describedby="engine-bay-hint">
                 <svg class="engine-token__svg" viewBox="${fmt(seat.x)} ${fmt(seat.y)} ${fmt(seat.w)} ${fmt(seat.h)}" role="presentation" aria-hidden="true">
                   <defs>
@@ -835,12 +836,18 @@ ${chipDefs("token")}
                   </defs>
 ${chipBody(base, "token")}
                 </svg>
-                <span class="sr-only">Competency engine chip. Drag it onto the socket, or press to seat it.</span>
+                <span class="sr-only">Competency engine chip. Drag it down onto the socket below to unlock the site, or press to seat it.</span>
               </button>
+              </div>
+              <div class="engine-bay__drag-guide" aria-hidden="true">
+                <svg class="engine-bay__drag-guide-icon" viewBox="0 0 24 32" width="20" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 4v16M7 15l5 5 5-5" />
+                  <path class="engine-bay__drag-guide-icon-trail" d="M12 0v8M7 7l5 5 5-5" opacity="0.45" />
+                </svg>
               </div>
 ${traySocketMarkup()}
             </div>
-            <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag onto the socket</span></p>
+            <p class="engine-bay__hint" id="engine-bay-hint"><span data-engine-hint>Drag the chip down onto the socket</span></p>
           </aside>`;
 }
 

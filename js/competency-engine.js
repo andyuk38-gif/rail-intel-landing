@@ -265,8 +265,12 @@
     if (statusLabel) statusLabel.textContent = on ? "Live feeds" : "Socket open";
     if (deviceLabel) deviceLabel.textContent = on ? "Operational Compliance" : "Awaiting Rail Intel Technologies";
     if (outputsLabel) outputsLabel.textContent = on ? "Drives assessment and compliance" : "Drag the chip to seat";
-    if (kicker) kicker.textContent = on ? "Engine online" : "Ready to plug-in";
-    if (hint) hint.textContent = coarse ? "Drag or tap onto the socket" : "Drag onto the socket";
+    if (kicker) kicker.textContent = on ? "Engine online" : "Drag down to unlock";
+    if (hint) {
+      hint.textContent = coarse
+        ? "Drag the chip down onto the socket, or tap it"
+        : "Drag the chip down onto the socket";
+    }
   }
 
   var coarse = window.matchMedia("(pointer: coarse)").matches;
@@ -451,7 +455,7 @@
     if (!live || busy) return;
     rememberSeat(false);
     quietUnseat();
-    say("Chip unplugged. Drag it onto the socket.");
+    say("Chip unplugged. Drag it down onto the socket.");
     window.scrollTo({ top: 0, left: 0, behavior: reduced ? "auto" : "smooth" });
   }
 
@@ -470,6 +474,7 @@
     };
     placeToken(rect);
     revealSocket();
+    if (bay) bay.classList.add("is-interacting");
     token.classList.add("is-dragging");
     token.setAttribute("aria-grabbed", "true");
     try {
@@ -511,6 +516,7 @@
     var moved = drag.moved;
     var near = event ? overSocket(event.clientX, event.clientY) : false;
     token.classList.remove("is-dragging");
+    if (bay) bay.classList.remove("is-interacting");
     if (token.hasPointerCapture && event && token.hasPointerCapture(event.pointerId)) {
       token.releasePointerCapture(event.pointerId);
     }
@@ -531,6 +537,7 @@
   token.addEventListener("pointercancel", function (event) {
     if (!drag || event.pointerId !== drag.id) return;
     token.classList.remove("is-dragging");
+    if (bay) bay.classList.remove("is-interacting");
     if (token.hasPointerCapture && token.hasPointerCapture(event.pointerId)) {
       token.releasePointerCapture(event.pointerId);
     }

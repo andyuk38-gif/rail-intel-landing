@@ -1232,10 +1232,62 @@ body.is-engine-open .engine-socket-hit__label,
   aspect-ratio: var(--token-ratio);
 }
 
+.engine-bay__chip-tag {
+  position: absolute;
+  left: 50%;
+  bottom: 0.1rem;
+  z-index: 2;
+  transform: translateX(-50%);
+  padding: 0.24rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 158, 11, 0.55);
+  background: rgba(8, 12, 18, 0.82);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28), 0 0 16px rgba(245, 158, 11, 0.18);
+  color: #fde68a;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: engine-bay-chip-nudge 2.4s ease-in-out infinite;
+}
+
+.engine-bay__drag-guide {
+  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: -0.05rem 0 -0.15rem;
+  color: #fbbf24;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+.engine-bay__drag-guide-icon {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.35));
+  animation: engine-bay-guide-pulse 2.4s ease-in-out infinite;
+}
+
+.engine-bay.is-interacting .engine-bay__chip-tag,
+.engine-bay.is-interacting .engine-bay__drag-guide,
+.engine-bay.is-armed .engine-bay__chip-tag,
+.engine-bay.is-armed .engine-bay__drag-guide,
+.engine-bay.is-spent .engine-bay__chip-tag,
+.engine-bay.is-spent .engine-bay__drag-guide {
+  opacity: 0;
+  visibility: hidden;
+  animation: none;
+}
+
 .engine-bay__well {
   position: relative;
   z-index: 0;
-  order: 2;
+  order: 3;
   display: grid;
   place-items: center;
   width: 88%;
@@ -1392,12 +1444,26 @@ body.is-engine-open .engine-socket-hit__label,
 }
 
 .engine-bay__hint {
-  margin: 0.35rem 0 0;
+  margin: 0.45rem 0 0;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #c5d0de;
+  color: #e8d48a;
+  text-align: center;
+  text-wrap: balance;
+  max-width: 14rem;
+  line-height: 1.35;
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .engine-bay__hint {
+  text-shadow: 0 0 18px rgba(245, 158, 11, 0.22);
+}
+
+body:has([data-engine-token]):not(.is-engine-open) .engine-bay .engine-socket__pulse {
+  animation-duration: 1.85s;
+  stroke: rgba(251, 191, 36, 0.55);
 }
 
 .engine-bay.is-spent .engine-bay__hint {
@@ -1502,6 +1568,16 @@ body.is-engine-open .engine-socket-hit__label,
 @keyframes engine-token-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
+}
+
+@keyframes engine-bay-chip-nudge {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(5px); }
+}
+
+@keyframes engine-bay-guide-pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.75; }
+  50% { transform: translateY(5px); opacity: 1; }
 }
 
 @keyframes engine-label-float {
@@ -1615,6 +1691,8 @@ body:has([data-engine-token]):not(.is-engine-open) .hero:has(.hero-engine) {
   .engine__scene,
   .engine-socket__pulse,
   .engine-token,
+  .engine-bay__chip-tag,
+  .engine-bay__drag-guide-icon,
   .engine-socket-hit__label,
   .engine-trace,
   .engine-addon,
