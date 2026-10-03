@@ -42,13 +42,14 @@ export const products = [
     pageBadge: "In development",
     seoTitle: "Rail Investigations Software | Rail Intel Investigations",
     seoDescription:
-      "Rail Intel Investigations — evidence-first investigation software for UK rail, in active development with a planned mid-2027 launch.",
-    seoKeywords: "rail investigations software, incident investigation rail, RCA rail, ORR investigation evidence",
+      "Rail Intel Investigations — evidence-first investigation software for UK rail, with an industry-aligned fatigue engine and optional secure API linking to Rail Intel CMS, in active development for a mid-2027 launch.",
+    seoKeywords:
+      "rail investigations software, incident investigation rail, RCA rail, ORR investigation evidence, rail fatigue calculator, FRMS rail, shift pattern fatigue",
     summary:
       "Evidence-first rail investigations — in active development for a mid-2027 launch.",
     tagline: "Investigations with the evidence in one place",
     lead:
-      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file — not scattered across email, chat and shared drives. It's in active development now, with a planned launch in mid 2027.",
+      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file — not scattered across email, chat and shared drives. It includes an automated, industry-aligned fatigue engine for safety-critical staff, shaped with pilots and rail industry partners. Active development continues toward a planned launch in mid 2027.",
     faq: [
       {
         question: "When will Rail Intel Investigations launch?",
@@ -58,7 +59,12 @@ export const products = [
       {
         question: "Is Rail Intel Investigations separate from CMS?",
         answer:
-          "Yes. Investigations is planned as a standalone app alongside Rail Intel CMS. We're exploring an optional link so you can pull workforce and competency context into a case when you need it — without merging the two products.",
+          "Yes. Investigations is designed to run as a standalone system. When you use Rail Intel CMS as well, an optional link via secure API tokens lets both products stay aligned on people and competency context — while investigation data remains in Investigations, under your access controls.",
+      },
+      {
+        question: "How will Investigations link to Rail Intel CMS?",
+        answer:
+          "We're planning a deliberate, token-based API connection configured by administrators on both sides — not an open data merge. Approved tokens allow agreed workforce and competency lookups to support an investigation; the case file, evidence and findings stay confidential within Investigations unless you choose to share them through your normal process.",
       },
       {
         question: "Will the features on this page match the final product?",
@@ -69,6 +75,11 @@ export const products = [
         question: "Can we talk to the team before launch?",
         answer:
           "Yes. Use Register your interest or contact us if you want to share how your operation runs investigations today — that feedback helps us prioritise what ships first.",
+      },
+      {
+        question: "What fatigue capability is planned for Investigations?",
+        answer:
+          "We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns against industry-aligned criteria, supports investigation-level assessment, and offers deeper trend views for assurance. It reflects pilot work, partner input and operational experience — final behaviour and standards mapping may evolve before launch.",
       },
     ],
     relatedLinks: [
@@ -84,7 +95,9 @@ export const products = [
         "Built with UK rail investigation practice in mind — designed for assurance teams, investigators and safety leadership.",
       milestones: [
         "Active development with early design partners",
+        "Fatigue engine informed by pilots and rail industry partners",
         "Standalone app — not a CMS add-on module",
+        "Optional secure API link to Rail Intel CMS when you need alignment",
         "Early access conversations ahead of launch",
       ],
       disclaimer:
@@ -114,14 +127,29 @@ export const products = [
             "Compile the investigation record for export and sign-off when you're ready to close — with an audit trail behind changes.",
         },
         {
-          title: "Safety-critical workflows",
+          title: "Automated fatigue calculator",
           detail:
-            "Room for drugs & alcohol, fatigue and other operational factors on the investigation path when your procedure requires them.",
+            "Analyse shift patterns for safety-critical staff with an automated engine aligned to industry expectations — built for investigation use, not spreadsheet side calculations.",
         },
         {
-          title: "Optional CMS context",
+          title: "Fatigue trends & assurance",
           detail:
-            "When linked to Rail Intel CMS, bring workforce and competency context into the case without duplicating your system of record.",
+            "Go beyond a single case snapshot with trend views that help safety and assurance teams understand fatigue exposure over time.",
+        },
+        {
+          title: "Safety-critical workflows",
+          detail:
+            "Drugs & alcohol and other operational factors on the investigation path when your procedure requires them — alongside fatigue where the case demands it.",
+        },
+        {
+          title: "Secure CMS linking",
+          detail:
+            "Optional API tokens connect Investigations to Rail Intel CMS so people and competency data stay aligned — without moving confidential case material into CMS.",
+        },
+        {
+          title: "Standalone by design",
+          detail:
+            "Run Investigations on its own with no CMS dependency, or enable the link when your operation wants shared context on both sides.",
         },
       ],
       themes: [
@@ -133,10 +161,19 @@ export const products = [
           ],
         },
         {
-          heading: "Part of the Rail Intel suite",
+          heading: "A fatigue engine built to a higher standard",
           body: [
-            "Rail Intel CMS remains the competency system of record. Investigations is a separate product for investigation teams — with optional connectivity when you want shared people data and competency context on the subject of an investigation.",
-            "Add-ons such as Driver Reports can feed structured operational events into your wider safety picture; Investigations is where those events can mature into a managed case when your process demands it.",
+            "Fatigue belongs on the critical path for many rail investigations — but it is often handled with manual spreadsheets, opaque assumptions and little continuity between cases. We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns within the investigation file, aligned with industry standards and the way UK operators already frame fatigue risk.",
+            "The engine is designed for depth: structured inputs, defensible outputs, and trend analysis so investigators and assurance leads can move from a single shift pattern to organisational patterns over time. Our aim is the most sophisticated fatigue capability ever integrated into a rail investigation platform — a reference-grade tool, not a checklist bolt-on.",
+            "That ambition is grounded in research and delivery. We have tested concepts with pilot operators, worked with rail industry partners, and drawn on hands-on operational experience to decide what investigators actually need at 02:00 when the file has to stand up to review. Capabilities on this page reflect that direction; exact models, thresholds and reporting may change as we complete development.",
+          ],
+        },
+        {
+          heading: "Aligned with CMS — or fully standalone",
+          body: [
+            "Rail Intel CMS remains the competency system of record; Investigations is a separate product for investigation teams. You can operate Investigations alone, with no CMS tenant required — many organisations will want that separation so sensitive case material stays inside the investigation boundary.",
+            "When you use both products, we're building linkage through secure API tokens issued and approved on each side. That keeps the systems aligned on agreed workforce and competency context — who someone is, cycle status, team membership — while investigation evidence, findings and reports remain confidential within Investigations unless you export or share them deliberately.",
+            "The connection is optional and administrator-controlled, not an automatic merge of databases. Add-ons such as Driver Reports can still feed structured operational events into your wider safety picture; Investigations is where those events can mature into a managed case when your process demands it.",
           ],
         },
       ],
