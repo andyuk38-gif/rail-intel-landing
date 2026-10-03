@@ -1506,16 +1506,40 @@ function productPreviewPage(product) {
   const pillarTiles = renderSpecTileList(pillars, "        ", { hideIndex: true });
 
   const themeSections = themes
-    .map(
-      (theme) => `    <section class="page-section">
+    .map((theme) => {
+      const bodyHtml = (theme.body || [])
+        .map((paragraph) => `          <p>${esc(paragraph)}</p>`)
+        .join("\n");
+      const media = theme.media;
+      if (media?.src) {
+        const imgSrc = `${base}${media.src}?v=${ASSET_VERSION}`;
+        const imgWidth = media.width || 768;
+        const imgHeight = media.height || 1024;
+        return `    <section class="page-section page-section--inv-preview-theme">
       <div class="container">
-        <div class="page-section__head">
-          <h2>${esc(theme.heading)}</h2>
-${(theme.body || []).map((paragraph) => `          <p>${esc(paragraph)}</p>`).join("\n")}
+        <div class="inv-preview-theme">
+          <div class="inv-preview-theme__copy page-section__head">
+            <h2>${esc(theme.heading)}</h2>
+${bodyHtml}
+          </div>
+          <figure class="inv-preview-theme__figure">
+            <img class="inv-preview-theme__img" src="${imgSrc}" alt="${esc(media.alt || "")}" width="${imgWidth}" height="${imgHeight}" loading="lazy" decoding="async" />
+          </figure>
         </div>
       </div>
-    </section>`
-    )
+    </section>`;
+      }
+      const fullWidthClass = theme.fullWidth ? " page-section--inv-preview-theme-full" : "";
+      const headClass = theme.fullWidth ? "page-section__head page-section__head--full" : "page-section__head";
+      return `    <section class="page-section${fullWidthClass}">
+      <div class="container">
+        <div class="${headClass}">
+          <h2>${esc(theme.heading)}</h2>
+${bodyHtml}
+        </div>
+      </div>
+    </section>`;
+    })
     .join("\n\n");
 
   const disclaimer = preview.disclaimer

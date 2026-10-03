@@ -10222,6 +10222,62 @@ body.lightbox-open {
   margin-top: 0.25rem;
 }
 
+.page-section--inv-preview-theme-full .page-section__head--full {
+  max-width: none;
+}
+
+.page-section--inv-preview-theme-full .page-section__head--full > p {
+  max-width: none;
+}
+
+.page-section--inv-preview-theme {
+  overflow: hidden;
+}
+
+.inv-preview-theme {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 2rem 2.75rem;
+  align-items: center;
+}
+
+.inv-preview-theme__copy {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+.inv-preview-theme__figure {
+  margin: 0;
+  justify-self: end;
+  width: min(100%, 22.5rem);
+}
+
+.inv-preview-theme__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 24px 48px rgba(0, 0, 0, 0.42),
+    0 0 60px rgba(59, 130, 246, 0.12);
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .inv-preview-theme {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .inv-preview-theme__figure {
+    justify-self: center;
+    max-width: 20rem;
+    order: -1;
+  }
+}
+
 .inv-preview-disclaimer {
   margin: 1.75rem 0 0;
   max-width: 42rem;

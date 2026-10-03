@@ -156,6 +156,7 @@ export const products = [
       themes: [
         {
           heading: "Designed for how rail actually investigates",
+          fullWidth: true,
           body: [
             "Investigations rarely fail because teams lack commitment, they fail because the record fragments. Rail Intel Investigations is being shaped around evidence-first practice: one file per case, clear roles, and a path from opening the investigation to sealing the outcome.",
             "We're not trying to replace your safety management system overnight. The goal is a focused app that does investigation workflow well, sits alongside Rail Intel CMS, and respects the assurance expectations UK operators already work to.",
@@ -163,6 +164,13 @@ export const products = [
         },
         {
           heading: "A fatigue engine built to a higher standard",
+          media: {
+            src: "images/product/investigations-fatigue-engine.jpg",
+            alt:
+              "Abstract illustration combining a human profile with fatigue risk glows and advanced shift-pattern analytics overlays.",
+            width: 864,
+            height: 1152,
+          },
           body: [
             "Fatigue belongs on the critical path for many rail investigations, but it is often handled with manual spreadsheets, opaque assumptions and little continuity between cases. We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns within the investigation file, aligned with industry standards and the way UK operators already frame fatigue risk.",
             "The engine is designed for depth: structured inputs, defensible outputs, and trend analysis so investigators and assurance leads can move from a single shift pattern to organisational patterns over time. Our aim is the most sophisticated fatigue capability ever integrated into a rail investigation platform, a reference-grade tool, not a checklist bolt-on.",
@@ -171,6 +179,13 @@ export const products = [
         },
         {
           heading: "Aligned with CMS, or fully standalone",
+          media: {
+            src: "images/product/investigations-cms-linking.jpg",
+            alt:
+              "Abstract illustration of Rail Intel CMS workforce competency data linked to Investigations through a secure API token bridge.",
+            width: 864,
+            height: 1152,
+          },
           body: [
             "Rail Intel CMS remains the competency system of record; Investigations is a separate product for investigation teams. You can operate Investigations alone, with no CMS tenant required, many organisations will want that separation so sensitive case material stays inside the investigation boundary.",
             "When you use both products, we're building linkage through secure API tokens issued and approved on each side. That keeps the systems aligned on agreed workforce and competency context, who someone is, cycle status, team membership, while investigation evidence, findings and reports remain confidential within Investigations unless you export or share them deliberately.",
