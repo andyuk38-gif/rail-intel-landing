@@ -1416,9 +1416,11 @@ ${bullets}
 
   if (section.tileSplit) {
     const tileSplitShots = section.shots ? renderShotList(section.shots) : "";
+    const tileHeadWide = Boolean(section.fullWidth);
+    const tileHeadClass = tileHeadWide ? "page-section__head page-section__head--full" : "page-section__head";
     return `    <section class="page-section${section.mod ? ` page-section--${section.mod}` : ""}"${sectionIdAttr(section)}>
       <div class="container">
-        <div class="page-section__head">
+        <div class="${tileHeadClass}">
 ${renderSectionHeadingMarkup(section, base)}
 ${body}
         </div>
@@ -1849,9 +1851,15 @@ function renderTraineeFlow(addon, base) {
 
   const track = steps.map((step, index) => renderJourneyStep(step, base, index, total)).join("\n");
 
-  return `    <section class="page-section page-section--trainee-journey">
+  const flowHeadFull = Boolean(addon.flowIntro?.fullWidth);
+  const journeySectionClass = flowHeadFull
+    ? "page-section page-section--trainee-journey page-section--trainee-journey-head-full"
+    : "page-section page-section--trainee-journey";
+  const flowHeadClass = flowHeadFull ? "page-section__head page-section__head--full" : "page-section__head";
+
+  return `    <section class="${journeySectionClass}">
       <div class="container container--trainee-journey">
-        <div class="page-section__head">
+        <div class="${flowHeadClass}">
           <h2>${esc(addon.flowIntro.heading)}</h2>
           <p>${esc(addon.flowIntro.body)}</p>
         </div>

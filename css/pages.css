@@ -1434,6 +1434,18 @@
   max-width: 84rem;
 }
 
+.page-section--leave-overview .page-section__head {
+  max-width: none;
+}
+
+.page-section--leave-overview .page-section__head > h2 {
+  max-width: 46rem;
+}
+
+.page-section--leave-overview .page-section__head > p {
+  max-width: none;
+}
+
 .page-section--leave-overview .page-section__tile-split {
   grid-template-columns: minmax(0, 14rem) 1024px;
   justify-content: space-between;
@@ -6257,6 +6269,14 @@ body.lightbox-open {
 
 .page-section--trainee-journey {
   padding-top: 2.5rem;
+}
+
+.page-section--trainee-journey-head-full .page-section__head--full {
+  max-width: none;
+}
+
+.page-section--trainee-journey-head-full .page-section__head--full > p {
+  max-width: none;
 }
 
 .container--trainee-journey {

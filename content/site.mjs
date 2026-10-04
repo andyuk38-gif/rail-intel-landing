@@ -555,8 +555,9 @@ export const addons = [
     },
     flowIntro: {
       heading: "How the module works",
+      fullWidth: true,
       body:
-        "Scroll through each step below — the same pathway as the module, top to bottom. Policies first, then schedules, groups, enrolment and training-cycle assignment. Optional equipment can be prepared before enrolment.",
+        "Scroll through each step below, the same pathway as the module, top to bottom. Policies first, then schedules, groups, enrolment and training-cycle assignment. Optional equipment can be prepared before enrolment.",
     },
     flowSteps: [
       {
@@ -838,6 +839,7 @@ export const addons = [
       {
         heading: "Entitlements and balances per employee",
         mod: "leave-overview",
+        fullWidth: true,
         tileSplit: true,
         bulletTiles: true,
         body: [

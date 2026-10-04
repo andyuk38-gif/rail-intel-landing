@@ -25,7 +25,7 @@ export const seoExtensions = {
       {
         question: "How do you get notified of a task?",
         answer:
-          "When a task is assigned to you, Rail Intel's communications hub picks it up and notifies you by email and with an in-app system notification — so the follow-up reaches you even if you are not already in the application.",
+          "When a task is assigned to you, Rail Intel's communications hub picks it up and notifies you by email and with an in-app system notification, so the follow-up reaches you even if you are not already in the application.",
       },
     ],
     relatedLinks: [],
@@ -88,7 +88,7 @@ export const seoExtensions = {
       {
         question: "What does a driver report capture?",
         answer:
-          "Structured operational context — turn, headcode, conditions and narrative — signed by the driver and retained on their employee record.",
+          "Structured operational context, turn, headcode, conditions and narrative, signed by the driver and retained on their employee record.",
       },
       {
         question: "Can reports export to Investigations?",
