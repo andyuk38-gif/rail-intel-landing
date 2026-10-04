@@ -2380,7 +2380,7 @@ export const getStarted = {
   procurementNotice: {
     heading: "Procurement & supplier onboarding",
     lead:
-      "If your organisation needs supplier onboarding documents — company registration, bank details, insurance, Cyber Essentials, DPA and related assurance — you do not need a separate portal on this site.",
+      "If your organisation needs supplier onboarding documents, company registration, bank details, insurance, Cyber Essentials, DPA and related assurance, you do not need a separate portal on this site.",
     body: [
       "Mention it in your application notes or when you speak to our team. If you request a quotation, we can include the procurement pack with that quote. You can also request the pack later at any stage.",
     ],
