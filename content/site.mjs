@@ -504,7 +504,7 @@ export const addons = [
     hideHeroActions: true,
     heroLeadFullWidth: true,
     summary: "Record who received which brief, in person or remotely, with evidence.",
-    tagline: "Evidence that the brief actually landed",
+    tagline: "Evidence that the brief actually delivered",
     lead:
       "Issuing a safety brief is easy. Proving that a specific driver received it, when, and from whom is the part that fails an audit. Safety Briefs records attendance per employee with the delivery method and provider captured against the record.",
     sections: [
