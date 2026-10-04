@@ -1070,6 +1070,21 @@ export const featureGroups = [
         answer:
           "Yes. Assessors record structured observations in the field, including Tunnel Mode for low-glare assessing in dark cabs.",
       },
+      {
+        question: "Can an employee hold more than one live cycle of the same type?",
+        answer:
+          "No. Only one live cycle of a given type is allowed on the employee record at a time, so start and expiry stay unambiguous. Closing a cycle moves it to Closed Cycles before a new period can begin.",
+      },
+      {
+        question: "What happens to open development points when a cycle renews?",
+        answer:
+          "Continuous cycles renew rather than end, and unfinished CDP monitoring can carry into the next period so open development points are not lost at the boundary. Assessment evidence and grades remain available from Closed Cycles.",
+      },
+      {
+        question: "How do company standards apply across cycles?",
+        answer:
+          "Frameworks, grading scales and timing standards, including daylight, darkness and session minimums, are configured once as company standards and applied to every cycle that references them.",
+      },
     ],
     relatedLinks: [
       { name: "Medicals & Licences", href: "features/medicals-licensing.html" },

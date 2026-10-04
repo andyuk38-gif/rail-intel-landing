@@ -261,7 +261,7 @@ export const seoExtensions = {
       {
         question: "What happens while a profile is locked?",
         answer:
-          "Every section of the record becomes read-only for all users — medicals, competence, training, incidents, cycles, notes and documents cannot be added, changed or deleted until an administrator unlocks the profile.",
+          "Every section of the record becomes read-only for all users, medicals, competence, training, incidents, cycles, notes and documents cannot be added, changed or deleted until an administrator unlocks the profile.",
       },
       {
         question: "Is a reason recorded when a profile is locked?",
@@ -276,7 +276,7 @@ export const seoExtensions = {
       {
         question: "What is a SPOC in a RAIB inquiry?",
         answer:
-          "SPOC stands for Single Point of Contact. During a RAIB inquiry, your organisation nominates a SPOC as the person investigators liaise with on evidence and access. That role would normally be the company administrator — the same role that applies and releases profile lock in Rail Intel CMS.",
+          "SPOC stands for Single Point of Contact. During a RAIB inquiry, your organisation nominates a SPOC as the person investigators liaise with on evidence and access. That role would normally be the company administrator, the same role that applies and releases profile lock in Rail Intel CMS.",
       },
     ],
   },
