@@ -17,6 +17,9 @@ import { homeGallery } from "../content/home-gallery.mjs";
 import {
   SITE_URL,
   DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_WIDTH,
+  DEFAULT_OG_IMAGE_HEIGHT,
+  DEFAULT_OG_IMAGE_ALT,
   SITE_NAME,
   home as homeSeo,
   staticPages,
@@ -275,9 +278,11 @@ ${keywords}  <link rel="canonical" href="${esc(canonical)}" />
   <meta property="og:description" content="${esc(pageSeo.description)}" />
   <meta property="og:url" content="${esc(canonical)}" />
   <meta property="og:image" content="${esc(ogImage)}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="First, unlock the power by plugging in our technology. The Rail Intel chip, ready to plug in." />
+  <meta property="og:image:secure_url" content="${esc(ogImage)}" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="${DEFAULT_OG_IMAGE_WIDTH}" />
+  <meta property="og:image:height" content="${DEFAULT_OG_IMAGE_HEIGHT}" />
+  <meta property="og:image:alt" content="${esc(DEFAULT_OG_IMAGE_ALT)}" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${esc(pageSeo.title)}" />
