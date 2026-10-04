@@ -229,7 +229,7 @@ export const addons = [
       {
         question: "What does QA Verifications check?",
         answer:
-          "It evaluates live employee record data — competency cycles, assessments, medicals, licence expiry and monitoring history — against configured criteria with section-level outcomes.",
+          "It evaluates live employee record data, competency cycles, assessments, medicals, licence expiry and monitoring history, against configured criteria with section-level outcomes.",
       },
       {
         question: "Can I use QA Verifications for external audits?",
@@ -239,7 +239,7 @@ export const addons = [
       {
         question: "Can I see compliance when I forget to run a report?",
         answer:
-          "Yes. Compliance is not only visible when you run a formal verification. As record data changes, issues surface on the manager dashboard in real time — advisory and review items, lapsed competencies and other findings appear in the live feed for your team, so you can see where you stand without waiting for a scheduled check.",
+          "Yes. Compliance is not only visible when you run a formal verification. As record data changes, issues surface on the manager dashboard in real time, advisory and review items, lapsed competencies and other findings appear in the live feed for your team, so you can see where you stand without waiting for a scheduled check.",
       },
       {
         question: "What if I do not want a particular element checked?",
@@ -249,7 +249,7 @@ export const addons = [
       {
         question: "How do I add the QA Verifications module?",
         answer: [
-          "QA Verifications is activated from the Add-ons library inside Rail Intel CMS. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate — or start a 14-day trial where offered.",
+          "QA Verifications is activated from the Add-ons library inside Rail Intel CMS. Sign in as a company administrator, open Administration from the main navigation, then select Add-ons. In the library, locate the QA Verifications Module tile and choose Activate, or start a 14-day trial where offered.",
           "The module is enabled for your company only; once active, verification checks are available from employee records and the company-wide QA Verifications page.",
         ],
         shot: {
@@ -400,7 +400,7 @@ export const addons = [
         bulletTiles: true,
         crispShots: true,
         body: [
-          "Many operators are required to evidence compliance on a quarterly, six-monthly or annual cycle — but meeting that obligation by pulling records and checking them by hand is slow, inconsistent and hard to defend under scrutiny. Sampled run analysis replaces that process with a single action.",
+          "Many operators are required to evidence compliance on a quarterly, six-monthly or annual cycle, but meeting that obligation by pulling records and checking them by hand is slow, inconsistent and hard to defend under scrutiny. Sampled run analysis replaces that process with a single action.",
           "Choose the percentage of employees to include, run the sample, and Rail Intel selects individuals at random, verifies each record against your configured checks, and presents the results with donut analytics and a highlighted list of who was included. The run is retained in history alongside every other verification, so you have a clear audit trail of what was tested, when, and by whom.",
         ],
         bullets: [
