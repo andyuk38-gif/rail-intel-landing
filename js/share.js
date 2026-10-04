@@ -21,7 +21,7 @@
     url.hash = "";
     // WhatsApp keeps the first preview it fetched for a link. A new query
     // makes the next share a link it has not cached yet.
-    url.searchParams.set("v", "4");
+    url.searchParams.set("v", "5");
     return url.toString();
   }
 
@@ -38,13 +38,11 @@
         "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(message);
     }
     if (linkedin) {
-      // LinkedIn stores the first preview for a URL for about a week, and its
-      // link card is 1200×627. This path has never been scraped and only
-      // advertises that wide image.
-      var linkedinPage = new URL("/share/card.html", window.location.origin);
+      // LinkedIn caches previews per URL for days. Use the same cache-busted page
+      // URL as WhatsApp (proven to pick up og:image), not legacy /share/card.html.
       linkedin.href =
         "https://www.linkedin.com/sharing/share-offsite/?url=" +
-        encodeURIComponent(linkedinPage.toString());
+        encodeURIComponent(url);
     }
     if (whatsapp) {
       whatsapp.href = "https://wa.me/?text=" + encodeURIComponent(title + " " + url);
