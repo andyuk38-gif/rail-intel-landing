@@ -57,7 +57,7 @@ function renderTemplateStore(template, logoUrl) {
 const SCHEDULED_ALERTS = [
   {
     title: "Assessment windows",
-    detail: "Open and closing reminders for scheduled cycle events — emailed to assessing managers with window dates.",
+    detail: "Open and closing reminders for scheduled cycle events, emailed to assessing managers with window dates.",
     templates: ["assessment-window-open", "assessment-window-closing"],
   },
   {
@@ -157,7 +157,7 @@ export function renderCommHubSignalPanel() {
           <p class="comm-hub-signal-panel__tagline" data-comm-signal-tagline>Same event · inbox and dashboard · no manual chasing</p>
           <div class="comm-hub-signal-panel__progress" aria-hidden="true"><span data-comm-signal-progress></span></div>
         </div>
-        <p class="comm-hub-signal-panel__caption">Rules across competency, medicals, incidents and messaging — delivered on two channels automatically.</p>`;
+        <p class="comm-hub-signal-panel__caption">Rules across competency, medicals, incidents and messaging, delivered on two channels automatically.</p>`;
 }
 
 export function renderCommunicationsHubHero() {
@@ -407,7 +407,7 @@ ${notificationItems}
         <div class="page-section__head">
           <p class="product-eyebrow">Scheduled alerts</p>
           <h2>Time-based rules that run without anyone watching a calendar</h2>
-          <p>Rail Intel's scheduler evaluates competence cycles, licence dates, continuous renewals and welfare milestones daily. When criteria match, the communications hub sends the right template — by email and as a system notification.</p>
+          <p>Rail Intel's scheduler evaluates competence cycles, licence dates, continuous renewals and welfare milestones daily. When criteria match, the communications hub sends the right template, by email and as a system notification.</p>
         </div>
         <div class="comm-hub-schedule-grid">
 ${scheduledCards}
@@ -441,8 +441,8 @@ ${scheduledCards}
         <div class="comm-hub-section__copy">
           <p class="product-eyebrow">Maintained by Rail Intel</p>
           <h2>Automated does not mean generic</h2>
-          <p>Every transactional email is written and maintained by Rail Intel — cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
-          <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
+          <p>Every transactional email is written and maintained by Rail Intel, cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
+          <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging, updated centrally so messaging stays consistent.</p>
         </div>
         <div class="comm-hub-section__media">
 ${renderCommHubSignalPanel()}

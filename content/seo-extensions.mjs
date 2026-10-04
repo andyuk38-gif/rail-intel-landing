@@ -209,13 +209,10 @@ export const seoExtensions = {
       {
         question: "Can we control the emails that are sent?",
         answer:
-          "You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel — companies do not create or override templates in Administration.",
+          "You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel, companies do not create or override templates in Administration.",
       },
     ],
-    relatedLinks: [
-      { name: "Administration", href: "features/administration.html" },
-      { name: "Incidents & Monitoring", href: "features/incidents-monitoring.html" },
-    ],
+    relatedLinks: [],
   },
 
   "printable-profile": {

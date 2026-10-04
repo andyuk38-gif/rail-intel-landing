@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://railintel.co.uk/images/share/hero-share.jpg" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Rail Communications Hub | Automated Emails & System Notifications","description":"Automate alert emails and in-app system notifications from conditional rules — competency expiries, medical renewals, incidents, welfare follow-up and on-record messaging.","url":"https://railintel.co.uk/features/communications-hub.html","isPartOf":{"@type":"WebSite","name":"Rail Intel","url":"https://railintel.co.uk"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Rail Intel","item":"https://railintel.co.uk/"},{"@type":"ListItem","position":2,"name":"Features","item":"https://railintel.co.uk/features/index.html"},{"@type":"ListItem","position":3,"name":"Communications Hub","item":"https://railintel.co.uk/features/communications-hub.html"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What triggers automated communications in Rail Intel?","acceptedAnswer":{"@type":"Answer","text":"Conditional rules across competency, medicals, licensing, incidents, monitoring and messaging drive both email alerts and in-app system notifications when configured criteria are met."}},{"@type":"Question","name":"Can we control the emails that are sent?","acceptedAnswer":{"@type":"Answer","text":"You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel — companies do not create or override templates in Administration."}}],"url":"https://railintel.co.uk/features/communications-hub.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What triggers automated communications in Rail Intel?","acceptedAnswer":{"@type":"Answer","text":"Conditional rules across competency, medicals, licensing, incidents, monitoring and messaging drive both email alerts and in-app system notifications when configured criteria are met."}},{"@type":"Question","name":"Can we control the emails that are sent?","acceptedAnswer":{"@type":"Answer","text":"You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel, companies do not create or override templates in Administration."}}],"url":"https://railintel.co.uk/features/communications-hub.html"}</script>
   <meta name="site-admin-api" content="/5473/api" />
   <meta name="cms-api" content="https://cms.railintel.co.uk/api" />
   <meta name="signup-api-proxy" content="/api/signup-proxy.php" />
@@ -34,9 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css?v=107968013" />
-  <link rel="stylesheet" href="../css/pages.css?v=107968013" />
-  <link rel="stylesheet" href="../css/communications-hub.css?v=107968013" />
+  <link rel="stylesheet" href="../css/style.css?v=46133027" />
+  <link rel="stylesheet" href="../css/pages.css?v=46133027" />
+  <link rel="stylesheet" href="../css/communications-hub.css?v=46133027" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -1388,12 +1388,12 @@
         <div class="page-section__head">
           <p class="product-eyebrow">Scheduled alerts</p>
           <h2>Time-based rules that run without anyone watching a calendar</h2>
-          <p>Rail Intel's scheduler evaluates competence cycles, licence dates, continuous renewals and welfare milestones daily. When criteria match, the communications hub sends the right template — by email and as a system notification.</p>
+          <p>Rail Intel's scheduler evaluates competence cycles, licence dates, continuous renewals and welfare milestones daily. When criteria match, the communications hub sends the right template, by email and as a system notification.</p>
         </div>
         <div class="comm-hub-schedule-grid">
           <article class="comm-hub-schedule-card">
             <h3>Assessment windows</h3>
-            <p>Open and closing reminders for scheduled cycle events — emailed to assessing managers with window dates.</p>
+            <p>Open and closing reminders for scheduled cycle events, emailed to assessing managers with window dates.</p>
             <ul class="comm-hub-schedule-card__templates"><li><button type="button" data-comm-jump="assessment-window-open">Assessment window open</button></li><li><button type="button" data-comm-jump="assessment-window-closing">Assessment window closing soon</button></li></ul>
           </article>
           <article class="comm-hub-schedule-card">
@@ -1441,8 +1441,8 @@
         <div class="comm-hub-section__copy">
           <p class="product-eyebrow">Maintained by Rail Intel</p>
           <h2>Automated does not mean generic</h2>
-          <p>Every transactional email is written and maintained by Rail Intel — cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
-          <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging — updated centrally so messaging stays consistent.</p>
+          <p>Every transactional email is written and maintained by Rail Intel, cab passes, assessments, incidents, leave, tasks and operational events. Company administrators do not author templates in the CMS; Rail Intel owns the timing, the rules and the wording, while your operation controls permissions and who receives each alert.</p>
+          <p class="comm-hub-admin-note">Templates span scheduled compliance alerts, welcome and account access, cab pass delivery, leave workflows, trainee communications and on-record messaging, updated centrally so messaging stays consistent.</p>
         </div>
         <div class="comm-hub-section__media">
         <div class="comm-hub-signal-panel reveal" data-comm-signal-panel aria-label="How the communications hub routes one rule to email and in-app alerts">
@@ -1479,7 +1479,7 @@
           <p class="comm-hub-signal-panel__tagline" data-comm-signal-tagline>Same event · inbox and dashboard · no manual chasing</p>
           <div class="comm-hub-signal-panel__progress" aria-hidden="true"><span data-comm-signal-progress></span></div>
         </div>
-        <p class="comm-hub-signal-panel__caption">Rules across competency, medicals, incidents and messaging — delivered on two channels automatically.</p>
+        <p class="comm-hub-signal-panel__caption">Rules across competency, medicals, incidents and messaging, delivered on two channels automatically.</p>
         </div>
       </div>
     </section>
@@ -1488,11 +1488,6 @@
 
 
 
-    <section class="page-section page-section--tight">
-      <div class="container">
-        <p class="page-lead">Related: <a href="../features/administration.html">Administration</a>, <a href="../features/incidents-monitoring.html">Incidents &amp; Monitoring</a></p>
-      </div>
-    </section>
 
     <section class="page-section page-section--tight page-section--faq-accordion" aria-label="Frequently asked questions">
       <div class="container">
@@ -1518,7 +1513,7 @@
             </summary>
             <div class="faq-accordion__panel">
             <div class="faq-accordion__panel-inner">
-              <p>You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel — companies do not create or override templates in Administration.</p>
+              <p>You control which events trigger communications and who receives them through permissions and module configuration. Email template wording is maintained by Rail Intel, companies do not create or override templates in Administration.</p>
             </div>
             </div>
           </details>
@@ -1600,9 +1595,9 @@
     </div>
   </footer>
 
-  <script src="../js/site.js?v=107968013"></script>
-  <script src="../js/newsletter.js?v=107968013"></script>
-  <script src="../js/share.js?v=107968013"></script>
-  <script src="../js/communications-hub.js?v=107968013"></script>
+  <script src="../js/site.js?v=46133027"></script>
+  <script src="../js/newsletter.js?v=46133027"></script>
+  <script src="../js/share.js?v=46133027"></script>
+  <script src="../js/communications-hub.js?v=46133027"></script>
 </body>
 </html>
