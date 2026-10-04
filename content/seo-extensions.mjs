@@ -238,7 +238,7 @@ export const seoExtensions = {
       {
         question: "What data is included on the profile?",
         answer:
-          "The profile draws from the live record — competencies, medicals, licensing and supporting sections in one document, generated at the moment you create it.",
+          "The profile draws from the live record, competencies, medicals, licensing and supporting sections in one document, generated at the moment you create it.",
       },
       {
         question: "What is the difference between full-colour, print-friendly and dark mode?",

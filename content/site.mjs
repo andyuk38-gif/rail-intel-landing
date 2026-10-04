@@ -1242,7 +1242,7 @@ export const featureGroups = [
         mod: "printable-formats",
         bulletTiles: true,
         body: [
-          "The same live record can be output in three finishes. Each draws from identical data at the moment you generate the profile — only the presentation changes. Print or save as PDF directly from the employee record via your browser's print dialog.",
+          "The same live record can be output in three finishes. Each draws from identical data at the moment you generate the profile, only the presentation changes. Print or save as PDF directly from the employee record via your browser's print dialog.",
         ],
         tiles: [
           {
@@ -1254,7 +1254,7 @@ export const featureGroups = [
           {
             title: "Print friendly",
             detail:
-              "Plain black on white with no artwork or colour fills — designed to save ink on paper copies.",
+              "Plain black on white with no artwork or colour fills, designed to save ink on paper copies.",
             accent: "#38bdf8",
           },
           {
