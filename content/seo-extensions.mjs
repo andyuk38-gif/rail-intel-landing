@@ -168,7 +168,7 @@ export const seoExtensions = {
       {
         question: "Does Tunnel Mode detect tunnels automatically?",
         answer:
-          "No. The assessor switches dark mode and adjusts brightness manually — designed for the person in the cab to decide when glare is a problem.",
+          "No. The assessor switches dark mode and adjusts brightness manually, designed for the person in the cab to decide when glare is a problem.",
       },
       {
         question: "Which devices support brightness control?",
@@ -178,7 +178,7 @@ export const seoExtensions = {
       {
         question: "Do assessors need to change device settings?",
         answer:
-          "No. When an assessment starts on a mobile or tablet, Rail Intel prompts the assessor to switch to dark mode in the app — there is no need to open the device settings. A brightness slider under the assessment header lets them dim the screen further, to the level they need, without leaving the assessment.",
+          "No. When an assessment starts on a mobile or tablet, Rail Intel prompts the assessor to switch to dark mode in the app, there is no need to open the device settings. A brightness slider under the assessment header lets them dim the screen further, to the level they need, without leaving the assessment.",
       },
       {
         question: "Why don't I see the cab safety warning on my laptop?",
@@ -188,7 +188,7 @@ export const seoExtensions = {
       {
         question: "Is Tunnel Mode a paid add-on?",
         answer:
-          "No. Tunnel Mode is included in core Rail Intel at no extra cost. Safety-related assessment features are part of the standard platform — we do not charge separately for tools that help assessors work safely in the cab.",
+          "No. Tunnel Mode is included in core Rail Intel at no extra cost. Safety-related assessment features are part of the standard platform, we do not charge separately for tools that help assessors work safely in the cab.",
       },
     ],
     relatedLinks: [],

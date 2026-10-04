@@ -1000,7 +1000,7 @@ export const featureGroups = [
     taglineHtml:
       'Assess in the cab without <span class="hero-title__accent">lighting</span> up the windscreen',
     lead:
-      "A bright tablet in a dark cab is a distraction — for the driver and for the assessor. Tunnel Mode is the assessor switching dark mode on and dimming the screen on mobile or tablet. It does not detect the tunnel automatically; the person in the cab decides when the glass is too bright.",
+      "A bright tablet in a dark cab is a distraction, for the driver and for the assessor. Tunnel Mode is the assessor switching dark mode on and dimming the screen on mobile or tablet. It does not detect the tunnel automatically; the person in the cab decides when the glass is too bright.",
     heroShot: {
       src: "images/screens/assessing/AssessInDark.jpg",
       alt: "Assessor holding a bright tablet in a dark cab.",
@@ -1025,10 +1025,10 @@ export const featureGroups = [
         ],
         bulletTiles: true,
         bullets: [
-          "**One-tap dark mode** from the assessment header — switch before the cab goes dark and the choice stays for the rest of the session.",
-          "**Dimmable brightness** on mobile and tablet, from 40% up to 135%, adjusted by hand to suit cab conditions — not auto-detected.",
+          "**One-tap dark mode** from the assessment header, switch before the cab goes dark and the choice stays for the rest of the session.",
+          "**Dimmable brightness** on mobile and tablet, from 40% up to 135%, adjusted by hand to suit cab conditions, not auto-detected.",
           "**Cab safety notice** at the start of an assessable event, with a direct Turn on dark mode action when windscreen glare matters.",
-          "**App-wide dark theme** from the user menu when you are not assessing — the same dark palette across the whole app.",
+          "**App-wide dark theme** from the user menu when you are not assessing, the same dark palette across the whole app.",
         ],
         shots: [
           {

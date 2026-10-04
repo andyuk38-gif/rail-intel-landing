@@ -3111,9 +3111,9 @@ function tunnelDemo(base, { link = true } = {}) {
         <div class="tunnel__copy">
           <p class="product-eyebrow">Tunnel Mode</p>
           <h2 id="tunnel-heading">Dark and dimmable for the cab</h2>
-          <p>A bright tablet against a dark windscreen is a distraction. When you enter a tunnel, the assessor switches assessing to dark mode and can dim the screen further on mobile or tablet &mdash; glare drops, and the focus stays on the railway.</p>
+          <p>A bright tablet against a dark windscreen is a distraction. When you enter a tunnel, the assessor switches assessing to dark mode and can dim the screen further on mobile or tablet, glare drops, and the focus stays on the railway.</p>
           <ul class="spec-list">
-            <li><strong>One-tap dark mode</strong> from the assessment header &mdash; switched by the assessor, not by the device.</li>
+            <li><strong>One-tap dark mode</strong> from the assessment header, switched by the assessor, not by the device.</li>
             <li><strong>Dimmable brightness</strong> on mobile and tablet, adjusted by hand to suit the cab.</li>
             <li><strong>Cab safety notice</strong> at the start of an event that offers dark mode in one tap.</li>
           </ul>
@@ -3148,7 +3148,7 @@ ${actions}
             <button type="button" class="tunnel__btn" data-tunnel-mode="tunnel">Dark mode</button>
             <button type="button" class="tunnel__btn" data-tunnel-mode="dim">Dark + dim</button>
           </div>
-          <p class="tunnel__caption">Dark mode and brightness are set by the assessor on the tablet &mdash; the device does not switch automatically when the cab goes dark.</p>
+          <p class="tunnel__caption">Dark mode and brightness are set by the assessor on the tablet, the device does not switch automatically when the cab goes dark.</p>
         </div>
       </div>
     </section>`;
