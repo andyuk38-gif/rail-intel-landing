@@ -49,7 +49,7 @@ export const products = [
       "Evidence-first rail investigations — in active development for a mid-2027 launch.",
     tagline: "Investigations with the evidence in one place",
     lead:
-      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file, not scattered across email, chat and shared drives. It includes an automated, industry-aligned fatigue engine for safety-critical staff, shaped with pilots and rail industry partners. Active development continues toward a planned launch in mid 2027.",
+      "We're building a standalone Rail Intel app so safety investigations stay in one defensible file, not scattered across email, chat and shared drives. It includes an automated, industry-aligned fatigue engine for safety-critical staff, researched with airlines and rail industry partners. Active development continues toward a planned launch in mid 2027.",
     faq: [
       {
         question: "When will Rail Intel Investigations launch?",
@@ -172,9 +172,9 @@ export const products = [
             height: 1152,
           },
           body: [
-            "Fatigue belongs on the critical path for many rail investigations, but it is often handled with manual spreadsheets, opaque assumptions and little continuity between cases. We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns within the investigation file, aligned with industry standards and the way UK operators already frame fatigue risk.",
+            "Fatigue belongs on the critical path for many rail investigations, but it is often handled with calculated spreadsheets, opaque assumptions and little continuity between cases. We're building an automated fatigue calculator for safety-critical staff that analyses shift patterns within the investigation file, aligned with industry standards and the way UK operators already frame fatigue risk.",
             "The engine is designed for depth: structured inputs, defensible outputs, and trend analysis so investigators and assurance leads can move from a single shift pattern to organisational patterns over time. Our aim is the most sophisticated fatigue capability ever integrated into a rail investigation platform, a reference-grade tool, not a checklist bolt-on.",
-            "That ambition is grounded in research and delivery. We have tested concepts with pilot operators, worked with rail industry partners, and drawn on hands-on operational experience to decide what investigators actually need at 02:00 when the file has to stand up to review. Capabilities on this page reflect that direction; exact models, thresholds and reporting may change as we complete development.",
+            "That ambition is grounded in research and delivery. We have tested concepts with airlines, worked with rail industry partners, and drawn on hands-on operational experience to decide what investigators actually need at 02:00 when the file has to stand up to review. Capabilities on this page reflect that direction; exact models, thresholds and reporting may change as we complete development.",
           ],
         },
         {
