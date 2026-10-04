@@ -33,8 +33,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=107968013" />
-  <link rel="stylesheet" href="css/pages.css?v=107968013" />
+  <link rel="stylesheet" href="css/style.css?v=160802522" />
+  <link rel="stylesheet" href="css/pages.css?v=160802522" />
   <style>
     /* Critical: keep under-dev banner visible even if stylesheet is cached */
     .site-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
@@ -291,7 +291,7 @@
 
           <div class="page-hero__intro">
             <h2 class="page-hero__intro-title">Security in practice</h2>
-            <p>Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control — not the end user.</p>
+            <p>Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control, not the end user.</p>
 
           </div>
           </div>
@@ -333,7 +333,7 @@
         <ul class="spec-list">
           <li>
             <strong>Company codes</strong>
-            Users sign in with a company code, email and password. Tenants stay isolated — one operator cannot see another’s records.
+            Users sign in with a company code, email and password. Tenants stay isolated, one operator cannot see another’s records.
           </li>
           <li>
             <strong>Role-based permissions</strong>
@@ -341,7 +341,7 @@
           </li>
           <li>
             <strong>Logged access</strong>
-            Sign-in and sensitive actions are attributable. The product is built for authorised personnel only — all access is logged.
+            Sign-in and sensitive actions are attributable. The product is built for authorised personnel only, all access is logged.
           </li>
           <li>
             <strong>Session tokens</strong>
@@ -351,9 +351,9 @@
       </div>
     </section>
 
-    <section class="page-section page-section--viewer">
+    <section class="page-section page-section--viewer page-section--wide">
       <div class="container container--showcase">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--wide">
           <h2>Two-factor authentication (2FA)</h2>
           <p>When 2FA is required, a correct password is not enough. Rail Intel challenges for a second factor before a session is issued.</p>
         </div>
@@ -368,7 +368,7 @@
           </li>
           <li>
             <strong>Trusted devices (14 days)</strong>
-            After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. The 14-day window and revocation rules are enforced by the platform — not configurable by end users. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator or removes the device (for example when someone changes role or leaves), when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).
+            After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. The 14-day window and revocation rules are enforced by the platform, not configurable by end users. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator or removes the device (for example when someone changes role or leaves), when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).
           </li>
         </ul>
       <div class="shot-viewer reveal shot-viewer--sidebar" data-shot-viewer data-shot-count="3" tabindex="0">
@@ -431,7 +431,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="images/screens/main-sys/login-screen-portrait.png?v=107968013"
+              src="images/screens/main-sys/login-screen-portrait.png?v=160802522"
               alt="Sign-in with company code, email and password."
               width="280"
               height="456"
@@ -449,7 +449,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="images/screens/main-sys/login-authenticator-code.png?v=107968013"
+              src="images/screens/main-sys/login-authenticator-code.png?v=160802522"
               alt="Authenticator code challenge at sign-in."
               width="198"
               height="384"
@@ -467,7 +467,7 @@
           <div class="shot-viewer__frame-inner">
             <img
               class="shot-viewer__image"
-              src="images/screens/main-sys/account-two-factor.png?v=107968013"
+              src="images/screens/main-sys/account-two-factor.png?v=160802522"
               alt="Re-enrol authenticator and manage trusted devices."
               width="268"
               height="415"
@@ -484,7 +484,7 @@
             <div class="shot-viewer__partner-head">
               <div class="shot-viewer__partner-mark">
                 <img
-                  src="images/security/auth-apps/google-authenticator.png?v=107968013"
+                  src="images/security/auth-apps/google-authenticator.png?v=160802522"
                   alt=""
                   width="72"
                   height="72"
@@ -511,7 +511,7 @@
           </div>
           <div class="shot-viewer__partner-icons" aria-label="Supported authenticator apps">
             <img
-              src="images/security/auth-apps/google-authenticator.png?v=107968013"
+              src="images/security/auth-apps/google-authenticator.png?v=160802522"
               alt="Google Authenticator"
               title="Google Authenticator"
               width="32"
@@ -520,7 +520,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/microsoft-authenticator.png?v=107968013"
+              src="images/security/auth-apps/microsoft-authenticator.png?v=160802522"
               alt="Microsoft Authenticator"
               title="Microsoft Authenticator"
               width="32"
@@ -529,7 +529,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/authy.png?v=107968013"
+              src="images/security/auth-apps/authy.png?v=160802522"
               alt="Authy"
               title="Authy"
               width="32"
@@ -538,7 +538,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/1password.png?v=107968013"
+              src="images/security/auth-apps/1password.png?v=160802522"
               alt="1Password"
               title="1Password"
               width="32"
@@ -547,7 +547,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/bitwarden.png?v=107968013"
+              src="images/security/auth-apps/bitwarden.png?v=160802522"
               alt="Bitwarden"
               title="Bitwarden"
               width="32"
@@ -556,7 +556,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/duo-mobile.png?v=107968013"
+              src="images/security/auth-apps/duo-mobile.png?v=160802522"
               alt="Duo Mobile"
               title="Duo Mobile"
               width="32"
@@ -565,7 +565,7 @@
               decoding="async"
             />
             <img
-              src="images/security/auth-apps/apple-passwords.png?v=107968013"
+              src="images/security/auth-apps/apple-passwords.png?v=160802522"
               alt="Apple Passwords"
               title="Apple Passwords"
               width="32"
@@ -579,9 +579,9 @@
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section page-section--wide">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--wide">
           <h2>How 2FA is governed</h2>
           <p>These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.</p>
         </div>
@@ -602,11 +602,11 @@
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section page-section--wide">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__head page-section__head--wide">
           <h2>Hosted on Microsoft Azure</h2>
-          <p>The Rail Intel application runs on Azure App Service with Azure Database for PostgreSQL and Azure Blob Storage for documents — so platform security inherits Azure’s enterprise controls.</p>
+          <p>The Rail Intel application runs on Azure App Service with Azure Database for PostgreSQL and Azure Blob Storage for documents, so platform security inherits Azure’s enterprise controls.</p>
         </div>
         <ul class="spec-list">
           <li>
@@ -724,8 +724,8 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=107968013"></script>
-  <script src="js/newsletter.js?v=107968013"></script>
-  <script src="js/share.js?v=107968013"></script>
+  <script src="js/site.js?v=160802522"></script>
+  <script src="js/newsletter.js?v=160802522"></script>
+  <script src="js/share.js?v=160802522"></script>
 </body>
 </html>

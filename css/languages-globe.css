@@ -71,6 +71,16 @@
   opacity: 0.92;
 }
 
+.lang-globe--intro-full .lang-globe__header--full.container {
+  max-width: min(84rem, 96vw);
+}
+
+.lang-globe--intro-full .lang-globe__intro-copy--full,
+.lang-globe--intro-full .lang-globe__intro-copy--full > p,
+.lang-globe--intro-full .lang-globe__footnote {
+  max-width: none;
+}
+
 .lang-globe__body {
   display: grid;
   grid-template-columns: minmax(15rem, 19rem) minmax(0, 1fr);

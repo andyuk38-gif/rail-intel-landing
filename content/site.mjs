@@ -1489,8 +1489,9 @@ export const featureGroups = [
       },
       {
         heading: "Monitoring and competence development plans",
+        fullWidth: true,
         body: [
-          "The Monitoring tab holds performance monitoring and the competence development plans raised against an employee. A CDP records what needs to improve, what was agreed and whether it was completed — and can carry over into the next cycle if it is still open.",
+          "The Monitoring tab holds performance monitoring and the competence development plans raised against an employee. A CDP records what needs to improve, what was agreed and whether it was completed, and can carry over into the next cycle if it is still open.",
         ],
         interactiveDemo: "incidents-monitoring",
       },
@@ -1640,7 +1641,7 @@ export const featureGroups = [
       heading: "The Administration menu",
       body: [
         "Open Administration from the main navigation and the full control surface appears in one fly-out menu. Day-to-day assessing and record-keeping happen on employee records and in the field; Administration is where you set the rules those workflows follow.",
-        "The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration — custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.",
+        "The menu groups everything an administrator needs: team and module management at the top, document storage, then Company configuration, custom job roles, grading scale, email templates, Cycle Builder, company standards, traction and routes, organisation structure, the Investigations connector, role permissions and your company logo.",
       ],
       tiles: [
         {
@@ -2009,11 +2010,13 @@ export const featureGroups = [
 
 export const languages = {
   heading: "Supported languages",
+  introFullWidth: true,
   lead:
-    "The interface — including login and in-app chrome — can be switched without changing your company data. Each tile shows the language in its own wording.",
+    "The interface, including login and in-app chrome, can be switched without changing your company data. Each tile shows the language in its own wording.",
   globe: {
     eyebrow: "Supported languages",
     heading: "Languages spoken by country*",
+    introFullWidth: true,
     lead:
       "Choose a language, then jump to a city or country where it is commonly used. The night globe highlights those locations.",
     footnote:
@@ -2171,7 +2174,7 @@ export const security = {
   heroIntro: {
     heading: "Security in practice",
     body: [
-      "Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control — not the end user.",
+      "Competency, medical and safety records only belong in the hands of authorised people. Rail Intel keeps each operator in its own tenant, ties every session to a named user and leaves sign-in policy under your administrators’ control, not the end user.",
     ],
   },
   access: {
@@ -2180,7 +2183,7 @@ export const security = {
     items: [
       {
         title: "Company codes",
-        body: "Users sign in with a company code, email and password. Tenants stay isolated — one operator cannot see another’s records.",
+        body: "Users sign in with a company code, email and password. Tenants stay isolated, one operator cannot see another’s records.",
       },
       {
         title: "Role-based permissions",
@@ -2188,7 +2191,7 @@ export const security = {
       },
       {
         title: "Logged access",
-        body: "Sign-in and sensitive actions are attributable. The product is built for authorised personnel only — all access is logged.",
+        body: "Sign-in and sensitive actions are attributable. The product is built for authorised personnel only, all access is logged.",
       },
       {
         title: "Session tokens",
@@ -2198,6 +2201,7 @@ export const security = {
   },
   twoFactor: {
     heading: "Two-factor authentication (2FA)",
+    leadFullWidth: true,
     lead:
       "When 2FA is required, a correct password is not enough. Rail Intel challenges for a second factor before a session is issued.",
     methods: [
@@ -2211,7 +2215,7 @@ export const security = {
       },
       {
         title: "Trusted devices (14 days)",
-        body: "After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. The 14-day window and revocation rules are enforced by the platform — not configurable by end users. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator or removes the device (for example when someone changes role or leaves), when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).",
+        body: "After a successful 2FA challenge, users may trust that browser for 14 days so later password logins can skip the second factor. The 14-day window and revocation rules are enforced by the platform, not configurable by end users. System administrators never skip. Trust is revoked when the password changes, when an administrator resets the authenticator or removes the device (for example when someone changes role or leaves), when the 14-day window expires, or when the sign-in location no longer matches (country, or coarse network if country is unknown).",
       },
     ],
     viewer: {
@@ -2265,6 +2269,12 @@ export const security = {
         },
       ],
     },
+    governance: {
+      heading: "How 2FA is governed",
+      leadFullWidth: true,
+      lead:
+        "These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.",
+    },
     rules: [
       {
         heading: "Policy is administered centrally",
@@ -2282,8 +2292,9 @@ export const security = {
   },
   azure: {
     heading: "Hosted on Microsoft Azure",
+    leadFullWidth: true,
     lead:
-      "The Rail Intel application runs on Azure App Service with Azure Database for PostgreSQL and Azure Blob Storage for documents — so platform security inherits Azure’s enterprise controls.",
+      "The Rail Intel application runs on Azure App Service with Azure Database for PostgreSQL and Azure Blob Storage for documents, so platform security inherits Azure’s enterprise controls.",
     items: [
       {
         title: "Azure App Service",

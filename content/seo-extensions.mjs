@@ -519,7 +519,7 @@ export const seoExtensions = {
       {
         question: "Does the whole CMS translate?",
         answer:
-          "Rail Intel translates the product interface globally — navigation, screens, prompts and standard system wording follow each user's language choice. Content your organisation configures (criteria names, bespoke labels and free-text records) is not rewritten automatically; it remains as administrators and users entered it unless you maintain separate translations.",
+          "Rail Intel translates the product interface globally, navigation, screens, prompts and standard system wording follow each user's language choice. Content your organisation configures (criteria names, bespoke labels and free-text records) is not rewritten automatically; it remains as administrators and users entered it unless you maintain separate translations.",
       },
     ],
     relatedLinks: [],

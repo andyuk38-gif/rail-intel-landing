@@ -3015,13 +3015,13 @@ ${renderHeroActions(group, base)}
       </div>
     </section>
 
-    <section class="lang-globe" data-lang-globe aria-label="Supported languages on the globe">
+    <section class="lang-globe${languages.globe?.introFullWidth ? " lang-globe--intro-full" : ""}" data-lang-globe aria-label="Supported languages on the globe">
       <script type="application/json" data-lang-globe-data>${JSON.stringify(globePlaces).replace(/</g, "\\u003c")}</script>
       <div class="lang-globe__inner">
-        <div class="lang-globe__header container">
+        <div class="lang-globe__header container${languages.globe?.introFullWidth ? " lang-globe__header--full" : ""}">
           <div class="lang-globe__intro">
             <p class="lang-globe__eyebrow">${esc(languages.globe?.eyebrow || "Supported languages")}</p>
-            <div class="lang-globe__intro-copy">
+            <div class="lang-globe__intro-copy${languages.globe?.introFullWidth ? " lang-globe__intro-copy--full" : ""}">
               <h2>${esc(languages.globe?.heading || "Languages spoken by country*")}</h2>
               <p>${esc(languages.globe?.lead || languages.lead)}</p>
               ${
@@ -3079,9 +3079,9 @@ ${globeItems}
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section${languages.introFullWidth ? " page-section--wide" : ""}">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__head${languages.introFullWidth ? " page-section__head--wide" : ""}">
           <h2>${esc(languages.heading)}</h2>
           <p>${esc(languages.lead)}</p>
         </div>
@@ -3726,9 +3726,9 @@ ${accessItems}
       </div>
     </section>
 
-    <section class="page-section page-section--viewer">
+    <section class="page-section page-section--viewer${security.twoFactor.leadFullWidth ? " page-section--wide" : ""}">
       <div class="container container--showcase">
-        <div class="page-section__head">
+        <div class="page-section__head${security.twoFactor.leadFullWidth ? " page-section__head--wide" : ""}">
           <h2>${esc(security.twoFactor.heading)}</h2>
           <p>${esc(security.twoFactor.lead)}</p>
         </div>
@@ -3739,11 +3739,11 @@ ${twoFactorViewer}
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section${security.twoFactor.governance?.leadFullWidth ? " page-section--wide" : ""}">
       <div class="container">
-        <div class="page-section__head">
-          <h2>How 2FA is governed</h2>
-          <p>These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.</p>
+        <div class="page-section__head${security.twoFactor.governance?.leadFullWidth ? " page-section__head--wide" : ""}">
+          <h2>${esc(security.twoFactor.governance?.heading || "How 2FA is governed")}</h2>
+          <p>${esc(security.twoFactor.governance?.lead || "These rules keep second-factor policy under administrator control while giving users a clear path to enrol and recover.")}</p>
         </div>
         <ol class="steps steps--three">
 ${rules}
@@ -3751,9 +3751,9 @@ ${rules}
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section${security.azure.leadFullWidth ? " page-section--wide" : ""}">
       <div class="container">
-        <div class="page-section__head">
+        <div class="page-section__head${security.azure.leadFullWidth ? " page-section__head--wide" : ""}">
           <h2>${esc(security.azure.heading)}</h2>
           <p>${esc(security.azure.lead)}</p>
         </div>
