@@ -531,7 +531,10 @@ function renderFooterMarkup(base) {
       </div>
       <div class="footer-bar">
         <div class="container footer-bar__inner">
-          <p class="footer-bar__copy">Copyright &copy; <span data-year></span> Rail Intel. All rights reserved.</p>
+          <div class="footer-bar__meta">
+            <p class="footer-bar__copy">Copyright &copy; <span data-year></span> Rail Intel. All rights reserved.</p>
+            <p class="footer-bar__address">Registered office: Milroy House, Sayers Lane, Tenterden, Kent TN30 6BW</p>
+          </div>
           <nav class="footer-bar__links" aria-label="Legal">
             <a href="${base}privacy.html">Privacy policy</a>
             <a href="${base}contact.html">Contact</a>

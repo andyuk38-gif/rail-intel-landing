@@ -2579,7 +2579,7 @@ export const contact = {
   title: "Contact Rail Intel",
   titleHtml: 'Contact <span class="hero-title__accent">Rail Intel</span>',
   lead:
-    "Questions about Rail Intel CMS, Investigations, onboarding, media, careers or billing — send a message and we will route it to the right team.",
+    "Questions about Rail Intel CMS, Investigations, onboarding, media, careers or billing, send a message and we will route it to the right team.",
   departments: ["Sales", "Media", "Careers", "Technical Support", "Billing/Accounts", "Other"],
   highlights: [
     {
