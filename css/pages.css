@@ -8686,6 +8686,14 @@ body.lightbox-open {
   color: #f87171;
 }
 
+.signup-form__message[data-state="working"] {
+  color: #fbbf24;
+}
+
+.btn.is-working {
+  cursor: progress;
+}
+
 .signup-steps {
   margin: 0;
   padding-left: 1.2rem;

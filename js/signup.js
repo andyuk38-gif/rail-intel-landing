@@ -585,6 +585,15 @@
       });
   }
 
+  function setSubmitBusy(btn, busy, label) {
+    if (!btn) return;
+    if (!btn.dataset.idleLabel) btn.dataset.idleLabel = btn.textContent;
+    btn.disabled = busy;
+    btn.classList.toggle("is-working", busy);
+    btn.setAttribute("aria-busy", busy ? "true" : "false");
+    btn.textContent = busy ? label : btn.dataset.idleLabel;
+  }
+
   function submitQuote() {
     var msgEl = getMsgEl("quote-modules");
     var btn = document.querySelector("[data-signup-submit-quote]");
@@ -595,10 +604,15 @@
       setPanel("quote-requirements");
       return;
     }
-    if (btn) btn.disabled = true;
+    setSubmitBusy(btn, true, "Submitting your quotation request…");
+    showMessage(msgEl, "Submitting your quotation request. This can take a moment.", "working");
 
     validateDealCodeInput().then(function (dealOk) {
-      if (!dealOk) return;
+      if (!dealOk) {
+        hideMessage(msgEl);
+        setSubmitBusy(btn, false);
+        return;
+      }
 
     var payload = Object.assign({}, collectBasePayload(), {
       requestType: "quote",
@@ -632,7 +646,7 @@
         showMessage(msgEl, err.message || "Something went wrong.", "error");
       })
       .finally(function () {
-        if (btn) btn.disabled = false;
+        setSubmitBusy(btn, false);
       });
     });
   }

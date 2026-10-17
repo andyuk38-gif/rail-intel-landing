@@ -119,7 +119,21 @@
         "</div></div>";
     } else if (!paid && !data.canPayOnline) {
       payBlock =
-        '<p class="signup-form__lead" style="margin-top:1rem">Card payment is not available online for this invoice. Please pay by bank transfer using the details on the invoice.</p>';
+        '<p class="signup-form__lead" style="margin-top:1rem">Please pay by bank transfer using the details on the invoice.</p>';
+    }
+    if (!paid) {
+      if (data.bacsDeclaredAt) {
+        payBlock +=
+          '<p class="signup-form__lead signup-form__lead--success" style="margin-top:1rem">You have confirmed this invoice was paid by bank transfer. CMS access is sent once we confirm the funds have arrived.</p>';
+      } else {
+        payBlock +=
+          '<div class="signup-invoice-pay" style="margin-top:1rem">' +
+          '<p class="signup-form__lead">Paid by bank transfer? Confirm it here. You do not need a CMS login.</p>' +
+          '<p class="signup-form__message" data-invoice-bacs-msg hidden></p>' +
+          '<div class="signup-wizard__actions">' +
+          '<button type="button" class="btn btn-primary" data-invoice-bacs-paid>I have paid by bank transfer</button>' +
+          "</div></div>";
+      }
     }
 
     view.innerHTML =
@@ -141,6 +155,43 @@
 
     var payBtn = view.querySelector("[data-invoice-stripe-pay]");
     if (payBtn) payBtn.addEventListener("click", startStripeCheckout);
+    var bacsBtn = view.querySelector("[data-invoice-bacs-paid]");
+    if (bacsBtn) bacsBtn.addEventListener("click", declareBacsPaid);
+  }
+
+  function declareBacsPaid() {
+    if (!token) return;
+    var btn = view.querySelector("[data-invoice-bacs-paid]");
+    var msg = view.querySelector("[data-invoice-bacs-msg]");
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Recording your payment…";
+    }
+    if (msg) {
+      msg.hidden = false;
+      msg.dataset.state = "working";
+      msg.textContent = "Recording that you have paid by bank transfer.";
+    }
+    fetchJson("/public/invoice/" + encodeURIComponent(token) + "/declare-bacs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{}",
+    })
+      .then(function (data) {
+        if (invoiceData) invoiceData.bacsDeclaredAt = data.bacsDeclaredAt || new Date().toISOString();
+        renderInvoice(invoiceData || data);
+      })
+      .catch(function (err) {
+        if (msg) {
+          msg.hidden = false;
+          msg.dataset.state = "error";
+          msg.textContent = err.message || "Could not record your payment.";
+        }
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "I have paid by bank transfer";
+        }
+      });
   }
 
   if (!token) {
