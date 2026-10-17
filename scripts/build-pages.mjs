@@ -3455,7 +3455,7 @@ ${renderGetStartedPoBanner()}
                 </div>
                 <div class="field field--full signup-form__honeypot" aria-hidden="true">
                   <label for="website">Website</label>
-                  <input id="website" name="website" tabindex="-1" autocomplete="off" />
+                  <input id="rv-signup-fax" name="rv_signup_fax" tabindex="-1" autocomplete="off" />
                 </div>
               </div>
               <p class="signup-form__message" data-signup-msg="contact" hidden></p>

@@ -496,7 +496,7 @@
       noCurrentContract: noCurrentContractChecked(),
       currentContractEndDate: noCurrentContractChecked() ? undefined : fieldValue("currentContractEndDate") || undefined,
       source: "railintel.co.uk",
-      website: fieldValue("website"),
+      rv_signup_fax: fieldValue("rv-signup-fax"),
       dealCode: dealCode || undefined,
     };
   }
