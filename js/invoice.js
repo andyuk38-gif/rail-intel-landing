@@ -136,21 +136,26 @@
       }
     }
 
+    var showReceipt = paid && params.get("view") === "receipt" && data.receiptHtml;
     view.innerHTML =
-      '<h2 class="signup-form__title">Invoice for ' +
+      '<h2 class="signup-form__title">' +
+      (showReceipt ? "Receipt" : "Invoice") +
+      " for " +
       (data.companyName || "your company") +
       "</h2>" +
       '<p class="signup-form__lead signup-form__lead--success">Hello ' +
       (data.contactName || "there") +
-      ", please find your invoice below." +
-      (paid ? " This invoice has been marked as paid." : "") +
+      (showReceipt
+        ? ", please find your payment receipt below."
+        : ", please find your invoice below." + (paid ? " This invoice has been marked as paid." : "")) +
       "</p>" +
       '<div class="quotation-a4-wrap" data-invoice-preview></div>' +
       payBlock;
 
     var preview = view.querySelector("[data-invoice-preview]");
-    if (preview && data.previewHtml) {
-      preview.innerHTML = data.previewHtml;
+    var documentHtml = showReceipt ? data.receiptHtml : data.previewHtml;
+    if (preview && documentHtml) {
+      preview.innerHTML = documentHtml;
     }
 
     var payBtn = view.querySelector("[data-invoice-stripe-pay]");
