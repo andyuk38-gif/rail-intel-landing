@@ -163,6 +163,11 @@
     var declineBtn = view.querySelector("[data-quotation-decline]");
     if (acceptBtn) acceptBtn.addEventListener("click", function () { respond("accept"); });
     if (declineBtn) declineBtn.addEventListener("click", function () { respond("decline"); });
+
+    var preset = params.get("respond");
+    if (preset === "accept" || preset === "decline") {
+      respond(preset);
+    }
   }
 
   if (!token) {

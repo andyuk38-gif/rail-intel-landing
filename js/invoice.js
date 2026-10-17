@@ -203,7 +203,13 @@
 
   showLoading();
   fetchJson("/public/invoice/" + encodeURIComponent(token))
-    .then(renderInvoice)
+    .then(function (data) {
+      renderInvoice(data);
+      var paid = data.paid || data.status === "paid";
+      if (!paid && !data.bacsDeclaredAt && params.get("funds") === "transferred") {
+        declareBacsPaid();
+      }
+    })
     .catch(function (err) {
       renderError(err.message || "This invoice is no longer available.");
     });
