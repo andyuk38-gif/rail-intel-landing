@@ -50,6 +50,9 @@
       facebook.href =
         "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
     }
+    if (instagram) {
+      instagram.href = "https://www.instagram.com/";
+    }
     if (whatsapp) {
       whatsapp.href = "https://wa.me/?text=" + encodeURIComponent(title + " " + url);
     }
@@ -197,11 +200,10 @@
       if (fallbackCopy(url) && status) {
         status.textContent = "Link copied. Paste it into Instagram.";
       }
-      closePanel(false);
     });
   }
 
-  [email, linkedin, facebook, whatsapp].forEach(function (link) {
+  [email, linkedin, facebook, instagram, whatsapp].forEach(function (link) {
     if (!link) return;
     link.addEventListener("click", function () {
       closePanel(false);
