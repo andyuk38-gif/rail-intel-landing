@@ -40,11 +40,11 @@
         "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(message);
     }
     if (linkedin) {
-      // LinkedIn caches previews per URL for days. Use the same cache-busted page
-      // URL as WhatsApp (proven to pick up og:image), not legacy /share/card.html.
+      // LinkedIn stores a blank preview against the homepage and follows the
+      // canonical URL, so a query string on the page does not refresh it.
       linkedin.href =
         "https://www.linkedin.com/sharing/share-offsite/?url=" +
-        encodeURIComponent(url);
+        encodeURIComponent("https://railintel.co.uk/share/in.html");
     }
     if (facebook) {
       facebook.href =
