@@ -7,13 +7,13 @@ import { guides } from "./guides.mjs";
 
 export const SITE_URL = "https://railintel.co.uk";
 export const DEFAULT_OG_IMAGE = "/images/share/social-share.jpg";
-export const LINKEDIN_OG_IMAGE = "/images/share/social-share-linkedin.jpg";
+export const LINKEDIN_OG_IMAGE = "/images/share/social-share.jpg";
 export const DEFAULT_OG_IMAGE_WIDTH = 1024;
 export const DEFAULT_OG_IMAGE_HEIGHT = 1024;
-export const LINKEDIN_OG_IMAGE_WIDTH = 1200;
-export const LINKEDIN_OG_IMAGE_HEIGHT = 627;
+export const LINKEDIN_OG_IMAGE_WIDTH = 1024;
+export const LINKEDIN_OG_IMAGE_HEIGHT = 1024;
 export const DEFAULT_OG_IMAGE_ALT =
-  "Rail Intel dashboard on a laptop with verification compliance and real-time competency monitoring for rail operators.";
+  "Rail Intel. Intelligent products for rail operations.";
 export const SHARE_CARD_TITLE = "Rail Intel | Rail Competence Management System";
 export const SHARE_CARD_DESCRIPTION =
   "Protect your operations with Rail Intel, the competency management system built for UK rail operators.";
