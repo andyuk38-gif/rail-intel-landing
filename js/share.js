@@ -8,6 +8,8 @@
   var copyLabel = root.querySelector("[data-share-copy-label]");
   var email = root.querySelector("[data-share-email]");
   var linkedin = root.querySelector("[data-share-linkedin]");
+  var facebook = root.querySelector("[data-share-facebook]");
+  var instagram = root.querySelector("[data-share-instagram]");
   var whatsapp = root.querySelector("[data-share-whatsapp]");
   var nativeBtn = root.querySelector("[data-share-native]");
   var status = root.querySelector("[data-share-status]");
@@ -43,6 +45,10 @@
       linkedin.href =
         "https://www.linkedin.com/sharing/share-offsite/?url=" +
         encodeURIComponent(url);
+    }
+    if (facebook) {
+      facebook.href =
+        "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
     }
     if (whatsapp) {
       whatsapp.href = "https://wa.me/?text=" + encodeURIComponent(title + " " + url);
@@ -185,7 +191,17 @@
     });
   }
 
-  [email, linkedin, whatsapp].forEach(function (link) {
+  if (instagram) {
+    instagram.addEventListener("click", function () {
+      var url = pageUrl();
+      if (fallbackCopy(url) && status) {
+        status.textContent = "Link copied. Paste it into Instagram.";
+      }
+      closePanel(false);
+    });
+  }
+
+  [email, linkedin, facebook, whatsapp].forEach(function (link) {
     if (!link) return;
     link.addEventListener("click", function () {
       closePanel(false);

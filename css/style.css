@@ -295,6 +295,14 @@ body::before {
   background: #0a66c2;
 }
 
+.share__brand--facebook {
+  background: #1877f2;
+}
+
+.share__brand--instagram {
+  background: linear-gradient(135deg, #f9ce34, #ee2a7b 55%, #6228d7);
+}
+
 .share__brand--whatsapp {
   background: #25d366;
 }
