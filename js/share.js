@@ -31,6 +31,30 @@
     return (document.title || "Rail Intel").replace(/\s+/g, " ").trim();
   }
 
+  function recordShare(platform) {
+    var proxyMeta = document.querySelector('meta[name="signup-api-proxy"]');
+    var cmsMeta = document.querySelector('meta[name="cms-api"]');
+    var proxyBase = proxyMeta && proxyMeta.getAttribute("content");
+    var cmsBase = cmsMeta && cmsMeta.getAttribute("content");
+    var endpoint = proxyBase
+      ? proxyBase.replace(/\/$/, "") + "?path=public/social-shares"
+      : cmsBase
+        ? cmsBase.replace(/\/$/, "") + "/public/social-shares"
+        : "";
+    if (!endpoint) return;
+    var body = JSON.stringify({
+      platform: platform,
+      pageUrl: pageUrl(),
+      pageTitle: pageTitle(),
+    });
+    fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
+      keepalive: true,
+    }).catch(function () {});
+  }
+
   function refreshLinks() {
     var url = pageUrl();
     var title = pageTitle();
@@ -176,6 +200,7 @@
       // Copy while the click is still a user gesture. The async clipboard
       // API often rejects in this browser, and the fallback is too late by then.
       if (fallbackCopy(url)) {
+        recordShare("copy");
         markCopied();
         return;
       }
@@ -206,6 +231,16 @@
   [email, linkedin, facebook, instagram, whatsapp].forEach(function (link) {
     if (!link) return;
     link.addEventListener("click", function () {
+      var platform = link.getAttribute("data-share-linkedin") !== null
+        ? "linkedin"
+        : link.getAttribute("data-share-facebook") !== null
+          ? "facebook"
+          : link.getAttribute("data-share-instagram") !== null
+            ? "instagram"
+            : link.getAttribute("data-share-whatsapp") !== null
+              ? "whatsapp"
+              : "email";
+      recordShare(platform);
       closePanel(false);
     });
   });
