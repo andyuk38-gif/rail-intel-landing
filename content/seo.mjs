@@ -6,8 +6,8 @@
 import { guides } from "./guides.mjs";
 
 export const SITE_URL = "https://railintel.co.uk";
-export const DEFAULT_OG_IMAGE = "/images/share/social-share-linkedin.jpg";
-export const LINKEDIN_OG_IMAGE = "/images/share/social-share-linkedin.jpg";
+export const DEFAULT_OG_IMAGE = "/images/share/og-card.jpg";
+export const LINKEDIN_OG_IMAGE = "/images/share/og-card.jpg";
 export const DEFAULT_OG_IMAGE_WIDTH = 1200;
 export const DEFAULT_OG_IMAGE_HEIGHT = 627;
 export const LINKEDIN_OG_IMAGE_WIDTH = 1200;
