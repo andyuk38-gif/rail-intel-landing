@@ -6,7 +6,6 @@
   var PAGE_WIDTH = 420;
   var PAGE_HEIGHT = 594;
   var PAGE_RATIO = PAGE_WIDTH / PAGE_HEIGHT;
-  var CORNER_BOTTOM = "bottom";
 
   var root = document.querySelector("[data-profile-flipbook]");
   if (!root) return;
@@ -152,32 +151,29 @@
     if (!wrap) return metrics || getBookMetrics();
 
     var size = metrics || getBookMetrics();
-
-    /* Only fall back to the rendered block when no target size was passed. */
-    if (!metrics) {
-      var block = root.querySelector(".stf__block");
-
-      if (block) {
-        var blockWidth = block.offsetWidth;
-        var blockHeight = block.offsetHeight;
-
-        if (blockWidth > 0 && blockHeight > 0) {
-          size = {
-            bookWidth: blockWidth,
-            bookHeight: blockHeight,
-            pageWidth: Math.round(blockWidth / (isSinglePageMode() ? 1 : 2)),
-            pageHeight: blockHeight,
-          };
-        }
-      }
-    }
+    var single = isSinglePageMode();
+    var spread = single ? 1 : 2;
 
     wrap.style.width = size.bookWidth + "px";
-    wrap.style.height = size.bookHeight + "px";
     wrap.style.maxWidth = "100%";
     wrap.style.marginLeft = "auto";
     wrap.style.marginRight = "auto";
     wrap.style.background = "#012269";
+    wrap.style.height = size.bookHeight + "px";
+
+    /* If max-width compressed the wrap, rebuild height from the real width so the page is not clipped. */
+    var actualWidth = wrap.clientWidth;
+    if (actualWidth > 0 && Math.abs(actualWidth - size.bookWidth) > 1) {
+      size.bookWidth = actualWidth;
+      size.pageWidth = Math.round(actualWidth / spread);
+      size.pageHeight = Math.round(size.pageWidth / PAGE_RATIO);
+      size.bookHeight = size.pageHeight;
+      wrap.style.width = size.bookWidth + "px";
+      wrap.style.height = size.bookHeight + "px";
+    }
+
+    root.style.width = "100%";
+    root.style.height = size.bookHeight + "px";
     syncBrochureScale(size);
     return size;
   }
@@ -192,17 +188,31 @@
     return flipInstance.getPageCollection().getSpread().length;
   }
 
+  function getCurrentPage() {
+    if (!flipInstance) return 0;
+    return flipInstance.getCurrentPageIndex();
+  }
+
   function setNodeVisibility(nodes, visible) {
     nodes.forEach(function (node) {
       node.hidden = !visible;
     });
   }
 
-  function updateSpreadChrome() {
-    var spreadIndex = getSpreadIndex();
-    var spreadCount = getSpreadCount();
-    var atStart = spreadIndex <= 0;
-    var atEnd = spreadIndex >= spreadCount - 1;
+  function updateSpreadChrome(pageIndex) {
+    var current = typeof pageIndex === "number" ? pageIndex : getCurrentPage();
+    var atStart;
+    var atEnd;
+
+    if (isSinglePageMode()) {
+      atStart = current <= 0;
+      atEnd = current >= pageCount - 1;
+    } else {
+      var spreadIndex = getSpreadIndex();
+      var spreadCount = getSpreadCount();
+      atStart = spreadIndex <= 0;
+      atEnd = spreadIndex >= spreadCount - 1;
+    }
 
     setNodeVisibility(guardsBack, atStart);
     setNodeVisibility(guardsForward, atEnd);
@@ -218,18 +228,25 @@
   }
 
   function updateControls(pageIndex) {
-    var spreadIndex = getSpreadIndex();
-    var spreadCount = getSpreadCount();
+    var current = typeof pageIndex === "number" ? pageIndex : getCurrentPage();
 
     if (pageLabel) {
-      pageLabel.textContent = "Page " + (pageIndex + 1) + " of " + pageCount;
+      pageLabel.textContent = "Page " + (current + 1) + " of " + pageCount;
     }
 
-    if (prevBtn) prevBtn.disabled = spreadIndex <= 0;
-    if (nextBtn) nextBtn.disabled = spreadIndex >= spreadCount - 1;
+    /* Portrait mode must use page index — spread index can stay at 0 after a flip. */
+    if (isSinglePageMode()) {
+      if (prevBtn) prevBtn.disabled = current <= 0;
+      if (nextBtn) nextBtn.disabled = current >= pageCount - 1;
+    } else {
+      var spreadIndex = getSpreadIndex();
+      var spreadCount = getSpreadCount();
+      if (prevBtn) prevBtn.disabled = spreadIndex <= 0;
+      if (nextBtn) nextBtn.disabled = spreadIndex >= spreadCount - 1;
+    }
 
     updateHint();
-    updateSpreadChrome();
+    updateSpreadChrome(current);
   }
 
   function softenPage(page) {
@@ -270,10 +287,36 @@
       swipeDistance: 36,
       clickEventForward: false,
       disableFlipByClick: true,
-      autoSize: true,
+      autoSize: false,
       startPage: 0,
-      showPageCorners: true,
+      showPageCorners: !isSinglePageMode(),
     };
+  }
+
+  function goPrev() {
+    if (!flipInstance || getCurrentPage() <= 0) return;
+    var before = getCurrentPage();
+    flipInstance.flipPrev("bottom");
+    window.setTimeout(function () {
+      if (!flipInstance) return;
+      if (getCurrentPage() === before) {
+        flipInstance.turnToPrevPage();
+      }
+      updateControls(getCurrentPage());
+    }, 80);
+  }
+
+  function goNext() {
+    if (!flipInstance || getCurrentPage() >= pageCount - 1) return;
+    var before = getCurrentPage();
+    flipInstance.flipNext("bottom");
+    window.setTimeout(function () {
+      if (!flipInstance) return;
+      if (getCurrentPage() === before) {
+        flipInstance.turnToNextPage();
+      }
+      updateControls(getCurrentPage());
+    }, 80);
   }
 
   function initFlipbook() {
@@ -312,16 +355,16 @@
 
   function bindControls() {
     if (prevBtn) {
-      prevBtn.addEventListener("click", function () {
-        if (!flipInstance || getSpreadIndex() <= 0) return;
-        flipInstance.flipPrev(CORNER_BOTTOM);
+      prevBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        goPrev();
       });
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener("click", function () {
-        if (!flipInstance || getSpreadIndex() >= getSpreadCount() - 1) return;
-        flipInstance.flipNext(CORNER_BOTTOM);
+      nextBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        goNext();
       });
     }
   }

@@ -354,9 +354,15 @@
   }
 }
 
+.profile-flipbook.is-single-page .profile-flipbook__stage-panel {
+  overflow: visible;
+}
+
 .profile-flipbook.is-single-page .profile-flipbook__book-wrap {
   touch-action: none;
   background: #012269;
+  /* Height is set in JS from the page aspect ratio so the full page stays visible. */
+  overflow: hidden;
 }
 
 .profile-flipbook.is-single-page .profile-flipbook__book-wrap::before {
@@ -366,6 +372,12 @@
 
 .profile-flipbook.is-single-page .profile-flipbook__spread-fill {
   display: none;
+}
+
+.profile-flipbook.is-single-page .stf__parent,
+.profile-flipbook.is-single-page .stf__wrapper,
+.profile-flipbook.is-single-page .stf__block {
+  height: 100% !important;
 }
 
 /* Brochure page canvas */
