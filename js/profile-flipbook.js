@@ -321,7 +321,7 @@
     var y = rect.top + rect.height - inset;
     /*
       Portrait books are laid out as width = 2 * pageWidth with the visible page on the right.
-      Next peels from the visible right edge using this coordinate space.
+      Next peels from the outer right edge; Previous peels from the spine (left of the visible page).
     */
     if (edge === "next") {
       return { x: rect.left + rect.width - inset, y: y };
@@ -342,42 +342,35 @@
     softenCoverPages(flipInstance);
 
     /*
-      Portrait flipPrev() slides the destination page in from the left. To match Next, peel the
-      current page with the forward soft curl and reveal the previous page underneath, then land
-      on that previous page when the curl finishes.
+      Default portrait back-turns slide. Keep the soft corner curl, but run it in the BACK
+      direction: peel the current page from the spine and reveal the previous page underneath.
     */
     var collection = flipInstance.getPageCollection();
     var current = getCurrentPage();
+    var currentPage = collection.getPage(current);
     var target = collection.getPage(current - 1);
     var originalGetBottomPage = collection.getBottomPage.bind(collection);
-    var originalTurnToNextPage = flipInstance.turnToNextPage.bind(flipInstance);
-    var originalTurnToPrevPage = flipInstance.turnToPrevPage.bind(flipInstance);
+    var originalGetFlippingPage = collection.getFlippingPage.bind(collection);
 
     restorePrevCurlPatches();
 
+    collection.getFlippingPage = function (direction) {
+      if (direction === 1) return currentPage.newTemporaryCopy();
+      return originalGetFlippingPage(direction);
+    };
+
     collection.getBottomPage = function (direction) {
-      if (direction === 0) return target;
+      if (direction === 1) return target;
       return originalGetBottomPage(direction);
-    };
-
-    flipInstance.turnToNextPage = function () {
-      restorePrevCurlPatches();
-      originalTurnToPrevPage();
-    };
-
-    flipInstance.turnToPrevPage = function () {
-      restorePrevCurlPatches();
-      originalTurnToPrevPage();
     };
 
     prevCurlRestore = function () {
       collection.getBottomPage = originalGetBottomPage;
-      flipInstance.turnToNextPage = originalTurnToNextPage;
-      flipInstance.turnToPrevPage = originalTurnToPrevPage;
+      collection.getFlippingPage = originalGetFlippingPage;
     };
 
     withClickFlipAllowed(function () {
-      flipInstance.getFlipController().flip(cornerPoint("next"));
+      flipInstance.getFlipController().flip(cornerPoint("prev"));
     });
 
     window.setTimeout(restorePrevCurlPatches, 1000);
