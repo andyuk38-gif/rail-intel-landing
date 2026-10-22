@@ -84,12 +84,17 @@
   }
 
   .profile-flipbook__stage {
-    padding: 0 0.5rem;
+    padding: 0 0.35rem;
   }
 
   .profile-flipbook__stage-panel {
-    padding: 0.65rem;
+    padding: 0.45rem;
     border-radius: 1rem;
+  }
+
+  .profile-flipbook__book-wrap {
+    width: 100%;
+    max-width: 100%;
   }
 
   .profile-flipbook__controls {
@@ -1190,11 +1195,11 @@
 .brochure-page--detail,
 .brochure-page--contents,
 .brochure-page--back-cover {
-  font-size: 12px;
+  font-size: calc(12px * var(--brochure-scale));
 }
 
 .brochure-page--cover {
-  font-size: 11.25px;
+  font-size: calc(11.25px * var(--brochure-scale));
 }
 
 .brochure-page--detail .brochure-card,
@@ -1337,8 +1342,8 @@
 
   @media (max-width: 768px) {
     .profile-flipbook__stage-panel {
-      padding-left: max(0.85rem, env(safe-area-inset-left));
-      padding-right: max(0.85rem, env(safe-area-inset-right));
+      padding-left: max(0.45rem, env(safe-area-inset-left));
+      padding-right: max(0.45rem, env(safe-area-inset-right));
     }
   }
 }

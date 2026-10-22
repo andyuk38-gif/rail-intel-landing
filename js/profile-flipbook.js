@@ -82,33 +82,34 @@
 
     if (isSinglePageMode()) {
       if (isMobileLandscape()) {
-        return Math.min(height * 0.82, height - 56);
+        return Math.min(height * 0.88, height - 48);
       }
 
       if (!wrap || !section) {
-        return Math.min(height * 0.46, 400);
+        return Math.max(280, height * 0.62);
       }
 
       var controls = section.querySelector(".profile-flipbook__controls");
       var stagePanel = wrap.parentElement;
       var intro = section.querySelector(".profile-flipbook__intro");
-      var controlsHeight = controls ? controls.offsetHeight + 12 : 52;
-      var introHeight = intro ? intro.offsetHeight + 10 : 0;
+      var controlsHeight = controls ? controls.offsetHeight + 10 : 48;
+      var introHeight = intro ? intro.offsetHeight + 8 : 0;
       var panelStyles = stagePanel ? window.getComputedStyle(stagePanel) : null;
       var padY = panelStyles ? parseFloat(panelStyles.paddingTop) + parseFloat(panelStyles.paddingBottom) : 0;
       var chromeHeight = getSiteChromeHeight();
-      var available = height - chromeHeight - introHeight - padY - controlsHeight - 14;
+      var available = height - chromeHeight - introHeight - padY - controlsHeight - 10;
 
       if (stagePanel) {
         var panelTop = stagePanel.getBoundingClientRect().top;
-        var liveAvailable = height - panelTop - padY - controlsHeight - 12;
+        var liveAvailable = height - panelTop - padY - controlsHeight - 10;
 
-        if (liveAvailable > 200 && panelTop < height * 0.85) {
+        if (liveAvailable > 220 && panelTop < height * 0.9) {
           available = Math.max(available, liveAvailable);
         }
       }
 
-      return Math.max(240, Math.min(available, 440));
+      /* Prefer filling the stage width; do not cap height so the page can stay full-bleed. */
+      return Math.max(280, available);
     }
 
     return Math.min(height * 0.68, 800);
@@ -146,7 +147,8 @@
   }
 
   function getBookMetrics() {
-    var spread = isSinglePageMode() ? 1 : 2;
+    var single = isSinglePageMode();
+    var spread = single ? 1 : 2;
     var stageInnerWidth = getStageInnerWidth();
     var maxBookWidth = stageInnerWidth;
     var maxBookHeight = getMaxBookHeight();
@@ -156,6 +158,15 @@
     if (pageHeight > maxBookHeight) {
       pageHeight = maxBookHeight;
       pageWidth = pageHeight * PAGE_RATIO;
+    }
+
+    /* On phones, keep the page as wide as the frame whenever height allows. */
+    if (single && pageWidth < maxBookWidth - 1) {
+      var widthFitHeight = maxBookWidth / PAGE_RATIO;
+      if (widthFitHeight <= maxBookHeight + 1) {
+        pageWidth = maxBookWidth;
+        pageHeight = widthFitHeight;
+      }
     }
 
     var bookWidth = pageWidth * spread;
@@ -173,24 +184,31 @@
     if (!wrap) return metrics || getBookMetrics();
 
     var size = metrics || getBookMetrics();
-    var block = root.querySelector(".stf__block");
 
-    if (block) {
-      var blockWidth = block.offsetWidth;
-      var blockHeight = block.offsetHeight;
+    /* Only fall back to the rendered block when no target size was passed. */
+    if (!metrics) {
+      var block = root.querySelector(".stf__block");
 
-      if (blockWidth > 0 && blockHeight > 0) {
-        size = {
-          bookWidth: blockWidth,
-          bookHeight: blockHeight,
-          pageWidth: Math.round(blockWidth / (isSinglePageMode() ? 1 : 2)),
-          pageHeight: blockHeight,
-        };
+      if (block) {
+        var blockWidth = block.offsetWidth;
+        var blockHeight = block.offsetHeight;
+
+        if (blockWidth > 0 && blockHeight > 0) {
+          size = {
+            bookWidth: blockWidth,
+            bookHeight: blockHeight,
+            pageWidth: Math.round(blockWidth / (isSinglePageMode() ? 1 : 2)),
+            pageHeight: blockHeight,
+          };
+        }
       }
     }
 
     wrap.style.width = size.bookWidth + "px";
     wrap.style.height = size.bookHeight + "px";
+    wrap.style.maxWidth = "100%";
+    wrap.style.marginLeft = "auto";
+    wrap.style.marginRight = "auto";
     syncBrochureScale(size);
     return size;
   }
