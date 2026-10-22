@@ -80,36 +80,13 @@
   function getMaxBookHeight() {
     var height = getViewportHeight();
 
+    if (isMobileLandscape()) {
+      return Math.min(height * 0.88, height - 48);
+    }
+
     if (isSinglePageMode()) {
-      if (isMobileLandscape()) {
-        return Math.min(height * 0.88, height - 48);
-      }
-
-      if (!wrap || !section) {
-        return Math.max(280, height * 0.62);
-      }
-
-      var controls = section.querySelector(".profile-flipbook__controls");
-      var stagePanel = wrap.parentElement;
-      var intro = section.querySelector(".profile-flipbook__intro");
-      var controlsHeight = controls ? controls.offsetHeight + 10 : 48;
-      var introHeight = intro ? intro.offsetHeight + 8 : 0;
-      var panelStyles = stagePanel ? window.getComputedStyle(stagePanel) : null;
-      var padY = panelStyles ? parseFloat(panelStyles.paddingTop) + parseFloat(panelStyles.paddingBottom) : 0;
-      var chromeHeight = getSiteChromeHeight();
-      var available = height - chromeHeight - introHeight - padY - controlsHeight - 10;
-
-      if (stagePanel) {
-        var panelTop = stagePanel.getBoundingClientRect().top;
-        var liveAvailable = height - panelTop - padY - controlsHeight - 10;
-
-        if (liveAvailable > 220 && panelTop < height * 0.9) {
-          available = Math.max(available, liveAvailable);
-        }
-      }
-
-      /* Prefer filling the stage width; do not cap height so the page can stay full-bleed. */
-      return Math.max(280, available);
+      /* Portrait phones: size by width so the page fills the frame; height follows aspect. */
+      return Number.POSITIVE_INFINITY;
     }
 
     return Math.min(height * 0.68, 800);
@@ -149,24 +126,15 @@
   function getBookMetrics() {
     var single = isSinglePageMode();
     var spread = single ? 1 : 2;
-    var stageInnerWidth = getStageInnerWidth();
+    var stageInnerWidth = Math.max(0, getStageInnerWidth());
     var maxBookWidth = stageInnerWidth;
     var maxBookHeight = getMaxBookHeight();
     var pageWidth = maxBookWidth / spread;
     var pageHeight = pageWidth / PAGE_RATIO;
 
-    if (pageHeight > maxBookHeight) {
+    if (Number.isFinite(maxBookHeight) && pageHeight > maxBookHeight) {
       pageHeight = maxBookHeight;
       pageWidth = pageHeight * PAGE_RATIO;
-    }
-
-    /* On phones, keep the page as wide as the frame whenever height allows. */
-    if (single && pageWidth < maxBookWidth - 1) {
-      var widthFitHeight = maxBookWidth / PAGE_RATIO;
-      if (widthFitHeight <= maxBookHeight + 1) {
-        pageWidth = maxBookWidth;
-        pageHeight = widthFitHeight;
-      }
     }
 
     var bookWidth = pageWidth * spread;
@@ -209,6 +177,7 @@
     wrap.style.maxWidth = "100%";
     wrap.style.marginLeft = "auto";
     wrap.style.marginRight = "auto";
+    wrap.style.background = "#012269";
     syncBrochureScale(size);
     return size;
   }
@@ -293,12 +262,12 @@
       maxHeight: pageHeight,
       maxShadowOpacity: 0.9,
       showCover: true,
-      mobileScrollSupport: isSinglePageMode() || isCoarsePointer(),
+      mobileScrollSupport: false,
       usePortrait: isSinglePageMode(),
       drawShadow: true,
       flippingTime: 700,
       useMouseEvents: true,
-      swipeDistance: 24,
+      swipeDistance: 36,
       clickEventForward: false,
       disableFlipByClick: true,
       autoSize: true,
@@ -357,16 +326,27 @@
     }
   }
 
+  var lastAppliedSize = { bookWidth: 0, bookHeight: 0 };
+  var touchingBook = false;
+
   function handleResize() {
     updateLayoutClasses();
 
-    if (!flipInstance || !wrap) return;
+    if (!flipInstance || !wrap || touchingBook) return;
 
     var metrics = getBookMetrics();
+    if (
+      Math.abs(metrics.bookWidth - lastAppliedSize.bookWidth) < 2 &&
+      Math.abs(metrics.bookHeight - lastAppliedSize.bookHeight) < 2
+    ) {
+      return;
+    }
+
     var current = flipInstance.getCurrentPageIndex();
     flipInstance.update(flipOptions(metrics));
     softenCoverPages(flipInstance);
     syncWrapSize(metrics);
+    lastAppliedSize = { bookWidth: metrics.bookWidth, bookHeight: metrics.bookHeight };
     updateControls(current);
   }
 
@@ -375,7 +355,13 @@
   updateHint();
 
   loadScript("https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js")
-    .then(initFlipbook)
+    .then(function () {
+      initFlipbook();
+      if (flipInstance) {
+        var metrics = getBookMetrics();
+        lastAppliedSize = { bookWidth: metrics.bookWidth, bookHeight: metrics.bookHeight };
+      }
+    })
     .catch(function () {
       if (pageLabel) pageLabel.textContent = "Interactive preview unavailable";
       if (prevBtn) prevBtn.hidden = true;
@@ -385,24 +371,35 @@
   var resizeTimer;
   function scheduleResize() {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(handleResize, 150);
+    resizeTimer = window.setTimeout(handleResize, 220);
   }
 
   window.addEventListener("resize", scheduleResize);
-  window.addEventListener("orientationchange", scheduleResize);
+  window.addEventListener("orientationchange", function () {
+    window.setTimeout(scheduleResize, 350);
+  });
 
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", scheduleResize);
-  }
-
-  if (section && "IntersectionObserver" in window) {
-    var visibilityObserver = new IntersectionObserver(
-      function (entries) {
-        if (entries[0] && entries[0].isIntersecting) scheduleResize();
+  if (wrap) {
+    wrap.addEventListener(
+      "touchstart",
+      function () {
+        touchingBook = true;
       },
-      { threshold: 0.15 }
+      { passive: true }
     );
-
-    visibilityObserver.observe(section);
+    wrap.addEventListener(
+      "touchend",
+      function () {
+        touchingBook = false;
+      },
+      { passive: true }
+    );
+    wrap.addEventListener(
+      "touchcancel",
+      function () {
+        touchingBook = false;
+      },
+      { passive: true }
+    );
   }
 })();

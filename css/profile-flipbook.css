@@ -93,8 +93,13 @@
   }
 
   .profile-flipbook__book-wrap {
-    width: 100%;
     max-width: 100%;
+    background: #012269;
+  }
+
+  .profile-flipbook__book-wrap::before {
+    background: #012269;
+    box-shadow: none;
   }
 
   .profile-flipbook__controls {
@@ -345,8 +350,22 @@
   }
 
   .profile-flipbook__book-wrap {
-    touch-action: pan-y pinch-zoom;
+    touch-action: none;
   }
+}
+
+.profile-flipbook.is-single-page .profile-flipbook__book-wrap {
+  touch-action: none;
+  background: #012269;
+}
+
+.profile-flipbook.is-single-page .profile-flipbook__book-wrap::before {
+  background: #012269;
+  box-shadow: none;
+}
+
+.profile-flipbook.is-single-page .profile-flipbook__spread-fill {
+  display: none;
 }
 
 /* Brochure page canvas */
