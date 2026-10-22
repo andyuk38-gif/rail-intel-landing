@@ -293,15 +293,35 @@
     };
   }
 
+  function withClickFlipAllowed(run) {
+    if (!flipInstance) return;
+    var settings = flipInstance.getSettings();
+    var locked = settings.disableFlipByClick;
+    /*
+      page-flip's flipPrev() uses x:10, which often fails the corner hit-test when
+      disableFlipByClick is on (Next uses the right edge and still passes). Allow the
+      button-driven curl through, then restore the lock so body taps do not flip.
+    */
+    settings.disableFlipByClick = false;
+    try {
+      run();
+    } finally {
+      settings.disableFlipByClick = locked;
+    }
+  }
+
   function goPrev() {
     if (!flipInstance || getCurrentPage() <= 0) return;
-    /* Do not fall back to turnToPrevPage mid-animation — that skips the curl. */
-    flipInstance.flipPrev("bottom");
+    withClickFlipAllowed(function () {
+      flipInstance.flipPrev("bottom");
+    });
   }
 
   function goNext() {
     if (!flipInstance || getCurrentPage() >= pageCount - 1) return;
-    flipInstance.flipNext("bottom");
+    withClickFlipAllowed(function () {
+      flipInstance.flipNext("bottom");
+    });
   }
 
   function initFlipbook() {
