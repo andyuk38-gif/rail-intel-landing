@@ -380,6 +380,20 @@
   height: 100% !important;
 }
 
+/*
+  Previous reuses the soft forward curl, mirrored so it peels the other way.
+  Page contents are counter-mirrored so text stays readable during the turn.
+*/
+.profile-flipbook__book-wrap.is-prev-curling {
+  transform: scaleX(-1);
+  transform-origin: center center;
+}
+
+.profile-flipbook__book-wrap.is-prev-curling .brochure-page > * {
+  transform: scaleX(-1);
+  transform-origin: center center;
+}
+
 /* Brochure page canvas */
 
 .brochure-page {
