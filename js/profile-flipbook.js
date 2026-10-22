@@ -321,8 +321,7 @@
     var y = rect.top + rect.height - inset;
     /*
       Portrait books are laid out as width = 2 * pageWidth with the visible page on the right.
-      Next peels from the visible right edge; Previous must peel from the visible left (spine)
-      using the same coordinate space as flipNext (rect.left + …), not the library's bare x:10.
+      Next peels from the visible right edge using this coordinate space.
     */
     if (edge === "next") {
       return { x: rect.left + rect.width - inset, y: y };
@@ -330,20 +329,63 @@
     return { x: rect.left + rect.pageWidth + inset, y: y };
   }
 
+  var prevCurlRestore = null;
+
+  function restorePrevCurlPatches() {
+    if (!prevCurlRestore) return;
+    prevCurlRestore();
+    prevCurlRestore = null;
+  }
+
   function goPrev() {
     if (!flipInstance || getCurrentPage() <= 0 || isBookBusy()) return;
     softenCoverPages(flipInstance);
+
+    /*
+      Portrait flipPrev() slides the destination page in from the left. To match Next, peel the
+      current page with the forward soft curl and reveal the previous page underneath, then land
+      on that previous page when the curl finishes.
+    */
+    var collection = flipInstance.getPageCollection();
+    var current = getCurrentPage();
+    var target = collection.getPage(current - 1);
+    var originalGetBottomPage = collection.getBottomPage.bind(collection);
+    var originalTurnToNextPage = flipInstance.turnToNextPage.bind(flipInstance);
+    var originalTurnToPrevPage = flipInstance.turnToPrevPage.bind(flipInstance);
+
+    restorePrevCurlPatches();
+
+    collection.getBottomPage = function (direction) {
+      if (direction === 0) return target;
+      return originalGetBottomPage(direction);
+    };
+
+    flipInstance.turnToNextPage = function () {
+      restorePrevCurlPatches();
+      originalTurnToPrevPage();
+    };
+
+    flipInstance.turnToPrevPage = function () {
+      restorePrevCurlPatches();
+      originalTurnToPrevPage();
+    };
+
+    prevCurlRestore = function () {
+      collection.getBottomPage = originalGetBottomPage;
+      flipInstance.turnToNextPage = originalTurnToNextPage;
+      flipInstance.turnToPrevPage = originalTurnToPrevPage;
+    };
+
     withClickFlipAllowed(function () {
-      /*
-        Drive Previous through the same flip() path as Next, with a spine-side corner point.
-        That keeps the soft clip-path curl instead of the flat hard-page slide.
-      */
-      flipInstance.getFlipController().flip(cornerPoint("prev"));
+      flipInstance.getFlipController().flip(cornerPoint("next"));
     });
+
+    window.setTimeout(restorePrevCurlPatches, 1000);
   }
 
   function goNext() {
     if (!flipInstance || getCurrentPage() >= pageCount - 1 || isBookBusy()) return;
+    restorePrevCurlPatches();
     softenCoverPages(flipInstance);
     withClickFlipAllowed(function () {
       flipInstance.getFlipController().flip(cornerPoint("next"));
@@ -363,6 +405,7 @@
     softenCoverPages(flipInstance);
 
     flipInstance.on("flip", function (event) {
+      restorePrevCurlPatches();
       updateControls(event.data);
     });
 
@@ -371,6 +414,7 @@
       var flipping = event.data === "user_fold" || event.data === "fold_corner" || event.data === "flipping";
       wrap.classList.toggle("is-flipping", flipping);
       if (flipping) softenCoverPages(flipInstance);
+      if (event.data === "read") restorePrevCurlPatches();
     });
 
     flipInstance.on("init", function () {
