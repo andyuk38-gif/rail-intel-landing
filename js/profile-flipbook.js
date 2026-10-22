@@ -257,11 +257,11 @@
   function softenCoverPages(instance) {
     var collection = instance.getPageCollection();
     var total = instance.getPageCount();
+    var i;
 
-    softenPage(collection.getPage(0));
-
-    if (total > 1) {
-      softenPage(collection.getPage(total - 1));
+    /* Portrait back-flips draw the destination page; hard density becomes a flat slide. */
+    for (i = 0; i < total; i += 1) {
+      softenPage(collection.getPage(i));
     }
   }
 
@@ -293,6 +293,11 @@
     };
   }
 
+  function isBookBusy() {
+    if (!flipInstance || typeof flipInstance.getState !== "function") return false;
+    return flipInstance.getState() !== "read";
+  }
+
   function withClickFlipAllowed(run) {
     if (!flipInstance) return;
     var settings = flipInstance.getSettings();
@@ -310,17 +315,38 @@
     }
   }
 
+  function cornerPoint(edge) {
+    var rect = flipInstance.getRender().getRect();
+    var inset = Math.max(16, Math.min(rect.pageWidth, rect.height) * 0.04);
+    var y = rect.top + rect.height - inset;
+    /*
+      Portrait books are laid out as width = 2 * pageWidth with the visible page on the right.
+      Next peels from the visible right edge; Previous must peel from the visible left (spine)
+      using the same coordinate space as flipNext (rect.left + …), not the library's bare x:10.
+    */
+    if (edge === "next") {
+      return { x: rect.left + rect.width - inset, y: y };
+    }
+    return { x: rect.left + rect.pageWidth + inset, y: y };
+  }
+
   function goPrev() {
-    if (!flipInstance || getCurrentPage() <= 0) return;
+    if (!flipInstance || getCurrentPage() <= 0 || isBookBusy()) return;
+    softenCoverPages(flipInstance);
     withClickFlipAllowed(function () {
-      flipInstance.flipPrev("bottom");
+      /*
+        Drive Previous through the same flip() path as Next, with a spine-side corner point.
+        That keeps the soft clip-path curl instead of the flat hard-page slide.
+      */
+      flipInstance.getFlipController().flip(cornerPoint("prev"));
     });
   }
 
   function goNext() {
-    if (!flipInstance || getCurrentPage() >= pageCount - 1) return;
+    if (!flipInstance || getCurrentPage() >= pageCount - 1 || isBookBusy()) return;
+    softenCoverPages(flipInstance);
     withClickFlipAllowed(function () {
-      flipInstance.flipNext("bottom");
+      flipInstance.getFlipController().flip(cornerPoint("next"));
     });
   }
 
