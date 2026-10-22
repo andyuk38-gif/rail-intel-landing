@@ -181,6 +181,8 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0;
+  min-width: 0;
   font-weight: 700;
   font-size: 1.5rem;
   color: #fff;
@@ -207,6 +209,7 @@ body::before {
 
 .logo-text {
   display: inline-block;
+  white-space: nowrap;
 }
 
 .nav {
@@ -412,6 +415,41 @@ body::before {
 
   .nav-toggle {
     order: 2;
+  }
+
+  /* Keep the brand on one line — drop Facebook and Instagram from the compact header chip. */
+  .share__brand--facebook,
+  .share__brand--instagram {
+    display: none;
+  }
+
+  .share__toggle {
+    gap: 0.4rem;
+    padding: 0 0.75rem 0 0.35rem;
+  }
+
+  .logo {
+    gap: 0.55rem;
+    font-size: 1.35rem;
+  }
+
+  .logo-img {
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .share__label {
+    display: none;
+  }
+
+  .share__toggle {
+    padding: 0 0.4rem;
+  }
+
+  .share {
+    margin-inline-end: 0.25rem;
   }
 }
 

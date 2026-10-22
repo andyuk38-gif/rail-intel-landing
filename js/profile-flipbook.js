@@ -295,28 +295,13 @@
 
   function goPrev() {
     if (!flipInstance || getCurrentPage() <= 0) return;
-    var before = getCurrentPage();
+    /* Do not fall back to turnToPrevPage mid-animation — that skips the curl. */
     flipInstance.flipPrev("bottom");
-    window.setTimeout(function () {
-      if (!flipInstance) return;
-      if (getCurrentPage() === before) {
-        flipInstance.turnToPrevPage();
-      }
-      updateControls(getCurrentPage());
-    }, 80);
   }
 
   function goNext() {
     if (!flipInstance || getCurrentPage() >= pageCount - 1) return;
-    var before = getCurrentPage();
     flipInstance.flipNext("bottom");
-    window.setTimeout(function () {
-      if (!flipInstance) return;
-      if (getCurrentPage() === before) {
-        flipInstance.turnToNextPage();
-      }
-      updateControls(getCurrentPage());
-    }, 80);
   }
 
   function initFlipbook() {
