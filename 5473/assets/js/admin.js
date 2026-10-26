@@ -21,7 +21,10 @@ const api = async (path, options = {}) => {
 const el = (html) => {
   const node = document.createElement("div");
   node.innerHTML = html.trim();
-  return node.firstElementChild;
+  // Single root: return that element. Multiple roots (dashboard, newsletter, etc.):
+  // keep them in the wrapper so querySelector / event binding still see the full tree.
+  if (node.childElementCount <= 1) return node.firstElementChild;
+  return node;
 };
 
 const escapeHtml = (s) =>
