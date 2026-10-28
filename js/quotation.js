@@ -94,16 +94,63 @@
     });
   }
 
+  function backLinkHtml() {
+    return '<p class="doc-view-back"><a class="doc-view-back__link" href="/get-started.html">Return to get started</a></p>';
+  }
+
   function renderError(message) {
     view.innerHTML =
       '<h2 class="signup-form__title">Quotation unavailable</h2>' +
       '<p class="signup-form__lead signup-form__lead--success">' +
       message +
       "</p>" +
-      '<p><a href="/get-started.html">Return to get started</a></p>';
+      backLinkHtml();
+  }
+
+  function renderComplete(message, previewHtml) {
+    setQuotationCompleteState();
+    var html =
+      '<p class="signup-form__lead signup-form__lead--success" id="quotation-thank-you">' +
+      (message || "Your response has been recorded.") +
+      "</p>" +
+      backLinkHtml();
+    if (previewHtml) {
+      html +=
+        '<div class="quotation-a4-wrap quotation-a4-wrap--readonly" data-quotation-preview>' +
+        previewHtml +
+        "</div>";
+    }
+    view.innerHTML = html;
+    scrollThankYouIntoView(view);
   }
 
   function renderQuotation(data) {
+    var status = String(data.status || "").toLowerCase();
+    if (status === "accepted") {
+      renderComplete(
+        "This quotation has already been accepted. Thank you — we have emailed your invoice with payment instructions.",
+        data.previewHtml
+      );
+      return;
+    }
+    if (status === "declined") {
+      renderComplete(
+        "This quotation was declined. Contact sales@railintel.co.uk if you would like a new quotation.",
+        data.previewHtml
+      );
+      return;
+    }
+
+    var preset = params.get("respond");
+    var intentBanner = "";
+    if (preset === "accept") {
+      intentBanner =
+        '<p class="quotation-intent" role="status">You chose <strong>Accept</strong> from your email. Review the quotation below, then confirm with the Accept button.</p>';
+    } else if (preset === "decline") {
+      intentBanner =
+        '<p class="quotation-intent" role="status">You chose <strong>Decline</strong> from your email. Review the quotation below, then confirm with the Decline button.</p>';
+    }
+
     view.innerHTML =
       '<h2 class="signup-form__title">Quotation for ' +
       (data.companyName || "your company") +
@@ -111,6 +158,7 @@
       '<p class="signup-form__lead signup-form__lead--success">Hello ' +
       (data.contactName || "there") +
       ", please review your quotation below and accept or decline.</p>" +
+      intentBanner +
       '<div class="quotation-a4-wrap" data-quotation-preview></div>' +
       '<p class="signup-form__message" data-quotation-message hidden></p>' +
       '<div class="signup-wizard__actions quotation-actions">' +
@@ -142,12 +190,11 @@
         body: JSON.stringify({ action: action }),
       }, 1)
         .then(function (body) {
-          setQuotationCompleteState();
-          view.innerHTML =
-            '<p class="signup-form__lead signup-form__lead--success" id="quotation-thank-you">' +
-            (body.message || "Your response has been recorded.") +
-            "</p>";
-          scrollThankYouIntoView(view);
+          // Drop respond= from the URL so a refresh does not look like a fresh accept intent.
+          try {
+            window.history.replaceState({}, "", window.location.pathname + "?token=" + encodeURIComponent(token));
+          } catch (e) {}
+          renderComplete(body.message || "Your response has been recorded.", data.previewHtml);
         })
         .catch(function (err) {
           if (msgEl) {
@@ -164,9 +211,14 @@
     if (acceptBtn) acceptBtn.addEventListener("click", function () { respond("accept"); });
     if (declineBtn) declineBtn.addEventListener("click", function () { respond("decline"); });
 
-    var preset = params.get("respond");
-    if (preset === "accept" || preset === "decline") {
-      respond(preset);
+    // Do NOT auto-POST from ?respond= — email link scanners / in-app browsers would
+    // accept before the client can read the quotation. Show the quote and wait for a click.
+    if (preset === "accept" && acceptBtn) {
+      acceptBtn.focus();
+      acceptBtn.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    } else if (preset === "decline" && declineBtn) {
+      declineBtn.focus();
+      declineBtn.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
   }
 

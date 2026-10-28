@@ -9025,6 +9025,38 @@ body.lightbox-open {
   margin-right: auto;
 }
 
+[data-quotation-view] .doc-view-back,
+[data-invoice-view] .doc-view-back {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+[data-quotation-view] .doc-view-back__link,
+[data-invoice-view] .doc-view-back__link {
+  color: #e0e7ff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+[data-quotation-view] .doc-view-back__link:hover,
+[data-invoice-view] .doc-view-back__link:hover {
+  color: #ffffff;
+}
+
+[data-quotation-view] .quotation-intent {
+  margin: 0 auto 1.25rem;
+  max-width: 36rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  background: rgba(245, 158, 11, 0.16);
+  color: #fef3c7;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .signup-success-badge {
   display: inline-flex;
   align-items: center;

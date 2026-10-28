@@ -47,13 +47,17 @@
       "</div>";
   }
 
+  function backLinkHtml() {
+    return '<p class="doc-view-back"><a class="doc-view-back__link" href="/get-started.html">Return to get started</a></p>';
+  }
+
   function renderError(message) {
     view.innerHTML =
       '<h2 class="signup-form__title">Invoice unavailable</h2>' +
       '<p class="signup-form__lead signup-form__lead--success">' +
       message +
       "</p>" +
-      '<p><a href="/get-started.html">Return to get started</a></p>';
+      backLinkHtml();
   }
 
   function handleStripeReturn() {
@@ -71,7 +75,7 @@
           '<p class="signup-form__lead signup-form__lead--success">' +
           (data.message || "Thank you — your invoice payment has been received.") +
           "</p>" +
-          '<p><a href="/get-started.html">Return to get started</a></p>';
+          backLinkHtml();
         window.history.replaceState({}, "", window.location.pathname + "?token=" + encodeURIComponent(token));
       })
       .catch(function (err) {
