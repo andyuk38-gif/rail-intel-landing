@@ -7787,6 +7787,7 @@ body.lightbox-open {
 }
 
 .signup-onboard-welcome {
+  order: 1;
   margin: 0 0 clamp(1.35rem, 3.5vh, 2rem);
 }
 
@@ -7812,10 +7813,11 @@ body.lightbox-open {
 
 .signup-onboard-flow {
   position: relative;
+  order: 2;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.75rem;
-  margin-top: 1.35rem;
+  margin: 0 0 clamp(1.35rem, 3.5vh, 2rem);
   perspective: 1400px;
 }
 
@@ -7848,18 +7850,10 @@ body.lightbox-open {
   margin: 0;
   background: transparent;
   text-align: left;
-  cursor: pointer;
+  cursor: default;
+  pointer-events: none;
   transform-style: preserve-3d;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.signup-onboard-flow__tile:focus {
-  outline: none;
-}
-
-.signup-onboard-flow__tile:focus-visible .signup-onboard-flow__surface {
-  outline: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
-  outline-offset: 3px;
 }
 
 .signup-onboard-flow__surface {
@@ -7983,11 +7977,6 @@ body.lightbox-open {
   animation: signup-onboard-tile-trace 2.6s linear infinite;
 }
 
-.signup-onboard-flow__tile:hover .signup-onboard-flow__surface {
-  --onboard-lift: 8px;
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
 @property --onboard-tile-angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -8000,9 +7989,32 @@ body.lightbox-open {
   }
 }
 
+.signup-procurement-notice {
+  order: 3;
+  display: block;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0.5in;
+}
+
+.signup-shell > .signup-wizard-glass[data-cms-signup-wizard] {
+  order: 4;
+}
+
 @media (max-width: 1024px) {
   .signup-onboard-flow {
+    order: 4;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: clamp(1.35rem, 3.5vh, 2rem);
+    margin-bottom: 0;
+  }
+
+  .signup-procurement-notice {
+    order: 2;
+  }
+
+  .signup-shell > .signup-wizard-glass[data-cms-signup-wizard] {
+    order: 3;
   }
 
   .signup-onboard-flow::before {
@@ -8025,13 +8037,6 @@ body.lightbox-open {
   .signup-onboard-flow__surface {
     transition: none;
   }
-}
-
-.signup-procurement-notice {
-  display: block;
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 0.5in;
 }
 
 .signup-procurement-notice .signup-panel__head {

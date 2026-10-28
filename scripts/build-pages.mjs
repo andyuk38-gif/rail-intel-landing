@@ -3268,9 +3268,16 @@ function renderGetStartedPoBanner() {
 }
 
 function renderGetStartedWelcome() {
+  return `        <section class="signup-onboard-welcome" aria-label="Onboarding overview">
+          <h2 class="signup-onboard-welcome__title">${esc(getStarted.welcome.title)}</h2>
+          <p class="signup-onboard-welcome__lead">${esc(getStarted.welcome.lead)}</p>
+        </section>`;
+}
+
+function renderGetStartedOnboardFlow() {
   const steps = getStarted.welcome.steps
     .map(
-      (step, index) => `            <article class="signup-onboard-flow__tile${index === 0 ? " is-active" : ""}" data-onboard-tile role="listitem" tabindex="0" aria-label="Step ${index + 1}: ${esc(step.title)}">
+      (step, index) => `            <article class="signup-onboard-flow__tile${index === 0 ? " is-active" : ""}" data-onboard-tile role="listitem" aria-label="Step ${index + 1}: ${esc(step.title)}">
               <div class="signup-onboard-flow__surface" data-onboard-tilt>
                 <span class="signup-onboard-flow__num" aria-hidden="true">${index + 1}</span>
                 <h3 class="signup-onboard-flow__title">${esc(step.title)}</h3>
@@ -3279,13 +3286,9 @@ function renderGetStartedWelcome() {
             </article>`,
     )
     .join("\n");
-  return `        <section class="signup-onboard-welcome" aria-label="Onboarding overview">
-          <h2 class="signup-onboard-welcome__title">${esc(getStarted.welcome.title)}</h2>
-          <p class="signup-onboard-welcome__lead">${esc(getStarted.welcome.lead)}</p>
-          <div class="signup-onboard-flow" data-onboard-flow role="list">
+  return `        <div class="signup-onboard-flow" data-onboard-flow role="list" aria-label="Onboarding steps">
 ${steps}
-          </div>
-        </section>`;
+        </div>`;
 }
 
 function getStartedPage() {
@@ -3310,6 +3313,7 @@ function getStartedPage() {
     <section class="page-section page-section--tight signup-page">
       <div class="container signup-shell">
 ${renderGetStartedWelcome()}
+${renderGetStartedOnboardFlow()}
         <aside class="signup-wizard-glass signup-procurement-notice" aria-label="Procurement information">
           <div class="signup-panel__head">
             <h2 class="signup-form__title">${esc(getStarted.procurementNotice.heading)}</h2>
